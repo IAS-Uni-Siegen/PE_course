@@ -329,3 +329,63 @@
 	\end{equation}
 	must hold for any point in time as energy is conserved, that is, not created or destroyed.
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Why efficiency matters: a computer supply example %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+	\frametitle{Why efficiency matters: a computer supply example}
+	\begin{table}
+		\centering
+		\begin{tabular}{lcc}
+			\toprule
+			& Power supply A & Power supply B \\
+			& 80 PLUS Gold & 80 PLUS Titanium \\
+			\midrule
+			Input power & \multicolumn{2}{c}{\SI{250}{\watt}} \\
+			Efficiency & \SI{89}{\percent} & \SI{94}{\percent}  \\
+			Power loss & \SI{27.5}{\watt} & \SI{15}{\watt}\\
+			\midrule
+			Operating hours per year & \multicolumn{2}{c}{$\SI{8}{\hour} \times 220 = \SI{1760}{\hour}$} \\
+			Cumulated power loss per year & \SI{48.4}{\kilo\watt\hour} & \SI{26.4}{\kilo\watt\hour} \\
+			Electricity cost for yearly power losses & \SI{14.52}{\EUR} & \SI{7.92}{\EUR} \\
+			\midrule
+			Cumulated power loss in Germany & \SI{1.936}{\tera\watt\hour} & \SI{1.056}{\tera\watt\hour} \\
+			Electricity cost for power loss in Germany & \SI{580.8}{\mega\EUR} & \SI{316.8}{\mega\EUR} \\
+			\bottomrule
+		\end{tabular}
+		\label{tab:efficiency_computer_supply_example}
+		\caption{Comparison of two computer power supplies (further assumptions: effective nominal power calculation, electricity price \SI[fraction-function=\nicefrac]{0.3}{\EUR\per\kilo\watt\per\hour}, $40\cdot 10^6$ computers in Germany)}
+	\end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Why efficiency matters: a wind power plant example %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+	\frametitle{Why efficiency matters: a wind power plant example}
+	\begin{table}
+		\centering
+		\begin{tabular}{lcc}
+			\toprule
+			& Wind power plant A & Wind power plant B \\
+			\midrule
+			Input power & \multicolumn{2}{c}{\SI{5}{\mega\watt}} \\
+			Efficiency & \SI{97}{\percent} & \SI{97.1}{\percent}  \\
+			Power loss & \SI{150}{\kilo\watt} & \SI{145}{\kilo\watt}\\
+			\midrule
+			Nominal power operating hours per year & \multicolumn{2}{c}{$\SI{3000}{\hour}$} \\
+			Cumulated power loss per year & \SI{450}{\mega\watt\hour} & \SI{435}{\mega\watt\hour} \\
+			Cumulated power loss (lifetime) & \SI{9.0}{\giga\watt\hour} & \SI{8.7}{\giga\watt\hour} \\
+			\midrule
+			Lost sales proceeds due to losses per year  & \SI{22.5}{\kilo\EUR} & \SI{21.75}{\kilo\EUR} \\
+			Lost sales proceeds due to losses (lifetime)  & \SI{450}{\kilo\EUR} & \SI{435}{\kilo\EUR} \\
+			\midrule
+			Cumulated power loss (lifetime, Germany)  & \SI{9.0}{\tera\watt\hour} & \SI{8.7}{\tera\watt\hour} \\
+			Lost sales proceeds (lifetime, Germany)  & \SI{450}{\mega\EUR} & \SI{435}{\mega\EUR} \\
+			\bottomrule
+		\end{tabular}
+		\label{tab:efficiency_wind_power_example}
+		\caption{Comparison of two wind power plants (further assumptions:  electricity sales price \SI[fraction-function=\nicefrac]{0.05}{\EUR\per\kilo\watt\per\hour}, $20$ years of life time, $\num{1000}$ newly constructed wind power plants per year in Germany)}
+	\end{table}
+\end{frame}
