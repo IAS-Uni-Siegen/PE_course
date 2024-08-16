@@ -27,6 +27,18 @@
 			\draw[->] (M) |- (controller);
 			\draw[->] (controller) -- node {Feedback} (pc);
 			\node[dot] at (M.south) {}; 
+			% brace decoration right from entire plots
+			\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt] (8.75,-2.65) -- (8.75,0.5) node [black,midway, anchor = west, xshift = 0.5cm] {
+				\begin{circuitikz}
+					\node[twoportsplitshape, scale = 1.5](tp){};
+					\draw (tp.left up) to [short, -o, i_<= $i_\mathrm{in}$] ++(-0.75,0) coordinate(tpin1)
+					(tp.left down) to [short, -o] ++(-0.75,0) coordinate(tpin2);
+					\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{$u_\mathrm{in}$} ([xshift=-0.9cm]tp.left down);
+					\draw (tp.right up) to [short, -o, i= $i_\mathrm{out}$] ++(0.75,0) coordinate(tpout1)
+					(tp.right down) to [short, -o] ++(+0.75,0) coordinate(tpout2);
+					\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_\mathrm{out}$} ([xshift=1cm]tp.right down);
+				\end{circuitikz}	
+			};
 		\end{tikzpicture}
 		\caption{High-level block diagram of a power electronic system}
 		\label{fig:power_electronics_block_diagram}
@@ -241,9 +253,6 @@
 			\end{axis}
 			\\
 			};
-			% vertical arrows
-			%\draw[->, thick] (0.15\textwidth,0.3\textwidth) -- (0.15\textwidth,0.7\textwidth);
-			%\draw[->, thick] (0.5\textwidth,0.3\textwidth) -- (0.5\textwidth,0.7\textwidth);
 		\end{tikzpicture}
 	\end{figure}
 \end{frame}
@@ -396,6 +405,47 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Typical power electronic objectives %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+	\frametitle{Typical power electronic objectives}
+	\begin{figure}
+		\begin{tikzpicture}
+			\begin{axis}[
+				height=.70\textheight,
+				ylabel={Efficiency},
+				xlabel={Power density},
+				zlabel={Costs / ressources},
+				xlabel style={sloped},
+				ylabel style={sloped}, 
+				xticklabel style = {yshift=0.2cm, rotate=25},
+				view={70}{25},
+				grid,
+				ymax = 1,
+				xmax = 1,
+				zmax = 1,
+				xtick distance = 0.25,
+				ytick distance = 0.25,
+				ztick distance = 0.25
+			]
+			\addplot3[
+				mesh,
+				samples=20,
+				domain=0:1,
+				draw = signalblue
+			](
+				{sqrt(1-x^2) * cos(deg(y))},
+				{sqrt( 1-x^2 ) * sin(deg(y))},
+				{x}
+			);
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Illustration of typical, conflicting power electronic (normalized) objectives via a Pareto front}
+		\label{fig:power_electronic_objectives}
+	\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Terminology: work vs. energy%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[c]
@@ -456,11 +506,46 @@
 		\label{fig:power_balance_energy_conversion}
 	\end{figure}
 	\vspace{-0.5cm}
-	The power balance
+	The \hl{power balance}
 	\begin{equation}
 		P_\mathrm{in}(t) = P_\mathrm{out}(t) + P_\mathrm{l}(t) + \frac{\mathrm{d}}{\mathrm{d}t}E_\mathrm{i}(t)
 	\end{equation}
 	must hold for any point in time as energy is conserved, that is, not created or destroyed.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Efficiency %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Efficiency}
+	\begin{figure}
+		\begin{tikzpicture}[auto, node distance = 1.5cm and 2cm]
+			\draw
+				node [input, name = input] {}
+				node [bubble, right = of input, minimum height = 4em] (pc) {\large Power converter}
+				node [output, name = output, right = of pc] {}
+				node [output, name = losses, below = of pc] {};
+			\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm] (input) -- node[below, midway, align=left, name = input2] {Electrical\\input power} (pc);
+			\begin{scope}[on background layer]
+				\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm] (pc.mid) -- node[below, near end, align=left, name=output2] {Electrical\\output power} (output);
+				\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm, color=signalred] (pc.mid) -- node[right, yshift=-2.5mm, name = losses2] {Losses} (losses);
+			\end{scope}
+			\node[left=of losses2, color=signalred, xshift = 1.8cm] {$P_\mathrm{l}$};
+			\node[above=of output2.mid,, align=center, xshift = -0.3cm, yshift = -5mm] {$P_\mathrm{out}$};
+			\node[above=of input2.mid,, align=center, xshift = -0.3cm, yshift = -5mm] {$P_\mathrm{in}$};
+		\end{tikzpicture}
+		\caption{Power balance of an energy conversion system in steady state}
+		\label{fig:power_balance_energy_conversion_steady_state}
+	\end{figure}
+	\vspace{-0.5cm}
+	The power balance in steady state ($\nicefrac{\mathrm{d}x(t)}{\mathrm{d} t}=0$) is
+	\begin{equation}
+		P_\mathrm{in} = P_\mathrm{out} + P_\mathrm{l}
+	\end{equation}
+	and leads to the definition of the \hl{efficiency}
+	\begin{equation}
+		\eta = \frac{P_\mathrm{out}}{P_\mathrm{in}} = \frac{P_\mathrm{out}}{P_\mathrm{out} + P_\mathrm{l}}.
+	\end{equation}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -521,4 +606,310 @@
 		\label{tab:efficiency_wind_power_example}
 		\caption{Comparison of two wind power plants (further assumptions:  electricity sales price \SI[fraction-function=\nicefrac]{0.05}{\EUR\per\kilo\watt\per\hour}, $20$ years of life time, $\num{1000}$ newly constructed wind power plants per year in Germany)}
 	\end{table}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Linear power conversion %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+	\frametitle{Linear power conversion}
+	\begin{figure}
+		\begin{circuitikz}[]
+			\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+			to ++(-6,0)
+			to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+			to [european resistor, R=$R_1$] ++(4,0) 
+			to ++(2,0)
+			(-2,0) to [variable european resistor, *-*, l=$R_2$] (-2,2);
+		\end{circuitikz}
+		\caption{Adjustable resistive voltage divider as step-down converter}
+		\label{fig:linear_power_conversion}
+	\end{figure}
+	With Kirchhoff's voltage law, the output voltage $u_\mathrm{out}(t)$ is
+	\begin{equation}
+		u_\mathrm{out}(t) = u_\mathrm{in}(t) \frac{R_2}{R_1 + R_2}.
+	\end{equation}
+	By adjusting the resistance $R_2$, the output voltage can be controlled. However, this method is \hl{inefficient} as the power loss is independent of the output power and given by
+	\begin{equation}
+		P_\mathrm{l}(t) = \frac{u_\mathrm{in}^2(t)}{R_1 + R_2}.
+	\end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Linear power conversion (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+	\frametitle{Linear power conversion (cont.)}
+	\begin{columns}
+		\begin{column}{0.55\textwidth}
+			\begin{figure}
+				\begin{circuitikz}[]
+					\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+					to ++(-5.5,0)
+					to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+					(-5.5,2) to ++(1.25,0) node [nigbt, anchor=C, rotate=90](nigbt1){}
+					(nigbt1.E) to [short, i=$i_\mathrm{out}(t)$] (0,2);
+					\draw node[rectangle, draw, anchor = north] (r) at (nigbt1.B) {Linear amplifier}
+						(r.east)[<-] to ++(0.5,0) node [anchor = west](a){$u^*_\mathrm{out}(t)$};
+					\draw [->] ([yshift = 0.2cm, xshift = 0.1cm]nigbt1.C) -- node [yshift = 0.3cm] {$u_\mathrm{CE}(t)$} ([yshift = 0.2cm, xshift = -0.1cm]nigbt1.E) ;  
+				\end{circuitikz}
+				\caption{Transistor-based step-down converter}
+				\label{fig:linear_power_conversion_transistor}
+			\end{figure}
+			For a transistor-based step-down converter, the output voltage  is $u_\mathrm{out}(t)= u_\mathrm{in}(t) - u_\mathrm{CE}(t)$	leading to the power losses
+			\begin{equation}
+				P_\mathrm{l}(t) = u_\mathrm{CE}(t)  i_\mathrm{out}(t) .
+			\end{equation}
+		\end{column}
+		\begin{column}{0.45\textwidth}
+			\centering
+			\begin{figure}
+				\begin{tikzpicture}
+					% plot IGBT output characteristics V_CE = f(I_C)
+					\begin{axis}[
+						xlabel={$U_{\mathrm{CE}}$},
+						ylabel={$I_\mathrm{C}$},
+						axis lines=left,
+						ymin=0, ymax=6,
+						xmin=0, xmax=5,
+						xtick={0,1,2,3,4},
+						ytick={0,1,2,3,4,5},
+						%no x/y ticks displayed
+						xticklabels={},
+						yticklabels={},
+						domain=0:5,
+						samples=50,
+						thick,
+						smooth,
+						no markers,
+						width = 0.95\textwidth,
+						grid
+						]
+						% plt IGBT output characteristics consider the linear, saturation and cut-off region
+						\addplot[signalblue, domain=0:0.3]{0.01};
+						\addplot[signalblue, domain=0.3:5]{11.5 / (1+exp(-2*(x-0.3)))-6};
+						\addplot[signalblue, domain=0.3:5]{7.7 / (1+exp(-2.5*(x-0.3)))-4};
+						\addplot[signalblue, domain=0.3:5]{4 / (1+exp(-3*(x-0.3)))-2};
+						\addplot[signalblue, domain=0.3:5]{2 / (1+exp(-3.25*(x-0.3)))-1};
+						\addplot[signalblue, domain=0.3:5]{1 / (1+exp(-3.5*(x-0.325)))-0.5};
+						\addplot[signalblue, domain=0.3:5]{0.25 / (1+exp(-3.5*(x-0.325)))-0.125};
+
+						% arrow pointing upwards at x = 4 to indicate the dependance on U_GE
+						\draw[->, signalbrown, thick, dashed] (axis cs:1.5,0.25) -- (axis cs:1.5,5.2);
+						\node[signalbrown, anchor = west] at (axis cs:1.5,2.75) {$U_\mathrm{GE}$};
+						% plot a ellipse shape in the background of the linear region
+						\draw[signalgreen, thick, dashed, rotate=-10] (axis cs:0.5,1) ellipse (0.35cm and 3.0cm);
+						\node[signalgreen, anchor = south] at (axis cs:1.1,5.1) {\small Linear region};
+
+						%add a rectangle with rounded corners around the saturation area
+						\draw[signalred, thick, dashed, rounded corners] (axis cs:2.5,0.2) rectangle (axis cs:4.75,5.9);
+						\node[signalred, anchor = south, ,  align=center] at (axis cs:3.6,3.7) {\small Saturation\\region};
+					\end{axis}
+				\end{tikzpicture}
+				\caption{Output characteristics of an insulated-gate bipolar transistor}
+				\label{fig:output_characteristics_IGBT}
+			\end{figure}
+			\end{column}
+	\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Switching power conversion %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[b]
+	\frametitle{Switching power conversion}
+	Alternative idea: \hl{switch either fully on or off}. The average output voltage $\overline{u}_\mathrm{out}$ is controlled by the duty cycle (assuming that $u_\mathrm{in}(t)=\overline{u}_\mathrm{in}$ is constant)
+	\begin{equation}
+		D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \qquad \overline{u}_\mathrm{out} = \frac{1}{T_\mathrm{s}} \int_0^{T_\mathrm{s}} u_\mathrm{out}(t) \mathrm{d}t = D \overline{u}_\mathrm{in}.
+	\end{equation}
+	As the switching losses are typically small, the overall efficiency is (much) higher compared to linear power conversion. 
+	\vspace{-0.5cm}  
+	\begin{columns}[b]
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\begin{circuitikz}[]
+					\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+					to ++(-5,0)
+					to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+					(-5,2) to ++(1.25,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
+					let \p1 = (S.mid) in (S.in) to (0,2)
+					([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
+				\end{circuitikz}
+				\vspace{0.6cm}
+				\caption{Ideal switch-based step-down converter}
+				\label{fig:Switched_power_conversion}
+			\end{figure}
+			\vspace{0pt}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\centering
+			\begin{figure}
+				\begin{tikzpicture}
+					% plot switching output voltage with an ideal switch between u_out = u_int for t = 0 D*Ts and u_out = 0 for t = D*Ts to Ts
+					\begin{axis}[
+						xlabel={$t/T_\mathrm{s}$},
+						ylabel={$u_\mathrm{out}(t)/u_\mathrm{in}(t)$},
+						ymin=-0.05, ymax=1.05,
+						xmin=-0.1, xmax=1.1,
+						width = 0.95\textwidth,
+						height = 0.4\textheight,
+						grid,
+						thick,
+						clip = false,
+						]
+						% plt u_out = 1 for t = 0 to D*Ts and u_out = 0 for t = D*Ts to Ts in a single plot
+						\addplot[signalblue] coordinates {(-0.1,0) (0,0) (0,1) (0.4,1) (0.4,0) (1,0) (1,1) (1.1,1)};
+						\draw [thick,<->]  (0,0.5) -- node[above,fill=white]{$T_\mathrm{on}$}(0.4, 0.5); 
+						\draw [thick,<->]  (0.4,0.5) -- node[above]{$T_\mathrm{off}$}(1.0, 0.5);
+						\draw [thick,<->]  (0.0,1.2) -- node[above]{$T_\mathrm{s}$}(1.0, 1.2); 
+					\end{axis}
+				\end{tikzpicture}
+				\caption{Switching output voltage from \figref{fig:Switched_power_conversion}}
+				\label{fig:Switched_power_conversion_output}
+			\end{figure}
+			\vspace{0pt}
+			\end{column}
+	\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Important power electronic devices %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+	\frametitle{Important power electronic devices}
+\begin{table}
+	\begin{tabular}{M{0.22\textwidth} M{0.22\textwidth} M{0.22\textwidth} M{0.22\textwidth}}
+		Diode & Bipolar junction transistor & MOSFET\footnote{metal-oxide-semiconductor field-effect transistor} (with body diode) & Thyristor \\
+		\begin{circuitikz}
+			\draw (0,0) to [diode, v=$u$, i=$i$, , voltage = straight] (2,0);
+		\end{circuitikz}
+		&
+		\begin{circuitikz}
+			\draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0) 
+			to ++(0.01,0)  node [npn, anchor=C, rotate=90](npn1){}
+			(npn1.E) to [short] (2,0);
+			\draw [->] ([yshift = 0.2cm, xshift = 0.1cm]npn1.C) -- node [yshift = 0.25cm] {$u$} ([yshift = 0.2cm, xshift = -0.1cm]npn1.E) ;
+		\end{circuitikz}
+		&
+		\begin{circuitikz}
+			\draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0) 
+			to ++(0.01,0)  node [nigfete, anchor=D, rotate=90, bodydiode](fet1){}
+			(fet1.S) to [short] (2,0);
+			\draw [->] ([yshift = 0.5cm, xshift = 0.1cm]fet1.D) -- node [yshift = 0.3cm] {$u$} ([yshift = 0.5cm, xshift = -0.1cm]fet1.S) ;
+		\end{circuitikz}
+		&
+		\begin{circuitikz}
+			\draw (0,0) to node[emptythyristorshape](ty1){} (2,0);
+			\draw (ty1.cathode) to [short, i_=$i$, , xshift = -0.2cm] (2,0);
+			\draw [->] ([yshift = -0.5cm, xshift = 0.1cm]ty1.anode) -- node [yshift = -0.3cm] {$u$} ([yshift = -0.5cm, xshift = -0.1cm]ty1.cathode) ;
+		\end{circuitikz}		
+		\\
+
+		\begin{tikzpicture}
+			\begin{axis}[
+				xmin=-1, xmax=1,
+				ymin=-1, ymax=1,
+				width=0.25\textwidth,
+				height=0.5\textheight,
+				axis lines=middle,
+				clip = false,
+				thick,
+				xlabel = {$u$},
+				ylabel = {$i$},
+				xticklabels=\empty,
+				xlabel style={anchor = west},
+				ylabel style={anchor = north east},
+				yticklabels=\empty,
+				anchor = center
+				]
+				\addplot[signalred, very thick] coordinates {(-1,0) (0,0) (0,1)};
+			\end{axis}
+		\end{tikzpicture}
+
+		&
+
+		\begin{tikzpicture}
+			\begin{axis}[
+				xmin=-1, xmax=1,
+				ymin=-1, ymax=1,
+				width=0.25\textwidth,
+				height=0.5\textheight,
+				axis lines=middle,
+				clip = false,
+				thick,
+				xlabel = {$u$},
+				ylabel = {$i$},
+				xticklabels=\empty,
+				xlabel style={anchor = west},
+				ylabel style={anchor = north east},
+				yticklabels=\empty,
+				anchor = center
+				]
+				\addplot[signalred, very thick] coordinates {(0,0) (1,0)};
+				\addplot[signalgreen, very thick] coordinates {(0,0) (0,1)};
+				%\node[pin= left:{\footnotesize\color{signalgreen}active\\gate}, align=right] at (axis cs:0,0.5) {};
+				\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+				\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+			\end{axis}
+		\end{tikzpicture}
+
+		&
+
+		\begin{tikzpicture}
+			\begin{axis}[
+				xmin=-1, xmax=1,
+				ymin=-1, ymax=1,
+				width=0.25\textwidth,
+				height=0.5\textheight,
+				axis lines=middle,
+				clip = false,
+				thick,
+				xlabel = {$u$},
+				ylabel = {$i$},
+				xticklabels=\empty,
+				xlabel style={anchor = west},
+				ylabel style={anchor = north east},
+				yticklabels=\empty,
+				anchor = center
+				]
+				\addplot[signalred, very thick] coordinates {(0,0) (1,0)};
+				\addplot[signalgreen, very thick] coordinates {(0,-1) (0,1)};
+				%\node[pin= left:{\footnotesize\color{signalgreen}active\\gate}, align=right] at (axis cs:0,0.5) {};
+				\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+				\draw [pin] (axis cs:0.25,-0.05) -- +(10pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+				\draw [pin] (axis cs:-0.05,-0.5) -- +(-12pt,5pt) node[left, align=center, font=\footnotesize ] {body\\ diode};
+			\end{axis}
+		\end{tikzpicture}
+
+		&
+
+		\begin{tikzpicture}
+			\begin{axis}[
+				xmin=-1, xmax=1,
+				ymin=-1, ymax=1,
+				width=0.25\textwidth,
+				height=0.5\textheight,
+				axis lines=middle,
+				clip = false,
+				thick,
+				xlabel = {$u$},
+				ylabel = {$i$},
+				xticklabels=\empty,
+				xlabel style={anchor = west},
+				ylabel style={anchor = north east},
+				yticklabels=\empty,
+				anchor = center
+				]
+				\addplot[signalred, very thick] coordinates {(0,0) (1,0)};
+				\addplot[signalgreen, very thick] coordinates {(0,0) (0,1)};
+				%\node[pin= left:{\footnotesize\color{signalgreen}active\\gate}, align=right] at (axis cs:0,0.5) {};
+				\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+				\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
+				\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+			\end{axis}
+		\end{tikzpicture}
+
+	\end{tabular}
+\end{table}
 \end{frame}
