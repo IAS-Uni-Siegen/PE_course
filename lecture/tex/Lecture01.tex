@@ -778,138 +778,144 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[c]
 	\frametitle{Important power electronic devices}
-\begin{table}
-	\begin{tabular}{M{0.22\textwidth} M{0.22\textwidth} M{0.22\textwidth} M{0.22\textwidth}}
-		Diode & Bipolar junction transistor & MOSFET\footnote{metal-oxide-semiconductor field-effect transistor} (with body diode) & Thyristor \\
-		\begin{circuitikz}
-			\draw (0,0) to [diode, v=$u$, i=$i$, , voltage = straight] (2,0);
-		\end{circuitikz}
-		&
-		\begin{circuitikz}
-			\draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0) 
-			to ++(0.01,0)  node [npn, anchor=C, rotate=90](npn1){}
-			(npn1.E) to [short] (2,0);
-			\draw [->] ([yshift = 0.2cm, xshift = 0.1cm]npn1.C) -- node [yshift = 0.25cm] {$u$} ([yshift = 0.2cm, xshift = -0.1cm]npn1.E) ;
-		\end{circuitikz}
-		&
-		\begin{circuitikz}
-			\draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0) 
-			to ++(0.01,0)  node [nigfete, anchor=D, rotate=90, bodydiode](fet1){}
-			(fet1.S) to [short] (2,0);
-			\draw [->] ([yshift = 0.5cm, xshift = 0.1cm]fet1.D) -- node [yshift = 0.3cm] {$u$} ([yshift = 0.5cm, xshift = -0.1cm]fet1.S) ;
-		\end{circuitikz}
-		&
-		\begin{circuitikz}
-			\draw (0,0) to node[emptythyristorshape](ty1){} (2,0);
-			\draw (ty1.cathode) to [short, i_=$i$, , xshift = -0.2cm] (2,0);
-			\draw [->] ([yshift = -0.5cm, xshift = 0.1cm]ty1.anode) -- node [yshift = -0.3cm] {$u$} ([yshift = -0.5cm, xshift = -0.1cm]ty1.cathode) ;
-		\end{circuitikz}		
-		\\
+	\vspace{0.5cm}
+	\begin{table}
+		\centering
+		\begin{tabular}{M{0.22\textwidth} M{0.22\textwidth} M{0.22\textwidth} M{0.22\textwidth}}
+			Diode & Bipolar junction transistor & MOSFET\footnote{metal-oxide-semiconductor field-effect transistor} (with body diode) & Thyristor\\
+			
+			\begin{circuitikz}
+				\draw (0,0) to [diode, v=$u$, i=$i$, , voltage = straight] (2,0);
+			\end{circuitikz}
+			
+			&
+			
+			\begin{circuitikz}
+				\draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0) 
+				to ++(0.01,0)  node [npn, anchor=C, rotate=90](npn1){}
+				(npn1.E) to [short] (2,0);
+				\draw [->] ([yshift = 0.2cm, xshift = 0.1cm]npn1.C) -- node [yshift = 0.25cm] {$u$} ([yshift = 0.2cm, xshift = -0.1cm]npn1.E) ;
+			\end{circuitikz}
+			
+			&
+			
+			\begin{circuitikz}
+				\draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0) 
+				to ++(0.01,0)  node [nigfete, anchor=D, rotate=90, bodydiode](fet1){}
+				(fet1.S) to [short] (2,0);
+				\draw [->] ([yshift = 0.5cm, xshift = 0.1cm]fet1.D) -- node [yshift = 0.3cm] {$u$} ([yshift = 0.5cm, xshift = -0.1cm]fet1.S) ;
+			\end{circuitikz}
+			
+			&
 
-		\begin{tikzpicture}
-			\begin{axis}[
-				xmin=-1, xmax=1,
-				ymin=-1, ymax=1,
-				width=0.25\textwidth,
-				height=0.5\textheight,
-				axis lines=middle,
-				clip = false,
-				thick,
-				xlabel = {$u$},
-				ylabel = {$i$},
-				xticklabels=\empty,
-				xlabel style={anchor = west},
-				ylabel style={anchor = north east},
-				yticklabels=\empty,
-				anchor = center
-				]
-				\addplot[signalred, very thick] coordinates {(-1,0) (0,0) (0,1)};
-			\end{axis}
-		\end{tikzpicture}
+			\begin{circuitikz}
+				\draw (0,0) to node[emptythyristorshape](ty1){} (2,0);
+				\draw (ty1.cathode) to [short, i_=$i$, , xshift = -0.2cm] (2,0);
+				\draw [->] ([yshift = -0.5cm, xshift = 0.1cm]ty1.anode) -- node [yshift = -0.3cm] {$u$} ([yshift = -0.5cm, xshift = -0.1cm]ty1.cathode) ;
+			\end{circuitikz}
 
-		&
+			\\
 
-		\begin{tikzpicture}
-			\begin{axis}[
-				xmin=-1, xmax=1,
-				ymin=-1, ymax=1,
-				width=0.25\textwidth,
-				height=0.5\textheight,
-				axis lines=middle,
-				clip = false,
-				thick,
-				xlabel = {$u$},
-				ylabel = {$i$},
-				xticklabels=\empty,
-				xlabel style={anchor = west},
-				ylabel style={anchor = north east},
-				yticklabels=\empty,
-				anchor = center
-				]
-				\addplot[signalred, very thick] coordinates {(0,0) (1,0)};
-				\addplot[signalgreen, very thick] coordinates {(0,0) (0,1)};
-				%\node[pin= left:{\footnotesize\color{signalgreen}active\\gate}, align=right] at (axis cs:0,0.5) {};
-				\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
-				\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
-			\end{axis}
-		\end{tikzpicture}
+			\begin{tikzpicture}
+				\begin{axis}[
+					xmin=-1, xmax=1,
+					ymin=-1, ymax=1,
+					width=0.25\textwidth,
+					height=0.5\textheight,
+					axis lines=middle,
+					clip = false,
+					thick,
+					xlabel = {$u$},
+					ylabel = {$i$},
+					xticklabels=\empty,
+					xlabel style={anchor = west},
+					ylabel style={anchor = north east},
+					yticklabels=\empty,
+					anchor = center
+					]
+					\addplot[signalred, very thick] coordinates {(-1,0) (0,0) (0,1)};
+				\end{axis}
+			\end{tikzpicture}
 
-		&
+			&
 
-		\begin{tikzpicture}
-			\begin{axis}[
-				xmin=-1, xmax=1,
-				ymin=-1, ymax=1,
-				width=0.25\textwidth,
-				height=0.5\textheight,
-				axis lines=middle,
-				clip = false,
-				thick,
-				xlabel = {$u$},
-				ylabel = {$i$},
-				xticklabels=\empty,
-				xlabel style={anchor = west},
-				ylabel style={anchor = north east},
-				yticklabels=\empty,
-				anchor = center
-				]
-				\addplot[signalred, very thick] coordinates {(0,0) (1,0)};
-				\addplot[signalgreen, very thick] coordinates {(0,-1) (0,1)};
-				%\node[pin= left:{\footnotesize\color{signalgreen}active\\gate}, align=right] at (axis cs:0,0.5) {};
-				\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
-				\draw [pin] (axis cs:0.25,-0.05) -- +(10pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
-				\draw [pin] (axis cs:-0.05,-0.5) -- +(-12pt,5pt) node[left, align=center, font=\footnotesize ] {body\\ diode};
-			\end{axis}
-		\end{tikzpicture}
+			\begin{tikzpicture}
+				\begin{axis}[
+					xmin=-1, xmax=1,
+					ymin=-1, ymax=1,
+					width=0.25\textwidth,
+					height=0.5\textheight,
+					axis lines=middle,
+					clip = false,
+					thick,
+					xlabel = {$u$},
+					ylabel = {$i$},
+					xticklabels=\empty,
+					xlabel style={anchor = west},
+					ylabel style={anchor = north east},
+					yticklabels=\empty,
+					anchor = center
+					]
+					\addplot[signalred, very thick] coordinates {(0,0) (1,0)};
+					\addplot[signalgreen, very thick] coordinates {(0,0) (0,1)};
+					\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+					\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+				\end{axis}
+			\end{tikzpicture}
 
-		&
+			&
 
-		\begin{tikzpicture}
-			\begin{axis}[
-				xmin=-1, xmax=1,
-				ymin=-1, ymax=1,
-				width=0.25\textwidth,
-				height=0.5\textheight,
-				axis lines=middle,
-				clip = false,
-				thick,
-				xlabel = {$u$},
-				ylabel = {$i$},
-				xticklabels=\empty,
-				xlabel style={anchor = west},
-				ylabel style={anchor = north east},
-				yticklabels=\empty,
-				anchor = center
-				]
-				\addplot[signalred, very thick] coordinates {(0,0) (1,0)};
-				\addplot[signalgreen, very thick] coordinates {(0,0) (0,1)};
-				%\node[pin= left:{\footnotesize\color{signalgreen}active\\gate}, align=right] at (axis cs:0,0.5) {};
-				\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
-				\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
-				\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
-			\end{axis}
-		\end{tikzpicture}
+			\begin{tikzpicture}
+				\begin{axis}[
+					xmin=-1, xmax=1,
+					ymin=-1, ymax=1,
+					width=0.25\textwidth,
+					height=0.5\textheight,
+					axis lines=middle,
+					clip = false,
+					thick,
+					xlabel = {$u$},
+					ylabel = {$i$},
+					xticklabels=\empty,
+					xlabel style={anchor = west},
+					ylabel style={anchor = north east},
+					yticklabels=\empty,
+					anchor = center
+					]
+					\addplot[signalred, very thick] coordinates {(0,0) (1,0)};
+					\addplot[signalgreen, very thick] coordinates {(0,-1) (0,1)};
+					\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+					\draw [pin] (axis cs:0.25,-0.05) -- +(10pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+					\draw [pin] (axis cs:-0.05,-0.5) -- +(-12pt,5pt) node[left, align=center, font=\footnotesize ] {body\\ diode};
+				\end{axis}
+			\end{tikzpicture}
 
-	\end{tabular}
-\end{table}
+			&
+
+			\begin{tikzpicture}
+				\begin{axis}[
+					xmin=-1, xmax=1,
+					ymin=-1, ymax=1,
+					width=0.25\textwidth,
+					height=0.5\textheight,
+					axis lines=middle,
+					clip = false,
+					thick,
+					xlabel = {$u$},
+					ylabel = {$i$},
+					xticklabels=\empty,
+					xlabel style={anchor = west},
+					ylabel style={anchor = north east},
+					yticklabels=\empty,
+					anchor = center
+					]
+					\addplot[signalred, very thick] coordinates {(0,0) (1,0)};
+					\addplot[signalgreen, very thick] coordinates {(0,0) (0,1)};
+					\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+					\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
+					\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+				\end{axis}
+			\end{tikzpicture}
+		\end{tabular}
+	\end{table}
 \end{frame}
