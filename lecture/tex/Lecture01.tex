@@ -767,6 +767,83 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Switching power conversion: passive components as filters / energy buffers %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+	\frametitle{Switching power conversion: passive components as filters / energy buffers}
+	
+	\begin{figure}
+	\centering
+				\begin{tikzpicture}[ampersand replacement=\&]
+					
+					\node[] (A) at (0,0) {
+						\begin{circuitikz}[]
+							\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+							to ++(-6,0)
+							to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+							(-6,2) to ++(1.25,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
+							let \p1 = (S.mid) in (S.in) to [inductor, l_=$L$] (0,2) 
+							([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
+							\draw (-0.75,2) to [capacitor, *-*, l_=$C$] (-0.75,0);
+							\draw (-3.5,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s}(t)$, voltage = straight] ++(0,-2);
+						\end{circuitikz}
+					};
+
+					\matrix [anchor = north, column sep = 1cm] at (0,-1.5){
+						\begin{axis}[
+							xlabel={$t/T_\mathrm{s}$},
+							ylabel={$u_\mathrm{s}(t)/u_\mathrm{in}(t)$},
+							ymin=-0.05, ymax=1.05,
+							xmin=-0.1, xmax=1.1,
+							width = 0.45\textwidth,
+							height = 0.4\textheight,
+							grid,
+							thick,
+							clip = false,
+							]
+							% plt u_out = 1 for t = 0 to D*Ts and u_out = 0 for t = D*Ts to Ts in a single plot
+							\addplot[signalblue] coordinates {(-0.1,0) (0,0) (0,1) (0.4,1) (0.4,0) (1,0) (1,1) (1.1,1)};
+							\draw [thick,<->]  (0,0.5) -- node[above,fill=white]{$T_\mathrm{on}$}(0.4, 0.5); 
+							\draw [thick,<->]  (0.4,0.5) -- node[above]{$T_\mathrm{off}$}(1.0, 0.5);
+							\draw [thick,<->]  (0.0,1.2) -- node[above]{$T_\mathrm{s}$}(1.0, 1.2); 
+						\end{axis}
+						
+						\&
+
+						\begin{axis}[
+							xlabel={$t/T_\mathrm{s}$},
+							ylabel={$u_\mathrm{out}(t)/u_\mathrm{in}(t)$},
+							ymin=-0.05, ymax=1.05,
+							xmin=-0.1, xmax=1.1,
+							width = 0.45\textwidth,
+							height = 0.4\textheight,
+							grid,
+							thick,
+							clip = false,
+							]
+							\addplot[signalblue, dashed] coordinates {(-0.1,0.4) (1.1,0.4)};
+							\addplot[dashed] coordinates {(-0.1,0.5) (1.1,0.5)};
+							\addplot[dashed] coordinates {(-0.1,0.25) (1.1,0.25)};
+							\addplot[signalblue, domain=0:0.4]{0.25 + (x-0.2)^2*0.15/(0.2)^2};
+							\addplot[signalblue, domain=0.4:1.0]{0.5 - (x-0.7)^2*0.1/(0.3)^2};
+							\addplot[signalblue, domain=-0.1:0]{0.5 - (x+0.3)^2*0.1/(0.3)^2};
+							\addplot[signalblue, domain=1.0:1.1]{0.25 + (x-1.2)^2*0.15/(0.2)^2};
+							\draw [thick,<->, anchor = mid]  (0,0.8) -- node[midway,fill=white,inner sep = 1pt]{$T_\mathrm{on}$}(0.4, 0.8); 
+							\draw [thick,<->, anchor = mid]  (0.4,0.8) -- node[midway,fill=white,inner sep = 1pt]{$T_\mathrm{off}$} (1.0, 0.8);
+							\draw [thick,<->]  (0.0,1.2) -- node[above]{$T_\mathrm{s}$}(1.0, 1.2); 
+							\draw[-{Latex[length=2mm]}] (0.4, 0.7) -- (0.4, 0.5);
+							\draw[-{Latex[length=2mm]}] (0.4, 0.05) -- node[left=1mm, fill=white, inner sep = 1pt, yshift=-0.5mm]{$\Delta u$}(0.4, 0.25);
+							\draw[-{Latex[length=2mm]}, thin, signalblue] (0.7, 0.05) -- node[right=1mm, fill=white, inner sep = 1pt, yshift=-2mm]{$\overline{u}_\mathrm{out}$}(0.6, 0.4);
+						\end{axis}
+						\\
+						};	
+				\end{tikzpicture}
+				\caption{Exemplary voltage signals for a switched power conversion system with output filter} 
+				\label{fig:Switched_power_conversion_filters}
+			\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Important power electronic devices and idealized characteristics %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[c]
@@ -1159,5 +1236,122 @@
 			\vspace{0.5cm}
 		\end{tabular}
 	\end{table}
+	\vspace{-0.5cm}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Important power electronic devices and idealized characteristics (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+	\frametitle{Important power electronic devices and idealized characteristics (cont.)}
+		\begin{figure}
+			\begin{tikzpicture}
+				\begin{axis}[
+					view={-350}{30},
+					grid=major,
+					xlabel={Current},
+					zlabel={Voltage},
+					ylabel={Frequency},
+					axis line style={-Stealth},
+					width = 0.8\textwidth,
+					height = 0.85\textheight,
+					y dir=reverse,
+					ytick = {0,1,2,3,4,5},
+					yticklabels = {0,\SI{100}{\hertz},\SI{1}{\kilo\hertz},\SI{10}{\kilo\hertz},\SI{100}{\kilo\hertz},$\SI{\geq 1}{\mega\hertz}$},
+					yticklabel style={rotate=-5, anchor = west},
+					ylabel style={rotate=60, anchor = north west},
+					ztick = {0, 1, 2, 3, 4, 5, 6, 7},
+					zmin = 0,
+					zmax = 7,
+					zticklabels = {0, \SI{1}{\kilo\volt}, \SI{2}{\kilo\volt}, \SI{3}{\kilo\volt}, \SI{4}{\kilo\volt}, \SI{5}{\kilo\volt}, \SI{6}{\kilo\volt}, \SI{7}{\kilo\volt}},
+					xtick = {0, 1, 2, 3, 4, 5, 6 ,7, 8, 9, 10, 11},
+					xticklabels = {0, \SI{200}{\ampere}, , \SI{600}{\ampere}, , \SI{1}{\kilo\ampere}, , \SI{1.4}{\kilo\ampere}, , \SI{1.8}{\kilo\ampere},, \SI{2.2}{\kilo\ampere}},
+					xlabel style={rotate=-3, anchor = center},
+					xticklabel style={yshift = -0.2 cm},
+				]
+				
+				% Defining the maximal edges using \pgfmathsetmacro
+				\pgfmathsetmacro{\thyristorCurrent}{11} % 2.2 kA
+				\pgfmathsetmacro{\thyristorVoltage}{7}   % 7 kV
+				\pgfmathsetmacro{\thyristorFrequency}{1} % 100 Hz 
+				
+				\pgfmathsetmacro{\gtoCurrent}{10}  % 2.0 kA
+				\pgfmathsetmacro{\gtoVoltage}{6}    % 6 kV
+				\pgfmathsetmacro{\gtoFrequency}{2}  % 1 kHz 
+				
+				\pgfmathsetmacro{\igbtCurrent}{5} % 1 kA
+				\pgfmathsetmacro{\igbtVoltage}{3}   % 3 kV
+				\pgfmathsetmacro{\igbtFrequency}{4} % 100 kHz 
+				
+				\pgfmathsetmacro{\mosfetCurrent}{0.5} % 0.1 kA 
+				\pgfmathsetmacro{\mosfetVoltage}{1}   % 1 kV
+				\pgfmathsetmacro{\mosfetFrequency}{5} % 1 MHz 
+				
+				% Thyristor faces
+				\addplot3[fill=signalblue, opacity=0.6] coordinates { (0, 0, 0) (\thyristorCurrent, 0, 0) (\thyristorCurrent, \thyristorFrequency, 0) (0, \thyristorFrequency, 0)};
+
+				\addplot3[fill=signalblue, opacity=0.6] coordinates { (0, 0, \thyristorVoltage) (\thyristorCurrent, 0, \thyristorVoltage) (\thyristorCurrent, \thyristorFrequency, \thyristorVoltage) (0, \thyristorFrequency, \thyristorVoltage)};
+
+				\addplot3[fill=signalblue, opacity=0.6] coordinates { (0, 0, 0) (\thyristorCurrent, 0, 0) (\thyristorCurrent,  0, \thyristorVoltage) (0, 0, \thyristorVoltage)};
+
+				\addplot3[fill=signalblue, opacity=0.6] coordinates { (0, \thyristorFrequency, 0) (\thyristorCurrent, \thyristorFrequency, 0) (\thyristorCurrent, \thyristorFrequency, \thyristorVoltage) (0, \thyristorFrequency, \thyristorVoltage)};
+
+				\addplot3[fill=signalblue, opacity=0.6] coordinates { (0, 0, 0) (0, \thyristorFrequency, 0) (0, \thyristorFrequency, \thyristorVoltage) (0, 0, \thyristorVoltage)};
+
+				\addplot3[fill=signalblue, opacity=0.6] coordinates { (\thyristorCurrent, 0, 0) (\thyristorCurrent, \thyristorFrequency, 0) (\thyristorCurrent, \thyristorFrequency, \thyristorVoltage) (\thyristorCurrent, 0, \thyristorVoltage)};
+
+
+				% GTO faces
+				\addplot3[fill=signalred, opacity=0.6] coordinates { (0, \thyristorFrequency, 0) (\gtoCurrent, \thyristorFrequency, 0) (\gtoCurrent, \gtoFrequency, 0) (0, \gtoFrequency, 0)};
+
+				\addplot3[fill=signalred, opacity=0.6] coordinates { (0, \thyristorFrequency, \gtoVoltage) (\gtoCurrent, \thyristorFrequency, \gtoVoltage) (\gtoCurrent, \gtoFrequency, \gtoVoltage) (0, \gtoFrequency, \gtoVoltage)};
+
+				\addplot3[fill=signalred, opacity=0.6] coordinates { (0, \thyristorFrequency, 0) (\gtoCurrent, \thyristorFrequency, 0) (\gtoCurrent, \thyristorFrequency, \gtoVoltage) (0, \thyristorFrequency, \gtoVoltage)};
+
+				\addplot3[fill=signalred, opacity=0.6] coordinates { (0, \gtoFrequency, 0) (\gtoCurrent, \gtoFrequency, 0) (\gtoCurrent, \gtoFrequency, \gtoVoltage) (0, \gtoFrequency, \gtoVoltage)};
+
+				\addplot3[fill=signalred, opacity=0.6] coordinates { (0, \thyristorFrequency, 0) (0, \gtoFrequency, 0) (0, \gtoFrequency, \gtoVoltage) (0, \thyristorFrequency, \gtoVoltage)};
+
+				\addplot3[fill=signalred, opacity=0.6] coordinates { (\gtoCurrent, \thyristorFrequency, 0) (\gtoCurrent, \gtoFrequency, 0) (\gtoCurrent, \gtoFrequency, \gtoVoltage) (\gtoCurrent, \thyristorFrequency, \gtoVoltage)};
+
+				% IGBT faces
+				\addplot3[fill=signalgreen, opacity=0.6] coordinates { (0, \gtoFrequency, 0) (\igbtCurrent, \gtoFrequency, 0) (\igbtCurrent, \igbtFrequency, 0) (0, \igbtFrequency, 0)};
+
+				\addplot3[fill=signalgreen, opacity=0.6] coordinates { (0, \gtoFrequency, \igbtVoltage) (\igbtCurrent, \gtoFrequency, \igbtVoltage) (\igbtCurrent, \igbtFrequency, \igbtVoltage) (0, \igbtFrequency, \igbtVoltage)};
+
+				\addplot3[fill=signalgreen, opacity=0.6] coordinates { (0, \gtoFrequency, 0) (\igbtCurrent, \gtoFrequency, 0) (\igbtCurrent, \gtoFrequency, \igbtVoltage) (0, \gtoFrequency, \igbtVoltage)};
+
+				\addplot3[fill=signalgreen, opacity=0.6] coordinates { (0, \igbtFrequency, 0) (\igbtCurrent, \igbtFrequency, 0) (\igbtCurrent, \igbtFrequency, \igbtVoltage) (0, \igbtFrequency, \igbtVoltage)};
+
+				\addplot3[fill=signalgreen, opacity=0.6] coordinates { (0, \gtoFrequency, 0) (0, \igbtFrequency, 0) (0, \igbtFrequency, \igbtVoltage) (0, \gtoFrequency, \igbtVoltage)};
+
+				\addplot3[fill=signalgreen, opacity=0.6] coordinates { (\igbtCurrent, \gtoFrequency, 0) (\igbtCurrent, \igbtFrequency, 0) (\igbtCurrent, \igbtFrequency, \igbtVoltage) (\igbtCurrent, \gtoFrequency, \igbtVoltage)};
+
+
+				% MOSFET faces
+				\addplot3[fill=signalyellow, opacity=0.6] coordinates { (0, \igbtFrequency, 0) (\mosfetCurrent, \igbtFrequency, 0) (\mosfetCurrent, \mosfetFrequency, 0) (0, \mosfetFrequency, 0)};
+
+				\addplot3[fill=signalyellow, opacity=0.6] coordinates { (0, \igbtFrequency, \mosfetVoltage) (\mosfetCurrent, \igbtFrequency, \mosfetVoltage) (\mosfetCurrent, \mosfetFrequency, \mosfetVoltage) (0, \mosfetFrequency, \mosfetVoltage)};
+
+				\addplot3[fill=signalyellow, opacity=0.6] coordinates { (0, \igbtFrequency, 0) (\mosfetCurrent, \igbtFrequency, 0) (\mosfetCurrent, \igbtFrequency, \mosfetVoltage) (0, \igbtFrequency, \mosfetVoltage)};
+
+				\addplot3[fill=signalyellow, opacity=0.6] coordinates { (0, \mosfetFrequency, 0) (\mosfetCurrent, \mosfetFrequency, 0) (\mosfetCurrent, \mosfetFrequency, \mosfetVoltage) (0, \mosfetFrequency, \mosfetVoltage)};
+
+				\addplot3[fill=signalyellow, opacity=0.6] coordinates { (0, \igbtFrequency, 0) (0, \mosfetFrequency, 0) (0, \mosfetFrequency, \mosfetVoltage) (0, \igbtFrequency, \mosfetVoltage)};
+
+				\addplot3[fill=signalyellow, opacity=0.6] coordinates { (\mosfetCurrent, \igbtFrequency, 0) (\mosfetCurrent, \mosfetFrequency, 0) (\mosfetCurrent, \mosfetFrequency, \mosfetVoltage) (\mosfetCurrent, \igbtFrequency, \mosfetVoltage)};
+
+				% Labels
+				\node[anchor=center] at (axis cs:5.5, 0.5, 6.1) {Thyristor};
+				\node[anchor=center] at (axis cs:5.5, 1.5, 4.1) {GTO};
+				\node[anchor=center] at (axis cs:2.5, 3.5, 1.8) {IGBT};
+				\draw[->, thick] (axis cs:2.0, 5, 0.5) -- (axis cs:0.6, 5, 0.5);
+				\node[anchor=west, fill=white, inner sep=1pt, rotate = -2] at (axis cs:2.0, 5, 0.4) {MOSFET};
+	
+
+				\end{axis}
+				\end{tikzpicture}
+			  \label{fig:power_electronic_devices}
+			  \caption{Power electronic devicess and their typical operating ranges }
+		\end{figure}
 	\vspace{-0.5cm}
 \end{frame}
