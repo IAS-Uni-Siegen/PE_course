@@ -549,6 +549,50 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Four quadrants of operation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Four quadrants of operation}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\justifying
+			Depending on the current and voltage signs, the power $P$ can be positive or negative. This leads to four \hl{quadrants} of operation:%
+			\begin{itemize}
+				\item Quadrants I \& III: $P \geq 0$,\newline (Power transfer from input to output)
+				\item Quadrants II \& IV: $P \leq 0$. \newline (Power transfer from output to input)
+			\end{itemize}
+			How many quadrants a power converter can operate in depends on the topology and control strategy, i.e., is an important design criterion.
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\centering
+				\begin{tikzpicture}
+					\draw[<->] (-2,0) -- (2,0) node[anchor=west] {$i$};
+					\draw[<->] (0,-2) -- (0,2) node[anchor=south] {$u$};
+					\node[anchor=center, align = center] at (1.0,1.0) {$\mathrm{I}$\\$P \geq 0$};
+					\node[anchor=center, align = center] at (-1.0,1.0) {$\mathrm{II}$\\$P \leq 0$};
+					\node[anchor=center, align = center] at (-1.0,-1.0) {$\mathrm{III}$\\$P \geq 0$};
+					\node[anchor=center, align = center] at (1.0,-1.0) {$\mathrm{IV}$\\$P \leq 0$};
+					\node[anchor = center, xshift = 1mm] at (0, 3.5) {
+						\begin{circuitikz}
+							\node[twoportsplitshape, scale = 1.5](tp){};
+							\draw (tp.left up) to [short, -o, i_<= $i_\mathrm{in}$] ++(-0.75,0) coordinate(tpin1)
+							(tp.left down) to [short, -o] ++(-0.75,0) coordinate(tpin2);
+							\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{$u_\mathrm{in}$} ([xshift=-0.9cm]tp.left down);
+							\draw (tp.right up) to [short, -o, i= $i_\mathrm{out}$] ++(0.75,0) coordinate(tpout1)
+							(tp.right down) to [short, -o] ++(+0.75,0) coordinate(tpout2);
+							\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_\mathrm{out}$} ([xshift=1cm]tp.right down);
+						\end{circuitikz}	
+					} ;
+				\end{tikzpicture}
+				\caption{Four quadrants of energy conversion}
+				\label{fig:four_quadrants}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Why efficiency matters: a computer supply example %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[c]
@@ -713,7 +757,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[b]
 	\frametitle{Switching power conversion}
-	Alternative idea: \hl{switch either fully on or off}. The average output voltage $\overline{u}_\mathrm{out}$ is controlled by the duty cycle (assuming that $u_\mathrm{in}(t)=\overline{u}_\mathrm{in}$ is constant)
+	Alternative idea: \hl{switch either fully on or off}. The average output voltage $\overline{u}_\mathrm{out}$ is controlled by the \hl{duty cycle} (assuming that $u_\mathrm{in}(t)=\overline{u}_\mathrm{in}$ is constant)
 	\begin{equation}
 		D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \qquad \overline{u}_\mathrm{out} = \frac{1}{T_\mathrm{s}} \int_0^{T_\mathrm{s}} u_\mathrm{out}(t) \mathrm{d}t = D \overline{u}_\mathrm{in}.
 	\end{equation}
@@ -841,6 +885,56 @@
 				\caption{Exemplary voltage signals for a switched power conversion system with output filter} 
 				\label{fig:Switched_power_conversion_filters}
 			\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Feasible and infeasible filter topologies %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+	\frametitle{Feasible and infeasible filter topologies}
+	\begin{figure}
+		\centering	
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\begin{circuitikz}[]
+				\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+				to ++(-5,0)
+				to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+				(-5,2) to ++(2,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
+				let \p1 = (S.mid) in (S.in) to [inductor] (0,2) 
+				([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
+				\draw (-4,2) to [capacitor, *-*] (-4,0);
+			\end{circuitikz}
+			\caption{Feasible filter topology}
+		\end{subfigure}%
+		\begin{subfigure}{0.45\textwidth}
+			\centering
+			\begin{circuitikz}[]
+						\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+						to ++(-5,0)
+						to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+						(-5,2) to [inductor, name = L1] ++(2,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
+						let \p1 = (S.mid) in (S.in) to [short] (0,2) 
+						([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
+						\draw (-1,2) to [capacitor, *-*, name = C1] (-1,0);
+						\node[correct forbidden sign, line width = 0.6ex, draw = signalred, minimum size = 1.3cm] at (C1){};
+						\node[correct forbidden sign, line width = 0.65ex, draw = signalred, minimum size = 1.3cm] at (L1){};
+			\end{circuitikz}
+			\caption{Infeasible filter topology}
+		\end{subfigure}
+	\caption{Basic filter topologies for switched power conversion} 
+	\label{fig:Switched_power_conversion_filters_basic}
+	\end{figure}
+	\vspace{-0.25cm}
+	\begin{varblock}{Short and open circuit situations}
+		\setbeamertemplate{itemize/enumerate body end}{\vspace{0em}}
+		Prevent the following situations as they can lead to sparkover and damage:
+		\begin{itemize}
+			\item Short circuit of capacitor: current peak, 
+			\item Open circuit of inductor: voltage peak.
+		\end{itemize}
+	\end{varblock}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1351,7 +1445,80 @@
 				\end{axis}
 				\end{tikzpicture}
 			  \label{fig:power_electronic_devices}
-			  \caption{Power electronic devicess and their typical operating ranges }
+			  \caption{Power electronic devices and their typical operating ranges}
 		\end{figure}
 	\vspace{-0.5cm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Why is knowledge about power electronics important? %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Why is knowledge about power electronics important?}
+	\begin{varblock}{Power electronics are an essential pillar of the modern society}
+		Power electronics are the key technology for the efficient conversion of electrical energy. They are used in a wide range of applications, such as renewable energy systems, electric vehicles, industrial automation, computing and communication systems as well as a wide range of consumer electronics. Hence, power electronics are an essential pillar of the modern society.  
+	\end{varblock}
+	\begin{varblock}{Energy efficiency and sustainability is key}<2->
+		Electricity as a share of primary energy is current at \SI{20}{\percent} and is expected to further increase (source: \href{https://ourworldindata.org/grapher/electricity-as-a-share-of-primary-energy}{Ember and Energy Institute}). Power electronics convert a major share of the worldwide electrical energy as they are used on the generation, transmission, storage and load side. Increasing the conversion and resource efficiency of power electronics direct reduces the primary energy consumption and the environmental impact of the energy system. 
+	\end{varblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Learning objectives %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Learning objectives}
+	\begin{itemize}
+		\item Understand the electrical energy conversion principles of power electronics.
+		\item<2-> Differentiate the main converter application types:
+		\begin{itemize}
+			\item DC-DC converters.
+			\item DC-AC inverters.
+			\item AC-DC rectifiers.
+			\item AC-AC converters.
+			\item And their plentiful realization variants \ldots
+		\end{itemize}
+		\item<3-> Analyze the operation of power electronics:
+		\begin{itemize}
+			\item in steady state and
+			\item in transient conditions.
+		\end{itemize} 
+		\item<4-> Understand modulation techniques for switching actuators.
+		\item<5-> Have fun learning about power electronics.
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Necessary prior knowledge %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Necessary prior knowledge for this course}
+	You should have a basic understanding of the following topics:
+	\begin{itemize}
+		\item Linear differential equations (modeling, solution techniques),
+		\item Linear algebra basics (e.g., vector and matrix operations),
+		\item Basic signal theory knowledge (e.g., Fourier series, Laplace transform),
+		\item Basic knowledge of electrical circuit theory,
+		\item Basic knowledge of semiconductor physics.
+	\end{itemize}
+	\vspace{0.5cm}
+	\onslide<2->What we will \underline{not} cover, that is, you do not need to know (covered in separate courses):
+	\begin{itemize}
+		\item Control engineering (design converter controllers),
+		\item Specific load characteristics (e.g., electric drives or batteries).
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Recommended reading %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Recommended reading}
+	\begin{itemize}
+		\item R. Rickson and D. Maksimovic, Fundamentals of Power Electronics, Vol. 3, Springer, 2020, \url{https://doi.org/10.1007/978-3-030-43881-4}
+		\item J. Kassakian et al, Principles of Power Electronics, Vol. 2,  Cambridge University Press, 2023, \url{https://doi.org/10.1017/9781009023894}
+		\item J. Specovius, Grundkurs Leistungselektronik (in German), Vol. 10, Springer, 2020, \url{https://doi.org/10.1007/978-3-658-21169-1}
+		\item F. Zach, Leistungselektronik (in German), Vol. 6, Springer, 2022, \url{https://doi.org/10.1007/978-3-658-31436-1}
+		\item D. Schröder and R. Marquardt, Leistungselektronische	Schaltungen (in German), Vol. 4, Springer, 2019, \url{https://doi.org/10.1007/978-3-662-55325-1}
+	\end{itemize}
 \end{frame}

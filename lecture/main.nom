@@ -1,0 +1,16 @@
+\glossarysection[\glossarytoctitle]{\glossarytitle}\glossarypreamble
+\begin{theglossary}\glossaryheader
+\glsgroupheading{glsnumbers}\relax \glsresetentrylist %
+\glossentry{scalar_signal}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsignore{38}}}%
+\glossentry{vectorial_signal}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsignore{38}}}%
+\glossentry{const_signal}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsignore{38}}}%
+\glossentry{matrix}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsignore{38}}}%
+\glossentry{average_signal}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsignore{38}}}%
+\glossentry{derivative_signal}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsignore{38}}}%
+\end{theglossary}\glossarypostamble

@@ -1,0 +1,64 @@
+\section{Nomenclature}
+\title{Nomenclature} 
+
+\begin{frame}[plain]
+    \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Mathematical nomenclature (via glossaries-extra package) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newglossaryentry{scalar_signal}{
+    type=nomen,
+    name={$x(t)$},
+    description={time-dependent, scalar quantity},
+    sort = 010
+}
+
+\newglossaryentry{vectorial_signal}{
+    type=nomen,
+    name={$\bm{x}(t)$},
+    description={time-dependent, vectorial quantity},
+    sort = 020
+}
+
+\newglossaryentry{const_signal}{
+    type=nomen,
+    name={$X$},
+    description={constant, scalar quantity},
+    sort = 021
+}
+
+\newglossaryentry{matrix}{
+    type=nomen,
+    name={$\bm{X}$},
+    description={matrix},
+    sort = 022
+}
+
+\newglossaryentry{average_signal}{
+    type=nomen,
+    name={$\overline{x}$},
+    description={average},
+    sort = 030
+}
+
+\newglossaryentry{derivative_signal}{
+    type=nomen,
+    name={$\frac{\mathrm{d}}{\mathrm{d}t}{x(t)}$},
+    description={derivative (first derivative w.r.t. time)},
+    sort = 040
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Build nomenclature %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[allowframebreaks]{Nomenclature}
+    \glsaddallunused
+    \small
+    \setlength{\glslistdottedwidth}{.25\linewidth} % Set the width of the dotted lines in the glossary
+    \printglossary[style = listdotted, nogroupskip, title = , type = nomen]
+\end{frame}
