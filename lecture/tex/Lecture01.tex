@@ -1547,6 +1547,69 @@
 \begin{frame}
 	\frametitle{Internal device resistance}
 	Besides the switching losses, power electronic devices have an internal resistance $R_{\mathrm{on}}$ that causes conduction losses. 
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{table}
+				\centering
+				\begin{tabular}{M{0.22\textwidth} M{0.22\textwidth} M{0.22\textwidth}}
+		
+					
+					\begin{circuitikz}
+						\draw (0,0) to [R, i>^=$i$, l_= $R_\mathrm{on}$] (0,-1.75) to [inductor] (0,-3.5);
+						\draw[->] (0.6,0) -- node [xshift = 0.2cm] {$u$} (0.6,-3.5);
+					\end{circuitikz}
+							
+					&
+
+					\begin{circuitikz}
+						\draw (0,0) to [R, i>^=$i$, l_= $R_\mathrm{on}$] (0,-2) to [capacitor] (0,-3);
+						\draw[->] (0.6,0) -- node [xshift = 0.2cm] {$u$} (0.6,-3);
+					\end{circuitikz}					
+					
+					
+					&
+
+					\begin{circuitikz}
+						\draw (0,0) to [R, i>^=$i$, l_= $R_\mathrm{on}$] (0,-2) to [diode] (0,-3);
+						\draw[->] (0.6,0) -- node [xshift = 0.2cm] {$u$} (0.6,-3);
+					\end{circuitikz}
+						
+				\end{tabular}
+			\end{table}
+		\end{column}
+		%
+		\begin{column}{0.4\textwidth}
+			\begin{figure}
+				\begin{tikzpicture}
+					\begin{axis}[
+						xlabel={$U_{\mathrm{d}}$},
+						ylabel={$I_\mathrm{d}$},
+						axis lines=left,
+						ymin=0, ymax=1,
+						xmin=0, xmax=1,
+						xtick={0, 0.2, 0.4, 0.6, 0.8, 1.0},
+						ytick={0, 0.2, 0.4, 0.6, 0.8, 1.0},
+						xticklabels={},
+						yticklabels={},
+						thick,
+						smooth,
+						no markers,
+						width = 0.99\textwidth,
+						grid
+						]
+						\addplot[signalblue, domain=0:0.4] {0};
+						\addplot[dashed] coordinates {(0.4,0) (0.6,1)};
+						\addplot[signalblue, domain=0.4:1.0] {exp(2*x)-exp(0.8)};
+						\draw[-] (axis cs:0.5,0.5) -- (axis cs:0.55,0.5);
+						\draw[-] (axis cs:0.55,0.5) -- (axis cs:0.55,0.75);
+						\node[anchor=west, fill=white, inner sep = 1pt] at (axis cs:0.55,0.6) {$\frac{1}{R_\mathrm{on}}$};
+					\end{axis}
+				\end{tikzpicture}
+				\caption{Qualitative diode characteristic in the forward direction}
+				\label{fig:diode_characteristic}
+			\end{figure}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
