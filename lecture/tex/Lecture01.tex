@@ -825,6 +825,83 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Switching power conversion %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Switching power conversion: switching losses}
+	\begin{columns}[b]
+		\begin{column}{0.3\textwidth}
+			Switching process is not free of power loss:
+			$$\overline{P}_\mathrm{l} = \frac{1}{T_\mathrm{s}} \int_0^{T_\mathrm{s}} u_\mathrm{s}(t) i_\mathrm{s}(t) \mathrm{d}t .$$
+			\vspace{-0.6cm}
+			\begin{figure}
+				\begin{circuitikz}[]
+					\draw (0,1.5) to [vsource, v=$u_0$, name=vs] (0,0)
+					to (1.5,0) [short]
+					to ++(0,0.5) node [cspstshape, anchor = right, rotate = -90] (S) {};
+					\draw (S.left) to ++(0,0.5)  [short, -*] coordinate (S1);
+					\draw (S1) to [diode] ++(0,2) coordinate (S3)
+					to ++(1,0) [short]	coordinate (S2)
+					to  [isource, i=$i_0$] ++(0, -2.0)
+					to  [short, -*] (S1);
+					\draw (S3) to [short, *-] ++(-1.5,0)
+					to (vs) [short];
+					\draw (S.right) to [short, i=$i_\mathrm{s}$] ++(0,-0.5); 
+					\draw [->] ([xshift = 0.45cm, yshift=0.1cm]S.left) -- node [xshift = 0.45cm] {$u_\mathrm{s}$} ([xshift = 0.45cm, yshift =-0.1cm]S.right);
+				\end{circuitikz}
+				\caption{Idealized switching loss model}
+				\label{fig:idealized_switch_model}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.7\textwidth}
+			\centering
+			\begin{figure}
+				\begin{tikzpicture}
+					\begin{groupplot}[group style={group size=1 by 3}, height=0.34\textheight, width=0.875\textwidth, xmin=-0.1, xmax=1.1, grid,clip = false, ymin = -0.1, ymax =1.1]
+
+					% Top plot: switch control signal
+					\nextgroupplot[ylabel = {$u_\mathrm{ctrl}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {off, , on}]
+						\addplot[signalblue, thick] coordinates {(-0.1,0) (0,0) (0,1) (0.5,1) (0.5,0) (1,0) (1,1) (1.1,1)};
+						\draw [thick,<->]  (0,0.4) -- node[above, fill=white, inner sep = 1pt]{$T_\mathrm{on}$}(0.5, 0.4); 
+						\draw [thick,<->]  (0.5,0.4) -- node[above, fill=white, inner sep = 1pt]{$T_\mathrm{off}$}(1.0, 0.4);
+
+						% Middle plot: voltage and current through a switch (two y-axes)
+						\nextgroupplot[ylabel = {$u_\mathrm{s}(t)/u_0$}]
+							\addplot[signalblue, thick] coordinates {(-0.1,1) (0,1) (0.1,0) (0.5,0) (0.6,1) (1,1) (1.1,1)};
+							\draw[{Latex[length=2mm]}-, thin, signalblue] (axis cs:0.6,0.9) -- node[right=1mm, fill=white, inner sep = 1pt]{$u_\mathrm{s}(t)$}(axis cs:0.75,0.5);
+							\draw[{Latex[length=2mm]}-, thin, signalred] (axis cs:0.8,0.1) -- node[right=1mm, fill=white, inner sep = 1pt]{$i_\mathrm{s}(t)$}(axis cs:0.95,0.5);
+
+						% Bottom plot: power loss in the switch
+						\nextgroupplot[xlabel = {$t/T_\mathrm{s}$}, ylabel = {$P_\mathrm{l}(t)/P_\mathrm{max}$}]
+							\addplot[signalblue, domain = -0.1:0, thick] {0};
+							\addplot[signalblue, domain = 0.0:0.1, thick,fill=signalblue, 
+							fill opacity=0.1] {-(x-0.05)^2/(0.05)^2+1};
+							\addplot[signalblue, domain = 0.5:0.6, thick,fill=signalblue, 
+							fill opacity=0.1] {-(x-0.55)^2/(0.05)^2+1};
+							\addplot[signalblue, domain = 0.1:0.5, thick] {0};
+							\addplot[signalblue, domain = 0.6:1.1, thick] {0};
+							% add textbox with arrow pointing towards the first power loss curve
+							\draw[{Latex[length=2mm]}-, thin, signalblue] (axis cs:0.05,0.4) -- node[right=1mm, fill=white, inner sep = 1pt]{$E_\mathrm{on}$}(axis cs:0.25,0.5);
+							\draw[{Latex[length=2mm]}-, thin, signalblue] (axis cs:0.55,0.4) -- node[right=1mm, fill=white, inner sep = 1pt]{$E_\mathrm{off}$}(axis cs:0.75,0.5);
+					\end{groupplot}
+					% second y-axis for the middle plot
+					\begin{groupplot}[group style={group size=1 by 3, y descriptions at = edge right}, height=0.34\textheight, width=0.875\textwidth, xmin=-0.1, xmax=1.1, grid,clip = false, xtick=\empty, axis line style=transparent, ymin = -0.1, ymax =1.1]
+						\nextgroupplot[ytick = \empty]
+							%
+						\nextgroupplot[ylabel = {$i_\mathrm{s}(t)/i_0$}]
+							\addplot[signalred, thick] coordinates {(-0.1,0) (0,0) (0.1,1) (0.5,1) (0.6,0) (1,0) (1.1,0)};
+							\addplot[signalblue, thick] coordinates {(-0.1,1) (0,1) (0.1,0) (0.5,0) (0.6,1) (1,1) (1.1,1)}; %plot second time to prevent overlap from grid lines
+						\nextgroupplot[ytick = \empty]
+							%
+					\end{groupplot}
+				%	
+				\end{tikzpicture}
+			\end{figure}
+			\end{column}
+	\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Switching power conversion: passive components as filters / energy buffers %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[c]
@@ -911,9 +988,9 @@
 		\begin{subfigure}{0.45\textwidth}
 			\centering
 			\begin{circuitikz}[]
-				\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+				\draw (0,2) to [open, o-o, v = $ $, voltage = straight] ++(0,-2)
 				to ++(-5,0)
-				to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+				to [open, o-o, v<= $ $, voltage = straight] ++(0,2)
 				(-5,2) to ++(2,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
 				let \p1 = (S.mid) in (S.in) to [inductor] (0,2) 
 				([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
@@ -924,9 +1001,9 @@
 		\begin{subfigure}{0.45\textwidth}
 			\centering
 			\begin{circuitikz}[]
-						\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+						\draw (0,2) to [open, o-o, v = $ $, voltage = straight] ++(0,-2)
 						to ++(-5,0)
-						to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+						to [open, o-o, v<= $ $, voltage = straight] ++(0,2)
 						(-5,2) to [inductor, name = L1] ++(2,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
 						let \p1 = (S.mid) in (S.in) to [short] (0,2) 
 						([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
