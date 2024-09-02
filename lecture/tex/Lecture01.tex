@@ -1,5 +1,5 @@
+
 \section{An initial overview of power electronics}
-%\part{An initial overview of power electronics}
 \title[Initial overview]{An initial overview of power electronics}  
 
 \begin{frame}[plain]
@@ -1546,7 +1546,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{Internal device resistance}
-	Besides the switching losses, power electronic devices have an internal resistance $R_{\mathrm{on}}$ that causes conduction losses. 
+	Besides the switching losses, power electronic devices have an internal resistance $R_{\mathrm{i}}$ that causes conduction losses. Designing such components for a low resistance is crucial, however, there is typically a conflict with weight and volume constraints. 
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{table}
@@ -1555,14 +1555,14 @@
 		
 					
 					\begin{circuitikz}
-						\draw (0,0) to [R, i>^=$i$, l_= $R_\mathrm{on}$] (0,-1.75) to [inductor] (0,-3.5);
+						\draw (0,0) to [R, i>^=$i$, l_= $R_\mathrm{i}$] (0,-1.75) to [inductor] (0,-3.5);
 						\draw[->] (0.6,0) -- node [xshift = 0.2cm] {$u$} (0.6,-3.5);
 					\end{circuitikz}
 							
 					&
 
 					\begin{circuitikz}
-						\draw (0,0) to [R, i>^=$i$, l_= $R_\mathrm{on}$] (0,-2) to [capacitor] (0,-3);
+						\draw (0,0) to [R, i>^=$i$, l_= $R_\mathrm{i}$] (0,-2) to [capacitor] (0,-3);
 						\draw[->] (0.6,0) -- node [xshift = 0.2cm] {$u$} (0.6,-3);
 					\end{circuitikz}					
 					
@@ -1570,7 +1570,7 @@
 					&
 
 					\begin{circuitikz}
-						\draw (0,0) to [R, i>^=$i$, l_= $R_\mathrm{on}$] (0,-2) to [diode] (0,-3);
+						\draw (0,0) to [R, i>^=$i$, l_= $R_\mathrm{i}$] (0,-2) to [diode] (0,-3);
 						\draw[->] (0.6,0) -- node [xshift = 0.2cm] {$u$} (0.6,-3);
 					\end{circuitikz}
 						
@@ -1582,8 +1582,8 @@
 			\begin{figure}
 				\begin{tikzpicture}
 					\begin{axis}[
-						xlabel={$U_{\mathrm{d}}$},
-						ylabel={$I_\mathrm{d}$},
+						xlabel={$u_{\mathrm{d}}$},
+						ylabel={$i_\mathrm{d}$},
 						axis lines=left,
 						ymin=0, ymax=1,
 						xmin=0, xmax=1,
@@ -1602,7 +1602,7 @@
 						\addplot[signalblue, domain=0.4:1.0] {exp(2*x)-exp(0.8)};
 						\draw[-] (axis cs:0.5,0.5) -- (axis cs:0.55,0.5);
 						\draw[-] (axis cs:0.55,0.5) -- (axis cs:0.55,0.75);
-						\node[anchor=west, fill=white, inner sep = 1pt] at (axis cs:0.55,0.6) {$\frac{1}{R_\mathrm{on}}$};
+						\node[anchor=west, fill=white, inner sep = 1pt] at (axis cs:0.55,0.6) {$\frac{1}{R_\mathrm{i}}$};
 					\end{axis}
 				\end{tikzpicture}
 				\caption{Qualitative diode characteristic in the forward direction}

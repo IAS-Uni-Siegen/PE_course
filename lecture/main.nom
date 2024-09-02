@@ -2,15 +2,15 @@
 \begin{theglossary}\glossaryheader
 \glsgroupheading{glsnumbers}\relax \glsresetentrylist %
 \glossentry{scalar_signal}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsignore{41}}}%
+		\setentrycounter[]{page}\glsignore{47}}}%
 \glossentry{vectorial_signal}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsignore{41}}}%
+		\setentrycounter[]{page}\glsignore{47}}}%
 \glossentry{const_signal}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsignore{41}}}%
+		\setentrycounter[]{page}\glsignore{47}}}%
 \glossentry{matrix}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsignore{41}}}%
+		\setentrycounter[]{page}\glsignore{47}}}%
 \glossentry{average_signal}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsignore{41}}}%
+		\setentrycounter[]{page}\glsignore{47}}}%
 \glossentry{derivative_signal}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsignore{41}}}%
+		\setentrycounter[]{page}\glsignore{47}}}%
 \end{theglossary}\glossarypostamble

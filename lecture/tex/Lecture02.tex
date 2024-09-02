@@ -1,7 +1,210 @@
 \section{DC-DC converters}
-%\part{An initial overview of power electronics}
 \title{DC-DC converters}  
 
 \begin{frame}[plain]
     \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Step-down converter (unidirectional) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Step-down converter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Overview and assumption %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+\frametitle{Overview and assumption}
+    We consider the following assumptions:
+    \begin{itemize}
+        \item The switch is ideal, that is, lossless and infinitely fast.
+        \item The input voltage is constant: $u_\mathrm{in}(t) = U_\mathrm{in}$.
+        \item The output voltage is constant: $u_\mathrm{out}(t) = U_\mathrm{out}$.
+        \item The input voltage is greater than the output voltage: $U_\mathrm{in} > U_\mathrm{out}$.
+    \end{itemize}
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+            to ++(-6,0)
+            to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+            (-6,2) to  [short, i=$i_\mathrm{in}(t)$] ++(1.35,0);   
+            \draw (-5.375,2) ++(0.625,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
+            let \p1 = (S.mid) in (S.in) to  [short, i=$i_\mathrm{L}(t)$] ++(1,0)
+            to [inductor, l=$L$, v = $u_\mathrm{L}(t)$, voltage = straight] ++(2,0)
+            to [short, i=$i_\mathrm{out}(t)$] (0,2) 
+            ([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
+            \draw (-3.5,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s}(t)$, voltage = straight] ++(0,-2);
+        \end{circuitikz}
+        \caption{Step-down converter (ideal switch representation)}
+        \label{fig:step-down-converter-simple}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Switch states %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Switch states}
+     The voltage at the switch is given by
+     \begin{equation}
+            u_\mathrm{s}(t) = \begin{cases}
+                U_\mathrm{in}, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{e}],\\
+                0, & t\in [k T_\mathrm{s}+ T_\mathrm{e}, (k+1) T_\mathrm{s}]
+            \end{cases}
+     \end{equation}
+     with $k\in\mathbb{N}$ being the $k$-th switching period, $T_\mathrm{s}$ the switching period, and $T_\mathrm{e}$ the switch-on time. 
+        \begin{figure}
+            \centering	
+            \begin{subfigure}{0.45\textwidth}
+                \centering
+                \hspace{-0.75cm}
+                \begin{circuitikz}[]
+                    \draw (0,2) to [open, o-o, v = $\hspace{2cm}U_\mathrm{out}$, voltage = straight] ++(0,-2)
+                    to ++(-5,0)
+                    to [open, o-o, v<= $U_\mathrm{in} \hspace{2cm}$, voltage = straight] ++(0,2)
+                    (-5,2) to  [short, i=${i_\mathrm{in}(t)=i_\mathrm{L}(t)}$] ++(2,0)
+                    to [inductor, l=$L$, v = $u_\mathrm{L}(t)$, voltage = straight] ++(2,0)
+                    to [short, i=$i_\mathrm{out}(t)$] (0,2);
+                    \draw (-4,2) to [open, v = ${\hspace{2.4cm}U_\mathrm{s}=U_\mathrm{in}}$, voltage = straight] ++(0,-2);
+                \end{circuitikz}
+                \caption{Switch-on time}
+            \end{subfigure}%
+            \hspace{0.5cm}
+            \begin{subfigure}{0.45\textwidth}
+                \centering
+                \begin{circuitikz}[]
+                    \draw (0,2) to [open, o-o, v = $\hspace{2cm}U_\mathrm{out}$, voltage = straight] ++(0,-2)
+                    to ++(-5,0)
+                    to [open, o-o, v<= $U_\mathrm{in} \hspace{2cm}$, voltage = straight] ++(0,2)
+                    (-5,2) to  [short, i=${i_\mathrm{in}=0}$] ++(0.75,0)
+                    (-3.75,0) to [short, *-] ++(0,2)
+                    to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
+                    to [inductor, l=$L$, v = $u_\mathrm{L}(t)$, voltage = straight] ++(2,0)
+                    to [short, i=$i_\mathrm{out}(t)$] (0,2);
+                    \draw (-3.4,2) to [open, v = ${\hspace{2.4cm}U_\mathrm{s}=0}$, voltage = straight] ++(0,-2);
+                \end{circuitikz}
+                \caption{Switch-off time}
+            \end{subfigure}
+        \caption{Switch states of the step-down converter} 
+        \label{fig:step-down-converter-switch-states}
+        \end{figure}
+    \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Basic terms and definitions %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{Basic terms and definitions}
+    \centering
+     \begin{tabular}{c l c l}
+        $T_\mathrm{on}$ & Switch-on time  & $T_\mathrm{off}$ & Switch-off time\\[1em]
+        $T_\mathrm{s}= T_\mathrm{on} + T_\mathrm{off}$ & Switching period & $f_\mathrm{s} = 1/T_\mathrm{s}$ & Switching frequency\\[1em]
+        $D = T_\mathrm{on}/T_\mathrm{s}$ & Duty cycle &  & 
+     \end{tabular}
+     \begin{figure}
+        \begin{tikzpicture}
+            \begin{axis}[
+                xlabel={$t/T_\mathrm{s}$},
+                ylabel={$u_\mathrm{s}(t)/U_\mathrm{in}$},
+                ymin=-0.05, ymax=1.05,
+                xmin=-0.1, xmax=1.1,
+                width = 0.5\textwidth,
+                height = 0.4\textheight,
+                grid,
+                thick,
+                clip = false,
+                ]
+                % plt u_out = 1 for t = 0 to D*Ts and u_out = 0 for t = D*Ts to Ts in a single plot
+                \addplot[signalblue] coordinates {(-0.1,0) (0,0) (0,1) (0.4,1) (0.4,0) (1,0) (1,1) (1.1,1)};
+                \draw [thick,<->]  (0,0.5) -- node[above,fill=white]{$T_\mathrm{on}$}(0.4, 0.5); 
+                \draw [thick,<->]  (0.4,0.5) -- node[above]{$T_\mathrm{off}$}(1.0, 0.5);
+                \draw [thick,<->]  (0.0,1.2) -- node[above]{$T_\mathrm{s}$}(1.0, 1.2); 
+            \end{axis}
+        \end{tikzpicture}
+    \end{figure}
+    \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state analysis %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state analysis}
+    The inductor current from \figref{fig:step-down-converter-simple} is represented by the \hl{differential equation}
+    \begin{equation}
+        L \frac{\mathrm{d}i_\mathrm{L}(t)}{\mathrm{d}t} =  u_\mathrm{L}(t) =  u_\mathrm{s}(t) - U_\mathrm{out}.
+    \end{equation}
+    During the \hl{switch-on period} we have
+    \begin{equation}
+        i_\mathrm{L}(t) = i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_\mathrm{in}-U_\mathrm{out}}{L} (t - k T_\mathrm{s}), \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}]
+    \end{equation}
+    and during the \hl{switch-off period} we receive
+    \begin{equation}
+        \begin{split}
+            i_\mathrm{L}(t) &= i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on}) - \frac{U_\mathrm{out}}{L} (t - k T_\mathrm{s} - T_\mathrm{on})\\
+            \               &= i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_\mathrm{in}-U_\mathrm{out}}{L} T_\mathrm{on} - \frac{U_\mathrm{out}}{L} (t - k T_\mathrm{s} - T_\mathrm{on}), \quad 
+            t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}]. 
+        \end{split} 
+        \label{eq:inductor-current-switch-off}
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state analysis (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state analysis (cont.)}
+    In steady state the inductor current is periodic with period $T_\mathrm{s}$, that is, $$i_\mathrm{L}(t) = i_\mathrm{L}(t + T_\mathrm{s}).$$
+    From \eqref{eq:inductor-current-switch-off} we obtain for $t= k T_\mathrm{s}$
+    \begin{equation}
+        \begin{split}
+        \overbrace{i_\mathrm{L}(k T_\mathrm{s})}^{\mbox{Start of period}} &= \hspace{0.5cm}  \overbrace{i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_\mathrm{in}-U_\mathrm{out}}{L} T_\mathrm{on} - \frac{U_\mathrm{out}}{L} (T_\mathrm{s} - T_\mathrm{on})}^{\mbox{End of period}}\\
+        \Leftrightarrow \qquad 0 \hspace{1.1cm}&= \hspace{0.5cm}\frac{U_\mathrm{in}-U_\mathrm{out}}{L} T_\mathrm{on} - \frac{U_\mathrm{out}}{L} (T_\mathrm{s} - T_\mathrm{on})\\
+        \Leftrightarrow \qquad 0 \hspace{1.1cm}&= \hspace{0.5cm}U_\mathrm{in} T_\mathrm{on} - U_\mathrm{out} T_\mathrm{s}.
+    \end{split}
+    \end{equation}
+    Rewritting delivers the \hl{output voltage} as
+    \begin{equation}
+        U_\mathrm{out} = \frac{T_\mathrm{on}}{T_\mathrm{s}} U_\mathrm{in} = D U_\mathrm{in}.
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state time-domain behavior %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Steady-state time-domain behavior}
+    \begin{figure}
+        \begin{tikzpicture}
+            \begin{groupplot}[group style={group size=1 by 3}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1, xticklabels={}]
+
+            % Top plot: switch control signal
+            \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_1$}]
+                \pgfplotsinvokeforeach{0,...,3}{
+                    \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({0.66 + #1},1) ({0.66 + #1},0) ({1 + #1},0) ({1 + #1},1)};}
+                    \AddPlot
+                }
+
+                % Middle plot: voltage and current through a switch (two y-axes)
+                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)/u_0$}]
+                    \addplot[signalblue, thick] coordinates {(-0.1,1) (0,1) (0.1,0) (0.5,0) (0.6,1) (1,1) (1.1,1)};
+                    \draw[{Latex[length=2mm]}-, thin, signalblue] (axis cs:0.6,0.9) -- node[right=1mm, fill=white, inner sep = 1pt]{$u_\mathrm{s}(t)$}(axis cs:0.75,0.5);
+                    \draw[{Latex[length=2mm]}-, thin, signalred] (axis cs:0.8,0.1) -- node[right=1mm, fill=white, inner sep = 1pt]{$i_\mathrm{s}(t)$}(axis cs:0.95,0.5);
+
+                % Bottom plot: power loss in the switch
+                \nextgroupplot[ylabel = {$P_\mathrm{l}(t)/P_\mathrm{max}$}]
+                    \addplot[signalblue, domain = -0.1:0, thick] {0};
+                    \addplot[signalblue, domain = 0.0:0.1, thick,fill=signalblue, 
+                    fill opacity=0.1] {-(x-0.05)^2/(0.05)^2+1};
+                    \addplot[signalblue, domain = 0.5:0.6, thick,fill=signalblue, 
+                    fill opacity=0.1] {-(x-0.55)^2/(0.05)^2+1};
+                    \addplot[signalblue, domain = 0.1:0.5, thick] {0};
+                    \addplot[signalblue, domain = 0.6:1.1, thick] {0};
+                    % add textbox with arrow pointing towards the first power loss curve
+                    \draw[{Latex[length=2mm]}-, thin, signalblue] (axis cs:0.05,0.4) -- node[right=1mm, fill=white, inner sep = 1pt]{$E_\mathrm{on}$}(axis cs:0.25,0.5);
+                    \draw[{Latex[length=2mm]}-, thin, signalblue] (axis cs:0.55,0.4) -- node[right=1mm, fill=white, inner sep = 1pt]{$E_\mathrm{off}$}(axis cs:0.75,0.5);
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
 \end{frame}
