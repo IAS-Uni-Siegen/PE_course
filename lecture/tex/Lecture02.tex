@@ -177,34 +177,60 @@
     \frametitle{Steady-state time-domain behavior}
     \begin{figure}
         \begin{tikzpicture}
-            \begin{groupplot}[group style={group size=1 by 3}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1, xticklabels={}]
+            \pgfmathsetmacro{\D}{0.6} % duty cycle
+            \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
 
-            % Top plot: switch control signal
-            \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_1$}]
-                \pgfplotsinvokeforeach{0,...,3}{
-                    \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({0.66 + #1},1) ({0.66 + #1},0) ({1 + #1},0) ({1 + #1},1)};}
-                    \AddPlot
-                }
+                % Top plot: voltage at the switch
+                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_1$}]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
+                        \AddPlot
+                    }
+                    \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
+                    \draw [thick,<->]  (0,0.5) -- node[below]{$T_\mathrm{on}$}(\D, 0.5); % T_on 
+                    \draw [thick,<->]  (\D,0.5) -- node[below]{$T_\mathrm{off}$}(1.0, 0.5); % T_off
+                    \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{s}$}(1.0, -0.2); % T_s 
 
-                % Middle plot: voltage and current through a switch (two y-axes)
-                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)/u_0$}]
-                    \addplot[signalblue, thick] coordinates {(-0.1,1) (0,1) (0.1,0) (0.5,0) (0.6,1) (1,1) (1.1,1)};
-                    \draw[{Latex[length=2mm]}-, thin, signalblue] (axis cs:0.6,0.9) -- node[right=1mm, fill=white, inner sep = 1pt]{$u_\mathrm{s}(t)$}(axis cs:0.75,0.5);
-                    \draw[{Latex[length=2mm]}-, thin, signalred] (axis cs:0.8,0.1) -- node[right=1mm, fill=white, inner sep = 1pt]{$i_\mathrm{s}(t)$}(axis cs:0.95,0.5);
 
-                % Bottom plot: power loss in the switch
-                \nextgroupplot[ylabel = {$P_\mathrm{l}(t)/P_\mathrm{max}$}]
-                    \addplot[signalblue, domain = -0.1:0, thick] {0};
-                    \addplot[signalblue, domain = 0.0:0.1, thick,fill=signalblue, 
-                    fill opacity=0.1] {-(x-0.05)^2/(0.05)^2+1};
-                    \addplot[signalblue, domain = 0.5:0.6, thick,fill=signalblue, 
-                    fill opacity=0.1] {-(x-0.55)^2/(0.05)^2+1};
-                    \addplot[signalblue, domain = 0.1:0.5, thick] {0};
-                    \addplot[signalblue, domain = 0.6:1.1, thick] {0};
-                    % add textbox with arrow pointing towards the first power loss curve
-                    \draw[{Latex[length=2mm]}-, thin, signalblue] (axis cs:0.05,0.4) -- node[right=1mm, fill=white, inner sep = 1pt]{$E_\mathrm{on}$}(axis cs:0.25,0.5);
-                    \draw[{Latex[length=2mm]}-, thin, signalblue] (axis cs:0.55,0.4) -- node[right=1mm, fill=white, inner sep = 1pt]{$E_\mathrm{off}$}(axis cs:0.75,0.5);
+                % Middle plot: inductor current
+                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$, }]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({1 + #1},0.25)};}
+                        \AddPlot
+                    }
+                    \draw[signalred, thick, dashed] (axis cs:0,0.5) -- (axis cs:4,0.5); % dashed line at average current
+                    \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
+                    \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
+                    \draw[thin] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{U_1-U_2}{L}$}; % label positive current slope
+                    \draw[thin] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_2}{L}$}; % label negative current slope
+                
+                % Bottom plot: input current
+                \nextgroupplot[ylabel = {$i_\mathrm{in}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$}]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
+                        \AddPlot
+                    }
+                    \draw[signalred, thick, dashed] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
+                    \node[above, inner sep = 2pt, anchor = south, fill = white] at (axis cs:1.5+\D/2, 0.5 * \D) {$\overline{i}_\mathrm{in}$}; % label average current
             \end{groupplot}
         \end{tikzpicture}
     \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Alternative steady-state analysis: average values %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Alternative steady-state analysis: average values}
+    From the previous slide we know that the average inductor voltage is zero in steady state
+    \begin{equation}
+        \overline{u}_\mathrm{L} = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{s}} u_\mathrm{L}(t) \mathrm{d}t = \overline{u}_\mathrm{L} = 0,
+    \end{equation}
+    since otherwise the average inductor current would change between periods, compare
+    $$
+    L \frac{\mathrm{d}i_\mathrm{L}(t)}{\mathrm{d}t} =  u_\mathrm{L}(t).
+    $$
 \end{frame}
