@@ -6,7 +6,7 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Step-down converter (unidirectional) %%
+%% Step-down converter %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Step-down converter}
 
@@ -233,4 +233,238 @@
     $$
     L \frac{\mathrm{d}i_\mathrm{L}(t)}{\mathrm{d}t} =  u_\mathrm{L}(t).
     $$
+    From \figref{fig:step-down-converter-simple} we can apply Kirchhoff's voltage law to obtain
+    \begin{equation}
+        u_\mathrm{s}(t) = u_\mathrm{L}(t) + u_\mathrm{out}(t) \quad \Rightarrow \quad \overline{u}_\mathrm{s} = \overline{u}_\mathrm{L} + U_\mathrm{out} \quad \Leftrightarrow \quad  \overline{u}_\mathrm{s} = U_\mathrm{out}.
+        \label{eq:Kirchhoff-switch-voltage}
+    \end{equation}
+    The average switch voltage is given by
+    \begin{equation}
+        \overline{u}_\mathrm{s} = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{s}} u_\mathrm{s}(t) \mathrm{d}t = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{on}} U_\mathrm{in} \mathrm{d}t = U_\mathrm{in} \frac{T_\mathrm{on}}{T_\mathrm{s}} = U_\mathrm{in} D.
+        \label{eq:average-switch-voltage}
+    \end{equation}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Alternative steady-state analysis: average values (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Alternative steady-state analysis: average values (cont.)}
+    Combining \eqref{eq:Kirchhoff-switch-voltage} and \eqref{eq:average-switch-voltage} we obtain
+    \begin{equation}
+        \frac{U_\mathrm{out}}{U_\mathrm{in}} =  D.
+    \end{equation}
+    In addition, we can calculate the average input current as
+    \begin{equation}
+        \overline{i}_\mathrm{in} = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{s}} i_\mathrm{in}(t) \mathrm{d}t = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{on}} i_\mathrm{L}(t) \mathrm{d}t = \frac{T_\mathrm{on}}{T_\mathrm{s}} \overline{i}_\mathrm{L} = D \overline{i}_\mathrm{L}.
+    \end{equation}
+    Since $i_\mathrm{out}(t) = i_\mathrm{L}(t)$ applies, we can conclude
+    \begin{equation}
+        \frac{U_\mathrm{out}}{U_\mathrm{in}} = \frac{\overline{i}_\mathrm{in}}{\overline{i}_\mathrm{out}} = D.
+    \end{equation}
+    Hence, the duty cycle $D$ has a similar interpretation for the DC-DC step-down converter as the turn ratio for an ideal transformer in the AC domain.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Stationary averaged model of the step-down converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Stationary averaged model of the step-down converter}
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw (-3,0) to [short, o-, i=$\overline{i}_\mathrm{in}$] ++(1.5,0)
+            to [current source, i=$D \overline{i}_\mathrm{out}$] ++(0,-2)
+            to [short, -o] ++(-1.5,0);
+            \draw (-3,0) to [open, v = $\hspace{-0.25cm}U_\mathrm{in}$, voltage = straight] ++(0,-2);
+            \draw (3,0) to [short, o-, i_<=$\overline{i}_\mathrm{out}$] ++(-1.5,0)
+            to [voltage source, v_= $D U_\mathrm{in}$] ++(0,-2)
+            to [short, -o] ++(1.5,0);
+            \draw (3,0) to [open, v = $\hspace{1.5cm}U_\mathrm{out}$, voltage = straight] ++(0,-2);
+        \end{circuitikz}
+        \caption{Stationary averaged model of the step-down converter}
+        \label{fig:step-down-converter-averaged}
+    \end{figure}
+    \begin{varblock}{Switching vs. linear power conversion}
+        In contrast to the linear power conversion approaches from \figref{fig:linear_power_conversion} and \figref{fig:linear_power_conversion_transistor}, the switching step-down converter transforms the current and voltage levels with the same factor $D$ which results from the (idealized) loss-less transformation of energy. 
+    \end{varblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Current ripple %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Current ripple}
+    Due to the switching operation of the step-down converter, the inductor current exhibits an inherent ripple. The peak-to-peak \hl{current ripple} is given by
+    \begin{equation}
+        \begin{split}
+            \Delta i_\mathrm{L} &= \max\{i_\mathrm{L}(t)\} - \min\{i_\mathrm{L}(t)\}  = i_\mathrm{L}(t=T_\mathrm{on}) - i_\mathrm{L}(t=T_\mathrm{s})\\
+                                &=\frac{U_1 - U_2}{L} T_\mathrm{on} = \frac{U_2}{L} T_\mathrm{off}\\
+                                & = \frac{D(1-D)T_\mathrm{s}}{L}U_1.
+        \end{split}
+    \end{equation}
+    The current ripple has two main implications:
+    \begin{itemize}
+        \item The output power is not constant but varies with the current ripple.
+        \item The root mean square (RMS) current is higher than the average current.
+    \end{itemize}
+    The latter point should be investigated in more detail as it influences the design and loss characteristics of the converter.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Current ripple (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Current ripple (cont.)}
+    We define 
+    \begin{equation}
+        \Delta I_\mathrm{L} = \sqrt{\frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{s}} \left(i_\mathrm{L}(t) - \overline{i}_\mathrm{L}\right)^2 \mathrm{d}t}
+    \end{equation}
+    as the RMS deviation of the inductor current from its average value. As the average-corrected inductor current has a triangular shape (cf. \figref{fig:inductor-current-ripple}) we can calculate the RMS current as
+    \begin{equation}
+        \Delta I_\mathrm{L} = \frac{1}{\sqrt{3}} \frac{\Delta i_\mathrm{L}}{2} = \frac{D(1-D)T_\mathrm{s}U_1}{2\sqrt{3}L}.
+        \label{eq:RMS-current-ripple}
+    \end{equation}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfmathsetmacro{\D}{0.6} % duty cycle
+            \begin{axis}[
+                xlabel={$t/T_\mathrm{s}$},
+                ylabel={$i_\mathrm{L}(t)-\overline{i}_\mathrm{L}$},
+                ymin=-0.3, ymax=0.3,
+                xmin=-0.1, xmax=1.1,
+                width = 0.7\textwidth,
+                height = 0.4\textheight,
+                grid,
+                thick,
+                clip = true,
+                ytick = {-0.2, 0, 0.2}, 
+                yticklabels = {$\nicefrac{-\Delta i_\mathrm{L}}{2}$, 0, $\nicefrac{\Delta i_\mathrm{L}}{2}$}
+                ]
+                \addplot[signalred] coordinates {(\D-1,0.22) (0,-0.2) (\D,0.2) (1, -0.2) (1+\D,0.2)};
+                \draw[signalred, thick, dashed] (axis cs:\D-1,0.2/1.73) -- (axis cs:1+\D, 0.2/1.73); % dashed line at RMS current
+                \node[above, inner sep = 2pt, anchor = north, fill = white] at (axis cs:0.1, 0.2/1.73) {$\Delta I_\mathrm{L}$};
+                \draw [thin, <->]  (0.6,-0.2) -- node[left,fill=white]{$\Delta i_\mathrm{L}$}(0.6, 0.2); 
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Inductor current ripple}
+        \label{fig:inductor-current-ripple}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Current ripple (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Current ripple (cont.)}
+    The (total) RMS value of the inductor current (triangular signal with offset) is given by
+    \begin{equation}
+        I_\mathrm{L} = \sqrt{\overline{i}^2_\mathrm{L} + \Delta I^2_\mathrm{L}}.
+    \end{equation}
+    Considering the internal resistance $R_\mathrm{i}$ of the inductor, the ohmic power loss in the inductor is
+    \begin{equation}
+        P_\mathrm{L} = R_\mathrm{i} I^2_\mathrm{L} = R_\mathrm{i} \left(\overline{i}^2_\mathrm{L} + \Delta I^2_\mathrm{L}\right).
+    \end{equation}
+    The power loss in the inductor is thus composed of a constant part $\overline{P}_\mathrm{L} = R_\mathrm{i} \overline{i}^2_\mathrm{L}$, which is related to the power transfer from input to output, and a ripple part $\Delta P_\mathrm{L} = R_\mathrm{i} \Delta I^2_\mathrm{L}$.   
+    \begin{varblock}{Current ripple and power losses}
+        The current ripple produces additional losses in the inductor. From \eqref{eq:RMS-current-ripple} it seems tempting to increase the switching frequency $f_\mathrm{s}$ to reduce the ripple, but, this will increase switching losses (compare \figref{fig:idealized_switch_model}). Hence, there is a trade-off decision between switching and conduction losses.
+    \end{varblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Current ripple and duty cycle %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Current ripple and duty cycle}
+    Rewriting the current ripple expression
+    \begin{equation*}
+            \Delta i_\mathrm{L} = \frac{D(1-D)T_\mathrm{s}}{L}U_1 = (D-D^2)\frac{T_\mathrm{s}U_1}{L}.
+    \end{equation*}
+    and calculating the derivative with respect to the duty cycle $D$ delivers
+    \begin{equation}
+        \frac{\mathrm{d}\Delta i_\mathrm{L}}{\mathrm{d}D} = \frac{T_\mathrm{s}U_1}{L} - 2D\frac{T_\mathrm{s}U_1}{L}.
+    \end{equation}
+    Setting the derivative to zero, we find the duty cycle $D_\mathrm{max}$ as
+    \begin{equation}
+        \frac{\mathrm{d}\Delta i_\mathrm{L}}{\mathrm{d}D} = 0 \quad \Leftrightarrow \quad D_\mathrm{max} = \frac{1}{2}
+        \label{eq:duty-cycle-max}
+    \end{equation}
+    which is associated with the maximum current ripple since the second derivative 
+    \begin{equation}
+        \frac{\mathrm{d}^2\Delta i_\mathrm{L}}{\mathrm{d}D^2} = -\frac{2T_\mathrm{s}U_1}{L}
+    \end{equation}
+    is negative. 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Current ripple and duty cycle (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Current ripple and duty cycle (cont.)}
+    From \eqref{eq:duty-cycle-max} we can conclude that the maximum current ripple is given by
+    \begin{equation}
+        \Delta i_\mathrm{L, \max} = \frac{1}{4}\frac{T_\mathrm{s}U_1}{L} \quad \Rightarrow \quad \Delta i_\mathrm{L} = 4D(1-D) \Delta i_\mathrm{L, \max}.
+    \end{equation}
+
+    \begin{figure}
+        \begin{tikzpicture}
+            \begin{axis}[
+                xlabel={$D$},
+                ylabel={$\Delta i_\mathrm{L}$},
+                ymin=0, ymax=1.1,
+                xmin=0, xmax=1,
+                width = 0.6\textwidth,
+                height = 0.5\textheight,
+                grid,
+                thick,
+                clip = true,
+                xtick = {0, 0.25, 0.5, 0.75, 1.0}, 
+                ytick = {0, 0.5, 1.0}, 
+                yticklabels = {0, $\nicefrac{\Delta i_\mathrm{L, max}}{2}$, $\Delta i_\mathrm{L, max}$}
+                ]
+                \addplot[signalblue, domain=0:1, samples=100] {x*(1-x)*4};
+                \draw[dashed] (axis cs:0.5,0) -- (axis cs:0.5,1); % dashed line at max current ripple
+                \node[above, inner sep = 2pt, anchor = east, fill = white] at (axis cs:0.5, 0.5) {$D_\mathrm{max}$};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Inductor current ripple as a function of the duty cycle}
+        \label{fig:inductor-current-ripple-duty}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Step-down converter with output capacitor %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Step-down converter with output capacitor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Step-down converter with output capacitor: overview and assumption %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Step-down converter with output capacitor: overview and assumption}
+        We consider the following assumptions:
+        \begin{itemize}
+            \item The switch is ideal, that is, lossless and infinitely fast.
+            \item The input voltage is constant: $u_\mathrm{in}(t) = U_\mathrm{in}$.
+            \item The output current is constant: $i_\mathrm{out}(t) = I_\mathrm{out}$.
+            \item The input voltage is greater than the output voltage: $U_\mathrm{in} > u_\mathrm{out}(t)$.
+        \end{itemize}
+        \begin{figure}
+            \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+                to ++(-7,0)
+                to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+                (-7,2) to  [short, i=$i_\mathrm{in}(t)$] ++(1.35,0);   
+                \draw (-6.375,2) ++(0.625,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
+                let \p1 = (S.mid) in (S.in) to  [short, i=$i_\mathrm{L}(t)$] ++(1,0)
+                to [inductor, l=$L$, v = $u_\mathrm{L}(t)$, voltage = straight] ++(2,0)
+                to [short] ++(1,0)
+                to [short, i=$i_\mathrm{out}(t)$] (0,2) 
+                ([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
+                \draw (-4.5,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s}(t)$, voltage = straight] ++(0,-2);
+                \draw (-1.5,2) to [capacitor, *-*, l=$C$, i>^=$i_\mathrm{C}(t)$] ++(0,-2);
+            \end{circuitikz}
+            \caption{Step-down converter (ideal switch representation) with output capacitor}
+            \label{fig:step-down-converter-simple-output-cap}
+        \end{figure}
+    \end{frame}
