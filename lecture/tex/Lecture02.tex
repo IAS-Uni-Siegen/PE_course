@@ -18,7 +18,7 @@
 \frametitle{Overview and assumption}
     We consider the following assumptions:
     \begin{itemize}
-        \item The switch is ideal, that is, lossless and infinitely fast.
+        \item The switch is ideal, that is, infinitely fast.
         \item The input voltage is constant: $u_\mathrm{in}(t) = U_\mathrm{in}$.
         \item The output voltage is constant: $u_\mathrm{out}(t) = U_\mathrm{out}$.
         \item The input voltage is greater than the output voltage: $U_\mathrm{in} > U_\mathrm{out}$.
@@ -138,6 +138,7 @@
     During the \hl{switch-on period} we have
     \begin{equation}
         i_\mathrm{L}(t) = i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_\mathrm{in}-U_\mathrm{out}}{L} (t - k T_\mathrm{s}), \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}]
+        \label{eq:inductor-current-switch-on-simple-step-down}
     \end{equation}
     and during the \hl{switch-off period} we receive
     \begin{equation}
@@ -298,9 +299,10 @@
     \begin{equation}
         \begin{split}
             \Delta i_\mathrm{L} &= \max\{i_\mathrm{L}(t)\} - \min\{i_\mathrm{L}(t)\}  = i_\mathrm{L}(t=T_\mathrm{on}) - i_\mathrm{L}(t=T_\mathrm{s})\\
-                                &=\frac{U_1 - U_2}{L} T_\mathrm{on} = \frac{U_2}{L} T_\mathrm{off}\\
-                                & = \frac{D(1-D)T_\mathrm{s}}{L}U_1.
+                                &=\frac{U_\mathrm{in} - U_\mathrm{out}}{L} T_\mathrm{on} = \frac{U_\mathrm{out}}{L} T_\mathrm{off}\\
+                                & = \frac{D(1-D)T_\mathrm{s}}{L}U_\mathrm{in}.
         \end{split}
+        \label{eq:current-ripple-simple-step-down}
     \end{equation}
     The current ripple has two main implications:
     \begin{itemize}
@@ -321,7 +323,7 @@
     \end{equation}
     as the RMS deviation of the inductor current from its average value. As the average-corrected inductor current has a triangular shape (cf. \figref{fig:inductor-current-ripple}) we can calculate the RMS current as
     \begin{equation}
-        \Delta I_\mathrm{L} = \frac{1}{\sqrt{3}} \frac{\Delta i_\mathrm{L}}{2} = \frac{D(1-D)T_\mathrm{s}U_1}{2\sqrt{3}L}.
+        \Delta I_\mathrm{L} = \frac{1}{\sqrt{3}} \frac{\Delta i_\mathrm{L}}{2} = \frac{D(1-D)T_\mathrm{s}U_\mathrm{in}}{2\sqrt{3}L}.
         \label{eq:RMS-current-ripple}
     \end{equation}
     \begin{figure}
@@ -377,11 +379,11 @@
     \frametitle{Current ripple and duty cycle}
     Rewriting the current ripple expression
     \begin{equation*}
-            \Delta i_\mathrm{L} = \frac{D(1-D)T_\mathrm{s}}{L}U_1 = (D-D^2)\frac{T_\mathrm{s}U_1}{L}.
+            \Delta i_\mathrm{L} = \frac{D(1-D)T_\mathrm{s}}{L}U_\mathrm{in} = (D-D^2)\frac{T_\mathrm{s}U_\mathrm{in}}{L}.
     \end{equation*}
     and calculating the derivative with respect to the duty cycle $D$ delivers
     \begin{equation}
-        \frac{\mathrm{d}\Delta i_\mathrm{L}}{\mathrm{d}D} = \frac{T_\mathrm{s}U_1}{L} - 2D\frac{T_\mathrm{s}U_1}{L}.
+        \frac{\mathrm{d}\Delta i_\mathrm{L}}{\mathrm{d}D} = \frac{T_\mathrm{s}U_\mathrm{in}}{L} - 2D\frac{T_\mathrm{s}U_\mathrm{in}}{L}.
     \end{equation}
     Setting the derivative to zero, we find the duty cycle $D_\mathrm{max}$ as
     \begin{equation}
@@ -390,7 +392,7 @@
     \end{equation}
     which is associated with the maximum current ripple since the second derivative 
     \begin{equation}
-        \frac{\mathrm{d}^2\Delta i_\mathrm{L}}{\mathrm{d}D^2} = -\frac{2T_\mathrm{s}U_1}{L}
+        \frac{\mathrm{d}^2\Delta i_\mathrm{L}}{\mathrm{d}D^2} = -\frac{2T_\mathrm{s}U_\mathrm{on}}{L}
     \end{equation}
     is negative. 
 \end{frame}
@@ -402,7 +404,7 @@
     \frametitle{Current ripple and duty cycle (cont.)}
     From \eqref{eq:duty-cycle-max} we can conclude that the maximum current ripple is given by
     \begin{equation}
-        \Delta i_\mathrm{L, \max} = \frac{1}{4}\frac{T_\mathrm{s}U_1}{L} \quad \Rightarrow \quad \Delta i_\mathrm{L} = 4D(1-D) \Delta i_\mathrm{L, \max}.
+        \Delta i_\mathrm{L, \max} = \frac{1}{4}\frac{T_\mathrm{s}U_\mathrm{in}}{L} \quad \Rightarrow \quad \Delta i_\mathrm{L} = 4D(1-D) \Delta i_\mathrm{L, \max}.
     \end{equation}
 
     \begin{figure}
@@ -444,7 +446,7 @@
     \frametitle{Step-down converter with output capacitor: overview and assumption}
         We consider the following assumptions:
         \begin{itemize}
-            \item The switch is ideal, that is, lossless and infinitely fast.
+            \item The switch is ideal, that is, infinitely fast.
             \item The input voltage is constant: $u_\mathrm{in}(t) = U_\mathrm{in}$.
             \item The output current is constant: $i_\mathrm{out}(t) = I_\mathrm{out}$.
             \item The input voltage is greater than the output voltage: $U_\mathrm{in} > u_\mathrm{out}(t)$.
@@ -468,3 +470,154 @@
             \label{fig:step-down-converter-simple-output-cap}
         \end{figure}
     \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state analysis %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state analysis}
+    From \eqref{eq:inductor-current-switch-on-simple-step-down} we know that the inductor current during the switch-on period is given by
+    \begin{equation*}
+        i_\mathrm{L}(t) = i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_\mathrm{in}-u_\mathrm{c}(t)}{L} (t - k T_\mathrm{s}), \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}]. 
+    \end{equation*}
+   Note that the inductor current is now dependent on $u_\mathrm{c}(t)$:
+    \begin{itemize}
+        \item Formally, we need to consider the impact of the varying output capacitor voltage.
+        \item This would lead to a second-order differential equation which is more complex to solve.
+        \item We will simplify the analysis by assuming that the impact of the output capacitor voltage variation on the inductor current is negligible: $u_\mathrm{c}(t) \approx U_\mathrm{out}=\overline{u}_\mathrm{c}$.
+    \end{itemize} 
+    \vspace{-0.5cm}
+    \begin{varblock}{Simplification comment}
+        The above assumption is valid for sufficiently large output capacitors with only small voltage ripples. Otherwise, the output voltage ripple and the inductor current ripple will be significantly coupled and require a more thoughtful analysis.
+    \end{varblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state analysis (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state analysis (cont.)}
+     The \hl{capacitor's voltage differential equation} is given by
+    \begin{equation}
+        C \frac{\mathrm{d}u_\mathrm{c}(t)}{\mathrm{d}t} = i_\mathrm{C}(t) = i_\mathrm{L}(t) - I_\mathrm{out}.
+        \label{eq:capacitor-voltage-differential-equation-step-down-converter}
+    \end{equation}
+    While $I_\mathrm{out}$ is considered a known constant, we first need to determine the inductor current $i_\mathrm{L}(t)$. Combining \eqref{eq:inductor-current-switch-on-simple-step-down} and \eqref{eq:current-ripple-simple-step-down} we obtain
+    \begin{equation}
+         i_\mathrm{L}(k T_\mathrm{s})  = I_\mathrm{out} - \frac{\Delta i_\mathrm{L}}{2} = I_\mathrm{out} - \frac{U_\mathrm{in} - U_\mathrm{out}}{L} \frac{T_\mathrm{on}}{2}
+    \end{equation}
+    and
+    \begin{equation}
+        i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on})  = I_\mathrm{out} + \frac{\Delta i_\mathrm{L}}{2} = I_\mathrm{out} + \frac{U_\mathrm{in} - U_\mathrm{out}}{L} \frac{T_\mathrm{on}}{2}
+   \end{equation}
+    as the \hl{initial conditions for the inductor current} in steady state. 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state analysis (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state analysis (cont.)}
+     The capacitor's current during the \hl{switch-on period} is given by
+    \begin{equation}
+        \begin{split}
+            i_\mathrm{C}(t) &= i_\mathrm{L}(t) - I_\mathrm{out} = \frac{U_\mathrm{in}-U_\mathrm{out}}{L} (t - \frac{T_\mathrm{on}}{2}-k T_\mathrm{s})\\
+                            &= -\frac{\Delta i_\mathrm{L}}{2} + \frac{U_\mathrm{in}-U_\mathrm{out}}{L} (t -k T_\mathrm{s}), \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}]
+        \end{split}
+        \label{eq:capacitor-current-switch-on-step-down-converter}
+    \end{equation}
+    and during the \hl{switch-off period} we receive
+    \begin{equation}
+        \begin{split}
+            i_\mathrm{C}(t) &= i_\mathrm{L}(t) - I_\mathrm{out} = \frac{U_\mathrm{in} - U_\mathrm{out}}{L} \frac{T_\mathrm{on}}{2} -\frac{U_\mathrm{out}}{L} (t - k T_\mathrm{s} - T_\mathrm{on})\\
+                            &= \frac{\Delta i_\mathrm{L}}{2} - \frac{U_\mathrm{out}}{L} (t - k T_\mathrm{s} - T_\mathrm{on}), \quad t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].
+        \end{split}
+        \label{eq:capacitor-current-switch-off-step-down-converter}
+    \end{equation}
+    Based on the made assumptions, the capacitor's current is raising and falling linearly during the switch-on and switch-off periods, that is, it corresponds to the previous inductor current ripple analysis.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state analysis (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state analysis (cont.)}
+    Inserting \eqref{eq:capacitor-current-switch-on-step-down-converter} and \eqref{eq:capacitor-current-switch-off-step-down-converter} in \eqref{eq:capacitor-voltage-differential-equation-step-down-converter} and integrating the differential equation delivers
+    \begin{equation}
+        u_\mathrm{c}(t) = u_\mathrm{c}(k T_\mathrm{s}) -\frac{\Delta i_\mathrm{L}}{2 C}t + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} (\frac{t^2}{2} - t k T_\mathrm{s}), \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}]
+        \label{eq:capacitor-voltage-switch-on-step-down-converter}
+    \end{equation}
+    and 
+    \begin{equation}
+        u_\mathrm{c}(t) = u_\mathrm{c}(k T_\mathrm{s} + T_\mathrm{on}) + \frac{\Delta i_\mathrm{L}}{2 C}t - \frac{U_\mathrm{out}}{LC} (\frac{t^2}{2} - t k T_\mathrm{s} - tT_\mathrm{on}), \quad t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].
+    \end{equation}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfmathsetmacro{\D}{0.6} % duty cycle
+            \begin{axis}[
+                xlabel={$t/T_\mathrm{s}$},
+                ylabel={$i_\mathrm{C}(t)$},
+                ymin=-0.3, ymax=0.3,
+                xmin=-0.1, xmax=1.1,
+                width = 0.7\textwidth,
+                height = 0.4\textheight,
+                grid,
+                thick,
+                clip = true,
+                ytick = {-0.2, 0, 0.2}, 
+                yticklabels = {$\nicefrac{-\Delta i_\mathrm{L}}{2}$, 0, $\nicefrac{\Delta i_\mathrm{L}}{2}$}
+                ]
+                \addplot[signalred] coordinates {(\D-1,0.22) (0,-0.2) (\D,0.2) (1, -0.2) (1+\D,0.2)};
+                \draw [thin, <->]  (0.6,-0.2) -- node[left,fill=white]{$\Delta i_\mathrm{L}$}(0.6, 0.2); 
+            \end{axis}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state analysis (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state analysis (cont.)}
+    To simplify the following calculation steps, we will focus on the first period, i.e., setting $k=0$. The capacitor voltage for $t=T_\mathrm{on}$ results in
+    \begin{equation}
+        \begin{split}   
+        u_\mathrm{c}(t=T_\mathrm{on}) &= u_\mathrm{c}(0) -\frac{\Delta i_\mathrm{L}}{2 C}T_\mathrm{on} + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}^2}{2}\\
+                                      &= u_\mathrm{c}(0) -\frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}^2}{2} + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}^2}{2}\\
+                                      &= u_\mathrm{c}(0).
+        \end{split}
+    \end{equation}
+    Likewise, the capacitor voltage for $t=T_\mathrm{s}$ results in
+    \begin{equation}
+        \begin{split}   
+        u_\mathrm{c}(t=T_\mathrm{s}) &= u_\mathrm{c}(T_\mathrm{on}) -\frac{\Delta i_\mathrm{L}}{2 C}T_\mathrm{s} + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}T_\mathrm{s}}{2}\\
+                                      &= u_\mathrm{c}(0) -\frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}T_\mathrm{s}}{2} + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}T_\mathrm{s}}{2}\\
+                                      &= u_\mathrm{c}(0).
+        \end{split}
+    \end{equation}
+    Hence, the capacitor voltage's initial condition $u_\mathrm{c}(0)$ is also valid for $t=T_\mathrm{on}$ and $t=T_\mathrm{s}$. Hence, the maximum voltage ripple must be between the switching events. 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state analysis (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state analysis (cont.)}
+    Utilizing \eqref{eq:capacitor-voltage-switch-on-step-down-converter} and calculating the derivative with respect to $t$ we obtain
+    \begin{equation}
+        \begin{split}
+            \frac{\mathrm{d}u_\mathrm{c}(t)}{\mathrm{d}t} &= -\frac{\Delta i_\mathrm{L}}{2 C} + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} t\\
+                                                          &= -\frac{U_\mathrm{in}-U_\mathrm{out}}{LC}\frac{T_\mathrm{on}}{2} +\frac{U_\mathrm{in}-U_\mathrm{out}}{LC} t, \quad t\in [0, T_\mathrm{on}].
+        \end{split}
+    \end{equation}
+    Setting the derivative to zero, we find the time $t_\mathrm{min}$ at which the minimum voltage occurs as
+    \begin{equation}
+        \frac{\mathrm{d}u_\mathrm{c}(t)}{\mathrm{d}t} = 0 \quad \Rightarrow \quad t_\mathrm{min} = \frac{T_\mathrm{on}}{2}
+    \end{equation}
+    since the second derivative is positive. The minimum voltage is then given by
+    \begin{equation}
+        u_\mathrm{c}(t_\mathrm{min}) = u_\mathrm{c}(0) - \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}^2}{8} = u_\mathrm{c}(0) - \Delta i_\mathrm{L}\frac{T_\mathrm{on}}{8C}.
+    \end{equation}
+\end{frame}
+
+
