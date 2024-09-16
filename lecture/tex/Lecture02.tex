@@ -137,13 +137,17 @@
     \end{equation}
     During the \hl{switch-on period} we have
     \begin{equation}
-        i_\mathrm{L}(t) = i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_\mathrm{in}-U_\mathrm{out}}{L} (t - k T_\mathrm{s}), \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}]
+        \begin{split}
+            i_\mathrm{L}(t) &= i_\mathrm{L}(k T_\mathrm{s}) + \int_{k T_\mathrm{s}}^{t}u_\mathrm{L}(\tau)\mathrm{d}\tau \\
+                            &= i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_\mathrm{in}-U_\mathrm{out}}{L} (t - k T_\mathrm{s})
+            , \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}]
+        \end{split}
         \label{eq:inductor-current-switch-on-simple-step-down}
     \end{equation}
     and during the \hl{switch-off period} we receive
     \begin{equation}
         \begin{split}
-            i_\mathrm{L}(t) &= i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on}) - \frac{U_\mathrm{out}}{L} (t - k T_\mathrm{s} - T_\mathrm{on})\\
+            i_\mathrm{L}(t) &= i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on}) + \int_{k T_\mathrm{s}+T_\mathrm{on}}^{t}u_\mathrm{L}(\tau)\mathrm{d}\tau= i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on}) - \frac{U_\mathrm{out}}{L} (t - k T_\mathrm{s} - T_\mathrm{on})\\
             \               &= i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_\mathrm{in}-U_\mathrm{out}}{L} T_\mathrm{on} - \frac{U_\mathrm{out}}{L} (t - k T_\mathrm{s} - T_\mathrm{on}), \quad 
             t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}]. 
         \end{split} 
@@ -518,7 +522,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Steady-state analysis (cont.)}
-     The capacitor's current during the \hl{switch-on period} is given by
+     The \hl{capacitor's current} during the \hl{switch-on period} is given by
     \begin{equation}
         \begin{split}
             i_\mathrm{C}(t) &= i_\mathrm{L}(t) - I_\mathrm{out} = \frac{U_\mathrm{in}-U_\mathrm{out}}{L} (t - \frac{T_\mathrm{on}}{2}-k T_\mathrm{s})\\
@@ -534,23 +538,14 @@
         \end{split}
         \label{eq:capacitor-current-switch-off-step-down-converter}
     \end{equation}
-    Based on the made assumptions, the capacitor's current is raising and falling linearly during the switch-on and switch-off periods, that is, it corresponds to the previous inductor current ripple analysis.
 \end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Steady-state analysis (cont.) %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Steady-state analysis (cont.)}
-    Inserting \eqref{eq:capacitor-current-switch-on-step-down-converter} and \eqref{eq:capacitor-current-switch-off-step-down-converter} in \eqref{eq:capacitor-voltage-differential-equation-step-down-converter} and integrating the differential equation delivers
-    \begin{equation}
-        u_\mathrm{c}(t) = u_\mathrm{c}(k T_\mathrm{s}) -\frac{\Delta i_\mathrm{L}}{2 C}t + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} (\frac{t^2}{2} - t k T_\mathrm{s}), \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}]
-        \label{eq:capacitor-voltage-switch-on-step-down-converter}
-    \end{equation}
-    and 
-    \begin{equation}
-        u_\mathrm{c}(t) = u_\mathrm{c}(k T_\mathrm{s} + T_\mathrm{on}) + \frac{\Delta i_\mathrm{L}}{2 C}t - \frac{U_\mathrm{out}}{LC} (\frac{t^2}{2} - t k T_\mathrm{s} - tT_\mathrm{on}), \quad t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].
-    \end{equation}
     \begin{figure}
         \begin{tikzpicture}
             \pgfmathsetmacro{\D}{0.6} % duty cycle
@@ -572,6 +567,9 @@
             \end{axis}
         \end{tikzpicture}
     \end{figure}
+    \begin{varblock}{Current ripples through the capacitor and inductor}
+        Based on the made assumptions, the capacitor's current is raising and falling linearly during the switch-on and switch-off periods, that is, it corresponds to the previously considered inductor current ripple. 
+    \end{varblock}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -579,23 +577,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Steady-state analysis (cont.)}
-    To simplify the following calculation steps, we will focus on the first period, i.e., setting $k=0$. The capacitor voltage for $t=T_\mathrm{on}$ results in
+    Inserting \eqref{eq:capacitor-current-switch-on-step-down-converter} in \eqref{eq:capacitor-voltage-differential-equation-step-down-converter} and integrating the differential equation delivers the \hl{capacitor voltage during the switch-on period} as
     \begin{equation}
-        \begin{split}   
-        u_\mathrm{c}(t=T_\mathrm{on}) &= u_\mathrm{c}(0) -\frac{\Delta i_\mathrm{L}}{2 C}T_\mathrm{on} + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}^2}{2}\\
-                                      &= u_\mathrm{c}(0) -\frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}^2}{2} + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}^2}{2}\\
-                                      &= u_\mathrm{c}(0).
+        \begin{split}
+            u_\mathrm{c}(t) &= u_\mathrm{c}(k T_\mathrm{s}) + \frac{1}{C}\int_{k T_\mathrm{s}}^t i_\mathrm{C}(\tau) \mathrm{d}\tau , \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}]\\
+            &= u_\mathrm{c}(k T_\mathrm{s}) + \frac{1}{C}\int_{k T_\mathrm{s}}^t -\frac{\Delta i_\mathrm{L}}{2} + \frac{U_\mathrm{in}-U_\mathrm{out}}{L} (\tau -k T_\mathrm{s}) \mathrm{d}\tau\\
+            &=u_\mathrm{c}(k T_\mathrm{s}) + \frac{1}{C} \left[-\frac{\Delta i_\mathrm{L}}{2}\tau + \frac{U_\mathrm{in}-U_\mathrm{out}}{L} (\frac{1}{2}\tau^2 -k T_\mathrm{s}\tau)\right]_{k T_\mathrm{s}}^t\\
+            &=u_\mathrm{c}(k T_\mathrm{s}) - \frac{\Delta i_\mathrm{L}}{2 C}(t- kT_\mathrm{s}) + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \left[t(\frac{t}{2}-kT_\mathrm{s}) + \frac{(kT_\mathrm{s})^2}{2}\right].
         \end{split}
+        \label{eq:capacitor-voltage-switch-on-step-down-converter}
     \end{equation}
-    Likewise, the capacitor voltage for $t=T_\mathrm{s}$ results in
-    \begin{equation}
-        \begin{split}   
-        u_\mathrm{c}(t=T_\mathrm{s}) &= u_\mathrm{c}(T_\mathrm{on}) -\frac{\Delta i_\mathrm{L}}{2 C}T_\mathrm{s} + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}T_\mathrm{s}}{2}\\
-                                      &= u_\mathrm{c}(0) -\frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}T_\mathrm{s}}{2} + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}T_\mathrm{s}}{2}\\
-                                      &= u_\mathrm{c}(0).
-        \end{split}
-    \end{equation}
-    Hence, the capacitor voltage's initial condition $u_\mathrm{c}(0)$ is also valid for $t=T_\mathrm{on}$ and $t=T_\mathrm{s}$. Hence, the maximum voltage ripple must be between the switching events. 
+    Here, $u_\mathrm{c}(k T_\mathrm{s})$ is the initial capacitor voltage at the beginning of the switch-on period.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -603,21 +595,152 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Steady-state analysis (cont.)}
+    At the end of the switch-on period, the capacitor voltage is given by
+    \begin{equation}
+        \begin{split}
+            u_\mathrm{c}(k T_\mathrm{s} + T_\mathrm{on}) &= u_\mathrm{c}(k T_\mathrm{s}) -\frac{\Delta i_\mathrm{L}}{2 C}(k T_\mathrm{s} + T_\mathrm{on}- kT_\mathrm{s}) \\&+ \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \left[(k T_\mathrm{s} + T_\mathrm{on})(\frac{k T_\mathrm{s} + T_\mathrm{on}}{2}-kT_\mathrm{s}) + \frac{(kT_\mathrm{s})^2}{2}\right]\\
+            &= u_\mathrm{c}(k T_\mathrm{s}) - \frac{\Delta i_\mathrm{L}}{2 C}T_\mathrm{on} +\frac{\Delta i_\mathrm{L}}{2 C}T_\mathrm{on}\\
+            &= u_\mathrm{c}(k T_\mathrm{s}),
+        \end{split}
+        \label{eq:capacitor-voltage-switch-on-step-down-converter-end}
+    \end{equation}
+    i.e., the capacitor voltage at the end of the switch-on period is equal to the voltage at the beginning of the switch-on period. Since the capacitor voltage needs to be continuous over time, this also marks the initial condition for the switch-off period.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state analysis (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state analysis (cont.)}
+    Inserting \eqref{eq:capacitor-current-switch-off-step-down-converter} in \eqref{eq:capacitor-voltage-differential-equation-step-down-converter} and integrating the differential equation delivers the \hl{capacitor voltage during the switch-off period} as
+    \begin{equation}
+        \begin{split}
+            u_\mathrm{c}(t) &= u_\mathrm{c}(k T_\mathrm{s}+T_\mathrm{on}) + \frac{1}{C}\int_{k T_\mathrm{s}+T_\mathrm{on}}^t i_\mathrm{C}(\tau) \mathrm{d}\tau, \quad t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}] \\
+            &= u_\mathrm{c}(k T_\mathrm{s}) + \frac{1}{C}\int_{k T_\mathrm{s}+T_\mathrm{on}}^t \frac{\Delta i_\mathrm{L}}{2} - \frac{U_\mathrm{out}}{L} (\tau - k T_\mathrm{s} - T_\mathrm{on}) \mathrm{d}\tau\\
+            & = u_\mathrm{c}(k T_\mathrm{s}) + \left[\frac{\Delta i_\mathrm{L}}{2}\tau - \frac{U_\mathrm{out}}{L} (\frac{1}{2}\tau^2 - k T_\mathrm{s}\tau - T_\mathrm{on}\tau) \right]_{k T_\mathrm{s}+T_\mathrm{on}}^t\\
+            &= u_\mathrm{c}(k T_\mathrm{s}) + \frac{\Delta i_\mathrm{L}}{2 C}(t - k T_\mathrm{s} - T_\mathrm{on}) - \frac{U_\mathrm{out}}{LC} \left[t(\frac{t}{2} - k T_\mathrm{s} - T_\mathrm{on}) + \frac{(k T_\mathrm{s} + T_\mathrm{on})^2}{2}\right].
+        \end{split}
+        \label{eq:capacitor-voltage-switch-off-step-down-converter}
+    \end{equation}
+    Here, $u_\mathrm{c}(k T_\mathrm{s}+T_\mathrm{on})=u_\mathrm{c}(k T_\mathrm{s})$ is the initial capacitor voltage at the beginning of both the switch-on and switch-off period.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state time-domain behavior %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Steady-state time-domain behavior}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfmathsetmacro{\D}{0.6} % duty cycle
+            \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
+
+                % Top plot: voltage at the switch
+                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_1$}]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
+                        \AddPlot
+                    }
+                    \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
+                    \draw [thick,<->]  (0,0.5) -- node[below]{$T_\mathrm{on}$}(\D, 0.5); % T_on 
+                    \draw [thick,<->]  (\D,0.5) -- node[below]{$T_\mathrm{off}$}(1.0, 0.5); % T_off
+                    \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{s}$}(1.0, -0.2); % T_s 
+
+
+                % Middle plot: inductor current
+                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$, }]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({1 + #1},0.25)};}
+                        \AddPlot
+                    }
+                    \draw[signalred, thick, dashed] (axis cs:0,0.5) -- (axis cs:4,0.5); % dashed line at average current
+                    \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
+                    \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
+                    \draw[thin] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{U_1-U_2}{L}$}; % label positive current slope
+                    \draw[thin] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_2}{L}$}; % label negative current slope
+                
+                % Bottom plot: input current
+                \nextgroupplot[ylabel = {$i_\mathrm{in}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$}]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
+                        \AddPlot
+                    }
+                    \draw[signalred, thick, dashed] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
+                    \node[above, inner sep = 2pt, anchor = south, fill = white] at (axis cs:1.5+\D/2, 0.5 * \D) {$\overline{i}_\mathrm{in}$}; % label average current
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Output voltage ripple %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Output voltage ripple}
     Utilizing \eqref{eq:capacitor-voltage-switch-on-step-down-converter} and calculating the derivative with respect to $t$ we obtain
     \begin{equation}
         \begin{split}
             \frac{\mathrm{d}u_\mathrm{c}(t)}{\mathrm{d}t} &= -\frac{\Delta i_\mathrm{L}}{2 C} + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} t\\
-                                                          &= -\frac{U_\mathrm{in}-U_\mathrm{out}}{LC}\frac{T_\mathrm{on}}{2} +\frac{U_\mathrm{in}-U_\mathrm{out}}{LC} t, \quad t\in [0, T_\mathrm{on}].
+                                                          &= -\frac{U_\mathrm{in}-U_\mathrm{out}}{LC}\frac{T_\mathrm{on}}{2} +\frac{U_\mathrm{in}-U_\mathrm{out}}{LC} (t-kT_\mathrm{s}), \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}].
         \end{split}
     \end{equation}
     Setting the derivative to zero, we find the time $t_\mathrm{min}$ at which the minimum voltage occurs as
     \begin{equation}
-        \frac{\mathrm{d}u_\mathrm{c}(t)}{\mathrm{d}t} = 0 \quad \Rightarrow \quad t_\mathrm{min} = \frac{T_\mathrm{on}}{2}
+        \frac{\mathrm{d}u_\mathrm{c}(t)}{\mathrm{d}t} = 0 \quad \Rightarrow \quad t_\mathrm{min} = \frac{T_\mathrm{on}}{2} + kT_\mathrm{s}
+        \label{eq:time-min-voltage-ripple-step-down-converter}
     \end{equation}
-    since the second derivative is positive. The minimum voltage is then given by
+    since the second derivative is positive. Inserting \eqref{eq:time-min-voltage-ripple-step-down-converter} in \eqref{eq:capacitor-voltage-switch-on-step-down-converter} reveals the minimum voltage as
     \begin{equation}
-        u_\mathrm{c}(t_\mathrm{min}) = u_\mathrm{c}(0) - \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}^2}{8} = u_\mathrm{c}(0) - \Delta i_\mathrm{L}\frac{T_\mathrm{on}}{8C}.
+        u_\mathrm{c}(t_\mathrm{min}) = u_\mathrm{c}(kT_\mathrm{s}) - \frac{U_\mathrm{in}-U_\mathrm{out}}{LC} \frac{T_\mathrm{on}^2}{8} = u_\mathrm{c}(kT_\mathrm{s}) - \Delta i_\mathrm{L}\frac{T_\mathrm{on}}{8C}.
     \end{equation}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Output voltage ripple (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Output voltage ripple (cont.)}
+    Likewise, calculating the derivative of \eqref{eq:capacitor-voltage-switch-off-step-down-converter} leads to
+    \begin{equation}
+        \begin{split}
+            \frac{\mathrm{d}u_\mathrm{c}(t)}{\mathrm{d}t} &= \frac{\Delta i_\mathrm{L}}{2 C} - \frac{U_\mathrm{out}}{LC} (t-kT_\mathrm{s} - T_\mathrm{on})\\
+                                                          &= \frac{U_\mathrm{in}-U_\mathrm{out}}{LC}\frac{T_\mathrm{on}}{2} -\frac{U_\mathrm{out}}{LC} (t-kT_\mathrm{s} - T_\mathrm{on}), \quad t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].
+        \end{split}
+    \end{equation}
+    Setting the derivative to zero, we find the time $t_\mathrm{max}$ at which the maximum voltage occurs as
+    \begin{equation}
+        \frac{\mathrm{d}u_\mathrm{c}(t)}{\mathrm{d}t} = 0 \quad \Rightarrow \quad t_\mathrm{max} = \frac{T_\mathrm{off}}{2} + T_\mathrm{on} + k T_\mathrm{s}
+    \end{equation}
+    since the second derivative is negative. The maximum voltage is then given by
+    \begin{equation}
+        u_\mathrm{c}(t_\mathrm{max}) = u_\mathrm{c}(kT_\mathrm{s}) + \Delta i_\mathrm{L}\frac{T_\mathrm{off}}{8C}.
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Output voltage ripple (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Output voltage ripple (cont.)}
+    The voltage ripple is then given by
+    \begin{equation}
+        \begin{split}
+            \Delta u_\mathrm{c} &= u_\mathrm{c}(t_\mathrm{max}) - u_\mathrm{c}(t_\mathrm{min}) = \Delta i_\mathrm{L}\frac{T_\mathrm{off}}{8C} + \Delta i_\mathrm{L}\frac{T_\mathrm{on}}{8C}\\
+                                &= \Delta i_\mathrm{L}\frac{T_\mathrm{s}}{8C} = \frac{D(1-D)T_\mathrm{s}^2U_\mathrm{in}}{8LC}.
+        \end{split}
+    \end{equation}
+    The voltage ripple is proportionally depending on the inductor current ripple. Hence, the maximum voltage ripple occurs at the same characteristic duty cycle $D_\mathrm{max}$ and is given by
+    \begin{equation}
+        D_\mathrm{max}=\frac{1}{2} \quad \Rightarrow \quad \Delta u_\mathrm{c, max} =  \frac{T_\mathrm{s}^2U_\mathrm{in}}{32 LC}.
+    \end{equation}
+    Hence, we can rewrite the voltage ripple as
+    \begin{equation}
+        \Delta u_\mathrm{c} =   4D(1-D)\Delta u_\mathrm{c, max}.
+    \end{equation}
+    The voltage ripple is associated with additional losses in the output capacitor and the load, that is, an important stress parameter.
+\end{frame}
 
