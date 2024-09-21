@@ -1189,11 +1189,11 @@
 			
 			&
 			
-			\begin{circuitikz} %Mosfet
+			\begin{circuitikz} %MOSFET
 				\draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0) 
 				to ++(0.01,0)  node [nigfete, anchor=D, rotate=90, bodydiode](fet1){}
 				(fet1.S) to [short] (2,0);
-				\draw [->] ([yshift = 0.5cm, xshift = 0.1cm]fet1.D) -- node [yshift = 0.3cm] {$u$} ([yshift = 0.5cm, xshift = -0.1cm]fet1.S) ;
+				\draw [->] ([yshift = 0.6cm, xshift = 0.1cm]fet1.D) -- node [yshift = 0.3cm] {$u$} ([yshift = 0.6cm, xshift = -0.1cm]fet1.S) ;
 			\end{circuitikz}
 			
 			&

@@ -32,7 +32,7 @@
             \draw (-5.375,2) ++(0.625,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
             let \p1 = (S.mid) in (S.in) to  [short, i=$i_\mathrm{L}(t)$] ++(1,0)
             to [inductor, l=$L$, v = $u_\mathrm{L}(t)$, voltage = straight] ++(2,0)
-            to [short, i=$i_\mathrm{out}(t)$] (0,2) 
+            to [short, -o, i=$i_\mathrm{out}(t)$] (0,2) 
             ([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
             \draw (-3.5,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s}(t)$, voltage = straight] ++(0,-2);
         \end{circuitikz}
@@ -208,12 +208,12 @@
                     \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
                     \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
                     \draw[thin] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
-                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{U_\mathrm{in}-U_\mathrm{out}}{L}$}; % label positive current slope
+                    \node[above, inner sep = 2pt, anchor = south, xshift = -4mm] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{(U_\mathrm{in}-U_\mathrm{out})}{L}$}; % label positive current slope
                     \draw[thin] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
-                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_\mathrm{out}}{L}$}; % label negative current slope
+                    \node[above, inner sep = 2pt, anchor = south, xshift = 2mm] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_\mathrm{out}}{L}$}; % label negative current slope
                 
                 % Bottom plot: input current
-                \nextgroupplot[ylabel = {$i_\mathrm{in}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$}]
+                \nextgroupplot[ylabel = {$i_\mathrm{in}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
                         \AddPlot
@@ -465,7 +465,7 @@
                 let \p1 = (S.mid) in (S.in) to  [short, i=$i_\mathrm{L}(t)$] ++(1,0)
                 to [inductor, l=$L$, v = $u_\mathrm{L}(t)$, voltage = straight] ++(2,0)
                 to [short] ++(1,0)
-                to [short, i=$i_\mathrm{out}(t)$] (0,2) 
+                to [short, -o, i=$i_\mathrm{out}(t)$] (0,2) 
                 ([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
                 \draw (-4.5,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s}(t)$, voltage = straight] ++(0,-2);
                 \draw (-1.5,2) to [capacitor, *-*, l=$C$, i>^=$i_\mathrm{C}(t)$] ++(0,-2);
@@ -681,12 +681,12 @@
                     \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
                     \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
                     \draw[thin] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
-                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{U_\mathrm{in}-U_\mathrm{out}}{L}$}; % label positive current slope
+                    \node[above, inner sep = 2pt, anchor = south, xshift = -4mm] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{(U_\mathrm{in}-U_\mathrm{out})}{L}$}; % label positive current slope
                     \draw[thin] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
-                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_\mathrm{out}}{L}$}; % label negative current slope
+                    \node[above, inner sep = 2pt, anchor = south, xshift = 2mm] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_\mathrm{out}}{L}$}; % label negative current slope
                 
                 % Bottom plot: input current
-                \nextgroupplot[ylabel = {$i_\mathrm{in}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$}]
+                \nextgroupplot[ylabel = {$i_\mathrm{in}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
                         \AddPlot
@@ -749,7 +749,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Output voltage ripple (cont.)}
-    The voltage ripple is then given by
+    The \hl{voltage ripple} is then given by
     \begin{equation}
         \begin{split}
             \Delta u_\mathrm{c} &= u_\mathrm{c}(t_\mathrm{max}) - u_\mathrm{c}(t_\mathrm{min}) = \Delta i_\mathrm{L}\frac{T_\mathrm{off}}{8C} + \Delta i_\mathrm{L}\frac{T_\mathrm{on}}{8C}\\
@@ -809,3 +809,160 @@
     \end{equation}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Step-down converter: circuit realization and operation modes %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Step-down converter: circuit realization and operation modes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Overview and assumption %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Circuit realization}
+    \begin{itemize}
+        \item The ideal (mechanical) switch cannot be operated with high frequency in practice.  
+        \item It must be replaced with semiconductor devices to allow for a practical realization.
+        \item In \figref{fig:step-down-converter-realization-1Q} the simplest realization is shown utilizing one transistor and one diode. 
+        \item However, this configuration can only provide positive voltages and currents.
+        \item Hence, the converter can operate in the \hl{first quadrant} only.
+    \end{itemize}
+    \begin{figure}
+        \begin{circuitikz}[]                
+            \draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+            to ++(-6,0)
+            to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+            (-6,2) to  [short, i=$i_\mathrm{in}(t)$] ++(1.0,0);   
+            \draw (-5.375,2) node [npn, anchor=C, rotate=90](npn1) {}
+            (npn1.E) to  [short] ++(0.5,0) coordinate (S)
+            to [short] ++(0.5,0)
+            to [inductor, l=$L$, v = $u_\mathrm{L}(t)$, voltage = straight] ++(1.8,0)
+            to [short, -o, i=$i_\mathrm{out}(t)$] (0,2);
+            \draw (S)--++(0,-2) to [diode, *-*, l=$D$, v_<=$u_\mathrm{s}(t)$, voltage = straight] ++(0,2);
+            %\draw  [node]{$T$} at (npn1.B)++(0,-0.5);
+            \draw let \p1 = (npn1.B) in node[anchor=north] at (\x1,\y1) {$T$};
+        \end{circuitikz}
+        \caption{Step-down converter with real components (single quadrant type)}
+        \label{fig:step-down-converter-realization-1Q}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Discontinous conduction mode (DCM) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Discontinous conduction mode (DCM)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \tikzmath{
+                real \D,\Ts, \Ton, \Toff1, \Toff2, \ripple, \relrip, \currentavg;
+                \Ts = 1;
+                \Ton = 0.5;
+                \D = \Ton/\Ts;
+                \ripple = 0.65;
+                \relrip = 1/3;
+                \Uout = 1/(1+(\relrip/(2*\D^2)));
+                \Toff1 = (1-\Uout)/\Uout*\Ton;
+                \Toff2 = \Ts - \Ton - \Toff1;
+                \currentavg = \ripple/2*(\Ton+\Toff1)/\Ts;
+            }
+            \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
+
+                % Top plot: voltage at the switch
+                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_\mathrm{in}$}]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},1) ({\Ton + #1},1) ({\Ton + #1},0) ({\Ton+\Toff1 + #1},0) ({\Ton+\Toff1 + #1},\Uout) ({\Ts + #1},\Uout) ({\Ts + #1},1)};}
+                        \AddPlot
+                    }
+                    \draw[signalblue, thick, dashed] (axis cs:0, \Uout) -- (axis cs:4, \Uout); % dashed line at U_\mathrm{out} (average)
+                    \node[above, inner sep = 1pt, anchor = north, fill = white, yshift= -1pt] at (axis cs:1+\Ton/2, \Uout) {$U_\mathrm{out}$}; % label U_\mathrm{out}
+                    \draw [thick,{Latex[length=2mm]}-{Latex[length=2mm]}]  (0,-0.2) -- node[below]{$T_\mathrm{on}$}(\Ton, -0.2); % T_on 
+                    \draw [thick,{Latex[length=2mm]}-{Latex[length=2mm]}]  (\Ton,-0.2) -- node[below]{$T'_\mathrm{off}$}(\Ton+\Toff1, -0.2); % T'_off
+                    \draw [thick,{Latex[length=2mm]}-{Latex[length=2mm]}]  (\Ton+\Toff1,-0.2) -- node[below]{$T''_\mathrm{off}$}(\Ts, -0.2); % T''_off
+                    \draw [thick,{Latex[length=2mm]}-{Latex[length=2mm]}]  (\Ts,-0.2) -- node[below]{$T_\mathrm{s}$}(2*\Ts, -0.2); % T_s 
+
+
+                % Middle plot: inductor current
+                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , }]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0) ({\Ton + #1}, \ripple) ({\Ton+\Toff1 + #1},0) ({\Ts + #1},0)};}
+                        \AddPlot
+                    }
+                    \draw[signalred, thick, dashed] (axis cs:0,\currentavg) -- (axis cs:4,\currentavg); % dashed line at average current
+                    \node[above, inner sep = 1pt, anchor = south, fill = white, yshift= 1pt] at (axis cs:2-\Toff2/2, \currentavg) {$\overline{i}_\mathrm{L}$}; % label \overline{i}_\mathrm{L}
+                    \draw[thin] (axis cs:1+\Ton/2,\ripple/2) -- (axis cs:1+\Ton/2,\ripple*5/6) -- (axis cs:1+5*\Ton/6,\ripple*5/6); % indicate positive current slopde
+                    \node[above, inner sep = 2pt, anchor = south east] at (axis cs:1+\Ton*4/6, \ripple-1/6) {$\nicefrac{(U_\mathrm{in}-U_\mathrm{out})}{L}$}; % label positive current slope
+                    \draw[thin] (axis cs:2+\Ton+\Toff1/6,\ripple*5/6) -- (axis cs:2+\Ton+\Toff1/2,\ripple*5/6) -- (axis cs:2+\Ton+\Toff1/2,\ripple/2); % indicate negative current slope
+                    \node[above, inner sep = 2pt, anchor = south west, xshift = -2mm] at (axis cs:2+\Ton+\Toff1/2, \ripple-1/6) {$\nicefrac{-U_\mathrm{out}}{L}$}; % label negative current slope
+                
+                % Bottom plot: input current
+                \nextgroupplot[ylabel = {$i_\mathrm{in}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}]
+                \pgfplotsinvokeforeach{0,...,3}{
+                    \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0) ({\Ton + #1},\ripple) ({\Ton + #1},0) ({\Ts + #1},0)};}
+                    \AddPlot
+                }
+                \draw[signalred, thick, dashed] (axis cs:0,\ripple/2*\Ton/\Ts) -- (axis cs:4, \ripple/2*\Ton/\Ts); % dashed line at average current
+                \node[above, inner sep = 2pt, anchor = south, fill = white] at (axis cs:1.5+\Ton/2, \ripple/2*\Ton/\Ts) {$\overline{i}_\mathrm{in}$}; % label average current
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Switch states %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Switch states DCM}
+        \begin{figure}
+            \centering	
+            \begin{subfigure}{0.33\textwidth}
+                \centering
+                \hspace{-1.4cm}
+                \begin{circuitikz}[scale=0.75, font=\small]
+                    \draw (0,2) to [open, o-o, v = $\hspace{-0.4cm}U_\mathrm{out}$, voltage = straight] ++(0,-2)
+                    to ++(-5,0)
+                    to [open, o-o, v<= $U_\mathrm{in} \hspace{-0.1cm}$, voltage = straight] ++(0,2)
+                    (-5,2) to  [short, i=${i_\mathrm{in}(t)=i_\mathrm{L}(t)}$] ++(2,0)
+                    to [inductor, l=$L$] ++(2,0)
+                    to [short, i=$i_\mathrm{out}(t)$] (0,2);
+                    \draw (-4,2) to [open, v = ${\hspace{2.2cm}U_\mathrm{s}=U_\mathrm{in}}$, voltage = straight] ++(0,-2);
+                \end{circuitikz}
+                \caption{Switch-on time $T_\mathrm{on}$}
+            \end{subfigure}%
+            \begin{subfigure}{0.33\textwidth}
+                \centering
+                \hspace{-0.6cm}
+                \begin{circuitikz}[scale=0.75, font=\small]
+                    \draw (0,2) to [open, o-o, v = $\hspace{-0.4cm}U_\mathrm{out}$, voltage = straight] ++(0,-2)
+                    to ++(-5,0)
+                    to [open, o-o, v<= $U_\mathrm{in} \hspace{-0.1cm}$, voltage = straight] ++(0,2)
+                    (-5,2) to  [short, i=${i_\mathrm{in}=0}$] ++(0.75,0)
+                    (-3.75,0) to [short, *-] ++(0,2)
+                    to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
+                    to [inductor, l=$L$] ++(2,0)
+                    to [short, i=$i_\mathrm{out}(t)$] (0,2);
+                    \draw (-3.4,2) to [open, v = ${\hspace{1.8cm}U_\mathrm{s}=0}$, voltage = straight] ++(0,-2);
+                \end{circuitikz}
+                \caption{Switch-off time $T'_\mathrm{off}$}
+            \end{subfigure}
+            \begin{subfigure}{0.33\textwidth}
+                \centering
+                \hspace{-1.3cm}
+                \begin{circuitikz}[scale=0.75, font=\small]
+                    \draw (0,2) to [open, o-o, v = $\hspace{-0.4cm}U_\mathrm{out}$, voltage = straight] ++(0,-2)
+                    to ++(-5,0)
+                    to [open, o-o, v<= $U_\mathrm{in} \hspace{-0.1cm}$, voltage = straight] ++(0,2)
+                    (-5,2) to  [short, i=${i_\mathrm{in}=0}$] ++(0.75,0)
+                    (-3.75,0) to [open] ++(0,2)
+                    to [short] ++(0.5,0)
+                    to [inductor, l=$L$] ++(2,0)
+                    to [short, i=${i_\mathrm{out}=0}$] (0,2);
+                    \draw (-3.75,2) to [open, v = ${\hspace{2.3cm}U_\mathrm{s}=U_\mathrm{out}}$, voltage = straight] ++(0,-2);
+                \end{circuitikz}
+                \caption{Switch-off time $T''_\mathrm{off}$}
+            \end{subfigure}
+        \caption{Switch states of the step-down converter including DCM} 
+        \label{fig:step-down-converter-switch-states-DCM}
+        \end{figure}
+    \end{frame}
