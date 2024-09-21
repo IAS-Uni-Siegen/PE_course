@@ -633,19 +633,42 @@
     \begin{figure}
         \begin{tikzpicture}
             \pgfmathsetmacro{\D}{0.6} % duty cycle
+
             \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
 
                 % Top plot: voltage at the switch
-                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_1$}]
+                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_\mathrm{in}$}]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
                         \AddPlot
                     }
                     \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
-                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
-                    \draw [thick,<->]  (0,0.5) -- node[below]{$T_\mathrm{on}$}(\D, 0.5); % T_on 
-                    \draw [thick,<->]  (\D,0.5) -- node[below]{$T_\mathrm{off}$}(1.0, 0.5); % T_off
-                    \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{s}$}(1.0, -0.2); % T_s 
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:1-\D/4-0.04, \D+0.05) {$u(t)$}; % label U_2
+                    \draw [thick,<->]  (0,0.42) -- node[below]{$T_\mathrm{on}$}(\D, 0.42); % T_on 
+                    \draw [thick,<->]  (\D,0.42) -- node[below]{$T_\mathrm{off}$}(1.0, 0.42); % T_off
+                    \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{s}$}(1.0, -0.2); % T_s
+                    \tikzmath{
+                        real \D, \u0, \Ts, \Ton, \Toff, \ripple;
+                        \D = 0.6;
+                        \Ts = 1;
+                        \Ton = \D;
+                        \Toff = 1-\D;
+                        \ripple = 0.75;
+                        \u0 = \D - \ripple / 6 * \Ts*(1-2*\D);
+                    } 
+                    \pgfplotsinvokeforeach{0,...,3}{
+                            \edef\AddPlot{\noexpand\addplot[signalblue, thick, domain=#1:#1+\Ton, samples=50] {\u0 - \ripple*(x - #1 * \Ts) + 2 * \ripple / \Ton * (x^2/2 - #1 * \Ts *x + (#1 * \Ts)^2/2)};}
+                            \AddPlot
+                            \edef\AddPlot{\noexpand\addplot[signalblue, thick, domain=#1+\Ton:#1+\Ts, samples=50] {\u0 + \ripple*(x - #1 * \Ts - \Ton) - 2 * \ripple / \Toff * (x^2/2 - #1 * \Ts *x - x*\Ton + (#1 * \Ts + \Ton)^2/2)};}
+                            \AddPlot
+                        }
+                    \draw[dashed, thin] (axis cs:0, \u0+\ripple*\Toff/4) -- (axis cs:4, \u0+\ripple*\Toff/4);
+                    \draw[dashed, thin] (axis cs:0, \u0-\ripple*\Ton/4) -- (axis cs:4, \u0-\ripple*\Ton/4);
+                    \draw[thin, -{Latex[length=2mm]}] (axis cs:1+\D/2, \u0+\ripple*\Toff/4+0.25) -- (axis cs:1+\D/2, \u0+\ripple*\Toff/4);
+                    \draw[thin, -{Latex[length=2mm]}] (axis cs:1+\D/2, \u0-\ripple*\Ton/4-0.25) -- (axis cs:1+\D/2, \u0-\ripple*\Ton/4);
+                    \node[above, inner sep = 2pt, anchor = west] at (axis cs:1+\D/2, \u0-\ripple*\Ton/4-0.2) {$\Delta u_\mathrm{c}$}; 
+                    \draw[{Latex[length=2mm]}-, thin] (axis cs:1.5+\D/2,\D) -- node[right=1mm, fill=white, inner sep = 1pt, anchor = north]{$\overline{u}_\mathrm{c}$}(axis cs:1.5+\D/2,0.1);
+                    \draw[{Latex[length=2mm]}-, thin] (axis cs:2,\D/3) -- node[right=1mm, fill=white, inner sep = 1pt, anchor = west]{$u_\mathrm{s}(t)$}(axis cs:2+\D/2,\D/3);
 
 
                 % Middle plot: inductor current
@@ -742,5 +765,47 @@
         \Delta u_\mathrm{c} =   4D(1-D)\Delta u_\mathrm{c, max}.
     \end{equation}
     The voltage ripple is associated with additional losses in the output capacitor and the load, that is, an important stress parameter.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Average and initial capacitor voltage %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Average and initial capacitor voltage}
+    The initial voltage $u_\mathrm{c}(k T_\mathrm{s})$ at the beginning of a period is still unknown. We can derive it from the capacitor's average voltage over one period. For simplicity, we consider $k=0$:
+    \begin{equation}
+            \overline{u}_\mathrm{c} = \frac{1}{T_\mathrm{s}}\int_0^{T_\mathrm{s}} u_\mathrm{c}(t) \mathrm{d}t = \frac{1}{T_\mathrm{s}}\left(\int_0^{T_\mathrm{on}} u_\mathrm{c}(t) \mathrm{d}t + \int_{T_\mathrm{on}}^{T_\mathrm{s}} u_\mathrm{c}(t) \mathrm{d}t\right)  \stackrel{!}{=} D U_\mathrm{in}.
+            \label{eq:capacitor-voltage-average-step-down-converter}
+    \end{equation}
+    Inserting \eqref{eq:capacitor-voltage-switch-on-step-down-converter} we receive for the first part
+    \begin{equation}
+        \begin{split}
+            \int_0^{T_\mathrm{on}} u_\mathrm{c}(t) \mathrm{d}t &= \left[u_\mathrm{c}(0)t + \frac{\Delta i_\mathrm{L}}{2C}\frac{t^2}{2} + \frac{U_\mathrm{in}-U_\mathrm{out}}{LC}\frac{t^3}{6} \right]_{0}^{T_\mathrm{on}}=\ldots\\ &= u_\mathrm{c}(0) T_\mathrm{on} - \frac{\Delta i_\mathrm{L}}{C}\frac{T_\mathrm{on}^2}{12}. 
+        \end{split}
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Average and initial capacitor voltage (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Average and initial capacitor voltage (cont.)}
+     Inserting \eqref{eq:capacitor-voltage-switch-off-step-down-converter} into the second part of \eqref{eq:capacitor-voltage-average-step-down-converter} delivers
+    \begin{equation}
+        \begin{split}
+            \int_{T_\mathrm{on}}^{T_\mathrm{s}} u_\mathrm{c}(t) \mathrm{d}t &= \left[u_\mathrm{c}(0)t +  \frac{\Delta i_\mathrm{L}}{2C}(\frac{t^2}{2} - T_\mathrm{on}t) - \frac{U_\mathrm{out}}{LC}(\frac{t^3}{6} - T_\mathrm{on}\frac{t^2}{2} + \frac{T_\mathrm{on}^2}{2}t)  \right]_{T_\mathrm{on}}^{T_\mathrm{s}} =\ldots \\ &= u_\mathrm{c}(0) T_\mathrm{off} + \frac{\Delta i_\mathrm{L}}{C}\frac{T_\mathrm{off}^2}{12}.
+        \end{split}
+    \end{equation}
+    Combining both parts results in
+    \begin{equation}
+    \begin{split}
+        \overline{u}_\mathrm{c} &= \frac{1}{T_\mathrm{s}}\left(u_\mathrm{c}(0)T_\mathrm{s} + \frac{\Delta i_\mathrm{L}}{C}\frac{T_\mathrm{off}^2-T_\mathrm{on}^2}{12} \right)\\
+                                & = u_\mathrm{c}(0) + \frac{\Delta i_\mathrm{L}}{12C}T_\mathrm{s}(1-2D) \stackrel{!}{=} D U_\mathrm{in}.
+        \end{split}
+    \end{equation}
+    Solving for $u_\mathrm{c}(0)$ we receive the \hl{initial capacitor voltage} as
+    \begin{equation}
+        u_\mathrm{c}(0) = D U_\mathrm{in} - \frac{\Delta i_\mathrm{L}}{12C}T_\mathrm{s}(1-2D).
+    \end{equation}
 \end{frame}
 
