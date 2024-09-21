@@ -186,13 +186,13 @@
             \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
 
                 % Top plot: voltage at the switch
-                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_1$}]
+                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_\mathrm{in}$}]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
                         \AddPlot
                     }
-                    \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
-                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
+                    \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_\mathrm{out} (average)
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:1.5+\D/2, \D) {$U_\mathrm{out}$}; % label U_\mathrm{out}
                     \draw [thick,<->]  (0,0.5) -- node[below]{$T_\mathrm{on}$}(\D, 0.5); % T_on 
                     \draw [thick,<->]  (\D,0.5) -- node[below]{$T_\mathrm{off}$}(1.0, 0.5); % T_off
                     \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{s}$}(1.0, -0.2); % T_s 
@@ -208,9 +208,9 @@
                     \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
                     \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
                     \draw[thin] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
-                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{U_1-U_2}{L}$}; % label positive current slope
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{U_\mathrm{in}-U_\mathrm{out}}{L}$}; % label positive current slope
                     \draw[thin] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
-                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_2}{L}$}; % label negative current slope
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_\mathrm{out}}{L}$}; % label negative current slope
                 
                 % Bottom plot: input current
                 \nextgroupplot[ylabel = {$i_\mathrm{in}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$}]
@@ -637,13 +637,13 @@
             \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
 
                 % Top plot: voltage at the switch
-                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_\mathrm{in}$}]
+                \nextgroupplot[ylabel = {$u(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_\mathrm{in}$}]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
                         \AddPlot
                     }
-                    \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
-                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:1-\D/4-0.04, \D+0.05) {$u(t)$}; % label U_2
+                    \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_\mathrm{out} (average)
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:1-\D/4-0.04, \D+0.05) {$u(t)$}; % label U_\mathrm{out}
                     \draw [thick,<->]  (0,0.42) -- node[below]{$T_\mathrm{on}$}(\D, 0.42); % T_on 
                     \draw [thick,<->]  (\D,0.42) -- node[below]{$T_\mathrm{off}$}(1.0, 0.42); % T_off
                     \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{s}$}(1.0, -0.2); % T_s
@@ -681,9 +681,9 @@
                     \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
                     \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
                     \draw[thin] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
-                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{U_1-U_2}{L}$}; % label positive current slope
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{U_\mathrm{in}-U_\mathrm{out}}{L}$}; % label positive current slope
                     \draw[thin] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
-                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_2}{L}$}; % label negative current slope
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_\mathrm{out}}{L}$}; % label negative current slope
                 
                 % Bottom plot: input current
                 \nextgroupplot[ylabel = {$i_\mathrm{in}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$}]
