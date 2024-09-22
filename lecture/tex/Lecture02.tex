@@ -409,6 +409,7 @@
     From \eqref{eq:duty-cycle-max} we can conclude that the maximum current ripple is given by
     \begin{equation}
         \Delta i_\mathrm{L, \max} = \frac{1}{4}\frac{T_\mathrm{s}U_\mathrm{in}}{L} \quad \Rightarrow \quad \Delta i_\mathrm{L} = 4D(1-D) \Delta i_\mathrm{L, \max}.
+        \label{eq:current-ripple-max-simple-step-down}
     \end{equation}
 
     \begin{figure}
@@ -914,6 +915,12 @@
 
 \begin{frame}[b]
     \frametitle{Switch states DCM}
+    In contrast to the previous \hl{continuous conduction mode (CCM)}, the converter traverses three states in the \hl{discontinuous conduction mode (DCM)}:
+    \begin{itemize}
+            \item Transistor on-time:  $T_\mathrm{on}=DT_\mathrm{s}$,
+            \item Transistor off-time (conducting diode): $T'_\mathrm{off}=D'T_\mathrm{s}$,
+            \item Transistor off-time (no conduction):  $T''_\mathrm{off}=T_\mathrm{s}-T_\mathrm{on}.-T'_\mathrm{off}$
+    \end{itemize}
         \begin{figure}
             \centering	
             \begin{subfigure}{0.33\textwidth}
@@ -966,3 +973,110 @@
         \label{fig:step-down-converter-switch-states-DCM}
         \end{figure}
     \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DCM operation characteristics %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{DCM operation characteristics}
+    The operation in CCM and DCM can be distinguished by the inductor current ripple
+    \begin{equation}
+        \overline{i}_\mathrm{L}=\overline{i}_\mathrm{out}\begin{cases}
+            \geq \frac{\Delta i_\mathrm{L}}{2}= 2D(1-D)\Delta i_\mathrm{L,max}: & \text{CCM},\\
+            < \frac{\Delta i_\mathrm{L}}{2}= 2D(1-D)\Delta i_\mathrm{L,max}: & \text{DCM}
+        \end{cases}
+    \end{equation}
+    with $$\Delta i_\mathrm{L,max} = \frac{U_\mathrm{in}T_\mathrm{s}}{4L}.$$
+    Hence, the operation mode directly depends on the duty cycle $D$ and average load current $\overline{i}_\mathrm{out}$, that is, it can change during runtime. While we have already discussed the operation in CCM, we will now focus on the operation in DCM. Here, it must be noted that
+    $$ U_2 \neq U_1 D \quad \mbox{(DCM operation)}$$
+    applies due to the non-conducting diode during  $T''_\mathrm{off}$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DCM operation characteristics (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{DCM operation characteristics (cont.)}
+    To find the input-to-output voltage ratio in DCM, we can utilize the current ripple balance:
+    \begin{equation}
+        \begin{alignedat}{2}
+            \Delta i_\mathrm{L} &= \frac{U_\mathrm{in}-U_\mathrm{out}}{L}T_\mathrm{on} = i_\mathrm{L} = \frac{U_\mathrm{in}-U_\mathrm{out}}{L}DT_\mathrm{s} \quad &&\mbox{(rising edge)},\\
+            \Delta i_\mathrm{L} &= \frac{U_\mathrm{out}}{L}T'_\mathrm{off} = \frac{U_\mathrm{out}}{L}D'T_\mathrm{s} \quad &&\mbox{(falling edge)}.
+        \end{alignedat}
+    \end{equation}
+    Solving for $D'$ results in
+    \begin{equation}
+        D' = \frac{L\Delta i_\mathrm{L}}{U_\mathrm{out}T_\mathrm{s}} = \frac{U_\mathrm{in}-U_\mathrm{out}}{U_\mathrm{out}}D = \left(\frac{U_\mathrm{in}}{U_\mathrm{out}}-1\right)D.
+        \label{eq:Dprime-DCM}
+    \end{equation}
+    The average load current is
+    \begin{equation}
+        \overline{i}_\mathrm{out} = \overline{i}_\mathrm{L} = \frac{1}{2}\Delta i_\mathrm{L}\frac{T_\mathrm{on}+T'_\mathrm{off}}{T_\mathrm{s}} = \frac{1}{2}\Delta i_\mathrm{L}(D+D')
+        \label{eq:average-load-current-DCM}
+    \end{equation}
+    which is derived from the area under the triangular-shaped current during $T_\mathrm{on}$ and $T'_\mathrm{off}$. 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DCM operation characteristics (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{DCM operation characteristics (cont.)}
+    Inserting \eqref{eq:Dprime-DCM} into \eqref{eq:average-load-current-DCM} yields
+    \begin{equation}
+        \begin{split}
+            \overline{i}_\mathrm{out} &= \frac{1}{2}\Delta i_\mathrm{L}D\frac{U_\mathrm{in}}{U_\mathrm{out}} = \frac{U_\mathrm{in}-U_\mathrm{out}}{2L}DT_\mathrm{s}D\frac{U_\mathrm{in}}{U_\mathrm{out}}\\ &= 2D^2\left(\frac{U_\mathrm{in}}{U_\mathrm{out}}-1\right)\Delta i_\mathrm{L,max}.
+        \end{split}
+        \label{eq:average-load-current-DCM-2}
+    \end{equation}
+    Solving for the \hl{DCM input-to-output voltage ratio} results in
+    \begin{equation}
+        \frac{U_\mathrm{out}}{U_\mathrm{in}} = \frac{1}{1+\frac{\overline{i}_\mathrm{out}}{2\Delta i_\mathrm{L,max}D^2}}.
+        \label{eq:voltage-ratio-DCM}
+    \end{equation}
+    Since $\Delta i_\mathrm{L,max}$ also depends on $U_\mathrm{in}$, cf.  \eqref{eq:current-ripple-max-simple-step-down}, the relation \eqref{eq:voltage-ratio-DCM} only holds for a given $U_\mathrm{in}$. Alternatively, we can utilize \eqref{eq:average-load-current-DCM-2} and solve for $U_\mathrm{out}$ to receive
+    \begin{equation}
+        U_\mathrm{out} = \frac{D^2T_\mathrm{s}U_\mathrm{in}^2}{D^2T_\mathrm{s}U_\mathrm{in}+2L\overline{i}_\mathrm{out}}.
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Step-down converter load curves %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Step-down converter load curves}
+    \begin{figure}
+        \begin{tikzpicture}
+            \begin{axis}[
+                xlabel={$\overline{i}_\mathrm{out}/\Delta i_\mathrm{L,max}$},
+                ylabel={$U_\mathrm{out}/U_\mathrm{in}$},
+                axis lines=left,
+                thick,
+                smooth,
+                no markers,
+                axis equal image,
+                height = 0.8\textheight,
+                grid,
+                ymin=0, ymax=1,
+                xmin=0, xmax=1,
+                clip = false
+                ]
+                \foreach \D in {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0}{
+                    \addplot[signalblue, domain=2*\D*(1-\D):1, samples=10] {\D}; %CCM
+                    \addplot[signalblue, domain=0.001:2*\D*(1-\D), samples=30] {1/(1+x/(2*\D^2))}; %DCM
+                }
+                \foreach \D in {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0}{
+                    \edef\temp{\noexpand\node[inner sep = 1pt, align = center, fill = white] at (axis cs:0.8, \D) {$D=\D$};}
+                    \temp
+                }
+                \addplot[signalred, domain = 0.001:0.5, samples=30, thick, name path = upper] {1/2 + (1/4 - x/2)^(0.5)}; % Upper boundary area
+                \addplot[signalred, domain = 0.001:0.5, samples=30, thick, name path = lower] {1/2 - (1/4 - x/2)^(0.5)}; % Lower boundary area
+                \addplot[shadecolor, opacity=0.3] fill between[of=upper and lower];
+                \node[inner sep = 1pt, anchor = west, fill = white, font=\footnotesize] at (axis cs:0.3, 0.15) {CCM};
+                \node[inner sep = 1pt, anchor = center, font=\footnotesize] at (axis cs:0.185, 0.175) {DCM};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Step-down converter load curves for CCM and DCM}
+        \label{fig:step-down-converter-load-curves}
+    \end{figure}
+\end{frame}
