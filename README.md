@@ -15,3 +15,6 @@ This work is licensed under a
 ## Simulations
 - First download KiCad and set the system language to English.
 - After that create a new project and open the "Schematic Editor"
+"resource": [
+{"files":[
+  "**/*.jpg,],
