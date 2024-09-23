@@ -1066,17 +1066,101 @@
                     \addplot[signalblue, domain=0.001:2*\D*(1-\D), samples=30] {1/(1+x/(2*\D^2))}; %DCM
                 }
                 \foreach \D in {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0}{
-                    \edef\temp{\noexpand\node[inner sep = 1pt, align = center, fill = white] at (axis cs:0.8, \D) {$D=\D$};}
+                    \edef\temp{\noexpand\node[inner sep = 1pt, align = center, fill = white] at (axis cs:0.8, \D) {$D=\D$};} % Duty-cycle labels
                     \temp
                 }
                 \addplot[signalred, domain = 0.001:0.5, samples=30, thick, name path = upper] {1/2 + (1/4 - x/2)^(0.5)}; % Upper boundary area
                 \addplot[signalred, domain = 0.001:0.5, samples=30, thick, name path = lower] {1/2 - (1/4 - x/2)^(0.5)}; % Lower boundary area
                 \addplot[shadecolor, opacity=0.3] fill between[of=upper and lower];
-                \node[inner sep = 1pt, anchor = west, fill = white, font=\footnotesize] at (axis cs:0.3, 0.15) {CCM};
-                \node[inner sep = 1pt, anchor = center, font=\footnotesize] at (axis cs:0.185, 0.175) {DCM};
+                \node[inner sep = 1pt, anchor = west, fill = white, font=\footnotesize] at (axis cs:0.295, 0.15) {CCM}; % CCM label
+                \node[inner sep = 1pt, anchor = center, font=\footnotesize] at (axis cs:0.185, 0.175) {DCM}; % DCM label
             \end{axis}
         \end{tikzpicture}
         \caption{Step-down converter load curves for CCM and DCM}
         \label{fig:step-down-converter-load-curves}
     \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Boundary conduction mode (BCM) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Boundary conduction mode (BCM)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \tikzmath{
+                real \D,\Ts, \Ton, \Toff1, \Toff2, \ripple, \relrip, \currentavg;
+                \Ts = 1;
+                \Ton = 0.7;
+                \D = \Ton/\Ts;
+                \ripple = 0.65;
+                \relrip = 1/2; % average load current devided by ripple current
+                \Uout = \D;
+                \Toff1 = \Ts - \Ton;
+                \Toff2 = \Ts - \Ton - \Toff1;
+                \currentavg = \ripple/2*(\Ton+\Toff1)/\Ts;
+            }
+            \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
+
+                % Top plot: voltage at the switch
+                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_\mathrm{in}$}]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},1) ({\Ton + #1},1) ({\Ton + #1},0) ({\Ton+\Toff1 + #1},0) ({\Ton+\Toff1 + #1},\Uout) ({\Ts + #1},\Uout) ({\Ts + #1},1)};}
+                        \AddPlot
+                    }
+                    \draw[signalblue, thick, dashed] (axis cs:0, \Uout) -- (axis cs:4, \Uout); % dashed line at U_\mathrm{out} (average)
+                    \node[above, inner sep = 1pt, anchor = north, fill = white, yshift= -1pt] at (axis cs:1+\Ton/2, \Uout) {$U_\mathrm{out}$}; % label U_\mathrm{out}
+                    \draw [thick,{Latex[length=2mm]}-{Latex[length=2mm]}]  (0,-0.2) -- node[below]{$T_\mathrm{on}$}(\Ton, -0.2); % T_on 
+                    \draw [thick,{Latex[length=2mm]}-{Latex[length=2mm]}]  (\Ton,-0.2) -- node[below]{$T_\mathrm{off}$}(\Ton+\Toff1, -0.2); % T'_off
+                    \draw [thick,{Latex[length=2mm]}-{Latex[length=2mm]}]  (\Ts,-0.2) -- node[below]{$T_\mathrm{s}$}(2*\Ts, -0.2); % T_s 
+
+
+                % Middle plot: inductor current
+                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , }]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0) ({\Ton + #1}, \ripple) ({\Ton+\Toff1 + #1},0) ({\Ts + #1},0)};}
+                        \AddPlot
+                    }
+                    \draw[signalred, thick, dashed] (axis cs:0,\currentavg) -- (axis cs:4,\currentavg); % dashed line at average current
+                    \node[above, inner sep = 1pt, anchor = south, fill = white, yshift= 1pt] at (axis cs:2-\Toff2/2, \currentavg) {$\overline{i}_\mathrm{L}$}; % label \overline{i}_\mathrm{L}
+                    \draw[thin] (axis cs:1+\Ton/2,\ripple/2) -- (axis cs:1+\Ton/2,\ripple*5/6) -- (axis cs:1+5*\Ton/6,\ripple*5/6); % indicate positive current slopde
+                    \node[above, inner sep = 2pt, anchor = south east] at (axis cs:1+\Ton*4/6, \ripple-1/6) {$\nicefrac{(U_\mathrm{in}-U_\mathrm{out})}{L}$}; % label positive current slope
+                    \draw[thin] (axis cs:2+\Ton+\Toff1/6,\ripple*5/6) -- (axis cs:2+\Ton+\Toff1/2,\ripple*5/6) -- (axis cs:2+\Ton+\Toff1/2,\ripple/2); % indicate negative current slope
+                    \node[above, inner sep = 2pt, anchor = south west, xshift = -2mm] at (axis cs:2+\Ton+\Toff1/2, \ripple-1/6) {$\nicefrac{-U_\mathrm{out}}{L}$}; % label negative current slope
+                
+                % Bottom plot: input current
+                \nextgroupplot[ylabel = {$i_\mathrm{in}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}]
+                \pgfplotsinvokeforeach{0,...,3}{
+                    \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0) ({\Ton + #1},\ripple) ({\Ton + #1},0) ({\Ts + #1},0)};}
+                    \AddPlot
+                }
+                \draw[signalred, thick, dashed] (axis cs:0,\ripple/2*\Ton/\Ts) -- (axis cs:4, \ripple/2*\Ton/\Ts); % dashed line at average current
+                \node[above, inner sep = 2pt, anchor = south, fill = white] at (axis cs:1.5+\Ton/2, \ripple/2*\Ton/\Ts) {$\overline{i}_\mathrm{in}$}; % label average current
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BCM operation characteristics %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{BCM operation characteristics}
+    In the \hl{boundary conduction mode (BCM)}, the average inductor current load is exactly half of the current ripple, that is, 
+    \begin{equation}
+        \overline{i}_\mathrm{L}=\overline{i}_\mathrm{out}=\frac{\Delta i_\mathrm{L}}{2}= 2D(1-D)\Delta i_\mathrm{L,max}.
+        \label{eq:average-load-current-BCM-step-down}
+    \end{equation}
+    \vspace{-0.5cm}
+    \begin{itemize}
+        \item Diode current becomes zero and then the transistor turns on again.
+        \begin{itemize}
+            \item The diode is not hard turned-off but its current naturally decays to zero.
+            \item Also known as \hl{zero current switching (ZCS)} or generally \hl{soft switching}.
+        \end{itemize}
+        \item Requires adaptive switching frequency control if load changes. From \eqref{eq:current-ripple-simple-step-down} and \eqref{eq:average-load-current-BCM-step-down} the BCM switching frequency results in 
+    \end{itemize}
+    \begin{equation}
+        f_\mathrm{s} = \frac{1}{T_\mathrm{s}} = \frac{D(1-2)U_\mathrm{in}}{L\Delta i_\mathrm{L} } = \frac{D(1-2)U_\mathrm{in}}{2L \overline{i}_\mathrm{out} }.
+    \end{equation}
 \end{frame}
