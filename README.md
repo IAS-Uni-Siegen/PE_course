@@ -15,7 +15,20 @@ This work is licensed under a
 ## Simulations
 - First download KiCad and set the system language to English.
 - After that create a new project and open the "Schematic Editor"
+  
 ![schematic editor startscreen](https://github.com/user-attachments/assets/d8dc0eb6-3e88-41ce-b3b9-336a76bb9a16)
-- Then you have to load the symbol library using the shortcut ‘a’. Now you can drag the first components onto the schematic.
+
+- Then you have to load the symbol library using the shortcut ‘a’.
+  
 ![symbol library](https://github.com/user-attachments/assets/6b398c3d-81cf-4102-8923-367103336724)
-- This symbol library specifically lists the components that are intended for a SPICE circuit simulation
+
+- This symbol library specifically lists the components that are intended for a SPICE circuit simulation. Now you can drag the first components onto the schematic.
+- If a circuit is created as shown in the picture below, in which certain sources have time-varying properties, these must be set in the internal settings of the components. The same applies to the respective parameters of the components. The internal settings can be opened by double-clicking on the symbols. 
+  
+![buck converter](https://github.com/user-attachments/assets/cfbf9be0-0957-4e0d-b04e-d2d52db9ca50)
+
+-Once the circuit has been created, it can be simulated. To do this, first activate the ‘Inspect’ tab at the top and then the ‘Simulator’ field. The ‘Spice Simulator’ is now opened. The desired analysis must be added there under ‘New Analysis Tab’, such as ‘TRAN Transient Analysis’. Once the desired analysis has been set, the blue arrow must be activated to perform the necessary calculations. In order to be able to view certain curves, these signals must be activated in the right-hand field.
+
+![simulation buck converter](https://github.com/user-attachments/assets/2f699cac-79b3-4c94-8332-6910e940948d)
+
+
