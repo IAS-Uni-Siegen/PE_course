@@ -15,4 +15,4 @@ This work is licensed under a
 ## Simulations
 - First download KiCad and set the system language to English.
 - After that create a new project and open the "Schematic Editor"
-![Startscreen](E:\KiCad\Buck converter\Github instruction.jpg)
+![schematic editor startscreen](https://github.com/user-attachments/assets/d8dc0eb6-3e88-41ce-b3b9-336a76bb9a16)
