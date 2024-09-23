@@ -27,7 +27,7 @@ This work is licensed under a
   
 ![buck converter](https://github.com/user-attachments/assets/cfbf9be0-0957-4e0d-b04e-d2d52db9ca50)
 
--Once the circuit has been created, it can be simulated. To do this, first activate the ‘Inspect’ tab at the top and then the ‘Simulator’ field. The ‘Spice Simulator’ is now opened. The desired analysis must be added there under ‘New Analysis Tab’, such as ‘TRAN Transient Analysis’. Once the desired analysis has been set, the blue arrow must be activated to perform the necessary calculations. In order to be able to view certain curves, these signals must be activated in the right-hand field.
+- Once the circuit has been created, it can be simulated. To do this, first activate the ‘Inspect’ tab at the top and then the ‘Simulator’ field. The ‘Spice Simulator’ is now opened. The desired analysis must be added there under ‘New Analysis Tab’, such as ‘TRAN Transient Analysis’. Once the desired analysis has been set, the blue arrow must be activated to perform the necessary calculations. In order to be able to view certain curves, these signals must be activated in the right-hand field.
 
 ![simulation buck converter](https://github.com/user-attachments/assets/2f699cac-79b3-4c94-8332-6910e940948d)
 
