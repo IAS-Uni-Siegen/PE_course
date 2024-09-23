@@ -13,4 +13,5 @@ This work is licensed under a
 [cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
 
 ## Simulations
-- Open with KiCad...
+- First download KiCad and set the system language to English.
+- After that create a new project and open the "Schematic Editor"
