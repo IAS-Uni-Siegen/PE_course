@@ -13,7 +13,7 @@ This work is licensed under a
 [cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
 
 ## Simulations
-- First download KiCad and set the system language to English.
+- Download KiCad for your operating system at the following link: https://www.kicad.org/download/ and set the system language to English.
 - After that create a new project and open the "Schematic Editor"
   
 ![schematic editor startscreen](https://github.com/user-attachments/assets/d8dc0eb6-3e88-41ce-b3b9-336a76bb9a16)
