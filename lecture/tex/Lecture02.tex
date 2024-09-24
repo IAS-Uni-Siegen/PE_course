@@ -1164,3 +1164,184 @@
         f_\mathrm{s} = \frac{1}{T_\mathrm{s}} = \frac{D(1-2)U_\mathrm{in}}{L\Delta i_\mathrm{L} } = \frac{D(1-2)U_\mathrm{in}}{2L \overline{i}_\mathrm{out} }.
     \end{equation}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Motivation for BCM: diode reverse recovery %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Motivation for BCM: diode reverse recovery}
+     % tikz plot which shows a diode and its charge distributions in forward and and backward direction
+    \begin{figure}
+        \begin{tikzpicture}
+
+            % --- First Subplot: Forward Bias Mode ---
+            \begin{scope}[shift={(-3,0)}, scale=0.55]  % Shift to create space for second subplot
+            
+            % N region (right side)
+            \draw[fill=signalblue!20] (0,0) rectangle (3,4);
+            \node at (1.5,4.3) {n};
+            
+            % P region (left side)
+            \draw[fill=signalred!20] (-3,0) rectangle (0,4);
+            \node at (-1.5,4.3) {p};
+            
+            % Diode symbol
+            \draw[thick] (-4,2) -- (-3,2);  % Anode lead
+            \draw[thick] (3,2) -- (4,2);    % Cathode lead
+            
+            % Forward bias current
+            \draw[->, thick] (-5,2) -- (-3.5,2) node[above, midway] {$i_\mathrm{D}$};  
+            
+            \fill[signalred] (-1, 0.35) circle (0.3cm);
+            \draw (-1, 0.35) node[white, scale=0.75] {\textbf{+}};
+            \fill[signalred] (-2.15, 1) circle (0.3cm);
+            \draw (-2.15, 1) node[white, scale=0.75] {\textbf{+}};
+            \fill[signalred] (-0.6, 1.65) circle (0.3cm);
+            \draw (-0.6, 1.65) node[white, scale=0.75] {\textbf{+}};
+            \fill[signalred] (-1.8, 2.3) circle (0.3cm);
+            \draw (-1.8, 2.3) node[white, scale=0.75] {\textbf{+}};
+            \fill[signalred] (-2.4, 2.95) circle (0.3cm);
+            \draw (-2.4, 2.95) node[white, scale=0.75] {\textbf{+}};
+            \fill[signalred] (-1.25, 3.6) circle (0.3cm);
+            \draw (-1.25, 3.6) node[white, scale=0.75] {\textbf{+}};
+           
+            \fill[signalblue] (1.8, 0.35) circle (0.3cm);
+            \draw (1.8, 0.35) node[white] {\textbf{-}};
+            \fill[signalblue] (2.35, 1) circle (0.3cm);
+            \draw (2.35, 1) node[white] {\textbf{-}};
+            \fill[signalblue] (0.9, 1.65) circle (0.3cm);
+            \draw (0.9, 1.65) node[white] {\textbf{-}};
+            \fill[signalblue] (2.6, 2.3) circle (0.3cm);
+            \draw (2.6, 2.3) node[white] {\textbf{-}};
+            \fill[signalblue] (1.4, 2.95) circle (0.3cm);
+            \draw (1.4, 2.95) node[white] {\textbf{-}};
+            \fill[signalblue] (0.65, 3.6) circle (0.3cm);
+            \draw (0.65, 3.6) node[white] {\textbf{-}};
+            \node at (0,-0.5) {Forward mode};
+            \end{scope}
+            
+            % --- Second Subplot: Reverse Bias Mode (Reverse Recovery) ---
+            \begin{scope}[shift={(3,0)}, scale=0.55]  % Shift second subplot to the right
+            
+            % N region (right side)
+            \draw[fill=signalblue!20] (0,0) rectangle (3,4);
+            \node at (1.5,4.3) {n};
+            
+            % P region (left side)
+            \draw[fill=signalred!20] (-3,0) rectangle (0,4);
+            \node at (-1.5,4.3) {p};
+            
+            % Diode symbol
+            \draw[thick] (-4,2) -- (-3,2);  % Anode lead
+            \draw[thick] (3,2) -- (4,2);    % Cathode lead
+            
+            % Forward bias current
+            \draw[->, thick] (-5,2) -- (-3.5,2) node[above, midway] {${i_\mathrm{D}=0}$};  
+            
+            \fill[signalred] (-2.5, 0.35) circle (0.3cm);
+            \draw (-2.5, 0.35) node[white, scale=0.75] {\textbf{+}};
+            \fill[signalred] (-2.5, 1) circle (0.3cm);
+            \draw (-2.5, 1) node[white, scale=0.75] {\textbf{+}};
+            \fill[signalred] (-2.5, 1.65) circle (0.3cm);
+            \draw (-2.5, 1.65) node[white, scale=0.75] {\textbf{+}};
+            \fill[signalred] (-2.5, 2.3) circle (0.3cm);
+            \draw (-2.5, 2.3) node[white, scale=0.75] {\textbf{+}};
+            \fill[signalred] (-2.5, 2.95) circle (0.3cm);
+            \draw (-2.5, 2.95) node[white, scale=0.75] {\textbf{+}};
+            \fill[signalred] (-2.5, 3.6) circle (0.3cm);
+            \draw (-2.5, 3.6) node[white, scale=0.75] {\textbf{+}};
+           
+            \fill[signalblue] (2.5, 0.35) circle (0.3cm);
+            \draw (2.5, 0.35) node[white] {\textbf{-}};
+            \fill[signalblue] (2.5, 1) circle (0.3cm);
+            \draw (2.5, 1) node[white] {\textbf{-}};
+            \fill[signalblue] (2.5, 1.65) circle (0.3cm);
+            \draw (2.5, 1.65) node[white] {\textbf{-}};
+            \fill[signalblue] (2.5, 2.3) circle (0.3cm);
+            \draw (2.5, 2.3) node[white] {\textbf{-}};
+            \fill[signalblue] (2.5, 2.95) circle (0.3cm);
+            \draw (2.5, 2.95) node[white] {\textbf{-}};
+            \fill[signalblue] (2.5, 3.6) circle (0.3cm);
+            \draw (2.5, 3.6) node[white] {\textbf{-}};
+            \node at (0,-0.5) {Blocking mode};
+            \end{scope}
+
+            % --- Third Subplot: Time-Domain Plot of Current ---
+            \begin{scope}[shift={(-5.25,-4.25)}]  % Shift the third subplot to the right
+                \centering
+                \begin{axis}[
+                    width=6cm,
+                    height=5cm,
+                    axis lines=middle,
+                    xlabel={$t$},
+                    ylabel={$i_\mathrm{D}(t)$},
+                    xtick=\empty,
+                    ytick=\empty,
+                    xmin=1, xmax=6,
+                    ymin=-3, ymax=5,
+                    samples=200,
+                    domain=0:8,
+                    thick
+                ]
+                    % Plot of current showing reverse recovery
+                    \addplot [shadecolor, opacity=0.3, fill=shadecolor, 
+                            domain=3.01:4.99, samples=20
+                        ] {(-3*exp(-(2*(\x-3))))} \closedcycle;
+                    \addplot[red, thick] plot (\x, 
+                        {(\x<=3)*(4 - 0.7*\x) + 
+                        (\x>3 && \x<=5)*(-3*exp(-(2*(\x-3)))) + 
+                        (\x>5)*0});
+                    % label pointing towards shaded area with reverse recovery charge
+                    \draw[<-, thin] (axis cs:3.15, -0.6) -- (axis cs:4.0, -1.5) node[anchor = west] {$Q_\mathrm{rr}$};
+
+                    %annotation at switch off point "high current turn-off"
+                    \draw[<-, thin] (axis cs:3, 2) -- (axis cs:3.5, 2.5) node[anchor = west, align=left, node font=\small] {High current\\turn-off};
+    
+                \end{axis}
+                \end{scope}
+                \begin{scope}[shift={(0.75,-4.25)}]  % Shift the third subplot to the right
+                    \centering
+                    \begin{axis}[
+                        width=6cm,
+                        height=5cm,
+                        axis lines=middle,
+                        xlabel={$t$},
+                        ylabel={$i_\mathrm{D}(t)$},
+                        xtick=\empty,
+                        ytick=\empty,
+                        xmin=1, xmax=6,
+                        ymin=-3, ymax=5,
+                        samples=200,
+                        domain=0:8,
+                        thick
+                    ]
+    
+                        % Plot of current showing reverse recovery
+                        \addplot [shadecolor, opacity=0.3, fill=shadecolor, 
+                            domain=3.01:4.99, samples=20
+                        ] {(-2*exp(-(2*(\x-3))))} \closedcycle;
+                        \addplot[red, thick] plot (\x, 
+                            {(\x<=3)*(3 - 0.7*\x) + 
+                            (\x>3 && \x<=5)*(-2*exp(-(2*(\x-3)))) + 
+                            (\x>5)*0});
+
+                        % label pointing towards shaded area with reverse recovery charge
+                        \draw[<-, thin] (axis cs:3.15, -0.5) -- (axis cs:4.0, -1.5) node[anchor = west] {$Q_\mathrm{rr}$};
+
+                        %annotation at switch off point "high current turn-off"
+                        \draw[<-, thin] (axis cs:3, 1) -- (axis cs:3.5, 1.5) node[anchor = west, align=left, node font=\small] {Low current\\turn-off};
+
+                        
+
+
+        
+                    \end{axis}
+                    \end{scope}
+            
+            \end{tikzpicture}
+        \caption{Qualitative and simplified representation of the reverse recovery effect}
+        \label{fig:diode-reverse-recovery}
+    \end{figure}
+
+
+\end{frame}
