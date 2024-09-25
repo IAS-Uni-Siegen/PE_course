@@ -441,7 +441,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Step-down converter with output capacitor %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Step-down converter with output capacitor}
+\subsection{Step-down converter: output capacitor}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Step-down converter with output capacitor: overview and assumption %%
@@ -1342,6 +1342,27 @@
         \caption{Qualitative and simplified representation of the reverse recovery effect}
         \label{fig:diode-reverse-recovery}
     \end{figure}
+\end{frame}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BCM operation characteristics %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{BCM operation characteristics: comments}
+   Advantages of BCM:
+   \begin{itemize}
+        \item Reduces the reverse recovery effect, that is, ZCS of the diode during turn on.
+        \item Also allows also ZCS transistor turn on.  
+   \end{itemize}
+   \vspace{1em}
+   Limitations of BCM:
+    \begin{itemize}
+          \item Transistor turn off and diode turn on cannot be soft switched due to topology constraints.
+          \item Ripple current increases with load current: $ \Delta i_\mathrm{L} = 2=\overline{i}_\mathrm{out}$.
+          \begin{itemize}
+            \item May negatively affects load.
+            \item Increases conduction losses due to higher RMS current.
+            \item High switching frequency required at low loads (switching losses).
+          \end{itemize}
+    \end{itemize}
 \end{frame}
