@@ -11,6 +11,13 @@
 \subsection{Step-down converter}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Outline / table of content %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Section's content}
+    \tableofcontents[currentsection, hideothersubsections]
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Overview and assumption %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -36,7 +43,7 @@
             ([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
             \draw (-3.5,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s}(t)$, voltage = straight] ++(0,-2);
         \end{circuitikz}
-        \caption{Step-down converter (ideal switch representation)}
+        \caption{Step-down converter (aka \hl{buck converter}, ideal switch representation)}
         \label{fig:step-down-converter-simple}
     \end{figure}
 \end{frame}
@@ -769,6 +776,93 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Output voltage ripple: alternative via charge balance %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Output voltage ripple: alternative via charge balance}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            If one is not interested in the specific signal shape $u_\mathrm{c}(t)$, the output voltage ripple can be derived from the charge balance over half a period (cf. \figref{fig:step-down-converter-voltage-ripple-charge-balance}):
+            \begin{equation}
+                \Delta Q = \frac{1}{2}\frac{\Delta i_\mathrm{L}}{2}\frac{T_\mathrm{s}}{2}.
+            \end{equation}
+        From $$\frac{1}{C}\int i_\mathrm{c}(t)\mathrm{d}t = u_\mathrm{c}(t) + u_\mathrm{c}(0)$$
+        we receive
+        \begin{equation}
+                \Delta u_\mathrm{c} = \frac{\Delta Q}{C} = \frac{\Delta i_\mathrm{L}T_\mathrm{s}}{8C}.
+        \end{equation}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \begin{tikzpicture}
+
+                    \tikzmath{
+                        real \D, \u0, \Ts, \Ton, \Toff, \ripple;
+                        \D = 0.6;
+                        \Ts = 1;
+                        \Ton = \D;
+                        \Toff = 1-\D;
+                        \ripple = 0.75;
+                        \u0 = \D - \ripple / 6 * \Ts*(1-2*\D);
+                        } 
+
+                    \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom}, height=0.34\textheight, width=0.8\textwidth, xmin=-0.1, xmax=1.1, grid,clip = false, ymin = 0, ymax =1.1]
+
+                        % Capacitor voltage
+                        \nextgroupplot[ylabel = {$u_\mathrm{c}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_\mathrm{in}$}]
+                            % Half cycle for t<0
+                            \addplot[signalblue, thick, domain=-0.1:-1+\Ts, samples=15] {\u0 + \ripple*(x - -1 * \Ts - \Ton) - 2 * \ripple / \Toff * (x^2/2 - -1 * \Ts *x - x*\Ton + (-1 * \Ts + \Ton)^2/2)};
+                            % Half cycle for 0<t<Ton
+                            \addplot[signalblue, thick, domain=0:\Ton, samples=50] {\u0 - \ripple*(x) + 2 * \ripple / \Ton * (x^2/2)};
+                            % Half cycle for Ton<t<Ts
+                            \addplot[signalblue, thick, domain=\Ton:\Ts, samples=50] {\u0 + \ripple*(x - \Ton) - 2 * \ripple / \Toff * (x^2/2 - x*\Ton + (\Ton)^2/2)};
+                            % Half cycle for t>Ts
+                            \addplot[signalblue, thick, domain=1:1.1, samples=15] {\u0 - \ripple*(x - 1 * \Ts) + 2 * \ripple / \Ton * (x^2/2 - 1 * \Ts *x + (1 * \Ts)^2/2)};
+
+                            % Dashed lines for voltage ripple (upper limit)
+                            \draw[dashed, thin] (axis cs:-0.1, \u0+\ripple*\Toff/4) -- (axis cs:1.1, \u0+\ripple*\Toff/4);
+                            % Dashed lines for voltage ripple (lower limit)
+                            \draw[dashed, thin] (axis cs:-0.1, \u0-\ripple*\Ton/4) -- (axis cs:1.1, \u0-\ripple*\Ton/4);
+                            % Voltage ripple arrow indication (top)
+                            \draw[thin, -{Latex[length=2mm]}] (axis cs:0, \u0+\ripple*\Toff/4+0.25) -- (axis cs:0, \u0+\ripple*\Toff/4);
+                            % Voltage ripple arrow indication (buttom)
+                            \draw[thin, -{Latex[length=2mm]}] (axis cs:0, \u0-\ripple*\Ton/4-0.25) -- (axis cs:0, \u0-\ripple*\Ton/4);
+                            % Voltage ripple label
+                            \node[above, inner sep = 2pt, anchor = west] at (axis cs:0, \u0-\ripple*\Ton/4-0.2) {$\Delta u_\mathrm{c}$}; 
+                            \coordinate (a) at (\Ton/2,\u0-\ripple*\Ton/4); %coordinate for left vertical grouplot line
+                            \coordinate (b) at (\Ton+\Toff/2,\u0+\ripple*\Ton/4); %coordinate for right vertical grouplot line
+
+
+                        % Capacitor current
+                        \nextgroupplot[ylabel = {$i_\mathrm{c}(t)$}, xlabel={$t/T_\mathrm{s}$}, ymin=-0.3, ymax=0.3, ytick = {-0.2, 0, 0.2}, yticklabels = {$\nicefrac{-\Delta i_\mathrm{L}}{2}$, 0,$\nicefrac{\Delta i_\mathrm{L}}{2}$}]
+                            % Current signal
+                            \addplot[signalred, thick] coordinates {(-0.1,-0.2+0.4/6) (0,-0.2) (\D,0.2) (1, -0.2) (1.1,-0.2+0.4/6)};
+                            % Current ripple arrow indication
+                            \draw [thin, <->]  (0,-0.2) -- (0, 0.2);
+                            % Current ripple label
+                            \node[inner sep = 1pt, anchor = west, fill = white] at (axis cs:0.025, 0.1) {$\Delta i_\mathrm{L}$};
+                            % Positive \Delta Q charge area indication
+                            \addplot[signalred, fill=shadecolor, fill opacity=0.3] coordinates {(\D/2,0) (\D,0.2) (0.5+\D/2,0)};
+                            % \Delta Q charge area indication arrow
+                            \draw[thin, -{Latex[length=2mm]}] (axis cs:\D-0.1,-0.1) -- (axis cs:\D,0.125);
+                            % \Delta Q charge area indication label
+                            \node[inner sep = 1pt, anchor = east, fill = white] at (axis cs:\D-0.1, -0.2) {$\Delta Q$};
+                            % \Delta Q time indication
+                            \draw [thick,<->]  (\Ton -\Ton/2,0.4) -- node[above]{$\nicefrac{T_\mathrm{s}}{2}$}(\Ton +\Toff/2, 0.4);
+                            \coordinate (c) at (\Ton/2,0); %coordinate for left vertical grouplot line
+                            \coordinate (d) at (\Ton+\Toff/2,0);  %coordinate for right vertical grouplot line
+                    \end{groupplot}
+                    \draw [dashed] (a) -- (c);
+                    \draw [dashed] (b) -- (d);
+                \end{tikzpicture}
+                \caption{Voltage ripple derivation via charge balance}
+                \label{fig:step-down-converter-voltage-ripple-charge-balance}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Average and initial capacitor voltage %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -823,7 +917,7 @@
     \frametitle{Circuit realization}
     \begin{itemize}
         \item The ideal (mechanical) switch cannot be operated with high frequency in practice.  
-        \item It must be replaced with semiconductor devices to allow for a practical realization.
+        \item It must be replaced with \hl{semiconductor devices} to allow for a practical realization.
         \item In \figref{fig:step-down-converter-realization-1Q} the simplest realization is shown utilizing one transistor and one diode. 
         \item However, this configuration can only provide positive voltages and currents.
         \item Hence, the converter can operate in the \hl{first quadrant} only.
@@ -1366,3 +1460,8 @@
           \end{itemize}
     \end{itemize}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Step-up converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Step-up converter}

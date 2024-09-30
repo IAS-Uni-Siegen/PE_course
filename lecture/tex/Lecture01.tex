@@ -6,6 +6,13 @@
     \titlepage
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Outline / table of content %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Section's content}
+    \tableofcontents[currentsection, hideothersubsections]
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% What are power electronics? %%
@@ -912,67 +919,72 @@
 			\begin{tikzpicture}
 				\begin{groupplot}[group style={group size=1 by 2}, height=0.34\textheight, width=\textwidth, xmin=0, xmax=1, grid, ymin = -0.1, ymax =1.1]
 	
-				% Top plot: switch control signal
+				% Top-left plot: switch control signal for ZVS
 				\nextgroupplot[ylabel = {$u_\mathrm{ctrl}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {off, , on}]
 					\addplot[signalblue, thick] coordinates {(-0.1,0) (0.3,0) (0.3,1) (0.7,1) (0.7,0) (1.1,0)};
+					\coordinate (a) at (0.3,0);
+					\coordinate (b) at (0.7,0);
 				
 	
-	
-				% Middle plot: voltage and current through a switch (two y-axes)
+				% Bottom-left plot: voltage and current through a switch for ZVS
 				\nextgroupplot[ylabel = {$u_\mathrm{s}(t)/u_0$}]
 					\addplot[signalblue, thick] coordinates {(0,1) (0.2,1) (0.3,0) (0.7,0) (0.8,1) (1,1)};
 					\node[signalred, fill=white, inner sep = 1pt, anchor = north] at (axis cs:0.5,1) {$i_\mathrm{s}(t)$};
 					\node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0) {$u_\mathrm{s}(t)$};
-	
-	
+					\coordinate (c) at (0.3,0);
+					\coordinate (d) at (0.7,0);
 				\end{groupplot}
-				% second y-axis for the middle plot
+
+				% second y-axis for the bottom plot
 				\begin{groupplot}[group style={group size=1 by 2, y descriptions at = edge right}, height=0.34\textheight, width=\textwidth, xmin=0, xmax=1, grid, xtick=\empty, axis line style=transparent, ymin = -0.1, ymax =1.1]
 					\nextgroupplot[ytick = \empty]
-	
-						%
+					%
 					\nextgroupplot[ylabel = {$i_\mathrm{s}(t)/i_0$}, ytick = {}, yticklabels = {}]
 						\addplot[signalred, thick] coordinates {(0,0) (0.25,0) (0.35,1) (0.65,1) (0.75,0) (1,0)};
 						\addplot[signalblue, thick] coordinates {(0,1) (0.2,1) (0.3,0) (0.7,0) (0.8,1) (1,1)};
-
 				\end{groupplot}
+				\draw [dashed] (a) -- (c);
+                \draw [dashed] (b) -- (d);
 			\end{tikzpicture}
 			\caption{Zero-voltage switching (ZVS)}
 		\end{subfigure}
+		%
 		\hspace{0.5cm}
+		%
 		\begin{subfigure}[b]{0.44\textwidth}
-
 		\begin{tikzpicture}
 			\begin{groupplot}[group style={group size=1 by 2}, height=0.34\textheight, width=\textwidth, xmin=0, xmax=1, grid, ymin = -0.1, ymax =1.1]
 	
-				% Top plot: switch control signal
+				% Top-right plot: switch control signal for ZVS
 				\nextgroupplot[ylabel = {$u_\mathrm{ctrl}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {off, , on}]
 					\addplot[signalblue, thick] coordinates {(-0.1,0) (0.3,0) (0.3,1) (0.7,1) (0.7,0) (1.1,0)};
+					\coordinate (a) at (0.3,0);
+					\coordinate (b) at (0.7,0);
 				
-	
-	
-				% Middle plot: voltage and current through a switch (two y-axes)
+				% Bottom-right plot: voltage and current through a switch for ZCS
 				\nextgroupplot[ylabel = {$u_\mathrm{s}(t)/u_0$}]
 					\addplot[signalblue, thick] coordinates {(0,1) (0.25,1) (0.35,0) (0.65,0) (0.75,1) (1,1)};
 					\node[signalred, fill=white, inner sep = 1pt, anchor = north] at (axis cs:0.5,1) {$i_\mathrm{s}(t)$};
 					\node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0) {$u_\mathrm{s}(t)$};
-	
-	
+					\coordinate (c) at (0.3,0);
+					\coordinate (d) at (0.7,0);
 				\end{groupplot}
-				% second y-axis for the middle plot
+
+				% second y-axis for the bottom plot
 				\begin{groupplot}[group style={group size=1 by 2, y descriptions at = edge right}, height=0.34\textheight, width=\textwidth, xmin=0, xmax=1, grid, xtick=\empty, axis line style=transparent, ymin = -0.1, ymax =1.1]
 					\nextgroupplot[ytick = \empty]
-	
-						%
+					%
 					\nextgroupplot[ylabel = {$i_\mathrm{s}(t)/i_0$}, ytick = {}, yticklabels = {}]
 						\addplot[signalred, thick] coordinates {(0,0) (0.3,0) (0.4,1) (0.6,1) (0.7,0) (1,0)};
 						\addplot[signalblue, thick] coordinates {(0,1) (0.25,1) (0.35,0) (0.65,0) (0.75,1) (1,1)};
-
+					%
 				\end{groupplot}
+				\draw [dashed] (a) -- (c);
+                \draw [dashed] (b) -- (d);
 		\end{tikzpicture}
 		\caption{Zero-current switching (ZCS)}
 	\end{subfigure}
-		\caption{Soft switching: reducing switching losses by turning on or off the switch when it does not transfer any power}
+		\caption{Soft switching: reducing switching losses by turning on or off the switch when it does not transfer any power (note: above's voltage and current shapes are heavily idealized and require an appropriate circuit design besides the actual switch to enable soft switching)}
 		\label{fig:soft_switching}
 	\end{figure}
 \end{frame}
