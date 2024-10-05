@@ -1916,3 +1916,64 @@
         \label{fig:step-up-converter-realization-1Q}
     \end{figure}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Step-up converter: DCM %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Step-up converter: DCM}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfmathsetmacro{\D}{0.7} % duty cycle
+            \tikzmath{
+                real \Ts, \Ton, \Toff1, \Toff2, \Uin, \Uout, \ripple;
+                \Ts = 1;
+                \Uout = 1;
+                \Toff1 = 0.5;
+                \Toff2 = 0.25;
+                \Ton = \Ts - \Toff1 - \Toff2;
+                \Uin = \Uout*\Toff1/(\Toff1+\Ton);      
+                \ripple = 0.65;
+                \Iavg = \ripple /2 * (\Toff1+\Ton)/\Ts;
+            } 
+            \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
+
+                % Top plot: voltage at the switch
+                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_\mathrm{out}$}]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},\Uout) ({\Toff1 + #1},\Uout) ({\Toff1 + #1},\Uin) ({\Toff1+\Toff2 + #1},\Uin) ({\Toff1 + \Toff2 + #1},0) ({\Ts + #1},0) ({\Ts + #1},\Uout)};}
+                        \AddPlot
+                    }
+                    \draw[signalblue, thick, dashed] (axis cs:0, \Uin) -- (axis cs:4, \Uin); % dashed line at U_\mathrm{in}
+                    \node[above, inner sep = 1pt, anchor = north, fill = white, yshift= -1pt] at (axis cs:1+\Toff1/2, \Uin) {$U_\mathrm{in}$}; % label U_\mathrm{in}
+                    \draw [thick,{Latex[length=2mm]}-{Latex[length=2mm]}]  (0,-0.2) -- node[below]{$T'_\mathrm{off}$}(\Toff1, -0.2); % T'_off 
+                    \draw [thick,{Latex[length=2mm]}-{Latex[length=2mm]}]  (\Toff1,-0.2) -- node[below]{$T''_\mathrm{off}$}(\Toff1+\Toff2, -0.2); % T''_off
+                    \draw [thick,{Latex[length=2mm]}-{Latex[length=2mm]}]  (\Toff1+\Toff2,-0.2) -- node[below]{$T_\mathrm{on}$}(\Ts, -0.2); % T_on
+                    \draw [thick,{Latex[length=2mm]}-{Latex[length=2mm]}]  (\Ts,-0.2) -- node[below]{$T_\mathrm{s}$}(2*\Ts, -0.2); % T_s 
+
+
+                % Middle plot: inductor current
+                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , }]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},\ripple) ({\Toff1 + #1},0) ({\Toff1+\Toff2 + #1},0) ({\Ts + #1},\ripple)};}
+                        \AddPlot
+                    }
+                    \draw[signalred, thick, dashed] (axis cs:0,\Iavg) -- (axis cs:4,\Iavg); % dashed line at average current
+                    \draw[thin] (axis cs:2*\Ts-3/4*\Ton,\ripple/4) -- (axis cs:2*\Ts-3/4*\Ton,3*\ripple/4) -- (axis cs:2*\Ts-1/4*\Ton,3*\ripple/4); % indicate positive current slopde
+                    \node[above, inner sep = 2pt, anchor = south east] at (axis cs:2*\Ts-\Ton/2, \ripple*3/4) {$\nicefrac{U_\mathrm{in}}{L}$}; % label positive current slope
+                    \draw[thin] (axis cs:2*\Ts+\Toff1/4,\ripple*3/4) -- (axis cs:2*\Ts+\Toff1*3/4,\ripple*3/4) -- (axis cs:2*\Ts+3*\Toff1/4,\ripple*1/4); % indicate negative current slope
+                    \node[above, inner sep = 2pt, anchor = south west, xshift=-3mm] at (axis cs:2*\Ts+\Toff1/2, \ripple*3/4) {$\nicefrac{U_\mathrm{in}-U_\mathrm{out}}{L}$}; % label negative current slope
+
+                
+                % Bottom plot: input current
+                \nextgroupplot[ylabel = {$i_\mathrm{out}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},\ripple) ({\Toff1 + #1},0) ({\Ts + #1},0) ({\Ts + #1},\ripple)};}
+                        \AddPlot
+                    }
+                    \draw[signalred, thick, dashed] (axis cs:0,\ripple/2*\Toff1/\Ts) -- (axis cs:4, \ripple/2*\Toff1/\Ts); % dashed line at average current
+                    \node[above, inner sep = 2pt, anchor = south, fill = white] at (axis cs:1.5+\D/2, \ripple/2*\Toff1/\Ts) {$\overline{i}_\mathrm{out}$}; % label average current
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
