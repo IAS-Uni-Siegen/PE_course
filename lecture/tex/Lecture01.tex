@@ -28,8 +28,8 @@
 				node [block, right = of pc] (load) {Load}
 				node [block, below = of pc] (controller) {Controller}
 				node [input, left = of controller, name = ref] {};
-			\draw [->] (input) -- node  {$u_\mathrm{in}, i_\mathrm{in}$} (pc);
-			\draw [->] (pc) -- node [name=M]  {$u_\mathrm{out}, i_\mathrm{out}$} (load);
+			\draw [->] (input) -- node  {$u_1, i_1$} (pc);
+			\draw [->] (pc) -- node [name=M]  {$u_2, i_2$} (load);
 			\draw [->] (ref) -- node  {Reference} (controller);
 			\draw[->] (M) |- (controller);
 			\draw[->] (controller) -- node {Feedback} (pc);
@@ -38,12 +38,12 @@
 			\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=4pt},yshift=0pt] (8.75,-2.65) -- (8.75,0.5) node [black,midway, anchor = west, xshift = 0.5cm] {
 				\begin{circuitikz}
 					\node[twoportsplitshape, scale = 1.5](tp){};
-					\draw (tp.left up) to [short, -o, i_<= $i_\mathrm{in}$] ++(-0.75,0) coordinate(tpin1)
+					\draw (tp.left up) to [short, -o, i_<= $i_1$] ++(-0.75,0) coordinate(tpin1)
 					(tp.left down) to [short, -o] ++(-0.75,0) coordinate(tpin2);
-					\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{$u_\mathrm{in}$} ([xshift=-0.9cm]tp.left down);
-					\draw (tp.right up) to [short, -o, i= $i_\mathrm{out}$] ++(0.75,0) coordinate(tpout1)
+					\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{$u_1$} ([xshift=-0.9cm]tp.left down);
+					\draw (tp.right up) to [short, -o, i= $i_2$] ++(0.75,0) coordinate(tpout1)
 					(tp.right down) to [short, -o] ++(+0.75,0) coordinate(tpout2);
-					\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_\mathrm{out}$} ([xshift=1cm]tp.right down);
+					\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_2$} ([xshift=1cm]tp.right down);
 				\end{circuitikz}	
 			};
 		\end{tikzpicture}
@@ -593,12 +593,12 @@
 					\node[anchor = center, xshift = 1mm] at (0, 3.5) {
 						\begin{circuitikz}
 							\node[twoportsplitshape, scale = 1.5](tp){};
-							\draw (tp.left up) to [short, -o, i_<= $i_\mathrm{in}$] ++(-0.75,0) coordinate(tpin1)
+							\draw (tp.left up) to [short, -o, i_<= $i_1$] ++(-0.75,0) coordinate(tpin1)
 							(tp.left down) to [short, -o] ++(-0.75,0) coordinate(tpin2);
-							\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{$u_\mathrm{in}$} ([xshift=-0.9cm]tp.left down);
-							\draw (tp.right up) to [short, -o, i= $i_\mathrm{out}$] ++(0.75,0) coordinate(tpout1)
+							\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{$u_1$} ([xshift=-0.9cm]tp.left down);
+							\draw (tp.right up) to [short, -o, i= $i_2$] ++(0.75,0) coordinate(tpout1)
 							(tp.right down) to [short, -o] ++(+0.75,0) coordinate(tpout2);
-							\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_\mathrm{out}$} ([xshift=1cm]tp.right down);
+							\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_2$} ([xshift=1cm]tp.right down);
 						\end{circuitikz}	
 					} ;
 				\end{tikzpicture}
@@ -681,9 +681,9 @@
 	\frametitle{Linear power conversion}
 	\begin{figure}
 		\begin{circuitikz}[]
-			\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+			\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
 			to ++(-6,0)
-			to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+			to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
 			to [european resistor, R=$R_1$] ++(4,0) 
 			to ++(2,0)
 			(-2,0) to [variable european resistor, *-*, l=$R_2$] (-2,2);
@@ -691,13 +691,13 @@
 		\caption{Adjustable resistive voltage divider as step-down converter}
 		\label{fig:linear_power_conversion}
 	\end{figure}
-	With Kirchhoff's voltage law, the output voltage $u_\mathrm{out}(t)$ is
+	With Kirchhoff's voltage law, the output voltage $u_2(t)$ is
 	\begin{equation}
-		u_\mathrm{out}(t) = u_\mathrm{in}(t) \frac{R_2}{R_1 + R_2}.
+		u_2(t) = u_1(t) \frac{R_2}{R_1 + R_2}.
 	\end{equation}
 	By adjusting the resistance $R_2$, the output voltage can be controlled. However, this method is \hl{inefficient} as the power loss is independent of the output power and given by
 	\begin{equation}
-		P_\mathrm{l}(t) = \frac{u_\mathrm{in}^2(t)}{R_1 + R_2}.
+		P_\mathrm{l}(t) = \frac{u_1^2(t)}{R_1 + R_2}.
 	\end{equation}
 \end{frame}
 
@@ -710,11 +710,11 @@
 		\begin{column}{0.55\textwidth}
 			\begin{figure}
 				\begin{circuitikz}[]
-					\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+					\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
 					to ++(-5.5,0)
-					to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+					to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
 					(-5.5,2) to ++(1.25,0) node [nigbt, anchor=C, rotate=90](nigbt1){}
-					(nigbt1.E) to [short, i=$i_\mathrm{out}(t)$] (0,2);
+					(nigbt1.E) to [short, i=$i_2(t)$] (0,2);
 					\draw node[rectangle, draw, anchor = north] (r) at (nigbt1.B) {Linear amplifier}
 						(r.east)[<-] to ++(0.5,0) node [anchor = west](a){$u^*_\mathrm{out}(t)$};
 					\draw [->] ([yshift = 0.2cm, xshift = 0.1cm]nigbt1.C) -- node [yshift = 0.3cm] {$u_\mathrm{CE}(t)$} ([yshift = 0.2cm, xshift = -0.1cm]nigbt1.E) ;  
@@ -722,9 +722,9 @@
 				\caption{Transistor-based step-down converter}
 				\label{fig:linear_power_conversion_transistor}
 			\end{figure}
-			For a transistor-based step-down converter, the output voltage  is $u_\mathrm{out}(t)= u_\mathrm{in}(t) - u_\mathrm{CE}(t)$	leading to the power losses
+			For a transistor-based step-down converter, the output voltage  is $u_2(t)= u_1(t) - u_\mathrm{CE}(t)$	leading to the power losses
 			\begin{equation}
-				P_\mathrm{l}(t) = u_\mathrm{CE}(t)  i_\mathrm{out}(t) .
+				P_\mathrm{l}(t) = u_\mathrm{CE}(t)  i_2(t) .
 			\end{equation}
 		\end{column}
 		\begin{column}{0.45\textwidth}
@@ -778,9 +778,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[b]
 	\frametitle{Switching power conversion}
-	Alternative idea: \hl{switch either fully on or off}. The average output voltage $\overline{u}_\mathrm{out}$ is controlled by the \hl{duty cycle} (assuming that $u_\mathrm{in}(t)=\overline{u}_\mathrm{in}$ is constant)
+	Alternative idea: \hl{switch either fully on or off}. The average output voltage $\overline{u}_2$ is controlled by the \hl{duty cycle} (assuming that $u_1(t)=\overline{u}_1$ is constant)
 	\begin{equation}
-		D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \qquad \overline{u}_\mathrm{out} = \frac{1}{T_\mathrm{s}} \int_0^{T_\mathrm{s}} u_\mathrm{out}(t) \mathrm{d}t = D \overline{u}_\mathrm{in}.
+		D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \qquad \overline{u}_2 = \frac{1}{T_\mathrm{s}} \int_0^{T_\mathrm{s}} u_2(t) \mathrm{d}t = D \overline{u}_1.
 	\end{equation}
 	As the switching losses are typically small, the overall efficiency is (much) higher compared to linear power conversion. 
 	\vspace{-0.5cm}  
@@ -788,9 +788,9 @@
 		\begin{column}{0.5\textwidth}
 			\begin{figure}
 				\begin{circuitikz}[]
-					\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+					\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
 					to ++(-5,0)
-					to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+					to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
 					(-5,2) to ++(1.25,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
 					let \p1 = (S.mid) in (S.in) to (0,2)
 					([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
@@ -807,7 +807,7 @@
 				\begin{tikzpicture}
 					\begin{axis}[
 						xlabel={$t/T_\mathrm{s}$},
-						ylabel={$u_\mathrm{out}(t)/u_\mathrm{in}(t)$},
+						ylabel={$u_2(t)/u_1(t)$},
 						ymin=-0.05, ymax=1.05,
 						xmin=-0.1, xmax=1.1,
 						width = 0.95\textwidth,
@@ -1001,9 +1001,9 @@
 					
 					\node[] (A) at (0,0) {
 						\begin{circuitikz}[]
-							\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_\mathrm{out}(t)$, voltage = straight] ++(0,-2)
+							\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
 							to ++(-6,0)
-							to [open, o-o, v<= $u_\mathrm{in}(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+							to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
 							(-6,2) to ++(1.25,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
 							let \p1 = (S.mid) in (S.in) to [inductor, l_=$L$] (0,2) 
 							([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
@@ -1015,7 +1015,7 @@
 					\matrix [anchor = north, column sep = 1cm] at (0,-1.5){
 						\begin{axis}[
 							xlabel={$t/T_\mathrm{s}$},
-							ylabel={$u_\mathrm{s}(t)/u_\mathrm{in}(t)$},
+							ylabel={$u_\mathrm{s}(t)/u_1(t)$},
 							ymin=-0.05, ymax=1.05,
 							xmin=-0.1, xmax=1.1,
 							width = 0.45\textwidth,
@@ -1035,7 +1035,7 @@
 
 						\begin{axis}[
 							xlabel={$t/T_\mathrm{s}$},
-							ylabel={$u_\mathrm{out}(t)/u_\mathrm{in}(t)$},
+							ylabel={$u_2(t)/u_1(t)$},
 							ymin=-0.05, ymax=1.05,
 							xmin=-0.1, xmax=1.1,
 							width = 0.45\textwidth,
@@ -1056,7 +1056,7 @@
 							\draw [thick,<->]  (0.0,1.2) -- node[above]{$T_\mathrm{s}$}(1.0, 1.2); 
 							\draw[-{Latex[length=2mm]}] (0.4, 0.7) -- (0.4, 0.5);
 							\draw[-{Latex[length=2mm]}] (0.4, 0.05) -- node[left=1mm, fill=white, inner sep = 1pt, yshift=-0.5mm]{$\Delta u$}(0.4, 0.25);
-							\draw[-{Latex[length=2mm]}, thin, signalblue] (0.7, 0.05) -- node[right=1mm, fill=white, inner sep = 1pt, yshift=-2mm]{$\overline{u}_\mathrm{out}$}(0.6, 0.4);
+							\draw[-{Latex[length=2mm]}, thin, signalblue] (0.7, 0.05) -- node[right=1mm, fill=white, inner sep = 1pt, yshift=-2mm]{$\overline{u}_2$}(0.6, 0.4);
 						\end{axis}
 						\\
 						};	
