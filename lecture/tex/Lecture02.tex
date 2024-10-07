@@ -2098,7 +2098,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Step-up converter: DCM operation characteristics (cont.)}
-    Solving \eqref{eq:step-up-converter-average-output-current-DCM} delivers the step-up \hl{converter voltage gain} in DCM as
+    Solving \eqref{eq:step-up-converter-average-output-current-DCM} delivers the step-up \hl{converter voltage gain in DCM} as
     \begin{equation}
         \frac{U_2}{U_1} = 1+ \frac{D^2}{2} \frac{\Delta i_\mathrm{L,max}}{\overline{i}_2}.
         \label{eq:voltage-ratio-DCM-step-up}
@@ -2108,6 +2108,11 @@
         U_2= U_1 + \frac{D^2}{2} \frac{T_\mathrm{s}}{L \overline{i}_2}.
     \end{equation}
     One can note the inverse proportionality of $U_2$ to $\overline{i}_2$, that is, the lower the load current, the higher the output voltage.
+
+    Finally, the step-up converter \hl{operates in BCM} if
+    \begin{equation}
+        \overline{i}_\mathrm{L}=\overline{i}_1 = \frac{\Delta i_\mathrm{L}}{2} \quad \Leftrightarrow \quad  \overline{i}_2 = (1-D)\frac{\Delta i_\mathrm{L}}{2}. 
+    \end{equation}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2152,4 +2157,75 @@
         \caption{Step-up converter load curves for CCM and DCM}
         \label{fig:step-up-converter-load-curves}
     \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Buck-boost converter%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Buck-boost converter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Step-up converter: overview and assumptions %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Buck-boost converter: combining step-up and step-down stages}
+        \begin{figure}
+            \begin{circuitikz}[]
+                %Boost part
+                \draw (5,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+                to [short, -o]++(-5,0)
+                to [open, voltage = straight, o-o] ++(0,2)
+                to [short, o-]++(0.5,0)
+                to [inductor, l=$L_2$] ++(1.5,0)
+                to [short, i=$i_{\mathrm{L}_2}(t)$] ++(1.0,0)
+                to ++(0.1,0) node [cuteopenswitchshape, anchor = in, yscale=-1] (S2) {}
+                let \p2 = (S2.mid) in (S2.out) to  [short, i=$i_2(t)$] (5,2)
+                ([yshift = -0.3cm]S2.mid) to [short, o-*](\x2,0);
+                \draw (2.5,2) to [open, v_>=$u_{\mathrm{s}_2}(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2);
+                % gray background behind boost part
+               \begin{scope}[on background layer]
+                \node[rectangle, draw = shadecolor,	fill = shadecolor,	opacity=0.3, minimum width = 4.75cm, minimum height = 3.4cm] (B1) at (2.625,1.1) {};
+                \node[inner sep = 1pt, anchor = south, font=\small] at (B1.south) {Boost};
+                \end{scope}
+                % Buck part
+                \draw (0,0) to [short, o-]++(-5,0)
+                to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+                to  [short, i=$i_1(t)$] ++(1.0,0)
+                to ++(0.1,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S1) {}
+                let \p1 = (S1.mid) in (S1.in) to  [short, i=$i_\mathrm{L_1}(t)$] ++(1.15,0)
+                to [inductor, l=$L_1$] ++(1.3,0)
+                to [short, -o] (0,2) 
+                ([yshift = -0.3cm]S1.mid) to [short, o-*](\x1,0);
+                \draw (-2.5,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s_1}(t)$, voltage = straight] ++(0,-2);
+                 % gray background behind buck part
+                 \begin{scope}[on background layer]
+                    \node[rectangle, draw = shadecolor,	fill = shadecolor,	opacity=0.3, minimum width = 4.75cm, minimum height = 3.4cm] (B2) at (-2.625,1.1) {};
+                    \node[inner sep = 1pt, anchor = south, font=\small] at (B2.south) {Buck};
+                \end{scope}
+                 %Curly bracket that points from the upper circuit to the lower circuit
+                \draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=0.5cm},yshift=0pt] (-2.5,-0.25) -- (2.5,-0.25) node [black,midway,yshift=-0.6cm] {};
+            \end{circuitikz}
+            \begin{circuitikz}[]
+                %Boost part
+                \draw (3,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+                to [short]++(-3,0)
+                (1.25,2) to ++(0.1,0) node [cuteopenswitchshape, anchor = in, yscale=-1] (S2) {}
+                let \p2 = (S2.mid) in (S2.out) to  [short, i=$i_2(t)$] (3,2)
+                ([yshift = -0.3cm]S2.mid) to [short, o-*](\x2,0);
+                \draw (1.4,2) to [open, v_>=$u_{\mathrm{s}_2}(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2);
+                % Buck part
+                \draw (0,0) to [short]++(-3,0)
+                to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+                to  [short, i=$i_1(t)$] ++(0.75,0)
+                to ++(0.1,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S1) {}
+                let \p1 = (S1.mid) in (S1.in) to  [short] (-1.0,2)
+                ([yshift = -0.3cm]S1.mid) to [short, o-*](\x1,0);
+                \draw (-1.4,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s_1}(t)$, voltage = straight] ++(0,-2);
+                %Combining inductor
+                \draw (S1.in) to [inductor, l=$L$, i=$i_\mathrm{L}(t)$] (S2.in);
+            \end{circuitikz}
+            \caption{Buck-boost converter (ideal switch representation)}
+            \label{fig:buck-boost-simple}
+        \end{figure}
 \end{frame}
