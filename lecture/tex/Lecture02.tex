@@ -23,12 +23,12 @@
 
 \begin{frame}[b]
 \frametitle{Step-down converter: overview and assumptions}
-    We consider the following assumptions:
+    \onslide<2->{We consider the following assumptions:}
     \begin{itemize}
-        \item The switch is ideal, that is, infinitely fast.
-        \item The input voltage is constant: $u_1(t) = U_1$.
-        \item The output voltage is constant: $u_2(t) = U_2$.
-        \item The input voltage is greater than the output voltage: $U_1 > U_2$.
+        \item<2-> The switch is ideal, that is, infinitely fast.
+        \item<3-> The input voltage is constant: $u_1(t) = U_1$.
+        \item<3-> The output voltage is constant: $u_2(t) = U_2$.
+        \item<4-> The input voltage is greater than the output voltage: $U_1 > U_2$.
     \end{itemize}
     \begin{figure}
         \begin{circuitikz}[]
@@ -54,16 +54,18 @@
 
 \begin{frame}[b]
     \frametitle{Step-down converter: switch states}
-     The voltage at the switch is given by
+     \onslide<1->{%
+        The voltage at the switch is given by
      \begin{equation}
             u_\mathrm{s}(t) = \begin{cases}
-                U_1, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],\\
-                0, & t\in [k T_\mathrm{s}+ T_\mathrm{on}, (k+1) T_\mathrm{s}]
-            \end{cases}
-     \end{equation}
-     with $k\in\mathbb{N}$ being the $k$-th switching period, $T_\mathrm{s}$ the switching period, and $T_\mathrm{on}$ the switch-on time. 
+                U_1, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],\\}
+                \onslide<2->{0, & t\in [k T_\mathrm{s}+ T_\mathrm{on}, (k+1) T_\mathrm{s}]
+            \end{cases}}
+     \end{equation}%
+     \onslide<1->{with $k\in\mathbb{N}$ being the $k$-th switching period, $T_\mathrm{s}$ the switching period time interval, and $T_\mathrm{on}$ the switch-on time.} 
         \begin{figure}
             \centering	
+            \onslide<1->{
             \begin{subfigure}{0.45\textwidth}
                 \centering
                 \hspace{-0.75cm}
@@ -78,7 +80,9 @@
                 \end{circuitikz}
                 \caption{Switch-on time}
             \end{subfigure}%
-            \hspace{0.5cm}
+            }%
+            \hspace{0.5cm}%
+            \onslide<2->{
             \begin{subfigure}{0.45\textwidth}
                 \centering
                 \begin{circuitikz}[]
@@ -94,6 +98,7 @@
                 \end{circuitikz}
                 \caption{Switch-off time}
             \end{subfigure}
+            }
         \caption{Switch states of the step-down converter} 
         \label{fig:step-down-converter-switch-states}
         \end{figure}
@@ -104,11 +109,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[c]
     \frametitle{Basic terms and definitions}
+    \onslide<1->
     \centering
      \begin{tabular}{c l c l}
-        $T_\mathrm{on}$ & Switch-on time  & $T_\mathrm{off}$ & Switch-off time\\[1em]
-        $T_\mathrm{s}= T_\mathrm{on} + T_\mathrm{off}$ & Switching period & $f_\mathrm{s} = 1/T_\mathrm{s}$ & Switching frequency\\[1em]
-        $D = T_\mathrm{on}/T_\mathrm{s}$ & Duty cycle &  & 
+        \onslide<2->{$T_\mathrm{on}$} & \onslide<2->{Switch-on time}  & \onslide<3->{$T_\mathrm{off}$} & \onslide<3->{Switch-off time}\\[1em]
+        \onslide<4->{$T_\mathrm{s}= T_\mathrm{on} + T_\mathrm{off}$} & \onslide<4->{Switching period} & \onslide<5->{$f_\mathrm{s} = 1/T_\mathrm{s}$} & \onslide<5->{Switching frequency}\\[1em]
+        \onslide<6->{$D = T_\mathrm{on}/T_\mathrm{s}$} & \onslide<6->{Duty cycle} &  & 
      \end{tabular}
      \begin{figure}
         \begin{tikzpicture}
@@ -125,9 +131,9 @@
                 ]
                 % plt u_out = 1 for t = 0 to D*Ts and u_out = 0 for t = D*Ts to Ts in a single plot
                 \addplot[signalblue] coordinates {(-0.1,0) (0,0) (0,1) (0.4,1) (0.4,0) (1,0) (1,1) (1.1,1)};
-                \draw [thick,<->]  (0,0.5) -- node[above,fill=white]{$T_\mathrm{on}$}(0.4, 0.5); 
-                \draw [thick,<->]  (0.4,0.5) -- node[above]{$T_\mathrm{off}$}(1.0, 0.5);
-                \draw [thick,<->]  (0.0,1.2) -- node[above]{$T_\mathrm{s}$}(1.0, 1.2); 
+                \draw [thick,<->, visible on=<2->]  (0,0.5) -- node[above,fill=white]{$T_\mathrm{on}$}(0.4, 0.5);
+                \draw [thick,<->, , visible on=<3->]  (0.4,0.5) -- node[above]{$T_\mathrm{off}$}(1.0, 0.5);
+                \draw [thick,<->, visible on=<4->]  (0.0,1.2) -- node[above]{$T_\mathrm{s}$}(1.0, 1.2);
             \end{axis}
         \end{tikzpicture}
     \end{figure}
@@ -142,21 +148,22 @@
     \begin{equation}
         L \frac{\mathrm{d}i_\mathrm{L}(t)}{\mathrm{d}t} =  u_\mathrm{L}(t) =  u_\mathrm{s}(t) - U_2.
     \end{equation}
+    \pause
     During the \hl{switch-on period} we have
     \begin{equation}
         \begin{split}
-            i_\mathrm{L}(t) &= i_\mathrm{L}(k T_\mathrm{s}) + \int_{k T_\mathrm{s}}^{t}u_\mathrm{L}(\tau)\mathrm{d}\tau \\
-                            &= i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_1-U_2}{L} (t - k T_\mathrm{s})
-            , \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}]
+            \onslide<2->{i_\mathrm{L}(t) &= i_\mathrm{L}(k T_\mathrm{s}) + \int_{k T_\mathrm{s}}^{t}u_\mathrm{L}(\tau)\mathrm{d}\tau} \\ 
+            \onslide<3->{                &= i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_1-U_2}{L} (t - k T_\mathrm{s})
+            , \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}]}
         \end{split}
         \label{eq:inductor-current-switch-on-simple-step-down}
     \end{equation}
-    and during the \hl{switch-off period} we receive
+    \onslide<4->{and during the \hl{switch-off period} we receive}
     \begin{equation}
         \begin{split}
-            i_\mathrm{L}(t) &= i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on}) + \int_{k T_\mathrm{s}+T_\mathrm{on}}^{t}u_\mathrm{L}(\tau)\mathrm{d}\tau= i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on}) - \frac{U_2}{L} (t - k T_\mathrm{s} - T_\mathrm{on})\\
-            \               &= i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_1-U_2}{L} T_\mathrm{on} - \frac{U_2}{L} (t - k T_\mathrm{s} - T_\mathrm{on}), \quad 
-            t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}]. 
+            \onslide<4->{i_\mathrm{L}(t) &= i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on}) + \int_{k T_\mathrm{s}+T_\mathrm{on}}^{t}u_\mathrm{L}(\tau)\mathrm{d}\tau}\onslide<5->{= i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on}) - \frac{U_2}{L} (t - k T_\mathrm{s} - T_\mathrm{on})}\\
+            \onslide<6->{&= i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_1-U_2}{L} T_\mathrm{on} - \frac{U_2}{L} (t - k T_\mathrm{s} - T_\mathrm{on}), \quad 
+            t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].} 
         \end{split} 
         \label{eq:inductor-current-switch-off}
     \end{equation}
@@ -167,19 +174,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Steady-state analysis (cont.)}
-    In steady state the inductor current is periodic with period $T_\mathrm{s}$, that is, $$i_\mathrm{L}(t) = i_\mathrm{L}(t + T_\mathrm{s}).$$
-    From \eqref{eq:inductor-current-switch-off} we obtain for $t= k T_\mathrm{s}$
+    In steady state the inductor current is periodic with period $T_\mathrm{s}$, that is, $$i_\mathrm{L}(t) = i_\mathrm{L}(t + T_\mathrm{s}).$$\pause
+    \onslide<2->{From \eqref{eq:inductor-current-switch-off} we obtain for $t= k T_\mathrm{s}$}
     \begin{equation}
         \begin{split}
-        \overbrace{i_\mathrm{L}(k T_\mathrm{s})}^{\mbox{Start of period}} &= \hspace{0.5cm}  \overbrace{i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_1-U_2}{L} T_\mathrm{on} - \frac{U_2}{L} (T_\mathrm{s} - T_\mathrm{on})}^{\mbox{End of period}}\\
-        \Leftrightarrow \qquad 0 \hspace{1.1cm}&= \hspace{0.5cm}\frac{U_1-U_2}{L} T_\mathrm{on} - \frac{U_2}{L} (T_\mathrm{s} - T_\mathrm{on})\\
-        \Leftrightarrow \qquad 0 \hspace{1.1cm}&= \hspace{0.5cm}U_1 T_\mathrm{on} - U_2 T_\mathrm{s}.
+            \onslide<2->{\overbrace{i_\mathrm{L}(k T_\mathrm{s})}^{\mbox{Start of period}} &= \hspace{0.5cm}  \overbrace{i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_1-U_2}{L} T_\mathrm{on} - \frac{U_2}{L} (T_\mathrm{s} - T_\mathrm{on})}^{\mbox{End of period}}}\\
+            \onslide<3->{\Leftrightarrow \qquad 0 \hspace{1.1cm}&= \hspace{0.5cm}\frac{U_1-U_2}{L} T_\mathrm{on} - \frac{U_2}{L} (T_\mathrm{s} - T_\mathrm{on})}\\
+            \onslide<4->{\Leftrightarrow \qquad 0 \hspace{1.1cm}&= \hspace{0.5cm}U_1 T_\mathrm{on} - U_2 T_\mathrm{s}.}
     \end{split}
     \end{equation}
-    Rewritting delivers the \hl{output voltage} as
+    \onslide<5->{Rewritting delivers the \hl{output voltage} as
     \begin{equation}
         U_2 = \frac{T_\mathrm{on}}{T_\mathrm{s}} U_1 = D U_1.
-    \end{equation}
+    \end{equation}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -198,35 +205,35 @@
                         \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
                         \AddPlot
                     }
-                    \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
-                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
+                    \draw[signalblue, thick, dashed, visible on=<2->] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
+                    \node[above, inner sep = 2pt, anchor = south, visible on=<2->] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
                     \draw [thick,<->]  (0,0.5) -- node[below]{$T_\mathrm{on}$}(\D, 0.5); % T_on 
                     \draw [thick,<->]  (\D,0.5) -- node[below]{$T_\mathrm{off}$}(1.0, 0.5); % T_off
                     \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{s}$}(1.0, -0.2); % T_s 
 
 
                 % Middle plot: inductor current
-                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$, }]
+                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$, }, visible on=<3->]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({1 + #1},0.25)};}
                         \AddPlot
                     }
                     \draw[signalred, thick, dashed] (axis cs:0,0.5) -- (axis cs:4,0.5); % dashed line at average current
-                    \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
-                    \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
-                    \draw[thin] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
-                    \node[above, inner sep = 2pt, anchor = south, xshift = -4mm] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{(U_1-U_2)}{L}$}; % label positive current slope
-                    \draw[thin] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
-                    \node[above, inner sep = 2pt, anchor = south, xshift = 2mm] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_2}{L}$}; % label negative current slope
+                    \draw[{Latex[length=2mm]}-, thin, visible on=<4->] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
+                    \draw[-{Latex[length=2mm]}, thin, visible on=<4->] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
+                    \draw[thin, visible on=<5->] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
+                    \node[above, inner sep = 2pt, anchor = south, xshift = -4mm, visible on=<5->] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{(U_1-U_2)}{L}$}; % label positive current slope
+                    \draw[thin, visible on=<6->] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
+                    \node[above, inner sep = 2pt, anchor = south, xshift = 2mm, visible on=<6->] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_2}{L}$}; % label negative current slope
                 
                 % Bottom plot: input current
-                \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}]
+                \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}, visible on=<7->]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
                         \AddPlot
                     }
-                    \draw[signalred, thick, dashed] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
-                    \node[above, inner sep = 2pt, anchor = south, fill = white] at (axis cs:1.5+\D/2, 0.5 * \D) {$\overline{i}_1$}; % label average current
+                    \draw[signalred, thick, dashed, visible on=<8->] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
+                    \node[above, inner sep = 2pt, anchor = south, fill = white, visible on=<8->] at (axis cs:1.5+\D/2, 0.5 * \D) {$\overline{i}_1$}; % label average current
             \end{groupplot}
         \end{tikzpicture}
     \end{figure}
@@ -240,21 +247,25 @@
     From the previous slide we know that the average inductor voltage is zero in steady state
     \begin{equation}
         \overline{u}_\mathrm{L} = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{s}} u_\mathrm{L}(t) \mathrm{d}t = \overline{u}_\mathrm{L} = 0,
-    \end{equation}
+    \end{equation}%
+    \pause%
     since otherwise the average inductor current would change between periods, compare
     $$
     L \frac{\mathrm{d}i_\mathrm{L}(t)}{\mathrm{d}t} =  u_\mathrm{L}(t).
-    $$
-    From \figref{fig:step-down-converter-simple} we can apply Kirchhoff's voltage law to obtain
+    $$%
+    \pause%
+    \onslide<3->{From \figref{fig:step-down-converter-simple} we can apply Kirchhoff's voltage law to obtain}
     \begin{equation}
-        u_\mathrm{s}(t) = u_\mathrm{L}(t) + u_2(t) \quad \Rightarrow \quad \overline{u}_\mathrm{s} = \overline{u}_\mathrm{L} + U_2 \quad \Leftrightarrow \quad  \overline{u}_\mathrm{s} = U_2.
+        \onslide<3->{u_\mathrm{s}(t) = u_\mathrm{L}(t) + u_2(t)} \onslide<4->{\quad \Rightarrow \quad \overline{u}_\mathrm{s} = \overline{u}_\mathrm{L} + U_2} \onslide<5->{\quad \Leftrightarrow \quad  \overline{u}_\mathrm{s} = U_2.}
         \label{eq:Kirchhoff-switch-voltage}
     \end{equation}
-    The average switch voltage is given by
+    \onslide<6->{%
+    The average switch voltage is given by  }
     \begin{equation}
-        \overline{u}_\mathrm{s} = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{s}} u_\mathrm{s}(t) \mathrm{d}t = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{on}} U_1 \mathrm{d}t = U_1 \frac{T_\mathrm{on}}{T_\mathrm{s}} = U_1 D.
+        \onslide<6->{\overline{u}_\mathrm{s} = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{s}} u_\mathrm{s}(t) \mathrm{d}t} \onslide<7->{= \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{on}} U_1 \mathrm{d}t}\onslide<8->{ = U_1 \frac{T_\mathrm{on}}{T_\mathrm{s}} = U_1 D.}
         \label{eq:average-switch-voltage}
     \end{equation}
+  
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -262,19 +273,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Alternative steady-state analysis: average values (cont.)}
-    Combining \eqref{eq:Kirchhoff-switch-voltage} and \eqref{eq:average-switch-voltage} we obtain
+    Combining \eqref{eq:Kirchhoff-switch-voltage} and \eqref{eq:average-switch-voltage} we obtain the \hl{voltage transfer ratio}
     \begin{equation}
         \frac{U_2}{U_1} =  D.
     \end{equation}
-    In addition, we can calculate the average input current as
+    \pause
+    \onslide<2->{In addition, we can calculate the average input current as}
     \begin{equation}
-        \overline{i}_1 = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{s}} i_1(t) \mathrm{d}t = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{on}} i_\mathrm{L}(t) \mathrm{d}t = \frac{T_\mathrm{on}}{T_\mathrm{s}} \overline{i}_\mathrm{L} = D \overline{i}_\mathrm{L}.
-    \end{equation}
+        \onslide<2->{\overline{i}_1 = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{s}} i_1(t) \mathrm{d}t}\onslide<3->{ = \frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{on}} i_\mathrm{L}(t) \mathrm{d}t} \onslide<4->{= \frac{T_\mathrm{on}}{T_\mathrm{s}} \overline{i}_\mathrm{L} = D \overline{i}_\mathrm{L}.}
+    \end{equation}%
+    \onslide<5->{%
     Since $i_2(t) = i_\mathrm{L}(t)$ applies, we can conclude
     \begin{equation}
         \frac{U_2}{U_1} = \frac{\overline{i}_1}{\overline{i}_2} = D.
-    \end{equation}
+    \end{equation}}%
+    \onslide<6->{%
     Hence, the duty cycle $D$ has a similar interpretation for the DC-DC step-down converter as the turn ratio for an ideal transformer in the AC domain.
+    }
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -295,7 +310,8 @@
         \end{circuitikz}
         \caption{Stationary averaged model of the step-down converter}
         \label{fig:step-down-converter-averaged}
-    \end{figure}
+    \end{figure}%
+    \pause%
     \begin{varblock}{Switching vs. linear power conversion}
         In contrast to the linear power conversion approaches from \figref{fig:linear_power_conversion} and \figref{fig:linear_power_conversion_transistor}, the switching step-down converter transforms the current and voltage levels with the same factor $D$ which results from the (idealized) loss-less transformation of energy. 
     \end{varblock}
@@ -306,21 +322,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Current ripple}
-    Due to the switching operation of the step-down converter, the inductor current exhibits an inherent ripple. The peak-to-peak \hl{current ripple} is given by
+    \onslide<1->{Due to the switching operation of the step-down converter, the inductor current exhibits an inherent ripple. The peak-to-peak \hl{current ripple} is given by}
     \begin{equation}
         \begin{split}
-            \Delta i_\mathrm{L} &= \max\{i_\mathrm{L}(t)\} - \min\{i_\mathrm{L}(t)\}  = i_\mathrm{L}(t=T_\mathrm{on}) - i_\mathrm{L}(t=T_\mathrm{s})\\
-                                &=\frac{U_1 - U_2}{L} T_\mathrm{on} = \frac{U_2}{L} T_\mathrm{off}\\
-                                & = \frac{D(1-D)T_\mathrm{s}}{L}U_1.
+            \onslide<1->{ \Delta i_\mathrm{L} &= \max\{i_\mathrm{L}(t)\} - \min\{i_\mathrm{L}(t)\}}  \onslide<2->{= i_\mathrm{L}(t=T_\mathrm{on}) - i_\mathrm{L}(t=T_\mathrm{s})}\\
+                                &\onslide<3->{=\frac{U_1 - U_2}{L} T_\mathrm{on}} \onslide<4->{= \frac{U_2}{L} T_\mathrm{off}}\\
+                                & \onslide<5->{= \frac{D(1-D)T_\mathrm{s}}{L}U_1.}
         \end{split}
         \label{eq:current-ripple-simple-step-down}
     \end{equation}
-    The current ripple has two main implications:
+    \onslide<6->{The current ripple has two main implications:}
     \begin{itemize}
-        \item The output power is not constant but varies with the current ripple.
-        \item The root mean square (RMS) current is higher than the average current.
-    \end{itemize}
-    The latter point should be investigated in more detail as it influences the design and loss characteristics of the converter.
+        \item<6-> The output power is not constant but varies with the current ripple.
+        \item<7-> The root mean square (RMS) current is higher than the average current.
+    \end{itemize}%
+    \onslide<8->{The latter point should be investigated in more detail as it influences the design and loss characteristics of the converter.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -328,15 +344,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Current ripple (cont.)}
-    We define 
+    \onslide<2->{We define 
     \begin{equation}
         \Delta I_\mathrm{L} = \sqrt{\frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{s}} \left(i_\mathrm{L}(t) - \overline{i}_\mathrm{L}\right)^2 \mathrm{d}t}
     \end{equation}
-    as the RMS deviation of the inductor current from its average value. As the average-corrected inductor current has a triangular shape (cf. \figref{fig:inductor-current-ripple}) we can calculate the RMS current as
+    as the \hl{RMS deviation} of the inductor current from its average value.}  \onslide<3->{As the average-corrected inductor current has a triangular shape (cf. \figref{fig:inductor-current-ripple}) we can calculate the RMS current as}%
     \begin{equation}
-        \Delta I_\mathrm{L} = \frac{1}{\sqrt{3}} \frac{\Delta i_\mathrm{L}}{2} = \frac{D(1-D)T_\mathrm{s}U_1}{2\sqrt{3}L}.
+        \onslide<3->{\Delta I_\mathrm{L} = \frac{1}{\sqrt{3}} \frac{\Delta i_\mathrm{L}}{2}} \onslide<4->{= \frac{D(1-D)T_\mathrm{s}U_1}{2\sqrt{3}L}.}
         \label{eq:RMS-current-ripple}
-    \end{equation}
+    \end{equation}%
+    \vspace{-0.25cm}
     \begin{figure}
         \begin{tikzpicture}
             \pgfmathsetmacro{\D}{0.6} % duty cycle
@@ -354,8 +371,8 @@
                 yticklabels = {$\nicefrac{-\Delta i_\mathrm{L}}{2}$, 0, $\nicefrac{\Delta i_\mathrm{L}}{2}$}
                 ]
                 \addplot[signalred] coordinates {(\D-1,0.22) (0,-0.2) (\D,0.2) (1, -0.2) (1+\D,0.2)};
-                \draw[signalred, thick, dashed] (axis cs:\D-1,0.2/1.73) -- (axis cs:1+\D, 0.2/1.73); % dashed line at RMS current
-                \node[above, inner sep = 2pt, anchor = north, fill = white] at (axis cs:0.1, 0.2/1.73) {$\Delta I_\mathrm{L}$};
+                \draw[signalred, thick, dashed, visible on=<3->] (axis cs:\D-1,0.2/1.73) -- (axis cs:1+\D, 0.2/1.73); % dashed line at RMS current
+                \node[above, inner sep = 2pt, anchor = north, fill = white, visible on=<3->] at (axis cs:0.1, 0.2/1.73) {$\Delta I_\mathrm{L}$};
                 \draw [thin, <->]  (0.6,-0.2) -- node[left,fill=white]{$\Delta i_\mathrm{L}$}(0.6, 0.2); 
             \end{axis}
         \end{tikzpicture}
@@ -373,11 +390,14 @@
     \begin{equation}
         I_\mathrm{L} = \sqrt{\overline{i}^2_\mathrm{L} + \Delta I^2_\mathrm{L}}.
     \end{equation}
-    Considering the internal resistance $R_\mathrm{i}$ of the inductor, the ohmic power loss in the inductor is
+    \pause
+    Considering the internal resistance $R_\mathrm{i}$ of the inductor, the \hl{ohmic power loss} in the inductor is
     \begin{equation}
         P_\mathrm{L} = R_\mathrm{i} I^2_\mathrm{L} = R_\mathrm{i} \left(\overline{i}^2_\mathrm{L} + \Delta I^2_\mathrm{L}\right).
     \end{equation}
+    \pause
     The power loss in the inductor is thus composed of a constant part $\overline{P}_\mathrm{L} = R_\mathrm{i} \overline{i}^2_\mathrm{L}$, which is related to the power transfer from input to output, and a ripple part $\Delta P_\mathrm{L} = R_\mathrm{i} \Delta I^2_\mathrm{L}$.   
+    \pause%
     \begin{varblock}{Current ripple and power losses}
         The current ripple produces additional losses in the inductor. From \eqref{eq:RMS-current-ripple} it seems tempting to increase the switching frequency $f_\mathrm{s}$ to reduce the ripple, but this will increase switching losses (compare \figref{fig:idealized_switch_model}). Hence, there is a trade-off decision between switching and conduction losses.
     \end{varblock}
@@ -388,24 +408,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Current ripple and duty cycle}
-    Rewriting the current ripple expression
+    \onslide<1->{Rewriting the current ripple expression}
     \begin{equation*}
-            \Delta i_\mathrm{L} = \frac{D(1-D)T_\mathrm{s}}{L}U_1 = (D-D^2)\frac{T_\mathrm{s}U_1}{L}.
+        \onslide<1->{\Delta i_\mathrm{L} = \frac{D(1-D)T_\mathrm{s}}{L}U_1} \onslide<2->{= (D-D^2)\frac{T_\mathrm{s}U_1}{L}.}
     \end{equation*}
-    and calculating the derivative with respect to the duty cycle $D$ delivers
+    \onslide<3->{and calculating the derivative with respect to the duty cycle $D$ delivers}
     \begin{equation}
-        \frac{\mathrm{d}\Delta i_\mathrm{L}}{\mathrm{d}D} = \frac{T_\mathrm{s}U_1}{L} - 2D\frac{T_\mathrm{s}U_1}{L}.
+        \onslide<3->{\frac{\mathrm{d}\Delta i_\mathrm{L}}{\mathrm{d}D} = \frac{T_\mathrm{s}U_1}{L} - 2D\frac{T_\mathrm{s}U_1}{L}.}
     \end{equation}
-    Setting the derivative to zero, we find the duty cycle $D_\mathrm{max}$ as
+    \onslide<4->{Setting the derivative to zero, we find the duty cycle $D_\mathrm{max}$ as}
     \begin{equation}
-        \frac{\mathrm{d}\Delta i_\mathrm{L}}{\mathrm{d}D} = 0 \quad \Leftrightarrow \quad D_\mathrm{max} = \frac{1}{2}
+        \onslide<4->{\frac{\mathrm{d}\Delta i_\mathrm{L}}{\mathrm{d}D} = 0} \onslide<5->{\quad \Leftrightarrow \quad D_\mathrm{max} = \frac{1}{2}}
         \label{eq:duty-cycle-max}
     \end{equation}
-    which is associated with the maximum current ripple since the second derivative 
+    \onslide<6->{which is associated with the maximum current ripple since the second derivative 
     \begin{equation}
         \frac{\mathrm{d}^2\Delta i_\mathrm{L}}{\mathrm{d}D^2} = -\frac{2T_\mathrm{s}U_\mathrm{on}}{L}
     \end{equation}
-    is negative. 
+    is negative.} 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -413,12 +433,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Current ripple and duty cycle (cont.)}
-    From \eqref{eq:duty-cycle-max} we can conclude that the maximum current ripple is given by
+    \onslide<1->{From \eqref{eq:duty-cycle-max} we can conclude that the maximum current ripple is given by}
     \begin{equation}
-        \Delta i_\mathrm{L, \max} = \frac{1}{4}\frac{T_\mathrm{s}U_1}{L} \quad \Rightarrow \quad \Delta i_\mathrm{L} = 4D(1-D) \Delta i_\mathrm{L, \max}.
+        \onslide<1->{\Delta i_\mathrm{L, \max} = \frac{1}{4}\frac{T_\mathrm{s}U_1}{L}} \onslide<2->{\quad \Rightarrow \quad \Delta i_\mathrm{L} = 4D(1-D) \Delta i_\mathrm{L, \max}.}
         \label{eq:current-ripple-max-simple-step-down}
     \end{equation}
-
+    \onslide<3->{
     \begin{figure}
         \begin{tikzpicture}
             \begin{axis}[
@@ -443,6 +463,7 @@
         \caption{Inductor current ripple as a function of the duty cycle}
         \label{fig:inductor-current-ripple-duty}
     \end{figure}
+    }
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

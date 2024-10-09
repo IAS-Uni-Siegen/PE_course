@@ -775,7 +775,7 @@
 					(-5.5,2) to ++(1.25,0) node [nigbt, anchor=C, rotate=90](nigbt1){}
 					(nigbt1.E) to [short, i=$i_2(t)$] (0,2);
 					\draw node[rectangle, draw, anchor = north] (r) at (nigbt1.B) {Linear amplifier}
-						(r.east)[<-] to ++(0.5,0) node [anchor = west](a){$u^*_\mathrm{out}(t)$};
+						(r.east)[<-] to ++(0.5,0) node [anchor = west](a){$u^*_2(t)$};
 					\draw [->] ([yshift = 0.2cm, xshift = 0.1cm]nigbt1.C) -- node [yshift = 0.3cm] {$u_\mathrm{CE}(t)$} ([yshift = 0.2cm, xshift = -0.1cm]nigbt1.E) ;  
 				\end{circuitikz}
 				\caption{Transistor-based step-down converter}
@@ -846,7 +846,8 @@
 	\begin{equation}
 		D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \qquad \overline{u}_2 = \frac{1}{T_\mathrm{s}} \int_0^{T_\mathrm{s}} u_2(t) \mathrm{d}t = D \overline{u}_1.
 	\end{equation}}
-	\onslide<4->{As the switching losses are typically small, the overall efficiency is (much) higher compared to linear power conversion.} 
+	\onslide<4->{%
+		As the switching losses are typically small, the overall efficiency is (much) higher compared to linear power conversion.} 
 	\vspace{-0.5cm}  
 	\begin{columns}[b]
 		\begin{column}{0.5\textwidth}
@@ -1868,7 +1869,7 @@
 	\begin{itemize}
 		\item Linear differential equations (modeling, solution techniques),
 		\item Linear algebra basics (e.g., vector and matrix operations),
-		\item Basic signal theory knowledge (e.g., Fourier series, Laplace transform),
+		\item Basic signal theory knowledge (e.g., signal properties like root mean square),
 		\item Basic knowledge of electrical circuit theory,
 		\item Basic knowledge of semiconductor physics.
 	\end{itemize}
@@ -1886,7 +1887,7 @@
 \begin{frame}
 	\frametitle{Recommended reading}
 	\begin{itemize}
-		\item R. Rickson and D. Maksimovic, Fundamentals of Power Electronics, Vol. 3, Springer, 2020, \url{https://doi.org/10.1007/978-3-030-43881-4}
+		\item R. Erickson and D. Maksimovic, Fundamentals of Power Electronics, Vol. 3, Springer, 2020, \url{https://doi.org/10.1007/978-3-030-43881-4}
 		\item J. Kassakian et al, Principles of Power Electronics, Vol. 2,  Cambridge University Press, 2023, \url{https://doi.org/10.1017/9781009023894}
 		\item J. Specovius, Grundkurs Leistungselektronik (in German), Vol. 10, Springer, 2020, \url{https://doi.org/10.1007/978-3-658-21169-1}
 		\item F. Zach, Leistungselektronik (in German), Vol. 6, Springer, 2022, \url{https://doi.org/10.1007/978-3-658-31436-1}
