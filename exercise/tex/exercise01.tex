@@ -233,11 +233,46 @@ $$ P_{\mathrm{2f}} \overset ! = \frac{U_1^2}{ R_{\mathrm{L}}} \cdot D$$
  $$\overline i_2 = \frac{U_1}{ R_{\mathrm{L}}} \cdot D = \SI{14.29}{\ampere}$$
  $$\overline u_2 = U_1 \cdot D = \SI{5.6}{\volt}$$
 \end{solutionblock}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: Step-down converter with output filter %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \task{Step-down converter with output filter}
+A step-down converter is used to charge a mobile phone from the vehicle electrical system with the vehicle electrical system voltage $U_1 = \SI{13.5}{\volt}$. The input voltage of the mobile phone is $U_2 = \SI{4.5}{\volt}$.
+\begin{center}
+\begin{circuitikz}[european currents,european resistors,american inductors]
+	\draw
+	(0,0) coordinate(U+) to [short,-] ++(0.5,0)  
+	node[currarrow](Tl){} -- ++(1,0) ++(0.5,0) node[nigfete,rotate=90](Trans){} -- ++(1.5,0) coordinate(Tr)  to [short,-*] ++(0.5,0) coordinate(junc1)   -- ++(0.5,0) coordinate(Ll) to [L,l_=$L$,i^=$i_\text{L}$] ++(2,0) coordinate(Lr) to [short,-*] ++(0.5,0) coordinate(junc2)  -- ++(2,0)  coordinate(Rt) to [R,l_=$R$,i_=$i_\text{2}$,v^=$U_\text{2}$,voltage shift=0.5] ++(0,-3) coordinate(Rb) to [short,-*] ++(-2,0) coordinate(junc3) to [short,-*] ++(-3,0) coordinate(junc4) to [short] ++(-2,0) coordinate(junc5) to [short,-] ++(-2,0) coordinate(U-)
+        (junc2) to [C,l_=$C$](junc3)
+        (junc4) to [short]  ++(0,0.5) coordinate(Db) to[D-,l^=$D$]  ++(0,2) coordinate(Dt) to [short] (junc1)
+         (Trans.G)  to [sqV] ++(0,-1)(junc5) 
+	
+	(U+) to [V=$U_1$] (U-)
+	
+  	(Trans)  node[anchor=south,color=black]{$T_1$}	
+ 	(Tl)  node[anchor=south,color=black]{$i_\text{1}$}	
+	;
+\end{circuitikz}
+\end{center}
+
+(both voltages are assumed to be constant). The inductance of the ideal coil is $L = \SI{10}{\milli\henry}$
+The switching frequency is $f_s = \SI{ 100}{\kilo\hertz}$. All components are ideal.
+
+\subtask{Draw the equivalent circuits for the two switching states.}
+\subtask{At what duty cycle $D$ should the buck converter be operated?}
+\subtask{Qualitatively draw the voltage and current waveforms in the components.}
+\subtask{How large is the current fluctuation range $\triangle i_L$ of the coil current in normal operation at a switching frequency of $f_s = \SI{ 100}{\kilo\hertz}$.}
+\subtask{When starting the engine, the input voltage drops to $U_{1min} = \SI{ 10}{\volt}$.
+The voltage regulator of the buck converter changes the duty cycle so that the output voltage $U_2 = \SI{ 4.5}{\volt}$ is kept stable.
+What duty cycle D is set?}
+\subtask{Where is the boundary of discontinuous conduction mode?}
+\subtask{In the next step, the input voltage is constant, and the output voltage is to be adjusted using the duty cycle.
+         At what duty cycle $D$ will the peak-to-peak current ripple be maximal?}
+\subtask{Sketch the course of the current fluctuation width $\triangle i$ as a function of the duty cycle $D$.}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 3: Power losses within the step-down converter %%
