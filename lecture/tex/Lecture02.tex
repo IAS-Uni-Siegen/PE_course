@@ -152,7 +152,7 @@
     During the \hl{switch-on period} we have
     \begin{equation}
         \begin{split}
-            \onslide<2->{i_\mathrm{L}(t) &= i_\mathrm{L}(k T_\mathrm{s}) + \int_{k T_\mathrm{s}}^{t}u_\mathrm{L}(\tau)\mathrm{d}\tau} \\ 
+            \onslide<2->{i_\mathrm{L}(t) &= i_\mathrm{L}(k T_\mathrm{s}) +\frac{1}{L} \int_{k T_\mathrm{s}}^{t}u_\mathrm{L}(\tau)\mathrm{d}\tau} \\ 
             \onslide<3->{                &= i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_1-U_2}{L} (t - k T_\mathrm{s})
             , \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}]}
         \end{split}
@@ -161,7 +161,7 @@
     \onslide<4->{and during the \hl{switch-off period} we receive}
     \begin{equation}
         \begin{split}
-            \onslide<4->{i_\mathrm{L}(t) &= i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on}) + \int_{k T_\mathrm{s}+T_\mathrm{on}}^{t}u_\mathrm{L}(\tau)\mathrm{d}\tau}\onslide<5->{= i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on}) - \frac{U_2}{L} (t - k T_\mathrm{s} - T_\mathrm{on})}\\
+            \onslide<4->{i_\mathrm{L}(t) &= i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on}) + \frac{1}{L}\int_{k T_\mathrm{s}+T_\mathrm{on}}^{t}u_\mathrm{L}(\tau)\mathrm{d}\tau}\onslide<5->{= i_\mathrm{L}(k T_\mathrm{s} + T_\mathrm{on}) - \frac{U_2}{L} (t - k T_\mathrm{s} - T_\mathrm{on})}\\
             \onslide<6->{&= i_\mathrm{L}(k T_\mathrm{s}) + \frac{U_1-U_2}{L} T_\mathrm{on} - \frac{U_2}{L} (t - k T_\mathrm{s} - T_\mathrm{on}), \quad 
             t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].} 
         \end{split} 
