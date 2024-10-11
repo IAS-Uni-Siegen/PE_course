@@ -232,6 +232,7 @@ $$ P_{\mathrm{2f}} \overset ! = \frac{U_1^2}{ R_{\mathrm{L}}} \cdot D$$
  Average values of current and voltage.
  $$\overline i_2 = \frac{U_1}{ R_{\mathrm{L}}} \cdot D = \SI{14.29}{\ampere}$$
  $$\overline u_2 = U_1 \cdot D = \SI{5.6}{\volt}$$
+ 
 \end{solutionblock}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -309,7 +310,10 @@ The switching frequency is $f_s = \SI{ 100}{\kilo\hertz}$. All components are id
 % Solution of subtask
 
 \begin{solutionblock}
-    $D = \frac{U_2}{U_1} = \frac{\SI{ 4.5}{\volt}}{\SI{ 13.5}{\volt}} = \frac{1}{3}$
+    \begin{equation}
+        D = \frac{U_2}{U_1} = \frac{\SI{ 4.5}{\volt}}{\SI{ 13.5}{\volt}} = \frac{1}{3}
+    \end{equation}
+
 \end{solutionblock}
    
 \subtask{Qualitatively draw the voltage and current waveforms in the components.}
@@ -683,12 +687,18 @@ The switching frequency is $f_s = \SI{ 100}{\kilo\hertz}$. All components are id
     % 		\psfrag{Ts}{$\mi Ts$}
     % 	 	\includegraphics{bilder/loesung2_4.eps}
     \end{center}
-
-    $$f_s = \SI{ 100}{\kilo\hertz} \Rightarrow T_s = \SI{ 10}{\micro\second} \Rightarrow T_e = D \cdot T_s = \frac{\SI{ 10}{\micro \second}}{3}$$
-    $$U_L = U_1 - U_2 = L \frac{d i_L}{dt} \overset {\begin{matrix}\text{Assumption of ideal coil}\\ \Rightarrow \text{linear current flow} \end{matrix}} = L \frac{\triangle i_L}{\triangle t} = L \frac{\triangle i_L}{T_e}$$ 
-    $$\Rightarrow \triangle i_L = \frac{U_1 - U_2}{L} T_e = \frac{\SI{13.5}{\volt} - \SI{4.5}{\volt}}{\SI{10}{\micro \henry} \cdot \frac{\SI{10}{\micro \second}}{3}} = \SI{3}{\ampere}$$
-    $$ I_{2min} = \frac{\triangle i_L}{2} = \SI{1.5}{\ampere}$$
-
+    \begin{equation}
+        f_s = \SI{ 100}{\kilo\hertz} \Rightarrow T_s = \SI{ 10}{\micro\second} \Rightarrow T_e = D \cdot T_s = \frac{\SI{ 10}{\micro \second}}{3}
+    \end{equation}
+    \begin{equation}
+        U_L = U_1 - U_2 = L \frac{d i_L}{dt} \overset {\begin{matrix}\text{Assumption of ideal coil}\\ \Rightarrow \text{linear current flow} \end{matrix}} = L \frac{\triangle i_L}{\triangle t} = L \frac{\triangle i_L}{T_e}
+    \end{equation}
+    \begin{equation}
+        \Rightarrow \triangle i_L = \frac{U_1 - U_2}{L} T_e = \frac{\SI{13.5}{\volt} - \SI{4.5}{\volt}}{\SI{10}{\micro \henry} \cdot \frac{\SI{10}{\micro \second}}{3}} = \SI{3}{\ampere}
+    \end{equation}
+    \begin{equation}
+        I_{2min} = \frac{\triangle i_L}{2} = \SI{1.5}{\ampere}
+    \end{equation}
 \end{solutionblock}
 
 \subtask{When starting the engine, the input voltage drops to $U_{1min} = \SI{ 10}{\volt}$.
@@ -696,24 +706,38 @@ The voltage regulator of the buck converter changes the duty cycle so that the o
 What duty cycle D is set?}
 % Solution of subtask
 \begin{solutionblock}
-    $$D= \frac{U_2}{U_{1min}} = \frac{\SI{4.5}{\volt}}{\SI{10}{\volt}} = 0.45$$
+    \begin{equation}    
+        D= \frac{U_2}{U_{1min}} = \frac{\SI{4.5}{\volt}}{\SI{10}{\volt}} = 0.45
+    \end{equation}    
 \end{solutionblock}
 
 \subtask{Where is the boundary of discontinuous conduction mode?}
 % Lösung des Unterpunktes
 \begin{solutionblock}
-    $$\triangle i_L = \frac{U_{1min} - U_2}{L} D \cdot T_s = \frac{(\SI{10}{\volt} - \SI{4.5}{\volt}) \cdot 0.45 \cdot \SI{10}{\micro \second}}{\SI{10}{\micro \henry}} = \SI{2.475}{\ampere}$$
-    $$I_{2min} = \frac{\triangle i_L}{2} \approx \SI{1.24}{\ampere}$$
+    \begin{equation}
+        \triangle i_L = \frac{U_{1min} - U_2}{L} D \cdot T_s = \frac{(\SI{10}{\volt} - \SI{4.5}{\volt}) \cdot 0.45 \cdot \SI{10}{\micro \second}}{\SI{10}{\micro \henry}} = \SI{2.475}{\ampere}
+    \end{equation}
+    \begin{equation}
+        I_{2min} = \frac{\triangle i_L}{2} \approx \SI{1.24}{\ampere}
+    \end{equation}
 \end{solutionblock}
 
 \subtask{In the next step, the input voltage is constant, and the output voltage is to be adjusted using the duty cycle.
          At what duty cycle $D$ will the peak-to-peak current ripple be maximal?}
 % Lösung des Unterpunktes
 \begin{solutionblock}
-    $$U_2 = D \cdot U_1$$
-    $$\triangle i_L (D) = \frac{U_1 - D \cdot U_1}{L} \cdot D \cdot T_s = \frac{U_1 T_s}{L} (D-D^2)$$
-    $$\triangle i_L' (D) \overset ! = 0 = \frac{U_1 T_s}{L}(1-2 D)$$
-    $$\Rightarrow 1 = 2 D \Rightarrow D = \frac{1}{2}$$
+    \begin{equation}
+        U_2 = D \cdot U_1
+    \end{equation}
+    \begin{equation}
+        \triangle i_L (D) = \frac{U_1 - D \cdot U_1}{L} \cdot D \cdot T_s = \frac{U_1 T_s}{L} (D-D^2)
+    \end{equation}
+    \begin{equation}
+        \triangle i_L' (D) \overset ! = 0 = \frac{U_1 T_s}{L}(1-2 D)
+    \end{equation}
+    \begin{equation}
+        \Rightarrow 1 = 2 D \Rightarrow D = \frac{1}{2}
+    \end{equation}
 \end{solutionblock}
 \subtask{Sketch the course of the current fluctuation width $\triangle i$ as a function of the duty cycle $D$.}
 % Lösung des Unterpunktes
