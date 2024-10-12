@@ -480,9 +480,9 @@
         We consider the following assumptions:
         \begin{itemize}
             \item The switch is ideal, that is, infinitely fast.
-            \item The input voltage is constant: $u_1(t) = U_1$.
-            \item The output current is constant: $i_2(t) = I_2$.
-            \item The input voltage is greater than the output voltage: $U_1 > u_2(t)$.
+            \item<2-> The input voltage is constant: $u_1(t) = U_1$.
+            \item<3-> The output current is constant: $i_2(t) = I_2$.
+            \item<4-> The input voltage is greater than the output voltage: $U_1 > u_2(t)$.
         \end{itemize}
         \begin{figure}
             \begin{circuitikz}[]
@@ -2193,6 +2193,7 @@
     \frametitle{Buck-boost converter: combining step-up and step-down stages}
         \begin{figure}
             \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}u_0(t)$, voltage = straight] ++(0,-2);
                 %Boost part
                 \draw (5,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
                 to [short, -o]++(-5,0)
@@ -2203,7 +2204,10 @@
                 to ++(0.1,0) node [cuteopenswitchshape, anchor = in, yscale=-1] (S2) {}
                 let \p2 = (S2.mid) in (S2.out) to  [short, i=$i_2(t)$] (5,2)
                 ([yshift = -0.3cm]S2.mid) to [short, o-*](\x2,0);
-                \draw (2.5,2) to [open, v_>=$u_{\mathrm{s}_2}(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2);
+                \draw (2.5,2) to [open, v_>=$u_{\mathrm{s}_2}(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
+                (S2.out) node[below, anchor = north west] {$S_\mathrm{2,off}$}
+                ([yshift = -0.3cm]S2.mid) node[below, anchor = north west] {$S_\mathrm{2,on}$};
+
                 % gray background behind boost part
                \begin{scope}[on background layer]
                 \node[rectangle, draw = shadecolor,	fill = shadecolor,	opacity=0.3, minimum width = 4.75cm, minimum height = 3.4cm] (B1) at (2.625,1.1) {};
@@ -2218,7 +2222,9 @@
                 to [inductor, l=$L_1$] ++(1.3,0)
                 to [short, -o] (0,2) 
                 ([yshift = -0.3cm]S1.mid) to [short, o-*](\x1,0);
-                \draw (-2.5,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s_1}(t)$, voltage = straight] ++(0,-2);
+                \draw (-2.5,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s_1}(t)$, voltage = straight] ++(0,-2)
+                (S1.out) node[below, anchor = north east] {$S_\mathrm{1,on}$}
+                ([yshift = -0.3cm]S1.mid) node[below, anchor = north east] {$S_\mathrm{1,off}$};
                  % gray background behind buck part
                  \begin{scope}[on background layer]
                     \node[rectangle, draw = shadecolor,	fill = shadecolor,	opacity=0.3, minimum width = 4.75cm, minimum height = 3.4cm] (B2) at (-2.625,1.1) {};
@@ -2229,24 +2235,175 @@
             \end{circuitikz}
             \begin{circuitikz}[]
                 %Boost part
-                \draw (3,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
-                to [short]++(-3,0)
+                \draw (3.5,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+                to [short]++(-3.5,0)
                 (1.25,2) to ++(0.1,0) node [cuteopenswitchshape, anchor = in, yscale=-1] (S2) {}
-                let \p2 = (S2.mid) in (S2.out) to  [short, i=$i_2(t)$] (3,2)
+                let \p2 = (S2.mid) in (S2.out) to  [short, i=$i_2(t)$] (3.5,2)
                 ([yshift = -0.3cm]S2.mid) to [short, o-*](\x2,0);
                 \draw (1.4,2) to [open, v_>=$u_{\mathrm{s}_2}(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2);
                 % Buck part
-                \draw (0,0) to [short]++(-3,0)
+                \draw (0,0) to [short]++(-3.5,0)
                 to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
-                to  [short, i=$i_1(t)$] ++(0.75,0)
+                to  [short, i=$i_1(t)$] ++(1.25,0)
                 to ++(0.1,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S1) {}
                 let \p1 = (S1.mid) in (S1.in) to  [short] (-1.0,2)
                 ([yshift = -0.3cm]S1.mid) to [short, o-*](\x1,0);
                 \draw (-1.4,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s_1}(t)$, voltage = straight] ++(0,-2);
                 %Combining inductor
-                \draw (S1.in) to [inductor, l=$L$, i=$i_\mathrm{L}(t)$] (S2.in);
+                \draw (S1.in) to [inductor, l=$L$, i=$i_\mathrm{L}(t)$, v = $u_\mathrm{L}(t)$, voltage = straight] (S2.in)
+                (S1.out) node[below, anchor = north east] {$S_\mathrm{1,on}$}
+                ([yshift = -0.3cm]S1.mid) node[below, anchor = north east] {$S_\mathrm{1,off}$}
+                (S2.out) node[below, anchor = north west] {$S_\mathrm{2,off}$}
+                ([yshift = -0.3cm]S2.mid) node[below, anchor = north west] {$S_\mathrm{2,on}$};;
             \end{circuitikz}
             \caption{Buck-boost converter (ideal switch representation)}
             \label{fig:buck-boost-simple}
         \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Buck-boost converter: switching states %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Buck-boost converter: switching states}
+    The buck-boost converter switches are \hl{operated synchronously}, that is, $S_1$ and $S_2$ are either on or off at the same time. Thus, the converter has only two switch states:
+    \begin{equation}
+        \begin{alignedat}{3}
+                \{S_\mathrm{1,on}, S_\mathrm{2,on}\} \quad &\rightarrow \quad u_{\mathrm{s}_1}(t) &&= U_1, \,&&u_{\mathrm{s}_2}(t) = 0, \quad \\
+                \{S_\mathrm{1,off}, S_\mathrm{2,off}\} \quad &\rightarrow \quad u_{\mathrm{s}_1}(t) &&= 0, &&u_{\mathrm{s}_2}(t) = U_2.
+        \end{alignedat}
+    \end{equation}
+    \begin{figure}
+        \centering	
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \hspace{-0.75cm}
+            \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}U_2$, voltage = straight] ++(0,-2)
+                to ++(-5,0)
+                to [open, o-o, v<= $U_1 \hspace{2cm}$, voltage = straight] ++(0,2)
+                (-5,2) to  [short, i=$i_1(t)$] ++(1.0,0)
+                to [inductor, l=$L$] ++(1.75,0)
+                to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
+                to [short, -*] ++(0,-2);
+                \draw (0,2) to [short, i_<=${i_2=0}$, -o] ++(-1.0,0);
+                \draw (-1.8,2) to [open, v_>=${U_{\mathrm{s}_2}\hspace{0.2cm}}$, voltage = straight] ++(0,-2);
+                \draw (-4.4,2) to [open, v = ${\hspace{1.5cm}U_{\mathrm{s}_1}}$, voltage = straight] ++(0,-2);
+            \end{circuitikz}
+            \caption{Switch-on time}
+        \end{subfigure}%
+        \hspace{0.5cm}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}U_2$, voltage = straight] ++(0,-2)
+                to ++(-5,0)
+                to [open, o-o, v<= $U_1 \hspace{2cm}$, voltage = straight] ++(0,2)
+                (-5,2) to  [short, i=${i_1=0}$] ++(0.75,0)
+                (-3.75,0) to [short, *-] ++(0,2)
+                to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
+                to [inductor, l=$L$] ++(2,0)
+                to [short, i=$i_2(t)$] (0,2);
+                \draw (-3.4,2) to [open, v = ${\hspace{1.5cm}U_{\mathrm{s}_1}}$, voltage = straight] ++(0,-2);
+                \draw (-0.5,2) to [open, v_>=${U_{\mathrm{s}_2}\hspace{0.2cm}}$, voltage = straight] ++(0,-2);
+            \end{circuitikz}
+            \caption{Switch-off time}
+        \end{subfigure}
+    \caption{Switch states of the buck-boost converter} 
+    \label{fig:buck-boost-converter-switch-states}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Buck-boost converter: CCM voltage transfer ratio %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Buck-boost converter: CCM voltage transfer ratio}
+    In CCM, we can derive the \hl{voltage transfer ratio} directly by the serial connection of the buck and boost stages from \figref{fig:buck-boost-simple}
+    \begin{equation}
+        \frac{U_0}{U_1} = D, \qquad   \frac{U_2}{U_0} = \frac{1}{1-D},
+    \end{equation}
+    leading to 
+    \begin{equation}
+        \frac{U_2}{U_1} = \frac{D}{1-D}.
+    \end{equation}
+    Alternatively, we can derive this result from the \hl{voltage balance} of the inductor $L$:
+    \begin{equation}
+        u_\mathrm{L}(t) = \begin{cases} 
+            U_1, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],\\ 
+            -U_2 & t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].
+        \end{cases}
+    \end{equation}
+    In steady state, the average inductor voltage per period must be zero, yielding
+    \begin{equation}
+        U_1 T_\mathrm{on} = U_2 T_\mathrm{off} \quad \Leftrightarrow \quad  U_1 D T_\mathrm{s} = U_2 (1-D) T_\mathrm{s} \quad \Leftrightarrow \quad \frac{U_2}{U_1} = \frac{D}{1-D}.
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Buck-boost converter: steady-state time-domain behavior %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Buck-boost converter: steady-state time-domain behavior}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfmathsetmacro{\D}{0.4} % duty cycle
+            \pgfmathsetmacro{\gain}{\D/(1-\D)} % current ripple
+            \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
+
+                % Top plot: voltage at the switch
+                \nextgroupplot[ylabel = {$u_\mathrm{L}(t)$}, ytick = {-1, -0.5, 0, 0.5, 1}, yticklabels = {$-U_1$, , 0, , $U_1$}, ymin = -1.1]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},-\gain) ({0 + #1},1) ({\D + #1},1) ({\D + #1},-\gain) ({1 + #1},-\gain) ({1 + #1},1)};}
+                        \AddPlot
+                    }
+                    \draw[signalblue, thick, dashed, visible on=<2->] (axis cs:0, \gain) -- (axis cs:4, \gain); % dashed line at U_2 (average)
+                    \node[above, inner sep = 2pt, anchor = north, visible on=<2->] at (axis cs:1.5+\D/2, \gain) {$U_2$}; % label U_2
+                    \draw [thick,<->]  (0,0.2) -- node[below]{$T_\mathrm{on}$}(\D, 0.2); % T_on 
+                    \draw [thick,<->]  (\D,0.2) -- node[below]{$T_\mathrm{off}$}(1.0, 0.2); % T_off
+                    \draw [thick,<->]  (0.0,-1.4) -- node[below]{$T_\mathrm{s}$}(1.0, -1.4); % T_s 
+
+
+                % Middle plot: inductor current
+                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$, }, visible on=<3->]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({1 + #1},0.25)};}
+                        \AddPlot
+                    }
+                    \draw[signalred, thick, dashed] (axis cs:0,0.5) -- (axis cs:4,0.5); % dashed line at average current
+                    \draw[{Latex[length=2mm]}-, thin, visible on=<4->] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
+                    \draw[-{Latex[length=2mm]}, thin, visible on=<4->] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
+                    \draw[thin, visible on=<5->] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
+                    \node[above, inner sep = 2pt, anchor = south, xshift = -4mm, visible on=<5->] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{U_1}{L}$}; % label positive current slope
+                    \draw[thin, visible on=<6->] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
+                    \node[above, inner sep = 2pt, anchor = south, xshift = 2mm, visible on=<6->] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_2}{L}$}; % label negative current slope
+                
+                % Bottom plot: input current
+                \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}, visible on=<7->]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
+                        \AddPlot
+                    }
+                    \draw[signalred, thick, dashed, visible on=<8->] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
+                    \node[above, inner sep = 2pt, anchor = south east, fill = white, visible on=<8->] at (axis cs:\D, 0.5 * \D) {$\overline{i}_1$}; % label average current
+                    \node[above, inner sep = 2pt, anchor = center, fill = white, visible on=<8->] at (axis cs:\D/2-0.05, 0.85) {$i_1(t)$}; % label input current
+            \end{groupplot}
+
+            % second y-axis for the bottom plot
+					\begin{groupplot}[group style={group size=1 by 3, y descriptions at = edge right}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, xtick=\empty, axis line style=transparent, ymin = 0, ymax =1.1]
+						\nextgroupplot[ytick = \empty]
+							%
+                        \nextgroupplot[ytick = \empty, ymin =-1.1]
+                        %
+						\nextgroupplot[ylabel = {$i_2(t)$}, ytick = {}, yticklabels = {}]
+                            \pgfplotsinvokeforeach{0,...,3}{
+                                \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({\D + #1},0) ({\D + #1},0.75) ({1 + #1},0.25) ({1 + #1},0)};}
+                                \AddPlot
+                            }
+                            \node[above, inner sep = 2pt, anchor = center, fill = white, visible on=<8->] at (axis cs:0.5+\D/2, 0.85) {$i_2(t)$}; % label output current
+					\end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
 \end{frame}
