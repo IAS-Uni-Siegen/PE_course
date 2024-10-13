@@ -1689,6 +1689,7 @@
     In contrast to the step-down converter, cf. \eqref{eq:duty-cycle-max}, the worst-case current ripple of the step-up converter occurs for 
     \begin{equation}
         \Delta i_\mathrm{L} =  \frac{U_1}{L}DT_\mathrm{s} \quad \Rightarrow \quad D_\mathrm{max} \rightarrow 1.
+        \label{eq:ripple-current-duty-cycle-max-step-up_converter}
     \end{equation}
     This corresponds to the case of an infinitely large output voltage $U_2$:
     \begin{equation}
@@ -2386,9 +2387,9 @@
                         \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
                         \AddPlot
                     }
-                    \draw[signalred, thick, dashed, visible on=<8->] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
-                    \node[above, inner sep = 2pt, anchor = south east, fill = white, visible on=<8->] at (axis cs:\D, 0.5 * \D) {$\overline{i}_1$}; % label average current
-                    \node[above, inner sep = 2pt, anchor = center, fill = white, visible on=<8->] at (axis cs:\D/2-0.05, 0.85) {$i_1(t)$}; % label input current
+                    \draw[signalred, thick, dashed, visible on=<8->] (axis cs:0,0.75 * \D) -- (axis cs:4, 0.75 * \D); % dashed line at average current
+                    \node[signalred, above, inner sep = 1pt, anchor = east, fill = white, xshift=-1mm, yshift=-1mm, visible on=<8->] at (axis cs:\D, 0.75 * \D) {$\overline{i}_1$}; % label average current
+                    \node[signalred, above, inner sep = 2pt, anchor = center, fill = white, visible on=<8->] at (axis cs:\D/2-0.05, 0.85) {$i_1(t)$}; % label input current
             \end{groupplot}
 
             % second y-axis for the bottom plot
@@ -2402,8 +2403,39 @@
                                 \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({\D + #1},0) ({\D + #1},0.75) ({1 + #1},0.25) ({1 + #1},0)};}
                                 \AddPlot
                             }
-                            \node[above, inner sep = 2pt, anchor = center, fill = white, visible on=<8->] at (axis cs:0.5+\D/2, 0.85) {$i_2(t)$}; % label output current
+                            \node[signalblue, above, inner sep = 2pt, anchor = center, fill = white, visible on=<8->] at (axis cs:0.5+\D/2, 0.85) {$i_2(t)$}; % label output current
+                            \draw[signalblue, thick, dashed, visible on=<8->] (axis cs:0,0.5-0.25*\D) -- (axis cs:4, 0.5-0.25*\D); % dashed line at average current
+                            \node[signalblue, above, inner sep = 1pt, anchor = west, fill = white, visible on=<8->, xshift=1mm] at (axis cs:\D, 0.5-0.25*\D) {$\overline{i}_2$}; % label average current
 					\end{groupplot}
         \end{tikzpicture}
     \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Current ripple %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Current ripple}
+    \onslide<1->{The peak-to-peak \hl{current ripple} of the buck-boost converter is given by}
+    \begin{equation}
+        \begin{split}
+            \onslide<1->{ \Delta i_\mathrm{L} &= \max\{i_\mathrm{L}(t)\} - \min\{i_\mathrm{L}(t)\}}  \onslide<2->{= i_\mathrm{L}(t=T_\mathrm{on}) - i_\mathrm{L}(t=T_\mathrm{s})}\\
+                                &\onslide<3->{=\frac{U_1}{L} T_\mathrm{on}} \onslide<4->{= \frac{U_2}{L} T_\mathrm{off}}\\
+                                & \onslide<5->{= \frac{DT_\mathrm{s}}{L}U_1.}
+        \end{split}
+        \label{eq:current-ripple-simple-step-down}
+    \end{equation}
+    \onslide<6->{The buck-boost converter current ripple characteristic matches the previous boost converter behavior (cf. \eqref{eq:ripple-current-duty-cycle-max-step-up_converter}):}
+    \begin{itemize}
+        \item<6-> Its minimal for $D \rightarrow 0$ since the output voltage becomes zero and the inductor is connected to the output voltage over the entire switching peripd. 
+        \item<7-> Its maximal for $D \rightarrow 1$ since the inductor is connected to the (on-zero) input voltage over the entire switching peripd.
+    \end{itemize}%
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Circuit realization %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Circuit realization}
+    
 \end{frame}
