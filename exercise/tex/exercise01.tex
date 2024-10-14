@@ -799,13 +799,13 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
         (Ud) to [short,i=$i_c(t)$] (Trans.drain)
         (Trans.source) to [short,-] ++(0,0) coordinate(U2p)
         to [short,-] ++(0,0) to [L,l^=$L$] ++(3,0) coordinate(Lp) to [short,-] ++(0,-2) coordinate(Lp10)
-        (Lp) to [V] (Lp10)
-        (Lp) to [open,v^=$U_2$] (Lp10)
+        (Lp) to [V, v^=$U_2$] (Lp10)
+        (Lp) to [open] (Lp10)
         coordinate(Lp10) to  [short,-] ++(-3,0) coordinate(D)
-        to [short,i=$i_D(t)$] ++(0,0) to [D,l^=$D$] ++(0,2)
+        to [D,l^=$D$, i=$i_D(t)$] ++(0,2)
         (0,-3.77) coordinate(Bw) to [short] ++(3,0) coordinate(U1)
         %(N1) to [V] (Bw)
-        (N1) to [open,v^=$U_1$] (Bw)
+        (N1) to [open,v=$U_1$] (Bw)
            ;
         \end{circuitikz}
     \end{center}
