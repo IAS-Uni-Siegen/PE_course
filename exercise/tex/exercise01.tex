@@ -11,34 +11,37 @@
 \task{Step-down converter without output filter}
 
 A switching transistor is used for low-loss and stepless control of a car's rear window heating.
-transistor is used. By varying the duty cycle of the transistor, the average value of the heating power can be
-of the heating power can be adjusted. The voltage in the car's electrical system is constant and
-can be simulated with a voltage source $U_1 = \SI{14}{\volt}$. The heater is dimensioned in such a way
-that at its nominal voltage $ U_{\mathrm{2N}} = \SI{14}{\volt}$ it absorbs a power of $ P_{\mathrm{LN}} = \SI{500}{\watt}$ and
-can be simulated with an ohmic resistor.
+By varying the duty cycle of the transistor the average value of the heating power can be adjusted. The voltage in the car's electrical system is assumed to be constant with $U_1 = \SI{14}{\volt}$. The heater is dimensioned in such a way
+that at its nominal voltage $ U_{\mathrm{2N}} = \SI{14}{\volt}$ it consumes a power of $ P_{\mathrm{LN}} = \SI{500}{\watt}$ and
+can be modeled with an ohmic resistor. This circuit is shown in the figure \ref{fig:transistor circuit}.
 
+\begin{figure}[h]
 \begin{center}
     \begin{circuitikz}[european currents,european resistors,american inductors]
         \draw
-        (0,0) coordinate(N1) to [short,-o] ++(1,0) coordinate(U1p)
+        (0,0) coordinate(N1) to [short,-o] ++(1.5,0) coordinate(U1p)
         ++(2,0) node[nigfete,rotate=90](Trans){}
-        (U1p) to [short,i=$i_1$] (Trans.drain)
-        (Trans.source) to [short,-o,i=$i_2$] ++(1,0) coordinate(U2p)
+        (U1p) to [short,i=$i_1(t)$] (Trans.drain)
+        (Trans.source) to [short,-o,i=$i_2(t)$] ++(1.5,0) coordinate(U2p)
         to [short,-] ++(1,0) to [R,l^=$R_\text{L}$] ++(0,-3) to [short,-o] ++(-1,0) coordinate(U2n) to [short,-o] (1,-3) coordinate(U1n) to [short,-] ++(-1,0) coordinate(N10)
          (N1) to [V] (N10)
          (U1p) to [open,v^=$U_1$] (U1n)
-         (U2p) to [open,v_=$u_2$] (U2n)
+         (U2p) to [open,v_=$u_2(t)$] (U2n)
          (Trans.gate) to [short,o-] ++(0,-.3) to [sqV] ++(0,-1) 
          (Trans.gate) ++(-0.3,0) node(T1){$\text{T}_\text{1}$}
          
         ;
     \end{circuitikz}
 \end{center}
+\caption{Circuit with one transistor and one load resistor.}
+    \label{fig:transistor circuit}
+\end{figure}
 
 %\begin{enumerate}
 	\subtask{Draw qualitative current and voltage curves on the load resistor.}
         \begin{solutionblock}
-            The graph below shows the voltages and currents at the load resistor with the period $T_{\mathrm{s}}$, the switch-on time $T_{\mathrm{on}}$ and the switch-off time $T_{\mathrm{off}}$. 
+            The graph \ref{fig:Currents and voltages during the period} shows the voltages and currents at the load resistor with the period $T_{\mathrm{s}}$, the switch-on time $T_{\mathrm{on}}$ and the switch-off time $T_{\mathrm{off}}$. 
+        \begin{solutionfigure}[htb]
 \begin{center}
       \begin{tikzpicture}
         \begin{axis}[
@@ -56,7 +59,7 @@ can be simulated with an ohmic resistor.
             width=0.8\textwidth,
             height=0.25\textwidth,
             xlabel={$t$},
-            ylabel={{\color{blue}$u_\text{L}(t)$}\quad{\color{red}$i_\text{L}(t)$}},
+            ylabel={{\color{blue}$u_\text{2}(t)$}\quad{\color{red}$i_\text{2}(t)$}},
             xtick={0},
             xticklabels={$0$},
             ytick={0,1,2},
@@ -111,15 +114,18 @@ can be simulated with an ohmic resistor.
     %  	\psfrag{U1/R_L}[r][r]{$\textcolor{red}{\frac{U_1}{\mi RL}}$}
     %   	\includegraphics{bilder/loesung1_1.eps}
      \end{center}
-         The duty cycle D is equal to the switch on time $T_{\mathrm{on}}$ divided by the switching cycle $T_{\mathrm{s}}$.
-     $$D= \frac{T_\text{on}}{T_\text{s}}, \quad 1-D = \frac{T_\text{off}}{T_\text{s}} \Rightarrow T_\text{on} = D \cdot T_\text{s}, \quad T_\text{off} = (1-D) T_\text{s}$$
+     \caption{Display of currents and voltages depending on the switching phases.}
+    \label{fig:Currents and voltages during the period}
+\end{solutionfigure}
+            
 \end {solutionblock}
 
 \subtask{ Draw the time curve of the instantaneous power at the load resistor.}
 
 
 \begin {solutionblock}
-The following graph shows the time curve of the instantaneous power at the load resistor.
+The graph \ref{fig:Instantaneous power} shows the time curve of the instantaneous power at the load resistor.
+\begin{solutionfigure}[h]
 \begin{center}
     \begin{tikzpicture}
        \begin{axis}[
@@ -174,65 +180,106 @@ The following graph shows the time curve of the instantaneous power at the load 
    %  	\psfrag{U1^2/R}[r][r]{$\textcolor{blue}{\frac {U_1^2}{R}}$}
    %   	\includegraphics{bilder/loesung1_2.eps}
     \end{center}
+   \caption{Instantaneous power at the load resistor.}
+   % \ref{fig:Instantaneous power}
+    \label{fig:Instantaneous power}
+\end{solutionfigure}
 
 \end{solutionblock}
 
-\subtask{ Derive the relationships for the mean voltage $\overline u_2$, the mean current $\overline i_2$ and the mean power}
+\subtask{ Derive the relationships for the mean voltage $\overline u_2$, the mean current $\overline i_2$ and the mean power $P_{\mathrm{2}}$}.
 
 \begin{solutionblock}
-    The relationship between the average voltage $\overline u_2$, the average current $\overline i_2$ and the average power $P_{\mathrm{2}}$ as a function of the duty cycle D is derived below. 
-    $$\overline u_2 = \frac{1}{T_{\mathrm{s}}} \int_0^{ T_{\mathrm{s}}} u_2 (t) dt = \frac{1}{ T_{\mathrm{s}}} \int_0^{D T_{\mathrm{s}}} U_1 dt + \frac{1}{ T_{\mathrm{s}}} \int_{D  T_{\mathrm{s}}}^{ T_{\mathrm{s}}} 0 dt$$
- $$= \left . \frac{U_1}{ T_{\mathrm{s}}} \cdot t \right |_0^{D  T_{\mathrm{s}}}  + 0 = \frac{U_1 D  T_{\mathrm{s}}}{ T_{\mathrm{s}}} = U_1 D$$
- $$\overline i_2 = \frac{1}{ T_{\mathrm{s}}} \int_0^{ T_{\mathrm{s}}} i_2(t) dt = \frac{1}{ T_{\mathrm{s}}}\int_0^{D  T_{\mathrm{s}}} \frac{U_1}{ R_{\mathrm{L}}} dt + \frac{1}{ T_{\mathrm{s}}}\int_{D  T_{\mathrm{s}}}^{ T_{\mathrm{s}}} 0 dt$$
- $$= \left . \frac{U_1}{ R_{\mathrm{L}}  T_{\mathrm{a}}} \cdot t \right |_0^{D  T_{\mathrm{s}}} = \frac{U_1 D  T_{\mathrm{s}}}{ R_{\mathrm{L}}  T_{\mathrm{s}}} = \frac{U_1}{ R_{\mathrm{L}}} \cdot D$$
- $$P_2 = \frac{1}{ T_{\mathrm{s}}} \int_0^{ T_{\mathrm{s}}} p(t) dt = \frac{1}{ T_{\mathrm{s}}} \int_0^{D T_{\mathrm{s}}s} \frac{U_1^2}{ R_{\mathrm{L}}} dt = \frac{U_1^2 D  T_{\mathrm{s}}}{ T_{\mathrm{s}} R_{\mathrm{L}}} = \frac{U_1^2 D}{ R_{\mathrm{L}}}$$
- $$P_2 \neq \overline u_2 \cdot \overline i_2 = U_1 D \cdot \frac{U_1}{ R_{\mathrm{L}}} \cdot D = \frac{U_1^2 D T_{\mathrm{s}}}{ T_{\mathrm{s}}  R_{\mathrm{L}}} = \frac{U_1^2 D^2}{ _{\mathrm{L}}} !$$
- Averages were used, not effective values!
+    In order to calculate the average voltage $\overline u_2$, the voltage $u_{\mathrm{2}}(t)$ must be integrated over the period $T_{\mathrm{s}}$.
+
+    \begin{equation}
+    \overline u_2 = \frac{1}{T_{\mathrm{s}}} \int_0^{ T_{\mathrm{s}}} u_2 (t) \, \mathrm{d}t = \frac{1}{ T_{\mathrm{s}}} \int_0^{D T_{\mathrm{s}}} U_1 \, \mathrm{d}t + \frac{1}{ T_{\mathrm{s}}} \int_{D  T_{\mathrm{s}}}^{ T_{\mathrm{s}}} 0 \, \mathrm{d}t$$
+ $$= \left . \frac{U_1}{ T_{\mathrm{s}}} t \right |_0^{D  T_{\mathrm{s}}}  + 0 = \frac{U_1 D  T_{\mathrm{s}}}{ T_{\mathrm{s}}} = U_1 D
+    \end{equation}
+
+    In order to calculate the mean value $\overline i_2$, the current $i_{\mathrm{2}}(t)$ must be integrated over the period $T_{\mathrm{s}}$.
+    \begin{equation}
+ \overline i_2 = \frac{1}{ T_{\mathrm{s}}} \int_0^{ T_{\mathrm{s}}} i_2(t) \, \mathrm{d}t = \frac{1}{ T_{\mathrm{s}}}\int_0^{D  T_{\mathrm{s}}} \frac{U_1}{ R_{\mathrm{L}}} \, \mathrm{d}t + \frac{1}{ T_{\mathrm{s}}}\int_{D  T_{\mathrm{s}}}^{ T_{\mathrm{s}}} 0 \, \mathrm{d}t$$
+ $$= \left . \frac{U_1}{ R_{\mathrm{L}}  T_{\mathrm{a}}}  t \right |_0^{D  T_{\mathrm{s}}} = \frac{U_1 D  T_{\mathrm{s}}}{ R_{\mathrm{L}}  T_{\mathrm{s}}} = \frac{U_1}{ R_{\mathrm{L}}} D
+    \end{equation}
+
+    In order to calculate the mean value $P_{\mathrm{2}}$, the power $p(t)$ must be integrated over the period $T_{\mathrm{s}}$.
+    \begin{equation}
+P_2 = \frac{1}{T_{\mathrm{s}}} \int_0^{T_{\mathrm{s}}} p(t) \mathrm{d}t = \frac{1}{T_{\mathrm{s}}} \int_0^{D T_{\mathrm{s}}} \frac{U_1^2}{ R_{\mathrm{L}}} \mathrm{d}t = \frac{U_1^2 D T_{\mathrm{s}}}{ T_{\mathrm{s}}  R_{\mathrm{L}}} = \frac{U_1^2 D}{ R_{\mathrm{L}}}
+    \end{equation}
+ 
 \end{solutionblock}
 	% power $P_2$ as a function of the duty cycle $D$.
 
 
-\subtask{ How large should the duty cycle D be selected so that an average voltage of $\overline u_2 = \SI{8}{\volt}$ is applied to the heater? What is the mean value of the current $\overline i_2$? What power $P_2$ is converted into
-converted into heat?}
+\subtask{ How large should the duty cycle D be selected so that an average voltage of $\overline u_2 = \SI{8}{\volt}$ is applied to the heater? What is the mean value of the current $\overline i_2$? What power $P_2$ converted into heat?}
 \begin {solutionblock}
-Duty cycle to obtain an average voltage of 8V.
-    $$\overline u_2 = D \cdot U_1 \Leftrightarrow D = \frac{\overline u_2}{U_1} = \frac{8\ \si{V}}{14 \ \si{V}}=0.57$$
+
+To determine the duty cycle D, the average voltage $\overline u_2$  must be divided by the source voltage $U_1$.
+\begin{equation}
+    \overline u_2 = D U_1 \Leftrightarrow D = \frac{\overline u_2}{U_1} = \frac{8\ \si{V}}{14 \ \si{V}}=0.57
+\end{equation}
     
-   $$\overline i_2 = \frac{U_1}{ R_{\mathrm{L}}} \cdot D$$
- $$ R_{\mathrm{L}}? \quad  P_{\mathrm{LN}} = \frac{{ U_{\mathrm{2N}}}^2}{ R_{\mathrm{L}}} 
- \Leftrightarrow  R_{\mathrm{L}} = \frac{ U_{\mathrm{2N}}^2}{ P_{\mathrm{LN}}} = \frac{(14\ \si{V})^2}{500\ \si{W}} = \SI{392}{\mohm}$$%
- Average value of the current.
- $$\Rightarrow \overline i_2 = \frac{14\ \si{V}}{392\ \si{\mohm}} \cdot 0.57 =  \SI{20.36}{\ampere}$$
- Power converted into heat.
- $$P_2 = \frac{U_1^2}{ R_{\mathrm{L}}} \cdot D = \frac{14\ \si{V}^2}{392\ \si{\mohm}} \cdot 0.57 = \SI{285}{\watt}$$
+In order to determine the average current $\overline i_2$, the load resistance $R_{\mathrm{L}}$ must first be determined.
+\begin{equation}
+   \overline i_2 = \frac{U_1}{ R_{\mathrm{L}}}  D
+\end{equation}
+
+The known power equation is used to determine the load resistance $R_{\mathrm{L}}$.
+\begin{equation}
+   \quad  P_{\mathrm{LN}} = \frac{{ U_{\mathrm{2N}}}^2}{ R_{\mathrm{L}}} 
+ \Leftrightarrow  R_{\mathrm{L}} = \frac{ U_{\mathrm{2N}}^2}{ P_{\mathrm{LN}}} = \frac{(14\ \si{V})^2}{500\ \si{W}} = \SI{392}{\mohm}
+\end{equation}
+
+This value can be used to determine the average current $\overline i_2$.
+ $$\Rightarrow \overline i_2 = \frac{14\ \si{V}}{392\ \si{\mohm}} 0.57 =  \SI{20.36}{\ampere}$$
+ 
+ To determine the power $P_2$ that is converted into heat, the corresponding duty cycle D must be considered!
+ \begin{equation}
+ P_2 = \frac{U_1^2}{ R_{\mathrm{L}}}  D = \frac{14\ \si{V}^2}{392\ \si{\mohm}}  0.57 = \SI{285}{\watt}
+\end{equation}
 \end{solutionblock}
 	
-\subtask{ When starting the engine, the heater may draw a maximum average current ${\overline i}{an} = \SI{10}{\ampere}$ from the
+\subtask{ When starting the engine, the heater may draw a maximum average current ${\overline i_{\mathrm{an}}} = \SI{10}{\ampere}$ from the
 draw from the vehicle electrical system. With which duty cycle $D$ should the transistor be switched in this case?
 What is the average voltage $\overline u_2$ at the heater? What power $P_2$ is converted into heat?}
 
 %\frac{8\ \si{V}}{14 \ \si{V}}=0.57$$
 
 \begin{solutionblock}
-Duty cycle transistor.
-$$\overline i_1 = \overline i_2 = \frac{U_1}{ R_{\mathrm{L}}} \cdot D \overset ! \leq {\overline i_{\mathrm{an}}}$$
- $$\Leftrightarrow D \leq \frac{ {\overline i_{\mathrm{an}}} \cdot R_{\mathrm{L}}}{U_1} = \frac{10 \ \si{A} \cdot 392 \si{\mohm}}{14\ \si{V}} = 0.28$$
- Medium voltage at the heater.
- $$\overline u_2 = D \cdot u_1 = \SI{3.92}{\volt}$$
- Power converted into heat.
- $$P_2 = \frac{U_1^2 D}{ R_{\mathrm{L}}} = \frac{(14\ \si{V})^2 \cdot 0.28}{392\ \si{\mohm}}= \SI{140}{\watt}$$    
+
+    Due to the structure of the circuit, it is noticeable that the average current $\overline i_1$ is equal to the average current $\overline i_2$. The corresponding ratio for $\overline i_{\mathrm{an}}$ can be calculated from this.
+\begin{equation}
+\overline i_1 = \overline i_2 = \frac{U_1}{ R_{\mathrm{L}}}  D \overset ! \leq {\overline i_{\mathrm{an}}}$$
+ $$\Leftrightarrow D \leq \frac{ {\overline i_{\mathrm{an}}}  R_{\mathrm{L}}}{U_1} = \frac{10 \ \si{A} \cdot 392 \si{\mohm}}{14\ \si{V}} = 0.28
+\end{equation}
+
+To determine the average voltage $\overline u_2$ at the heater, the duty cycle D is offset against the source voltage $U_1$.
+ \begin{equation}
+ \overline u_2 = D  U_1 = 0.28 \cdot \SI{14}{\volt} = \SI{3.92}{\volt}
+\end{equation}
+
+To determine the power $P_2$ that is converted into heat, the corresponding duty cycle D must be considered!
+ \begin{equation}
+ P_2 = \frac{U_1^2 D}{ R_{\mathrm{L}}} = \frac{(14\ \si{V})^2 \cdot 0.28}{392\ \si{\mohm}}= \SI{140}{\watt}   
+\end{equation}
 \end{solutionblock}
 
 \subtask{During the journey, the heat output should be $ P_{\mathrm{2f}} = \SI{200} {\watt}$. How is the duty cycle
-	 $D$ set? What are the mean values of the current $\overline i_2$ and the voltage $\overline u_2$?}
+	 $D$ set? What are the mean values of the current $\overline i_2$ and the voltage $\overline u_2$?.}
      \begin{solutionblock}
-  Duty cycle D.
-$$ P_{\mathrm{2f}} \overset ! = \frac{U_1^2}{ R_{\mathrm{L}}} \cdot D$$
- $$\Leftrightarrow D = \frac{ R_{\mathrm{L}} \cdot P_{\mathrm{2f}}}{U_1^2} = \frac{{392\ \si{\mohm}} \cdot 200 \ \si{W}}{(14\ \si{V})^2} = 0,4$$
- Average values of current and voltage.
- $$\overline i_2 = \frac{U_1}{ R_{\mathrm{L}}} \cdot D = \SI{14.29}{\ampere}$$
- $$\overline u_2 = U_1 \cdot D = \SI{5.6}{\volt}$$
- 
+        To determine the duty cycle D, the familiar power formula is used and the parameters are then applied.
+  \begin{equation}
+P_{\mathrm{2f}} \overset ! = \frac{U_1^2}{ R_{\mathrm{L}}} D
+ \Leftrightarrow D = \frac{ R_{\mathrm{L}}  P_{\mathrm{2f}}}{U_1^2} = \frac{{392\ \si{\mohm}} \cdot 200 \ \si{W}}{(14\ \si{V})^2} = 0.4
+\end{equation}
+The known equations are used to determine the average current $\overline i_2$ and the average voltage $\overline u_2$.
+ \begin{equation}
+ \overline i_2 = \frac{U_1}{ R_{\mathrm{L}}} D = \frac{\SI{14}{\volt}}{392\ \si{\mohm}} \cdot 0.4 = \SI{14.29}{\ampere}
+\end{equation}
+\begin{equation}
+ \overline u_2 = U_1 D = {\SI{14}{\volt}} \cdot 0.4 = \SI{5.6}{\volt}
+\end{equation}
 \end{solutionblock}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
