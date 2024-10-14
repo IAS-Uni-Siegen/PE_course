@@ -19,17 +19,17 @@ can be modeled with an ohmic resistor. This circuit is shown in the figure \ref{
 \begin{center}
     \begin{circuitikz}[european currents,european resistors,american inductors]
         \draw
-        (0,0) coordinate(N1) to [short,-o] ++(1.5,0) coordinate(U1p)
+        (0,0) coordinate(N1) to [short,-] ++(1.5,0) coordinate(U1p)
         ++(2,0) node[nigfete,rotate=90](Trans){}
         (U1p) to [short,i=$i_1(t)$] (Trans.drain)
-        (Trans.source) to [short,-o,i=$i_2(t)$] ++(1.5,0) coordinate(U2p)
-        to [short,-] ++(1,0) to [R,l^=$R_\text{L}$] ++(0,-3) to [short,-o] ++(-1,0) coordinate(U2n) to [short,-o] (1,-3) coordinate(U1n) to [short,-] ++(-1,0) coordinate(N10)
+        (Trans.source) to [short,-,i=$i_2(t)$] ++(1.5,0) coordinate(U2p)
+        to [short,-] ++(1,0) to [R,l^=$R_\text{L}$, v_=$u_2$=straight] ++(0,-3) to [short,-] ++(-1,0) coordinate(U2n) to [short,-] (1,-3) coordinate(U1n) to [short,-] ++(-1,0) coordinate(N10)
          (N1) to [V] (N10)
-         (U1p) to [open,v^=$U_1$] (U1n)
-         (U2p) to [open,v_=$u_2(t)$] (U2n)
-         (Trans.gate) to [short,o-] ++(0,-.3) to [sqV] ++(0,-1) 
+         (0,0) to [V,v_=$U_1$] (0,-3)
+       %  (U2p) to [open=straight,v^=$u_2(t)$] (U2n)
+         (Trans.gate) to [short,-] ++(0,-.3) to [sqV] ++(0,-1) 
          (Trans.gate) ++(-0.3,0) node(T1){$\text{T}_\text{1}$}
-         
+      %   (Lp) to [V, v^=$U_2$] (Lp10)         
         ;
     \end{circuitikz}
 \end{center}
@@ -147,7 +147,7 @@ The graph \ref{fig:Instantaneous power} shows the time curve of the instantaneou
            xtick={0},
            xticklabels={$0$},
            ytick={0,2},
-           yticklabels={0,{\color{blue}$\frac{U_1^2}{R}$}},
+           yticklabels={0,{\color{blue}$\frac{U_1^2}{R_L}$}},
            grid=none,
            grid style={line width=.1pt, draw=gray!10},
            major grid style={line width=.2pt,draw=gray!50},    ]
@@ -251,7 +251,7 @@ What is the average voltage $\overline u_2$ at the heater? What power $P_2$ is c
     Due to the structure of the circuit, it is noticeable that the average current $\overline i_1$ is equal to the average current $\overline i_2$. The corresponding ratio for $\overline i_{\mathrm{an}}$ can be calculated from this.
 \begin{equation}
 \overline i_1 = \overline i_2 = \frac{U_1}{ R_{\mathrm{L}}}  D \overset ! \leq {\overline i_{\mathrm{an}}}$$
- $$\Leftrightarrow D \leq \frac{ {\overline i_{\mathrm{an}}}  R_{\mathrm{L}}}{U_1} = \frac{10 \ \si{A} \cdot 392 \si{\mohm}}{14\ \si{V}} = 0.28
+ $$\Leftrightarrow D \leq \frac{ {\overline i_{\mathrm{an}}}  R_{\mathrm{L}}}{U_1} = \frac{10 \ \si{A} \cdot {392\ \si{\mohm}}} {14\ \si{V}} = 0.28
 \end{equation}
 
 To determine the average voltage $\overline u_2$ at the heater, the duty cycle D is offset against the source voltage $U_1$.
@@ -265,13 +265,13 @@ To determine the power $P_2$ that is converted into heat, the corresponding duty
 \end{equation}
 \end{solutionblock}
 
-\subtask{During the journey, the heat output should be $ P_{\mathrm{2f}} = \SI{200} {\watt}$. How is the duty cycle
+\subtask{During the journey, the heat output should be $ P_{2f} = \SI{200} {\watt}$. How is the duty cycle
 	 $D$ set? What are the mean values of the current $\overline i_2$ and the voltage $\overline u_2$?.}
      \begin{solutionblock}
         To determine the duty cycle D, the familiar power formula is used and the parameters are then applied.
   \begin{equation}
-P_{\mathrm{2f}} \overset ! = \frac{U_1^2}{ R_{\mathrm{L}}} D
- \Leftrightarrow D = \frac{ R_{\mathrm{L}}  P_{\mathrm{2f}}}{U_1^2} = \frac{{392\ \si{\mohm}} \cdot 200 \ \si{W}}{(14\ \si{V})^2} = 0.4
+P_{2f} \overset ! = \frac{U_1^2}{ R_{\mathrm{L}}} D
+ \Leftrightarrow D = \frac{ R_{\mathrm{L}}  P_{2f}}{U_1^2} = \frac{{392\ \si{\mohm}} \cdot 200 \ \si{W}}{(14\ \si{V})^2} = 0.4
 \end{equation}
 The known equations are used to determine the average current $\overline i_2$ and the average voltage $\overline u_2$.
  \begin{equation}
@@ -834,8 +834,10 @@ What duty cycle D is set?}
 
 
 \task{Power losses within the step-down converter}
-The power loss of a buck converter is analysed. The inductance is so large
-that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}(t) = I_{\mathrm{2}} =const $
+The power loss of a buck converter is to be analysed. The inductance is so large
+that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}(t) = I_{\mathrm{2}} =const $. Furthermore, the component values are given in \ref{table:Parameters of the circuit} and the currents and voltages of the switch-on and switch-off processes in \ref{fig:Switch-on behaviour and switch-off behaviour of} and \ref{fig:Switch-on behaviour and switch-off behaviour of voltage}. 
+
+%\ref{fig:Currents and voltages during the period}
 
 \begin{figure}[h]
     \begin{center}
@@ -843,48 +845,50 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
             \draw
         (0,0) coordinate(N1) to [short] ++(1.5,0) coordinate(Ud)
         ++(0,-1) node[nigfete](Trans){}
-        (Ud) to [short,i=$i_c(t)$] (Trans.drain)
+        (Ud) to [short,i=$i_{\mathrm{c}}(t)$] (Trans.drain)
         (Trans.source) to [short,-] ++(0,0) coordinate(U2p)
+        node[circ]{}
         to [short,-] ++(0,0) to [L,l^=$L$] ++(3,0) coordinate(Lp) to [short,-] ++(0,-2) coordinate(Lp10)
-        (Lp) to [V, v^=$U_2$] (Lp10)
+        (Lp) to [V, v_=$U_2$] (Lp10)
         (Lp) to [open] (Lp10)
         coordinate(Lp10) to  [short,-] ++(-3,0) coordinate(D)
-        to [D,l^=$D$, i=$i_D(t)$] ++(0,2)
+        to [D,l^=$D$, i=$i_{\mathrm{D}}(t)$] ++(0,2)
         (0,-3.77) coordinate(Bw) to [short] ++(3,0) coordinate(U1)
         %(N1) to [V] (Bw)
-        (N1) to [open,v=$U_1$] (Bw)
+        (N1) to [V,v_=$U_1$] (Bw)
            ;
         \end{circuitikz}
     \end{center}
-    \caption{Graphic of a buck converter.}
-        \label{fig:buck converter}
+    \caption{Circuit buck converter.}
+        \label{fig:Graphic of a buck converter}
     \end{figure}
 
-
+    
       \begin{table}[h]
         \centering  % Zentriert die Tabelle
                 \begin{tabular}{|l|l|l|l|}
             \hline
             \multicolumn{2}{|l|}{\textbf{DC link voltage:}} & \multicolumn{2}{l|}{\textbf{Diode:}} \\
             \hline
-            \multicolumn{2}{|l|}{$U_d = 600$V} & Forward voltage: & $u_F = 2{,}7$V \\
+            \multicolumn{2}{|l|}{$U_{\mathrm{1}} = \SI{600}{\volt}$} & Forward voltage: & $u_{\mathrm{F}} = \SI{2.7}{\volt}$ \\
             \hline
-            \multicolumn{2}{|l|}{Output current: $I_2 = 30$A} & Einschaltverluste: & $E_{\text{on},D} = 52\,\mu$J \\
+            \multicolumn{2}{|l|}{Output current: $I_2 = 30$A} & Switch-on losses: & $E_{\text{on},D} = \SI{52}{\micro\joule}$ \\
             \hline
-            \multicolumn{2}{|l|}{Clock frequency: $f_T = 25$kHz} & Ausschaltverluste: & $E_{\text{off},D} = 240\,\mu$J \\
+            \multicolumn{2}{|l|}{Clock frequency: $f_{\mathrm{T}} = \SI{25}{\kilo\hertz}$} & Switch-off losses: & $E_{\text{off},D} = \SI{240}{\micro\joule}$ \\
             \hline
             \multicolumn{2}{|l|}{\textbf{IGBT:}} & \multicolumn{2}{l|}{} \\
             \hline
-            Forward voltage: & $u_{CE,\text{on}} = 2{,}5$V & \multicolumn{2}{l|}{} \\
+            Forward voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2.5}{\volt}$ & \multicolumn{2}{l|}{} \\
             \hline
             \multicolumn{2}{|l|}{\textbf{Inductance:}} & \multicolumn{2}{l|}{} \\
             \hline
-            Copper resistance: & $R_{\text{Cu}} = 45$\,m$\Omega$ & \multicolumn{2}{l|}{} \\
+            Copper resistance: & $R_{\text{Cu}} = \SI{45}{\milli\ohm}$ & \multicolumn{2}{l|}{} \\
             \hline
-            Iron losses: & $P_{V,\text{FE}} = 13$W & \multicolumn{2}{l|}{} \\
+            Iron losses: & $P_{\mathrm{l},\text{FE}} = \SI{13}{\watt}$ & \multicolumn{2}{l|}{} \\
             \hline
         \end{tabular}
         \caption{Parameters of the circuit.}  % Beschriftung der Tabelle
+        \label{table:Parameters of the circuit}
     \end{table}
 
     \begin{figure}[h]
@@ -897,7 +901,7 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
             minor grid style={line width=.1pt,draw=gray!20},
             xlabel={$t$ [ns]},
             ylabel={$i_C(t)$ [A]},
-            title={Einschaltverhalten},
+            title={Switch-on behaviour},
             xmin=0, xmax=150,
             ymin=0, ymax=70,
             xtick={0, 50, 100, 150},
@@ -912,7 +916,7 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
                 (0,0) (25,0) (50, 20) (75, 40) (100, 60) (125, 30) (150, 30)
             };
         \end{axis}
-        \end{tikzpicture}
+        \end{tikzpicture} 
         \hspace{1cm} % Abstand zwischen den beiden Diagrammen
         \begin{tikzpicture}
         \begin{axis}[
@@ -920,9 +924,9 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
             grid=both,
             major grid style={line width=.2pt,draw=gray!50},
             minor grid style={line width=.1pt,draw=gray!20},
-            xlabel={$t$ [ns]},
-            ylabel={$i_C(t)$ [A]},
-            title={Ausschaltverhalten},
+            xlabel={$t$/ns},
+            ylabel={$i_C(t)$/A},
+            title={Switch-off behaviour},
             xmin=0, xmax=600,
             ymin=0, ymax=70,
             xtick={0, 200, 400, 600},
@@ -938,20 +942,21 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
             };
         \end{axis}
         \end{tikzpicture}
-        \caption{Switch-on behaviour and switch-off behaviour of $i_C(t)$}
+        \caption{Switch-on behaviour and switch-off behaviour of $i_{\mathrm{C}}(t)$}
+        \label{fig:Switch-on behaviour and switch-off behaviour of}
 
-        \end{figure}
+    %    \end{figure}
        
-    \begin{figure}[h]
-        \centering
+  %  \begin{figure}[h]
+     %   \centering
         \begin{tikzpicture}
         \begin{axis}[
             width=7cm, height=5cm,
             grid=both,
             major grid style={line width=.2pt,draw=gray!50},
             minor grid style={line width=.1pt,draw=gray!20},
-            xlabel={$t$ [ns]},
-            ylabel={$u_{\mathrm{CE}}(t)$ [V]},
+            xlabel={$t$/ns},
+            ylabel={$u_{\mathrm{CE}}(t)$/V},
             xmin=0, xmax=150,
             ymin=0, ymax=800,
             xtick={0, 50, 100, 150},
@@ -974,8 +979,8 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
             grid=both,
             major grid style={line width=.2pt,draw=gray!50},
             minor grid style={line width=.1pt,draw=gray!20},
-            xlabel={$t$ [ns]},
-            ylabel={$u_{\mathrm{CE}}(t)$ [V]},
+            xlabel={$t$/ns},
+            ylabel={$u_{\mathrm{CE}}(t)$/V},
             xmin=0, xmax=600,
             ymin=0, ymax=1000,
             xtick={0,200, 400, 600},
@@ -992,7 +997,7 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
         \end{axis}
         \end{tikzpicture}
         \caption{Switch-on behaviour and switch-off behaviour of $u_{\mathrm{CE}}(t)$}
-        
+        \label{fig:Switch-on behaviour and switch-off behaviour of voltage}
     \end{figure}
 
     
@@ -1052,7 +1057,7 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
         E_{\mathrm{off,T}} =  \SI {3.45}{\milli\joule}
      \end{equation}
 
-        \begin{figure}[h]
+        \begin{solutionfigure}[h]
             \centering
             \begin{subfigure}[t]{0.45\textwidth}
                 \centering
@@ -1062,8 +1067,8 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
                         grid=both,
                         major grid style={line width=.2pt,draw=gray!50},
                         minor grid style={line width=.1pt,draw=gray!20},
-                        xlabel={$t$ [ns]},
-                        ylabel={$p(t)$ [kW]},
+                        xlabel={$t$/ns},
+                        ylabel={$p(t)$/kW},
                         xmin=0, xmax=150,
                         ymin=0, ymax=45,
                         xtick={0, 50, 100, 150},
@@ -1091,8 +1096,8 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
                         grid=both,
                         major grid style={line width=.2pt,draw=gray!50},
                         minor grid style={line width=.1pt,draw=gray!20},
-                        xlabel={$t$ [ns]},
-                        ylabel={$p(t)$ [kW]},
+                        xlabel={$t$/ns},
+                        ylabel={$p(t)$/kW},
                         xmin=0, xmax=600,
                         ymin=0, ymax=45,
                         xtick={0,200, 400, 600},
@@ -1113,7 +1118,7 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
             \end{subfigure}
             
             \caption{Switch-on behaviour and switch-off behaviour of $p(t)$}
-        \end{figure}
+        \end{solutionfigure}
     \end{solutionblock}
 
 
