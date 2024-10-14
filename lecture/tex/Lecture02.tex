@@ -2421,8 +2421,8 @@
     \end{equation}
     \onslide<6->{The buck-boost converter current ripple characteristic matches the previous boost converter behavior (cf. \eqref{eq:ripple-current-duty-cycle-max-step-up_converter}):}
     \begin{itemize}
-        \item<6-> Its minimal for $D \rightarrow 0$ since the output voltage becomes zero and the inductor is connected to the output voltage over the entire switching peripd. 
-        \item<7-> Its maximal for $D \rightarrow 1$ since the inductor is connected to the (on-zero) input voltage over the entire switching peripd.
+        \item<6-> Its minimal for $D \rightarrow 0$ since the output voltage becomes zero and the inductor is connected to the output voltage over the entire switching period. 
+        \item<7-> Its maximal for $D \rightarrow 1$ since the inductor is connected to the (none-zero) input voltage over the entire switching period.
     \end{itemize}%
 \end{frame}
 
@@ -2431,5 +2431,35 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Circuit realization}
-    
+    \begin{itemize}
+        \item In \figref{fig:buck-boost-converter-realization-1Q} the buck-boost converter realization is a direct series circuit combination of \figref{fig:step-down-converter-realization-1Q} and \figref{fig:step-up-converter-realization-1Q}. 
+        \item This configuration can only provide positive voltages and currents (\hl{first quadrant}).
+        \item It should be noted that this circuit requires two diodes and two transistors.
+    \end{itemize}
+    \begin{figure}
+        \begin{circuitikz}[]
+            %Boost part
+            \draw (4,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+            to [short]++(-4,0)
+            (2.0,2) to [diode, l_=$D_2$, -o, i=$i_2(t)$] (4,2)
+            (2,1) node[npn](npn2) {}
+            (npn2.C) to [short, -*] (2,2)
+            (npn2.E) to [short, -*] (2,0);
+            \draw let \p2 = (npn2.B) in node[anchor=east] at (\x2,\y2) {$T_2$};
+            % Buck part
+            \draw (0,0) to [short]++(-4,0)
+            to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+            (-2,2) to [Tnpn, o-*, n=npn1] ++(-2,0)
+            (-4,2) to [short, i=$i_1(t)$] (-3.3,2)
+            (-2,0) to [diode, l_=$D_1$, *-*] (-2,2);
+            \draw let \p1 = (npn1.B) in node[anchor=north] at (\x1,\y1) {$T_1$};
+            %Combining inductor
+            \draw (-2,2) to [short] (-1,2)
+             to [inductor, l=$L$, v = $u_\mathrm{L}(t)$, voltage = straight] (1,2)
+             to [short, i=$i_\mathrm{L}(t)$](2,2);
+        \end{circuitikz}
+        \caption{Buck-boost converter with real components (single quadrant type)}
+        \label{fig:buck-boost-converter-realization-1Q}
+    \end{figure}
 \end{frame}
+
