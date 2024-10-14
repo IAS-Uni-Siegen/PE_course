@@ -250,8 +250,8 @@ What is the average voltage $\overline u_2$ at the heater? What power $P_2$ is c
 
     Due to the structure of the circuit, it is noticeable that the average current $\overline i_1$ is equal to the average current $\overline i_2$. The corresponding ratio for $\overline i_{\mathrm{an}}$ can be calculated from this.
 \begin{equation}
-\overline i_1 = \overline i_2 = \frac{U_1}{ R_{\mathrm{L}}}  D \overset ! \leq {\overline i_{\mathrm{an}}}$$
- $$\Leftrightarrow D \leq \frac{ {\overline i_{\mathrm{an}}}  R_{\mathrm{L}}}{U_1} = \frac{10 \ \si{A} \cdot {392\ \si{\mohm}}} {14\ \si{V}} = 0.28
+\overline i_1 = \overline i_2 = \frac{U_1}{ R_{\mathrm{L}}}  D \overset ! \leq {\overline i_{\mathrm{2,s}}}$$
+ $$\Leftrightarrow D \leq \frac{ {\overline i_{\mathrm{2,s}}}  R_{\mathrm{L}}}{U_1} = \frac{10 \ \si{A} \cdot {392\ \si{\mohm}}} {14\ \si{V}} = 0.28
 \end{equation}
 
 To determine the average voltage $\overline u_2$ at the heater, the duty cycle D is offset against the source voltage $U_1$.
@@ -265,20 +265,20 @@ To determine the power $P_2$ that is converted into heat, the corresponding duty
 \end{equation}
 \end{solutionblock}
 
-\subtask{During the journey, the heat output should be $ P_{2f} = \SI{200} {\watt}$. How is the duty cycle
-	 $D$ set? What are the mean values of the current $\overline i_2$ and the voltage $\overline u_2$?.}
+\subtask{During the journey, the heat output should be $ P_{\mathrm{2f}} = \SI{200} {\watt}$. How is the duty cycle
+	 $D$ set? What are the mean values of the current $\overline i_\mathrm{2}$ and the voltage $\overline u_\mathrm{2}$?.}
      \begin{solutionblock}
         To determine the duty cycle D, the familiar power formula is used and the parameters are then applied.
   \begin{equation}
-P_{2f} \overset ! = \frac{U_1^2}{ R_{\mathrm{L}}} D
- \Leftrightarrow D = \frac{ R_{\mathrm{L}}  P_{2f}}{U_1^2} = \frac{{392\ \si{\mohm}} \cdot 200 \ \si{W}}{(14\ \si{V})^2} = 0.4
+P_{\mathrm{2f}} \overset ! = \frac{U_\mathrm{1}^2}{ R_{\mathrm{L}}} D
+ \Leftrightarrow D = \frac{ R_{\mathrm{L}}  P_{\mathrm{2f}}}{U_\mathrm{1^2}} = \frac{{392\ \si{\mohm}} \cdot 200 \ \si{W}}{(14\ \si{V})^2} = 0.4
 \end{equation}
-The known equations are used to determine the average current $\overline i_2$ and the average voltage $\overline u_2$.
+The known equations are used to determine the average current $\overline i_\mathrm{2}$ and the average voltage $\overline u_\mathrm{2}$.
  \begin{equation}
- \overline i_2 = \frac{U_1}{ R_{\mathrm{L}}} D = \frac{\SI{14}{\volt}}{392\ \si{\mohm}} \cdot 0.4 = \SI{14.29}{\ampere}
+ \overline i_\mathrm{2} = \frac{U_\mathrm{1}}{ R_{\mathrm{L}}} D = \frac{\SI{14}{\volt}}{392\ \si{\mohm}} \cdot 0.4 = \SI{14.29}{\ampere}
 \end{equation}
 \begin{equation}
- \overline u_2 = U_1 D = {\SI{14}{\volt}} \cdot 0.4 = \SI{5.6}{\volt}
+ \overline u_\mathrm{2} = U_\mathrm{1} D = {\SI{14}{\volt}} \cdot 0.4 = \SI{5.6}{\volt}
 \end{equation}
 \end{solutionblock}
 
@@ -287,143 +287,121 @@ The known equations are used to determine the average current $\overline i_2$ an
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \task{Step-down converter with output filter}
-A step-down converter is used to charge a mobile phone from the vehicle electrical system with the vehicle electrical system voltage $U_1 = \SI{13.5}{\volt}$. The input voltage of the mobile phone is $U_2 = \SI{4.5}{\volt}$.
-\begin{center}
-\begin{circuitikz}[european currents,european resistors,american inductors]
-	\draw
-	(0,0) coordinate(U+) to [short,-] ++(0.5,0)  
-	node[currarrow](Tl){} -- ++(1,0) ++(0.5,0) node[nigfete,rotate=90](Trans){} -- ++(1.5,0) coordinate(Tr)  to [short,-*] ++(0.5,0) coordinate(junc1)   -- ++(0.5,0) coordinate(Ll) to [L,l_=$L$,i^=$i_\text{L}$] ++(2,0) coordinate(Lr) to [short,-*] ++(0.5,0) coordinate(junc2)  -- ++(2,0)  coordinate(Rt) to [R,l_=$R$,i_=$i_\text{2}$,v^=$U_\text{2}$,voltage shift=0.5] ++(0,-3) coordinate(Rb) to [short,-*] ++(-2,0) coordinate(junc3) to [short,-*] ++(-3,0) coordinate(junc4) to [short] ++(-2,0) coordinate(junc5) to [short,-] ++(-2,0) coordinate(U-)
-        (junc2) to [C,l_=$C$](junc3)
-        (junc4) to [short]  ++(0,0.5) coordinate(Db) to[D-,l^=$D$]  ++(0,2) coordinate(Dt) to [short] (junc1)
-         (Trans.G)  to [sqV] ++(0,-1)(junc5) 
-	
-	(U+) to [V=$U_1$] (U-)
-	
-  	(Trans)  node[anchor=south,color=black]{$T_1$}	
- 	(Tl)  node[anchor=south,color=black]{$i_\text{1}$}	
-	;
-\end{circuitikz}
-\end{center}
+A step-down converter is used to charge a mobile phone from the vehicle electrical system with the vehicle electrical
+system voltage $U_1 = \SI{13.5}{\volt}$.
+The input voltage of the mobile phone is $U_2 = \SI{4.5}{\volt}$.
 
-(both voltages are assumed to be constant). The inductance of the ideal coil is $L = \SI{10}{\milli\henry}$
-The switching frequency is $f_s = \SI{ 100}{\kilo\hertz}$. All components are ideal.
+\begin{figure}[htb]
+    \begin{center}
+    \begin{circuitikz}[european currents,european resistors,american inductors]
+        \draw
+        (0,0) coordinate(U+) to [short,-] ++(0.5,0)  
+        node[currarrow](Tl){} -- ++(1,0) ++(0.5,0) node[nigfete,rotate=90](Trans){} -- ++(1.5,0) coordinate(Tr)
+            to [short,-*] ++(0.5,0) coordinate(junc1)   -- ++(0.5,0) coordinate(Ll) to [L,l_=$L$,i^=$i_\text{L}$]
+            ++(2,0) coordinate(Lr) to [short,-*] ++(0.5,0) coordinate(junc2)  -- ++(2,0)
+            coordinate(Rt) to [R,l_=$R$,i_=$i_\text{2}$,v^=$U_\text{2}$,voltage shift=0.5, voltage=straight] ++(0,-3) coordinate(Rb)
+            to [short,-*] ++(-2,0) coordinate(junc3) to [short,-*] ++(-3,0) coordinate(junc4) to [short] ++(-2,0)
+            coordinate(junc5) to [short,-] ++(-2,0) coordinate(U-)
+            (junc2) to [C,l_=$C$](junc3)
+            (junc4) to [short]  ++(0,0.5) coordinate(Db) to[D-,l^=$D$]  ++(0,2) coordinate(Dt) to [short] (junc1)
+            (Trans.G)  to [sqV] ++(0,-1)(junc5) 
+        
+        (U+) to [V=$U_1$] (U-)
+        
+        (Trans)  node[anchor=south,color=black]{$T_1$}	
+        (Tl)  node[anchor=south,color=black]{$i_\text{1}$}	
+        ;
+    \end{circuitikz}
+    \end{center}
+    \caption{Circuit with one transistor, filter and one load resistor.}
+    \label{fig:transistor circuit}
+\end{figure}
+
+Consider both voltages are constant. The inductance of the coil is $L = \SI{10}{\milli\henry}$.
+The switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All components are ideal.
 
 \subtask{Draw the equivalent circuits for the two switching states.}
 % Solution of subtask
 \begin{solutionblock}
-	\begin{tabular}{cc}
-        	Transistor leitet & Diode leitet\\
-       	\begin{circuitikz}[european currents,european resistors,american inductors,]
-	        \draw
-            (0,0) coordinate(u1o)
-            to [V,v^=$U_2$] ++(0,-3) coordinate(u1u)
-                (u1o) to [short,-,i^<=$i_2$] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}$,mirror] ++(-3,0) to [short,-,i^<=$i_1$] ++(-1,0) coordinate(uqo)
-                (u1u) to [short,-] ++(-5,0) coordinate(uqu)
-                (uqo) to [V,v_=$U_1$] (uqu)
-                ;
-        \end{circuitikz}
-&
-      	\begin{circuitikz}[european currents,european resistors,american inductors,]
-            \draw
-            (0,0) coordinate(u2o)
-            to [V,v^=$U_2$] ++(0,-3) coordinate(u2u)
-                (u2o) to [short,-,i^<=$i_2$] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}$,mirror] ++(-3,0) coordinate(Ll) ++(-1,0) coordinate(uqo)
-                (u2u) to [short,-*] ++(-4,0) coordinate(Llu) to [short,-] ++(-1,0) coordinate(uqu)
-                (Llu) to [short,-,i_=$i_1$] (Ll)
-                (uqo) to [V,v_=$U_1$] (uqu)
-                ;
-        \end{circuitikz}
-% \\
-%         	\psfrag {U1}{$U_1$}
-% 		\psfrag {U2}{$U_2$}
-% 		\psfrag {i1}{$i_1$}
-% 		\psfrag {i2}{$i_2$}
-% 		\psfrag {uL}{$u_L$}
-% 		\psfrag {L}{$L$}
-%         	\includegraphics{bilder/loesung2_1a} 
-%         	& 
-%         	\psfrag {U1}{$U_1$}
-% 		\psfrag {U2}{$U_2$}
-% 		\psfrag {i1}{$i_1$}
-% 		\psfrag {i2}{$i_2$}
-% 		\psfrag {uL}{$u_L$}
-% 		\psfrag {L}{$L$}
-%         	\includegraphics{bilder/loesung2_1b}
-	\end{tabular}
-
+    \begin{solutionfigure}[h]
+        \begin{tabular}{cc}
+                transistor conducts & diode conducts\\
+            \begin{circuitikz}[european currents,european resistors,american inductors,]
+                \draw
+                (0,0) coordinate(u1o)
+                to [V,v^=$U_2$] ++(0,-3) coordinate(u1u)
+                    (u1o) to [short,-,i^<=$i_2$] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}$,mirror,voltage=straight] ++(-3,0) to [short,-,i^<=$i_1$] ++(-1,0) coordinate(uqo)
+                    (u1u) to [short,-] ++(-5,0) coordinate(uqu)
+                    (uqo) to [V,v_=$U_1$] (uqu)
+                    ;
+            \end{circuitikz}
+        &
+            \begin{circuitikz}[european currents,european resistors,american inductors,]
+                \draw
+                (0,0) coordinate(u2o)
+                to [V,v^=$U_2$, voltage=straight] ++(0,-3) coordinate(u2u)
+                    (u2o) to [short,-,i^<=$i_2$] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}$,mirror,voltage=straight] ++(-3,0) coordinate(Ll) ++(-1,0) coordinate(uqo)
+                    (u2u) to [short,-*] ++(-4,0) coordinate(Llu) to [short,-] ++(-1,0) coordinate(uqu)
+                    (Llu) to [short,-,i_=$i_1$] (Ll)
+                    (uqo) to [V,v_=$U_1$] (uqu)
+                    ;
+            \end{circuitikz}
+        \end{tabular}
+        \caption{Circuits for different switching states (Transistor active and inactive)}
+        \label{fig:transistor circuit}
+    \end{solutionfigure}
 \end{solutionblock}
 
 \subtask{At what duty cycle $D$ should the buck converter be operated?}
 % Solution of subtask
 
 \begin{solutionblock}
+    The duty cycle corresponds to the relation of output voltage to input voltage:
     \begin{equation}
         D = \frac{U_2}{U_1} = \frac{\SI{ 4.5}{\volt}}{\SI{ 13.5}{\volt}} = \frac{1}{3}
     \end{equation}
 
 \end{solutionblock}
    
-\subtask{Qualitatively draw the voltage and current waveforms in the components.}
+\subtask{Sketch the voltage and current waveforms in the components.}
 % Solution of subtask
-
-\begin{solutionblock}    
-    \begin{center}
-        \definecolor{orange}{rgb}{1.0,0.5,0}
-        \begin{tikzpicture}
-            \begin{groupplot}[group style={%
-                group size=1 by 5,
-            %     group name=plots,
-                xlabels at=edge bottom,
-                y descriptions at=edge left,
-                },
-            %     ybar,
-                xmin=0, xmax=13.5,
-                domain=0:13,
-            %     enlarge x limits={abs=.5},
-                width=0.6\textwidth,
-            %     height=0.6\textwidth,
-            %     scaled y ticks=base 10:-3,
-            %     xticklabels from table={\first}{Criterion},
-            %     x tick label style={rotate=90,anchor=east},
-            %     xtick=data,
-            %         x label style={at={(axis description cs:1,0)},anchor=north},
-            %         xlabel={$t$},
-                    xtick={0,1,4,5,8,9,12,13},
-                    xticklabels={{},{},{},{},{},{},{},{},{},{}},
-                    grid=both,
-                    grid style={line width=.1pt, draw=gray!10},
-                    major grid style={line width=.2pt,draw=gray!50},    
-                    axis y line=center,
-                    axis x line=middle,
+\begin{solutionblock} %[htb]
+    The waveforms of $u_\mathrm{T}$, $u_\mathrm{D}$, $u_\mathrm{L}$, $i_\mathrm{L}$ and $i_\mathrm{T}$ are displayed in \autoref{fig:transistor_circuit}.
+    \begin{solutionfigure}[htb]  
+        \begin{center}
+            \definecolor{orange}{rgb}{1.0,0.5,0}
+            \begin{tikzpicture}
+    % groupplot begin
+                \begin{groupplot}[group style={
+                            group size=1 by 5,
+                            xlabels at=edge bottom,
+                            y descriptions at=edge left,
+                        },
+                        xmin=0, xmax=13.5,
+                        domain=0:13,
+                        width=0.6\textwidth,
+                        xtick={0,1,4,5,8,9,12,13},
+                        xticklabels={{},{},{},{},{},{},{},{},{},{}},
+                        grid=both,
+                        grid style={line width=.1pt, draw=gray!10},
+                        major grid style={line width=.2pt,draw=gray!50},    
+                        axis y line=center,
+                        axis x line=middle,
                     ]
-            
-            %     ]
-            
-            
-            \nextgroupplot[
-            %         domain=0:13,
-            %         xmin=0, xmax=13.5,
-                    ymin=0, ymax=1.2,
-                    samples=500,
-            %         axis y line=center,
-            %         axis x line=middle,
-            %         xtick distance=1,
-                    ytick distance=2,
-                    extra y ticks=0,
-                    x label style={at={(axis description cs:1,0)},anchor=north},
-                    y label style={at={(axis description cs:-.05,.97)},anchor=south},
-            %         width=0.6\textwidth,
-                    height=0.2\textwidth,
-                    xlabel={$t$},
-                    ylabel={{\color{orange}$u_\text{T}$}},
-            %         xtick={0,1,4,5,8,9,12,13},
-            %         xticklabels={$0$,{},{},{},{},{},{},{},{},{}},
-                    ytick={0,1},
-                    yticklabels={0,$U_1$},
-            %         grid=both,
-            %         grid style={line width=.1pt, draw=gray!10},
-            %         major grid style={line width=.2pt,draw=gray!50},    
-            ]
+
+                    \nextgroupplot[
+                        ymin=0, ymax=1.2,
+                        samples=500,
+                        ytick distance=2,
+                        extra y ticks=0,
+                        x label style={at={(axis description cs:1,0)},anchor=north},
+                        y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                        height=0.2\textwidth,
+                        xlabel={$t$},
+                        ylabel={{\color{orange}$u_\text{T}$}},
+                        ytick={0,1},
+                        yticklabels={0,$U_1$},
+                    ]
                     \addplot[color=orange,mark=none,solid] coordinates{
                         (0, 0)
                         (1, 0)
@@ -440,31 +418,21 @@ The switching frequency is $f_s = \SI{ 100}{\kilo\hertz}$. All components are id
                         (12,0)
                         (13, 0)
                     };  
-                    
-            \nextgroupplot[
-            %         domain=0:13,
-            %         xmin=0, xmax=13.5,
-                    ymin=0, ymax=1.2,
-                    samples=500,
-                    axis y line=center,
-            %         axis x line=middle,
-            %         xtick distance=1,
-                    ytick distance=2,
-                    extra y ticks=0,
-                    x label style={at={(axis description cs:1,0)},anchor=north},
-                    y label style={at={(axis description cs:-.05,.97)},anchor=south},
-            %         width=0.6\textwidth,
-                    height=0.2\textwidth,
-                    xlabel={$t$},
-                    ylabel={{\color{blue}$u_\text{D}$}},
-            %         xtick={0,1,4,5,8,9,12,13},
-            %         xticklabels={$0$,{},{},{},{},{},{},{},{},{}},
-                    ytick={0,.33,1},
-                    yticklabels={0,$U_2$,$U_1$},
-            %         grid=both,
-            %         grid style={line width=.1pt, draw=gray!10},
-            %         major grid style={line width=.2pt,draw=gray!50},    
-            ]
+                        
+                    \nextgroupplot[
+                        ymin=0, ymax=1.2,
+                        samples=500,
+                        axis y line=center,
+                        ytick distance=2,
+                        extra y ticks=0,
+                        x label style={at={(axis description cs:1,0)},anchor=north},
+                        y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                        height=0.2\textwidth,
+                        xlabel={$t$},
+                        ylabel={{\color{blue}$u_\text{D}$}},
+                        ytick={0,.33,1},
+                        yticklabels={0,$U_2$,$U_1$},
+                    ]
                     \addplot[color=blue,mark=none,solid] coordinates{
                         (0, 1)
                         (1, 1)
@@ -482,31 +450,21 @@ The switching frequency is $f_s = \SI{ 100}{\kilo\hertz}$. All components are id
                         (13, 1)
                         (13, 0)
                     };
-                
-            \nextgroupplot[
-            %         domain=0:13,
-            %         xmin=0, xmax=13.5,
-                    ymin=-.5, ymax=1.2,
-                    samples=500,
-                    axis y line=center,
-            %         axis x line=middle,
-            %         xtick distance=1,
-                    ytick distance=2,
-                    extra y ticks=0,
-                    x label style={at={(axis description cs:1,0.25)},anchor=north},
-                    y label style={at={(axis description cs:-.05,.97)},anchor=south},
-            %         width=0.6\textwidth,
-                    height=0.25\textwidth,
-                    xlabel={$t$},
-                    ylabel={{\color{orange}$u_\text{L}$}},
-            %         xtick={0,1,4,5,8,9,12,13},
-            %         xticklabels={$0$,{},{},{},{},{},{},{},{},{}},
-                    ytick={-.333,0,1},
-                    yticklabels={$-U_2$,0,$U_1-U_2$},
-            %         grid=both,
-            %         grid style={line width=.1pt, draw=gray!10},
-            %         major grid style={line width=.2pt,draw=gray!50},    
-            ]
+                    
+                    \nextgroupplot[
+                        ymin=-.5, ymax=1.2,
+                        samples=500,
+                        axis y line=center,
+                        ytick distance=2,
+                        extra y ticks=0,
+                        x label style={at={(axis description cs:1,0.25)},anchor=north},
+                        y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                        height=0.25\textwidth,
+                        xlabel={$t$},
+                        ylabel={{\color{orange}$u_\text{L}$}},
+                        ytick={-.333,0,1},
+                        yticklabels={$-U_2$,0,$U_1-U_2$},
+                    ]
                     \draw [fill=green] (axis cs:4,0) rectangle (axis cs:5,1);
                     \draw [fill=cyan] (axis cs:5,0) rectangle (axis cs:8,-.3333);
                     \addplot[color=orange,mark=none,solid] coordinates{
@@ -526,33 +484,23 @@ The switching frequency is $f_s = \SI{ 100}{\kilo\hertz}$. All components are id
                         (13, 1)
                         (13, -.333)
                     };
-                \node[anchor=center] at (axis cs:4.5,0.5){\tiny $ A_\text{ein}$};
-                \node[anchor=center] at (axis cs:6.5,-0.1667){\tiny $ A_\text{aus}$};
-            
-            \nextgroupplot[
-            %         domain=0:13,
-            %         xmin=0, xmax=13.5,
-                    ymin=0, ymax=1.2,
-                    samples=500,
-                    axis y line=center,
-            %         axis x line=middle,
-            %         xtick distance=1,
-                    ytick distance=2,
-                    extra y ticks=0,
-                    x label style={at={(axis description cs:1,0)},anchor=north},
-                    y label style={at={(axis description cs:-.05,.97)},anchor=south},
-            %         width=0.6\textwidth,
-                    height=0.2\textwidth,
-                    xlabel={$t$},
-                    ylabel={{\color{red}$i_\text{L}$}},
-            %         xtick={0,1,4,5,8,9,12,13},
-            %         xticklabels={$0$,{},{},{},{},{},{},{},{},{}},
-                    ytick={0,.5,.75,1},
-                    yticklabels={0,,,},
-            %         grid=both,
-            %         grid style={line width=.1pt, draw=gray!10},
-            %         major grid style={line width=.2pt,draw=gray!50},    
-            ]
+                    \node[anchor=center] at (axis cs:4.5,0.5){\tiny $ A_\text{ein}$};
+                    \node[anchor=center] at (axis cs:6.5,-0.1667){\tiny $ A_\text{aus}$};
+
+                    \nextgroupplot[
+                        ymin=0, ymax=1.2,
+                        samples=500,
+                        axis y line=center,
+                        ytick distance=2,
+                        extra y ticks=0,
+                        x label style={at={(axis description cs:1,0)},anchor=north},
+                        y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                        height=0.2\textwidth,
+                        xlabel={$t$},
+                        ylabel={{\color{red}$i_\text{L}$}},
+                        ytick={0,.5,.75,1},
+                        yticklabels={0,,,},
+                    ]
                     \addplot[color=red,mark=none,solid] coordinates{
                         (0, 0.5)
                         (1, 1)
@@ -563,31 +511,21 @@ The switching frequency is $f_s = \SI{ 100}{\kilo\hertz}$. All components are id
                         (12,0.5)
                         (13,1)
                     };
-            
-            \nextgroupplot[
-            %         domain=0:13,
-            %         xmin=0, xmax=13.5,
-                    ymin=0, ymax=1.2,
-                    samples=500,
-                    axis y line=center,
-            %         axis x line=middle,
-            %         xtick distance=1,
-                    ytick distance=2,
-                    extra y ticks=0,
-                    x label style={at={(axis description cs:1,0)},anchor=north},
-                    y label style={at={(axis description cs:-.0,.97)},anchor=south},
-            %         width=0.6\textwidth,
-                    height=0.2\textwidth,
-                    xlabel={$t$},
-                    ylabel={{\color{orange}$i_\text{T}$}\quad{\color{blue}$i_\text{D}$}},
-            %         xtick={0,1,4,5,8,9,12,13},
-            %         xticklabels={$0$,{},{},{},{},{},{},{},{},{}},
-                    ytick={0,.5,.75,1},
-                    yticklabels={0,,,},
-            %         grid=both,
-            %         grid style={line width=.1pt, draw=gray!10},
-            %         major grid style={line width=.2pt,draw=gray!50},    
-            ]
+
+                    \nextgroupplot[
+                        ymin=0, ymax=1.2,
+                        samples=500,
+                        axis y line=center,
+                        ytick distance=2,
+                        extra y ticks=0,
+                        x label style={at={(axis description cs:1,0)},anchor=north},
+                        y label style={at={(axis description cs:-.0,.97)},anchor=south},
+                        height=0.2\textwidth,
+                        xlabel={$t$},
+                        ylabel={{\color{orange}$i_\text{T}$}\quad{\color{blue}$i_\text{D}$}},
+                        ytick={0,.5,.75,1},
+                        yticklabels={0,,,},
+                    ]
                     \addplot[color=orange,mark=none,solid] coordinates{
                         (0,0)
                         (0, 0.5)
@@ -662,55 +600,45 @@ The switching frequency is $f_s = \SI{ 100}{\kilo\hertz}$. All components are id
                         (13,0)
                         (13,1)
                     };
-            
-            \end{groupplot}
-        \end{tikzpicture}
-        
-    
-    % 		\psfrag{U1}{$U_1$}
-    % 		\psfrag{U2}{$U_2$}
-    %  		\psfrag{UT}{$\textcolor{orange}{\mi UT}$}
-    % 		\psfrag{UL}{$\textcolor{orange}{\mi UL}$}
-    % 		\psfrag{UD}{$\textcolor{blue}{\mi UD}$}
-    % 		\psfrag{IT}{$\textcolor{orange}{\mi IT}$}
-    % 		\psfrag{IL}{$\textcolor{red}{\mi IL}$}
-    % 		\psfrag{ID}{$\textcolor{blue}{\mi ID}$}
-    % 		\psfrag{Aein}{$\mi A{ein}$}
-    % 		\psfrag{Aaus}{$\mi A{aus}$}
-    % 		\includegraphics[width =8cm]{bilder/verlaeufe_aufg_2.eps}
-    \end{center}
-    
-    
+                \end{groupplot}
+            \end{tikzpicture}
+        \end{center}
+        \caption{Circuits for different switching states (Transistor active and inactive)}
+        \label{fig:transistor_circuit}
+    \end{solutionfigure}   
 \end{solutionblock}
 
-\subtask{How large is the current fluctuation range $\triangle i_L$ of the coil current in normal operation at a switching frequency of $f_s = \SI{ 100}{\kilo\hertz}$.}
+\newpage
+\subtask{How large is the current fluctuation range $\triangle i_L$ of the coil current in normal operation.}
 % Solution of subtask
 \begin{solutionblock}
+    
     \begin{center}
         \begin{tikzpicture}
-        \begin{axis}[
-                domain=0:15,
-                xmin=0, xmax=7,
-                ymin=-1.5, ymax=2.5,
-                samples=500,
-                axis y line=center,
-                axis x line=middle,
-                xtick distance=1,
-                ytick distance=2,
-                extra y ticks=0,
-                x label style={at={(axis description cs:1,0.33)},anchor=north},
-                y label style={at={(axis description cs:-.05,.97)},anchor=south},
-                width=0.8\textwidth,
-                height=0.5\textwidth,
-                xlabel={$t$},
-                ylabel={$i_\text{L}$},
-                xtick={0,2,5},
-                xticklabels={$0$,{},{}},
-                ytick={0,1,2},
-                yticklabels={0,$\frac{\Delta i_\text{L}}{2}$,$\Delta i_\text{L}$},
-                grid=both,
-                grid style={line width=.1pt, draw=gray!10},
-                major grid style={line width=.2pt,draw=gray!50},    ]
+            \begin{axis}[
+                    domain=0:15,
+                    xmin=0, xmax=7,
+                    ymin=-1.5, ymax=2.5,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+                    xtick distance=1,
+                    ytick distance=2,
+                    extra y ticks=0,
+                    x label style={at={(axis description cs:1,0.33)},anchor=north},
+                    y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                    width=0.6\textwidth,
+                    height=0.3\textwidth,
+                    xlabel={$t$},
+                    ylabel={$i_\text{L}$},
+                    xtick={0,2,5},
+                    xticklabels={$0$,{},{}},
+                    ytick={0,1,2},
+                    yticklabels={0,$\frac{\Delta i_\text{L}}{2}$,$\Delta i_\text{L}$},
+                    grid=both,
+                    grid style={line width=.1pt, draw=gray!10},
+                    major grid style={line width=.2pt,draw=gray!50},
+                ]
                 \addplot[color=blue,mark=none,solid] coordinates{
                     (0, 0)
                     (2, 2)
@@ -724,27 +652,21 @@ The switching frequency is $f_s = \SI{ 100}{\kilo\hertz}$. All components are id
                 \draw[>=triangle 45, <->] (axis cs:0,-1) -- (axis cs:5,-1);
                 \node[anchor=north] at (axis cs:2.5,-1){$T_\text{s}$};
             \end{axis}
-    \end{tikzpicture}
-    % 
-    % 		\psfrag{iL}{$\mi iL$}
-    % 		\psfrag{delta iL}{$\triangle \mi iL$}
-    % 		\psfrag{I2=delta iL/2}{$I_2 = \frac{\triangle \mi iL}{2}$}
-    % 		\psfrag{DTs}{$D \mi Ts$}
-    % 		\psfrag{(1-D)Ts}{$(1-D) \mi Ts$}
-    % 		\psfrag{Ts}{$\mi Ts$}
-    % 	 	\includegraphics{bilder/loesung2_4.eps}
+        \end{tikzpicture}
     \end{center}
     \begin{equation}
-        f_s = \SI{ 100}{\kilo\hertz} \Rightarrow T_s = \SI{ 10}{\micro\second} \Rightarrow T_e = D \cdot T_s = \frac{\SI{ 10}{\micro \second}}{3}
+        f_\mathrm{s} = \SI{ 100}{\kilo\hertz} \Rightarrow T_\mathrm{s} = \SI{ 10}{\micro\second} \Rightarrow T_\mathrm{e} = D \cdot T_\mathrm{s} = \frac{\SI{ 10}{\micro \second}}{3}
+    \end{equation}
+    Assumption of ideal coil $\Rightarrow$ linear current flow
+    \begin{equation}
+        U_\mathrm{L} = U_\mathrm{1} - U_\mathrm{2} = L \frac{d i_\mathrm{L}}{dt}  = L \frac{\triangle i_\mathrm{L}}{\triangle t} = L \frac{\triangle i_\mathrm{L}}{T_\mathrm{e}}
     \end{equation}
     \begin{equation}
-        U_L = U_1 - U_2 = L \frac{d i_L}{dt} \overset {\begin{matrix}\text{Assumption of ideal coil}\\ \Rightarrow \text{linear current flow} \end{matrix}} = L \frac{\triangle i_L}{\triangle t} = L \frac{\triangle i_L}{T_e}
+        \Rightarrow \triangle i_\mathrm{L} = \frac{U_\mathrm{1} - U_\mathrm{2}}{L} T_\mathrm{e} = \frac{\SI{13.5}{\volt} - \SI{4.5}{\volt}}{\SI{10}{\micro \henry} \cdot \frac{\SI{10}{\micro \second}}{3}} = \SI{3}{\ampere}
     \end{equation}
     \begin{equation}
-        \Rightarrow \triangle i_L = \frac{U_1 - U_2}{L} T_e = \frac{\SI{13.5}{\volt} - \SI{4.5}{\volt}}{\SI{10}{\micro \henry} \cdot \frac{\SI{10}{\micro \second}}{3}} = \SI{3}{\ampere}
-    \end{equation}
-    \begin{equation}
-        I_{2min} = \frac{\triangle i_L}{2} = \SI{1.5}{\ampere}
+        I_{\mathrm{2,min}} = \frac{\triangle i_\mathrm{L}}{2} = \SI{1.5}{\ampere}
+        % \label{eq:Test1}
     \end{equation}
 \end{solutionblock}
 
@@ -753,80 +675,40 @@ The voltage regulator of the buck converter changes the duty cycle so that the o
 What duty cycle D is set?}
 % Solution of subtask
 \begin{solutionblock}
+    The duty cycle still corresponds to the relation of output voltage to input voltage:
     \begin{equation}    
-        D= \frac{U_2}{U_{1min}} = \frac{\SI{4.5}{\volt}}{\SI{10}{\volt}} = 0.45
+        D= \frac{U_\mathrm{2}}{U_{\mathrm{1,min}}} = \frac{\SI{4.5}{\volt}}{\SI{10}{\volt}} = 0.45
     \end{equation}    
 \end{solutionblock}
 
-\subtask{Where is the boundary of discontinuous conduction mode?}
+\subtask{In case of starting engine, calculate the current of the boundary of discontinuous conduction mode.}
 % Lösung des Unterpunktes
 \begin{solutionblock}
+    The boundary of discontinuous conduction mode depends on the inductivity, duty cycle, switching frequency and voltages.
     \begin{equation}
-        \triangle i_L = \frac{U_{1min} - U_2}{L} D \cdot T_s = \frac{(\SI{10}{\volt} - \SI{4.5}{\volt}) \cdot 0.45 \cdot \SI{10}{\micro \second}}{\SI{10}{\micro \henry}} = \SI{2.475}{\ampere}
+        \triangle i_\mathrm{L} = \frac{U_{\mathrm{1,min}} - U_\mathrm{2}}{L} D T_\mathrm{s} = \frac{(\SI{10}{\volt} - \SI{4.5}{\volt}) \cdot 0.45 \cdot \SI{10}{\micro \second}}{\SI{10}{\micro \henry}} = \SI{2.475}{\ampere}
     \end{equation}
     \begin{equation}
-        I_{2min} = \frac{\triangle i_L}{2} \approx \SI{1.24}{\ampere}
+        I_{\mathrm{L,min}} = \frac{\triangle i_\mathrm{L}}{2} \approx \SI{1.24}{\ampere}
     \end{equation}
 \end{solutionblock}
 
-\subtask{In the next step, the input voltage is constant, and the output voltage is to be adjusted using the duty cycle.
-         At what duty cycle $D$ will the peak-to-peak current ripple be maximal?}
+\subtask{How large is the worst-case current ripple?}
 % Lösung des Unterpunktes
 \begin{solutionblock}
+    The worst case ripple is at $D=0.5$
     \begin{equation}
-        U_2 = D \cdot U_1
+        U_\mathrm{2} = D U_\mathrm{1}
     \end{equation}
     \begin{equation}
-        \triangle i_L (D) = \frac{U_1 - D \cdot U_1}{L} \cdot D \cdot T_s = \frac{U_1 T_s}{L} (D-D^2)
+        \triangle i_\mathrm{L,max} = \frac{U_\mathrm{1} - U_\mathrm{2}}{L} 0.5 \cdot T_\mathrm{s}
+        \Rightarrow \triangle i_\mathrm{L,max} = \frac{\SI{10}{\volt} - \SI{5}{\volt}}{\SI{10}{\micro \henry}} 0.5 \cdot \SI{10}{\micro \second}
     \end{equation}
     \begin{equation}
-        \triangle i_L' (D) \overset ! = 0 = \frac{U_1 T_s}{L}(1-2 D)
-    \end{equation}
-    \begin{equation}
-        \Rightarrow 1 = 2 D \Rightarrow D = \frac{1}{2}
+        \triangle i_{\mathrm{L,min}} = \SI{2.5}{\ampere}
     \end{equation}
 \end{solutionblock}
-\subtask{Sketch the course of the current fluctuation width $\triangle i$ as a function of the duty cycle $D$.}
-% Lösung des Unterpunktes
-\begin{solutionblock}
-    \begin{center}
-        \begin{tikzpicture}
-            \begin{axis}[
-                domain=0:1,
-                xmin=0, xmax=1.2,
-                ymin=0, ymax=1.2,
-                samples=500,
-                axis y line=center,
-                axis x line=middle,
-                xtick distance=0.5,
-                ytick distance=2,
-                extra y ticks=0,
-                x label style={at={(axis description cs:1,0)},anchor=north},
-                y label style={at={(axis description cs:-.05,.95)},anchor=south},
-                width=0.6\textwidth,
-                height=0.4\textwidth,
-                xlabel={$D$},
-                ylabel={$\Delta i_\text{L}$},
-        %          xtick={0, 1},
-        %         xticklabels={$0$,$\tau$},
-                ytick={0,1},
-                yticklabels={0,$\frac{U_1 T_s}{4L}$},
-                grid=both,
-                grid style={line width=.1pt, draw=gray!10},
-                major grid style={line width=.2pt,draw=gray!50},    ]
-                \addplot+[color=blue,mark=none]{1-((2*(x-0.5))^2)};
-            \end{axis}
-        \end{tikzpicture}
 
-    % 	\psfrag{delta iL}{$\triangle \mi iL$}
-    % 	\psfrag{(U1Ts)/(4L)}{$\frac{U_1 \mi Ts}{4L}$}
-    % 	\psfrag{0}{$0$}
-    % 	\psfrag{0.5}{$\frac{1}{2}$}
-    % 	\psfrag{1}{$1$}
-    % 	\psfrag{D}{$D$}
-    % 	 	\includegraphics[width = 7cm]{bilder/loesung2_8.eps}
-    \end{center}
-\end{solutionblock}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 3: Power losses within the step-down converter %%
@@ -866,17 +748,19 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
     
       \begin{table}[h]
         \centering  % Zentriert die Tabelle
-                \begin{tabular}{|l|l|l|l|}
+        \begin{tabular}{|l|l|l|l|}
             \hline
             \multicolumn{2}{|l|}{\textbf{DC link voltage:}} & \multicolumn{2}{l|}{\textbf{Diode:}} \\
+            \hline 
+            Input voltage: &  $U_{\mathrm{1}} = \SI{600}{\volt}$ & Forward voltage: & $u_{\mathrm{F}} = \SI{2.7}{\volt}$ \\
             \hline
-            \multicolumn{2}{|l|}{$U_{\mathrm{1}} = \SI{600}{\volt}$} & Forward voltage: & $u_{\mathrm{F}} = \SI{2.7}{\volt}$ \\
+            Output current: & $I_2 = 30$A  & Switch-on losses: & $E_{\text{on},D} = \SI{52}{\micro\joule}$ \\
             \hline
-            \multicolumn{2}{|l|}{Output current: $I_2 = 30$A} & Switch-on losses: & $E_{\text{on},D} = \SI{52}{\micro\joule}$ \\
-            \hline
-            \multicolumn{2}{|l|}{Clock frequency: $f_{\mathrm{T}} = \SI{25}{\kilo\hertz}$} & Switch-off losses: & $E_{\text{off},D} = \SI{240}{\micro\joule}$ \\
-            \hline
+            Switchibg frequency: & $f_{\mathrm{s}} = \SI{25}{\kilo\hertz}$  & Switch-off losses: & $E_{\text{off},D} = \SI{240}{\micro\joule}$ \\
+            \hline 
             \multicolumn{2}{|l|}{\textbf{IGBT:}} & \multicolumn{2}{l|}{} \\
+            \hline
+            Forward voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2.5}{\volt}$ & \multicolumn{2}{l|}{} \\
             \hline
             Forward voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2.5}{\volt}$ & \multicolumn{2}{l|}{} \\
             \hline
@@ -891,7 +775,7 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
         \label{table:Parameters of the circuit}
     \end{table}
 
-    \begin{figure}[h]
+    \begin{figure}[htb]
         \centering
         \begin{tikzpicture}
         \begin{axis}[
@@ -1001,7 +885,7 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
     \end{figure}
 
     
-    \subtask{Calculate the switch-on and switch-off loss energies $E_{\mathrm{on,T}}$ and $E_{\mathrm{off,T}}$  of the IGBT using the time curves during the switching processes.}
+    \subtask{Calculate the switch-on and switch-off loss $E_{\mathrm{on,T}}$ and $E_{\mathrm{off,T}}$  of the IGBT using the time curves during the switching processes.}
 
   \begin{solutionblock}
     First, the power values for the switch-on process at the times $t = \SI{25}{\ns}$ and $ t = \SI{100}{\ns}$ are calculated.
@@ -1013,7 +897,7 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
     \begin{equation}
         p(t = \SI{100}{\ns}) = \SI{600}{\volt} \cdot \SI{60}{\ampere} = \SI{36}{\kilo\watt} 
     \end{equation}
-    Figure \ref{fig:Power values for the switch-on process} can be drawn from these values for the services.
+    Figure \ref{fig:Power values for the switch-on process}  results from these power values.
     The switch-on losses of the IGBT can now be calculated. These are equal to the area of the drawn triangle.
          
    \begin{equation}
@@ -1034,7 +918,7 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
         p(t = \SI{250}{\ns}) = \SI{600}{\volt} \cdot \SI{10}{\ampere} = \SI{6}{\kilo\watt} 
     \end{equation}
 
-    Figure \ref{fig:Power values for the switch-off process} can be drawn from these values for the services.
+    Figure \ref{fig:Power values for the switch-off process} results from these power values.
     The switch-off losses of the IGBT can now be calculated. For this purpose, the power curve is divided into three parts.
          
    \begin{equation}
@@ -1052,7 +936,7 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
     \begin{equation}
      E_{\mathrm{3}} = \frac{1}{2} \SI{6}{\kilo\watt} \cdot \SI{350}{\ns} = \SI {1.05}{\milli\joule}
      \end{equation}
-     If all three energies are added together, the result is the total switch-off loss energy.
+     If all three losses are added together, the result is the total switch-off loss.
      \begin{equation}
         E_{\mathrm{off,T}} =  \SI {3.45}{\milli\joule}
      \end{equation}
@@ -1122,90 +1006,90 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
     \end{solutionblock}
 
 
-    \subtask{Calculate the switching power loss in the IGBT $P_{\mathrm{VS,T}}$ and in the diode $P_{\mathrm{VS,D}}$.}
+    \subtask{Calculate the switching power loss in the IGBT $P_{\mathrm{LC,T}}$ and in the diode $P_{\mathrm{LC,D}}$.}
 
 \begin{solutionblock}
-The switching power loss of the IGBT is dependent on the clock frequency $f_{\mathrm{t}}$ in addition to the switch-on and switch-off power losses.
+The switching power loss of the IGBT is dependent on the switching frequency $f_{\mathrm{s}}$ in addition to the switch-on and switch-off power losses.
 
 \begin{equation}
-    P_{\mathrm{VS,T}} =  (E_{\mathrm{on,T}} +  E_{\mathrm{off,T}}) \cdot f_{\mathrm{t}} = (\SI {1.35}{\milli\joule} + \SI {3.45}{\milli\joule}) \cdot \SI {25}{\kilo\hertz} = \SI {120}{\watt}
+    P_{\mathrm{LS,T}} =  (E_{\mathrm{on,T}} +  E_{\mathrm{off,T}}) \cdot f_{\mathrm{s}} = (\SI {1.35}{\milli\joule} + \SI {3.45}{\milli\joule}) \cdot \SI {25}{\kilo\hertz} = \SI {120}{\watt}
  \end{equation}
 
- The switching power loss of the diode also depends on the clock frequency $f_{\mathrm{t}}$.
+ The switching power loss of the diode also depends on the switching frequency $f_{\mathrm{s}}$.
  \begin{equation}
-    P_{\mathrm{VS,D}} =  (E_{\mathrm{on,D}} +  E_{\mathrm{off,D}}) \cdot f_{\mathrm{t}} = (\SI {52}{\micro\joule} + \SI {3.45}{\micro\joule}) \cdot \SI {25}{\kilo\hertz} = \SI {7.3}{\watt}
+    P_{\mathrm{LS,D}} =  (E_{\mathrm{on,D}} +  E_{\mathrm{off,D}}) \cdot f_{\mathrm{s}} = (\SI {52}{\micro\joule} + \SI {3.45}{\micro\joule}) \cdot \SI {25}{\kilo\hertz} = \SI {7.3}{\watt}
  \end{equation}
 \end{solutionblock}
 
-\subtask{ Calculate the conduction losses in the IGBT  $P_{\mathrm{VD,T}}(T)$ and in the diode $P_{\mathrm{VD,D}}(D)$ in
+\subtask{ Calculate the conduction losses in the IGBT  $P_{\mathrm{LC,T}}(T)$ and in the diode $P_{\mathrm{LC,D}}(D)$ in
 as a function of the relative duty cycle D.}
 \begin{solutionblock}
     There are two operating states, one in which the IGBT is closed and another in which it is open. Therefore, the IGBT and diode never carry a current at the same time. This means that the conduction losses of the IGBT only occur when it is switched on.
     \begin{equation}
-P_{\mathrm{VD,T}}(T) = u_{\mathrm{CE,on}} I_2  D = \SI {2.5}{\volt}\cdot \SI {30}{\ampere} \cdot D = \SI {75}{\watt} \cdot D
+P_{\mathrm{LC,T}}(T) = u_{\mathrm{CE,on}} I_\mathrm{2}  D = \SI {2.5}{\volt}\cdot \SI {30}{\ampere} \cdot D = \SI {75}{\watt} \cdot D
     \end{equation}
 
     Furthermore, this means that the forward losses of the diode only occur when the IGBT is switched off.
     \begin{equation}
-    P_{\mathrm{VD,D}}(T) = u_{\mathrm{f}} I_2 (1-D)= \SI {2.7}{\volt}\cdot \SI {30}{\ampere} \cdot (1-D) = \SI {81}{\watt} \cdot (1-D)
+    P_{\mathrm{LC,D}}(T) = u_{\mathrm{f}} I_\mathrm{2} (1-D)= \SI {2.7}{\volt}\cdot \SI {30}{\ampere} \cdot (1-D) = \SI {81}{\watt} \cdot (1-D)
     \end{equation}
 \end{solutionblock}
 
-\subtask{Calculate the efficiency $\mu(U_2)$ as a function of the output voltage.}
+\subtask{Calculate the efficiency $\eta(U_2)$ as a function of the output voltage.}
 \begin{solutionblock}
-    To determine the efficiency, the general equation $\mu=\frac{P_{\mathrm{disp}}}{P_{\mathrm{sup}}}$ is used.
+    To determine the efficiency, the general equation $\eta=\frac{P_{\mathrm{out}}}{P_{\mathrm{in}}}$ is used.
     \begin{equation}
-\mu=\frac{P_{\mathrm{disp}}}{P_{\mathrm{sup}}} = \frac{U_2 I_2}{U_2 I_2 + P_{\mathrm{V,total}}(D)}
+        \eta=\frac{P_{\mathrm{out}}}{P_{\mathrm{in}}} = \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} + P_{\mathrm{L,total}}(D)}
     \end{equation}
-    $P_{\mathrm{V,total}}(D)$ results from all losses.
+    $P_{\mathrm{L,total}}(D)$ results from all losses.
 
     \begin{equation}
-P_{\mathrm{V,total}}(D) =  P_{\mathrm{VS,T}} +  P_{\mathrm{VS,D}} + P_{\mathrm{VD,T}}(D) + P_{\mathrm{VD,D}}(D) + P_{\mathrm{V,L}}
+P_{\mathrm{L,total}}(D) =  P_{\mathrm{LS,T}} +  P_{\mathrm{LS,D}} + P_{\mathrm{LC,T}}(D) + P_{\mathrm{LC,D}}(D) + P_{\mathrm{L,L}}
 \end{equation}
 
 The inductance losses are unknown and have yet to be determined.
 
 \begin{equation}
-   P_{\mathrm{V,L}} = R_{\mathrm{CU}} (I_{\mathrm{2}})^2 + P_{\mathrm{V,FE}} = \SI{45}{\mohm} \cdot {(30\ \si{A})^2} + \SI {13}{\watt} = \SI {53.5}{\watt}
+   P_{\mathrm{L,L}} = R_{\mathrm{CU}} (I_{\mathrm{2}})^2 + P_{\mathrm{L,FE}} = \SI{45}{\mohm} \cdot {(30\ \si{A})^2} + \SI {13}{\watt} = \SI {53.5}{\watt}
     \end{equation}
 
-    $P_{\mathrm{VD,T}}(D)$ and $P_{\mathrm{VD,D}}(D)$ can only be determined in general terms.
+    $P_{\mathrm{LC,T}}(D)$ and $P_{\mathrm{LC,D}}(D)$ can only be determined in general terms.
 
     \begin{equation}
-P_{\mathrm{VD,T}}(D) + P_{\mathrm{VD,D}}(D) = I_2( u_{\mathrm{CE,on}} D + u_{\mathrm{F}}(D-1)) = D I_2(u_{\mathrm{CE,on}} - u_{\mathrm{F}} ) + I_2 u_{\mathrm{F}}
+P_{\mathrm{LC,T}}(D) + P_{\mathrm{LC,D}}(D) = I_2( u_{\mathrm{CE,on}} D + u_{\mathrm{F}}(D-1)) = D I_\mathrm{2}(u_{\mathrm{CE,on}} - u_{\mathrm{F}} ) + I_\mathrm{2} u_{\mathrm{F}}
     \end{equation}
 
-    If you now summarise everything, you come to the solution:
+    If you now summarise all power values, you get the solution:
     \begin{equation}
-    P_{\mathrm{V,total}}(D) = P_{\mathrm{VS,T}} +  P_{\mathrm{VS,D}} + P_{\mathrm{V,L}} + D I_2(u_{\mathrm{CE,on}} - u_{\mathrm{F}} ) + I_2 u_{\mathrm{F}} =  P_{\mathrm{V,const}} + D I_2 (u_{\mathrm{CE,on}} - u_{\mathrm{F}})
+    P_{\mathrm{L,total}}(D) = P_{\mathrm{LS,T}} +  P_{\mathrm{LS,D}} + P_{\mathrm{L,L}} + D I_\mathrm{2}(u_{\mathrm{CE,on}} - u_{\mathrm{F}} ) + I_\mathrm{2} u_{\mathrm{F}} =  P_{\mathrm{L,const}} + D I_\mathrm{2} (u_{\mathrm{CE,on}} - u_{\mathrm{F}})
 \end{equation}
-The value $P_{\mathrm{V,const}}$ is made up of all losses that could be calculated.
+The value $P_{\mathrm{L,const}}$ is made up of all losses that could be calculated.
 \begin{equation}
-    P_{\mathrm{V,const}} = \SI {120}{\watt} + \SI {7.3}{\watt} +\SI {53.5}{\watt} + \SI {2.7}{\volt}\cdot\SI {30}{\ampere}
+    P_{\mathrm{L,const}} = \SI {120}{\watt} + \SI {7.3}{\watt} +\SI {53.5}{\watt} + \SI {2.7}{\volt}\cdot\SI {30}{\ampere}
 \end{equation}
 
 If these calculations are used in the efficiency as a function of $U_2$, the following result is obtained.
 
 \begin{equation}
-    \mu= \frac{U_2 I_2}{U_2 I_2 + P_{\mathrm{V,total}}(D)+D I_2 (u_{\mathrm{CE,on}} - u_{\mathrm{F}})}
+    \mu= \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} + P_{\mathrm{L,total}}(D)+D I_\mathrm{2} (u_{\mathrm{CE,on}} - u_{\mathrm{F}})}
 \end{equation}
 \end{solutionblock}
 
-\subtask{The circuit is now analysed at   $ U_{\mathrm{2}} = \SI{300}{\volt}$. Calculate the total power loss in the IGBT $P_{\mathrm{VT}}$ and in the $P_{\mathrm{VD}}$ diode.}
+\subtask{The circuit is to be evaluated at   $ U_{\mathrm{2}} = \SI{300}{\volt}$. Calculate the total power loss in the IGBT $P_{\mathrm{L,T}}$ and in the $P_{\mathrm{L,D}}$ diode.}
 \begin{solutionblock}
     Firstly, the duty cycle must be determined.
     \begin{equation}
-D = \frac{U_2}{U_1} = \frac{\SI{300}{\volt}}{\SI{600}{\volt}} = 0.5
+D = \frac{U_\mathrm{2}}{U_\mathrm{1}} = \frac{\SI{300}{\volt}}{\SI{600}{\volt}} = 0.5
     \end{equation}
 
     The total power loss of the IGBT is made up of the switching losses and the losses during operation.
     \begin{equation}
-    P_{\mathrm{VT}}(D) = u_{\mathrm{CE,on}} I_2 D +  P_{\mathrm{VS,T}} = \SI{2.5}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{120}{\watt} = \SI{157.5}{\watt}
+    P_{\mathrm{L,T}}(D) = u_{\mathrm{CE,on}} I_\mathrm{2} D +  P_{\mathrm{LS,T}} = \SI{2.5}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{120}{\watt} = \SI{157.5}{\watt}
 \end{equation}
 The total power loss of the diode is made up of the switching losses and the losses during operation.
 
 \begin{equation}
-    P_{\mathrm{VD}}(D) = u_{\mathrm{F}} I_2 (1-D) +  P_{\mathrm{VS,D}} = \SI{2.7}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{7.3}{\watt} = \SI{47.8}{\watt}
+    P_{\mathrm{L,D}}(D) = u_{\mathrm{F}} I_\mathrm{2} (1-D) +  P_{\mathrm{LS,D}} = \SI{2.7}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{7.3}{\watt} = \SI{47.8}{\watt}
 \end{equation}
 \end{solutionblock}
     
