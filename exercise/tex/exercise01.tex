@@ -9,12 +9,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \task{Step-down converter without output filter}
-
 A switching transistor is used for low-loss and stepless control of a car's rear window heating.
 By varying the duty cycle of the transistor the average value of the heating power can be adjusted. The voltage in the car's electrical system is assumed to be constant with $U_1 = \SI{14}{\volt}$. The heater is dimensioned in such a way
 that at its nominal voltage $ U_{\mathrm{2N}} = \SI{14}{\volt}$ it consumes a power of $ P_{\mathrm{LN}} = \SI{500}{\watt}$ and
-can be modeled with an ohmic resistor. This circuit is shown in the figure \ref{fig:transistor circuit}.
-
+can be modeled with an ohmic resistor. This circuit is shown in \autoref{fig:transistor circuit}.
+%
 \begin{figure}[h]
 \begin{center}
     \begin{circuitikz}[european currents,european resistors,american inductors]
@@ -23,7 +22,7 @@ can be modeled with an ohmic resistor. This circuit is shown in the figure \ref{
         ++(2,0) node[nigfete,rotate=90](Trans){}
         (U1p) to [short,i=$i_1(t)$] (Trans.drain)
         (Trans.source) to [short,-,i=$i_2(t)$] ++(1.5,0) coordinate(U2p)
-        to [short,-] ++(1,0) to [R,l^=$R_\text{L}$, v_=$u_2$=straight] ++(0,-3) to [short,-] ++(-1,0) coordinate(U2n) to [short,-] (1,-3) coordinate(U1n) to [short,-] ++(-1,0) coordinate(N10)
+        to [short,-] ++(1,0) to [R,l_=$R_\text{L}$, v^=$u_2(t)$, voltage = straight] ++(0,-3) to [short,-] ++(-1,0) coordinate(U2n) to [short,-] (1,-3) coordinate(U1n) to [short,-] ++(-1,0) coordinate(N10)
          (N1) to [V] (N10)
          (0,0) to [V,v_=$U_1$] (0,-3)
        %  (U2p) to [open=straight,v^=$u_2(t)$] (U2n)
@@ -34,14 +33,13 @@ can be modeled with an ohmic resistor. This circuit is shown in the figure \ref{
     \end{circuitikz}
 \end{center}
 \caption{Circuit with one transistor and one load resistor.}
-    \label{fig:transistor circuit}
+\label{fig:transistor circuit}
 \end{figure}
 
-%\begin{enumerate}
-	\subtask{Draw qualitative current and voltage curves on the load resistor.}
-        \begin{solutionblock}
-            The graph \ref{fig:Currents and voltages during the period} shows the voltages and currents at the load resistor with the period $T_{\mathrm{s}}$, the switch-on time $T_{\mathrm{on}}$ and the switch-off time $T_{\mathrm{off}}$. 
-        \begin{solutionfigure}[htb]
+\subtask{Draw qualitative current and voltage curves on the load resistor.}
+\begin{solutionblock}
+The graph \autoref{fig:Currents and voltages during the period} shows the voltages and currents at the load resistor with the period $T_{\mathrm{s}}$, the switch-on time $T_{\mathrm{on}}$ and the switch-off time $T_{\mathrm{off}}$. 
+\begin{solutionfigure}[htb]
 \begin{center}
       \begin{tikzpicture}
         \begin{axis}[
@@ -107,24 +105,18 @@ can be modeled with an ohmic resistor. This circuit is shown in the figure \ref{
         \node[anchor=north] at (axis cs:3.5,-0.3){$T_\text{s}$};
         \end{axis}
     \end{tikzpicture}
-    % 
-    %  \psfrag{u_L(t)}{$\textcolor{blue}{\mi uL (t)}$}
-    %  	\psfrag{i_L(t)}{$\textcolor{red}{\mi iL (t)}$}
-    %  	\psfrag{U1}{$\textcolor{blue}{U_1}$}
-    %  	\psfrag{U1/R_L}[r][r]{$\textcolor{red}{\frac{U_1}{\mi RL}}$}
-    %   	\includegraphics{bilder/loesung1_1.eps}
      \end{center}
      \caption{Display of currents and voltages depending on the switching phases.}
     \label{fig:Currents and voltages during the period}
 \end{solutionfigure}
             
-\end {solutionblock}
+\end{solutionblock}
 
-\subtask{ Draw the time curve of the instantaneous power at the load resistor.}
+\subtask{Draw the instantaneous power at the load resistor.}
 
 
 \begin {solutionblock}
-The graph \ref{fig:Instantaneous power} shows the time curve of the instantaneous power at the load resistor.
+The \autoref{fig:Instantaneous power} shows the time curve of the instantaneous power at the load resistor.
 \begin{solutionfigure}[h]
 \begin{center}
     \begin{tikzpicture}
@@ -175,110 +167,96 @@ The graph \ref{fig:Instantaneous power} shows the time curve of the instantaneou
        \node[anchor=north] at (axis cs:3.5,-0.3){$T_\text{s}$};
        \end{axis}
    \end{tikzpicture}
-   % 
-   %  	\psfrag{p(t)}{$\textcolor{blue}{p(t)}$}
-   %  	\psfrag{U1^2/R}[r][r]{$\textcolor{blue}{\frac {U_1^2}{R}}$}
-   %   	\includegraphics{bilder/loesung1_2.eps}
     \end{center}
    \caption{Instantaneous power at the load resistor.}
-   % \ref{fig:Instantaneous power}
     \label{fig:Instantaneous power}
 \end{solutionfigure}
-
 \end{solutionblock}
 
-\subtask{ Derive the relationships for the mean voltage $\overline u_2$, the mean current $\overline i_2$ and the mean power $P_{\mathrm{2}}$}.
+\subtask{Derive the relationships for the mean voltage $\overline u_2$, the mean current $\overline i_2$ and the mean power $\overline{p}_{\mathrm{2}}$}.
 
 \begin{solutionblock}
-    In order to calculate the average voltage $\overline u_2$, the voltage $u_{\mathrm{2}}(t)$ must be integrated over the period $T_{\mathrm{s}}$.
+In order to calculate the average voltage $\overline u_2$, the voltage $u_{\mathrm{2}}(t)$ must be integrated over the period $T_{\mathrm{s}}$:
 
-    \begin{equation}
-    \overline u_2 = \frac{1}{T_{\mathrm{s}}} \int_0^{ T_{\mathrm{s}}} u_2 (t) \, \mathrm{d}t = \frac{1}{ T_{\mathrm{s}}} \int_0^{D T_{\mathrm{s}}} U_1 \, \mathrm{d}t + \frac{1}{ T_{\mathrm{s}}} \int_{D  T_{\mathrm{s}}}^{ T_{\mathrm{s}}} 0 \, \mathrm{d}t$$
- $$= \left . \frac{U_1}{ T_{\mathrm{s}}} t \right |_0^{D  T_{\mathrm{s}}}  + 0 = \frac{U_1 D  T_{\mathrm{s}}}{ T_{\mathrm{s}}} = U_1 D
-    \end{equation}
-
-    In order to calculate the mean value $\overline i_2$, the current $i_{\mathrm{2}}(t)$ must be integrated over the period $T_{\mathrm{s}}$.
-    \begin{equation}
- \overline i_2 = \frac{1}{ T_{\mathrm{s}}} \int_0^{ T_{\mathrm{s}}} i_2(t) \, \mathrm{d}t = \frac{1}{ T_{\mathrm{s}}}\int_0^{D  T_{\mathrm{s}}} \frac{U_1}{ R_{\mathrm{L}}} \, \mathrm{d}t + \frac{1}{ T_{\mathrm{s}}}\int_{D  T_{\mathrm{s}}}^{ T_{\mathrm{s}}} 0 \, \mathrm{d}t$$
- $$= \left . \frac{U_1}{ R_{\mathrm{L}}  T_{\mathrm{a}}}  t \right |_0^{D  T_{\mathrm{s}}} = \frac{U_1 D  T_{\mathrm{s}}}{ R_{\mathrm{L}}  T_{\mathrm{s}}} = \frac{U_1}{ R_{\mathrm{L}}} D
-    \end{equation}
-
-    In order to calculate the mean value $P_{\mathrm{2}}$, the power $p(t)$ must be integrated over the period $T_{\mathrm{s}}$.
-    \begin{equation}
-P_2 = \frac{1}{T_{\mathrm{s}}} \int_0^{T_{\mathrm{s}}} p(t) \mathrm{d}t = \frac{1}{T_{\mathrm{s}}} \int_0^{D T_{\mathrm{s}}} \frac{U_1^2}{ R_{\mathrm{L}}} \mathrm{d}t = \frac{U_1^2 D T_{\mathrm{s}}}{ T_{\mathrm{s}}  R_{\mathrm{L}}} = \frac{U_1^2 D}{ R_{\mathrm{L}}}
-    \end{equation}
- 
-\end{solutionblock}
-	% power $P_2$ as a function of the duty cycle $D$.
-
-
-\subtask{ How large should the duty cycle D be selected so that an average voltage of $\overline u_2 = \SI{8}{\volt}$ is applied to the heater? What is the mean value of the current $\overline i_2$? What power $P_2$ converted into heat?}
-\begin {solutionblock}
-
-To determine the duty cycle D, the average voltage $\overline u_2$  must be divided by the source voltage $U_1$.
 \begin{equation}
-    \overline u_2 = D U_1 \Leftrightarrow D = \frac{\overline u_2}{U_1} = \frac{8\ \si{V}}{14 \ \si{V}}=0.57
+    \overline u_2 = \frac{1}{T_{\mathrm{s}}} \int_0^{ T_{\mathrm{s}}} u_2 (t) \, \mathrm{d}t = \frac{1}{ T_{\mathrm{s}}} \int_0^{D T_{\mathrm{s}}} U_1 \, \mathrm{d}t + \frac{1}{ T_{\mathrm{s}}} \int_{D  T_{\mathrm{s}}}^{ T_{\mathrm{s}}} 0 \, \mathrm{d}t$$
+    $$= \left . \frac{U_1}{ T_{\mathrm{s}}} t \right |_0^{D  T_{\mathrm{s}}}  + 0 = \frac{U_1 D  T_{\mathrm{s}}}{ T_{\mathrm{s}}} = U_1 D.
+\end{equation}
+
+For the mean value $\overline i_2$, the current $i_{\mathrm{2}}(t)$ must be integrated over the period $T_{\mathrm{s}}$:
+\begin{equation}
+    \overline i_2 = \frac{1}{ T_{\mathrm{s}}} \int_0^{ T_{\mathrm{s}}} i_2(t) \, \mathrm{d}t = \frac{1}{ T_{\mathrm{s}}}\int_0^{D  T_{\mathrm{s}}} \frac{U_1}{ R_{\mathrm{L}}} \, \mathrm{d}t + \frac{1}{ T_{\mathrm{s}}}\int_{D  T_{\mathrm{s}}}^{ T_{\mathrm{s}}} 0 \, \mathrm{d}t$$
+    $$= \left . \frac{U_1}{ R_{\mathrm{L}}  T_{\mathrm{a}}}  t \right |_0^{D  T_{\mathrm{s}}} = \frac{U_1 D  T_{\mathrm{s}}}{ R_{\mathrm{L}}  T_{\mathrm{s}}} = \frac{U_1}{ R_{\mathrm{L}}} D.
+\end{equation}
+
+To calculate the mean value $\overline{p}_{\mathrm{2}}$, the power $p(t)$ must be integrated over the period $T_{\mathrm{s}}$:
+\begin{equation}
+    \overline{p}_{\mathrm{2}} = \frac{1}{T_{\mathrm{s}}} \int_0^{T_{\mathrm{s}}} p(t) \mathrm{d}t = \frac{1}{T_{\mathrm{s}}} \int_0^{D T_{\mathrm{s}}} \frac{U_1^2}{ R_{\mathrm{L}}} \mathrm{d}t = \frac{U_1^2 D T_{\mathrm{s}}}{ T_{\mathrm{s}}  R_{\mathrm{L}}} = \frac{U_1^2 D}{ R_{\mathrm{L}}}.
+\end{equation}
+\end{solutionblock}
+
+
+\subtask{How large should the duty cycle D be selected so that an average voltage of $\overline u_2 = \SI{8}{\volt}$ is applied to the heater? What is the mean value of the current $\overline i_2$? What power $\overline{p}_{\mathrm{2}}$ is converted into heat?}
+
+\begin {solutionblock}
+To determine the duty cycle D, the average voltage $\overline u_2$  must be divided by the source voltage $U_1$
+\begin{equation}
+    \overline u_2 = D U_1 \quad \Leftrightarrow \quad D = \frac{\overline u_2}{U_1} = \frac{\SI{8}{\volt}}{\SI{14}{\volt}}=0.57.
 \end{equation}
     
-In order to determine the average current $\overline i_2$, the load resistance $R_{\mathrm{L}}$ must first be determined.
+In order to determine the average current $\overline i_2$, the load resistance $R_{\mathrm{L}}$ must be calculated first:
 \begin{equation}
-   \overline i_2 = \frac{U_1}{ R_{\mathrm{L}}}  D
+   \overline i_2 = \frac{U_1}{ R_{\mathrm{L}}}  D.
 \end{equation}
 
-The known power equation is used to determine the load resistance $R_{\mathrm{L}}$.
+The known power equation is used to determine the load resistance $R_{\mathrm{L}}$
 \begin{equation}
-   \quad  P_{\mathrm{LN}} = \frac{{ U_{\mathrm{2N}}}^2}{ R_{\mathrm{L}}} 
- \Leftrightarrow  R_{\mathrm{L}} = \frac{ U_{\mathrm{2N}}^2}{ P_{\mathrm{LN}}} = \frac{(14\ \si{V})^2}{500\ \si{W}} = \SI{392}{\mohm}
+   \quad  P_{\mathrm{LN}} = \frac{{ U_{\mathrm{2N}}}^2}{ R_{\mathrm{L}}} \quad
+ \Leftrightarrow \quad R_{\mathrm{L}} = \frac{ U_{\mathrm{2N}}^2}{ P_{\mathrm{LN}}} = \frac{(\SI{14}{\volt})^2}{\SI{500}{\watt}} = \SI{392}{\milli\ohm}.
 \end{equation}
 
-This value can be used to determine the average current $\overline i_2$.
- $$\Rightarrow \overline i_2 = \frac{14\ \si{V}}{392\ \si{\mohm}} 0.57 =  \SI{20.36}{\ampere}$$
+Inserting into the current equation delivers :
+ $$\overline i_2 = \frac{\SI{14}{\volt}}{\SI{392}{\milli\ohm}} 0.57 =  \SI{20.36}{\ampere}.$$
  
- To determine the power $P_2$ that is converted into heat, the corresponding duty cycle D must be considered!
+The average power $\overline{p}_{\mathrm{2}}$ yields
  \begin{equation}
- P_2 = \frac{U_1^2}{ R_{\mathrm{L}}}  D = \frac{14\ \si{V}^2}{392\ \si{\mohm}}  0.57 = \SI{285}{\watt}
+ \overline{p}_{\mathrm{2}} = \frac{U_1^2}{ R_{\mathrm{L}}}  D = \frac{(\SI{14}{\volt})^2}{\SI{392}{\milli\ohm}}  0.57 = \SI{285}{\watt}.
 \end{equation}
 \end{solutionblock}
 	
-\subtask{ When starting the engine, the heater may draw a maximum average current ${\overline i_{\mathrm{an}}} = \SI{10}{\ampere}$ from the
-draw from the vehicle electrical system. With which duty cycle $D$ should the transistor be switched in this case?
-What is the average voltage $\overline u_2$ at the heater? What power $P_2$ is converted into heat?}
-
-%\frac{8\ \si{V}}{14 \ \si{V}}=0.57$$
-
+\subtask{When starting the engine, the heater may draw a maximum average current ${\overline i_{2,\mathrm{s}}} = \SI{10}{\ampere}$ from the vehicle electrical system. With which duty cycle $D$ should the transistor be switched in this case?
+What is the average voltage $\overline u_2$ at the heater? What power $\overline{p}_{\mathrm{2}}$ is converted into heat?}
 \begin{solutionblock}
-
-    Due to the structure of the circuit, it is noticeable that the average current $\overline i_1$ is equal to the average current $\overline i_2$. The corresponding ratio for $\overline i_{\mathrm{an}}$ can be calculated from this.
-\begin{equation}
-\overline i_1 = \overline i_2 = \frac{U_1}{ R_{\mathrm{L}}}  D \overset ! \leq {\overline i_{\mathrm{2,s}}}$$
- $$\Leftrightarrow D \leq \frac{ {\overline i_{\mathrm{2,s}}}  R_{\mathrm{L}}}{U_1} = \frac{10 \ \si{A} \cdot {392\ \si{\mohm}}} {14\ \si{V}} = 0.28
-\end{equation}
-
-To determine the average voltage $\overline u_2$ at the heater, the duty cycle D is offset against the source voltage $U_1$.
- \begin{equation}
- \overline u_2 = D  U_1 = 0.28 \cdot \SI{14}{\volt} = \SI{3.92}{\volt}
-\end{equation}
-
-To determine the power $P_2$ that is converted into heat, the corresponding duty cycle D must be considered!
- \begin{equation}
- P_2 = \frac{U_1^2 D}{ R_{\mathrm{L}}} = \frac{(14\ \si{V})^2 \cdot 0.28}{392\ \si{\mohm}}= \SI{140}{\watt}   
-\end{equation}
+    Due to the structure of the circuit, it is noticeable that the average current $\overline i_1$ is equal to the average current $\overline i_2$. The corresponding ratio for $\overline i_{2,\mathrm{s}}$ can be calculated from this.
+    \begin{equation}
+            \overline i_1 = \overline i_2 = \frac{U_1}{R_{\mathrm{L}}}  D \overset ! \leq {\overline i_{\mathrm{2,s}}} \quad \Leftrightarrow \quad  D \leq \frac{{\overline i_{\mathrm{2,s}}}  R_{\mathrm{L}}}{U_1} = \frac{\SI{10}{\ampere} \cdot {\SI{392}{\milli\ohm}}}{\SI{14}{\volt}} = 0.28
+    \end{equation}
+    
+    To determine the average voltage $\overline u_2$ at the heater, the duty cycle D is offset against the source voltage $U_1$.
+    \begin{equation}
+        \overline u_2 = D  U_1 = 0.28 \cdot \SI{14}{\volt} = \SI{3.92}{\volt}
+    \end{equation}
+    To determine the power $\overline{p}_{2}$ that is converted into heat, the corresponding duty cycle D must be considered:
+     \begin{equation}
+        \overline{p}_{\mathrm{2}} = \frac{U_1^2 D}{ R_{\mathrm{L}}} = \frac{(\SI{14}{\volt})^2 \cdot 0.28}{\SI{392}{\milli\ohm}}= \SI{140}{\watt}.   
+    \end{equation}
 \end{solutionblock}
 
-\subtask{During the journey, the heat output should be $ P_{\mathrm{2f}} = \SI{200} {\watt}$. How is the duty cycle
+
+\subtask{During the journey, the heat output should be $ \overline{p}_{\mathrm{2,f}} = \SI{200}{\watt}$. How is the duty cycle
 	 $D$ set? What are the mean values of the current $\overline i_\mathrm{2}$ and the voltage $\overline u_\mathrm{2}$?.}
-     \begin{solutionblock}
-        To determine the duty cycle D, the familiar power formula is used and the parameters are then applied.
-  \begin{equation}
-P_{\mathrm{2f}} \overset ! = \frac{U_\mathrm{1}^2}{ R_{\mathrm{L}}} D
- \Leftrightarrow D = \frac{ R_{\mathrm{L}}  P_{\mathrm{2f}}}{U_\mathrm{1^2}} = \frac{{392\ \si{\mohm}} \cdot 200 \ \si{W}}{(14\ \si{V})^2} = 0.4
+\begin{solutionblock}
+To determine the duty cycle D, the familiar power formula is applied:
+\begin{equation}
+    \overline{p}_{\mathrm{2,f}} \overset ! = \frac{U_\mathrm{1}^2}{ R_{\mathrm{L}}} D \quad 
+    \Leftrightarrow \quad D = \frac{ R_{\mathrm{L}}  \overline{p}_{\mathrm{2,f}}}{U_\mathrm{1^2}} = \frac{\SI{392}{\milli\ohm} \cdot \SI{200}{\watt}}{(\SI{14}{\volt})^2} = 0.4.
 \end{equation}
-The known equations are used to determine the average current $\overline i_\mathrm{2}$ and the average voltage $\overline u_\mathrm{2}$.
- \begin{equation}
- \overline i_\mathrm{2} = \frac{U_\mathrm{1}}{ R_{\mathrm{L}}} D = \frac{\SI{14}{\volt}}{392\ \si{\mohm}} \cdot 0.4 = \SI{14.29}{\ampere}
+The known equations are used to determine the average current $\overline i_\mathrm{2}$ and the average voltage $\overline u_\mathrm{2}$:
+\begin{equation}
+    \overline i_\mathrm{2} = \frac{U_\mathrm{1}}{ R_{\mathrm{L}}} D = \frac{\SI{14}{\volt}}{\SI{392}{\milli\ohm}} \cdot 0.4 = \SI{14.29}{\ampere},
 \end{equation}
 \begin{equation}
- \overline u_\mathrm{2} = U_\mathrm{1} D = {\SI{14}{\volt}} \cdot 0.4 = \SI{5.6}{\volt}
+ \overline u_\mathrm{2} = U_\mathrm{1} D = {\SI{14}{\volt}} \cdot 0.4 = \SI{5.6}{\volt}.
 \end{equation}
 \end{solutionblock}
 
@@ -287,10 +265,8 @@ The known equations are used to determine the average current $\overline i_\math
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \task{Step-down converter with output filter}
-A step-down converter is used to charge a mobile phone from the vehicle electrical system with the vehicle electrical
-system voltage $U_1 = \SI{13.5}{\volt}$.
-The input voltage of the mobile phone is $U_2 = \SI{4.5}{\volt}$.
-
+A step-down converter is used to charge a mobile phone from the vehicle electrical system with the vehicle electrical 
+system voltage $U_1 = \SI{13.5}{\volt}$. The input voltage of the mobile phone is $U_2 = \SI{4.5}{\volt}$.
 \begin{figure}[htb]
     \begin{center}
     \begin{circuitikz}[european currents,european resistors,american inductors]
@@ -314,16 +290,15 @@ The input voltage of the mobile phone is $U_2 = \SI{4.5}{\volt}$.
     \end{circuitikz}
     \end{center}
     \caption{Circuit with one transistor, filter and one load resistor.}
-    \label{fig:transistor circuit}
+    \label{fig:step_down_converter_output_filter}
 \end{figure}
-
-Consider both voltages are constant. The inductance of the coil is $L = \SI{10}{\milli\henry}$.
-The switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All components are ideal.
+Consider both voltages as constant, the inductance of the coil is $L = \SI{10}{\milli\henry}$ and the switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All components are considered ideal.
 
 \subtask{Draw the equivalent circuits for the two switching states.}
 % Solution of subtask
 \begin{solutionblock}
     \begin{solutionfigure}[h]
+        \centering
         \begin{tabular}{cc}
                 transistor conducts & diode conducts\\
             \begin{circuitikz}[european currents,european resistors,american inductors,]
@@ -347,26 +322,24 @@ The switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All componen
                     ;
             \end{circuitikz}
         \end{tabular}
-        \caption{Circuits for different switching states (Transistor active and inactive)}
-        \label{fig:transistor circuit}
+        \caption{Circuits for different switching states.}
+        \label{fig:switching_states_step-down_converter}
     \end{solutionfigure}
 \end{solutionblock}
 
 \subtask{At what duty cycle $D$ should the buck converter be operated?}
 % Solution of subtask
-
 \begin{solutionblock}
     The duty cycle corresponds to the relation of output voltage to input voltage:
     \begin{equation}
-        D = \frac{U_2}{U_1} = \frac{\SI{ 4.5}{\volt}}{\SI{ 13.5}{\volt}} = \frac{1}{3}
+        D = \frac{U_2}{U_1} = \frac{\SI{ 4.5}{\volt}}{\SI{ 13.5}{\volt}} = \frac{1}{3}.
     \end{equation}
-
 \end{solutionblock}
    
-\subtask{Sketch the voltage and current waveforms in the components.}
+\subtask{Sketch the voltage and current signals in the components.}
 % Solution of subtask
 \begin{solutionblock} %[htb]
-    The waveforms of $u_\mathrm{T}$, $u_\mathrm{D}$, $u_\mathrm{L}$, $i_\mathrm{L}$ and $i_\mathrm{T}$ are displayed in \autoref{fig:transistor_circuit}.
+The signals of $u_\mathrm{T}$, $u_\mathrm{D}$, $u_\mathrm{L}$, $i_\mathrm{L}$ and $i_\mathrm{T}$ are displayed in \autoref{fig:transistor_circuit}.
     \begin{solutionfigure}[htb]  
         \begin{center}
             \definecolor{orange}{rgb}{1.0,0.5,0}
@@ -484,8 +457,8 @@ The switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All componen
                         (13, 1)
                         (13, -.333)
                     };
-                    \node[anchor=center] at (axis cs:4.5,0.5){\tiny $ A_\text{ein}$};
-                    \node[anchor=center] at (axis cs:6.5,-0.1667){\tiny $ A_\text{aus}$};
+                    \node[anchor=center] at (axis cs:4.5,0.5){\tiny $ A_\text{off}$};
+                    \node[anchor=center] at (axis cs:6.5,-0.1667){\tiny $ A_\text{on}$};
 
                     \nextgroupplot[
                         ymin=0, ymax=1.2,
@@ -603,17 +576,17 @@ The switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All componen
                 \end{groupplot}
             \end{tikzpicture}
         \end{center}
-        \caption{Circuits for different switching states (Transistor active and inactive)}
+        \caption{Relevant voltage and current signals.}
         \label{fig:transistor_circuit}
     \end{solutionfigure}   
 \end{solutionblock}
 
-\newpage
-\subtask{How large is the current fluctuation range $\triangle i_L$ of the coil current in normal operation.}
+\subtask{How large is the current ripple $\Delta i_\mathrm{L}$ of the coil current in boundary conduction mode (BCM) operation?}
 % Solution of subtask
 \begin{solutionblock}
-    
-    \begin{center}
+The BCM operation is characterized by zero inductor current events at the beginning / end of a switching period, compare \autoref{fig:BCM_step-down-converter}.
+    \begin{solutionfigure}
+        \centering
         \begin{tikzpicture}
             \begin{axis}[
                     domain=0:15,
@@ -653,61 +626,68 @@ The switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All componen
                 \node[anchor=north] at (axis cs:2.5,-1){$T_\text{s}$};
             \end{axis}
         \end{tikzpicture}
-    \end{center}
+        \caption{Qualitative inductor current during BCM}
+        \label{fig:BCM_step-down-converter}
+    \end{solutionfigure}
+    The relevant switching time intervals are:
     \begin{equation}
-        f_\mathrm{s} = \SI{ 100}{\kilo\hertz} \Rightarrow T_\mathrm{s} = \SI{ 10}{\micro\second} \Rightarrow T_\mathrm{e} = D \cdot T_\mathrm{s} = \frac{\SI{ 10}{\micro \second}}{3}
+        f_\mathrm{s} = \SI{ 100}{\kilo\hertz} \quad \Rightarrow \quad T_\mathrm{s} = \SI{ 10}{\micro\second} \quad \Rightarrow \quad T_\mathrm{e} = D \cdot T_\mathrm{s} = \frac{\SI{ 10}{\micro \second}}{3}.
     \end{equation}
-    Assumption of ideal coil $\Rightarrow$ linear current flow
+    The (linear) inductor ordinary differential equations yields
     \begin{equation}
-        U_\mathrm{L} = U_\mathrm{1} - U_\mathrm{2} = L \frac{d i_\mathrm{L}}{dt}  = L \frac{\triangle i_\mathrm{L}}{\triangle t} = L \frac{\triangle i_\mathrm{L}}{T_\mathrm{e}}
+        U_\mathrm{L} = U_\mathrm{1} - U_\mathrm{2} = L \frac{\mathrm{d} i_\mathrm{L}}{\mathrm{d}t}  = L \frac{\Delta i_\mathrm{L}}{\Delta t} = L \frac{\Delta i_\mathrm{L}}{T_\mathrm{e}}
     \end{equation}
+    resulting to
     \begin{equation}
-        \Rightarrow \triangle i_\mathrm{L} = \frac{U_\mathrm{1} - U_\mathrm{2}}{L} T_\mathrm{e} = \frac{\SI{13.5}{\volt} - \SI{4.5}{\volt}}{\SI{10}{\micro \henry} \cdot \frac{\SI{10}{\micro \second}}{3}} = \SI{3}{\ampere}
+        \Delta i_\mathrm{L} = \frac{U_\mathrm{1} - U_\mathrm{2}}{L} T_\mathrm{e} = \frac{\SI{13.5}{\volt} - \SI{4.5}{\volt}}{\SI{10}{\micro \henry} \cdot \frac{\SI{10}{\micro \second}}{3}} = \SI{3}{\ampere}
     \end{equation}
+    and finally
     \begin{equation}
-        I_{\mathrm{2,min}} = \frac{\triangle i_\mathrm{L}}{2} = \SI{1.5}{\ampere}
-        % \label{eq:Test1}
-    \end{equation}
-\end{solutionblock}
-
-\subtask{When starting the engine, the input voltage drops to $U_{1min} = \SI{ 10}{\volt}$.
-The voltage regulator of the buck converter changes the duty cycle so that the output voltage $U_2 = \SI{ 4.5}{\volt}$ is kept stable.
-What duty cycle D is set?}
-% Solution of subtask
-\begin{solutionblock}
-    The duty cycle still corresponds to the relation of output voltage to input voltage:
-    \begin{equation}    
-        D= \frac{U_\mathrm{2}}{U_{\mathrm{1,min}}} = \frac{\SI{4.5}{\volt}}{\SI{10}{\volt}} = 0.45
-    \end{equation}    
-\end{solutionblock}
-
-\subtask{In case of starting engine, calculate the current of the boundary of discontinuous conduction mode.}
-% Lösung des Unterpunktes
-\begin{solutionblock}
-    The boundary of discontinuous conduction mode depends on the inductivity, duty cycle, switching frequency and voltages.
-    \begin{equation}
-        \triangle i_\mathrm{L} = \frac{U_{\mathrm{1,min}} - U_\mathrm{2}}{L} D T_\mathrm{s} = \frac{(\SI{10}{\volt} - \SI{4.5}{\volt}) \cdot 0.45 \cdot \SI{10}{\micro \second}}{\SI{10}{\micro \henry}} = \SI{2.475}{\ampere}
-    \end{equation}
-    \begin{equation}
-        I_{\mathrm{L,min}} = \frac{\triangle i_\mathrm{L}}{2} \approx \SI{1.24}{\ampere}
+        I_{\mathrm{2,min}} = \frac{\Delta i_\mathrm{L}}{2} = \SI{1.5}{\ampere}.
     \end{equation}
 \end{solutionblock}
 
 \subtask{How large is the worst-case current ripple?}
 % Lösung des Unterpunktes
 \begin{solutionblock}
-    The worst case ripple is at $D=0.5$
+    The worst case ripple is at $D=0.5$ leading to
     \begin{equation}
-        U_\mathrm{2} = D U_\mathrm{1}
+        U_\mathrm{2} = D U_\mathrm{1},
     \end{equation}
     \begin{equation}
-        \triangle i_\mathrm{L,max} = \frac{U_\mathrm{1} - U_\mathrm{2}}{L} 0.5 \cdot T_\mathrm{s}
-        \Rightarrow \triangle i_\mathrm{L,max} = \frac{\SI{10}{\volt} - \SI{5}{\volt}}{\SI{10}{\micro \henry}} 0.5 \cdot \SI{10}{\micro \second}
+        \Delta i_\mathrm{L,max} = \frac{U_\mathrm{1} - U_\mathrm{2}}{L} 0.5 \cdot T_\mathrm{s}
+        \Rightarrow \Delta i_\mathrm{L,max} = \frac{\SI{10}{\volt} - \SI{5}{\volt}}{\SI{10}{\micro \henry}} 0.5 \cdot \SI{10}{\micro \second},
     \end{equation}
     \begin{equation}
-        \triangle i_{\mathrm{L,min}} = \SI{2.5}{\ampere}
+        \Delta i_{\mathrm{L,min}} = \SI{2.5}{\ampere}.
     \end{equation}
 \end{solutionblock}
+
+\subtask{When starting the engine, the input voltage drops to $U_{1,\mathrm{min}} = \SI{ 10}{\volt}$.
+The voltage regulator of the buck converter changes the duty cycle so that the output voltage $U_2 = \SI{4.5}{\volt}$ is kept stable.
+What duty cycle D is set?}
+% Solution of subtask
+\begin{solutionblock}
+    The new duty cycle results in:
+    \begin{equation}    
+        D= \frac{U_\mathrm{2}}{U_{\mathrm{1,min}}} = \frac{\SI{4.5}{\volt}}{\SI{10}{\volt}} = 0.45.
+    \end{equation}    
+\end{solutionblock}
+
+\subtask{Calculate the average and ripple current in BCM mode considering $U_{1,\mathrm{min}}$ at the input.}
+% Lösung des Unterpunktes
+\begin{solutionblock}
+    The boundary of discontinuous conduction mode depends on the inductance, duty cycle, switching frequency and voltages:
+    \begin{equation}
+        \Delta i_\mathrm{L} = \frac{U_{\mathrm{1,min}} - U_\mathrm{2}}{L} D T_\mathrm{s} = \frac{(\SI{10}{\volt} - \SI{4.5}{\volt}) \cdot 0.45 \cdot \SI{10}{\micro \second}}{\SI{10}{\micro \henry}} = \SI{2.475}{\ampere},
+    \end{equation}
+    \begin{equation}
+        I_{\mathrm{L,min}} = \frac{\Delta i_\mathrm{L}}{2} = \SI{1.24}{\ampere}.
+    \end{equation}
+\end{solutionblock}
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -716,11 +696,8 @@ What duty cycle D is set?}
 
 
 \task{Power losses within the step-down converter}
-The power loss of a buck converter is to be analysed. The inductance is so large
-that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}(t) = I_{\mathrm{2}} =const $. Furthermore, the component values are given in \ref{table:Parameters of the circuit} and the currents and voltages of the switch-on and switch-off processes in \ref{fig:Switch-on behaviour and switch-off behaviour of} and \ref{fig:Switch-on behaviour and switch-off behaviour of voltage}. 
-
-%\ref{fig:Currents and voltages during the period}
-
+The power loss of a buck converter is to be analyzed. The inductance is so large
+that the current ripple in the output current can be neglected, i.e., $ i_{\mathrm{2}}(t) = I_{\mathrm{2}} =\mathrm{const}$. Furthermore, the component values are given in \autoref{table:Parameters of the circuit} and the currents and voltages of the switch-on and switch-off processes in \autoref{fig:Switch-on behavior and switch-off behavior of} and \autoref{fig:Switch-on behavior and switch-off behavior of voltage}. 
 \begin{figure}[h]
     \begin{center}
         \begin{circuitikz}[european currents,european resistors,american inductors]
@@ -741,355 +718,313 @@ that the current ripple in the output current can be neglected. $ i_{\mathrm{2}}
            ;
         \end{circuitikz}
     \end{center}
-    \caption{Circuit buck converter.}
-        \label{fig:Graphic of a buck converter}
-    \end{figure}
+    \caption{Buck converter with one transistor and one diode.}
+\end{figure}
+%
+\begin{table}[ht]
+    \centering  % Zentriert die Tabelle
+    \begin{tabular}{llll}
+        \toprule
+        \multicolumn{2}{l}{\textbf{General parameters:}} & \multicolumn{2}{l}{\textbf{Diode:}} \\ 
+        Input voltage: &  $U_{\mathrm{1}} = \SI{600}{\volt}$ & Forward voltage: & $u_{\mathrm{F}} = \SI{2.7}{\volt}$ \\
+        Output current: & $I_2 = \SI{30}{A}$  & Switch-on losses: & $E_{\text{on},\mathrm{D}} = \SI{52}{\micro\joule}$ \\
+        Switching frequency: & $f_{\mathrm{s}} = \SI{25}{\kilo\hertz}$  & Switch-off losses: & $E_{\text{off},\mathrm{D}} = \SI{240}{\micro\joule}$ \\
+        \midrule
+        \multicolumn{2}{l}{\textbf{IGBT:}} & \multicolumn{2}{l}{\textbf{Inductance:}} \\ 
+        Forward voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2.5}{\volt}$ & Copper resistance: & $R_{\text{Cu}} = \SI{45}{\milli\ohm}$  \\
+        Forward voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2.5}{\volt}$ &  Iron losses: & $P_{\mathrm{l},\text{FE}} = \SI{13}{\watt}$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Parameters of the circuit.}  % Beschriftung der Tabelle
+    \label{table:Parameters of the circuit}
+\end{table}
+%
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+    \begin{axis}[
+        width=7cm, height=5cm,
+        grid=both,
+        major grid style={line width=.2pt,draw=gray!50},
+        minor grid style={line width=.1pt,draw=gray!20},
+        xlabel={$t$ / ns},
+        ylabel={$i_\mathrm{C}(t)$ / A},
+        title={Switch-on behavior},
+        xmin=0, xmax=150,
+        ymin=0, ymax=70,
+        xtick={0, 50, 100, 150},
+        ytick={0, 10, 20, 30, 40, 50, 60},
+        ]
+        % Einschaltverhalten graph
+        \addplot[
+            thick,
+            mark=none,
+            color=black,
+        ] coordinates {
+            (0,0) (25,0) (50, 20) (75, 40) (100, 60) (125, 30) (150, 30)
+        };
+    \end{axis}
+    \end{tikzpicture} 
+    \hspace{1cm} % Abstand zwischen den beiden Diagrammen
+    \begin{tikzpicture}
+    \begin{axis}[
+        width=7cm, height=5cm,
+        grid=both,
+        major grid style={line width=.2pt,draw=gray!50},
+        minor grid style={line width=.1pt,draw=gray!20},
+        xlabel={$t$ / ns},
+        ylabel={$i_\mathrm{C}(t)$ / A},
+        title={Switch-off behavior},
+        xmin=0, xmax=600,
+        ymin=0, ymax=70,
+        xtick={0, 200, 400, 600},
+        ytick={0, 10, 20, 30, 40, 50, 60},
+        ]
+        % Ausschaltverhalten graph
+        \addplot[
+            thick,
+            mark=none,
+            color=black,
+        ] coordinates {
+            (0,30) (200, 30) (200, 10) (250, 10) (600, 0)
+        };
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Switch-on behavior and switch-off behavior of $i_{\mathrm{C}}(t)$}
+    \label{fig:Switch-on behavior and switch-off behavior of}
 
-    
-      \begin{table}[h]
-        \centering  % Zentriert die Tabelle
-        \begin{tabular}{|l|l|l|l|}
-            \hline
-            \multicolumn{2}{|l|}{\textbf{DC link voltage:}} & \multicolumn{2}{l|}{\textbf{Diode:}} \\
-            \hline 
-            Input voltage: &  $U_{\mathrm{1}} = \SI{600}{\volt}$ & Forward voltage: & $u_{\mathrm{F}} = \SI{2.7}{\volt}$ \\
-            \hline
-            Output current: & $I_2 = 30$A  & Switch-on losses: & $E_{\text{on},D} = \SI{52}{\micro\joule}$ \\
-            \hline
-            Switchibg frequency: & $f_{\mathrm{s}} = \SI{25}{\kilo\hertz}$  & Switch-off losses: & $E_{\text{off},D} = \SI{240}{\micro\joule}$ \\
-            \hline 
-            \multicolumn{2}{|l|}{\textbf{IGBT:}} & \multicolumn{2}{l|}{} \\
-            \hline
-            Forward voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2.5}{\volt}$ & \multicolumn{2}{l|}{} \\
-            \hline
-            Forward voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2.5}{\volt}$ & \multicolumn{2}{l|}{} \\
-            \hline
-            \multicolumn{2}{|l|}{\textbf{Inductance:}} & \multicolumn{2}{l|}{} \\
-            \hline
-            Copper resistance: & $R_{\text{Cu}} = \SI{45}{\milli\ohm}$ & \multicolumn{2}{l|}{} \\
-            \hline
-            Iron losses: & $P_{\mathrm{l},\text{FE}} = \SI{13}{\watt}$ & \multicolumn{2}{l|}{} \\
-            \hline
-        \end{tabular}
-        \caption{Parameters of the circuit.}  % Beschriftung der Tabelle
-        \label{table:Parameters of the circuit}
-    \end{table}
+    \begin{tikzpicture}
+    \begin{axis}[
+        width=7cm, height=5cm,
+        grid=both,
+        major grid style={line width=.2pt,draw=gray!50},
+        minor grid style={line width=.1pt,draw=gray!20},
+        xlabel={$t$ / ns},
+        ylabel={$u_{\mathrm{CE}}(t)$ / V},
+        xmin=0, xmax=150,
+        ymin=0, ymax=800,
+        xtick={0, 50, 100, 150},
+        ytick={0,200, 400, 600, 800},
+        ]
+        % Einschaltverhalten graph
+        \addplot[
+            thick,
+            mark=none,
+            color=black,
+        ] coordinates {
+            (0,600) (100, 600) (100, 0)
+        };
+    \end{axis}
+    \end{tikzpicture}
+    \hspace{1cm} % Abstand zwischen den beiden Diagrammen
+    \begin{tikzpicture}
+    \begin{axis}[
+        width=7cm, height=5cm,
+        grid=both,
+        major grid style={line width=.2pt,draw=gray!50},
+        minor grid style={line width=.1pt,draw=gray!20},
+        xlabel={$t$ / ns},
+        ylabel={$u_{\mathrm{CE}}(t)$ / V},
+        xmin=0, xmax=600,
+        ymin=0, ymax=1000,
+        xtick={0,200, 400, 600},
+        ytick={0,200, 400, 600,800, 1000},
+        ]
+        % Ausschaltverhalten graph
+        \addplot[
+            thick,
+            mark=none,
+            color=black,
+        ] coordinates {
+            (50,0) (200, 900) (250, 600) (600, 600)
+        };
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Switch-on behavior and switch-off behavior of $u_{\mathrm{CE}}(t)$}
+    \label{fig:Switch-on behavior and switch-off behavior of voltage}
+\end{figure}
 
-    \begin{figure}[htb]
-        \centering
-        \begin{tikzpicture}
-        \begin{axis}[
-            width=7cm, height=5cm,
-            grid=both,
-            major grid style={line width=.2pt,draw=gray!50},
-            minor grid style={line width=.1pt,draw=gray!20},
-            xlabel={$t$ [ns]},
-            ylabel={$i_C(t)$ [A]},
-            title={Switch-on behaviour},
-            xmin=0, xmax=150,
-            ymin=0, ymax=70,
-            xtick={0, 50, 100, 150},
-            ytick={0, 10, 20, 30, 40, 50, 60},
-            ]
-            % Einschaltverhalten graph
-            \addplot[
-                thick,
-                mark=none,
-                color=black,
-            ] coordinates {
-                (0,0) (25,0) (50, 20) (75, 40) (100, 60) (125, 30) (150, 30)
-            };
-        \end{axis}
-        \end{tikzpicture} 
-        \hspace{1cm} % Abstand zwischen den beiden Diagrammen
-        \begin{tikzpicture}
-        \begin{axis}[
-            width=7cm, height=5cm,
-            grid=both,
-            major grid style={line width=.2pt,draw=gray!50},
-            minor grid style={line width=.1pt,draw=gray!20},
-            xlabel={$t$/ns},
-            ylabel={$i_C(t)$/A},
-            title={Switch-off behaviour},
-            xmin=0, xmax=600,
-            ymin=0, ymax=70,
-            xtick={0, 200, 400, 600},
-            ytick={0, 10, 20, 30, 40, 50, 60},
-            ]
-            % Ausschaltverhalten graph
-            \addplot[
-                thick,
-                mark=none,
-                color=black,
-            ] coordinates {
-                (0,30) (200, 30) (200, 10) (250, 10) (600, 0)
-            };
-        \end{axis}
-        \end{tikzpicture}
-        \caption{Switch-on behaviour and switch-off behaviour of $i_{\mathrm{C}}(t)$}
-        \label{fig:Switch-on behaviour and switch-off behaviour of}
-
-    %    \end{figure}
-       
-  %  \begin{figure}[h]
-     %   \centering
-        \begin{tikzpicture}
-        \begin{axis}[
-            width=7cm, height=5cm,
-            grid=both,
-            major grid style={line width=.2pt,draw=gray!50},
-            minor grid style={line width=.1pt,draw=gray!20},
-            xlabel={$t$/ns},
-            ylabel={$u_{\mathrm{CE}}(t)$/V},
-            xmin=0, xmax=150,
-            ymin=0, ymax=800,
-            xtick={0, 50, 100, 150},
-            ytick={0,200, 400, 600, 800},
-            ]
-            % Einschaltverhalten graph
-            \addplot[
-                thick,
-                mark=none,
-                color=black,
-            ] coordinates {
-                (0,600) (100, 600) (100, 0)
-            };
-        \end{axis}
-        \end{tikzpicture}
-        \hspace{1cm} % Abstand zwischen den beiden Diagrammen
-        \begin{tikzpicture}
-        \begin{axis}[
-            width=7cm, height=5cm,
-            grid=both,
-            major grid style={line width=.2pt,draw=gray!50},
-            minor grid style={line width=.1pt,draw=gray!20},
-            xlabel={$t$/ns},
-            ylabel={$u_{\mathrm{CE}}(t)$/V},
-            xmin=0, xmax=600,
-            ymin=0, ymax=1000,
-            xtick={0,200, 400, 600},
-            ytick={0,200, 400, 600,800, 1000},
-            ]
-            % Ausschaltverhalten graph
-            \addplot[
-                thick,
-                mark=none,
-                color=black,
-            ] coordinates {
-                (50,0) (200, 900) (250, 600) (600, 600)
-            };
-        \end{axis}
-        \end{tikzpicture}
-        \caption{Switch-on behaviour and switch-off behaviour of $u_{\mathrm{CE}}(t)$}
-        \label{fig:Switch-on behaviour and switch-off behaviour of voltage}
-    \end{figure}
-
-    
-    \subtask{Calculate the switch-on and switch-off loss $E_{\mathrm{on,T}}$ and $E_{\mathrm{off,T}}$  of the IGBT using the time curves during the switching processes.}
-
-  \begin{solutionblock}
-    First, the power values for the switch-on process at the times $t = \SI{25}{\ns}$ and $ t = \SI{100}{\ns}$ are calculated.
-
-    \begin{equation}
-        p(t = \SI{25}{\ns}) = \SI{600}{\volt} \cdot \SI{0}{\ampere} = 0
-    \end{equation}
-
-    \begin{equation}
-        p(t = \SI{100}{\ns}) = \SI{600}{\volt} \cdot \SI{60}{\ampere} = \SI{36}{\kilo\watt} 
-    \end{equation}
-    Figure \ref{fig:Power values for the switch-on process}  results from these power values.
-    The switch-on losses of the IGBT can now be calculated. These are equal to the area of the drawn triangle.
-         
-   \begin{equation}
-    E_{\mathrm{on,T}} = \frac{1}{2} \Delta P \Delta t = \frac{1}{2} \SI{36}{\kilo\watt} \cdot \SI{75}{\ns} = \SI {1.35}{\milli\joule}
-   \end{equation}
-
-   The switch-off power can now be determined for the times $t = \SI{200}{\ns}$, $t = \SI{200.1}{\ns}$ and $t = \SI{250}{\ns}$.
-   
-    \begin{equation}
-        p(t = \SI{200}{\ns}) = \SI{900}{\volt} \cdot \SI{30}{\ampere} = \SI{27}{\kilo\watt} 
-    \end{equation}
-
-    \begin{equation}
-        p(t = \SI{200.1}{\ns}) = \SI{900}{\volt} \cdot \SI{10}{\ampere} = \SI{9}{\kilo\watt} 
-    \end{equation}
-
-    \begin{equation}
-        p(t = \SI{250}{\ns}) = \SI{600}{\volt} \cdot \SI{10}{\ampere} = \SI{6}{\kilo\watt} 
-    \end{equation}
-
-    Figure \ref{fig:Power values for the switch-off process} results from these power values.
-    The switch-off losses of the IGBT can now be calculated. For this purpose, the power curve is divided into three parts.
-         
-   \begin{equation}
-    E_{\mathrm{off,T}} = E_{\mathrm{1}} + E_{\mathrm{2}} + E_{\mathrm{3}}
-   \end{equation}
-   
-   \begin{equation}
-    E_{\mathrm{1}} = \frac{1}{2} \SI{27}{\kilo\watt} \cdot \SI{150}{\ns} = \SI {2.025}{\milli\joule}
-   \end{equation}
-
-   \begin{equation}
-    E_{\mathrm{2}} = \SI{6}{\kilo\watt} \cdot \SI{50}{\ns} + \frac{1}{2} \SI{3}{\kilo\watt} \cdot \SI{50}{\ns} = \SI {0.375}{\milli\joule}
-    \end{equation}
-
-    \begin{equation}
-     E_{\mathrm{3}} = \frac{1}{2} \SI{6}{\kilo\watt} \cdot \SI{350}{\ns} = \SI {1.05}{\milli\joule}
-     \end{equation}
-     If all three losses are added together, the result is the total switch-off loss.
-     \begin{equation}
-        E_{\mathrm{off,T}} =  \SI {3.45}{\milli\joule}
-     \end{equation}
-
-        \begin{solutionfigure}[h]
-            \centering
-            \begin{subfigure}[t]{0.45\textwidth}
-                \centering
-                \begin{tikzpicture}
-                    \begin{axis}[
-                        width=7cm, height=5cm,
-                        grid=both,
-                        major grid style={line width=.2pt,draw=gray!50},
-                        minor grid style={line width=.1pt,draw=gray!20},
-                        xlabel={$t$/ns},
-                        ylabel={$p(t)$/kW},
-                        xmin=0, xmax=150,
-                        ymin=0, ymax=45,
-                        xtick={0, 50, 100, 150},
-                        ytick={0,9, 18, 27, 36, 45},
-                    ]
-                    % Einschaltverhalten graph
-                    \addplot[
-                        thick,
-                        mark=none,
-                        color=black,
-                    ] coordinates {
-                        (25,0) (100, 36) (100, 0)
-                    };
-                    \end{axis}
-                \end{tikzpicture}
-                \caption{Power values for the switch-on process.}
-                \label{fig:Power values for the switch-on process}
-            \end{subfigure}
-            \hfill % Abstand zwischen den Subfiguren
-            \begin{subfigure}[t]{0.45\textwidth}
-                \centering
-                \begin{tikzpicture}
-                    \begin{axis}[
-                        width=7cm, height=5cm,
-                        grid=both,
-                        major grid style={line width=.2pt,draw=gray!50},
-                        minor grid style={line width=.1pt,draw=gray!20},
-                        xlabel={$t$/ns},
-                        ylabel={$p(t)$/kW},
-                        xmin=0, xmax=600,
-                        ymin=0, ymax=45,
-                        xtick={0,200, 400, 600},
-                        ytick={0,9, 18, 27,36, 45},
-                    ]
-                    % Ausschaltverhalten graph
-                    \addplot[
-                        thick,
-                        mark=none,
-                        color=black,
-                    ] coordinates {
-                        (50,0) (200, 27) (200, 9) (250, 7) (600,0)
-                    };
-                    \end{axis}
-                \end{tikzpicture}
-                \caption{Power values for the switch-off process.}
-                \label{fig:Power values for the switch-off process}
-            \end{subfigure}
-            
-            \caption{Switch-on behaviour and switch-off behaviour of $p(t)$}
-        \end{solutionfigure}
-    \end{solutionblock}
-
-
-    \subtask{Calculate the switching power loss in the IGBT $P_{\mathrm{LC,T}}$ and in the diode $P_{\mathrm{LC,D}}$.}
-
+\subtask{Calculate the switch-on and switch-off loss work $E_{\mathrm{on,T}}$ and $E_{\mathrm{off,T}}$  of the IGBT.}
 \begin{solutionblock}
-The switching power loss of the IGBT is dependent on the switching frequency $f_{\mathrm{s}}$ in addition to the switch-on and switch-off power losses.
+First, the power values for the switch-on process at the times $t = \SI{25}{\ns}$ and $ t = \SI{100}{\ns}$ are calculated:
 
 \begin{equation}
-    P_{\mathrm{LS,T}} =  (E_{\mathrm{on,T}} +  E_{\mathrm{off,T}}) \cdot f_{\mathrm{s}} = (\SI {1.35}{\milli\joule} + \SI {3.45}{\milli\joule}) \cdot \SI {25}{\kilo\hertz} = \SI {120}{\watt}
+    p(t = \SI{25}{\ns}) = \SI{600}{\volt} \cdot \SI{0}{\ampere} = 0,
+\end{equation}
+
+\begin{equation}
+    p(t = \SI{100}{\ns}) = \SI{600}{\volt} \cdot \SI{60}{\ampere} = \SI{36}{\kilo\watt}. 
+\end{equation}
+\autoref{fig:Power values for the switch-on process}  results from these power values.
+The switch-on losses of the IGBT can be calculated based on the triangular signal shapes of the provided signals:
+        
+\begin{equation}
+E_{\mathrm{on,T}} = \frac{1}{2} \Delta P \Delta t = \frac{1}{2} \SI{36}{\kilo\watt} \cdot \SI{75}{\ns} = \SI {1.35}{\milli\joule}.
+\end{equation}
+
+The switch-off power can now be determined for the times $t = \SI{200}{\ns}$, $t = \SI{200.1}{\ns}$ and $t = \SI{250}{\ns}$:
+
+\begin{equation}
+    p(t = \SI{200}{\ns}) = \SI{900}{\volt} \cdot \SI{30}{\ampere} = \SI{27}{\kilo\watt}, 
+\end{equation}
+
+\begin{equation}
+    p(t = \SI{200.1}{\ns}) = \SI{900}{\volt} \cdot \SI{10}{\ampere} = \SI{9}{\kilo\watt}, 
+\end{equation}
+
+\begin{equation}
+    p(t = \SI{250}{\ns}) = \SI{600}{\volt} \cdot \SI{10}{\ampere} = \SI{6}{\kilo\watt}. 
+\end{equation}
+
+Finally, \autoref{fig:Power values for the switch-off process} results from these power values. The switch-off losses of the IGBT are calculated next. For this purpose, the power curve is divided into three parts:
+        
+\begin{equation}
+E_{\mathrm{off,T}} = E_{\mathrm{1}} + E_{\mathrm{2}} + E_{\mathrm{3}}
+\end{equation}
+with
+\begin{equation}
+E_{\mathrm{1}} = \frac{1}{2} \SI{27}{\kilo\watt} \cdot \SI{150}{\ns} = \SI {2.025}{\milli\joule},
+\end{equation}
+\begin{equation}
+E_{\mathrm{2}} = \SI{6}{\kilo\watt} \cdot \SI{50}{\ns} + \frac{1}{2} \SI{3}{\kilo\watt} \cdot \SI{50}{\ns} = \SI {0.375}{\milli\joule},
+\end{equation}
+\begin{equation}
+    E_{\mathrm{3}} = \frac{1}{2} \SI{6}{\kilo\watt} \cdot \SI{350}{\ns} = \SI {1.05}{\milli\joule}.
+    \end{equation}
+If all three loss work terms are added together, the result is the total switch-off loss work:
+\begin{equation}
+    E_{\mathrm{off,T}} =  \SI {3.45}{\milli\joule}.
+\end{equation}
+\begin{solutionfigure}[h]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=7cm, height=5cm,
+                grid=both,
+                major grid style={line width=.2pt,draw=gray!50},
+                minor grid style={line width=.1pt,draw=gray!20},
+                xlabel={$t$ / ns},
+                ylabel={$p(t)$ / kW},
+                xmin=0, xmax=150,
+                ymin=0, ymax=45,
+                xtick={0, 50, 100, 150},
+                ytick={0,9, 18, 27, 36, 45},
+            ]
+            % Einschaltverhalten graph
+            \addplot[
+                thick,
+                mark=none,
+                color=black,
+            ] coordinates {
+                (25,0) (100, 36) (100, 0)
+            };
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Power values for the switch-on process.}
+        \label{fig:Power values for the switch-on process}
+    \end{subfigure}
+    \hfill % Abstand zwischen den Subfiguren
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=7cm, height=5cm,
+                grid=both,
+                major grid style={line width=.2pt,draw=gray!50},
+                minor grid style={line width=.1pt,draw=gray!20},
+                xlabel={$t$ / ns},
+                ylabel={$p(t)$ / kW},
+                xmin=0, xmax=600,
+                ymin=0, ymax=45,
+                xtick={0,200, 400, 600},
+                ytick={0,9, 18, 27,36, 45},
+            ]
+            % Ausschaltverhalten graph
+            \addplot[
+                thick,
+                mark=none,
+                color=black,
+            ] coordinates {
+                (50,0) (200, 27) (200, 9) (250, 7) (600,0)
+            };
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Power values for the switch-off process.}
+        \label{fig:Power values for the switch-off process}
+    \end{subfigure}
+    \caption{Switch-on behavior and switch-off behavior of $p(t)$}
+\end{solutionfigure}
+\end{solutionblock}
+
+
+\subtask{Calculate the (average) switching power loss in the IGBT $P_{\mathrm{LC,T}}$ and in the diode $P_{\mathrm{LC,D}}$.}
+\begin{solutionblock}
+The switching power loss of the IGBT is dependent on the switching frequency $f_{\mathrm{s}}$ in addition to the switch-on and switch-off power losses:
+\begin{equation}
+    P_{\mathrm{LS,T}} =  (E_{\mathrm{on,T}} +  E_{\mathrm{off,T}}) \cdot f_{\mathrm{s}} = (\SI {1.35}{\milli\joule} + \SI {3.45}{\milli\joule}) \cdot \SI {25}{\kilo\hertz} = \SI {120}{\watt}.
  \end{equation}
 
- The switching power loss of the diode also depends on the switching frequency $f_{\mathrm{s}}$.
+ Likewise, the switching power loss of the diode also depends on the switching frequency $f_{\mathrm{s}}$:
  \begin{equation}
-    P_{\mathrm{LS,D}} =  (E_{\mathrm{on,D}} +  E_{\mathrm{off,D}}) \cdot f_{\mathrm{s}} = (\SI {52}{\micro\joule} + \SI {3.45}{\micro\joule}) \cdot \SI {25}{\kilo\hertz} = \SI {7.3}{\watt}
+    P_{\mathrm{LS,D}} =  (E_{\mathrm{on,D}} +  E_{\mathrm{off,D}}) \cdot f_{\mathrm{s}} = (\SI {52}{\micro\joule} + \SI {3.45}{\micro\joule}) \cdot \SI {25}{\kilo\hertz} = \SI {7.3}{\watt}.
  \end{equation}
 \end{solutionblock}
 
-\subtask{ Calculate the conduction losses in the IGBT  $P_{\mathrm{LC,T}}(T)$ and in the diode $P_{\mathrm{LC,D}}(D)$ in
-as a function of the relative duty cycle D.}
+\subtask{Calculate the (average) conduction losses in the IGBT  $P_{\mathrm{LC,T}}(D)$ and in the diode $P_{\mathrm{LC,D}}(D)$.}
 \begin{solutionblock}
-    There are two operating states, one in which the IGBT is closed and another in which it is open. Therefore, the IGBT and diode never carry a current at the same time. This means that the conduction losses of the IGBT only occur when it is switched on.
-    \begin{equation}
-P_{\mathrm{LC,T}}(T) = u_{\mathrm{CE,on}} I_\mathrm{2}  D = \SI {2.5}{\volt}\cdot \SI {30}{\ampere} \cdot D = \SI {75}{\watt} \cdot D
-    \end{equation}
-
-    Furthermore, this means that the forward losses of the diode only occur when the IGBT is switched off.
-    \begin{equation}
-    P_{\mathrm{LC,D}}(T) = u_{\mathrm{f}} I_\mathrm{2} (1-D)= \SI {2.7}{\volt}\cdot \SI {30}{\ampere} \cdot (1-D) = \SI {81}{\watt} \cdot (1-D)
+There are two operating states, one in which the IGBT is closed and another in which it is open. Therefore, the IGBT and diode never carry a current at the same time. This means that the conduction losses of the IGBT only occur when it is switched on:
+\begin{equation}
+    P_{\mathrm{LC,T}}(D) = u_{\mathrm{CE,on}} I_\mathrm{2}  D = \SI {2.5}{\volt}\cdot \SI {30}{\ampere} \cdot D = \SI {75}{\watt} \cdot D .
+\end{equation}
+Furthermore, this means that the forward losses of the diode only occur when the IGBT is switched off:
+\begin{equation}
+    P_{\mathrm{LC,D}}(D) = u_{\mathrm{f}} I_\mathrm{2} (1-D)= \SI {2.7}{\volt}\cdot \SI {30}{\ampere} \cdot (1-D) = \SI {81}{\watt} \cdot (1-D) .
     \end{equation}
 \end{solutionblock}
 
 \subtask{Calculate the efficiency $\eta(U_2)$ as a function of the output voltage.}
 \begin{solutionblock}
-    To determine the efficiency, the general equation $\eta=\frac{P_{\mathrm{out}}}{P_{\mathrm{in}}}$ is used.
-    \begin{equation}
-        \eta=\frac{P_{\mathrm{out}}}{P_{\mathrm{in}}} = \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} + P_{\mathrm{L,total}}(D)}
-    \end{equation}
-    $P_{\mathrm{L,total}}(D)$ results from all losses.
-
-    \begin{equation}
-P_{\mathrm{L,total}}(D) =  P_{\mathrm{LS,T}} +  P_{\mathrm{LS,D}} + P_{\mathrm{LC,T}}(D) + P_{\mathrm{LC,D}}(D) + P_{\mathrm{L,L}}
-\end{equation}
-
-The inductance losses are unknown and have yet to be determined.
-
+To determine the efficiency, the general equation $\eta=\frac{P_{\mathrm{out}}}{P_{\mathrm{in}}}$ is used
 \begin{equation}
-   P_{\mathrm{L,L}} = R_{\mathrm{CU}} (I_{\mathrm{2}})^2 + P_{\mathrm{L,FE}} = \SI{45}{\mohm} \cdot {(30\ \si{A})^2} + \SI {13}{\watt} = \SI {53.5}{\watt}
-    \end{equation}
-
-    $P_{\mathrm{LC,T}}(D)$ and $P_{\mathrm{LC,D}}(D)$ can only be determined in general terms.
-
-    \begin{equation}
-P_{\mathrm{LC,T}}(D) + P_{\mathrm{LC,D}}(D) = I_2( u_{\mathrm{CE,on}} D + u_{\mathrm{F}}(D-1)) = D I_\mathrm{2}(u_{\mathrm{CE,on}} - u_{\mathrm{F}} ) + I_\mathrm{2} u_{\mathrm{F}}
-    \end{equation}
-
-    If you now summarise all power values, you get the solution:
-    \begin{equation}
+    \eta=\frac{P_{\mathrm{out}}}{P_{\mathrm{in}}} = \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} + P_{\mathrm{L,total}}(D)}
+\end{equation}
+where $P_{\mathrm{L,total}}(D)$ results from all losses:
+\begin{equation}
+    P_{\mathrm{L,total}}(D) =  P_{\mathrm{LS,T}} +  P_{\mathrm{LS,D}} + P_{\mathrm{LC,T}}(D) + P_{\mathrm{LC,D}}(D) + P_{\mathrm{L,L}}.
+\end{equation}
+The losses inside the inductor are:
+\begin{equation}
+   P_{\mathrm{L,L}} = R_{\mathrm{CU}} (I_{\mathrm{2}})^2 + P_{\mathrm{L,FE}} = \SI{45}{\mohm} \cdot {(30\ \si{A})^2} + \SI {13}{\watt} = \SI {53.5}{\watt},
+\end{equation}
+where $P_{\mathrm{LC,T}}(D)$ and $P_{\mathrm{LC,D}}(D)$ can only be determined in general terms:
+\begin{equation}
+    P_{\mathrm{LC,T}}(D) + P_{\mathrm{LC,D}}(D) = I_2( u_{\mathrm{CE,on}} D + u_{\mathrm{F}}(D-1)) = D I_\mathrm{2}(u_{\mathrm{CE,on}} - u_{\mathrm{F}} ) + I_\mathrm{2} u_{\mathrm{F}}.
+\end{equation}
+Summarizing all power loss components yields:
+\begin{equation}
     P_{\mathrm{L,total}}(D) = P_{\mathrm{LS,T}} +  P_{\mathrm{LS,D}} + P_{\mathrm{L,L}} + D I_\mathrm{2}(u_{\mathrm{CE,on}} - u_{\mathrm{F}} ) + I_\mathrm{2} u_{\mathrm{F}} =  P_{\mathrm{L,const}} + D I_\mathrm{2} (u_{\mathrm{CE,on}} - u_{\mathrm{F}})
 \end{equation}
-The value $P_{\mathrm{L,const}}$ is made up of all losses that could be calculated.
+The value $P_{\mathrm{L,const}}$ is considering all losses that could be calculated:
 \begin{equation}
-    P_{\mathrm{L,const}} = \SI {120}{\watt} + \SI {7.3}{\watt} +\SI {53.5}{\watt} + \SI {2.7}{\volt}\cdot\SI {30}{\ampere}
-\end{equation}
-
-If these calculations are used in the efficiency as a function of $U_2$, the following result is obtained.
-
-\begin{equation}
-    \mu= \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} + P_{\mathrm{L,total}}(D)+D I_\mathrm{2} (u_{\mathrm{CE,on}} - u_{\mathrm{F}})}
+    P_{\mathrm{L,const}} = \SI {120}{\watt} + \SI {7.3}{\watt} +\SI {53.5}{\watt} + \SI {2.7}{\volt}\cdot\SI {30}{\ampere}.
 \end{equation}
 \end{solutionblock}
 
 \subtask{The circuit is to be evaluated at   $ U_{\mathrm{2}} = \SI{300}{\volt}$. Calculate the total power loss in the IGBT $P_{\mathrm{L,T}}$ and in the $P_{\mathrm{L,D}}$ diode.}
 \begin{solutionblock}
-    Firstly, the duty cycle must be determined.
-    \begin{equation}
-D = \frac{U_\mathrm{2}}{U_\mathrm{1}} = \frac{\SI{300}{\volt}}{\SI{600}{\volt}} = 0.5
-    \end{equation}
-
-    The total power loss of the IGBT is made up of the switching losses and the losses during operation.
-    \begin{equation}
-    P_{\mathrm{L,T}}(D) = u_{\mathrm{CE,on}} I_\mathrm{2} D +  P_{\mathrm{LS,T}} = \SI{2.5}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{120}{\watt} = \SI{157.5}{\watt}
-\end{equation}
-The total power loss of the diode is made up of the switching losses and the losses during operation.
-
+Firstly, the duty cycle must be determined:
 \begin{equation}
-    P_{\mathrm{L,D}}(D) = u_{\mathrm{F}} I_\mathrm{2} (1-D) +  P_{\mathrm{LS,D}} = \SI{2.7}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{7.3}{\watt} = \SI{47.8}{\watt}
+    D = \frac{U_\mathrm{2}}{U_\mathrm{1}} = \frac{\SI{300}{\volt}}{\SI{600}{\volt}} = 0.5.
+\end{equation}
+The total power loss of the IGBT is made up of the switching losses and the losses during operation:
+\begin{equation}
+    P_{\mathrm{L,T}}(D) = u_{\mathrm{CE,on}} I_\mathrm{2} D +  P_{\mathrm{LS,T}} = \SI{2.5}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{120}{\watt} = \SI{157.5}{\watt}.
+\end{equation}
+The total power loss of the diode is made up of the switching losses and the losses during operation:
+\begin{equation}
+    P_{\mathrm{L,D}}(D) = u_{\mathrm{F}} I_\mathrm{2} (1-D) +  P_{\mathrm{LS,D}} = \SI{2.7}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{7.3}{\watt} = \SI{47.8}{\watt}.
 \end{equation}
 \end{solutionblock}
     
