@@ -14,7 +14,7 @@ By varying the duty cycle of the transistor the average value of the heating pow
 that at its nominal voltage $ U_{\mathrm{2N}} = \SI{14}{\volt}$ it consumes a power of $ P_{\mathrm{LN}} = \SI{500}{\watt}$ and
 can be modeled with an ohmic resistor. This circuit is shown in \autoref{fig:transistor circuit}.
 %
-\begin{figure}[h]
+\begin{figure}[ht]
 \begin{center}
     \begin{circuitikz}[european currents,european resistors,american inductors]
         \draw
@@ -117,7 +117,7 @@ The graph \autoref{fig:Currents and voltages during the period} shows the voltag
 
 \begin {solutionblock}
 The \autoref{fig:Instantaneous power} shows the time curve of the instantaneous power at the load resistor.
-\begin{solutionfigure}[h]
+\begin{solutionfigure}[ht]
 \begin{center}
     \begin{tikzpicture}
        \begin{axis}[
@@ -297,7 +297,7 @@ Consider both voltages as constant, the inductance of the coil is $L = \SI{10}{\
 \subtask{Draw the equivalent circuits for the two switching states.}
 % Solution of subtask
 \begin{solutionblock}
-    \begin{solutionfigure}[h]
+    \begin{solutionfigure}[ht]
         \centering
         \begin{tabular}{cc}
                 transistor conducts & diode conducts\\
@@ -698,7 +698,7 @@ What duty cycle D is set?}
 \task{Power losses within the step-down converter}
 The power loss of a buck converter is to be analyzed. The inductance is so large
 that the current ripple in the output current can be neglected, i.e., $ i_{\mathrm{2}}(t) = I_{\mathrm{2}} =\mathrm{const}$. Furthermore, the component values are given in \autoref{table:Parameters of the circuit} and the currents and voltages of the switch-on and switch-off processes in \autoref{fig:Switch-on behavior and switch-off behavior of} and \autoref{fig:Switch-on behavior and switch-off behavior of voltage}. 
-\begin{figure}[h]
+\begin{figure}[ht]
     \begin{center}
         \begin{circuitikz}[european currents,european resistors,american inductors]
             \draw
@@ -895,7 +895,7 @@ If all three loss work terms are added together, the result is the total switch-
 \begin{equation}
     E_{\mathrm{off,T}} =  \SI {3.45}{\milli\joule}.
 \end{equation}
-\begin{solutionfigure}[h]
+\begin{solutionfigure}[ht]
     \centering
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
