@@ -963,12 +963,12 @@ If all three loss work terms are added together, the result is the total switch-
 \begin{solutionblock}
 The switching power loss of the IGBT is dependent on the switching frequency $f_{\mathrm{s}}$ in addition to the switch-on and switch-off power losses:
 \begin{equation}
-    P_{\mathrm{LS,T}} =  (E_{\mathrm{on,T}} +  E_{\mathrm{off,T}}) \cdot f_{\mathrm{s}} = (\SI {1.35}{\milli\joule} + \SI {3.45}{\milli\joule}) \cdot \SI {25}{\kilo\hertz} = \SI {120}{\watt}.
+    P_{\mathrm{l,sw,T}} =  (E_{\mathrm{on,T}} +  E_{\mathrm{off,T}}) \cdot f_{\mathrm{s}} = (\SI {1.35}{\milli\joule} + \SI {3.45}{\milli\joule}) \cdot \SI {25}{\kilo\hertz} = \SI {120}{\watt}.
  \end{equation}
 
  Likewise, the switching power loss of the diode also depends on the switching frequency $f_{\mathrm{s}}$:
  \begin{equation}
-    P_{\mathrm{LS,D}} =  (E_{\mathrm{on,D}} +  E_{\mathrm{off,D}}) \cdot f_{\mathrm{s}} = (\SI {52}{\micro\joule} + \SI {3.45}{\micro\joule}) \cdot \SI {25}{\kilo\hertz} = \SI {7.3}{\watt}.
+    P_{\mathrm{l,sw,D}} =  (E_{\mathrm{on,D}} +  E_{\mathrm{off,D}}) \cdot f_{\mathrm{s}} = (\SI {52}{\micro\joule} + \SI {3.45}{\micro\joule}) \cdot \SI {25}{\kilo\hertz} = \SI {7.3}{\watt}.
  \end{equation}
 \end{solutionblock}
 
@@ -976,11 +976,11 @@ The switching power loss of the IGBT is dependent on the switching frequency $f_
 \begin{solutionblock}
 There are two operating states, one in which the IGBT is closed and another in which it is open. Therefore, the IGBT and diode never carry a current at the same time. This means that the conduction losses of the IGBT only occur when it is switched on:
 \begin{equation}
-    P_{\mathrm{LC,T}}(D) = u_{\mathrm{CE,on}} I_\mathrm{2}  D = \SI {2.5}{\volt}\cdot \SI {30}{\ampere} \cdot D = \SI {75}{\watt} \cdot D .
+    P_{\mathrm{l,cond,T}}(D) = u_{\mathrm{CE,on}} I_\mathrm{2}  D = \SI {2.5}{\volt}\cdot \SI {30}{\ampere} \cdot D = \SI {75}{\watt} \cdot D .
 \end{equation}
 Furthermore, this means that the forward losses of the diode only occur when the IGBT is switched off:
 \begin{equation}
-    P_{\mathrm{LC,D}}(D) = u_{\mathrm{f}} I_\mathrm{2} (1-D)= \SI {2.7}{\volt}\cdot \SI {30}{\ampere} \cdot (1-D) = \SI {81}{\watt} \cdot (1-D) .
+    P_{\mathrm{l,cond,D}}(D)= u_{\mathrm{f}} I_\mathrm{2} (1-D)= \SI {2.7}{\volt}\cdot \SI {30}{\ampere} \cdot (1-D) = \SI {81}{\watt} \cdot (1-D) .
     \end{equation}
 \end{solutionblock}
 
@@ -988,27 +988,27 @@ Furthermore, this means that the forward losses of the diode only occur when the
 \begin{solutionblock}
 To determine the efficiency, the general equation $\eta=\frac{P_{\mathrm{out}}}{P_{\mathrm{in}}}$ is used
 \begin{equation}
-    \eta=\frac{P_{\mathrm{out}}}{P_{\mathrm{in}}} = \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} + P_{\mathrm{L,total}}(D)}
+    \eta=\frac{P_{\mathrm{out}}}{P_{\mathrm{in}}} = \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} + P_{\mathrm{l,total}}(D)}
 \end{equation}
-where $P_{\mathrm{L,total}}(D)$ results from all losses:
+where $P_{\mathrm{l,total}}(D)$ results from all losses:
 \begin{equation}
-    P_{\mathrm{L,total}}(D) =  P_{\mathrm{LS,T}} +  P_{\mathrm{LS,D}} + P_{\mathrm{LC,T}}(D) + P_{\mathrm{LC,D}}(D) + P_{\mathrm{L,L}}.
+    P_{\mathrm{l,total}}(D) =  P_{\mathrm{l,sw,T}} +  P_{\mathrm{l,sw,D}} + P_{\mathrm{l,cond,T}}(D) + P_{\mathrm{l,cond,D}}(D) + P_{\mathrm{l,L}}.
 \end{equation}
 The losses inside the inductor are:
 \begin{equation}
-   P_{\mathrm{L,L}} = R_{\mathrm{CU}} (I_{\mathrm{2}})^2 + P_{\mathrm{L,FE}} = \SI{45}{\mohm} \cdot {(30\ \si{A})^2} + \SI {13}{\watt} = \SI {53.5}{\watt},
+   P_{\mathrm{l,L}} = R_{\mathrm{Cu}} (I_{\mathrm{2}})^2 + P_{\mathrm{l,Fe}} = \SI{45}{\mohm} \cdot {(30\ \si{A})^2} + \SI {13}{\watt} = \SI {53.5}{\watt},
 \end{equation}
-where $P_{\mathrm{LC,T}}(D)$ and $P_{\mathrm{LC,D}}(D)$ can only be determined in general terms:
+where $P_{\mathrm{l,cond,T}}(D)$ and $P_{\mathrm{l,cond,D}}(D)$ can only be determined in general terms:
 \begin{equation}
     P_{\mathrm{LC,T}}(D) + P_{\mathrm{LC,D}}(D) = I_2( u_{\mathrm{CE,on}} D + u_{\mathrm{F}}(D-1)) = D I_\mathrm{2}(u_{\mathrm{CE,on}} - u_{\mathrm{F}} ) + I_\mathrm{2} u_{\mathrm{F}}.
 \end{equation}
 Summarizing all power loss components yields:
 \begin{equation}
-    P_{\mathrm{L,total}}(D) = P_{\mathrm{LS,T}} +  P_{\mathrm{LS,D}} + P_{\mathrm{L,L}} + D I_\mathrm{2}(u_{\mathrm{CE,on}} - u_{\mathrm{F}} ) + I_\mathrm{2} u_{\mathrm{F}} =  P_{\mathrm{L,const}} + D I_\mathrm{2} (u_{\mathrm{CE,on}} - u_{\mathrm{F}})
+    P_{\mathrm{L,total}}(D) = P_{\mathrm{l,sw,T}}  +  P_{\mathrm{l,sw,D}}  + P_{\mathrm{l,L}} + D I_\mathrm{2}(u_{\mathrm{CE,on}} - u_{\mathrm{F}} ) + I_\mathrm{2} u_{\mathrm{F}} =  P_{\mathrm{l,const}} + D I_\mathrm{2} (u_{\mathrm{CE,on}} - u_{\mathrm{F}})
 \end{equation}
-The value $P_{\mathrm{L,const}}$ is considering all losses that could be calculated:
+The value $P_{\mathrm{l,const}}$ is considering all losses that could be calculated:
 \begin{equation}
-    P_{\mathrm{L,const}} = \SI {120}{\watt} + \SI {7.3}{\watt} +\SI {53.5}{\watt} + \SI {2.7}{\volt}\cdot\SI {30}{\ampere}.
+    P_{\mathrm{l,const}} = \SI {120}{\watt} + \SI {7.3}{\watt} +\SI {53.5}{\watt} + \SI {2.7}{\volt}\cdot\SI {30}{\ampere}.
 \end{equation}
 \end{solutionblock}
 
@@ -1020,11 +1020,11 @@ Firstly, the duty cycle must be determined:
 \end{equation}
 The total power loss of the IGBT is made up of the switching losses and the losses during operation:
 \begin{equation}
-    P_{\mathrm{L,T}}(D) = u_{\mathrm{CE,on}} I_\mathrm{2} D +  P_{\mathrm{LS,T}} = \SI{2.5}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{120}{\watt} = \SI{157.5}{\watt}.
+    P_{\mathrm{l,T}}(D) = u_{\mathrm{CE,on}} I_\mathrm{2} D +  P_{\mathrm{l,sw,T}} = \SI{2.5}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{120}{\watt} = \SI{157.5}{\watt}.
 \end{equation}
 The total power loss of the diode is made up of the switching losses and the losses during operation:
 \begin{equation}
-    P_{\mathrm{L,D}}(D) = u_{\mathrm{F}} I_\mathrm{2} (1-D) +  P_{\mathrm{LS,D}} = \SI{2.7}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{7.3}{\watt} = \SI{47.8}{\watt}.
+    P_{\mathrm{l,D}}(D) = u_{\mathrm{F}} I_\mathrm{2} (1-D) +  P_{\mathrm{l,sw,D}} = \SI{2.7}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{7.3}{\watt} = \SI{47.8}{\watt}.
 \end{equation}
 \end{solutionblock}
     
