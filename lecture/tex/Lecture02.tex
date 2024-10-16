@@ -2481,3 +2481,108 @@
     \end{figure}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Buck-boost converter: switch states %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Buck-boost converter: switch states in DCM}
+    The buck-boost converter in DCM has three different switch states:
+    \begin{itemize}
+            \item Transistor on-time:  $T_\mathrm{on}=DT_\mathrm{s}$,
+            \item Transistor off-time (conducting diode): $T'_\mathrm{off}=D'T_\mathrm{s}$,
+            \item Transistor off-time (no conduction):  $T''_\mathrm{off}=T_\mathrm{s}-T_\mathrm{on}-T'_\mathrm{off}$.
+    \end{itemize}
+        \begin{figure}
+            \centering	
+            \begin{subfigure}{0.33\textwidth}
+                \centering
+                \begin{circuitikz}[scale=0.75, font=\small]
+                    \draw (0,2) to [open, o-o, v = $\hspace{-0.4cm}U_2$, voltage = straight] ++(0,-2)
+                    to ++(-5,0)
+                    to [open, o-o, v<= $U_1 \hspace{-0.1cm}$, voltage = straight] ++(0,2)
+                    (-5,2) to  [short, i=${i_1}(t)$] ++(1,0)
+                    to [inductor, l=$L$] ++(1.5,0)
+                    to [short, i=$i_\mathrm{L}(t)$] ++(1,0)
+                    to [short, -*] ++(0,-2);
+                    \draw (-1,2) to [short, -o, i=${i_2=0}$] (0,2);
+                \end{circuitikz}
+                \caption{Switch-on time $T_\mathrm{on}$}
+            \end{subfigure}%
+            \begin{subfigure}{0.33\textwidth}
+                \centering
+                \hspace{-0.6cm}
+                \begin{circuitikz}[scale=0.75, font=\small]
+                    \draw (0,2) to [open, o-o, v = $\hspace{-0.4cm}U_2$, voltage = straight] ++(0,-2)
+                    to ++(-5,0)
+                    to [open, o-o, v<= $U_1 \hspace{-0.1cm}$, voltage = straight] ++(0,2)
+                    (-5,2) to  [short, i=${i_1=0}$] ++(0.75,0)
+                    (-3.75,0) to [short, *-] ++(0,2)
+                    to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
+                    to [inductor, l=$L$] ++(2,0)
+                    to [short, i=$i_2(t)$] (0,2);
+                \end{circuitikz}
+                \caption{Switch-off time $T'_\mathrm{off}$}
+            \end{subfigure}
+            \begin{subfigure}{0.33\textwidth}
+                \centering
+                \begin{circuitikz}[scale=0.75, font=\small]
+                    \draw (0,2) to [open, o-o, v = $\hspace{-0.4cm}U_2$, voltage = straight] ++(0,-2)
+                    to ++(-5,0)
+                    to [open, o-o, v<= $U_1 \hspace{-0.1cm}$, voltage = straight] ++(0,2)
+                    (-5,2) to  [short, i=${i_1=0}\hspace{0.15cm}$] ++(1.0,0)
+                    to [open] ++(0.5, 0)
+                    to [short] ++(0.25,0)
+                    to [inductor, l=$L$] ++(1.5,0)
+                    to [short] ++(0.25,0);
+                    \draw (-1,2) to [short, -o, i=${i_2=0}$] (0,2);
+                \end{circuitikz}
+                \caption{Switch-off time $T''_\mathrm{off}$}
+            \end{subfigure}
+        \caption{Switch states of the buck-boost converter including DCM} 
+        \label{fig:buck-boost-converter-switch-states-DCM}
+        \end{figure}
+    \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Buck-boost converter load curves %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Buck-boost converter load curves}
+    \begin{figure}
+        \begin{tikzpicture}
+            \begin{semilogyaxis}[
+                xlabel={$\overline{i}_2/\Delta i_\mathrm{L,max}$},
+                ylabel={$U_2/U_1$},
+                axis lines=left,
+                thick,
+                smooth,
+                no markers,
+                height = 0.8\textheight,
+                grid,
+                log ticks with fixed point,
+                ymin=0.04, ymax=11,
+                xmin=0, xmax=0.4,
+                clip = true
+                ]
+                \foreach \D in {0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9}{
+                    \addplot[signalblue, domain=\D*(1-\D)/2:1, samples=15] {\D/(1-\D)}; %CCM
+                    \addplot[signalblue, domain=0.01:\D*(1-\D)/2, samples=30] {\D^2/2/x}; %DCM
+                }
+                 \foreach \D [count=\xi] in {0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9}{
+                    \pgfmathsetmacro{\gain}{\D/(1-\D)}
+                    \pgfmathsetmacro{\shift}{(-1)^(Mod(\xi,2))}
+                     \edef\temp{\noexpand\node[inner sep = 1pt, align = center, fill = white] at (axis cs:0.3+\shift/20, \gain) {$\scriptstyle D=\D$};} % Duty-cycle labels
+                     \temp
+                 }
+                 \addplot[signalred, domain = 0.005:0.15, samples=30, thick, name path = upper] {-(1-1/(4*x)) + ((1-1/(4*x))^2 - 1)^(0.5)}; % Upper boundary area
+                 \addplot[signalred, domain = 0.005:0.15, samples=30, thick, name path = lower] {-(1-1/(4*x)) - ((1-1/(4*x))^2 - 1)^(0.5)}; % Lower boundary area
+                \addplot[shadecolor, opacity=0.3] fill between[of=upper and lower];
+                \node[inner sep = 1pt, anchor = west, fill = white, font=\footnotesize] at (axis cs:0.102, 0.165) {CCM}; % CCM label
+                \node[inner sep = 1pt, anchor = center, font=\footnotesize] at (axis cs:0.0475, 0.25) {DCM}; % DCM label
+            \end{semilogyaxis}
+        \end{tikzpicture}
+        \caption{Buck-boost converter load curves for CCM and DCM}
+        \label{fig:buck-boost-converter-load-curves}
+    \end{figure}
+\end{frame}
