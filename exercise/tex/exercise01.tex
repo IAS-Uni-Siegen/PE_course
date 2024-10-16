@@ -173,7 +173,7 @@ The \autoref{fig:Instantaneous power} shows the time curve of the instantaneous 
 \end{solutionfigure}
 \end{solutionblock}
 
-\subtask{Derive the relationships for the mean voltage $\overline u_2$, the mean current $\overline i_2$ and the mean power $\overline{p}_{\mathrm{2}}$}.
+\subtask{Derive the relationships for the mean voltage $\overline u_2$, the mean current $\overline i_2$ and the mean power $\overline{p}_{\mathrm{2}}$.}
 
 \begin{solutionblock}
 In order to calculate the average voltage $\overline u_2$, the voltage $u_{\mathrm{2}}(t)$ must be integrated over the period $T_{\mathrm{s}}$:
@@ -244,7 +244,7 @@ What is the average voltage $\overline u_2$ at the heater? What power $\overline
 
 
 \subtask{During the journey, the heat output should be $ \overline{p}_{\mathrm{2,f}} = \SI{200}{\watt}$. How is the duty cycle
-	 $D$ set? What are the mean values of the current $\overline i_\mathrm{2}$ and the voltage $\overline u_\mathrm{2}$?.}
+	 $D$ set? What are the mean values of the current $\overline i_\mathrm{2}$ and the voltage $\overline u_\mathrm{2}$?}
 \begin{solutionblock}
 To determine the duty cycle D, the familiar power formula is applied:
 \begin{equation}
@@ -731,8 +731,8 @@ that the current ripple in the output current can be neglected, i.e., $ i_{\math
         Switching frequency: & $f_{\mathrm{s}} = \SI{25}{\kilo\hertz}$  & Switch-off losses: & $E_{\text{off},\mathrm{D}} = \SI{240}{\micro\joule}$ \\
         \midrule
         \multicolumn{2}{l}{\textbf{IGBT:}} & \multicolumn{2}{l}{\textbf{Inductance:}} \\ 
-        Forward voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2.5}{\volt}$ & Copper resistance: & $R_{\text{Cu}} = \SI{45}{\milli\ohm}$  \\
-        Forward voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2.5}{\volt}$ &  Iron losses: & $P_{\mathrm{l},\text{FE}} = \SI{13}{\watt}$ \\
+        Collector-emitter voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2.5}{\volt}$ & Copper resistance: & $R_{\text{Cu}} = \SI{45}{\milli\ohm}$  \\
+        & &  Iron losses: & $P_{\mathrm{l},\text{Fe}} = \SI{13}{\watt}$ \\
         \bottomrule
     \end{tabular}
     \caption{Parameters of the circuit.}  % Beschriftung der Tabelle
@@ -840,7 +840,7 @@ that the current ripple in the output current can be neglected, i.e., $ i_{\math
         };
     \end{axis}
     \end{tikzpicture}
-    \caption{Switch-on behavior and switch-off behavior of $u_{\mathrm{CE}}(t)$}
+    \caption{Switch-on behavior and switch-off behavior of $u_{\mathrm{CE}}(t)$.}
     \label{fig:Switch-on behavior and switch-off behavior of voltage}
 \end{figure}
 
@@ -959,7 +959,7 @@ If all three loss work terms are added together, the result is the total switch-
 \end{solutionblock}
 
 
-\subtask{Calculate the (average) switching power loss in the IGBT $P_{\mathrm{LC,T}}$ and in the diode $P_{\mathrm{LC,D}}$.}
+\subtask{Calculate the (average) switching power loss in the IGBT $P_{\mathrm{l,sw,T}}$ and in the diode $P_{\mathrm{l,sw,D}}$.}
 \begin{solutionblock}
 The switching power loss of the IGBT is dependent on the switching frequency $f_{\mathrm{s}}$ in addition to the switch-on and switch-off power losses:
 \begin{equation}
@@ -972,7 +972,7 @@ The switching power loss of the IGBT is dependent on the switching frequency $f_
  \end{equation}
 \end{solutionblock}
 
-\subtask{Calculate the (average) conduction losses in the IGBT  $P_{\mathrm{LC,T}}(D)$ and in the diode $P_{\mathrm{LC,D}}(D)$.}
+\subtask{Calculate the (average) conduction losses in the IGBT  $P_{\mathrm{l,cond,T}}(D)$ and in the diode $P_{\mathrm{l,cond,D}}(D)$.}
 \begin{solutionblock}
 There are two operating states, one in which the IGBT is closed and another in which it is open. Therefore, the IGBT and diode never carry a current at the same time. This means that the conduction losses of the IGBT only occur when it is switched on:
 \begin{equation}
@@ -1012,7 +1012,7 @@ The value $P_{\mathrm{L,const}}$ is considering all losses that could be calcula
 \end{equation}
 \end{solutionblock}
 
-\subtask{The circuit is to be evaluated at   $ U_{\mathrm{2}} = \SI{300}{\volt}$. Calculate the total power loss in the IGBT $P_{\mathrm{L,T}}$ and in the $P_{\mathrm{L,D}}$ diode.}
+\subtask{The circuit is to be evaluated at   $ U_{\mathrm{2}} = \SI{300}{\volt}$. Calculate the total power loss in the IGBT $P_{\mathrm{l,T}}$ and in the $P_{\mathrm{l,D}}$ diode.}
 \begin{solutionblock}
 Firstly, the duty cycle must be determined:
 \begin{equation}
