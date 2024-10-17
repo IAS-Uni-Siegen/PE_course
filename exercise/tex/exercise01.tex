@@ -186,7 +186,7 @@ In order to calculate the average voltage $\overline u_2$, the voltage $u_{\math
 For the mean value $\overline i_2$, the current $i_{\mathrm{2}}(t)$ must be integrated over the period $T_{\mathrm{s}}$:
 \begin{equation}
     \overline i_2 = \frac{1}{ T_{\mathrm{s}}} \int_0^{ T_{\mathrm{s}}} i_2(t) \, \mathrm{d}t = \frac{1}{ T_{\mathrm{s}}}\int_0^{D  T_{\mathrm{s}}} \frac{U_1}{ R_{\mathrm{L}}} \, \mathrm{d}t + \frac{1}{ T_{\mathrm{s}}}\int_{D  T_{\mathrm{s}}}^{ T_{\mathrm{s}}} 0 \, \mathrm{d}t$$
-    $$= \left . \frac{U_1}{ R_{\mathrm{L}}  T_{\mathrm{a}}}  t \right |_0^{D  T_{\mathrm{s}}} = \frac{U_1 D  T_{\mathrm{s}}}{ R_{\mathrm{L}}  T_{\mathrm{s}}} = \frac{U_1}{ R_{\mathrm{L}}} D.
+    $$= \left . \frac{U_1}{ R_{\mathrm{L}}  T_{\mathrm{on}}}  t \right |_0^{D  T_{\mathrm{s}}} = \frac{U_1 D  T_{\mathrm{s}}}{ R_{\mathrm{L}}  T_{\mathrm{s}}} = \frac{U_1}{ R_{\mathrm{L}}} D.
 \end{equation}
 
 To calculate the mean value $\overline{p}_{\mathrm{2}}$, the power $p(t)$ must be integrated over the period $T_{\mathrm{s}}$:
@@ -292,7 +292,7 @@ system voltage $U_1 = \SI{13.5}{\volt}$. The input voltage of the mobile phone i
     \caption{Circuit with one transistor, filter and one load resistor.}
     \label{fig:step_down_converter_output_filter}
 \end{figure}
-Consider both voltages as constant, the inductance of the coil is $L = \SI{10}{\milli\henry}$ and the switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All components are considered ideal.
+Consider both voltages as constant, the inductance of the coil is $L = \SI{10}{\micro\henry}$ and the switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All components are considered ideal.
 
 \subtask{Draw the equivalent circuits for the two switching states.}
 % Solution of subtask
@@ -631,15 +631,15 @@ The BCM operation is characterized by zero inductor current events at the beginn
     \end{solutionfigure}
     The relevant switching time intervals are:
     \begin{equation}
-        f_\mathrm{s} = \SI{ 100}{\kilo\hertz} \quad \Rightarrow \quad T_\mathrm{s} = \SI{ 10}{\micro\second} \quad \Rightarrow \quad T_\mathrm{e} = D \cdot T_\mathrm{s} = \frac{\SI{ 10}{\micro \second}}{3}.
+        f_\mathrm{s} = \SI{ 100}{\kilo\hertz} \quad \Rightarrow \quad T_\mathrm{s} = \SI{ 10}{\micro\second} \quad \Rightarrow \quad T_\mathrm{on} = D \cdot T_\mathrm{s} = \frac{\SI{ 10}{\micro \second}}{3}.
     \end{equation}
     The (linear) inductor ordinary differential equations yields
     \begin{equation}
-        U_\mathrm{L} = U_\mathrm{1} - U_\mathrm{2} = L \frac{\mathrm{d} i_\mathrm{L}}{\mathrm{d}t}  = L \frac{\Delta i_\mathrm{L}}{\Delta t} = L \frac{\Delta i_\mathrm{L}}{T_\mathrm{e}}
+        U_\mathrm{L} = U_\mathrm{1} - U_\mathrm{2} = L \frac{\mathrm{d} i_\mathrm{L}}{\mathrm{d}t}  = L \frac{\Delta i_\mathrm{L}}{\Delta t} = L \frac{\Delta i_\mathrm{L}}{T_\mathrm{on}}
     \end{equation}
     resulting to
     \begin{equation}
-        \Delta i_\mathrm{L} = \frac{U_\mathrm{1} - U_\mathrm{2}}{L} T_\mathrm{e} = \frac{\SI{13.5}{\volt} - \SI{4.5}{\volt}}{\SI{10}{\micro \henry} \cdot \frac{\SI{10}{\micro \second}}{3}} = \SI{3}{\ampere}
+        \Delta i_\mathrm{L} = \frac{U_\mathrm{1} - U_\mathrm{2}}{L} T_\mathrm{on} = \frac{\SI{13.5}{\volt} - \SI{4.5}{\volt}}{\SI{10}{\micro \henry} \cdot \frac{\SI{10}{\micro \second}}{3}} = \SI{3}{\ampere}
     \end{equation}
     and finally
     \begin{equation}
@@ -656,10 +656,10 @@ The BCM operation is characterized by zero inductor current events at the beginn
     \end{equation}
     \begin{equation}
         \Delta i_\mathrm{L,max} = \frac{U_\mathrm{1} - U_\mathrm{2}}{L} 0.5 \cdot T_\mathrm{s}
-        \Rightarrow \Delta i_\mathrm{L,max} = \frac{\SI{10}{\volt} - \SI{5}{\volt}}{\SI{10}{\micro \henry}} 0.5 \cdot \SI{10}{\micro \second},
+        \Rightarrow \Delta i_\mathrm{L,max} = \frac{\SI{13.5}{\volt} - \SI{6.75}{\volt}}{\SI{13.5}{\micro \henry}} 0.5 \cdot \SI{10}{\micro \second},
     \end{equation}
     \begin{equation}
-        \Delta i_{\mathrm{L,min}} = \SI{2.5}{\ampere}.
+        \Delta i_{\mathrm{L,min}} = \SI{3.38}{\ampere}.
     \end{equation}
 \end{solutionblock}
 
@@ -679,7 +679,7 @@ What duty cycle D is set?}
 \begin{solutionblock}
     The boundary of discontinuous conduction mode depends on the inductance, duty cycle, switching frequency and voltages:
     \begin{equation}
-        \Delta i_\mathrm{L} = \frac{U_{\mathrm{1,min}} - U_\mathrm{2}}{L} D T_\mathrm{s} = \frac{(\SI{10}{\volt} - \SI{4.5}{\volt}) \cdot 0.45 \cdot \SI{10}{\micro \second}}{\SI{10}{\micro \henry}} = \SI{2.475}{\ampere},
+        \Delta i_\mathrm{L} = \frac{U_{\mathrm{1,min}} - U_\mathrm{2}}{L} D T_\mathrm{s} = \frac{(\SI{10}{\volt} - \SI{4.5}{\volt}) \cdot 0.45 \cdot \SI{10}{\micro \second}}{\SI{10}{\micro \henry}} = \SI{2.48}{\ampere},
     \end{equation}
     \begin{equation}
         I_{\mathrm{L,min}} = \frac{\Delta i_\mathrm{L}}{2} = \SI{1.24}{\ampere}.
