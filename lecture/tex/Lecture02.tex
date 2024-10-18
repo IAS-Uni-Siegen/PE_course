@@ -2732,3 +2732,30 @@
         \end{subfigure}
     \end{figure}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Recap: Buck-boost converter switching states %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Inverting buck-boost converter: overview}
+    \begin{figure}
+        \begin{itemize}
+            \item Polarity change of the inductor can be also achieved by a \hl{single switch} which input is connected to the inductor.
+            \item Assuming an ideal, infinitely fast switch, the inductor current $i_\mathrm{L}(t)$ remains well-defined (no open switch inductor scenario).
+        \end{itemize}
+        \begin{circuitikz}[]
+            \draw(0,3) node[cute spdt mid, rotate=90] (S) {}
+            (S.cout 2) to [short, -o, i=$i_2(t)$] ++(3,0)
+            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-3) coordinate (A)
+            (S.cout 1) to [short, -o, i_<=$i_1(t)$] ++(-3,0)
+            to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-3)
+            to [short, o-o] (A)
+            (S.out 1) node[below, anchor = north east] {$S_\mathrm{on}$}
+            (S.out 2) node[below, anchor = north west] {$S_\mathrm{off}$};
+            \draw let \p1 = (A) in (S.cin) to [inductor, i=$i_\mathrm{L}(t)$, v=$u_\mathrm{L}(t)$,voltage = straight, o-*] (0,\y1);
+        \end{circuitikz}
+        \caption{Inverting buck-boost converter (ideal switch representation)}
+        \label{fig:inverting-buck-boost-simple}
+    \end{figure}
+\end{frame}
