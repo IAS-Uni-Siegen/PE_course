@@ -1,8 +1,11 @@
+% Include figures of exercise 1
+\input{fig/figexec1}
+\input{fig/sfigexec1}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Begin exercise %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ex{Step-down converter and power loss calculation}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 1: Step-down converter without output filter %%
@@ -10,105 +13,18 @@
 
 \task{Step-down converter without output filter}
 A switching transistor is used for low-loss and stepless control of a car's rear window heating.
-By varying the duty cycle of the transistor the average value of the heating power can be adjusted. The voltage in the car's electrical system is assumed to be constant with $U_1 = \SI{14}{\volt}$. The heater is dimensioned in such a way
+By varying the duty cycle of the tranSsistor the average value of the heating power can be adjusted. The voltage in the car's electrical system is assumed to be constant with $U_1 = \SI{14}{\volt}$. The heater is dimensioned in such a way
 that at its nominal voltage $ U_{\mathrm{2N}} = \SI{14}{\volt}$ it consumes a power of $ P_{\mathrm{LN}} = \SI{500}{\watt}$ and
 can be modeled with an ohmic resistor. This circuit is shown in \autoref{fig:transistor circuit}.
-%
-\begin{figure}[ht]
-\begin{center}
-    \begin{circuitikz}[european currents,european resistors,american inductors]
-        \draw
-        (0,0) coordinate(N1) to [short,-] ++(1.5,0) coordinate(U1p)
-        ++(2,0) node[nigfete,rotate=90](Trans){}
-        (U1p) to [short,i=$i_1(t)$] (Trans.drain)
-        (Trans.source) to [short,-,i=$i_2(t)$] ++(1.5,0) coordinate(U2p)
-        to [short,-] ++(1,0) to [R,l_=$R_\text{L}$, v^=$u_2(t)$, voltage = straight] ++(0,-3) to [short,-] ++(-1,0) coordinate(U2n) to [short,-] (1,-3) coordinate(U1n) to [short,-] ++(-1,0) coordinate(N10)
-         (N1) to [V] (N10)
-         (0,0) to [V,v_=$U_1$] (0,-3)
-       %  (U2p) to [open=straight,v^=$u_2(t)$] (U2n)
-         (Trans.gate) to [short,-] ++(0,-.3) to [sqV] ++(0,-1) 
-         (Trans.gate) ++(-0.3,0) node(T1){$\text{T}_\text{1}$}
-      %   (Lp) to [V, v^=$U_2$] (Lp10)         
-        ;
-    \end{circuitikz}
-\end{center}
-\caption{Circuit with one transistor and one load resistor.}
-\label{fig:transistor circuit}
-\end{figure}
+% figure figCircuitWithOneTransistorAndOneLoadResistor
+\figCircuitWithOneTransistorAndOneLoadResistor
 
 \subtask{Draw qualitative current and voltage curves on the load resistor.}
 \begin{solutionblock}
 The graph \autoref{fig:Currents and voltages during the period} shows the voltages and currents at the load resistor with the period $T_{\mathrm{s}}$, the switch-on time $T_{\mathrm{on}}$ and the switch-off time $T_{\mathrm{off}}$. 
-\begin{solutionfigure}[htb]
-\begin{center}
-      \begin{tikzpicture}
-        \begin{axis}[
-            domain=0:15,
-            xmin=0, xmax=15,
-            ymin=-1, ymax=2.5,
-            samples=500,
-            axis y line=center,
-            axis x line=middle,
-            xtick distance=1,
-            ytick distance=2,
-            extra y ticks=0,
-            x label style={at={(axis description cs:1,0.25)},anchor=north},
-            y label style={at={(axis description cs:0,.95)},anchor=south},
-            width=0.8\textwidth,
-            height=0.25\textwidth,
-            xlabel={$t$},
-            ylabel={{\color{blue}$u_\text{2}(t)$}\quad{\color{red}$i_\text{2}(t)$}},
-            xtick={0},
-            xticklabels={$0$},
-            ytick={0,1,2},
-            yticklabels={0,{\color{red}$\frac{U_1}{R_\text{L}}$},{\color{blue}$U_1$}},
-            grid=none,
-            grid style={line width=.1pt, draw=gray!10},
-            major grid style={line width=.2pt,draw=gray!50},    ]
-            \addplot[color=red,mark=none,solid] coordinates{
-                (0, 0)
-                (1, 0)
-                (1, 1)
-                (3, 1)
-                (3, 0)
-                (6, 0)
-                (6, 1)
-                (8, 1)
-                (8, 0)
-                (11, 0)
-                (11, 1)
-                (13, 1)
-                (13, 0)
-                (15, 0)
-            };
-            \addplot[color=blue,mark=none,dashed] coordinates{
-                (0, 0)
-                (1, 0)
-                (1, 2)
-                (3, 2)
-                (3, 0)
-                (6, 0)
-                (6, 2)
-                (8, 2)
-                (8, 0)
-                (11, 0)
-                (11, 2)
-                (13, 2)
-                (13, 0)
-                (15, 0)
-            };
-        \draw[>=triangle 45, <->] (axis cs:1,0.7) -- (axis cs:3,0.7);
-        \node[anchor=north] at (axis cs:2,0.7){$T_\text{on}$};
-        \draw[>=triangle 45, <->] (axis cs:3,0.7) -- (axis cs:6,0.7);
-        \node[anchor=north] at (axis cs:4.5,0.7){$T_\text{off}$};
-        \draw[>=triangle 45, <->] (axis cs:1,-0.3) -- (axis cs:6,-0.3);
-        \node[anchor=north] at (axis cs:3.5,-0.3){$T_\text{s}$};
-        \end{axis}
-    \end{tikzpicture}
-     \end{center}
-     \caption{Display of currents and voltages depending on the switching phases.}
-    \label{fig:Currents and voltages during the period}
-\end{solutionfigure}
+
+% Solution figure sfigDisplayOfCurrentsAndVoltagesDependingOnTheSwitchingPhases
+\sfigDisplayOfCurrentsAndVoltagesDependingOnTheSwitchingPhases
             
 \end{solutionblock}
 
@@ -117,60 +33,10 @@ The graph \autoref{fig:Currents and voltages during the period} shows the voltag
 
 \begin {solutionblock}
 The \autoref{fig:Instantaneous power} shows the time curve of the instantaneous power at the load resistor.
-\begin{solutionfigure}[ht]
-\begin{center}
-    \begin{tikzpicture}
-       \begin{axis}[
-           domain=0:15,
-           xmin=0, xmax=15,
-           ymin=-1, ymax=2.5,
-           samples=500,
-           axis y line=center,
-           axis x line=middle,
-           xtick distance=1,
-           ytick distance=2,
-           extra y ticks=0,
-           x label style={at={(axis description cs:1,0.25)},anchor=north},
-           y label style={at={(axis description cs:-.05,.97)},anchor=south},
-           width=0.8\textwidth,
-           height=0.25\textwidth,
-           xlabel={$t$},
-           ylabel={{\color{blue}$p(t)$}},
-           xtick={0},
-           xticklabels={$0$},
-           ytick={0,2},
-           yticklabels={0,{\color{blue}$\frac{U_1^2}{R_L}$}},
-           grid=none,
-           grid style={line width=.1pt, draw=gray!10},
-           major grid style={line width=.2pt,draw=gray!50},    ]
-           \addplot[color=blue,mark=none,solid] coordinates{
-               (0, 0)
-               (1, 0)
-               (1, 2)
-               (3, 2)
-               (3, 0)
-               (6, 0)
-               (6, 2)
-               (8, 2)
-               (8, 0)
-               (11, 0)
-               (11, 2)
-               (13, 2)
-               (13, 0)
-               (15, 0)
-           };
-       \draw[>=triangle 45, <->] (axis cs:1,0.7) -- (axis cs:3,0.7);
-       \node[anchor=north] at (axis cs:2,0.7){$T_\text{on}$};
-       \draw[>=triangle 45, <->] (axis cs:3,0.7) -- (axis cs:6,0.7);
-       \node[anchor=north] at (axis cs:4.5,0.7){$T_\text{off}$};
-       \draw[>=triangle 45, <->] (axis cs:1,-0.3) -- (axis cs:6,-0.3);
-       \node[anchor=north] at (axis cs:3.5,-0.3){$T_\text{s}$};
-       \end{axis}
-   \end{tikzpicture}
-    \end{center}
-   \caption{Instantaneous power at the load resistor.}
-    \label{fig:Instantaneous power}
-\end{solutionfigure}
+
+% Solution figure sfigInstantaneousPowerAtTheLoadResistor
+\sfigInstantaneousPowerAtTheLoadResistor
+
 \end{solutionblock}
 
 \subtask{Derive the relationships for the mean voltage $\overline u_2$, the mean current $\overline i_2$ and the mean power $\overline{p}_{\mathrm{2}}$.}
@@ -267,64 +133,20 @@ The known equations are used to determine the average current $\overline i_\math
 \task{Step-down converter with output filter}
 A step-down converter is used to charge a mobile phone from the vehicle electrical system with the vehicle electrical 
 system voltage $U_1 = \SI{13.5}{\volt}$. The input voltage of the mobile phone is $U_2 = \SI{4.5}{\volt}$.
-\begin{figure}[htb]
-    \begin{center}
-    \begin{circuitikz}[european currents,european resistors,american inductors]
-        \draw
-        (0,0) coordinate(U+) to [short,-] ++(0.5,0)  
-        node[currarrow](Tl){} -- ++(1,0) ++(0.5,0) node[nigfete,rotate=90](Trans){} -- ++(1.5,0) coordinate(Tr)
-            to [short,-*] ++(0.5,0) coordinate(junc1)   -- ++(0.5,0) coordinate(Ll) to [L,l_=$L$,i^=$i_\text{L}$]
-            ++(2,0) coordinate(Lr) to [short,-*] ++(0.5,0) coordinate(junc2)  -- ++(2,0)
-            coordinate(Rt) to [R,l_=$R$,i_=$i_\text{2}$,v^=$U_\text{2}$,voltage shift=0.5, voltage=straight] ++(0,-3) coordinate(Rb)
-            to [short,-*] ++(-2,0) coordinate(junc3) to [short,-*] ++(-3,0) coordinate(junc4) to [short] ++(-2,0)
-            coordinate(junc5) to [short,-] ++(-2,0) coordinate(U-)
-            (junc2) to [C,l_=$C$](junc3)
-            (junc4) to [short]  ++(0,0.5) coordinate(Db) to[D-,l^=$D$]  ++(0,2) coordinate(Dt) to [short] (junc1)
-            (Trans.G)  to [sqV] ++(0,-1)(junc5) 
-        
-        (U+) to [V=$U_1$] (U-)
-        
-        (Trans)  node[anchor=south,color=black]{$T_1$}	
-        (Tl)  node[anchor=south,color=black]{$i_\text{1}$}	
-        ;
-    \end{circuitikz}
-    \end{center}
-    \caption{Circuit with one transistor, filter and one load resistor.}
-    \label{fig:step_down_converter_output_filter}
-\end{figure}
+
+% figure figStepDownConverterOutputFilter
+\figStepDownConverterOutputFilter
+
 Consider both voltages as constant, the inductance of the coil is $L = \SI{10}{\micro\henry}$ and the switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All components are considered ideal.
 
 \subtask{Draw the equivalent circuits for the two switching states.}
 % Solution of subtask
+
 \begin{solutionblock}
-    \begin{solutionfigure}[ht]
-        \centering
-        \begin{tabular}{cc}
-                transistor conducts & diode conducts\\
-            \begin{circuitikz}[european currents,european resistors,american inductors,]
-                \draw
-                (0,0) coordinate(u1o)
-                to [V,v^=$U_2$] ++(0,-3) coordinate(u1u)
-                    (u1o) to [short,-,i^<=$i_2$] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}$,mirror,voltage=straight] ++(-3,0) to [short,-,i^<=$i_1$] ++(-1,0) coordinate(uqo)
-                    (u1u) to [short,-] ++(-5,0) coordinate(uqu)
-                    (uqo) to [V,v_=$U_1$] (uqu)
-                    ;
-            \end{circuitikz}
-        &
-            \begin{circuitikz}[european currents,european resistors,american inductors,]
-                \draw
-                (0,0) coordinate(u2o)
-                to [V,v^=$U_2$, voltage=straight] ++(0,-3) coordinate(u2u)
-                    (u2o) to [short,-,i^<=$i_2$] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}$,mirror,voltage=straight] ++(-3,0) coordinate(Ll) ++(-1,0) coordinate(uqo)
-                    (u2u) to [short,-*] ++(-4,0) coordinate(Llu) to [short,-] ++(-1,0) coordinate(uqu)
-                    (Llu) to [short,-,i_=$i_1$] (Ll)
-                    (uqo) to [V,v_=$U_1$] (uqu)
-                    ;
-            \end{circuitikz}
-        \end{tabular}
-        \caption{Circuits for different switching states.}
-        \label{fig:switching_states_step-down_converter}
-    \end{solutionfigure}
+
+% solution figure sfigSwitchingStatesStepDownConverter
+\sfigSwitchingStatesStepDownConverter
+
 \end{solutionblock}
 
 \subtask{At what duty cycle $D$ should the buck converter be operated?}
@@ -340,295 +162,20 @@ Consider both voltages as constant, the inductance of the coil is $L = \SI{10}{\
 % Solution of subtask
 \begin{solutionblock} %[htb]
 The signals of $u_\mathrm{T}$, $u_\mathrm{D}$, $u_\mathrm{L}$, $i_\mathrm{L}$ and $i_\mathrm{T}$ are displayed in \autoref{fig:transistor_circuit}.
-    \begin{solutionfigure}[htb]  
-        \begin{center}
-            \definecolor{orange}{rgb}{1.0,0.5,0}
-            \begin{tikzpicture}
-    % groupplot begin
-                \begin{groupplot}[group style={
-                            group size=1 by 5,
-                            xlabels at=edge bottom,
-                            y descriptions at=edge left,
-                        },
-                        xmin=0, xmax=13.5,
-                        domain=0:13,
-                        width=0.6\textwidth,
-                        xtick={0,1,4,5,8,9,12,13},
-                        xticklabels={{},{},{},{},{},{},{},{},{},{}},
-                        grid=both,
-                        grid style={line width=.1pt, draw=gray!10},
-                        major grid style={line width=.2pt,draw=gray!50},    
-                        axis y line=center,
-                        axis x line=middle,
-                    ]
 
-                    \nextgroupplot[
-                        ymin=0, ymax=1.2,
-                        samples=500,
-                        ytick distance=2,
-                        extra y ticks=0,
-                        x label style={at={(axis description cs:1,0)},anchor=north},
-                        y label style={at={(axis description cs:-.05,.97)},anchor=south},
-                        height=0.2\textwidth,
-                        xlabel={$t$},
-                        ylabel={{\color{orange}$u_\text{T}$}},
-                        ytick={0,1},
-                        yticklabels={0,$U_1$},
-                    ]
-                    \addplot[color=orange,mark=none,solid] coordinates{
-                        (0, 0)
-                        (1, 0)
-                        (1, 1)
-                        (4, 1)
-                        (4, 0)
-                        (5, 0)
-                        (5, 1)
-                        (8, 1)
-                        (8, 0)
-                        (9, 0)
-                        (9, 1)
-                        (12,1)
-                        (12,0)
-                        (13, 0)
-                    };  
-                        
-                    \nextgroupplot[
-                        ymin=0, ymax=1.2,
-                        samples=500,
-                        axis y line=center,
-                        ytick distance=2,
-                        extra y ticks=0,
-                        x label style={at={(axis description cs:1,0)},anchor=north},
-                        y label style={at={(axis description cs:-.05,.97)},anchor=south},
-                        height=0.2\textwidth,
-                        xlabel={$t$},
-                        ylabel={{\color{blue}$u_\text{D}$}},
-                        ytick={0,.33,1},
-                        yticklabels={0,$U_2$,$U_1$},
-                    ]
-                    \addplot[color=blue,mark=none,solid] coordinates{
-                        (0, 1)
-                        (1, 1)
-                        (1, 0)
-                        (4, 0)
-                        (4, 1)
-                        (5, 1)
-                        (5, 0)
-                        (8, 0)
-                        (8, 1)
-                        (9, 1)
-                        (9, 0)
-                        (12,0)
-                        (12,1)
-                        (13, 1)
-                        (13, 0)
-                    };
-                    
-                    \nextgroupplot[
-                        ymin=-.5, ymax=1.2,
-                        samples=500,
-                        axis y line=center,
-                        ytick distance=2,
-                        extra y ticks=0,
-                        x label style={at={(axis description cs:1,0.25)},anchor=north},
-                        y label style={at={(axis description cs:-.05,.97)},anchor=south},
-                        height=0.25\textwidth,
-                        xlabel={$t$},
-                        ylabel={{\color{orange}$u_\text{L}$}},
-                        ytick={-.333,0,1},
-                        yticklabels={$-U_2$,0,$U_1-U_2$},
-                    ]
-                    \draw [fill=green] (axis cs:4,0) rectangle (axis cs:5,1);
-                    \draw [fill=cyan] (axis cs:5,0) rectangle (axis cs:8,-.3333);
-                    \addplot[color=orange,mark=none,solid] coordinates{
-                        (0, 1)
-                        (1, 1)
-                        (1, -.333)
-                        (4, -.333)
-                        (4, 1)
-                        (5, 1)
-                        (5, -.333)
-                        (8, -.333)
-                        (8, 1)
-                        (9, 1)
-                        (9, -.333)
-                        (12, -.333)
-                        (12, 1)
-                        (13, 1)
-                        (13, -.333)
-                    };
-                    \node[anchor=center] at (axis cs:4.5,0.5){\tiny $ A_\text{off}$};
-                    \node[anchor=center] at (axis cs:6.5,-0.1667){\tiny $ A_\text{on}$};
+% solution figure sfigRelevantVoltageAndCurrentSignals
+\sfigRelevantVoltageAndCurrentSignals
 
-                    \nextgroupplot[
-                        ymin=0, ymax=1.2,
-                        samples=500,
-                        axis y line=center,
-                        ytick distance=2,
-                        extra y ticks=0,
-                        x label style={at={(axis description cs:1,0)},anchor=north},
-                        y label style={at={(axis description cs:-.05,.97)},anchor=south},
-                        height=0.2\textwidth,
-                        xlabel={$t$},
-                        ylabel={{\color{red}$i_\text{L}$}},
-                        ytick={0,.5,.75,1},
-                        yticklabels={0,,,},
-                    ]
-                    \addplot[color=red,mark=none,solid] coordinates{
-                        (0, 0.5)
-                        (1, 1)
-                        (4, 0.5)
-                        (5, 1)
-                        (8, 0.5)
-                        (9, 1)
-                        (12,0.5)
-                        (13,1)
-                    };
-
-                    \nextgroupplot[
-                        ymin=0, ymax=1.2,
-                        samples=500,
-                        axis y line=center,
-                        ytick distance=2,
-                        extra y ticks=0,
-                        x label style={at={(axis description cs:1,0)},anchor=north},
-                        y label style={at={(axis description cs:-.0,.97)},anchor=south},
-                        height=0.2\textwidth,
-                        xlabel={$t$},
-                        ylabel={{\color{orange}$i_\text{T}$}\quad{\color{blue}$i_\text{D}$}},
-                        ytick={0,.5,.75,1},
-                        yticklabels={0,,,},
-                    ]
-                    \addplot[color=orange,mark=none,solid] coordinates{
-                        (0,0)
-                        (0, 0.5)
-                        (1, 1)
-                        (1, 0)
-                        (4,0)
-                        (4,0.5)
-                        (5, 1)
-                        (5,0)
-                        (8,0)
-                        (8, 0.5)
-                        (9, 1)
-                        (9,0)
-                        (12,0)
-                        (12,0.5)
-                        (13,1)
-                        (13,0)
-                    };
-                    \addplot[color=blue,mark=none,solid] coordinates{
-                        (1,1)
-                        (4, 0.5)
-                    };
-                    \addplot[color=blue,mark=none,solid] coordinates{
-                        (5,1)
-                        (8, 0.5)
-                    };
-                    \addplot[color=blue,mark=none,solid] coordinates{
-                        (9,1)
-                        (12, 0.5)
-                    };
-                    \addplot[color=blue,mark=none,solid] coordinates{
-                        (0,0)
-                        (1, 0)
-                    };
-                    \addplot[color=blue,mark=none,solid] coordinates{
-                        (4,0)
-                        (5,0)
-                    };
-                    \addplot[color=blue,mark=none,solid] coordinates{
-                        (8,0)
-                        (9,0)
-                    };
-                    \addplot[color=blue,mark=none,solid] coordinates{
-                        (12,0)
-                        (13,0)
-                    };
-                    \addplot[color=blue,mark=none,dashed] coordinates{
-                        (1,0)
-                        (1,1)
-                    };
-                    \addplot[color=blue,mark=none,dashed] coordinates{
-                        (4,0)
-                        (4,0.5)
-                    };
-                    \addplot[color=blue,mark=none,dashed] coordinates{
-                        (5,0)
-                        (5,1)
-                    };
-                    \addplot[color=blue,mark=none,dashed] coordinates{
-                        (8,0)
-                        (8,0.5)
-                    };
-                    \addplot[color=blue,mark=none,dashed] coordinates{
-                        (9,0)
-                        (9,1)
-                    };
-                    \addplot[color=blue,mark=none,dashed] coordinates{
-                        (12,0)
-                        (12,0.5)
-                    };
-                    \addplot[color=blue,mark=none,dashed] coordinates{
-                        (13,0)
-                        (13,1)
-                    };
-                \end{groupplot}
-            \end{tikzpicture}
-        \end{center}
-        \caption{Relevant voltage and current signals.}
-        \label{fig:transistor_circuit}
-    \end{solutionfigure}   
 \end{solutionblock}
 
 \subtask{How large is the current ripple $\Delta i_\mathrm{L}$ of the coil current in boundary conduction mode (BCM) operation?}
 % Solution of subtask
 \begin{solutionblock}
 The BCM operation is characterized by zero inductor current events at the beginning / end of a switching period, compare \autoref{fig:BCM_step-down-converter}.
-    \begin{solutionfigure}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                    domain=0:15,
-                    xmin=0, xmax=7,
-                    ymin=-1.5, ymax=2.5,
-                    samples=500,
-                    axis y line=center,
-                    axis x line=middle,
-                    xtick distance=1,
-                    ytick distance=2,
-                    extra y ticks=0,
-                    x label style={at={(axis description cs:1,0.33)},anchor=north},
-                    y label style={at={(axis description cs:-.05,.97)},anchor=south},
-                    width=0.6\textwidth,
-                    height=0.3\textwidth,
-                    xlabel={$t$},
-                    ylabel={$i_\text{L}$},
-                    xtick={0,2,5},
-                    xticklabels={$0$,{},{}},
-                    ytick={0,1,2},
-                    yticklabels={0,$\frac{\Delta i_\text{L}}{2}$,$\Delta i_\text{L}$},
-                    grid=both,
-                    grid style={line width=.1pt, draw=gray!10},
-                    major grid style={line width=.2pt,draw=gray!50},
-                ]
-                \addplot[color=blue,mark=none,solid] coordinates{
-                    (0, 0)
-                    (2, 2)
-                    (5, 0)
-                    (7, 2)
-                };
-                \draw[>=triangle 45, <->] (axis cs:0,-.3) -- (axis cs:2,-.3);
-                \node[anchor=north] at (axis cs:1,-.3){$D T_\text{s}$};
-                \draw[>=triangle 45, <->] (axis cs:2,-.3) -- (axis cs:5,-.3);
-                \node[anchor=north] at (axis cs:3.5,-.3){$(1-D) T_\text{s}$};
-                \draw[>=triangle 45, <->] (axis cs:0,-1) -- (axis cs:5,-1);
-                \node[anchor=north] at (axis cs:2.5,-1){$T_\text{s}$};
-            \end{axis}
-        \end{tikzpicture}
-        \caption{Qualitative inductor current during BCM}
-        \label{fig:BCM_step-down-converter}
-    \end{solutionfigure}
+
+    % solution figure sfigQualitativeInductorCurrentDuringBCM
+    \sfigQualitativeInductorCurrentDuringBCM
+
     The relevant switching time intervals are:
     \begin{equation}
         f_\mathrm{s} = \SI{ 100}{\kilo\hertz} \quad \Rightarrow \quad T_\mathrm{s} = \SI{ 10}{\micro\second} \quad \Rightarrow \quad T_\mathrm{on} = D \cdot T_\mathrm{s} = \frac{\SI{ 10}{\micro \second}}{3}.
@@ -648,7 +195,7 @@ The BCM operation is characterized by zero inductor current events at the beginn
 \end{solutionblock}
 
 \subtask{How large is the worst-case current ripple?}
-% Lösung des Unterpunktes
+% Solution of subtask
 \begin{solutionblock}
     The worst case ripple is at $D=0.5$ leading to
     \begin{equation}
@@ -675,7 +222,7 @@ What duty cycle D is set?}
 \end{solutionblock}
 
 \subtask{Calculate the average and ripple current in BCM mode considering $U_{1,\mathrm{min}}$ at the input.}
-% Lösung des Unterpunktes
+% Solution of subtask
 \begin{solutionblock}
     The boundary of discontinuous conduction mode depends on the inductance, duty cycle, switching frequency and voltages:
     \begin{equation}
@@ -698,28 +245,10 @@ What duty cycle D is set?}
 \task{Power losses within the step-down converter}
 The power loss of a buck converter is to be analyzed. The inductance is so large
 that the current ripple in the output current can be neglected, i.e., $ i_{\mathrm{2}}(t) = I_{\mathrm{2}} =\mathrm{const}$. Furthermore, the component values are given in \autoref{table:Parameters of the circuit} and the currents and voltages of the switch-on and switch-off processes in \autoref{fig:Switch-on behavior and switch-off behavior of} and \autoref{fig:Switch-on behavior and switch-off behavior of voltage}. 
-\begin{figure}[ht]
-    \begin{center}
-        \begin{circuitikz}[european currents,european resistors,american inductors]
-            \draw
-        (0,0) coordinate(N1) to [short] ++(1.5,0) coordinate(Ud)
-        ++(0,-1) node[nigfete](Trans){}
-        (Ud) to [short,i=$i_{\mathrm{c}}(t)$] (Trans.drain)
-        (Trans.source) to [short,-] ++(0,0) coordinate(U2p)
-        node[circ]{}
-        to [short,-] ++(0,0) to [L,l^=$L$] ++(3,0) coordinate(Lp) to [short,-] ++(0,-2) coordinate(Lp10)
-        (Lp) to [V, v_=$U_2$] (Lp10)
-        (Lp) to [open] (Lp10)
-        coordinate(Lp10) to  [short,-] ++(-3,0) coordinate(D)
-        to [D,l^=$D$, i=$i_{\mathrm{D}}(t)$] ++(0,2)
-        (0,-3.77) coordinate(Bw) to [short] ++(3,0) coordinate(U1)
-        %(N1) to [V] (Bw)
-        (N1) to [V,v_=$U_1$] (Bw)
-           ;
-        \end{circuitikz}
-    \end{center}
-    \caption{Buck converter with one transistor and one diode.}
-\end{figure}
+
+% figure figBuckConverterWithOneTransistorAndOneDiode
+\figBuckConverterWithOneTransistorAndOneDiode
+
 %
 \begin{table}[ht]
     \centering  % Zentriert die Tabelle
@@ -739,223 +268,65 @@ that the current ripple in the output current can be neglected, i.e., $ i_{\math
     \label{table:Parameters of the circuit}
 \end{table}
 %
-\begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}
-    \begin{axis}[
-        width=7cm, height=5cm,
-        grid=both,
-        major grid style={line width=.2pt,draw=gray!50},
-        minor grid style={line width=.1pt,draw=gray!20},
-        xlabel={$t$ / ns},
-        ylabel={$i_\mathrm{C}(t)$ / A},
-        title={Switch-on behavior},
-        xmin=0, xmax=150,
-        ymin=0, ymax=70,
-        xtick={0, 50, 100, 150},
-        ytick={0, 10, 20, 30, 40, 50, 60},
-        ]
-        % Einschaltverhalten graph
-        \addplot[
-            thick,
-            mark=none,
-            color=black,
-        ] coordinates {
-            (0,0) (25,0) (50, 20) (75, 40) (100, 60) (125, 30) (150, 30)
-        };
-    \end{axis}
-    \end{tikzpicture} 
-    \hspace{1cm} % Abstand zwischen den beiden Diagrammen
-    \begin{tikzpicture}
-    \begin{axis}[
-        width=7cm, height=5cm,
-        grid=both,
-        major grid style={line width=.2pt,draw=gray!50},
-        minor grid style={line width=.1pt,draw=gray!20},
-        xlabel={$t$ / ns},
-        ylabel={$i_\mathrm{C}(t)$ / A},
-        title={Switch-off behavior},
-        xmin=0, xmax=600,
-        ymin=0, ymax=70,
-        xtick={0, 200, 400, 600},
-        ytick={0, 10, 20, 30, 40, 50, 60},
-        ]
-        % Ausschaltverhalten graph
-        \addplot[
-            thick,
-            mark=none,
-            color=black,
-        ] coordinates {
-            (0,30) (200, 30) (200, 10) (250, 10) (600, 0)
-        };
-    \end{axis}
-    \end{tikzpicture}
-    \caption{Switch-on behavior and switch-off behavior of $i_{\mathrm{C}}(t)$}
-    \label{fig:Switch-on behavior and switch-off behavior of}
 
-    \begin{tikzpicture}
-    \begin{axis}[
-        width=7cm, height=5cm,
-        grid=both,
-        major grid style={line width=.2pt,draw=gray!50},
-        minor grid style={line width=.1pt,draw=gray!20},
-        xlabel={$t$ / ns},
-        ylabel={$u_{\mathrm{CE}}(t)$ / V},
-        xmin=0, xmax=150,
-        ymin=0, ymax=800,
-        xtick={0, 50, 100, 150},
-        ytick={0,200, 400, 600, 800},
-        ]
-        % Einschaltverhalten graph
-        \addplot[
-            thick,
-            mark=none,
-            color=black,
-        ] coordinates {
-            (0,600) (100, 600) (100, 0)
-        };
-    \end{axis}
-    \end{tikzpicture}
-    \hspace{1cm} % Abstand zwischen den beiden Diagrammen
-    \begin{tikzpicture}
-    \begin{axis}[
-        width=7cm, height=5cm,
-        grid=both,
-        major grid style={line width=.2pt,draw=gray!50},
-        minor grid style={line width=.1pt,draw=gray!20},
-        xlabel={$t$ / ns},
-        ylabel={$u_{\mathrm{CE}}(t)$ / V},
-        xmin=0, xmax=600,
-        ymin=0, ymax=1000,
-        xtick={0,200, 400, 600},
-        ytick={0,200, 400, 600,800, 1000},
-        ]
-        % Ausschaltverhalten graph
-        \addplot[
-            thick,
-            mark=none,
-            color=black,
-        ] coordinates {
-            (50,0) (200, 900) (250, 600) (600, 600)
-        };
-    \end{axis}
-    \end{tikzpicture}
-    \caption{Switch-on behavior and switch-off behavior of $u_{\mathrm{CE}}(t)$.}
-    \label{fig:Switch-on behavior and switch-off behavior of voltage}
-\end{figure}
+% figure figSwitchOnBehaviorAndSwitchOffBehaviorOfUI
+\figSwitchOnBehaviorAndSwitchOffBehaviorOfUI
 
 \subtask{Calculate the switch-on and switch-off loss work $E_{\mathrm{on,T}}$ and $E_{\mathrm{off,T}}$  of the IGBT.}
 \begin{solutionblock}
 First, the power values for the switch-on process at the times $t = \SI{25}{\ns}$ and $ t = \SI{100}{\ns}$ are calculated:
 
-\begin{equation}
-    p(t = \SI{25}{\ns}) = \SI{600}{\volt} \cdot \SI{0}{\ampere} = 0,
-\end{equation}
+    \begin{equation}
+        p(t = \SI{25}{\ns}) = \SI{600}{\volt} \cdot \SI{0}{\ampere} = 0,
+    \end{equation}
 
-\begin{equation}
-    p(t = \SI{100}{\ns}) = \SI{600}{\volt} \cdot \SI{60}{\ampere} = \SI{36}{\kilo\watt}. 
-\end{equation}
-\autoref{fig:Power values for the switch-on process}  results from these power values.
-The switch-on losses of the IGBT can be calculated based on the triangular signal shapes of the provided signals:
-        
-\begin{equation}
-E_{\mathrm{on,T}} = \frac{1}{2} \Delta P \Delta t = \frac{1}{2} \SI{36}{\kilo\watt} \cdot \SI{75}{\ns} = \SI {1.35}{\milli\joule}.
-\end{equation}
+    \begin{equation}
+        p(t = \SI{100}{\ns}) = \SI{600}{\volt} \cdot \SI{60}{\ampere} = \SI{36}{\kilo\watt}. 
+    \end{equation}
+    \autoref{fig:Power values for the switch-on process}  results from these power values.
+    The switch-on losses of the IGBT can be calculated based on the triangular signal shapes of the provided signals:
+            
+    \begin{equation}
+    E_{\mathrm{on,T}} = \frac{1}{2} \Delta P \Delta t = \frac{1}{2} \SI{36}{\kilo\watt} \cdot \SI{75}{\ns} = \SI {1.35}{\milli\joule}.
+    \end{equation}
 
-The switch-off power can now be determined for the times $t = \SI{200}{\ns}$, $t = \SI{200.1}{\ns}$ and $t = \SI{250}{\ns}$:
+    The switch-off power can now be determined for the times $t = \SI{200}{\ns}$, $t = \SI{200.1}{\ns}$ and $t = \SI{250}{\ns}$:
 
-\begin{equation}
-    p(t = \SI{200}{\ns}) = \SI{900}{\volt} \cdot \SI{30}{\ampere} = \SI{27}{\kilo\watt}, 
-\end{equation}
+    \begin{equation}
+        p(t = \SI{200}{\ns}) = \SI{900}{\volt} \cdot \SI{30}{\ampere} = \SI{27}{\kilo\watt}, 
+    \end{equation}
 
-\begin{equation}
-    p(t = \SI{200.1}{\ns}) = \SI{900}{\volt} \cdot \SI{10}{\ampere} = \SI{9}{\kilo\watt}, 
-\end{equation}
+    \begin{equation}
+        p(t = \SI{200.1}{\ns}) = \SI{900}{\volt} \cdot \SI{10}{\ampere} = \SI{9}{\kilo\watt}, 
+    \end{equation}
 
-\begin{equation}
-    p(t = \SI{250}{\ns}) = \SI{600}{\volt} \cdot \SI{10}{\ampere} = \SI{6}{\kilo\watt}. 
-\end{equation}
+    \begin{equation}
+        p(t = \SI{250}{\ns}) = \SI{600}{\volt} \cdot \SI{10}{\ampere} = \SI{6}{\kilo\watt}. 
+    \end{equation}
 
 Finally, \autoref{fig:Power values for the switch-off process} results from these power values. The switch-off losses of the IGBT are calculated next. For this purpose, the power curve is divided into three parts:
         
-\begin{equation}
-E_{\mathrm{off,T}} = E_{\mathrm{1}} + E_{\mathrm{2}} + E_{\mathrm{3}}
-\end{equation}
-with
-\begin{equation}
-E_{\mathrm{1}} = \frac{1}{2} \SI{27}{\kilo\watt} \cdot \SI{150}{\ns} = \SI {2.025}{\milli\joule},
-\end{equation}
-\begin{equation}
-E_{\mathrm{2}} = \SI{6}{\kilo\watt} \cdot \SI{50}{\ns} + \frac{1}{2} \SI{3}{\kilo\watt} \cdot \SI{50}{\ns} = \SI {0.375}{\milli\joule},
-\end{equation}
-\begin{equation}
-    E_{\mathrm{3}} = \frac{1}{2} \SI{6}{\kilo\watt} \cdot \SI{350}{\ns} = \SI {1.05}{\milli\joule}.
+    \begin{equation}
+    E_{\mathrm{off,T}} = E_{\mathrm{1}} + E_{\mathrm{2}} + E_{\mathrm{3}}
     \end{equation}
-If all three loss work terms are added together, the result is the total switch-off loss work:
-\begin{equation}
-    E_{\mathrm{off,T}} =  \SI {3.45}{\milli\joule}.
-\end{equation}
-\begin{solutionfigure}[ht]
-    \centering
-    \begin{subfigure}[t]{0.45\textwidth}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                width=7cm, height=5cm,
-                grid=both,
-                major grid style={line width=.2pt,draw=gray!50},
-                minor grid style={line width=.1pt,draw=gray!20},
-                xlabel={$t$ / ns},
-                ylabel={$p(t)$ / kW},
-                xmin=0, xmax=150,
-                ymin=0, ymax=45,
-                xtick={0, 50, 100, 150},
-                ytick={0,9, 18, 27, 36, 45},
-            ]
-            % Einschaltverhalten graph
-            \addplot[
-                thick,
-                mark=none,
-                color=black,
-            ] coordinates {
-                (25,0) (100, 36) (100, 0)
-            };
-            \end{axis}
-        \end{tikzpicture}
-        \caption{Power values for the switch-on process.}
-        \label{fig:Power values for the switch-on process}
-    \end{subfigure}
-    \hfill % Abstand zwischen den Subfiguren
-    \begin{subfigure}[t]{0.45\textwidth}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                width=7cm, height=5cm,
-                grid=both,
-                major grid style={line width=.2pt,draw=gray!50},
-                minor grid style={line width=.1pt,draw=gray!20},
-                xlabel={$t$ / ns},
-                ylabel={$p(t)$ / kW},
-                xmin=0, xmax=600,
-                ymin=0, ymax=45,
-                xtick={0,200, 400, 600},
-                ytick={0,9, 18, 27,36, 45},
-            ]
-            % Ausschaltverhalten graph
-            \addplot[
-                thick,
-                mark=none,
-                color=black,
-            ] coordinates {
-                (50,0) (200, 27) (200, 9) (250, 7) (600,0)
-            };
-            \end{axis}
-        \end{tikzpicture}
-        \caption{Power values for the switch-off process.}
-        \label{fig:Power values for the switch-off process}
-    \end{subfigure}
-    \caption{Switch-on behavior and switch-off behavior of $p(t)$}
-\end{solutionfigure}
+    with
+    \begin{equation}
+    E_{\mathrm{1}} = \frac{1}{2} \SI{27}{\kilo\watt} \cdot \SI{150}{\ns} = \SI {2.025}{\milli\joule},
+    \end{equation}
+    \begin{equation}
+    E_{\mathrm{2}} = \SI{6}{\kilo\watt} \cdot \SI{50}{\ns} + \frac{1}{2} \SI{3}{\kilo\watt} \cdot \SI{50}{\ns} = \SI {0.375}{\milli\joule},
+    \end{equation}
+    \begin{equation}
+        E_{\mathrm{3}} = \frac{1}{2} \SI{6}{\kilo\watt} \cdot \SI{350}{\ns} = \SI {1.05}{\milli\joule}.
+        \end{equation}
+    If all three loss work terms are added together, the result is the total switch-off loss work:
+    \begin{equation}
+        E_{\mathrm{off,T}} =  \SI {3.45}{\milli\joule}.
+    \end{equation}
+
+    % solution figure sfigSwitchOnBehaviorAndSwitchOffBehaviorOfPower
+    \sfigSwitchOnBehaviorAndSwitchOffBehaviorOfPower
+
 \end{solutionblock}
 
 
