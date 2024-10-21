@@ -1,0 +1,60 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% InstantaneousPowerAtTheLoadResistor
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{solutionfigure}[ht]
+    \begin{center}
+        \begin{tikzpicture}
+        \begin{axis}[
+            domain=0:15,
+            xmin=0, xmax=15,
+            ymin=-1, ymax=2.5,
+            samples=500,
+            axis y line=center,
+            axis x line=middle,
+            xtick distance=1,
+            ytick distance=2,
+            extra y ticks=0,
+            x label style={at={(axis description cs:1,0.25)},anchor=north},
+            y label style={at={(axis description cs:-.05,.97)},anchor=south},
+            width=0.8\textwidth,
+            height=0.25\textwidth,
+            xlabel={$t$},
+            ylabel={{\color{blue}$p(t)$}},
+            xtick={0},
+            xticklabels={$0$},
+            ytick={0,2},
+            yticklabels={0,{\color{blue}$\frac{U_1^2}{R_L}$}},
+            grid=none,
+            grid style={line width=.1pt, draw=gray!10},
+            major grid style={line width=.2pt,draw=gray!50},    ]
+            \addplot[color=blue,mark=none,solid] coordinates{
+                (0, 0)
+                (1, 0)
+                (1, 2)
+                (3, 2)
+                (3, 0)
+                (6, 0)
+                (6, 2)
+                (8, 2)
+                (8, 0)
+                (11, 0)
+                (11, 2)
+                (13, 2)
+                (13, 0)
+                (15, 0)
+            };
+        \draw[>=triangle 45, <->] (axis cs:1,0.7) -- (axis cs:3,0.7);
+        \node[anchor=north] at (axis cs:2,0.7){$T_\text{on}$};
+        \draw[>=triangle 45, <->] (axis cs:3,0.7) -- (axis cs:6,0.7);
+        \node[anchor=north] at (axis cs:4.5,0.7){$T_\text{off}$};
+        \draw[>=triangle 45, <->] (axis cs:1,-0.3) -- (axis cs:6,-0.3);
+        \node[anchor=north] at (axis cs:3.5,-0.3){$T_\text{s}$};
+        \end{axis}
+    \end{tikzpicture}
+    \end{center}
+    \caption{Instantaneous power at the load resistor.}
+    \label{fig:Instantaneous power}
+\end{solutionfigure}
+
+

@@ -1,6 +1,4 @@
 % Include figures of exercise 1
-\input{fig/figexec1}
-\input{fig/sfigexec1}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Begin exercise %%
@@ -17,14 +15,14 @@ By varying the duty cycle of the tranSsistor the average value of the heating po
 that at its nominal voltage $ U_{\mathrm{2N}} = \SI{14}{\volt}$ it consumes a power of $ P_{\mathrm{LN}} = \SI{500}{\watt}$ and
 can be modeled with an ohmic resistor. This circuit is shown in \autoref{fig:transistor circuit}.
 % figure figCircuitWithOneTransistorAndOneLoadResistor
-\figCircuitWithOneTransistorAndOneLoadResistor
+\input{fig/exec01/figCircuitWithOneTransistorAndOneLoadResistor}
 
 \subtask{Draw qualitative current and voltage curves on the load resistor.}
 \begin{solutionblock}
 The graph \autoref{fig:Currents and voltages during the period} shows the voltages and currents at the load resistor with the period $T_{\mathrm{s}}$, the switch-on time $T_{\mathrm{on}}$ and the switch-off time $T_{\mathrm{off}}$. 
 
 % Solution figure sfigDisplayOfCurrentsAndVoltagesDependingOnTheSwitchingPhases
-\sfigDisplayOfCurrentsAndVoltagesDependingOnTheSwitchingPhases
+\input{fig/exec01/sfigDisplayOfCurrentsAndVoltagesDependingOnTheSwitchingPhases.tex}
             
 \end{solutionblock}
 
@@ -35,7 +33,7 @@ The graph \autoref{fig:Currents and voltages during the period} shows the voltag
 The \autoref{fig:Instantaneous power} shows the time curve of the instantaneous power at the load resistor.
 
 % Solution figure sfigInstantaneousPowerAtTheLoadResistor
-\sfigInstantaneousPowerAtTheLoadResistor
+\input{fig/exec01/sfigInstantaneousPowerAtTheLoadResistor}
 
 \end{solutionblock}
 
@@ -135,7 +133,7 @@ A step-down converter is used to charge a mobile phone from the vehicle electric
 system voltage $U_1 = \SI{13.5}{\volt}$. The input voltage of the mobile phone is $U_2 = \SI{4.5}{\volt}$.
 
 % figure figStepDownConverterOutputFilter
-\figStepDownConverterOutputFilter
+\input{fig/exec01/figStepDownConverterOutputFilter}
 
 Consider both voltages as constant, the inductance of the coil is $L = \SI{10}{\micro\henry}$ and the switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All components are considered ideal.
 
@@ -145,7 +143,7 @@ Consider both voltages as constant, the inductance of the coil is $L = \SI{10}{\
 \begin{solutionblock}
 
 % solution figure sfigSwitchingStatesStepDownConverter
-\sfigSwitchingStatesStepDownConverter
+\input{fig/exec01/sfigSwitchingStatesStepDownConverter.tex }
 
 \end{solutionblock}
 
@@ -164,7 +162,7 @@ Consider both voltages as constant, the inductance of the coil is $L = \SI{10}{\
 The signals of $u_\mathrm{T}$, $u_\mathrm{D}$, $u_\mathrm{L}$, $i_\mathrm{L}$ and $i_\mathrm{T}$ are displayed in \autoref{fig:transistor_circuit}.
 
 % solution figure sfigRelevantVoltageAndCurrentSignals
-\sfigRelevantVoltageAndCurrentSignals
+\input{fig/exec01/sfigRelevantVoltageAndCurrentSignals}
 
 \end{solutionblock}
 
@@ -174,7 +172,7 @@ The signals of $u_\mathrm{T}$, $u_\mathrm{D}$, $u_\mathrm{L}$, $i_\mathrm{L}$ an
 The BCM operation is characterized by zero inductor current events at the beginning / end of a switching period, compare \autoref{fig:BCM_step-down-converter}.
 
     % solution figure sfigQualitativeInductorCurrentDuringBCM
-    \sfigQualitativeInductorCurrentDuringBCM
+    \input{fig/exec01/sfigQualitativeInductorCurrentDuringBCM}
 
     The relevant switching time intervals are:
     \begin{equation}
@@ -247,7 +245,8 @@ The power loss of a buck converter is to be analyzed. The inductance is so large
 that the current ripple in the output current can be neglected, i.e., $ i_{\mathrm{2}}(t) = I_{\mathrm{2}} =\mathrm{const}$. Furthermore, the component values are given in \autoref{table:Parameters of the circuit} and the currents and voltages of the switch-on and switch-off processes in \autoref{fig:Switch-on behavior and switch-off behavior of} and \autoref{fig:Switch-on behavior and switch-off behavior of voltage}. 
 
 % figure figBuckConverterWithOneTransistorAndOneDiode
-\figBuckConverterWithOneTransistorAndOneDiode
+\input{fig/exec01/figBuckConverterWithOneTransistorAndOneDiode}
+
 
 %
 \begin{table}[ht]
@@ -270,7 +269,7 @@ that the current ripple in the output current can be neglected, i.e., $ i_{\math
 %
 
 % figure figSwitchOnBehaviorAndSwitchOffBehaviorOfUI
-\figSwitchOnBehaviorAndSwitchOffBehaviorOfUI
+\input{fig/exec01/figSwitchOnBehaviorAndSwitchOffBehaviorOfUI}
 
 \subtask{Calculate the switch-on and switch-off loss work $E_{\mathrm{on,T}}$ and $E_{\mathrm{off,T}}$  of the IGBT.}
 \begin{solutionblock}
@@ -325,7 +324,7 @@ Finally, \autoref{fig:Power values for the switch-off process} results from thes
     \end{equation}
 
     % solution figure sfigSwitchOnBehaviorAndSwitchOffBehaviorOfPower
-    \sfigSwitchOnBehaviorAndSwitchOffBehaviorOfPower
+    \input{fig/exec01/sfigSwitchOnBehaviorAndSwitchOffBehaviorOfPower}
 
 \end{solutionblock}
 
@@ -398,4 +397,5 @@ The total power loss of the diode is made up of the switching losses and the los
     P_{\mathrm{l,D}}(D) = u_{\mathrm{F}} I_\mathrm{2} (1-D) +  P_{\mathrm{l,sw,D}} = \SI{2.7}{\volt} \cdot \SI{30}{\ampere} \cdot 0.5 + \SI{7.3}{\watt} = \SI{47.8}{\watt}.
 \end{equation}
 \end{solutionblock}
+
     
