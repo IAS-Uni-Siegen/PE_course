@@ -2494,10 +2494,10 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Circuit realization %%
+%% Buck-boost converter: circuit realization %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Circuit realization}
+    \frametitle{Buck-boost converter: circuit realization}
     \begin{itemize}
         \item In \figref{fig:buck-boost-converter-realization-1Q} the buck-boost converter realization is a direct series circuit combination of \figref{fig:step-down-converter-realization-1Q} and \figref{fig:step-up-converter-realization-1Q}. 
         \item This configuration can only provide positive voltages and currents (\hl{first quadrant}).
@@ -2636,7 +2636,7 @@
     \end{equation}
     Since $\Delta i_\mathrm{L,max}$ also depends on $U_1$, the relation \eqref{eq:voltage-ratio-DCM-buck-boost} only holds for a given $U_1$. Hence, we can insert \eqref{eq:current-ripple-simple-buck-boost} in \eqref{eq:current-ripple-simple-buck-boost} and solve for $U_2$ to receive
     \begin{equation}
-        U_2= U_1 \frac{D^2}{2} \frac{T_\mathrm{s}}{L \overline{i}_2}.
+        U_2= U_1^2 \frac{D^2}{2} \frac{T_\mathrm{s}}{L \overline{i}_2}.
     \end{equation}
     Finally, the buck-boost converter \hl{operates in BCM} if
     \begin{equation}
@@ -2752,7 +2752,7 @@
     \frametitle{Inverting buck-boost converter: overview}
     \begin{figure}
         \begin{itemize}
-            \item Polarity change of the inductor can be also achieved by a \hl{single switch} which input is connected to the inductor.
+            \item Voltage change at the inductor can be also achieved by a \hl{single switch} which input is connected to the inductor.
             \item Assuming an ideal, infinitely fast switch, the inductor current $i_\mathrm{L}(t)$ remains well-defined (no open switch at inductor).
         \end{itemize}
         \begin{circuitikz}[]
@@ -2768,5 +2768,107 @@
         \end{circuitikz}
         \caption{Inverting buck-boost converter (ideal switch representation)}
         \label{fig:inverting-buck-boost-simple}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Polarity change of inverting buck-boost converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Polarity change of inverting buck-boost converter}
+    \begin{itemize}
+        \item One side of the inductor remains connected to the common connection rail between input and output side.
+        \item The other inductor side switches between the upper input and output rail.
+        \item Consequence: voltage and current directions are inverted between the two switch states. 
+    \end{itemize}
+    \begin{figure}
+        \centering	
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \hspace{-0.75cm}
+            \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}U_2$, voltage = straight] ++(0,-2)
+                to ++(-5,0)
+                to [open, o-o, v<= $U_1 \hspace{2cm}$, voltage = straight] ++(0,2)
+                (-5,2) to  [short, i=$i_1(t)$] ++(1.0,0)
+                to [inductor, l=$L$, v=$u_\mathrm{L}(t)$, voltage = straight] ++(1.5,0)
+                to [short] ++(0.25,0)
+                to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
+                to [short, -*] ++(0,-2);
+                \draw (0,2) to [short, i_<=${i_2=0}$, -o] ++(-1.0,0);
+            \end{circuitikz}
+            \caption{Switch-on time}
+        \end{subfigure}%
+        \hspace{0.5cm}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}U_2$, voltage = straight] ++(0,-2)
+                to ++(-5,0)
+                to [open, o-o, v<= $U_1 \hspace{2cm}$, voltage = straight] ++(0,2)
+                (-5,2) to  [short, i=${i_1=0}$] ++(0.75,0)
+                (-3.75,0) to [short, *-] ++(0,2)
+                to [short, i<=$i_\mathrm{L}(t)$] ++(0.75,0)
+                to [inductor, l=$L$, v_<=$u_\mathrm{L}(t)$, voltage = straight] ++(1.5,0)
+                to [short] ++(0.5,0)
+                to [short, i=$i_2(t)$] (0,2);
+            \end{circuitikz}
+            \caption{Switch-off time}
+        \end{subfigure}
+        \caption{Voltage and current definitions of the inverting buck-boost converter}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Inverting buck-boost converter: voltage voltage transfer ratio %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Inverting buck-boost converter: voltage transfer ratios}
+    In CCM, the voltage balance of the inductor $L$ delivers:
+    \begin{equation}
+        u_\mathrm{L}(t) = \begin{cases} 
+            U_1, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],\\ 
+            U_2 & t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].
+        \end{cases}
+    \end{equation}
+    In steady state, the average inductor voltage per period must be zero, yielding
+    \begin{equation}
+        U_1 T_\mathrm{on} = -U_2 T_\mathrm{off}  \quad \Leftrightarrow \quad  U_1 D T_\mathrm{s} = -U_2 (1-D) T_\mathrm{s} \quad \Leftrightarrow \quad \frac{U_2}{U_1} = -\frac{D}{1-D}.
+    \end{equation}
+    Likewise, the analysis of the DCM mode reveals
+    \begin{equation}
+        \frac{U_2}{U_1} = -\frac{D^2}{2} \frac{\Delta i_\mathrm{L,max}}{\overline{i}_2} \quad \Leftrightarrow \quad U_2 = -U_1^2 \frac{D^2}{2} \frac{T_\mathrm{s}}{L \overline{i}_2}.
+    \end{equation}
+    Hence, the inverting buck-boost converter has a \hl{negative voltage transfer ratio} in CCM and DCM, but the same absolute voltage gain as the synchronous buck-boost converter.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Inverting buck-boost converter: circuit realization %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Inverting buck-boost converter: circuit realization}
+    \begin{itemize}
+        \item The inverting buck boost converter scores with its simple design (single transistor / diode).
+        \item Energy transfer takes place solely indirect by intermediate storage within inductor.
+        \item Further characteristics (current and voltage ripple, operation modes) are analogous to the synchronous buck-boost converter.  
+    \end{itemize}
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw (0,0) to [short, *-] ++(1.0,0)
+            to [diode, l=$D$, invert]  ++(1.0,0)
+            to [short, -o, i=$i_2(t)$] ++(1.0,0)
+            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2.5) coordinate (A)
+            (0,0) to [short, *-] ++(-1.0,0) 
+            to [Tnpn, n=npn1] ++(-1.0,0)
+            to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
+            to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-2.5)
+            to [short, o-o] (A)
+            (0,0) to [inductor, i=$i_\mathrm{L}(t)$, v=$u_\mathrm{L}(t)$,voltage = straight, *-*] ++(0,-2.5);
+            \draw let \p1 = (npn1.B) in node[anchor=north] at (\x1,\y1) {$T$};
+        \end{circuitikz}
+        \caption{Inverting buck-boost converter with real components (single quadrant type)}
+        \label{fig:inverting-buck-boost-converter-realization-1Q}
     \end{figure}
 \end{frame}
