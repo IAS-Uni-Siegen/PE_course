@@ -99,5 +99,49 @@ First, all losses of the boost converter including the resistance of the inducto
 
 \subtask{ Define a suitable inductivity for the coil L, so that the boost converter is operating in continuous conduction mode for the minimum output power given in the specification above. Determine the maximal switch-off current $i_{\mathrm{V1}}$ of the transistor $\mathrm{V}_1$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
 \begin{solutionblock}
-    
+    Because no losses are assumed, $P_{\mathrm{1min}}=P_{\mathrm{2min}}$.
+    The following equation is used for the average current $I_{\mathrm{1min}}$ over a period to generate the minimum power.
+    \begin{equation}
+        I_{\mathrm{1min}} = \frac{P_{\mathrm{1min}}}{U_{\mathrm{1}}} = \frac{\SI{10}{\watt}}{\SI{12}{\volt}}= \SI{0.833}{\ampere}
+    \end{equation}
+    Requirement for BCM, Current is zero at starting point of the period  $i_\mathrm{1BCM}(0)=\SI{0}{\ampere}$.
+    At time $T_{\mathrm{sw,on}}$, the average current to provide the minimum power corresponds to twice the value of the $I_{\mathrm{1min}}$.
+    \begin{equation}
+        i_\mathrm{1BCM}(T_{\mathrm{sw,on}})= 2I_{\mathrm{1min}}= 2\cdot \SI{0.833}{\ampere} = \SI{1.667}{\ampere}
+    \end{equation}
+    The differential form of the inductance equation is used for the further calculation.
+    \begin{equation}
+        u_\mathrm{L}=L\frac{\mathrm{d}i_\mathrm{L}}{\mathrm{d}t}
+    \end{equation}
+    Simplifications can be assumed for the lossless case.
+    \begin{equation}
+        u_\mathrm{L}=L\frac{\Delta i_\mathrm{L}}{\Delta t}
+    \end{equation}
+    Only the switch-on period is considered, therefore $\Delta t = T_{\mathrm{sw,on}}$. Furthermore, $u_\mathrm{L}=U_\mathrm{1}$ and $\Delta i_\mathrm{L} = 2 I_\mathrm{1min}$.
+    The switch-on period can be determined by the known duty cycle D and the known frequency $f_{\mathrm{s}}$.
+    \begin{equation}
+        T_{\mathrm{sw,on}} = D T_{\mathrm{s}} = \Delta t = \frac{D}{f_{\mathrm{s}}} = \frac{0.8}{\SI{100}{\kilo\hertz}}=\SI{8}{\micro\sec}
+    \end{equation}
+    The following inductivity equation can be derived from this.
+    \begin{equation}
+        L=\frac{\Delta t \cdot u_\mathrm{L} }{\Delta i_\mathrm{L}}= \frac{D U_\mathrm{1}}{f_{\mathrm{s}}2I_{\mathrm{1min}}} = \frac{0.8 \cdot \SI{12}{\volt}}{\SI{100}{\kilo\hertz\cdot 2\cdot \SI{10}{\ampere}}} = \SI{57.6}{\micro\henry}
+    \end{equation}
+    The maximum current flows through the transistor at the end of the switch-on interval.
+    \begin{equation}
+        I_\mathrm{V1max} = I_\mathrm{ein} + \frac{\Delta I_\mathrm{L}}{2}=\SI{10}{\ampere}+\frac{\SI{1.667}{\ampere}}{2} = \SI{10.833}{\ampere}
+    \end{equation}
+\end{solutionblock}
+
+\subtask{Calculate a suitable capacity, using the output voltage ripple given in the specification. Determine the current stress of the capacitor $I_\mathrm{C,RMS}$.}
+\begin{solutionblock}
+    The reaction of the voltage fluctuation on the current fluctuation is neglected. During on-state of the transistor, the output capacitor feed the load. Assuming an constant output current and an ideal capacitor, the output can be adopted as linearly decreasing for this intervall.
+
+    The differential form of the capacitor equation is used for this task.
+    \begin{equation}
+        i_\mathrm{C}=C \frac{\mathrm{d}u_\mathrm{c}}{\mathrm{d}t}
+    \end{equation}
+    Simplifications can be assumed for the lossless case.
+    \begin{equation}
+        i_\mathrm{C}=C \frac{\Delta u_\mathrm{c}}{\Delta t}
+    \end{equation}
 \end{solutionblock}
