@@ -8,11 +8,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \task{Step-down converter without output filter}
-<<<<<<< HEAD
 An ideal switching transistor is used for loss-free and stepless control of a car's rear window heating.
 By varying the duty cycle of the transistor the average value of the heating power can be adjusted. The voltage in the car's electrical system is assumed to be constant with $U_1 = \SI{14}{\volt}$. The heater is dimensioned in such a way
 that at its nominal voltage $ U_{\mathrm{2N}} = \SI{14}{\volt}$ it consumes a power of $ P_{\mathrm{LN}} = \SI{500}{\watt}$ and
-can be modeled with an ohmic resistor. This circuit is shown in \autoref{fig:transistor circuit}.
+can be modeled with an ohmic resistor. This circuit is shown in \autoref{fig:step_down_with_load_resistor}.
 % figure figCircuitWithOneTransistorAndOneLoadResistor
 \input{fig/exec01/figCircuitWithOneTransistorAndOneLoadResistor}
 
@@ -128,13 +127,12 @@ The known equations are used to determine the average current $\overline i_\math
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \task{Step-down converter with output filter}
-A step-down converter is used to charge a mobile phone from the vehicle electrical system with the vehicle electrical 
-system voltage $U_1 = \SI{13.5}{\volt}$. The input voltage of the mobile phone is $U_2 = \SI{4.5}{\volt}$.
+A step-down converter is used to charge a mobile phone from the vehicle electrical system with the vehicle electrical system voltage $U_1 = \SI{13.5}{\volt}$. The input voltage of the mobile phone is $U_2 = \SI{4.5}{\volt}$. Consider both voltages as constant, the inductance of the coil is $L = \SI{10}{\micro\henry}$ and the switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All components are considered ideal.
 
 % figure figStepDownConverterOutputFilter
 \input{fig/exec01/figStepDownConverterOutputFilter}
 
-Consider both voltages as constant, the inductance of the coil is $L = \SI{10}{\micro\henry}$ and the switching frequency is $f_\mathrm{s} = \SI{ 100}{\kilo\hertz}$. All components are considered ideal.
+
 
 \subtask{Draw the equivalent circuits for the two switching states.}
 % Solution of subtask
@@ -381,7 +379,7 @@ The value $P_{\mathrm{l,const}}$ is considering all losses that could be calcula
 \end{equation}
 \end{solutionblock}
 
-\subtask{The circuit is to be evaluated at   $ U_{\mathrm{2}} = \SI{300}{\volt}$. Calculate the total power loss in the IGBT $P_{\mathrm{l,T}}$ and in the $P_{\mathrm{l,D}}$ diode.}
+\subtask{The circuit is to be evaluated at   $ U_{\mathrm{2}} = \SI{300}{\volt}$. Calculate the total power loss in the IGBT $P_{\mathrm{l,T}}$ and in the diode $P_{\mathrm{l,D}}$.}
 \begin{solutionblock}
 Firstly, the duty cycle must be determined:
 \begin{equation}
