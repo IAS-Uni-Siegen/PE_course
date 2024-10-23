@@ -1,0 +1,245 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RelevantVoltageAndCurrentSignals
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{solutionfigure}[htb]  
+    \begin{center}
+        \definecolor{orange}{rgb}{1.0,0.5,0}
+        \begin{tikzpicture}
+            % groupplot begin
+            \begin{groupplot}[group style={
+                        group size=1 by 5,
+                        xlabels at=edge bottom,
+                        y descriptions at=edge left,
+                    },
+                    xmin=0, xmax=13.5,
+                    domain=0:13,
+                    width=0.6\textwidth,
+                    xtick={0,1,4,5,8,9,12,13},
+                    xticklabels={{},{},{},{},{},{},{},{},{},{}},
+                    grid=both,
+                    grid style={line width=.1pt, draw=gray!10},
+                    major grid style={line width=.2pt,draw=gray!50},    
+                    axis y line=center,
+                    axis x line=middle,
+                ]
+
+                \nextgroupplot[
+                    ymin=0, ymax=1.2,
+                    samples=500,
+                    ytick distance=2,
+                    extra y ticks=0,
+                    x label style={at={(axis description cs:1,0)},anchor=north},
+                    y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                    height=0.2\textwidth,
+                    xlabel={$t$},
+                    ylabel={{\color{orange}$u_\text{T}$}},
+                    ytick={0,1},
+                    yticklabels={0,$U_1$},
+                ]
+                \addplot[color=orange,mark=none,solid] coordinates{
+                    (0, 0)
+                    (1, 0)
+                    (1, 1)
+                    (4, 1)
+                    (4, 0)
+                    (5, 0)
+                    (5, 1)
+                    (8, 1)
+                    (8, 0)
+                    (9, 0)
+                    (9, 1)
+                    (12,1)
+                    (12,0)
+                    (13, 0)
+                };  
+                    
+                \nextgroupplot[
+                    ymin=0, ymax=1.2,
+                    samples=500,
+                    axis y line=center,
+                    ytick distance=2,
+                    extra y ticks=0,
+                    x label style={at={(axis description cs:1,0)},anchor=north},
+                    y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                    height=0.2\textwidth,
+                    xlabel={$t$},
+                    ylabel={{\color{blue}$u_\text{D}$}},
+                    ytick={0,.33,1},
+                    yticklabels={0,$U_2$,$U_1$},
+                ]
+                \addplot[color=blue,mark=none,solid] coordinates{
+                    (0, 1)
+                    (1, 1)
+                    (1, 0)
+                    (4, 0)
+                    (4, 1)
+                    (5, 1)
+                    (5, 0)
+                    (8, 0)
+                    (8, 1)
+                    (9, 1)
+                    (9, 0)
+                    (12,0)
+                    (12,1)
+                    (13, 1)
+                    (13, 0)
+                };
+                
+                \nextgroupplot[
+                    ymin=-.5, ymax=1.2,
+                    samples=500,
+                    axis y line=center,
+                    ytick distance=2,
+                    extra y ticks=0,
+                    x label style={at={(axis description cs:1,0.25)},anchor=north},
+                    y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                    height=0.25\textwidth,
+                    xlabel={$t$},
+                    ylabel={{\color{orange}$u_\text{L}$}},
+                    ytick={-.333,0,1},
+                    yticklabels={$-U_2$,0,$U_1-U_2$},
+                ]
+                \draw [fill=green] (axis cs:4,0) rectangle (axis cs:5,1);
+                \draw [fill=cyan] (axis cs:5,0) rectangle (axis cs:8,-.3333);
+                \addplot[color=orange,mark=none,solid] coordinates{
+                    (0, 1)
+                    (1, 1)
+                    (1, -.333)
+                    (4, -.333)
+                    (4, 1)
+                    (5, 1)
+                    (5, -.333)
+                    (8, -.333)
+                    (8, 1)
+                    (9, 1)
+                    (9, -.333)
+                    (12, -.333)
+                    (12, 1)
+                    (13, 1)
+                    (13, -.333)
+                };
+                \node[anchor=center] at (axis cs:4.5,0.5){\tiny $ A_\text{off}$};
+                \node[anchor=center] at (axis cs:6.5,-0.1667){\tiny $ A_\text{on}$};
+
+                \nextgroupplot[
+                    ymin=0, ymax=1.2,
+                    samples=500,
+                    axis y line=center,
+                    ytick distance=2,
+                    extra y ticks=0,
+                    x label style={at={(axis description cs:1,0)},anchor=north},
+                    y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                    height=0.2\textwidth,
+                    xlabel={$t$},
+                    ylabel={{\color{red}$i_\text{L}$}},
+                    ytick={0,.5,.75,1},
+                    yticklabels={0,,,},
+                ]
+                \addplot[color=red,mark=none,solid] coordinates{
+                    (0, 0.5)
+                    (1, 1)
+                    (4, 0.5)
+                    (5, 1)
+                    (8, 0.5)
+                    (9, 1)
+                    (12,0.5)
+                    (13,1)
+                };
+
+                \nextgroupplot[
+                    ymin=0, ymax=1.2,
+                    samples=500,
+                    axis y line=center,
+                    ytick distance=2,
+                    extra y ticks=0,
+                    x label style={at={(axis description cs:1,0)},anchor=north},
+                    y label style={at={(axis description cs:-.0,.97)},anchor=south},
+                    height=0.2\textwidth,
+                    xlabel={$t$},
+                    ylabel={{\color{orange}$i_\text{T}$}\quad{\color{blue}$i_\text{D}$}},
+                    ytick={0,.5,.75,1},
+                    yticklabels={0,,,},
+                ]
+                \addplot[color=orange,mark=none,solid] coordinates{
+                    (0,0)
+                    (0, 0.5)
+                    (1, 1)
+                    (1, 0)
+                    (4,0)
+                    (4,0.5)
+                    (5, 1)
+                    (5,0)
+                    (8,0)
+                    (8, 0.5)
+                    (9, 1)
+                    (9,0)
+                    (12,0)
+                    (12,0.5)
+                    (13,1)
+                    (13,0)
+                };
+                \addplot[color=blue,mark=none,solid] coordinates{
+                    (1,1)
+                    (4, 0.5)
+                };
+                \addplot[color=blue,mark=none,solid] coordinates{
+                    (5,1)
+                    (8, 0.5)
+                };
+                \addplot[color=blue,mark=none,solid] coordinates{
+                    (9,1)
+                    (12, 0.5)
+                };
+                \addplot[color=blue,mark=none,solid] coordinates{
+                    (0,0)
+                    (1, 0)
+                };
+                \addplot[color=blue,mark=none,solid] coordinates{
+                    (4,0)
+                    (5,0)
+                };
+                \addplot[color=blue,mark=none,solid] coordinates{
+                    (8,0)
+                    (9,0)
+                };
+                \addplot[color=blue,mark=none,solid] coordinates{
+                    (12,0)
+                    (13,0)
+                };
+                \addplot[color=blue,mark=none,dashed] coordinates{
+                    (1,0)
+                    (1,1)
+                };
+                \addplot[color=blue,mark=none,dashed] coordinates{
+                    (4,0)
+                    (4,0.5)
+                };
+                \addplot[color=blue,mark=none,dashed] coordinates{
+                    (5,0)
+                    (5,1)
+                };
+                \addplot[color=blue,mark=none,dashed] coordinates{
+                    (8,0)
+                    (8,0.5)
+                };
+                \addplot[color=blue,mark=none,dashed] coordinates{
+                    (9,0)
+                    (9,1)
+                };
+                \addplot[color=blue,mark=none,dashed] coordinates{
+                    (12,0)
+                    (12,0.5)
+                };
+                \addplot[color=blue,mark=none,dashed] coordinates{
+                    (13,0)
+                    (13,1)
+                };
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{center}
+    \caption{Relevant voltage and current signals.}
+    \label{fig:transistor_circuit}
+\end{solutionfigure}       
+
+

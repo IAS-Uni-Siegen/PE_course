@@ -386,6 +386,7 @@
     Considering the internal resistance $R_\mathrm{i}$ of the inductor, the \hl{ohmic power loss} in the inductor is
     \begin{equation}
         P_\mathrm{L} = R_\mathrm{i} I^2_\mathrm{L} = R_\mathrm{i} \left(\overline{i}^2_\mathrm{L} + \Delta I^2_\mathrm{L}\right).
+        \label{eq:power-loss-ripple-inductor-step-down-converter}
     \end{equation}
     \pause
     The power loss in the inductor is thus composed of a constant part $\overline{P}_\mathrm{L} = R_\mathrm{i} \overline{i}^2_\mathrm{L}$, which is related to the power transfer from input to output, and a ripple part $\Delta P_\mathrm{L} = R_\mathrm{i} \Delta I^2_\mathrm{L}$.   
@@ -1481,10 +1482,10 @@
    \onslide<3->{Limitations of BCM:}
     \begin{itemize}
           \item<3-> Transistor turn off and diode turn on cannot be soft switched due to topology constraints.
-          \item<4-> Ripple current increases with load current: $ \Delta i_\mathrm{L} = 2=\overline{i}_2$.
+          \item<4-> Ripple current increases with load current: $ \Delta i_\mathrm{L} = 2\overline{i}_2$.
           \begin{itemize}
             \item May negatively affects load.
-            \item Increases conduction losses due to higher RMS current.
+            \item Increases conduction losses due to higher RMS current -- compare \eqref{eq:power-loss-ripple-inductor-step-down-converter}.
             \item High switching frequency required at low loads (switching losses).
           \end{itemize}
     \end{itemize}
@@ -1501,12 +1502,12 @@
 
 \begin{frame}[b]
     \frametitle{Step-up converter: overview and assumptions}
-        We consider the following assumptions:
+        \onslide<2->{We consider the following assumptions:}
         \begin{itemize}
-            \item The switch is ideal, that is, infinitely fast.
-            \item The input voltage is constant: $u_1(t) = U_1$.
-            \item The output voltage is constant: $u_2(t) = U_2$.
-            \item The input voltage is lower than the output voltage: $U_1 < U_2$.
+            \item<2-> The switch is ideal, that is, infinitely fast.
+            \item<3-> The input voltage is constant: $u_1(t) = U_1$.
+            \item<3-> The output voltage is constant: $u_2(t) = U_2$.
+            \item<4-> The input voltage is lower than the output voltage: $U_1 < U_2$.
         \end{itemize}
         \begin{figure}
             \begin{circuitikz}[]
@@ -1533,14 +1534,14 @@
 
 \begin{frame}[b]
     \frametitle{Step-up converter: switch states}
-     The voltage at the switch is given by
+     \onslide<1->{The voltage at the switch is given by}
      \begin{equation}
-            u_\mathrm{s}(t) = \begin{cases}
-                0, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],\\
-                U_2, & t\in [k T_\mathrm{s}+ T_\mathrm{on}, (k+1) T_\mathrm{s}].
+        \onslide<1->{u_\mathrm{s}(t) = \begin{cases}
+                0, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],}\\
+                \onslide<2->{U_2, & t\in [k T_\mathrm{s}+ T_\mathrm{on}, (k+1) T_\mathrm{s}].}
             \end{cases}
      \end{equation}
-    Note: switch on/off definition is reversed compared to the step-down converter. 
+     \onslide<3->{Note: switch on/off definition is reversed compared to the step-down converter.} 
     \begin{figure}
         \centering	
         \begin{subfigure}{0.45\textwidth}
@@ -1560,6 +1561,7 @@
             \caption{Switch-on time}
         \end{subfigure}%
         \hspace{0.5cm}
+        \onslide<2->{
         \begin{subfigure}{0.45\textwidth}
             \centering
             \begin{circuitikz}[]
@@ -1573,6 +1575,7 @@
             \end{circuitikz}
             \caption{Switch-off time}
         \end{subfigure}
+        }
     \caption{Switch states of the step-up converter} 
     \label{fig:step-up-converter-switch-states}
     \end{figure}
@@ -1638,15 +1641,15 @@
     In steady state, the absolute voltage-time integral over the inductor must be identical for the switch-on and switch-off interval, that is,
     \begin{equation}
         \int_{0}^{T_\mathrm{off}} \left|u_\mathrm{L}(t)\right| \mathrm{d}t \stackrel{!}{=} \int_{T_\mathrm{off}}^{T_\mathrm{off}+T_\mathrm{on}} \left|u_\mathrm{L}(t)\right| \mathrm{d}t
-    \end{equation}
+    \end{equation}\pause
     resulting in
     \begin{equation}
-            (U_2-U_1)T_\mathrm{off} = U_1T_\mathrm{on} \quad  \Leftrightarrow \quad  (U_2-U_1)(1-D)T_\mathrm{s} = U_1DT_\mathrm{s}
-    \end{equation}
+            (U_2-U_1)T_\mathrm{off} = U_1T_\mathrm{on} \quad \pause  \Leftrightarrow \quad  (U_2-U_1)(1-D)T_\mathrm{s} = U_1DT_\mathrm{s}
+    \end{equation}\pause
     and finally delivering the \hl{voltage transfer ratio}
     \begin{equation}
         \frac{U_2}{U_1} = \frac{1}{1-D}.
-    \end{equation}
+    \end{equation}\pause
     Assuming a lossless converter ($P_\mathrm{in}=P_\mathrm{out}$), the \hl{current transfer ratio} is 
     \begin{equation}
         \frac{\overline{i}_1}{\overline{i}_2} = \frac{1}{1-D}.
@@ -1662,29 +1665,29 @@
     \begin{equation}
         \Delta i_\mathrm{L} = \frac{U_1}{L}T_\mathrm{on} = \frac{U_1}{L}DT_\mathrm{s}
         \label{eq:current-ripple-simple-step-up-pos}
-    \end{equation}
+    \end{equation}\pause
     or alternatively evaluating the negative slope during $T_\mathrm{off}$ with
     \begin{equation}
         \Delta i_\mathrm{L} = \frac{U_2-U_1}{L}T_\mathrm{off} = \frac{U_2-U_1}{L}(1-D)T_\mathrm{s}=\frac{D(1-D)T_\mathrm{s}}{L}U_2.
         \label{eq:current-ripple-simple-step-up-neg}
-    \end{equation}
+    \end{equation}\pause
     In addition, one can find that the output current and power is changing step-like within the step-up converter, while this is the case for the input side in the step-down converter: 
     \begin{equation*}
         \mbox{step-down:} \quad i_1(t) = \begin{cases}
             i_\mathrm{L}(t), & \mbox{switch on},\\
             0, & \mbox{switch off},
-        \end{cases}
+        \end{cases}\pause
         \qquad
         \mbox{step-up:} \quad i_1(t) = \begin{cases}
             i_\mathrm{L}(t), & \mbox{switch on},\\
             i_\mathrm{L}(t), & \mbox{switch off},
         \end{cases}
-    \end{equation*}
+    \end{equation*}\pause
     \begin{equation*}
         \mbox{step-down:} \quad i_2(t) = \begin{cases}
             i_\mathrm{L}(t), & \mbox{switch on},\\
             i_\mathrm{L}(t), & \mbox{switch off},
-        \end{cases}
+        \end{cases}\pause
         \qquad
         \mbox{step-up:} \quad i_2(t) = \begin{cases}
             0, & \mbox{switch on},\\
@@ -1702,16 +1705,16 @@
     \begin{equation}
         \Delta i_\mathrm{L} =  \frac{U_1}{L}DT_\mathrm{s} \quad \Rightarrow \quad D_\mathrm{max} \rightarrow 1.
         \label{eq:ripple-current-duty-cycle-max-step-up_converter}
-    \end{equation}
+    \end{equation}\pause
     This corresponds to the case of an infinitely large output voltage $U_2$:
     \begin{equation}
         \lim_{D\rightarrow1}U_2 = \lim_{D\rightarrow1} \frac{1}{1-D}U_1=\infty.
-    \end{equation}
+    \end{equation}\pause
     The \hl{maximum current ripple} is then
     \begin{equation}
         \Delta i_\mathrm{L,\max} = \frac{1}{L}U_1T_\mathrm{s}.
         \label{eq:current-ripple-max-step-up}
-    \end{equation}
+    \end{equation}\pause
     Consequently, we can express the current ripple as:
     \begin{equation}
         \Delta i_\mathrm{L} = D \Delta i_\mathrm{L,\max}.
@@ -1724,13 +1727,13 @@
 
 \begin{frame}[b]
     \frametitle{Step-up converter with output capacitor: overview and assumptions}
-        We consider the following assumptions:
+        \onslide<2->{We consider the following assumptions:}
         \begin{itemize}
-            \item The switch is ideal, that is, infinitely fast.
-            \item The input voltage is constant: $u_1(t) = U_1$.
-            \item The output current is constant: $i_2(t) = I_2$.
-            \item The inductor current $i_\mathrm{L}(t)$ is unaffected by the output voltage ripple (remains triangular).
-            \item The output voltage is greater than the output voltage: $u_2(t) > U_1$.
+            \item<2-> The switch is ideal, that is, infinitely fast.
+            \item<2-> The input voltage is constant: $u_1(t) = U_1$.
+            \item<3-> The output current is constant: $i_2(t) = I_2$.
+            \item<4-> The inductor current $i_\mathrm{L}(t)$ is unaffected by the output voltage ripple (remains triangular).
+            \item<5-> The output voltage is greater than the output voltage: $u_2(t) > U_1$.
         \end{itemize}
         \begin{figure}
             \begin{circuitikz}[]
@@ -1764,20 +1767,20 @@
             -I_2, & t\in [k T_\mathrm{s}+ T_\mathrm{off}, (k+1) T_\mathrm{s}].
         \end{cases}
         \label{eq:capacitor-current-step-up-converter}
-    \end{equation}
+    \end{equation}\pause
   The steady-state inductor current during the switch-off interval is
   \begin{equation}
     \begin{split}
-        i_\mathrm{L}(t) &= \overline{i}_\mathrm{L} + \frac{\Delta i_\mathrm{L}}{2} - \frac{\Delta i_\mathrm{L}}{T_\mathrm{off}}(t-kT_\mathrm{s})\\
-        &= \frac{1}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2(t-kT_\mathrm{s})}{2T_\mathrm{off}}, \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{off}].
+        \onslide<2->{i_\mathrm{L}(t) &= \overline{i}_\mathrm{L} + \frac{\Delta i_\mathrm{L}}{2} - \frac{\Delta i_\mathrm{L}}{T_\mathrm{off}}(t-kT_\mathrm{s})}\\
+        \onslide<3->{&= \frac{1}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2(t-kT_\mathrm{s})}{2T_\mathrm{off}}, \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{off}].}
     \end{split}
   \end{equation}
-  which follows from the triangular signal shape. Inserting into \eqref{eq:capacitor-current-step-up-converter} yields
+  \onslide<3->{which follows from the triangular signal shape.} \onslide<4->{Inserting into \eqref{eq:capacitor-current-step-up-converter} yields}
   \begin{equation}
-    i_\mathrm{C}(t) = \begin{cases}
+    \onslide<4->{i_\mathrm{C}(t) = \begin{cases}
         \frac{D}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2(t-kT_\mathrm{s})}{2T_\mathrm{off}}, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{off}],\\
         -I_2, & t\in [k T_\mathrm{s}+ T_\mathrm{off}, (k+1) T_\mathrm{s}].
-    \end{cases}
+    \end{cases}}
 \end{equation}
 \end{frame}
 
@@ -1786,20 +1789,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Step-up converter: capacitor voltage analysis (cont.)}
-     The \hl{capacitor voltage during the switch-off period} is then
+    \onslide<1->{The \hl{capacitor voltage during the switch-off period} is then}
   \begin{equation}
       \begin{split}
-          u_\mathrm{C}(t) &= u_\mathrm{C}(kT_\mathrm{s}) + \frac{1}{C}\int_{kT_\mathrm{s}}^t i_\mathrm{C}(\tau) \mathrm{d}\tau , \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{off}]\\
-          &= u_\mathrm{C}(kT_\mathrm{s}) + \frac{1}{C}\left(\int_{kT_\mathrm{s}}^{t} \frac{D}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2(\tau-kT_\mathrm{s})}{2T_\mathrm{off}}\mathrm{d}\tau\right)\\
-            &= u_\mathrm{C}(kT_\mathrm{s}) + \left[\frac{D\tau}{(1-D)C}I_2 + \frac{\Delta i_\mathrm{L}}{2T_\mathrm{off}C}\left(T_\mathrm{off}\tau - \tau^2 + 2\tau k T_\mathrm{s}\right)\right]_{kT_\mathrm{s}}^t\\
-            &= u_\mathrm{C}(kT_\mathrm{s}) + \frac{D(t-kT_\mathrm{s})}{(1-D)C}I_2 + \frac{\Delta i_\mathrm{L}}{2T_\mathrm{off}C}\left(T_\mathrm{off}(t-kT_\mathrm{s}) - t(t-2kT_\mathrm{s})-(kT_\mathrm{s})^2\right).
+        \onslide<1->{u_\mathrm{C}(t) &= u_\mathrm{C}(kT_\mathrm{s}) + \frac{1}{C}\int_{kT_\mathrm{s}}^t i_\mathrm{C}(\tau) \mathrm{d}\tau , \quad t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{off}]}\\
+        \onslide<2->{&= u_\mathrm{C}(kT_\mathrm{s}) + \frac{1}{C}\left(\int_{kT_\mathrm{s}}^{t} \frac{D}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2(\tau-kT_\mathrm{s})}{2T_\mathrm{off}}\mathrm{d}\tau\right)}\\
+        \onslide<3->{&= u_\mathrm{C}(kT_\mathrm{s}) + \left[\frac{D\tau}{(1-D)C}I_2 + \frac{\Delta i_\mathrm{L}}{2T_\mathrm{off}C}\left(T_\mathrm{off}\tau - \tau^2 + 2\tau k T_\mathrm{s}\right)\right]_{kT_\mathrm{s}}^t}\\
+        \onslide<4->{&= u_\mathrm{C}(kT_\mathrm{s}) + \frac{D(t-kT_\mathrm{s})}{(1-D)C}I_2 + \frac{\Delta i_\mathrm{L}}{2T_\mathrm{off}C}\left(T_\mathrm{off}(t-kT_\mathrm{s}) - t(t-2kT_\mathrm{s})-(kT_\mathrm{s})^2\right).}
       \end{split}
       \label{eq:capacitor-voltage-switch-off-step-up-converter}
   \end{equation}
-  The capacitor voltage at the end of the switch-off period is
+  \onslide<5->{The capacitor voltage at the end of the switch-off period is
     \begin{equation}
-        u_\mathrm{C}(kT_\mathrm{s}+T_\mathrm{off}) = u_\mathrm{C}(kT_\mathrm{s}) + \frac{DI_\mathrm{out}}{(1-D)C}T_\mathrm{off}.
-    \end{equation}
+        u_\mathrm{C}(kT_\mathrm{s}+T_\mathrm{off}) = u_\mathrm{C}(kT_\mathrm{s}) + \frac{DI_2}{(1-D)C}T_\mathrm{off}.
+    \end{equation}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1807,17 +1810,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Step-up converter: capacitor voltage analysis (cont.)}
-     The \hl{capacitor voltage during the switch-on period} is then
+    \onslide<1->{The \hl{capacitor voltage during the switch-on period} is then}
     \begin{equation}
         \begin{split}
-            u_\mathrm{C}(t) &= u_\mathrm{C}(kT_\mathrm{s}+T_\mathrm{off}) + \frac{1}{C}\int_{kT_\mathrm{s}+T_\mathrm{off}}^t i_\mathrm{C}(\tau) \mathrm{d}\tau , \quad t\in [k T_\mathrm{s}+T_\mathrm{off}, (k+1) T_\mathrm{s}]\\
-            &= u_\mathrm{C}(kT_\mathrm{s}+T_\mathrm{off}) + \frac{1}{C}\int_{kT_\mathrm{s}+T_\mathrm{off}}^t -I_2 \mathrm{d}\tau\\
-                &= u_\mathrm{C}(kT_\mathrm{s}+T_\mathrm{off}) - \frac{I_2}{C}(t-kT_\mathrm{s}-T_\mathrm{off})\\
-                &= \underbrace{u_\mathrm{C}(kT_\mathrm{s}) + \frac{DI_\mathrm{out}}{(1-D)C}T_\mathrm{off}}_{=u_\mathrm{C}(kT_\mathrm{s}+T_\mathrm{off})} - \frac{I_2}{C}(t-kT_\mathrm{s}-T_\mathrm{off}).\\
+            \onslide<1->{u_\mathrm{C}(t) &= u_\mathrm{C}(kT_\mathrm{s}+T_\mathrm{off}) + \frac{1}{C}\int_{kT_\mathrm{s}+T_\mathrm{off}}^t i_\mathrm{C}(\tau) \mathrm{d}\tau , \quad t\in [k T_\mathrm{s}+T_\mathrm{off}, (k+1) T_\mathrm{s}]}\\
+            \onslide<2->{&= u_\mathrm{C}(kT_\mathrm{s}+T_\mathrm{off}) + \frac{1}{C}\int_{kT_\mathrm{s}+T_\mathrm{off}}^t -I_2 \mathrm{d}\tau}\\
+            \onslide<3->{&= u_\mathrm{C}(kT_\mathrm{s}+T_\mathrm{off}) - \frac{I_2}{C}(t-kT_\mathrm{s}-T_\mathrm{off})}\\
+            \onslide<4->{&= \underbrace{u_\mathrm{C}(kT_\mathrm{s}) + \frac{DI_2}{(1-D)C}T_\mathrm{off}}_{=u_\mathrm{C}(kT_\mathrm{s}+T_\mathrm{off})} - \frac{I_2}{C}(t-kT_\mathrm{s}-T_\mathrm{off}).}\\
         \end{split}
         \label{eq:capacitor-voltage-switch-on-step-up-converter}
     \end{equation}
-    Here, $u_\mathrm{C}(kT_\mathrm{s})$ is the (yet unknown)  initial capacitor voltage at the beginning of a period, which will be derived in a follow-up slide starting at \eqref{eq:capacitor-voltage-switch-on-step-up-converter}. 
+    \onslide<5->{Here, $u_\mathrm{C}(kT_\mathrm{s})$ is the (yet unknown)  initial capacitor voltage at the beginning of a period, which will be derived later.} 
 \end{frame}
 
 
@@ -1828,18 +1831,19 @@
     \frametitle{Step-up converter: capacitor voltage analysis (cont.)}
     \begin{columns}
         \begin{column}{0.5\textwidth}
-            In steady state, the capacitor voltage at the end of the switch-on period is identical to the voltage at the beginning of the switch-off period, that is,
+            \onslide<1->{In steady state, the capacitor voltage at the end of the switch-on period is identical to the voltage at the beginning of the switch-off period, that is,
             \begin{equation*}
                     u_\mathrm{C}(kT_\mathrm{s}) = u_\mathrm{C}((k+1)T_\mathrm{s}).
-            \end{equation*}
-            Hence, we can identify the \hl{voltage ripple} from \eqref{eq:capacitor-voltage-switch-on-step-up-converter} as
+            \end{equation*}}%
+            \onslide<3->{%
+                Hence, we can identify the \hl{voltage ripple} from \eqref{eq:capacitor-voltage-switch-on-step-up-converter} as}
             \begin{equation}
                 \begin{split}
-                    \Delta u_\mathrm{C}&=\frac{I_2}{C}T_\mathrm{on} = \frac{DI_\mathrm{out}}{(1-D)C}T_\mathrm{off}\\
-                                       &=\frac{I_2}{C}DT_\mathrm{s}=\frac{\Delta Q}{C} 
+                    \onslide<3->{\Delta u_\mathrm{C}&=\frac{I_2}{C}T_\mathrm{on} = \frac{DI_2}{(1-D)C}T_\mathrm{off}\\}
+                    \onslide<4->{&=\frac{I_2}{C}DT_\mathrm{s}=\frac{\Delta Q}{C}} 
                 \end{split}
             \end{equation}
-            with the charge ripple $\Delta Q = DI_\mathrm{out}T_\mathrm{s}$.
+            \onslide<4->{with the charge ripple $\Delta Q = DI_2T_\mathrm{s}$.}
         \end{column}
         \begin{column}{0.5\textwidth}
             \begin{figure}
@@ -1862,7 +1866,7 @@
                     \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom}, height=0.4\textheight, width=0.9\textwidth, xmin=-0.1, xmax=1.1, grid,clip = false]
 
                         % Capacitor voltage
-                        \nextgroupplot[ylabel = {$u_\mathrm{C}(t)/\overline{u}_\mathrm{C}$}]
+                        \nextgroupplot[ylabel = {$u_\mathrm{C}(t)/\overline{u}_\mathrm{C}$},visible on=<2->]
                             % Half cycle for t<0
                             \addplot[signalblue, thick, domain=-0.1:0, samples=15] {\u0 +\rippleU-\rippleU/\Ton*((x+\Ts)-\Toff)};
                             % Half cycle for 0<t<Toff
@@ -1880,12 +1884,10 @@
                             \draw[thin, {Latex[length=2mm]}-{Latex[length=2mm]}] (axis cs:0, \u0) -- (axis cs:0, \u0+\rippleU);
                             % Voltage ripple label
                             \node[above, inner sep = 2pt, anchor = west] at (axis cs:0, 1) {$\Delta u_\mathrm{C}$}; 
-                            %\coordinate (a) at (\Ton/2,\u0-\ripple*\Ton/4); %coordinate for left vertical grouplot line
-                            %\coordinate (b) at (\Ton+\Toff/2,\u0+\ripple*\Ton/4); %coordinate for right vertical grouplot line
 
 
                         % Capacitor current
-                        \nextgroupplot[ylabel = {$i_\mathrm{C}(t)/I_2$}, xlabel={$t/T_\mathrm{s}$}]
+                        \nextgroupplot[ylabel = {$i_\mathrm{C}(t)/I_2$}, xlabel={$t/T_\mathrm{s}$},visible on=<3->]
                             % Current signal
                             \addplot[signalred, thick] coordinates {(-0.1, -\Iout) (0, -\Iout) (0, \Iavg + \rippleI/2)}; % Capacitor current for t < 0
                             \addplot[signalred, thick, domain=0:\Toff, samples=50] {\D/(1-\D)*\Iout + \rippleI*(\Toff-2*x)/(2*\Toff)}; % Capacitor current for 0 < t < Toff
@@ -1896,22 +1898,18 @@
                             \draw [thin, <->]  (1-\Ton/4,\Iavg - \rippleI/2) -- (1-\Ton/4, \Iavg + \rippleI/2); % current ripple arrow
                             \node[inner sep = 1pt, anchor = east, fill = white] at (axis cs:1-\Ton/3, \Iavg) {$\Delta i_\mathrm{L}$}; % current ripple label
                             % \Delta Q charge area indication
-                            \addplot[signalred, fill=shadecolor, fill opacity=0.3] coordinates {(\Toff,0) (\Toff,-\Iout) (\Ts,-\Iout) (\Ts,0)}; %Delta-Q indicator for  Toff < t < Ts
-                            \addplot[signalred, fill=shadecolor, fill opacity=0.3] coordinates {(0,0) (0,\Iavg+\rippleI/2) (\Toff,\Iavg-\rippleI/2) (\Toff,0)}; %Delta-Q indicator for t < Toff
+                            \addplot[signalred, fill=shadecolor, fill opacity=0.3,visible on=<4->] coordinates {(\Toff,0) (\Toff,-\Iout) (\Ts,-\Iout) (\Ts,0)}; %Delta-Q indicator for  Toff < t < Ts
+                            \addplot[signalred, fill=shadecolor, fill opacity=0.3,visible on=<4->] coordinates {(0,0) (0,\Iavg+\rippleI/2) (\Toff,\Iavg-\rippleI/2) (\Toff,0)}; %Delta-Q indicator for t < Toff
                             % \Delta Q charge area indication arrow
-                            \draw[thin, -{Latex[length=2mm]}] (axis cs:0.2,-0.4) -- (axis cs:0.1,\Iavg);
+                            \draw[thin, -{Latex[length=2mm]},visible on=<4->] (axis cs:0.2,-0.4) -- (axis cs:0.1,\Iavg);
                             % \Delta Q charge area indication label
-                            \node[inner sep = 1pt, anchor = west, fill = white] at (axis cs:0.2,-0.4) {$\Delta Q$};
-                            \node[inner sep = 1pt, anchor = center] at (axis cs:\Ts-\Ton/2,-0.5) {$\Delta Q$};
+                            \node[inner sep = 1pt, anchor = west, fill = white,visible on=<4->] at (axis cs:0.2,-0.4) {$\Delta Q$};
+                            \node[inner sep = 1pt, anchor = center,visible on=<4->] at (axis cs:\Ts-\Ton/2,-0.5) {$\Delta Q$};
                             \draw [<->]  (0,\pgfkeysvalueof{/pgfplots/ymax}+0.25) -- node[above]{$T_\mathrm{off}$}(\Toff, \pgfkeysvalueof{/pgfplots/ymax}+0.25);
                             \draw [<->]  (\Toff,\pgfkeysvalueof{/pgfplots/ymax}+0.25) -- node[above]{$T_\mathrm{on}$}(\Ts, \pgfkeysvalueof{/pgfplots/ymax}+0.25);
-                            %\coordinate (c) at (\Ton/2,0); %coordinate for left vertical grouplot line
-                            %\coordinate (d) at (\Ton+\Toff/2,0);  %coordinate for right vertical grouplot line
                     \end{groupplot}
-                    %\draw [dashed] (a) -- (c);
-                    %\draw [dashed] (b) -- (d);
                 \end{tikzpicture}
-                \caption{Step-up converter voltage ripple}
+                \onslide<2->{\caption{Step-up converter voltage ripple}}
                 \label{fig:step-up-converter-voltage-ripple}
             \end{figure}
         \end{column}
@@ -1923,24 +1921,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Step-up converter: capacitor voltage analysis (cont.)}
-    To calculate the \hl{initial capacitor voltage} $u_\mathrm{C}(kT_\mathrm{s})$, we can utilize
+    \onslide<1->{To calculate the \hl{initial capacitor voltage} $u_\mathrm{C}(kT_\mathrm{s})$, we can utilize}
     \begin{equation}
-        \overline{u}_\mathrm{c} = \frac{1}{T_\mathrm{s}}\int_0^{T_\mathrm{s}} u_\mathrm{C}(t) \mathrm{d}t   \stackrel{!}{=} \overline{u}_2 = \frac{U_1}{1-D}
+        \onslide<1->{\overline{u}_\mathrm{c} = \frac{1}{T_\mathrm{s}}\int_0^{T_\mathrm{s}} u_\mathrm{C}(t) \mathrm{d}t   \stackrel{!}{=} \overline{u}_2}  \onslide<2->{= \frac{U_1}{1-D}}
         \label{eq:capacitor-voltage-average-step-up-converter}
     \end{equation}
-    since the average capacitor voltage must be equal to the average output voltage. This yields
+    \onslide<2->{since the average capacitor voltage must be equal to the average output voltage.}  \onslide<3->{This yields}
     \begin{equation}
         \begin{split}
-            \overline{u}_\mathrm{c} &=  \frac{1}{T_\mathrm{s}}\left(\int_0^{T_\mathrm{off}} u_\mathrm{C}(t) \mathrm{d}t + \int_{T_\mathrm{off}}^{T_\mathrm{s}} u_\mathrm{C}(t) \mathrm{d}t\right)  \\
-                                    &=\ldots\\
-                                    &=u_\mathrm{C}(kT_\mathrm{s}) + \frac{\Delta u_\mathrm{C}}{2} +\frac{\Delta i_\mathrm{L}T_\mathrm{s}}{12C}(1-D)^2 
+            \onslide<3->{\overline{u}_\mathrm{c} &=  \frac{1}{T_\mathrm{s}}\left(\int_0^{T_\mathrm{off}} u_\mathrm{C}(t) \mathrm{d}t + \int_{T_\mathrm{off}}^{T_\mathrm{s}} u_\mathrm{C}(t) \mathrm{d}t\right)}  \\
+            \onslide<4->{& =\ldots}\\
+            \onslide<5->{&=u_\mathrm{C}(kT_\mathrm{s}) + \frac{\Delta u_\mathrm{C}}{2} +\frac{\Delta i_\mathrm{L}T_\mathrm{s}}{12C}(1-D)^2 }
         \end{split}
     \end{equation}
-    and finally delivers
+    \onslide<6->{and finally delivers}
     \begin{equation}
         \begin{split}
-            u_\mathrm{C}(kT_\mathrm{s}) &= \frac{U_1}{1-D} - \frac{\Delta u_\mathrm{C}}{2} -\frac{\Delta i_\mathrm{L}T_\mathrm{s}}{12C}(1-D)^2\\
-                                        &= \frac{U_1}{1-D} - \frac{I_2}{2C}DT_\mathrm{s} -\frac{U_1T^2_\mathrm{s}}{12LC}D(1-D)^2.
+            \onslide<6->{u_\mathrm{C}(kT_\mathrm{s}) &= \frac{U_1}{1-D} - \frac{\Delta u_\mathrm{C}}{2} -\frac{\Delta i_\mathrm{L}T_\mathrm{s}}{12C}(1-D)^2}\\
+            \onslide<7->{&= \frac{U_1}{1-D} - \frac{I_2}{2C}DT_\mathrm{s} -\frac{U_1T^2_\mathrm{s}}{12LC}D(1-D)^2.}
         \end{split}
     \end{equation}
 \end{frame}
@@ -1953,8 +1951,8 @@
     \frametitle{Circuit realization}
     \begin{itemize}
         \item In \figref{fig:step-up-converter-realization-1Q} the simplest realization is shown utilizing one transistor and one diode. 
-        \item This configuration can only provide positive voltages and currents (\hl{first quadrant}).
-        \item The previously made step-up converter's switch-on definition (cf.  \figref{fig:step-up-converter-switch-states}) results from the transistor position in the circuit -- difference to the step-down converter.
+        \item<2-> This configuration can only provide positive voltages and currents (\hl{first quadrant}).
+        \item<3-> The previously made step-up converter's switch-on definition (cf.  \figref{fig:step-up-converter-switch-states}) results from the transistor position in the circuit -- difference to the step-down converter.
     \end{itemize}
     \begin{figure}
         \begin{circuitikz}[]                
@@ -2044,17 +2042,17 @@
 
 \begin{frame}[b]
     \frametitle{Step-up converter: switch states in DCM}
-    The step-up converter in DCM has three different switch states:
+    \onslide<1->{The step-up converter in DCM has three different switch states:}
     \begin{itemize}
-            \item Transistor on-time:  $T_\mathrm{on}=DT_\mathrm{s}$,
-            \item Transistor off-time (conducting diode): $T'_\mathrm{off}=D'T_\mathrm{s}$,
-            \item Transistor off-time (no conduction):  $T''_\mathrm{off}=T_\mathrm{s}-T_\mathrm{on}-T'_\mathrm{off}$.
+            \item<1-> Transistor on-time:  $T_\mathrm{on}=DT_\mathrm{s}$,
+            \item<2-> Transistor off-time (conducting diode): $T'_\mathrm{off}=D'T_\mathrm{s}$,
+            \item<3-> Transistor off-time (no conduction):  $T''_\mathrm{off}=T_\mathrm{s}-T_\mathrm{on}-T'_\mathrm{off}$.
     \end{itemize}
         \begin{figure}
             \centering	
+            \onslide<1->{
             \begin{subfigure}{0.33\textwidth}
                 \centering
-                %\hspace{-1.4cm}
                 \begin{circuitikz}[scale=0.75, font=\small]
                     \draw (0,2) to [open, o-o, v = $\hspace{-0.4cm}U_2$, voltage = straight] ++(0,-2)
                     to ++(-5,0)
@@ -2068,9 +2066,10 @@
                 \end{circuitikz}
                 \caption{Switch-on time $T_\mathrm{on}$}
             \end{subfigure}%
+            }%
+            \onslide<2->{%
             \begin{subfigure}{0.33\textwidth}
                 \centering
-                %\hspace{-0.6cm}
                 \begin{circuitikz}[scale=0.75, font=\small]
                     \draw (0,2) to [open, o-o, v = $\hspace{-0.4cm}U_2$, voltage = straight] ++(0,-2)
                     to ++(-5,0)
@@ -2082,9 +2081,10 @@
                 \end{circuitikz}
                 \caption{Switch-off time $T'_\mathrm{off}$}
             \end{subfigure}
+            }%
+            \onslide<3->{%
             \begin{subfigure}{0.33\textwidth}
                 \centering
-                %\hspace{-1.3cm}
                 \begin{circuitikz}[scale=0.75, font=\small]
                     \draw (0,2) to [open, o-o, v = $\hspace{-0.4cm}U_2$, voltage = straight] ++(0,-2)
                     to ++(-5,0)
@@ -2097,6 +2097,7 @@
                 \end{circuitikz}
                 \caption{Switch-off time $T''_\mathrm{off}$}
             \end{subfigure}
+            }%
         \caption{Switch states of the step-up converter including DCM} 
         \label{fig:step-up-converter-switch-states-DCM}
         \end{figure}
@@ -2107,24 +2108,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Step-up converter: DCM operation characteristics}
-    In DCM operation 
+    \onslide<1->{In DCM operation 
     $$  \overline{i}_\mathrm{L}=\overline{i}_1 < \frac{\Delta i_\mathrm{L}}{2} \quad \Rightarrow \quad U_2 \neq U_1 \frac{1}{1-D}$$
-    applies due to the non-conducting diode during  $T''_\mathrm{off}$. To find the input-to-output voltage ratio in DCM, we again utilize the current ripple balance:
+    applies due to the non-conducting diode during  $T''_\mathrm{off}$.} \onslide<2->{To find the input-to-output voltage ratio in DCM, we again utilize the current ripple balance:}
     \begin{equation}
         \begin{alignedat}{2}
-            \Delta i_\mathrm{L} &= \frac{U_1}{L}T_\mathrm{on} = i_\mathrm{L} = \frac{U_1}{L}DT_\mathrm{s} \quad &&\mbox{(rising edge)},\\
-            \Delta i_\mathrm{L} &= \frac{U_2-U_1}{L}T'_\mathrm{off} = \frac{U_2-U_1}{L}D'T_\mathrm{s} \quad &&\mbox{(falling edge)}.
+            \onslide<2->{\Delta i_\mathrm{L} &= \frac{U_1}{L}T_\mathrm{on}  = \frac{U_1}{L}DT_\mathrm{s} \quad &&\mbox{(rising edge)},}\\
+            \onslide<3->{\Delta i_\mathrm{L} &= \frac{U_2-U_1}{L}T'_\mathrm{off} = \frac{U_2-U_1}{L}D'T_\mathrm{s} \quad &&\mbox{(falling edge)}.}
         \end{alignedat}
     \end{equation}
-    Solving for $D'$ yields
+    \onslide<4->{Solving for $D'$ yields
     \begin{equation}
         D' = \frac{U_1}{U_2-U_1}D.
-    \end{equation}
-    The average load current is 
-    \begin{equation}
-            \overline{i}_2 = \frac{\Delta i_\mathrm{L}}{2}\frac{T'_\mathrm{off}}{T_\mathrm{s}} = \frac{\Delta i_\mathrm{L,max}D}{2}D'= \frac{\Delta i_\mathrm{L,max}}{2}\frac{U_1}{U_2-U_1}D^2.
-            \label{eq:step-up-converter-average-output-current-DCM}
-    \end{equation}
+    \end{equation}}
+    \onslide<5->{The average load current is
+    \begin{equation}}
+        \onslide<5->{\overline{i}_2 = \frac{\Delta i_\mathrm{L}}{2}\frac{T'_\mathrm{off}}{T_\mathrm{s}}} \onslide<6->{= \frac{\Delta i_\mathrm{L,max}D}{2}D'}\onslide<7->{= \frac{\Delta i_\mathrm{L,max}}{2}\frac{U_1}{U_2-U_1}D^2.}
+        \onslide<6->{\label{eq:step-up-converter-average-output-current-DCM}
+    \end{equation}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2132,20 +2133,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Step-up converter: DCM operation characteristics (cont.)}
-    Solving \eqref{eq:step-up-converter-average-output-current-DCM} delivers the step-up \hl{converter voltage gain in DCM} as
+    \onslide<1->{Solving \eqref{eq:step-up-converter-average-output-current-DCM} delivers the step-up \hl{converter voltage gain in DCM} as
     \begin{equation}
         \frac{U_2}{U_1} = 1+ \frac{D^2}{2} \frac{\Delta i_\mathrm{L,max}}{\overline{i}_2}.
         \label{eq:voltage-ratio-DCM-step-up}
-    \end{equation}
-    Since $\Delta i_\mathrm{L,max}$ also depends on $U_1$, cf.  \eqref{eq:current-ripple-max-step-up}, the relation \eqref{eq:voltage-ratio-DCM-step-up} only holds for a given $U_1$. Hence, we can insert \eqref{eq:current-ripple-max-step-up} in \eqref{eq:voltage-ratio-DCM-step-up} and solve for $U_2$ to receive
+    \end{equation}}%
+    \onslide<2->{Since $\Delta i_\mathrm{L,max}$ also depends on $U_1$, cf.  \eqref{eq:current-ripple-max-step-up}, the relation \eqref{eq:voltage-ratio-DCM-step-up} only holds for a given $U_1$. Hence, we can insert \eqref{eq:current-ripple-max-step-up} in \eqref{eq:voltage-ratio-DCM-step-up} and solve for $U_2$ to receive
     \begin{equation}
         U_2= U_1 + \frac{D^2}{2} \frac{T_\mathrm{s}}{L \overline{i}_2}.
-    \end{equation}
-    One can note the inverse proportionality of $U_2$ to $\overline{i}_2$, that is, the lower the load current, the higher the output voltage.
-
-    Finally, the step-up converter \hl{operates in BCM} if
+    \end{equation}}
+    \onslide<3->{Finally, the step-up converter \hl{operates in BCM} if}
     \begin{equation}
-        \overline{i}_\mathrm{L}=\overline{i}_1 = \frac{\Delta i_\mathrm{L}}{2} \quad \Leftrightarrow \quad  \overline{i}_2 = (1-D)\frac{\Delta i_\mathrm{L}}{2}. 
+        \onslide<3->{\overline{i}_\mathrm{L}=\overline{i}_1 = \frac{\Delta i_\mathrm{L}}{2}} \onslide<4->{\quad \Leftrightarrow \quad  \overline{i}_2 = (1-D)\frac{\Delta i_\mathrm{L}}{2}.} 
     \end{equation}
 \end{frame}
 
@@ -2188,7 +2187,7 @@
                 \node[inner sep = 1pt, anchor = west, font=\footnotesize] at (axis cs:0.125, 4) {DCM}; % DCM label
             \end{semilogyaxis}
         \end{tikzpicture}
-        \caption{Step-up converter load curves for CCM and DCM}
+        \caption{Step-up converter load curves for CCM and DCM (note: logarithmic ordinate)}
         \label{fig:step-up-converter-load-curves}
     \end{figure}
 \end{frame}
@@ -2199,7 +2198,7 @@
 \subsection{Buck-boost converter}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Step-up converter: overview and assumptions %%
+%% Buck-boost converter: overview and assumptions %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[b]
@@ -2280,15 +2279,16 @@
 
 \begin{frame}[b]
     \frametitle{Buck-boost converter: switching states}
-    The buck-boost converter switches are \hl{operated synchronously}, that is, $S_1$ and $S_2$ are either on or off at the same time. Thus, the converter has only two switch states:
+    \onslide<1->{The buck-boost converter switches are \hl{operated synchronously}, that is, $S_1$ and $S_2$ are either on or off at the same time.} \onslide<2->{Thus, the converter has only two switch states:}
     \begin{equation}
         \begin{alignedat}{3}
-                \{S_\mathrm{1,on}, S_\mathrm{2,on}\} \quad &\rightarrow \quad u_{\mathrm{s}_1}(t) &&= U_1, \,&&u_{\mathrm{s}_2}(t) = 0, \quad \\
-                \{S_\mathrm{1,off}, S_\mathrm{2,off}\} \quad &\rightarrow \quad u_{\mathrm{s}_1}(t) &&= 0, &&u_{\mathrm{s}_2}(t) = U_2.
+            \onslide<2->{\{S_\mathrm{1,on}, S_\mathrm{2,on}\} \quad &\rightarrow \quad u_{\mathrm{s}_1}(t) &&= U_1, \,&&u_{\mathrm{s}_2}(t) = 0, \quad} \\
+            \onslide<3->{\{S_\mathrm{1,off}, S_\mathrm{2,off}\} \quad &\rightarrow \quad u_{\mathrm{s}_1}(t) &&= 0, &&u_{\mathrm{s}_2}(t) = U_2.}
         \end{alignedat}
     \end{equation}
     \begin{figure}
-        \centering	
+        \centering
+        \onslide<2->{%	
         \begin{subfigure}{0.45\textwidth}
             \centering
             \hspace{-0.75cm}
@@ -2306,7 +2306,9 @@
             \end{circuitikz}
             \caption{Switch-on time}
         \end{subfigure}%
-        \hspace{0.5cm}
+        }%
+        \hspace{0.5cm}%
+        \onslide<3->{%
         \begin{subfigure}{0.45\textwidth}
             \centering
             \begin{circuitikz}[]
@@ -2323,7 +2325,8 @@
             \end{circuitikz}
             \caption{Switch-off time}
         \end{subfigure}
-    \caption{Switch states of the buck-boost converter} 
+        }%
+        \onslide<2->{\caption{Switch states of the buck-boost converter}} 
     \label{fig:buck-boost-converter-switch-states}
     \end{figure}
 \end{frame}
@@ -2334,24 +2337,24 @@
 
 \begin{frame}
     \frametitle{Buck-boost converter: CCM voltage transfer ratio}
-    In CCM, we can derive the \hl{voltage transfer ratio} directly by the serial connection of the buck and boost stages from \figref{fig:buck-boost-simple}
+    \onslide<1->{In CCM, we can derive the \hl{voltage transfer ratio} directly by the serial connection of the buck and boost stages from \figref{fig:buck-boost-simple}}
     \begin{equation}
-        \frac{U_0}{U_1} = D, \qquad   \frac{U_2}{U_0} = \frac{1}{1-D},
+        \onslide<2->{\frac{U_0}{U_1} = D,}\onslide<3->{ \qquad   \frac{U_2}{U_0} = \frac{1}{1-D},}
     \end{equation}
-    leading to 
+    \onslide<4->{leading to} 
     \begin{equation}
-        \frac{U_2}{U_1} = \frac{D}{1-D}.
+        \onslide<4->{\frac{U_2}{U_1} = \frac{D}{1-D}.}
     \end{equation}
-    Alternatively, we can derive this result from the \hl{voltage balance} of the inductor $L$:
+    \onslide<5->{Alternatively, we can derive this result from the \hl{voltage balance} of the inductor $L$:
     \begin{equation}
         u_\mathrm{L}(t) = \begin{cases} 
             U_1, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],\\ 
             -U_2 & t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].
         \end{cases}
-    \end{equation}
-    In steady state, the average inductor voltage per period must be zero, yielding
+    \end{equation}}
+    \onslide<6->{In steady state, the average inductor voltage per period must be zero, yielding}
     \begin{equation}
-        U_1 T_\mathrm{on} = U_2 T_\mathrm{off} \quad \Leftrightarrow \quad  U_1 D T_\mathrm{s} = U_2 (1-D) T_\mathrm{s} \quad \Leftrightarrow \quad \frac{U_2}{U_1} = \frac{D}{1-D}.
+        \onslide<6->{U_1 T_\mathrm{on} = U_2 T_\mathrm{off}}  \onslide<7->{\quad \Leftrightarrow \quad  U_1 D T_\mathrm{s} = U_2 (1-D) T_\mathrm{s}}  \onslide<8->{\quad \Leftrightarrow \quad \frac{U_2}{U_1} = \frac{D}{1-D}.}
     \end{equation}
 \end{frame}
 
@@ -2372,36 +2375,36 @@
                         \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},-\gain) ({0 + #1},1) ({\D + #1},1) ({\D + #1},-\gain) ({1 + #1},-\gain) ({1 + #1},1)};}
                         \AddPlot
                     }
-                    \draw[signalblue, thick, dashed, visible on=<2->] (axis cs:0, \gain) -- (axis cs:4, \gain); % dashed line at U_2 (average)
-                    \node[above, inner sep = 2pt, anchor = north, visible on=<2->] at (axis cs:1.5+\D/2, \gain) {$U_2$}; % label U_2
+                    \draw[signalblue, thick, dashed] (axis cs:0, \gain) -- (axis cs:4, \gain); % dashed line at U_2 (average)
+                    \node[above, inner sep = 2pt, anchor = north] at (axis cs:1.5+\D/2, \gain) {$U_2$}; % label U_2
                     \draw [thick,<->]  (0,0.2) -- node[below]{$T_\mathrm{on}$}(\D, 0.2); % T_on 
                     \draw [thick,<->]  (\D,0.2) -- node[below]{$T_\mathrm{off}$}(1.0, 0.2); % T_off
                     \draw [thick,<->]  (0.0,-1.4) -- node[below]{$T_\mathrm{s}$}(1.0, -1.4); % T_s 
 
 
                 % Middle plot: inductor current
-                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$, }, visible on=<3->]
+                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$, }]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({1 + #1},0.25)};}
                         \AddPlot
                     }
                     \draw[signalred, thick, dashed] (axis cs:0,0.5) -- (axis cs:4,0.5); % dashed line at average current
-                    \draw[{Latex[length=2mm]}-, thin, visible on=<4->] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
-                    \draw[-{Latex[length=2mm]}, thin, visible on=<4->] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
-                    \draw[thin, visible on=<5->] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
-                    \node[above, inner sep = 2pt, anchor = south, xshift = -4mm, visible on=<5->] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{U_1}{L}$}; % label positive current slope
-                    \draw[thin, visible on=<6->] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
-                    \node[above, inner sep = 2pt, anchor = south, xshift = 2mm, visible on=<6->] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_2}{L}$}; % label negative current slope
+                    \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
+                    \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
+                    \draw[thin] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
+                    \node[above, inner sep = 2pt, anchor = south, xshift = -4mm] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{U_1}{L}$}; % label positive current slope
+                    \draw[thin] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
+                    \node[above, inner sep = 2pt, anchor = south, xshift = 2mm] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_2}{L}$}; % label negative current slope
                 
                 % Bottom plot: input current
-                \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}, visible on=<7->]
+                \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
                         \AddPlot
                     }
-                    \draw[signalred, thick, dashed, visible on=<8->] (axis cs:0,0.75 * \D) -- (axis cs:4, 0.75 * \D); % dashed line at average current
-                    \node[signalred, above, inner sep = 1pt, anchor = east, fill = white, xshift=-1mm, yshift=-1mm, visible on=<8->] at (axis cs:\D, 0.75 * \D) {$\overline{i}_1$}; % label average current
-                    \node[signalred, above, inner sep = 2pt, anchor = center, fill = white, visible on=<8->] at (axis cs:\D/2-0.05, 0.85) {$i_1(t)$}; % label input current
+                    \draw[signalred, thick, dashed] (axis cs:0,0.75 * \D) -- (axis cs:4, 0.75 * \D); % dashed line at average current
+                    \node[signalred, above, inner sep = 1pt, anchor = east, fill = white, xshift=-1mm, yshift=-1mm] at (axis cs:\D, 0.75 * \D) {$\overline{i}_1$}; % label average current
+                    \node[signalred, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:\D/2-0.05, 0.85) {$i_1(t)$}; % label input current
             \end{groupplot}
 
             % second y-axis for the bottom plot
@@ -2415,25 +2418,25 @@
                                 \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({\D + #1},0) ({\D + #1},0.75) ({1 + #1},0.25) ({1 + #1},0)};}
                                 \AddPlot
                             }
-                            \node[signalblue, above, inner sep = 2pt, anchor = center, fill = white, visible on=<8->] at (axis cs:0.5+\D/2, 0.85) {$i_2(t)$}; % label output current
-                            \draw[signalblue, thick, dashed, visible on=<8->] (axis cs:0,0.5-0.25*\D) -- (axis cs:4, 0.5-0.25*\D); % dashed line at average current
-                            \node[signalblue, above, inner sep = 1pt, anchor = west, fill = white, visible on=<8->, xshift=1mm] at (axis cs:\D, 0.5-0.25*\D) {$\overline{i}_2$}; % label average current
+                            \node[signalblue, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:0.5+\D/2, 0.85) {$i_2(t)$}; % label output current
+                            \draw[signalblue, thick, dashed] (axis cs:0,0.5-0.25*\D) -- (axis cs:4, 0.5-0.25*\D); % dashed line at average current
+                            \node[signalblue, above, inner sep = 1pt, anchor = west, fill = white, xshift=1mm] at (axis cs:\D, 0.5-0.25*\D) {$\overline{i}_2$}; % label average current
 					\end{groupplot}
         \end{tikzpicture}
     \end{figure}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Current ripple %%
+%% Buck-boost converter: Current ripple %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Current ripple}
+    \frametitle{Buck-boost converter: current ripple}
     \onslide<1->{The peak-to-peak \hl{current ripple} of the buck-boost converter is given by}
     \begin{equation}
         \begin{split}
             \onslide<1->{ \Delta i_\mathrm{L} &= \max\{i_\mathrm{L}(t)\} - \min\{i_\mathrm{L}(t)\}}  \onslide<2->{= i_\mathrm{L}(t=T_\mathrm{on}) - i_\mathrm{L}(t=T_\mathrm{s})}\\
                                 &\onslide<3->{=\frac{U_1}{L} T_\mathrm{on}} \onslide<4->{= \frac{U_2}{L} T_\mathrm{off}}\\
-                                & \onslide<5->{= \frac{DT_\mathrm{s}}{L}U_1.}
+                                & \onslide<5->{= \frac{DT_\mathrm{s}}{L}U_1=D \Delta i_\mathrm{L,max}.}
         \end{split}
         \label{eq:current-ripple-simple-buck-boost}
     \end{equation}
@@ -2445,14 +2448,60 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Circuit realization %%
+%% Buck-boost converter: output capacitor and voltage ripple %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Buck-boost converter: output capacitor and voltage ripple}
+    \onslide<2->{With the usual \hl{simplifying assumptions} (cf. \figref{fig:step-up-converter-simple-output-cap}), in particular, a constant output current $i_2(t)=I_2,$ the capacitor's current during the switch-on time is given by
+    \begin{equation*}
+        i_\mathrm{C}(t) = -i_2(t) = -I_2, \quad t \in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{off}].
+    \end{equation*}}
+    \onslide<3->{This is \hl{identical to the step-up converter}, leading to the same voltage ripple
+    \begin{equation*}
+        \Delta u_\mathrm{C} = \frac{I_2}{C}T_\mathrm{on}= \frac{I_2}{C}DT_\mathrm{s}.
+    \end{equation*}}
+    \begin{figure}
+        \begin{circuitikz}[]
+            %Boost part
+            \draw (4.5,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+            to [short]++(-4.5,0)
+            (1.25,2) to ++(0.1,0) node [cuteopenswitchshape, anchor = in, yscale=-1] (S2) {}
+            let \p2 = (S2.mid) in (S2.out) to  [short] (3.5,2)
+            to [short, i=$i_2(t)$] (4.5,2)
+            ([yshift = -0.3cm]S2.mid) to [short, o-*](\x2,0);
+            \draw (1.4,2) to [open, v_>=$u_{\mathrm{s}_2}(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2);
+            % Buck part
+            \draw (0,0) to [short]++(-3.5,0)
+            to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+            to  [short, i=$i_1(t)$] ++(1.25,0)
+            to ++(0.1,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S1) {}
+            let \p1 = (S1.mid) in (S1.in) to  [short] (-1.0,2)
+            ([yshift = -0.3cm]S1.mid) to [short, o-*](\x1,0);
+            \draw (-1.4,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s_1}(t)$, voltage = straight] ++(0,-2);
+            %Combining inductor
+            \draw (S1.in) to [inductor, l=$L$, i=$i_\mathrm{L}(t)$, v = $u_\mathrm{L}(t)$, voltage = straight] (S2.in)
+            (S1.out) node[below, anchor = north east] {$S_\mathrm{1,on}$}
+            ([yshift = -0.3cm]S1.mid) node[below, anchor = north east] {$S_\mathrm{1,off}$}
+            (S2.out) node[below, anchor = north west] {$S_\mathrm{2,off}$}
+            ([yshift = -0.3cm]S2.mid) node[below, anchor = north west] {$S_\mathrm{2,on}$};
+            %output capacitor
+            \draw (3.5,2) to [capacitor, l=$C$, i>^=$i_\mathrm{C}(t)$, *-*] ++(0,-2);
+        \end{circuitikz}
+        \caption{Buck-boost converter with output capacitor}
+        \label{fig:buck-boost-output-capacitor}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Buck-boost converter: circuit realization %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Circuit realization}
+    \frametitle{Buck-boost converter: circuit realization}
     \begin{itemize}
         \item In \figref{fig:buck-boost-converter-realization-1Q} the buck-boost converter realization is a direct series circuit combination of \figref{fig:step-down-converter-realization-1Q} and \figref{fig:step-up-converter-realization-1Q}. 
         \item This configuration can only provide positive voltages and currents (\hl{first quadrant}).
-        \item It should be noted that this circuit requires two diodes and two transistors.
+        \item<2-> It should be noted that this circuit requires two diodes and two transistors.
     \end{itemize}
     \begin{figure}
         \begin{circuitikz}[]
@@ -2487,14 +2536,15 @@
 
 \begin{frame}[b]
     \frametitle{Buck-boost converter: switch states in DCM}
-    The buck-boost converter in DCM has three different switch states:
+    \onslide<1->{The buck-boost converter in DCM has three different switch states:}
     \begin{itemize}
-            \item Transistor on-time:  $T_\mathrm{on}=DT_\mathrm{s}$,
-            \item Transistor off-time (conducting diode): $T'_\mathrm{off}=D'T_\mathrm{s}$,
-            \item Transistor off-time (no conduction):  $T''_\mathrm{off}=T_\mathrm{s}-T_\mathrm{on}-T'_\mathrm{off}$.
+            \item<1-> Transistor on-time:  $T_\mathrm{on}=DT_\mathrm{s}$,
+            \item<2-> Transistor off-time (conducting diode): $T'_\mathrm{off}=D'T_\mathrm{s}$,
+            \item<3-> Transistor off-time (no conduction):  $T''_\mathrm{off}=T_\mathrm{s}-T_\mathrm{on}-T'_\mathrm{off}$.
     \end{itemize}
         \begin{figure}
-            \centering	
+            \centering
+            \onslide<1->{%	
             \begin{subfigure}{0.33\textwidth}
                 \centering
                 \begin{circuitikz}[scale=0.75, font=\small]
@@ -2509,6 +2559,8 @@
                 \end{circuitikz}
                 \caption{Switch-on time $T_\mathrm{on}$}
             \end{subfigure}%
+            }%
+            \onslide<2->{%
             \begin{subfigure}{0.33\textwidth}
                 \centering
                 \hspace{-0.6cm}
@@ -2524,6 +2576,8 @@
                 \end{circuitikz}
                 \caption{Switch-off time $T'_\mathrm{off}$}
             \end{subfigure}
+            }%
+            \onslide<3->{%
             \begin{subfigure}{0.33\textwidth}
                 \centering
                 \begin{circuitikz}[scale=0.75, font=\small]
@@ -2539,10 +2593,56 @@
                 \end{circuitikz}
                 \caption{Switch-off time $T''_\mathrm{off}$}
             \end{subfigure}
+            }%
         \caption{Switch states of the buck-boost converter including DCM} 
         \label{fig:buck-boost-converter-switch-states-DCM}
         \end{figure}
     \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Buck-boost converter: DCM operation characteristics %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Buck-boost converter: DCM operation characteristics}
+    \onslide<1->{In DCM operation 
+    $$  \overline{i}_\mathrm{L} < \frac{\Delta i_\mathrm{L}}{2} \quad \Rightarrow \quad U_2 \neq U_1 \frac{D}{1-D}$$
+    applies due to the non-conducting diode during  $T''_\mathrm{off}$.} \onslide<2->{To find the input-to-output voltage ratio in DCM, we again utilize the current ripple balance:}
+    \begin{equation}
+        \begin{alignedat}{2}
+            \onslide<2->{\Delta i_\mathrm{L} &= \frac{U_1}{L}T_\mathrm{on} = \frac{U_1}{L}DT_\mathrm{s} \quad &&\mbox{(rising edge)},}\\
+            \onslide<3->{\Delta i_\mathrm{L} &= \frac{U_2}{L}T'_\mathrm{off} = \frac{U_2}{L}D'T_\mathrm{s} \quad &&\mbox{(falling edge)}.}
+        \end{alignedat}
+    \end{equation}
+    \onslide<4->{Solving for $D'$ yields
+    \begin{equation}
+        D' = \frac{U_1}{U_2}D.
+    \end{equation}}
+    \onslide<5->{The average load current is }
+    \begin{equation}
+        \onslide<5->{\overline{i}_2 = \frac{\Delta i_\mathrm{L}}{2}\frac{T'_\mathrm{off}}{T_\mathrm{s}}} \onslide<6->{= \frac{\Delta i_\mathrm{L,max}D}{2}D'}\onslide<7->{= \frac{\Delta i_\mathrm{L,max}}{2}\frac{U_1}{U_2}D^2.}
+            \label{eq:buck-boost-converter-average-output-current-DCM}
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Step-up converter: DCM operation characteristics (cont.)%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Buck-boost converter: DCM operation characteristics (cont.)}
+    Solving \eqref{eq:buck-boost-converter-average-output-current-DCM} delivers the buck-boost \hl{converter voltage gain in DCM} as
+    \begin{equation}
+        \frac{U_2}{U_1} = \frac{D^2}{2} \frac{\Delta i_\mathrm{L,max}}{\overline{i}_2}.
+        \label{eq:voltage-ratio-DCM-buck-boost}
+    \end{equation}
+    Since $\Delta i_\mathrm{L,max}$ also depends on $U_1$, the relation \eqref{eq:voltage-ratio-DCM-buck-boost} only holds for a given $U_1$. Hence, we can insert \eqref{eq:current-ripple-simple-buck-boost} in \eqref{eq:current-ripple-simple-buck-boost} and solve for $U_2$ to receive
+    \begin{equation}
+        U_2= U_1^2 \frac{D^2}{2} \frac{T_\mathrm{s}}{L \overline{i}_2}.
+    \end{equation}
+    Finally, the buck-boost converter \hl{operates in BCM} if
+    \begin{equation}
+        \overline{i}_\mathrm{L} = \frac{\Delta i_\mathrm{L}}{2} \quad \Leftrightarrow \quad  \overline{i}_2 = \Delta i_\mathrm{L,max} \frac{1}{2} \frac{D}{1-D}. 
+    \end{equation}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Buck-boost converter load curves %%
@@ -2582,7 +2682,193 @@
                 \node[inner sep = 1pt, anchor = center, font=\footnotesize] at (axis cs:0.0475, 0.25) {DCM}; % DCM label
             \end{semilogyaxis}
         \end{tikzpicture}
-        \caption{Buck-boost converter load curves for CCM and DCM}
+        \caption{Buck-boost converter load curves for CCM and DCM (note: logarithmic ordinate)}
         \label{fig:buck-boost-converter-load-curves}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Inverting buck-boost converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Inverting buck-boost converter}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Recap: Buck-boost converter switching states %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Recap: Buck-boost converter switching states}
+    \begin{varblock}{Key characteristic of (synchronous) buck-boost converter}
+        The switching scheme of the (synchronous) buck-boost converter from \figref{fig:buck-boost-converter-switch-states} is realized by \hl{two switches} and characterized by:
+        \begin{itemize}
+            \item \hl{During switch-on}: inductor is connected to $u_1(t)$,
+            \item \hl{During switch-off}: inductor is connected to $u_2(t)$.
+        \end{itemize}
+    \end{varblock}
+    \begin{figure}
+        \centering	
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \hspace{-0.75cm}
+            \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}U_2$, voltage = straight] ++(0,-2)
+                to ++(-5,0)
+                to [open, o-o, v<= $U_1 \hspace{2cm}$, voltage = straight] ++(0,2)
+                (-5,2) to  [short, i=$i_1(t)$] ++(1.0,0)
+                to [inductor, l=$L$] ++(1.75,0)
+                to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
+                to [short, -*] ++(0,-2);
+                \draw (0,2) to [short, i_<=${i_2=0}$, -o] ++(-1.0,0);
+                \draw (-1.8,2) to [open, v_>=${U_{\mathrm{s}_2}\hspace{0.2cm}}$, voltage = straight] ++(0,-2);
+                \draw (-4.4,2) to [open, v = ${\hspace{1.5cm}U_{\mathrm{s}_1}}$, voltage = straight] ++(0,-2);
+            \end{circuitikz}
+            \caption{Switch-on time}
+        \end{subfigure}%
+        \hspace{0.5cm}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}U_2$, voltage = straight] ++(0,-2)
+                to ++(-5,0)
+                to [open, o-o, v<= $U_1 \hspace{2cm}$, voltage = straight] ++(0,2)
+                (-5,2) to  [short, i=${i_1=0}$] ++(0.75,0)
+                (-3.75,0) to [short, *-] ++(0,2)
+                to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
+                to [inductor, l=$L$] ++(2,0)
+                to [short, i=$i_2(t)$] (0,2);
+                \draw (-3.4,2) to [open, v = ${\hspace{1.5cm}U_{\mathrm{s}_1}}$, voltage = straight] ++(0,-2);
+                \draw (-0.5,2) to [open, v_>=${U_{\mathrm{s}_2}\hspace{0.2cm}}$, voltage = straight] ++(0,-2);
+            \end{circuitikz}
+            \caption{Switch-off time}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Recap: Buck-boost converter switching states %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Inverting buck-boost converter: overview}
+    \begin{figure}
+        \begin{itemize}
+            \item Voltage change at the inductor can be also achieved by a \hl{single switch} which input is connected to the inductor.
+            \item Assuming an ideal, infinitely fast switch, the inductor current $i_\mathrm{L}(t)$ remains well-defined (no open switch at inductor).
+        \end{itemize}
+        \begin{circuitikz}[]
+            \draw(0,3) node[cute spdt mid, rotate=90] (S) {}
+            (S.cout 2) to [short, -o, i=$i_2(t)$] ++(3,0)
+            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-3) coordinate (A)
+            (S.cout 1) to [short, -o, i_<=$i_1(t)$] ++(-3,0)
+            to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-3)
+            to [short, o-o] (A)
+            (S.out 1) node[below, anchor = north east] {$S_\mathrm{on}$}
+            (S.out 2) node[below, anchor = north west] {$S_\mathrm{off}$};
+            \draw let \p1 = (A) in (S.cin) to [inductor, i=$i_\mathrm{L}(t)$, v=$u_\mathrm{L}(t)$,voltage = straight, o-*] (0,\y1);
+        \end{circuitikz}
+        \caption{Inverting buck-boost converter (ideal switch representation)}
+        \label{fig:inverting-buck-boost-simple}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Polarity change of inverting buck-boost converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Polarity change of inverting buck-boost converter}
+    \begin{itemize}
+        \item One side of the inductor remains connected to the common connection rail between input and output side.
+        \item The other inductor side switches between the upper input and output rail.
+        \item Consequence: voltage and current directions are inverted between the two switch states. 
+    \end{itemize}
+    \begin{figure}
+        \centering	
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \hspace{-0.75cm}
+            \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}U_2$, voltage = straight] ++(0,-2)
+                to ++(-5,0)
+                to [open, o-o, v<= $U_1 \hspace{2cm}$, voltage = straight] ++(0,2)
+                (-5,2) to  [short, i=$i_1(t)$] ++(1.0,0)
+                to [inductor, l=$L$, v=$u_\mathrm{L}(t)$, voltage = straight] ++(1.5,0)
+                to [short] ++(0.25,0)
+                to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
+                to [short, -*] ++(0,-2);
+                \draw (0,2) to [short, i_<=${i_2=0}$, -o] ++(-1.0,0);
+            \end{circuitikz}
+            \caption{Switch-on time}
+        \end{subfigure}%
+        \hspace{0.5cm}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}U_2$, voltage = straight] ++(0,-2)
+                to ++(-5,0)
+                to [open, o-o, v<= $U_1 \hspace{2cm}$, voltage = straight] ++(0,2)
+                (-5,2) to  [short, i=${i_1=0}$] ++(0.75,0)
+                (-3.75,0) to [short, *-] ++(0,2)
+                to [short, i<=$i_\mathrm{L}(t)$] ++(0.75,0)
+                to [inductor, l=$L$, v_<=$u_\mathrm{L}(t)$, voltage = straight] ++(1.5,0)
+                to [short] ++(0.5,0)
+                to [short, i=$i_2(t)$] (0,2);
+            \end{circuitikz}
+            \caption{Switch-off time}
+        \end{subfigure}
+        \caption{Voltage and current definitions of the inverting buck-boost converter}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Inverting buck-boost converter: voltage voltage transfer ratio %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Inverting buck-boost converter: voltage transfer ratios}
+    In CCM, the voltage balance of the inductor $L$ delivers:
+    \begin{equation}
+        u_\mathrm{L}(t) = \begin{cases} 
+            U_1, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],\\ 
+            U_2 & t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].
+        \end{cases}
+    \end{equation}
+    In steady state, the average inductor voltage per period must be zero, yielding
+    \begin{equation}
+        U_1 T_\mathrm{on} = -U_2 T_\mathrm{off}  \quad \Leftrightarrow \quad  U_1 D T_\mathrm{s} = -U_2 (1-D) T_\mathrm{s} \quad \Leftrightarrow \quad \frac{U_2}{U_1} = -\frac{D}{1-D}.
+    \end{equation}
+    Likewise, the analysis of the DCM mode reveals
+    \begin{equation}
+        \frac{U_2}{U_1} = -\frac{D^2}{2} \frac{\Delta i_\mathrm{L,max}}{\overline{i}_2} \quad \Leftrightarrow \quad U_2 = -U_1^2 \frac{D^2}{2} \frac{T_\mathrm{s}}{L \overline{i}_2}.
+    \end{equation}
+    Hence, the inverting buck-boost converter has a \hl{negative voltage transfer ratio} in CCM and DCM, but the same absolute voltage gain as the synchronous buck-boost converter.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Inverting buck-boost converter: circuit realization %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Inverting buck-boost converter: circuit realization}
+    \begin{itemize}
+        \item The inverting buck boost converter scores with its simple design (single transistor / diode).
+        \item Energy transfer takes place solely indirect by intermediate storage within inductor.
+        \item Further characteristics (current and voltage ripple, operation modes) are analogous to the synchronous buck-boost converter.  
+    \end{itemize}
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw (0,0) to [short, *-] ++(1.0,0)
+            to [diode, l=$D$, invert]  ++(1.0,0)
+            to [short, -o, i=$i_2(t)$] ++(1.0,0)
+            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2.5) coordinate (A)
+            (0,0) to [short, *-] ++(-1.0,0) 
+            to [Tnpn, n=npn1] ++(-1.0,0)
+            to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
+            to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-2.5)
+            to [short, o-o] (A)
+            (0,0) to [inductor, i=$i_\mathrm{L}(t)$, v=$u_\mathrm{L}(t)$,voltage = straight, *-*] ++(0,-2.5);
+            \draw let \p1 = (npn1.B) in node[anchor=north] at (\x1,\y1) {$T$};
+        \end{circuitikz}
+        \caption{Inverting buck-boost converter with real components (single quadrant type)}
+        \label{fig:inverting-buck-boost-converter-realization-1Q}
     \end{figure}
 \end{frame}
