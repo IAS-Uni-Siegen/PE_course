@@ -1,0 +1,22 @@
+\begin{figure}[htb]
+    \begin{center}
+        
+    %\begin{tikzpicture}
+    \begin{circuitikz}[european currents, european resistors, american inductors]
+        
+        \draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+        to ++(-6,0)
+        to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+        (-6,2) to  [short, i=$i_1(t)$] ++(1.25,0)
+        to [inductor, l=$L$, v = $u_\mathrm{L}(t)$, voltage = straight] ++(1.75,0)
+        to  [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
+        to ++(0.1,0) node [cuteopenswitchshape, anchor = in, yscale=-1] (S) {}
+        let \p1 = (S.mid) in (S.out) to  [short, i=$i_2(t)$] (0,2)
+        ([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
+        \draw (-2.2,2) to [open, v_>=$u_\mathrm{s}(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2);
+    \end{circuitikz}
+    \caption{Step-up converter}
+     \label{fig:boost converter}
+\end{center}
+%\end{tikzpicture}
+\end{figure}
