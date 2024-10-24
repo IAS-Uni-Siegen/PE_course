@@ -2850,9 +2850,9 @@
 \begin{frame}
     \frametitle{Inverting buck-boost converter: circuit realization}
     \begin{itemize}
-        \item The inverting buck boost converter scores with its simple design (single transistor / diode).
         \item Energy transfer takes place solely indirect by intermediate storage within inductor.
         \item Further characteristics (current and voltage ripple, operation modes) are analogous to the synchronous buck-boost converter.  
+        \item Transistor needs to block up to $|u_1(t)|+|u_2(t)|$, in contrast to step-down/up converter where only the input or output voltage is blocked by the transistor.
     \end{itemize}
     \begin{figure}
         \begin{circuitikz}[]
@@ -2871,4 +2871,26 @@
         \caption{Inverting buck-boost converter with real components (single quadrant type)}
         \label{fig:inverting-buck-boost-converter-realization-1Q}
     \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Silicon utilization %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Silicon utilization}
+    We define the \hl{silicon utilization} as the ratio of the average output power to the transistor (peak) power:
+    \begin{equation}
+        \frac{P_2}{P_\mathrm{T}} = \frac{U_2 I_2}{\max\{u_\mathrm{T}\}\cdot\max\{i_\mathrm{T}\}}.
+    \end{equation}
+    Background and interpretation:
+    \begin{itemize}
+        \item Transistor rating needs to withstand the peak voltage and current. 
+        \item The lower the silicon utilization, the more costly / bulky the transistor for a given converter power (key parameter for the selection of the power stage).
+    \end{itemize}
+    Assumptions for following calculations:
+    \begin{itemize}
+        \item Operation in CCM. 
+        \item Current and voltage ripple are marginal and can be neglected.
+        \item Given a constant $P_2$, the duty cycle $D$ is adjusted to achieve the desired output power.
+    \end{itemize}
 \end{frame}
