@@ -5,9 +5,9 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Task 1: Step-down converter without output filter %%
+%% Task 1: Boost Converter with no losses %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\task {Boost converter}
+\task {Boost Converter with no losses}
 The boost converter which is shown in \autoref{fig:boost converter} supplies an amplifier with a rated voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. For this exercise steady-state operation is assumed.
 
 \input{./fig/ex02/Fig_boostConverter.tex}
@@ -144,4 +144,77 @@ First, all losses of the boost converter including the resistance of the inducto
     \begin{equation}
         i_\mathrm{C}=C \frac{\Delta u_\mathrm{c}}{\Delta t}
     \end{equation}
+    In addition, $i_\mathrm{C}=I_\mathrm{2}$ and $\Delta u_\mathrm{c}=\Delta u_\mathrm{2}$.
+    $\Delta t$ is again equal to the switch-on period and can be represented by the following equation.
+    \begin{equation}
+        \Delta t = \frac{D}{f_\mathrm{s}}  
+    \end{equation}
+    Now that everything is known, the capacity can be determined.
+    \begin{equation}
+        C = \frac{I_\mathrm{2}\Delta t}{\Delta u_\mathrm{2}}= \frac{I_\mathrm{2}D}{\Delta u_\mathrm{2}f_\mathrm{s}}=\frac{\SI{2}{\ampere}\cdot 0.8}{\SI{120}{\milli\volt} \cdot \SI{100}{\kilo\hertz}}=\SI{133.333}{\micro\farad}
+    \end{equation}
+     During the on-state of the transistor we can assume an constant current which discharges the capacitor. During of-state the capacitor is charge with the current $i_\mathrm{1}-i_\mathrm{2}$.The average of the capacitor current is zero. An important rule during dimensioning the capacitor is the RMS Value of the current.
+     The RMS Value of the current is determined using the following equation.
+     \begin{equation}
+        I_\mathrm{C}=\sqrt{\frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{s}}i_\mathrm{c}(t)^2\mathrm{d}t}
+     \end{equation}
+     The switch-on and switch-off periods are now set.
+     \begin{equation}
+        I_\mathrm{C}=\sqrt{\frac{1}{T_\mathrm{s}}\int_{0}^{DT_\mathrm{s}}i_\mathrm{c}(t)^2\mathrm{d}t+\frac{1}{T_\mathrm{s}}\int_{DT_\mathrm{s}}^{T_\mathrm{s}}i_\mathrm{c}(t)^2\mathrm{d}t}
+     \end{equation}
+     With neglecting the current ripple (goodsmoothing):
+     \begin{equation}
+        I_\mathrm{C}=\sqrt{D (I_\mathrm{2})^2+(1-D)(I_\mathrm{1}-I_\mathrm{2})^2}=\sqrt{0.8\cdot (\SI{2}{\ampere})^2+(1-0.8)\cdot(\SI{10}{\ampere}-\SI{2}{\ampere})^2} = \SI{4}{\ampere}
+     \end{equation}
+     The following equation is now used for the current ripple.
+     \begin{equation}
+        I_\mathrm{C}=\sqrt{D (I_\mathrm{2})^2[1+\frac{1}{3}[\frac{\Delta i_\mathrm{L}}{2I_\mathrm{2}}]^2]+(1-D)(I_\mathrm{1}-I_\mathrm{2})^2[1+\frac{1}{3}[\frac{\Delta i_\mathrm{L}}{2(I_\mathrm{1}-I_\mathrm{2})}]^2]} 
+    \end{equation}
+    \begin{equation}
+        I_\mathrm{C}=\sqrt{0.8 \cdot (\SI{2}{\ampere})^2 [1+\frac{1}{3}[\frac{\SI{0.833}{\ampere}}{2\cdot (\SI{2}{\ampere})}]^2]+(1-0.8)(\SI{10}{\ampere}- \SI{2}{\ampere})^2[1+\frac{1}{3}[\frac{\SI{0.833}{\ampere}}{2(\SI{10}{\ampere}- \SI{2}{\ampere})}]^2]}=\SI{4.023}{\ampere}
+    \end{equation}
+\end{solutionblock}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Task 2: Boost Converter with losses %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\task{Boost Converter with losses}
+The same parameters as in task 1 are assumed as well as the equivalent circuit diagram. For the following points an ideal smoothed input current and a ripple-free output voltage are assumed.
+
+\subtask{From now on, the influences of the resistor $R_\mathrm{L}$ are considered. Derive the efficiency and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter, in dependence on the duty cycle D and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both values $\mu$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle D and give comments. Calculate D under consideration of $R_\mathrm{L}=\SI{0.2}{\ohm}$.}
+\begin{solutionblock}
+We are looking for: $\mu= F(D,\alpha)$ and $\frac{U_\mathrm{2}}{U_\mathrm{1}}=F(D,\alpha)$ with $\alpha=\frac{R_\mathrm{L}}{R}$
+Assuming a good smoothing of the inductor current yields to $I_\mathrm{L}=\overline i_\mathrm{L}=i\mathrm{L}(t)$
+The efficiency is given by the following equation.
+\begin{equation}
+    \mu = \frac{P_\mathrm{2}}{P_\mathrm{1}} = \frac{P_\mathrm{2}}{P_\mathrm{2}+P_\mathrm{l}} = \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} +R_\mathrm{L} I_\mathrm{L}^2} \label{eq:efficiency}
+\end{equation}
+Determine $I_\mathrm{2}$ depending on D and $I_\mathrm{L}$.
+\begin{equation}
+    I_\mathrm{2}=\frac{1}{T_\mathrm{s}} \int_{0}^{DT_\mathrm{s}} i_\mathrm{C discharg}(t)\mathrm{d}t-\frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} i_\mathrm{C charg}(t)\mathrm{d}t+\frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} I_\mathrm{L}(t)\mathrm{d}t
+\end{equation}
+The following property can now be used.
+\begin{equation}
+    0 = \frac{1}{T_\mathrm{s}} \int_{0}^{DT_\mathrm{s}} i_\mathrm{C discharg}(t)\mathrm{d}t-\frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} i_\mathrm{C charg}(t)\mathrm{d}t
+\end{equation}
+This simplifies the explanation of this expression.
+\begin{equation}
+    I_\mathrm{2}= \frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} I_\mathrm{L}(t)\mathrm{d}t
+\end{equation}
+If the current $I_\mathrm{L}$ is now assumed to be independent of t, the integral can be solved.
+\begin{equation}
+    I_\mathrm{2}= \frac{I_\mathrm{L}}{T_\mathrm{s}}(T_\mathrm{s}-(DT_\mathrm{s}))=I_\mathrm{L}(1-D)
+\end{equation}
+Now we insert the equation we have just calculated into equation \eqref{eq:efficiency}.
+\begin{equation}
+    \mu=\frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{2}I_\mathrm{2}+\frac{ R_\mathrm{L}I_\mathrm{2}^2}{(1-D)^2}}=\frac{U_\mathrm{2}}{U_\mathrm{2}+R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}=\frac{RI_\mathrm{2}}{RI_\mathrm{2}+R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}=\frac{R}{R+R_\mathrm{L}}{(1-D)^2}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}
+\end{equation}
+If we now look at the original efficiency equation again, the following transformations can be carried out.
+\begin{equation}
+    \mu=\frac{P_\mathrm{2}}{P_\mathrm{1}} = \frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{1}I_\mathrm{L}}
+\end{equation}
+If you now convert this equation to $U_\mathrm{2}/U_\mathrm{1}$, you get the following expression. Furthermore you have the expression $I_\mathrm{2}=I_\mathrm{L}(1-D)$
+\begin{equation}
+    \frac{U_\mathrm{2}}{U_\mathrm{1}}=\mu \frac{I_\mathrm{L}}{I_\mathrm{2}}= \mu \frac{1}{(1-D)}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}\frac{1}{1-D}=\frac{1}{(1-D)+\frac{\alpha}{1-D}}\cdot \frac{(1-D)}{(1-D)}=\frac{1-D}{(1-D)^2+\alpha}
+\end{equation}
 \end{solutionblock}

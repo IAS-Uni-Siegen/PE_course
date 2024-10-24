@@ -13,19 +13,20 @@
             (u3o) to [V,v_=$U_1$] ++(0,-3) coordinate(u3u)
             (u3u) to [short,-] ++(3.5,0) coordinate(t)
             
-            (u3o) ++(+2,0) to [L,l_=$L$,v^<=$u_\text{L}$,mirror,voltage=straight]   
+            (u3o) ++(+2,0) to [L,l_=$L$,v^<=$u_\text{L}(t)$,mirror,voltage=straight]   
              ++(-1,0) coordinate(uqo)
             (u3o) to [short,-] ++(1,0) coordinate(v1)
             (u2o) to [short,-] ++(-1.15,0) coordinate(v2)
-                      ;
-        \end{circuitikz}
+            (u2o) to [short,-,i^<=$i_L$(t)] ++(-1,0)
+            ;
+        \end{circuitikz} 
     &
     
         \begin{circuitikz}[european currents,european resistors,american inductors,]
             \draw
             (0,0) coordinate(u2o)
             to [V,v^=$U_2$, voltage=straight] ++(0,-3) coordinate(u2u)
-                (u2o) to [short,-,i^<=$i_L$] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}$,mirror,voltage=straight] ++(-3,0) coordinate(Ll) ++(-1,0) coordinate(uqo)
+                (u2o) to [short,-,i^<=$i_L$(t)] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}(t)$,mirror,voltage=straight] ++(-3,0) coordinate(Ll) ++(-1,0) coordinate(uqo)
                 (-4,0) to [V,v_=$U_1$] ++(0,-3) coordinate(u2u)
                 (-4,-3)  to [short,-] ++(4,0) coordinate(r)
                 ;
