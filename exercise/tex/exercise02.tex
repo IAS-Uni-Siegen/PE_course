@@ -259,3 +259,40 @@ If you now put these current values in relation to the losses, the following can
 \end{equation}
 The losses are 14 times higher by a duty cycle of 0.958.
 \end{solutionblock}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Task 3: Buck-Boost converter combination
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\task{Buck-Boost converter cascade}
+Cascading a buck converter and a boost converter (common inductance) to realize a DC/DC converter with a wide input voltage range.
+
+% Schematic of Buck Boost Converter cascade
+\input{./fig/ex02/Fig_BuckBoostConverterCascade.tex}
+
+%Table of parameter values
+\input{./fig/ex02/FigTab_BuckBoostConverterCascade.tex}
+
+The output voltage is kept at the specified constant value by adjusting the duty cycles D1 
+(of transistor T1) and D2 (of transistor T2) using a control system. Both transistors operate at the same switching frequency.
+The ripple of the output voltage and the current in the inductance can be ignored. The current in L shows a continuous course.
+
+Both transistors operates with the same relative duty cycle D1 = D2 = D.
+\subtask{Calculate the relative duty cycle of the transistors T1 and T2 depending on the voltage transformation ratio U2/U1.}
+\subtask{Calculate IL depending on D. Plot D and IL against U1 and enter the numerical values for U1 = 320V, U1 = 400V and U1 = 720V.}
+Both transistors should now be able to have different duty cycles. Assume
+that the transistors are switched on at the same time.
+subtask{Graphically represent the time profiles of the voltage at L for $U_\mathrm{1}$ = 320V and D1 = 0.9 or for $U_\mathrm{1}$ = 720V and D2 = 0.1 for one pulse period each.}
+\subtask{Calculate the voltage transformation ratio in general as a function of D1 and D2. 256 / 5.000}
+\subtask{Express the current IL as a function of the specified operating parameters ($U_\mathrm{1}$  U1, U2, P2) and as a function of D1 and D2.}
+\subtask{Are the calculated relationships valid if T1 and T2 do not switch synchronously or operate with different clock frequencies?}
+If the transistors T1 and T2 are switched on, a constant voltage drop $U_\mathrm{F}=\SI{2.5}{\volt}$ occurs at transistors, regardless of the current. All other components are considered ideal and loss-free.
+\subtask{How should D1 and D2 be selected so that the losses of the overall system are minimal? The relationships calculated under LABEL can be used for the voltage transformation ratio and the value of IL.}
+\subtask{Plot D1 and D2 and the efficiency graphically over U1 and give numerical values for U1 = 320V, U1 = 400V and U1 = 720V.}
+\subtask{Calculate the efficiency when controlled according to point LABEL for the three operating points and compare the numerical values.}
+\subtask{How high is the maximum efficiency gain and at which operating point does it occur? Give a clear explanation.}
+
+
+
