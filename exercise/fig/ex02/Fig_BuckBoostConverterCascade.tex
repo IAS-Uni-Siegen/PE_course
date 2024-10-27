@@ -12,21 +12,23 @@
                     % Add current symbol and T1 with Control
                     (jU1v) ++(2,0) node[nigfete,rotate=90](Trans1){} -- ++(2.5,0) coordinate(T1)
                     (Trans1.G)  to [sqV] ++(0,-1)
-                    % Short horizontal line with current arrow
+                    % Short horizontal line
                     (jU1v) to [short,-] (Trans1.D)
-                    node[currarrow](Tl){}
                     % Add junction point for M-buck diode
                     (T1) to [short,-*] ++(0,0) coordinate (jDBuckM)
                     % Add junction point for P-buck diode
                     (jDBuckM) ++(0,-3) coordinate (jDBuckP)
                     % Add Inductance
                     (jDBuckM) to  [L, l=$L$] ++ (3,0) coordinate (jT2v)
+                    % Add arrow and Text
+                    ++(-0.5,0) node[currarrow](IL){}
+                    (IL)  node[anchor=south,color=black]{$I_L$}
                     % Add junction point for Transistor
                     (jT2v) to [short,-*] ++(0,0)
                     % Add junction for Transistor
                     (jT2v) ++(0,-3) coordinate (jT2g)            
                     % Add Diode
-                    (jT2v) to  [D-,l^=$D$] ++ (2,0) coordinate (jC2v)
+                    (jT2v) to  [D-,l^=$D_{boost}$] ++ (2,0) coordinate (jC2v)
                     % Add junction point for capacitor C2v 
                     (jC2v) to [short,-*] ++(0,0)
                     % Add junction for capacitor C2g

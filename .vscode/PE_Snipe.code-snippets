@@ -1,0 +1,25 @@
+
+
+{
+
+	
+	"Volt": {
+		"prefix": "Volt",
+		"body": "\\SI{${1:1}}{\\volt}",
+		"description": "SI unit volt"
+	},
+	"Amp": {
+		"prefix": "Amp",
+		"body": "\\SI{${1:1}}{\\ampere}",
+		"description": "SI unit ampere"
+	},
+	"U_n": {
+		"prefix": "U_n",
+		"body": "\\$U_\\mathrm{${1:1}}\\$",
+		"description": "U with variable subscript in mathrm"
+	  }
+}
+
+
+
+
