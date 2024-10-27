@@ -18,7 +18,7 @@ The specification of the boost converter is given in \autoref{table:Parameters o
 
 First, all losses of the boost converter including the resistance of the inductor are neglected.
 
-\subtask{Derive the duty cycle, which leads to the specific output voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The steady state is considered:$i_{\mathrm{L}}(t=0)=i_{\mathrm{L}}(t=T_{\mathrm{s}})$} 
+\subtask{Derive the duty cycle, which leads to the specific output voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The steady state is considered:$i_{\mathrm{L}}(t=0)=i_{\mathrm{L}}(t=T_{\mathrm{s}})$}
 
 \begin{solutionblock}
     \input{./fig/ex02/Fig_ECDTeTa.tex}
@@ -86,7 +86,7 @@ First, all losses of the boost converter including the resistance of the inducto
     Since no losses are taken, the power  $P_{\mathrm{1}}$ is equal to  $P_{\mathrm{2}}$.
     This results in the average current $\overline i_{\mathrm{L}}$:
     \begin{equation}
-         I_{\mathrm{1}} = overline i_{\mathrm{L}} = \frac{P_{\mathrm{1}}}{U_{\mathrm{1}}}= \frac{\SI{120}{\watt}}{\SI{12}{\volt}} = \SI{12}{\ampere}
+         I_{\mathrm{1}} = \overline i_{\mathrm{L}} = \frac{P_{\mathrm{1}}}{U_{\mathrm{1}}}= \frac{\SI{120}{\watt}}{\SI{12}{\volt}} = \SI{12}{\ampere}
     \end{equation}
     An alternative solution would be to determine the average current $\overline i_{\mathrm{L}}$ via the duty cycle.
     \begin{equation}
@@ -181,13 +181,13 @@ First, all losses of the boost converter including the resistance of the inducto
 \task{Boost Converter with losses}
 The same parameters as in task 1 are assumed as well as the equivalent circuit diagram. For the following points an ideal smoothed input current and a ripple-free output voltage are assumed.
 
-\subtask{From now on, the influences of the resistor $R_\mathrm{L}$ are considered. Derive the efficiency and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter, in dependence on the duty cycle D and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both values $\mu$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle D and give comments. Calculate D under consideration of $R_\mathrm{L}=\SI{0.2}{\ohm}$.}
+\subtask{From now on, the influences of the resistor $R_\mathrm{L}$ are considered. Derive the efficiency and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter, in dependence on the duty cycle D and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both values $\eta$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle D and give comments. Calculate D under consideration of $R_\mathrm{L}=\SI{0.2}{\ohm}$.}
 \begin{solutionblock}
-We are looking for: $\mu= F(D,\alpha)$ and $\frac{U_\mathrm{2}}{U_\mathrm{1}}=F(D,\alpha)$ with $\alpha=\frac{R_\mathrm{L}}{R}$
+We are looking for: $\eta= F(D,\alpha)$ and $\frac{U_\mathrm{2}}{U_\mathrm{1}}=F(D,\alpha)$ with $\alpha=\frac{R_\mathrm{L}}{R}$
 Assuming a good smoothing of the inductor current yields to $I_\mathrm{L}=\overline i_\mathrm{L}=i\mathrm{L}(t)$
 The efficiency is given by the following equation.
 \begin{equation}
-    \mu = \frac{P_\mathrm{2}}{P_\mathrm{1}} = \frac{P_\mathrm{2}}{P_\mathrm{2}+P_\mathrm{l}} = \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} +R_\mathrm{L} I_\mathrm{L}^2} \label{eq:efficiency}
+    \eta = \frac{P_\mathrm{2}}{P_\mathrm{1}} = \frac{P_\mathrm{2}}{P_\mathrm{2}+P_\mathrm{l}} = \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} +R_\mathrm{L} I_\mathrm{L}^2} \label{eq:efficiency}
 \end{equation}
 Determine $I_\mathrm{2}$ depending on D and $I_\mathrm{L}$.
 \begin{equation}
@@ -207,14 +207,92 @@ If the current $I_\mathrm{L}$ is now assumed to be independent of t, the integra
 \end{equation}
 Now we insert the equation we have just calculated into equation \eqref{eq:efficiency}.
 \begin{equation}
-    \mu=\frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{2}I_\mathrm{2}+\frac{ R_\mathrm{L}I_\mathrm{2}^2}{(1-D)^2}}=\frac{U_\mathrm{2}}{U_\mathrm{2}+R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}=\frac{RI_\mathrm{2}}{RI_\mathrm{2}+R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}=\frac{R}{R+R_\mathrm{L}}{(1-D)^2}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}
+    \eta=\frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{2}I_\mathrm{2}+\frac{ R_\mathrm{L}I_\mathrm{2}^2}{(1-D)^2}}=\frac{U_\mathrm{2}}{U_\mathrm{2}+R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}=\frac{RI_\mathrm{2}}{RI_\mathrm{2}+R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}=\frac{R}{R+R_\mathrm{L}}{(1-D)^2}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}
 \end{equation}
 If we now look at the original efficiency equation again, the following transformations can be carried out.
 \begin{equation}
-    \mu=\frac{P_\mathrm{2}}{P_\mathrm{1}} = \frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{1}I_\mathrm{L}}
+    \eta=\frac{P_\mathrm{2}}{P_\mathrm{1}} = \frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{1}I_\mathrm{L}}
 \end{equation}
 If you now convert this equation to $U_\mathrm{2}/U_\mathrm{1}$, you get the following expression. Furthermore you have the expression $I_\mathrm{2}=I_\mathrm{L}(1-D)$
 \begin{equation}
-    \frac{U_\mathrm{2}}{U_\mathrm{1}}=\mu \frac{I_\mathrm{L}}{I_\mathrm{2}}= \mu \frac{1}{(1-D)}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}\frac{1}{1-D}=\frac{1}{(1-D)+\frac{\alpha}{1-D}}\cdot \frac{(1-D)}{(1-D)}=\frac{1-D}{(1-D)^2+\alpha}
+    \frac{U_\mathrm{2}}{U_\mathrm{1}}=\eta \frac{I_\mathrm{L}}{I_\mathrm{2}}= \eta \frac{1}{(1-D)}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}\frac{1}{1-D}=\frac{1}{(1-D)+\frac{\alpha}{1-D}}\cdot \frac{(1-D)}{(1-D)}=\frac{1-D}{(1-D)^2+\alpha}
 \end{equation}
+This results in the following for $\eta$ as a function of D and $\alpha$:
+\begin{equation}
+    \eta(D,\alpha)=\frac{1}{1+\frac{\alpha}{(1-D)^2}}
+\end{equation}
+And this results in the following for $\frac{U_\mathrm{2}}{U_\mathrm{1}}$ as a function of D and $\alpha$:
+\begin{equation}
+    \frac{U_\mathrm{2}}{U_\mathrm{1}}(D,\alpha)=\frac{1-D}{(1-D)^2+\alpha}
+\end{equation}
+Now determine the required dutycycle under consideration of inductor losses:
+$\frac{U_\mathrm{2}}{U_\mathrm{1}}=\frac{D_\mathrm{P}}{(D_\mathrm{P})^2+\alpha}$with $D_\mathrm{P}=1-D$.
+As this expression is a quadratic term, the pq formula must be used. To be able to use this, it must first be converted to $D_\mathrm{P}$.
+\begin{equation}
+    \frac{U_\mathrm{2}}{U_\mathrm{1}}(D_\mathrm{P})^2-D_\mathrm{P}+\frac{U_\mathrm{2}\alpha}{U_\mathrm{1}}=0
+\end{equation}
+\begin{equation}
+    D_\mathrm{P}^2 - \frac{U_\mathrm{1}}{U_\mathrm{2}} D_\mathrm{P}+\alpha
+\end{equation}
+The first term resulting from the pq formula is:
+\begin{equation}
+    D_\mathrm{P1}=\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}+\sqrt{(\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}})^2-\alpha}= \frac{1}{2}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}+\sqrt{({\frac{1}{2}}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}})^2-\frac{\SI{0.2}{\ohm}}{\SI{30}{\ohm}}}= 0.158
+\end{equation}
+If you now insert this into the equation $D_\mathrm{1}=1-D_\mathrm{P1}$, you get the result $D_\mathrm{1}=0.842$.
+
+The second term resulting from the pq formula is:
+\begin{equation}
+    D_\mathrm{P2}=\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}-\sqrt{(\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}})^2-\alpha}= \frac{1}{2}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}-\sqrt{({\frac{1}{2}}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}})^2-\frac{\SI{0.2}{\ohm}}{\SI{30}{\ohm}}}= 0.042
+\end{equation}
+If you now insert this into the equation $D_\mathrm{2}=1-D_\mathrm{P2}$, you get the result $D_\mathrm{2}=0.958$.
+The duty cycle of $D_\mathrm{2}=0.958$ is only a theoretical value. For the design of the converter, the smaller duty cycle will bechosen, because of lower losses.
+In the following, the currents $I_\mathrm{L1}$ and $I_\mathrm{L2}$ are determined in order to be able to make a statement about the losses.
+\begin{equation}
+    I_\mathrm{L1} = \frac{I_\mathrm{2}}{1-D_\mathrm{1}}= \frac{\SI{2}{\ampere}}{1-0.842}=\SI{12.679}{\ampere}
+\end{equation}
+\begin{equation}
+    I_\mathrm{L2} = \frac{I_\mathrm{2}}{1-D_\mathrm{2}}= \frac{\SI{2}{\ampere}}{1-0.958}=\SI{47.321}{\ampere}
+\end{equation}
+If you now put these current values in relation to the losses, the following can be determined by using the relation $P=I^2R$.
+\begin{equation}
+    \frac{(\SI{47.321}{\ampere})^2}{(\SI{12.679}{\ampere})^2}=13.9296
+\end{equation}
+The losses are 14 times higher by a duty cycle of 0.958.
 \end{solutionblock}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Task 3: Buck-Boost converter combination
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\task{Buck-Boost converter cascade}
+Cascading a buck converter and a boost converter (common inductance) to realize a DC/DC converter with a wide input voltage range.
+
+% Schematic of Buck Boost Converter cascade
+\input{./fig/ex02/Fig_BuckBoostConverterCascade.tex}
+
+%Table of parameter values
+\input{./fig/ex02/FigTab_BuckBoostConverterCascade.tex}
+
+The output voltage is kept at the specified constant value by adjusting the duty cycles D1 
+(of transistor T1) and D2 (of transistor T2) using a control system. Both transistors operate at the same switching frequency.
+The ripple of the output voltage and the current in the inductance can be ignored. The current in L shows a continuous course.
+
+Both transistors operates with the same relative duty cycle D1 = D2 = D.
+\subtask{Calculate the relative duty cycle of the transistors T1 and T2 depending on the voltage transformation ratio U2/U1.}
+\subtask{Calculate IL depending on D. Plot D and IL against U1 and enter the numerical values for U1 = 320V, U1 = 400V and U1 = 720V.}
+Both transistors should now be able to have different duty cycles. Assume
+that the transistors are switched on at the same time.
+subtask{Graphically represent the time profiles of the voltage at L for $U_\mathrm{1}$ = 320V and D1 = 0.9 or for $U_\mathrm{1}$ = 720V and D2 = 0.1 for one pulse period each.}
+\subtask{Calculate the voltage transformation ratio in general as a function of D1 and D2. 256 / 5.000}
+\subtask{Express the current IL as a function of the specified operating parameters ($U_\mathrm{1}$  U1, U2, P2) and as a function of D1 and D2.}
+\subtask{Are the calculated relationships valid if T1 and T2 do not switch synchronously or operate with different clock frequencies?}
+If the transistors T1 and T2 are switched on, a constant voltage drop $U_\mathrm{F}=\SI{2.5}{\volt}$ occurs at transistors, regardless of the current. All other components are considered ideal and loss-free.
+\subtask{How should D1 and D2 be selected so that the losses of the overall system are minimal? The relationships calculated under LABEL can be used for the voltage transformation ratio and the value of IL.}
+\subtask{Plot D1 and D2 and the efficiency graphically over U1 and give numerical values for U1 = 320V, U1 = 400V and U1 = 720V.}
+\subtask{Calculate the efficiency when controlled according to point LABEL for the three operating points and compare the numerical values.}
+\subtask{How high is the maximum efficiency gain and at which operating point does it occur? Give a clear explanation.}
+
+
+
