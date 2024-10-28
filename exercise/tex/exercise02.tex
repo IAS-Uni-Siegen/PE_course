@@ -97,7 +97,7 @@ First, all losses of the boost converter including the resistance of the inducto
     \end{equation}
 \end{solutionblock}
 
-\subtask{ Define a suitable inductivity for the coil L, so that the boost converter is operating in continuous conduction mode (CCM), for the minimum output power given in the specification above. Determine the maximal switch-off current $i_{\mathrm{T}}$ of the transistor $\mathrm{T}_1$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
+\subtask{ Define a suitable inductivity for the coil L, so that the boost converter is operating in continuous conduction mode (CCM), for the minimum output power given in the specification above. Determine the maximal switch-off current $i_{\mathrm{T}}$ of the transistor $T_1$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
 \begin{solutionblock}
     Because no losses are assumed, $P_{\mathrm{1min}}=P_{\mathrm{2min}}$.
     The following equation is used for the average current $I_{\mathrm{1min}}$ over a period to generate the minimum power.
@@ -344,7 +344,7 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subtask{In addition, consider the conduction losses of the diode D and the transistor T. Assume an equivalent resistance of $R_{\mathrm{D}} = \SI{0.5}{\milli\Omega}$ and voltage of $U_{\mathrm{D}} = \SI{1}{\volt}$ for the diode and an equivalent resistance of $R_{\mathrm{DS,on}} = \SI{30}{\milli\Omega}$ for the transistor. Determine the required duty cycle when the conduction losses are considered.}
+\subtask{In addition, consider the conduction losses of the diode $D$ and the transistor $T$. Assume an equivalent resistance of $R_{\mathrm{D}} = \SI{0.5}{\milli\Omega}$ and voltage of $U_{\mathrm{D}} = \SI{1}{\volt}$ for the diode and an equivalent resistance of $R_{\mathrm{DS,on}} = \SI{30}{\milli\Omega}$ for the transistor. Determine the required duty cycle when the conduction losses are considered.}
 
 \begin{solutionblock}
     Considering the losses, the equation is extended with the loss terms by
@@ -595,7 +595,8 @@ The output voltage is kept at the specified constant value by adjusting the duty
 The ripple of the output voltage and the current in the inductance can be ignored. The current in L shows a continuous course.
 Both transistors operates with the same relative duty cycle $D_1 = D_2 = D$.
 
-\subtask{Calculate the relative duty cycle of the transistors $\mathrm{T_1}$ and $\mathrm{T_2}$ depending on the voltage transformation ratio $U_\mathrm{2}/U_\mathrm{1}$}
+\subtask{Calculate the relative duty cycle of the transistors $T_1$ and $T_2$ depending on the voltage transformation ratio $U_\mathrm{2}/U_\mathrm{1}$}
+
 \subtask{Calculate $i_\mathrm{L}$ depending on $D$. Plot $D$ and $i_\mathrm{L}$ against $U_\mathrm{1}$ and enter the numerical values for $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
 \vspace{2em}\par
 % Explaining text for the next subtask
@@ -606,11 +607,11 @@ Both transistors should now be able to have different duty cycles. Assume that t
 \subtask{Calculate the voltage transformation ratio in general as a function of $D_1$ and $D_2$.}
 \subtask{Express the current $i_\mathrm{L}$ as a function of the specified operating parameters
 ($U_\mathrm{1}$, $U_\mathrm{2}$, $P_\mathrm{2}$) and as a function of $D_\mathrm{1}$ and $D_\mathrm{2}$.}
-\subtask{Are the calculated relationships valid if $\mathrm{T_1}$ and $\mathrm{T_2}$ do not switch synchronously or operate with
+\subtask{Are the calculated relationships valid if $T_1$ and $T_2$ do not switch synchronously or operate with
  different clock frequencies?}
 \vspace{2em}\par
 % Explaining text for the next subtask
-If the transistors $\mathrm{T_1}$ and $\mathrm{T_2}$ are switched on, a constant voltage drop $U_\mathrm{F}=\SI{2.5}{\volt}$ occurs at transistors,
+If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\mathrm{F}=\SI{2.5}{\volt}$ occurs at transistors,
  regardless of the current. All other components are considered ideal and loss-free.
 
 \subtask{How should $D_1$ and $D_2$ be selected so that the losses of the overall system are minimal?
