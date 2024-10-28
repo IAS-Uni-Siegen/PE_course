@@ -3459,7 +3459,7 @@
 %% Ćuk converter: switching states %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}[b]
+\begin{frame}
     \frametitle{Ćuk converter: switching states}
     \begin{itemize}
         \item The Ćuk converter uses the capacitor $C$ to transfer energy between the input and output.
@@ -3499,4 +3499,147 @@
         \caption{Switch states of the Ćuk converter}
         \label{fig:Cuk-converter-switch-states}
     \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Ćuk converter: voltage gain %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Ćuk converter: voltage gain}
+    In periodic steady-state operation, the voltage balance during a switching period of the two inductors must be fulfilled:
+    \begin{equation}
+        L_1:\quad D U_1 + (1-D)(U_1-U_\mathrm{C})=0, \qquad L_2:\quad D(U_2+U_\mathrm{C}) + (1-D)U_2=0.
+    \end{equation}
+    Above, $U_1$, $U_2$, and $U_\mathrm{C}$ are considered constant. From those we can derive:
+    \begin{equation}
+        L_1:\quad U_\mathrm{C}=\frac{U_1}{1-D}, \qquad L_2:\quad U_\mathrm{C}=-\frac{U_2}{D}.
+    \end{equation}
+    Combining both equations delivers the voltage gain of the Ćuk converter:
+    \begin{equation}
+        \frac{U_2}{U_1} = -\frac{D}{1-D}.
+    \end{equation}
+    This is the same finding as for the inverting buck-boost converter, which seems quite obvious, as the Ćuk converter just flips the order of the buck and boost parts. 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Ćuk converter: circuit realization %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Ćuk converter: circuit realization}
+    \begin{itemize}
+        \item Like the inverting buck-boost, the Ćuk converter only requires one diode and transistor.
+        \item Transistor $T$ needs to block $U_1$ during the off-time, while it covers both the input and output current during the on-time: semiconductor utilization is also $\nicefrac{P_2}{P_\mathrm{T}}=(1-D)D$ as for the inverting buck-boost (cf. \figref{fig:semiconductor-utilization-summary}).
+    \end{itemize}
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw (-1.5,2) coordinate (A) to [capacitor, *-*, l=$C$, v =$u_\mathrm{C}(t)$, voltage = straight] (1.5,2) coordinate (B)
+            (A) to [Tnpn, n=npn1, *-*, invert] ++(0,-2)
+            (B) to [diode, l=$D$, *-*] ++(0,-2)
+            (B) to [inductor, -o, i=$i_2(t)$, l=$L_2$] ++(3,0) coordinate (C)
+            to [open, o-o, v = $\hspace{1.9cm}u_2(t)$, voltage = straight] ++(0,-2)
+            (A) to [inductor, -o, i_<=$i_1(t)$, l_=$L_1$, mirror] ++(-3,0) coordinate (D)
+            to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
+            to [short, o-o] ++(9,0);
+            \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T$};
+        \end{circuitikz}
+        \caption{Ćuk converter with real components (single quadrant type)}
+        \label{fig:Cuk-converter-realization-1Q}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Single ended primary inductance converter (SEPIC) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Single ended primary inductance converter (SEPIC)}
+    \begin{itemize}
+        \item Output inductor and diode change places compared to the Ćuk converter.
+        \item Output current becomes pulsating (compared to Ćuk).
+        \item Input to output gain becomes non-inverting (cf. next slides).
+    \end{itemize}
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw (-1.5,2.5) coordinate (A) to [capacitor, *-*, l=$C$, v =$u_\mathrm{C}(t)$, voltage = straight] (1.5,2.5) coordinate (B)
+            (A) to [Tnpn, n=npn1, *-*, invert] ++(0,-2.5)
+            (B) to [inductor, *-*, l=$L_2$, i=$i_\mathrm{L_2}(t)$] ++(0,-2.5)
+            (B) to [diode, l=$D$, -o, i=$i_2(t)$] ++(3,0) coordinate (C)
+            to [open, o-o, v = $\hspace{1.9cm}u_2(t)$, voltage = straight] ++(0,-2.5)
+            (A) to [inductor, -o, i_<=$i_1(t)$, l_=$L_1$, mirror] ++(-3,0) coordinate (D)
+            to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2.5)
+            to [short, o-o] ++(9,0);
+            \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T$};
+        \end{circuitikz}
+        \caption{SEPIC with real components (single quadrant type)}
+        \label{fig:SEPIC-realization-1Q}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SEPIC: switching states %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{SEPIC: switching states}
+    \begin{itemize}
+        \item During switch on-time, the transistor is conducting and the diode is blocking (cause the output current pulsation).
+        \item During switch off-time, the diode is conducting and the transistor is blocking.
+    \end{itemize}
+    \begin{figure}
+        \centering	
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,2.5) coordinate (A) to [open, o-o, v = $U_1$, voltage = straight] ++(0,-2.5) -- ++(0.75,0) coordinate (B)
+                (0,2.5) to [short, i=$i_1(t)$] (A -| B)
+                to [inductor, l_=$L_1$] (B);   
+                \draw (2,0) coordinate (C) to [capacitor, v = $u_\mathrm{C}(t)$, voltage = straight] ++(0,2.5)
+                to [short] ++(2,0)   
+                to [inductor, l=$L_2$, i_>=$i_\mathrm{L_2}(t)$] ++(0,-2.5) coordinate (D) 
+                to [short] ++(-2,0)      
+                (4.5,2.5) to [short, i=$i_2(t)$] ++(0.75,0)
+                to [open, o-o, v = $\hspace{1.5cm}U_2$, voltage = straight] ++(0,-2.5)
+                to [short] ++(-0.75,0);    
+            \end{circuitikz}
+            \caption{Switch-on time}
+        \end{subfigure}%
+        \hspace{0.5cm}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,2.5) coordinate (A) to [open, o-o, v = $U_1$, voltage = straight] ++(0,-2.5)
+                (A) to [inductor, l=$L_1$, i>^=$i_1(t)$] ++(2.5,0)
+                to [capacitor, v = $u_\mathrm{C}(t)$, voltage = straight] ++(1.5,0) coordinate (B)
+                to [inductor, l=$L_2$, i_>=$i_\mathrm{L_2}(t)$] ++(0,-2.5) coordinate (C)
+                to [short, -o] (0,0);
+                \draw (B) to [short, i=$i_2(t)$, *-o] ++(1,0)
+                to [open, o-o, v = $\hspace{1.5cm}U_2$, voltage = straight] ++(0,-2.5)
+                to [short, o-*] (C);
+            \end{circuitikz}
+            \caption{Switch-off time}
+        \end{subfigure}
+        \caption{Switch states of the SEPIC}
+        \label{fig:SEPIC-switch-states}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% SEPIC: voltage gain %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{SEPIC: voltage gain}
+    In periodic steady-state operation, the voltage balance during a switching period of the two inductors must be fulfilled:
+    \begin{equation}
+        L_1:\quad D U_1 + (1-D)(U_1-U_2-U_\mathrm{C})=0, \qquad L_2:\quad -DU_\mathrm{C} + (1-D)U_2=0.
+    \end{equation}
+    Above, $U_1$, $U_2$, and $U_\mathrm{C}$ are considered constant. From those we can derive:
+    \begin{equation}
+        L_1:\quad U_\mathrm{C}=\frac{U_1}{1-D}-U_2, \qquad L_2:\quad U_\mathrm{C}=\left(\frac{1}{D}-1\right)\frac{U_2}{D}.
+    \end{equation}
+    Combining both equations delivers the voltage gain of the SEPIC:
+    \begin{equation}
+        \frac{U_2}{U_1} = \frac{D}{1-D}.
+    \end{equation}
+    Similar to the synchronous buck-boost, the SEPIC comes with a positive voltage gain, but with the advantages of a single transistor and diode as well as non-pulsating input currents (at the cost of more filter components).
 \end{frame}
