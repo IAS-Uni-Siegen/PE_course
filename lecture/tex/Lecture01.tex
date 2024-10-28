@@ -549,7 +549,7 @@
 				node [output, name = output, right = of pc] {}
 				node [output, name = losses, below = of pc] {};
 				\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm] (input) -- node[below, midway, align=left, name = input2] {Electrical\\input power} (pc);
-			\onslide<3->{\node[overlay, bubble, right = of input, minimum height = 4em, pin=80:Change of stored energy $ \frac{\mathrm{d}}{\mathrm{d}t}E_\mathrm{i}(t)$] {\large Power converter};}
+			\onslide<3->{\node[overlay, bubble, right = of input, minimum height = 4em, pin=80:Change of stored energy $ \frac{}{t}E_\mathrm{i}(t)$] {\large Power converter};}
 			\begin{scope}[on background layer]
 				\onslide<4->{\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm] (pc.mid) -- node[below, near end, align=left, name=output2] {Electrical\\output power} (output);}
 				\onslide<2->{\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm, color=signalred] (pc.mid) -- node[right, yshift=-2.5mm, name = losses2] {Losses} (losses);}
@@ -564,7 +564,7 @@
 	\vspace{-0.5cm}
 	The \hl{power balance}
 	\begin{equation}
-		\onslide<1->{P_\mathrm{in}(t)} \onslide<2->{= P_\mathrm{l}(t)}  \onslide<3->{+ \frac{\mathrm{d}}{\mathrm{d}t}E_\mathrm{i}(t)} \onslide<4->{+ P_\mathrm{out}(t)}
+		\onslide<1->{P_\mathrm{in}(t)} \onslide<2->{= P_\mathrm{l}(t)}  \onslide<3->{+ \frac{}{t}E_\mathrm{i}(t)} \onslide<4->{+ P_\mathrm{out}(t)}
 	\end{equation}
 	must hold for any point in time as energy is conserved, that is, not created or destroyed.
 \end{frame}
@@ -594,7 +594,7 @@
 		\label{fig:power_balance_energy_conversion_steady_state}
 	\end{figure}
 	\vspace{-0.5cm}
-	The power balance in \hl{steady state} ($\nicefrac{\mathrm{d}x(t)}{\mathrm{d} t}=0$) is
+	The power balance in \hl{steady state} ($\nicefrac{x(t)}{ t}=0$) is
 	\begin{equation}
 		P_\mathrm{in} = P_\mathrm{out} + P_\mathrm{l}
 	\end{equation}
@@ -834,7 +834,7 @@
 	\frametitle{Switching power conversion}
 	\onslide<1->{Alternative idea: \hl{switch either fully on or off}.} \onslide<3->{The average output voltage $\overline{u}_2$ is controlled by the \hl{duty cycle} (assuming that $u_1(t)=\overline{u}_1$ is constant)
 	\begin{equation}
-		D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \qquad \overline{u}_2 = \frac{1}{T_\mathrm{s}} \int_0^{T_\mathrm{s}} u_2(t) \mathrm{d}t = D \overline{u}_1.
+		D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \qquad \overline{u}_2 = \frac{1}{T_\mathrm{s}} \int_0^{T_\mathrm{s}} u_2(t) t = D \overline{u}_1.
 	\end{equation}}
 	\onslide<4->{%
 		As the switching losses are typically small, the overall efficiency is (much) higher compared to linear power conversion.} 
@@ -898,7 +898,7 @@
 	\begin{columns}[b]
 		\begin{column}{0.3\textwidth}
 			Switching process is not free of power loss:
-			$$\overline{P}_\mathrm{l} = \frac{1}{T_\mathrm{s}} \int_0^{T_\mathrm{s}} u_\mathrm{s}(t) i_\mathrm{s}(t) \mathrm{d}t .$$
+			$$\overline{P}_\mathrm{l} = \frac{1}{T_\mathrm{s}} \int_0^{T_\mathrm{s}} u_\mathrm{s}(t) i_\mathrm{s}(t) t .$$
 			\vspace{-0.6cm}
 			\begin{figure}
 				\begin{circuitikz}[]
@@ -1595,21 +1595,21 @@
 			&
 			\onslide<2->{
 			{\large
-			$ i(t) =C \frac{\mathrm{d}}{\mathrm{d} t}u(t)$
+			$ i(t) =C \frac{}{ t}u(t)$
 			}
 			}
 			\vspace{0.5cm}
 			&
 			\onslide<3->{
 			{\large
-			$u(t) =L \frac{\mathrm{d}}{\mathrm{d} t}i(t)$
+			$u(t) =L \frac{}{ t}i(t)$
 			}
 			}
 			\vspace{0.5cm}
 			&
 			\onslide<4->{
 			{\large
-			$\bm{u}(t) =\bm{L} \frac{\mathrm{d}}{\mathrm{d} t}\bm{i}(t)$
+			$\bm{u}(t) =\bm{L} \frac{}{ t}\bm{i}(t)$
 			}
 			}
 			\vspace{0.5cm}
@@ -1776,8 +1776,8 @@
 			\begin{figure}
 				\begin{tikzpicture}
 					\begin{axis}[
-						xlabel={$u_{\mathrm{d}}$},
-						ylabel={$i_\mathrm{d}$},
+						xlabel={$u_\mathrm{D}$},
+						ylabel={$i_\mathrm{D}$},
 						axis lines=left,
 						ymin=0, ymax=1,
 						xmin=0, xmax=1,

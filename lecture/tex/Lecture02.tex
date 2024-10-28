@@ -788,6 +788,7 @@
             \onslide<1->{\Delta u_\mathrm{C} &= u_\mathrm{C}(t_\mathrm{max}) - u_\mathrm{C}(t_\mathrm{min})} \onslide<2->{= \Delta i_\mathrm{L}\frac{T_\mathrm{off}}{8C} + \Delta i_\mathrm{L}\frac{T_\mathrm{on}}{8C}}\\
             \onslide<3->{&= \Delta i_\mathrm{L}\frac{T_\mathrm{s}}{8C} = \frac{D(1-D)T_\mathrm{s}^2U_1}{8LC}.}
         \end{split}
+        \label{eq:voltage-ripple-step-down-converter}
     \end{equation}
     \onslide<4->{The voltage ripple is proportionally depending on the inductor current ripple. Hence, the maximum voltage ripple occurs at the same characteristic duty cycle $D_\mathrm{max}$ and is given by
     \begin{equation}
@@ -2198,7 +2199,7 @@
 \subsection{Buck-boost converter}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Buck-boost converter: overview and assumptions %%
+%% Buck-boost converter: combining step-up and step-down stages %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[b]
@@ -2697,7 +2698,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[b]
-    \frametitle{Recap: Buck-boost converter switching states}
+    \frametitle{Recap: buck-boost converter switching states}
     \begin{varblock}{Key characteristic of (synchronous) buck-boost converter}
         The switching scheme of the (synchronous) buck-boost converter from \figref{fig:buck-boost-converter-switch-states} is realized by \hl{two switches} and characterized by:
         \begin{itemize}
@@ -2745,7 +2746,7 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Recap: Buck-boost converter switching states %%
+%% Inverting buck-boost converter: overview %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[b]
@@ -2817,6 +2818,7 @@
             \caption{Switch-off time}
         \end{subfigure}
         \caption{Voltage and current definitions of the inverting buck-boost converter}
+        \label{fig:inverting-buck-boost-converter-switch-states}
     \end{figure}
 \end{frame}
 
@@ -2874,23 +2876,627 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Silicon utilization %%
+%% Component requirements %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Component requirements}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Semiconductor utilization %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Silicon utilization}
-    We define the \hl{silicon utilization} as the ratio of the average output power to the transistor (peak) power:
+    \frametitle{Semiconductor utilization}
+    We define the \hl{semiconductor utilization} as the ratio of the average output power to the transistor (peak) power:
     \begin{equation}
         \frac{P_2}{P_\mathrm{T}} = \frac{U_2 I_2}{\max\{u_\mathrm{T}\}\cdot\max\{i_\mathrm{T}\}}.
     \end{equation}
     Background and interpretation:
     \begin{itemize}
         \item Transistor rating needs to withstand the peak voltage and current. 
-        \item The lower the silicon utilization, the more costly / bulky the transistor for a given converter power (key parameter for the selection of the power stage).
+        \item The lower the semiconductor utilization, the more costly / bulky the transistor for a given converter power (key parameter for the selection of the power stage).
     \end{itemize}
     Assumptions for following calculations:
     \begin{itemize}
-        \item Operation in CCM. 
-        \item Current and voltage ripple are marginal and can be neglected.
+        \item Lossless operation in CCM,
+        \item Current and voltage ripple are marginal and can be neglected,
         \item Given a constant $P_2$, the duty cycle $D$ is adjusted to achieve the desired output power.
     \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Semiconductor utilization:  step-down converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Semiconductor utilization: step-down converter}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+             The  step-down converter's transistor peak voltage and current are (cf. \figref{fig:step-down-converter-switch-states})
+            \begin{equation}
+                \begin{split}
+                    \max\{u_\mathrm{T}\} &= U_1,\\
+                    \max\{i_\mathrm{T}\} &= \frac{\overline{i}_1}{D}= \frac{I_1}{D}.                                            
+                \end{split}
+                \label{eq:step-down-converter-transistor-peak-voltage-current}
+            \end{equation}
+            The transistor must block the (constant) input voltage $U_1$ and step-like changing current $i_1(t)=i_\mathrm{T}(t)$. The semiconductor utilization is
+            \begin{equation}
+                \begin{split}
+                \frac{P_2}{P_\mathrm{T}} &= \frac{U_2 I_2}{U_1 \frac{\overline{i}_1}{D}} = \frac{U_1 I_1}{U_1 \frac{I_1}{D}}\\
+                & = D.
+            \end{split}
+            \end{equation}
+                
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \begin{tikzpicture}
+
+                    \tikzmath{
+                        real \D, \Ts, \Ton, \Toff;
+                        \D = 0.6;
+                        \Ts = 1;
+                        \Ton = \D;
+                        \Toff = 1-\D;
+                        } 
+
+                    \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom}, height=0.4\textheight, width=0.9\textwidth, xmin=-0.1, xmax=1.1, grid,clip = false, ymin = 0, ymax =1.1]
+
+                        % Transistor voltage
+                        \nextgroupplot[ylabel = {$u_\mathrm{T}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_1$}]
+                            \addplot[signalblue, thick] coordinates {(-0.1,1) (0,1) (0,0) (\D,0) (\D,1) (\Ts,1) (\Ts,0) (\Ts+0.1,0)};
+                            \coordinate (a1) at (0,0); %coordinate for left vertical grouplot line
+                            \coordinate (b1) at (\Ton,0); %coordinate for middle vertical grouplot line
+                            \coordinate (c1) at (\Ts,0); %coordinate for right vertical grouplot line
+
+
+                        % Transistor current
+                        \nextgroupplot[ylabel = {$i_\mathrm{T}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $\nicefrac{\overline{i}_1}{D}$}]
+                            % Current signal
+                            \addplot[signalred, thick] coordinates {(-0.1,0) (0,0) (0,1) (\D,1) (\D,0) (\Ts,0) (\Ts,1) (\Ts+0.1,1)};
+                            \addplot[signalred, thick, dashed] coordinates {(-0.1,\D) (1.1,\D)};
+                            \node[inner sep = 1pt, anchor = north, fill = white] at (axis cs:1/2+\D/2, \D) {$\overline{i}_1=I_1$};
+                            \coordinate (a2) at (0,0); %coordinate for left vertical grouplot line
+                            \coordinate (b2) at (\Ton,0); %coordinate for middle vertical grouplot line
+                            \coordinate (c2) at (\Ts,0); %coordinate for right vertical grouplot line
+                            \draw [<->]  (0,\pgfkeysvalueof{/pgfplots/ymax}+0.2) -- node[above]{$T_\mathrm{on}$}(\Ton, \pgfkeysvalueof{/pgfplots/ymax}+0.2);
+                            \draw [<->]  (\Ton,\pgfkeysvalueof{/pgfplots/ymax}+0.2) -- node[above]{$T_\mathrm{off}$}(\Ts, \pgfkeysvalueof{/pgfplots/ymax}+0.2);
+                    \end{groupplot}
+                    \draw [dashed] (a1) -- (a2);
+                    \draw [dashed] (b1) -- (b2);
+                    \draw [dashed] (c1) -- (c2);
+                \end{tikzpicture}
+                \caption{Voltage and current at the step-down converter transistor (w/o current ripple)}
+                \label{fig:step-down-converter-voltage-current-transistor}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Semiconductor utilization:  step-up converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Semiconductor utilization: step-up converter}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+             The  step-up converter's transistor peak voltage and current are (cf. \figref{fig:step-up-converter-switch-states})
+            \begin{equation}
+                \begin{split}
+                    \max\{u_\mathrm{T}\} &= U_2,\\
+                    \max\{i_\mathrm{T}\} &= \max\{i_\mathrm{L}\}= I_1.                                            
+                \end{split}
+            \end{equation}
+            The transistor must block the (constant) output voltage $U_2$ and (constant) input current $i_1(t)=i_\mathrm{T}(t)$, which is filtered by the inductor. The semiconductor utilization is
+            \begin{equation}
+                \begin{split}
+                \frac{P_2}{P_\mathrm{T}} &= \frac{U_2 I_2}{U_2 I_1} = \frac{I_2}{I_1}\\
+                & = 1-D.
+            \end{split}
+            \end{equation}
+                
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \begin{tikzpicture}
+
+                    \tikzmath{
+                        real \D, \Ts, \Ton, \Toff;
+                        \D = 0.6;
+                        \Ts = 1;
+                        \Ton = \D;
+                        \Toff = 1-\D;
+                        } 
+
+                    \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom}, height=0.4\textheight, width=0.9\textwidth, xmin=-0.1, xmax=1.1, grid,clip = false, ymin = 0, ymax =1.1]
+
+                        % Transistor voltage
+                        \nextgroupplot[ylabel = {$u_\mathrm{T}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_2$}]
+                            \addplot[signalblue, thick] coordinates {(-0.1,1) (0,1) (0,0) (\D,0) (\D,1) (\Ts,1) (\Ts,0) (\Ts+0.1,0)};
+                            \coordinate (a1) at (0,0); %coordinate for left vertical grouplot line
+                            \coordinate (b1) at (\Ton,0); %coordinate for middle vertical grouplot line
+                            \coordinate (c1) at (\Ts,0); %coordinate for right vertical grouplot line
+
+
+                        % Transistor current
+                        \nextgroupplot[ylabel = {$i_\mathrm{T}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $\overline{i}_1$}]
+                            % Current signal
+                            \addplot[signalred, thick] coordinates {(-0.1,0) (0,0) (0,1) (\D,1) (\D,0) (\Ts,0) (\Ts,1) (\Ts+0.1,1)};
+                            \addplot[signalred, thick, dashed] coordinates {(-0.1,1) (1.1,1)};
+                            \node[inner sep = 1pt, anchor = north, fill = white] at (axis cs:1/2+\D/2, 1) {$\overline{i}_1=I_1$};
+                            \coordinate (a2) at (0,0); %coordinate for left vertical grouplot line
+                            \coordinate (b2) at (\Ton,0); %coordinate for middle vertical grouplot line
+                            \coordinate (c2) at (\Ts,0); %coordinate for right vertical grouplot line
+                            \draw [<->]  (0,\pgfkeysvalueof{/pgfplots/ymax}+0.2) -- node[above]{$T_\mathrm{on}$}(\Ton, \pgfkeysvalueof{/pgfplots/ymax}+0.2);
+                            \draw [<->]  (\Ton,\pgfkeysvalueof{/pgfplots/ymax}+0.2) -- node[above]{$T_\mathrm{off}$}(\Ts, \pgfkeysvalueof{/pgfplots/ymax}+0.2);
+                    \end{groupplot}
+                    \draw [dashed] (a1) -- (a2);
+                    \draw [dashed] (b1) -- (b2);
+                    \draw [dashed] (c1) -- (c2);
+                \end{tikzpicture}
+                \caption{Voltage and current at the step-up converter transistor (w/o current ripple)}
+                \label{fig:step-up-converter-voltage-current-transistor}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Semiconductor utilization:  buck-boost converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Semiconductor utilization: inverting buck-boost converter}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+             The  inv. buck-boost converter's transistor peak voltage and current are (cf. \figref{fig:inverting-buck-boost-converter-switch-states})
+            \begin{equation}
+                \begin{split}
+                    \max\{u_\mathrm{T}\} &= U_1-U_2,\\
+                    \max\{i_\mathrm{T}\} &= \frac{\overline{i}_1}{D}= \frac{I_1}{D}.                                            
+                \end{split}
+            \end{equation}
+            The transistor must block the (combined) input and output voltage and step-like changing current $i_1(t)=i_\mathrm{T}(t)$. The semiconductor utilization is
+            \begin{equation}
+                \begin{split}
+                \frac{P_2}{P_\mathrm{T}} &= \frac{U_2 I_2}{(U_1-U_2) \frac{\overline{i}_1}{D}} = \frac{U_1 I_1}{U_1\frac{1}{1-D} \frac{I_1}{D}}\\
+                & = (1-D)D.
+            \end{split}
+            \end{equation}
+                
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \begin{tikzpicture}
+
+                    \tikzmath{
+                        real \D, \Ts, \Ton, \Toff;
+                        \D = 0.6;
+                        \Ts = 1;
+                        \Ton = \D;
+                        \Toff = 1-\D;
+                        } 
+
+                    \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom}, height=0.4\textheight, width=0.9\textwidth, xmin=-0.1, xmax=1.1, grid,clip = false, ymin = 0, ymax =1.1]
+
+                        % Transistor voltage
+                        \nextgroupplot[ylabel = {$u_\mathrm{T}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $U_1-U_2$}]
+                            \addplot[signalblue, thick] coordinates {(-0.1,1) (0,1) (0,0) (\D,0) (\D,1) (\Ts,1) (\Ts,0) (\Ts+0.1,0)};
+                            \coordinate (a1) at (0,0); %coordinate for left vertical grouplot line
+                            \coordinate (b1) at (\Ton,0); %coordinate for middle vertical grouplot line
+                            \coordinate (c1) at (\Ts,0); %coordinate for right vertical grouplot line
+
+
+                        % Transistor current
+                        \nextgroupplot[ylabel = {$i_\mathrm{T}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $\nicefrac{\overline{i}_1}{D}$}]
+                            % Current signal
+                            \addplot[signalred, thick] coordinates {(-0.1,0) (0,0) (0,1) (\D,1) (\D,0) (\Ts,0) (\Ts,1) (\Ts+0.1,1)};
+                            \addplot[signalred, thick, dashed] coordinates {(-0.1,\D) (1.1,\D)};
+                            \node[inner sep = 1pt, anchor = north, fill = white] at (axis cs:1/2+\D/2, \D) {$\overline{i}_1=I_1$};
+                            \coordinate (a2) at (0,0); %coordinate for left vertical grouplot line
+                            \coordinate (b2) at (\Ton,0); %coordinate for middle vertical grouplot line
+                            \coordinate (c2) at (\Ts,0); %coordinate for right vertical grouplot line
+                            \draw [<->]  (0,\pgfkeysvalueof{/pgfplots/ymax}+0.2) -- node[above]{$T_\mathrm{on}$}(\Ton, \pgfkeysvalueof{/pgfplots/ymax}+0.2);
+                            \draw [<->]  (\Ton,\pgfkeysvalueof{/pgfplots/ymax}+0.2) -- node[above]{$T_\mathrm{off}$}(\Ts, \pgfkeysvalueof{/pgfplots/ymax}+0.2);
+                    \end{groupplot}
+                    \draw [dashed] (a1) -- (a2);
+                    \draw [dashed] (b1) -- (b2);
+                    \draw [dashed] (c1) -- (c2);
+                \end{tikzpicture}
+                \caption{Voltage and current at the inv. buck-boost converter transistor (w/o current ripple)}
+                \label{fig:inverting-buck-boost-converter-voltage-current-transistor}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Semiconductor utilization:  summary %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Semiconductor utilization: summary}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+             \begin{itemize}
+                \item The converters' semiconductor utilization is generally the highest if the input and output voltages are similar:
+                \begin{itemize}
+                    \item Step-down: $D\rightarrow1$,
+                    \item Step-up: $D\rightarrow0$,
+                    \item Inv. buck-boost: $D\rightarrow0.5$.
+                \end{itemize}
+                \item Inverting buck-boost has generally a lower utilization.
+                \item Finding indicates that the inv. buck-boost  should be only considered if an application truly requires both step-up and step-down operation.
+             \end{itemize}
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \begin{figure}
+                \begin{tikzpicture}[pin distance=0.2cm]
+                    \begin{axis}[
+                        xlabel={$D$},
+                        ylabel={$\frac{P_2}{P_\mathrm{T}}$},
+                        ymin=0, ymax=1.0,
+                        xmin=0, xmax=1.0,
+                        width = 0.9\textwidth,
+                        height = 0.7\textheight,
+                        grid,
+                        thick,
+                        clip = true,
+                        xtick = {0, 0.25, 0.5, 0.75, 1.0}, 
+                        ytick = {0, 0.25, 0.5, 0.75, 1.0}
+                        ]
+                        \addplot[signalblue, domain=0:1, samples=10] {x}node[left,pos=0.4, anchor = east, inner sep = 1pt, fill = white, xshift=-0.3cm]{step-down};
+                        \addplot[signalblue, domain=0:1, samples=10] {1-x} node[right,pos=0.6, anchor = west, inner sep = 1pt, fill = white, xshift=0.3cm]{step-up};
+                        \addplot[signalblue, domain=0:1, samples=25] {(1-x)*x} node[below,pos=0.5, anchor = north, inner sep = 1pt, fill = white, yshift=-0.2cm]{inv. buck-boost};
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Comparison of the semiconductor utilization for the step-down, step-up, and inv. buck-boost converter}
+                \label{fig:semiconductor-utilization-summary}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Filter component requirements: step-down converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Filter component requirements: step-down converter}
+    Open question regarding \hl{filter dimensioning}:
+    \begin{itemize}
+        \item How large do the filter components need to be sized to ensure sufficiently smooth input and output signals?
+    \end{itemize}
+        To answer this, we consider the following assumptions:
+        \begin{itemize}
+            \item The input and output current are constant: $i_1(t) = I_1$, $i_2(t) = I_2$.
+            \item Additional input capacitor necessary to buffer the pulsating input current.
+            \item Voltage and current ripples do not influence each other (simplified superposition).
+        \end{itemize}
+        \vspace{-0.15cm}
+        \begin{figure}
+            \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+                to ++(-8.5,0)
+                to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+                (-8.5,2) to  [short, i=$i_1(t)$] (-7.0,2);   
+                \draw (-6.375,2) ++(0.625,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
+                let \p1 = (S.mid) in (S.in) to  [short, i=$i_\mathrm{L}(t)$] ++(1,0)
+                to [inductor, l=$L$, v = $u_\mathrm{L}(t)$, voltage = straight] ++(2,0)
+                to [short] ++(1,0)
+                to [short, -o, i=$i_2(t)$] (0,2) 
+                ([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
+                \draw (-4.5,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s}(t)$, voltage = straight] ++(0,-2);
+                \draw (-1.5,2) to [capacitor, *-*, l=$C_2$, i>^=$i_{\mathrm{C_2}(t)}$] ++(0,-2);
+                \draw (-7.0,2) to [capacitor, *-*, l=$C_1$, i>^=$i_{\mathrm{C_1}(t)}$] ++(0,-2)
+                (-7.0,2) to [short, *-] (S.out);
+            \end{circuitikz}
+            \caption{Step-down converter with filter components}
+            \label{fig:step-down-converter-filter-components}
+        \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Filter component requirements: step-down converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Filter component requirements: step-down converter (cont.)}
+    The input voltage ripple is
+    \begin{equation}
+        \Delta u_\mathrm{C_1} = \frac{I_1(1-D)T_\mathrm{s}}{C_1}
+    \end{equation}
+    assuming that the input capacitor is loaded with the input current $I_1$ during the off-time $T_\mathrm{off}=(1-D)T_\mathrm{s}$. Assuming that there is an \hl{input voltage ripple requirement} on $\Delta u_\mathrm{C_1}$, that is, an upper limit ripple, the minimum input capacitance is 
+    \begin{equation}
+        C_1 \geq \frac{I_1(1-D)T_\mathrm{s}}{\Delta u_\mathrm{C_1}}=C_{1,\mathrm{min}}.
+    \end{equation}
+    The stored input capacitor energy yields
+    \begin{equation}
+        E_\mathrm{C_1} = \frac{1}{2} C_{1,\mathrm{min}} \left(U_1 + \frac{1}{2}\Delta u_\mathrm{C_1}\right)^2 = \frac{1}{2} (1-D)\frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{u_\mathrm{C_1}}}{2}\right)^2}{\varepsilon_{u_\mathrm{C_1}}}
+    \end{equation}
+    with the \hl{normalized ripple factor} $\varepsilon_{u_\mathrm{C_1}} = \nicefrac{\Delta u_\mathrm{C_1}}{U_1}$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Filter component requirements: step-down converter (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Filter component requirements: step-down converter (cont.)}
+    We already know from \eqref{eq:current-ripple-simple-step-down} the inductor current ripple being
+    \begin{equation*}
+        \Delta i_\mathrm{L} = \frac{(1-D)U_2T_\mathrm{s}}{L}.
+    \end{equation*}
+    Assuming that there is an \hl{inductor current ripple requirement} on $\Delta i_\mathrm{L}$, that is, an upper limit ripple, the minimum inductance is
+    \begin{equation}
+        L \geq \frac{(1-D)U_2T_\mathrm{s}}{\Delta i_\mathrm{L}} = L_{\mathrm{min}}.
+        \label{eq:inductor-minimum-inductance-step-down}
+    \end{equation}
+    The stored inductor energy is
+    \begin{equation}
+        E_\mathrm{L} = \frac{1}{2} L_{\mathrm{min}} \left(I_2 + \frac{1}{2}\Delta i_\mathrm{L}\right)^2 = \frac{1}{2} (1-D)\frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{i_\mathrm{L}}}{2}\right)^2}{\varepsilon_{i_\mathrm{L}}}
+    \end{equation}
+    with the \hl{normalized ripple factor} $\varepsilon_{i_\mathrm{L}} = \nicefrac{\Delta i_\mathrm{L}}{I_2}$. 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Filter component requirements: step-down converter (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Filter component requirements: step-down converter (cont.)}
+    We already know from \eqref{eq:voltage-ripple-step-down-converter} the output capacitor voltage ripple being
+    \begin{equation*}
+        \Delta u_\mathrm{C_2} = \frac{D(1-D)T_\mathrm{s}^2U_1}{8LC_2} = \frac{(1-D)}{8LC_2}\frac{U_2}{f_\mathrm{s}^2}.
+    \end{equation*}
+    Inserting the inductor sizing \eqref{eq:inductor-minimum-inductance-step-down} delivers
+    \begin{equation}
+        \Delta u_\mathrm{C_2} = \frac{1}{8C_2} \frac{\Delta i_\mathrm{L}}{f_\mathrm{s}} = \frac{\varepsilon_{i_\mathrm{L}}}{8C_2} \frac{I_2}{f_\mathrm{s}}.
+    \end{equation}
+    Assuming that there is an \hl{output voltage ripple requirement} on $\Delta u_\mathrm{C_2}$, that is, an upper limit ripple, the minimum output capacitance is 
+    \begin{equation}
+        C_2 \geq \frac{\varepsilon_{i_\mathrm{L}}I_2}{8f_\mathrm{s}\Delta u_\mathrm{C_2}} = C_{2,\mathrm{min}}.
+    \end{equation}
+    The stored output capacitor energy yields
+    \begin{equation}
+        E_\mathrm{C_2} = \frac{1}{2} C_{2,\mathrm{min}} \left(U_2 + \frac{1}{2}\Delta u_\mathrm{C_2}\right)^2 = \frac{1}{16} \varepsilon_{i_\mathrm{L}}\frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{u_\mathrm{C_2}}}{2}\right)^2}{\varepsilon_{u_\mathrm{C_2}}}.
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Filter component requirements: step-down converter interpretation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Filter component requirements: step-down converter interpretation}
+    The \hl{stored energy} in the filter components is a good proxy for the \hl{filter size and weight}. All three step-down converter filter components share the following characteristics:
+    \begin{itemize}
+        \item The stored energy is proportional to the output power $P_2$.
+        \item The stored energy is inversely proportional to the switching frequency $f_\mathrm{s}$.
+        \item The stored energy is minimal at $\varepsilon_{u_\mathrm{C_1}} = \varepsilon_{i_\mathrm{L}} = \varepsilon_{u_\mathrm{C_2}} = \nicefrac{1}{2}$ (i.e., large signal ripples).
+        \begin{itemize}
+            \item $\varepsilon_{i_\mathrm{L}}=\nicefrac{1}{2}$ refers to BCM mode.
+            \item Increased input voltage ripple and inductor current ripple also increases the transistor requirements, see \eqref{eq:step-down-converter-transistor-peak-voltage-current}.
+        \end{itemize}
+    \end{itemize}
+    In addition, $E_\mathrm{L}$ and $E_\mathrm{C_1}$ also scale with $$(1-D),$$ that is, are small if the converter's input and output voltage are similar.    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Filter component requirements: inverting buck-boost converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Filter component requirements: inverting buck-boost converter}
+    Again, we assume the following:
+        \begin{itemize}
+            \item The input and output current are constant: $i_1(t) = I_1$, $i_2(t) = I_2$.
+            \item Additional capacitors necessary to buffer the pulsating input / output  currents.
+            \item Voltage and current ripples do not influence each other (simplified superposition).
+        \end{itemize}
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw(0,3) node[cute spdt mid, rotate=90] (S) {}
+            (S.cout 2) to [short] ++(2.5,0) coordinate (B)
+            to [capacitor, *-*, l_=$C_2$, i>_=$i_{\mathrm{C_2}(t)}$] ++(0,-3)
+            (B) to [short, -o, i=$i_2(t)$] ++(2,0)
+            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-3) coordinate (A)
+            (S.cout 1) to [short] ++(-2.5,0) coordinate (C)
+            to [capacitor, *-*, l=$C_1$, i>^=$i_{\mathrm{C_1}(t)}$] ++(0,-3)
+            (C) to [short, -o, i_<=$i_1(t)$] ++(-2,0)
+            to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-3)
+            to [short, o-o] (A)
+            (S.out 1) node[below, anchor = north east] {$S_\mathrm{on}$}
+            (S.out 2) node[below, anchor = north west] {$S_\mathrm{off}$};
+            \draw let \p1 = (A) in (S.cin) to [inductor, i=$i_\mathrm{L}(t)$, v=$u_\mathrm{L}(t)$,voltage = straight, o-*] (0,\y1);
+        \end{circuitikz}
+        \caption{Inverting buck-boost converter with filter components}
+        \label{fig:inverting-buck-boost-converter-filter-components}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Filter component requirements: inverting buck-boost converter (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+    \frametitle{Filter component requirements: inverting buck-boost converter (cont.)}
+    We further assume an identical normalized input and output voltage ripple requirement 
+    $$
+    \varepsilon_{u_\mathrm{C_1}} =\frac{\Delta u_\mathrm{C_1}}{U_1} =  \varepsilon_{u_\mathrm{C_2}} = \frac{\Delta u_\mathrm{C_2}}{U_2} = \varepsilon_{u_\mathrm{C}}.
+    $$
+    Following the same derivation as for the step-down converter, the stored filter energies are
+    \begin{equation}
+            E_\mathrm{C} = E_\mathrm{C_1} + E_\mathrm{C_2} = \frac{1}{2} \frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{u_\mathrm{C}}}{2}\right)^2}{\varepsilon_{u_\mathrm{C}}}, \qquad
+            E_\mathrm{L} = \frac{1}{2} \frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{i_\mathrm{L}}}{2}\right)^2}{\varepsilon_{i_\mathrm{L}}}.
+    \end{equation}
+    Compared to the step-down converter we can find:
+    \begin{itemize}
+        \item Same dependence on $P_2$, $f_\mathrm{s}$, and $\varepsilon_{u_\mathrm{C}}$ or $\varepsilon_{i_\mathrm{L}}$.
+        \item Missing $(1-D)$ scaling factor.
+        \item Result: The inverting buck-boost converter passive components are generally larger due to the pulsating input and output current which needs to be filtered.
+    \end{itemize} 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Further converter topologies %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Further converter topologies}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Recap: Buck-boost converter switching states %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Recap: (inverting) buck-boost converter switching states}
+    \begin{varblock}{Key characteristic drawback of (inverting) buck-boost converter}
+        The switching scheme of the (inverting) buck-boost converter utilizes an \hl{indirect inductive energy transfer} resulting in pulsating input and output currents which need to be filtered. This leads to larger filter components.
+    \end{varblock}
+    \begin{figure}
+        \centering	
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \hspace{-0.75cm}
+            \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}U_2$, voltage = straight] ++(0,-2)
+                to ++(-5,0)
+                to [open, o-o, v<= $U_1 \hspace{2cm}$, voltage = straight] ++(0,2)
+                (-5,2) to  [short, i=$i_1(t)$] ++(1.0,0)
+                to [inductor, l=$L$] ++(1.75,0)
+                to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
+                to [short, -*] ++(0,-2);
+                \draw (0,2) to [short, i_<=${i_2=0}$, o-o] ++(-1.0,0);
+                \draw (-1.8,2) to [open, v_>=${U_{\mathrm{s}_2}\hspace{0.2cm}}$, voltage = straight] ++(0,-2);
+                \draw (-4.4,2) to [open, v = ${\hspace{1.5cm}U_{\mathrm{s}_1}}$, voltage = straight] ++(0,-2);
+            \end{circuitikz}
+            \caption{Switch-on time}
+        \end{subfigure}%
+        \hspace{0.5cm}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,2) to [open, o-o, v = $\hspace{2cm}U_2$, voltage = straight] ++(0,-2)
+                to ++(-5,0)
+                to [open, o-o, v<= $U_1 \hspace{2cm}$, voltage = straight] ++(0,2)
+                (-5,2) to  [short, i=${i_1=0}$] ++(0.75,0)
+                (-3.75,0) to [short, *-] ++(0,2)
+                to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
+                to [inductor, l=$L$] ++(2,0)
+                to [short, i=$i_2(t)$] (0,2);
+                \draw (-3.4,2) to [open, v = ${\hspace{1.5cm}U_{\mathrm{s}_1}}$, voltage = straight] ++(0,-2);
+                \draw (-0.5,2) to [open, v_>=${U_{\mathrm{s}_2}\hspace{0.2cm}}$, voltage = straight] ++(0,-2);
+            \end{circuitikz}
+            \caption{Switch-off time}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Ćuk converter: the boost-buck converter with capacative energy transfer %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Ćuk converter: the boost-buck converter with capacative energy transfer}
+        \begin{figure}
+            \begin{circuitikz}[]
+                \draw (0,2) to [capacitor, *-*] ++(0,-2);
+                %Boost part
+                \draw (-5,2) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
+                to [short, -*]++(5,0)
+                (-5,2) to [short, o-, i=$i_1(t)$]++(0.75,0)
+                to [inductor, l=$L_1$] ++(1.5,0)
+                to [short, i=$i_{\mathrm{L}_1}(t)$] ++(0.75,0)
+                to ++(0.1,0) node [cuteopenswitchshape, anchor = in, yscale=-1] (S2) {}
+                let \p2 = (S2.mid) in ([yshift = -0.3cm]S2.mid) to [short, o-*](\x2,0);
+                \draw (-2.75,2) to [open, v_>=$u_{\mathrm{s}_1}(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
+                (S2.out) node[above, anchor = south] {$S_\mathrm{1,off}$}
+                ([yshift = -0.3cm]S2.mid) node[above, anchor = north east] {$S_\mathrm{1,on}$}
+                (S2.out) to[short, -*] (0,2);
+
+                % gray background behind boost part
+               \begin{scope}[on background layer]
+                \node[rectangle, draw = shadecolor,	fill = shadecolor,	opacity=0.3, minimum width = 4.75cm, minimum height = 3.4cm] (B1) at (-2.625,1.1) {};
+                \node[inner sep = 1pt, anchor = south, font=\small] at (B1.south) {Boost};
+                \end{scope}
+
+                % Buck part
+                \draw (0,0) to [short, o-]++(5,0)
+                (5,2) to [open, o-o, v= $\hspace{1.9cm}u_2(t)$, voltage = straight] ++(0,-2)
+                (0,2) [short] ++(1.0,0)
+                to ++(0.1,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S1) {}
+                let \p1 = (S1.mid) in (S1.in) to  [short, i=$i_\mathrm{L_2}(t)$] ++(0.90,0)
+                to [inductor, l=$L_2$] ++(1.3,0)
+                to [short, -o,  i=$i_2(t)$] (5,2) 
+                ([yshift = -0.3cm]S1.mid) to [short, o-*](\x1,0);
+                \draw (2.75,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s_2}(t)$, voltage = straight] ++(0,-2)
+                (S1.out) node[above, anchor = south] {$S_\mathrm{2,on}$}
+                ([yshift = -0.3cm]S1.mid) node[below, anchor = north west] {$S_\mathrm{2,off}$}
+                (0,2) to [short, *-] (S1.out);
+
+                 % gray background behind buck part
+                 \begin{scope}[on background layer]
+                    \node[rectangle, draw = shadecolor,	fill = shadecolor,	opacity=0.3, minimum width = 4.75cm, minimum height = 3.4cm] (B2) at (2.625,1.1) {};
+                    \node[inner sep = 1pt, anchor = south, font=\small] at (B2.south) {Buck};
+                \end{scope}
+
+                 %Curly bracket that points from the upper circuit to the lower circuit
+                \draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=0.5cm},yshift=0pt] (-2.5,-0.25) -- (2.5,-0.25) node [black,midway,yshift=-0.6cm] {};
+            \end{circuitikz}
+            \begin{circuitikz}[]
+                \draw (0,0) node[cute spdt mid, rotate=90] (S) {}
+                (-1.5,1.5) coordinate (A) to [capacitor, *-*, l=$C$, v =$u_\mathrm{C}(t)$, voltage = straight] (1.5,1.5) coordinate (B)
+                (S.cout 2) to [short] (S.cout 2 -| B) -- (B)
+                (S.cout 1) to [short] (S.cout 1 -| A) -- (A)
+                (B) to [inductor, -o, i=$i_2(t)$, l=$L_2$] ++(3,0) coordinate (C)
+                to [open, o-o, v = $\hspace{1.9cm}u_2(t)$, voltage = straight] (S.cin -| C) -- (S.cin)
+                (A) to [inductor, -o, i_<=$i_1(t)$, l_=$L_1$, mirror] ++(-3,0) coordinate (D)
+                to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] (S.cin -| D) -- (S.cin)
+                (S.out 1) node[below, anchor = north east] {$S_\mathrm{on}$}
+                (S.out 2) node[below, anchor = north west] {$S_\mathrm{off}$};
+            \end{circuitikz}
+            \caption{Ćuk converter (ideal switch representation)}
+            \label{fig:Cuk-simple}
+        \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Ćuk converter: switching states %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[b]
+    \frametitle{Ćuk converter: switching states}
+    \begin{itemize}
+        \item The Ćuk converter uses the capacitor $C$ to transfer energy between the input and output.
+        \item The polarity of $C$ is changed between the two switch states (inverting voltage gain).
+        \item In contrast to the previous topologies, there is no pulsating output or input current thanks to the outer inductors.
+    \end{itemize}
+    \begin{figure}
+        \centering	
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,2) coordinate (A) to [open, o-o, v = $U_1$, voltage = straight] ++(0,-2) -- ++(0.75,0) coordinate (B)
+                (0,2) to [short, i=$i_1(t)$] (A -| B)
+                to [inductor, l_=$L_1$] (B);   
+                \draw (2,0) coordinate (C) to [capacitor, v = $u_\mathrm{C}(t)$, voltage = straight] ++(0,2)  
+                to [inductor, l=$L_2$, i=$i_2(t)$] ++(3,0) coordinate (D)    
+                to [open, o-o, v = $\hspace{1.5cm}U_2$, voltage = straight] ++(0,-2)
+                to [short] (C);    
+            \end{circuitikz}
+            \caption{Switch-on time}
+        \end{subfigure}%
+        \hspace{0.5cm}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,2) coordinate (A) to [open, o-o, v = $U_1$, voltage = straight] ++(0,-2)
+                (A) to [inductor, l=$L_1$, i>^=$i_1(t)$] ++(3,0) coordinate (B)
+                to [capacitor, v = $u_\mathrm{C}(t)$, voltage = straight] ++(0,-2)
+                to [short, -o] (0,0);
+                \draw (4, 0) to [inductor, l_=$L_2$] ++(0,2)
+                to [short, i=$i_2(t)$] ++(0.75,0)
+                to [open, o-o, v = $\hspace{1.5cm}U_2$, voltage = straight] ++(0,-2)
+                (4, 0) to [short, -o] ++(0.75,0);
+            \end{circuitikz}
+            \caption{Switch-off time}
+        \end{subfigure}
+        \caption{Switch states of the Ćuk converter}
+        \label{fig:Cuk-converter-switch-states}
+    \end{figure}
 \end{frame}

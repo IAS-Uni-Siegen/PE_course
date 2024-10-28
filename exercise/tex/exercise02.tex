@@ -7,18 +7,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 1: Boost Converter with no losses %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\task {Boost Converter with no losses}
+\task {Boost converter with no losses}
 The boost converter which is shown in \autoref{fig:boost converter} supplies an amplifier with a rated voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. For this exercise steady-state operation is assumed.
 
 \input{./fig/ex02/Fig_boostConverter.tex}
 
-The specification of the boost converter is given in \autoref{table:Parameters of the circuit}:
+The specification of the boost converter is given in \autoref{table:Parameters of the circuit}.
 
 \input{./fig/ex02/Fig_ParamtersboostConverter.tex}
 
 First, all losses of the boost converter including the resistance of the inductor are neglected.
 
-\subtask{Derive the duty cycle, which leads to the specific output voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The steady state is considered:$i_{\mathrm{L}}(t=0)=i_{\mathrm{L}}(t=T_{\mathrm{s}})$}
+\subtask{Derive the duty cycle $D$ which leads to the specific output voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The steady state is considered when $i_{\mathrm{L}}(t=0)=i_{\mathrm{L}}(t=T_{\mathrm{s}})$}.
 
 \begin{solutionblock}
     \input{./fig/ex02/Fig_ECDTeTa.tex}
@@ -40,35 +40,35 @@ First, all losses of the boost converter including the resistance of the inducto
     \begin{equation}
         L \frac{\Delta i_{\mathrm{L}} }{\Delta t} = U_{\mathrm{1}} - U_{\mathrm{2}}
     \end{equation}
-    The equation for the current $i_{\mathrm{L}}$ at the switch-off time $T_{\mathrm{sw,off}}$ results from the term describing the discharge of the inductance from $T_{\mathrm{sw,off}}$ together with the initial condition of the current at this time.
+    The equation for the current $i_{\mathrm{L}}$ at the switch-off time $T_{\mathrm{s,off}}$ results from the term describing the discharge of the inductance from $T_{\mathrm{s,off}}$ together with the initial condition of the current at this time.
     \begin{equation}
-        i_{\mathrm{L}}(t) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (t-T_{\mathrm{sw,on}})+i_{\mathrm{L}}(T_{\mathrm{sw,on}})
+        i_{\mathrm{L}}(t) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (t-T_{\mathrm{s,on}})+i_{\mathrm{L}}(T_{\mathrm{s,on}})
     \end{equation}
     This results in the equation for the entire current curve over the period: 
     \begin{equation}
-        i_{\mathrm{L}}(t) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (t-T_{\mathrm{sw,on}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{sw,on}}+i_{\mathrm{L}}(0)
+        i_{\mathrm{L}}(t) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (t-T_{\mathrm{s,on}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}+i_{\mathrm{L}}(0)
     \end{equation}
     If you now consider the steady state $i_{\mathrm{L}}(t=0)=i_{\mathrm{L}}(t=T_{\mathrm{s}})$, this results in the following:
     \begin{equation}
-        i_{\mathrm{L}}(0) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{sw,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{sw,on}}+i_{\mathrm{L}}(0)
+        i_{\mathrm{L}}(0) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{s,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}+i_{\mathrm{L}}(0)
     \end{equation}
     Now the initial condition $i_{\mathrm{L}}(0)=0$ is assumed.
     \begin{equation}
-        0 = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{sw,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{sw,on}}
+        0 = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{s,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}
     \end{equation}
 
     \begin{equation}
-        U_{\mathrm{1}}T_{\mathrm{sw,on}}= (-U_{\mathrm{1}}+U_{\mathrm{2}})T_{\mathrm{sw,off}}
+        U_{\mathrm{1}}T_{\mathrm{s,on}}= (-U_{\mathrm{1}}+U_{\mathrm{2}})T_{\mathrm{s,off}}
     \end{equation}
 
     \begin{equation}
-        U_{\mathrm{1}}(T_{\mathrm{sw,off}}+T_{\mathrm{sw,on}})=  U_{\mathrm{2}}T_{\mathrm{sw,off}}
+        U_{\mathrm{1}}(T_{\mathrm{s,off}}+T_{\mathrm{s,on}})=  U_{\mathrm{2}}T_{\mathrm{s,off}}
     \end{equation}
-    The switch-off period $T_{\mathrm{sw,off}}$ plus the switch-on period $T_{\mathrm{sw,on}}$ is the total period $T_{\mathrm{s}}$.
+    The switch-off period $T_{\mathrm{s,off}}$ plus the switch-on period $T_{\mathrm{s,on}}$ is the total period $T_{\mathrm{s}}$.
 
     The following equation can now be established for the duty cycle.
     \begin{equation}
-        \frac{U_{\mathrm{1}}}{U_{\mathrm{2}}}= \frac{T_{\mathrm{sw,off}}}{T_{\mathrm{s}}}= \frac{T_{\mathrm{s}}}{T_{\mathrm{s}}}-\frac{T_{\mathrm{sw,on}}}{T_{\mathrm{s}}} = 1-D
+        \frac{U_{\mathrm{1}}}{U_{\mathrm{2}}}= \frac{T_{\mathrm{s,off}}}{T_{\mathrm{s}}}= \frac{T_{\mathrm{s}}}{T_{\mathrm{s}}}-\frac{T_{\mathrm{s,on}}}{T_{\mathrm{s}}} = 1-D
     \end{equation}
 
     \begin{equation}
@@ -97,7 +97,7 @@ First, all losses of the boost converter including the resistance of the inducto
     \end{equation}
 \end{solutionblock}
 
-\subtask{ Define a suitable inductivity for the coil L, so that the boost converter is operating in continuous conduction mode for the minimum output power given in the specification above. Determine the maximal switch-off current $i_{\mathrm{V1}}$ of the transistor $\mathrm{V}_1$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
+\subtask{ Define a suitable inductivity for the coil L, so that the boost converter is operating in continuous conduction mode (CCM), for the minimum output power given in the specification above. Determine the maximal switch-off current $i_{\mathrm{T}}$ of the transistor $\mathrm{T}_1$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
 \begin{solutionblock}
     Because no losses are assumed, $P_{\mathrm{1min}}=P_{\mathrm{2min}}$.
     The following equation is used for the average current $I_{\mathrm{1min}}$ over a period to generate the minimum power.
@@ -105,9 +105,9 @@ First, all losses of the boost converter including the resistance of the inducto
         I_{\mathrm{1min}} = \frac{P_{\mathrm{1min}}}{U_{\mathrm{1}}} = \frac{\SI{10}{\watt}}{\SI{12}{\volt}}= \SI{0.833}{\ampere}
     \end{equation}
     Requirement for BCM, Current is zero at starting point of the period  $i_\mathrm{1BCM}(0)=\SI{0}{\ampere}$.
-    At time $T_{\mathrm{sw,on}}$, the average current to provide the minimum power corresponds to twice the value of the $I_{\mathrm{1min}}$.
+    At time $T_{\mathrm{s,on}}$, the average current to provide the minimum power corresponds to twice the value of the $I_{\mathrm{1min}}$.
     \begin{equation}
-        i_\mathrm{1BCM}(T_{\mathrm{sw,on}})= 2I_{\mathrm{1min}}= 2\cdot \SI{0.833}{\ampere} = \SI{1.667}{\ampere}
+        i_\mathrm{1BCM}(T_{\mathrm{s,on}})= 2I_{\mathrm{1min}}= 2\cdot \SI{0.833}{\ampere} = \SI{1.667}{\ampere}
     \end{equation}
     The differential form of the inductance equation is used for the further calculation.
     \begin{equation}
@@ -117,10 +117,10 @@ First, all losses of the boost converter including the resistance of the inducto
     \begin{equation}
         u_\mathrm{L}=L\frac{\Delta i_\mathrm{L}}{\Delta t}
     \end{equation}
-    Only the switch-on period is considered, therefore $\Delta t = T_{\mathrm{sw,on}}$. Furthermore, $u_\mathrm{L}=U_\mathrm{1}$ and $\Delta i_\mathrm{L} = 2 I_\mathrm{1min}$.
+    Only the switch-on period is considered, therefore $\Delta t = T_{\mathrm{s,on}}$. Furthermore, $u_\mathrm{L}=U_\mathrm{1}$ and $\Delta i_\mathrm{L} = 2 I_\mathrm{1min}$.
     The switch-on period can be determined by the known duty cycle D and the known frequency $f_{\mathrm{s}}$.
     \begin{equation}
-        T_{\mathrm{sw,on}} = D T_{\mathrm{s}} = \Delta t = \frac{D}{f_{\mathrm{s}}} = \frac{0.8}{\SI{100}{\kilo\hertz}}=\SI{8}{\micro\sec}
+        T_{\mathrm{s,on}} = D T_{\mathrm{s}} = \Delta t = \frac{D}{f_{\mathrm{s}}} = \frac{0.8}{\SI{100}{\kilo\hertz}}=\SI{8}{\micro\sec}
     \end{equation}
     The following inductivity equation can be derived from this.
     \begin{equation}
@@ -181,7 +181,7 @@ First, all losses of the boost converter including the resistance of the inducto
 \task{Boost Converter with losses}
 The same parameters as in task 1 are assumed as well as the equivalent circuit diagram. For the following points an ideal smoothed input current and a ripple-free output voltage are assumed.
 
-\subtask{From now on, the influences of the resistor $R_\mathrm{L}$ are considered. Derive the efficiency and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter, in dependence on the duty cycle D and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both values $\eta$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle D and give comments. Calculate D under consideration of $R_\mathrm{L}=\SI{0.2}{\ohm}$.}
+\subtask{From now on, the influences of the resistor $R_\mathrm{L}$ are considered. Derive the efficiency $\eta$ and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter, in dependence on the duty cycle $D$ and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both functions, $\eta$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle $D$ and give comments. Calculate $D$ under consideration of $R_\mathrm{L}=\SI{0.2}{\ohm}$.}
 \begin{solutionblock}
 We are looking for: $\eta= F(D,\alpha)$ and $\frac{U_\mathrm{2}}{U_\mathrm{1}}=F(D,\alpha)$ with $\alpha=\frac{R_\mathrm{L}}{R}$
 Assuming a good smoothing of the inductor current yields to $I_\mathrm{L}=\overline i_\mathrm{L}=i\mathrm{L}(t)$
@@ -574,3 +574,55 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
     \end{equation}
 
 \end{solutionblock}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Task 3: Buck-Boost converter combination
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\task{Buck-Boost converter cascade}
+Cascading a buck converter and a boost converter (common inductance) to realize a DC/DC converter with a wide input voltage range.
+
+% Schematic of Buck Boost Converter cascade
+\input{./fig/ex02/Fig_BuckBoostConverterCascade.tex}
+
+%Table of parameter values 
+\input{./fig/ex02/FigTab_BuckBoostConverterCascade.tex}
+
+The output voltage is kept at the specified constant value by adjusting the duty cycles $D_1$ 
+(of transistor  $T_1$) and $D_2$ (of transistor $T_2$) using a control system. Both transistors operate at the same switching frequency.
+The ripple of the output voltage and the current in the inductance can be ignored. The current in L shows a continuous course.
+Both transistors operates with the same relative duty cycle $D_1 = D_2 = D$.
+
+\subtask{Calculate the relative duty cycle of the transistors $T_1$ and $T_2$ depending on the voltage transformation ratio $U_\mathrm{2}/U_\mathrm{1}$}
+\subtask{Calculate $I_L$ depending on $D$. Plot $D$ and $I_L$ against $U_\mathrm{1}$ and enter the numerical values for $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
+\vspace{2em}\par
+% Explaining text for the next subtask
+Both transistors should now be able to have different duty cycles. Assume that the transistors are switched on at the same time.
+
+\subtask{Graphically represent the time profiles of the voltage at $L$ for $U_\mathrm{1}$ = $\SI{320}{\volt}$ and
+ $D_1 = 0.9$ or for $U_\mathrm{1}$ = 720V and $D_2 = 0.1$ for one pulse period each.}
+\subtask{Calculate the voltage transformation ratio in general as a function of $D_1$ and $D_2$.}
+\subtask{Express the current IL as a function of the specified operating parameters
+($U_\mathrm{1}$, $U_\mathrm{2}$, $P_\mathrm{2}$) and as a function of $D_\mathrm{1}$ and $D_\mathrm{2}$.}
+\subtask{Are the calculated relationships valid if $T_1$ and $T_2$ do not switch synchronously or operate with
+ different clock frequencies?}
+\vspace{2em}\par
+% Explaining text for the next subtask
+If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\mathrm{F}=\SI{2.5}{\volt}$ occurs at transistors,
+ regardless of the current. All other components are considered ideal and loss-free.
+
+\subtask{How should $D_1$ and $D_2$ be selected so that the losses of the overall system are minimal? Take the relationships
+ of previous calculation for the voltage transformation ratio and the value of $I_L$.}
+\subtask{Plot $D_\mathrm{1}$ and $D_\mathrm{2}$ and the efficiency graphically over $U_\mathrm{1}$ and give numerical values
+ for $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
+\subtask{Calculate the efficiency for following three cases:\\
+$U_\mathrm{1}=\SI{320}{\volt}$, $D_1 = D_2 = 0.56$,  $I_L = \SI{28}{\ampere}$  \\
+$U_\mathrm{1}=\SI{400}{\volt}$, $D_1 = D_2 = 0.5$, $I_L = \SI{22.5}{\ampere}$  \\
+$U_\mathrm{1}=\SI{720}{\volt}$, $D_1 = D_2 = 0.36$,  $I_L = \SI{19.5}{\ampere}$ \\
+and compare the numerical values.}
+\subtask{How high is the maximum efficiency gain and at which operating point does it occur? Give a clear explanation.}
+
+
+
