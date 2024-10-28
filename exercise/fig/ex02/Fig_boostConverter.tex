@@ -6,35 +6,40 @@
         \draw
         (0,0) coordinate(u1o)
         to [V,v_=$U_1$] ++(0,-3) coordinate(u1u)
-        (0,0) to[R, l=$R_L$] (2.5,0)
-        (2.5,0) to[L, l=$L$] (4.5,0)
+        (0,0) to[R, l=$R_\mathrm{L}$] (2.5,0)
+        (2.5,0) to[L, l=${L}$] (4.5,0)
 
         (4,0) coordinate(N1) to [short] ++(1.5,0) coordinate(Ud)
-        ++(0,-1.5) node[nigfete](Trans){}
+        ++(0,-1.5) node[nigfete,bodydiode](Trans){}
         (Ud) to [short] (Trans.drain)
         (Trans.source) to [short,-] ++(0,0) coordinate(U2p)
-        
+      
+        (Trans) ++(-1,0) node {$T$}
+
         (4,0) to [short,-] (9.5,0)
 
         (5.5,-1.5) to [short,-] ++(0,-1.5) 
 
-        (6.5,0) to[D, l=$V_2$] (8,0)
-        
-        (8,0) to[C] (8,-3)
+        (6.5,0) to[D, l=$D$] (8,0)
+                
+        (8,0) to[C,l_=$C$] (8,-3)
 
         (9.5,0) to [R,l_=$R$,v^=$U_\text{2}$,voltage shift=0.5, voltage=straight] (9.5,-3)
 
+        
         (9.5,-3) to [short,-] (0,-3)
 
-        (0.5,0) to [short,i^<=$i_1$] (u1o)
-        (5.5,0) to [short,i^<=$i_L$(t)] (4.5,0)
-        (5.5,-0.5) to [short,i^<=$i_\mathrm{V1}$(t)] (5.5,-1)
-        (9,0) to [short,i^<=$I_2$(t)] (8.5,0)
+        (0.75,0) to [short,i^<=$i_1$(t)] (u1o)
+        (4.5,0) to [short,-*,i^>=$i_\mathrm{L}$(t)] (5.5,0)
+        
+        (5.5,-0.5) to [short,i^<=$i_\mathrm{T}$(t)] (5.5,-1)
+        
+        (9,0) to [short,i^<=$i_2$(t)] (8.5,0)
         ;
 % (u3o) to [short,-] ++(1,0) coordinate(v1)
         ;
     \end{circuitikz}
-    \caption{Step-up converter}
+    \caption{Boost converter}
      \label{fig:boost converter}
 \end{center}
 %\end{tikzpicture}

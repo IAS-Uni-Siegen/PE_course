@@ -7,18 +7,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 1: Boost Converter with no losses %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\task {Boost Converter with no losses}
+\task {Boost converter with no losses}
 The boost converter which is shown in \autoref{fig:boost converter} supplies an amplifier with a rated voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. For this exercise steady-state operation is assumed.
 
 \input{./fig/ex02/Fig_boostConverter.tex}
 
-The specification of the boost converter is given in \autoref{table:Parameters of the circuit}:
+The specification of the boost converter is given in \autoref{table:Parameters of the circuit}.
 
 \input{./fig/ex02/Fig_ParamtersboostConverter.tex}
 
 First, all losses of the boost converter including the resistance of the inductor are neglected.
 
-\subtask{Derive the duty cycle, which leads to the specific output voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The steady state is considered:$i_{\mathrm{L}}(t=0)=i_{\mathrm{L}}(t=T_{\mathrm{s}})$}
+\subtask{Derive the duty cycle $D$ which leads to the specific output voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The steady state is considered when $i_{\mathrm{L}}(t=0)=i_{\mathrm{L}}(t=T_{\mathrm{s}})$}.
 
 \begin{solutionblock}
     \input{./fig/ex02/Fig_ECDTeTa.tex}
@@ -40,35 +40,35 @@ First, all losses of the boost converter including the resistance of the inducto
     \begin{equation}
         L \frac{\Delta i_{\mathrm{L}} }{\Delta t} = U_{\mathrm{1}} - U_{\mathrm{2}}
     \end{equation}
-    The equation for the current $i_{\mathrm{L}}$ at the switch-off time $T_{\mathrm{sw,off}}$ results from the term describing the discharge of the inductance from $T_{\mathrm{sw,off}}$ together with the initial condition of the current at this time.
+    The equation for the current $i_{\mathrm{L}}$ at the switch-off time $T_{\mathrm{s,off}}$ results from the term describing the discharge of the inductance from $T_{\mathrm{s,off}}$ together with the initial condition of the current at this time.
     \begin{equation}
-        i_{\mathrm{L}}(t) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (t-T_{\mathrm{sw,on}})+i_{\mathrm{L}}(T_{\mathrm{sw,on}})
+        i_{\mathrm{L}}(t) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (t-T_{\mathrm{s,on}})+i_{\mathrm{L}}(T_{\mathrm{s,on}})
     \end{equation}
     This results in the equation for the entire current curve over the period: 
     \begin{equation}
-        i_{\mathrm{L}}(t) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (t-T_{\mathrm{sw,on}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{sw,on}}+i_{\mathrm{L}}(0)
+        i_{\mathrm{L}}(t) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (t-T_{\mathrm{s,on}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}+i_{\mathrm{L}}(0)
     \end{equation}
     If you now consider the steady state $i_{\mathrm{L}}(t=0)=i_{\mathrm{L}}(t=T_{\mathrm{s}})$, this results in the following:
     \begin{equation}
-        i_{\mathrm{L}}(0) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{sw,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{sw,on}}+i_{\mathrm{L}}(0)
+        i_{\mathrm{L}}(0) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{s,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}+i_{\mathrm{L}}(0)
     \end{equation}
     Now the initial condition $i_{\mathrm{L}}(0)=0$ is assumed.
     \begin{equation}
-        0 = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{sw,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{sw,on}}
+        0 = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{s,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}
     \end{equation}
 
     \begin{equation}
-        U_{\mathrm{1}}T_{\mathrm{sw,on}}= (-U_{\mathrm{1}}+U_{\mathrm{2}})T_{\mathrm{sw,off}}
+        U_{\mathrm{1}}T_{\mathrm{s,on}}= (-U_{\mathrm{1}}+U_{\mathrm{2}})T_{\mathrm{s,off}}
     \end{equation}
 
     \begin{equation}
-        U_{\mathrm{1}}(T_{\mathrm{sw,off}}+T_{\mathrm{sw,on}})=  U_{\mathrm{2}}T_{\mathrm{sw,off}}
+        U_{\mathrm{1}}(T_{\mathrm{s,off}}+T_{\mathrm{s,on}})=  U_{\mathrm{2}}T_{\mathrm{s,off}}
     \end{equation}
-    The switch-off period $T_{\mathrm{sw,off}}$ plus the switch-on period $T_{\mathrm{sw,on}}$ is the total period $T_{\mathrm{s}}$.
+    The switch-off period $T_{\mathrm{s,off}}$ plus the switch-on period $T_{\mathrm{s,on}}$ is the total period $T_{\mathrm{s}}$.
 
     The following equation can now be established for the duty cycle.
     \begin{equation}
-        \frac{U_{\mathrm{1}}}{U_{\mathrm{2}}}= \frac{T_{\mathrm{sw,off}}}{T_{\mathrm{s}}}= \frac{T_{\mathrm{s}}}{T_{\mathrm{s}}}-\frac{T_{\mathrm{sw,on}}}{T_{\mathrm{s}}} = 1-D
+        \frac{U_{\mathrm{1}}}{U_{\mathrm{2}}}= \frac{T_{\mathrm{s,off}}}{T_{\mathrm{s}}}= \frac{T_{\mathrm{s}}}{T_{\mathrm{s}}}-\frac{T_{\mathrm{s,on}}}{T_{\mathrm{s}}} = 1-D
     \end{equation}
 
     \begin{equation}
@@ -97,7 +97,7 @@ First, all losses of the boost converter including the resistance of the inducto
     \end{equation}
 \end{solutionblock}
 
-\subtask{ Define a suitable inductivity for the coil L, so that the boost converter is operating in continuous conduction mode for the minimum output power given in the specification above. Determine the maximal switch-off current $i_{\mathrm{V1}}$ of the transistor $\mathrm{V}_1$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
+\subtask{ Define a suitable inductivity for the coil L, so that the boost converter is operating in continuous conduction mode (CCM), for the minimum output power given in the specification above. Determine the maximal switch-off current $i_{\mathrm{T}}$ of the transistor $T_1$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
 \begin{solutionblock}
     Because no losses are assumed, $P_{\mathrm{1min}}=P_{\mathrm{2min}}$.
     The following equation is used for the average current $I_{\mathrm{1min}}$ over a period to generate the minimum power.
@@ -105,9 +105,9 @@ First, all losses of the boost converter including the resistance of the inducto
         I_{\mathrm{1min}} = \frac{P_{\mathrm{1min}}}{U_{\mathrm{1}}} = \frac{\SI{10}{\watt}}{\SI{12}{\volt}}= \SI{0.833}{\ampere}
     \end{equation}
     Requirement for BCM, Current is zero at starting point of the period  $i_\mathrm{1BCM}(0)=\SI{0}{\ampere}$.
-    At time $T_{\mathrm{sw,on}}$, the average current to provide the minimum power corresponds to twice the value of the $I_{\mathrm{1min}}$.
+    At time $T_{\mathrm{s,on}}$, the average current to provide the minimum power corresponds to twice the value of the $I_{\mathrm{1min}}$.
     \begin{equation}
-        i_\mathrm{1BCM}(T_{\mathrm{sw,on}})= 2I_{\mathrm{1min}}= 2\cdot \SI{0.833}{\ampere} = \SI{1.667}{\ampere}
+        i_\mathrm{1BCM}(T_{\mathrm{s,on}})= 2I_{\mathrm{1min}}= 2\cdot \SI{0.833}{\ampere} = \SI{1.667}{\ampere}
     \end{equation}
     The differential form of the inductance equation is used for the further calculation.
     \begin{equation}
@@ -117,10 +117,10 @@ First, all losses of the boost converter including the resistance of the inducto
     \begin{equation}
         u_\mathrm{L}=L\frac{\Delta i_\mathrm{L}}{\Delta t}
     \end{equation}
-    Only the switch-on period is considered, therefore $\Delta t = T_{\mathrm{sw,on}}$. Furthermore, $u_\mathrm{L}=U_\mathrm{1}$ and $\Delta i_\mathrm{L} = 2 I_\mathrm{1min}$.
+    Only the switch-on period is considered, therefore $\Delta t = T_{\mathrm{s,on}}$. Furthermore, $u_\mathrm{L}=U_\mathrm{1}$ and $\Delta i_\mathrm{L} = 2 I_\mathrm{1min}$.
     The switch-on period can be determined by the known duty cycle D and the known frequency $f_{\mathrm{s}}$.
     \begin{equation}
-        T_{\mathrm{sw,on}} = D T_{\mathrm{s}} = \Delta t = \frac{D}{f_{\mathrm{s}}} = \frac{0.8}{\SI{100}{\kilo\hertz}}=\SI{8}{\micro\sec}
+        T_{\mathrm{s,on}} = D T_{\mathrm{s}} = \Delta t = \frac{D}{f_{\mathrm{s}}} = \frac{0.8}{\SI{100}{\kilo\hertz}}=\SI{8}{\micro\sec}
     \end{equation}
     The following inductivity equation can be derived from this.
     \begin{equation}
@@ -134,7 +134,7 @@ First, all losses of the boost converter including the resistance of the inducto
 
 \subtask{Calculate a suitable capacity, using the output voltage ripple given in the specification. Determine the current stress of the capacitor $I_\mathrm{C,RMS}$.}
 \begin{solutionblock}
-    The reaction of the voltage fluctuation on the current fluctuation is neglected. During on-state of the transistor, the output capacitor feed the load. Assuming an constant output current and an ideal capacitor, the output can be adopted as linearly decreasing for this intervall.
+    The reaction of the voltage fluctuation on the current fluctuation is neglected. During on-state of the transistor, the output capacitor feed the load. Assuming an constant output current and an ideal capacitor, the output can be adopted as linearly decreasing for this interval.
 
     The differential form of the capacitor equation is used for this task.
     \begin{equation}
@@ -181,7 +181,7 @@ First, all losses of the boost converter including the resistance of the inducto
 \task{Boost Converter with losses}
 The same parameters as in task 1 are assumed as well as the equivalent circuit diagram. For the following points an ideal smoothed input current and a ripple-free output voltage are assumed.
 
-\subtask{From now on, the influences of the resistor $R_\mathrm{L}$ are considered. Derive the efficiency and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter, in dependence on the duty cycle D and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both values $\eta$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle D and give comments. Calculate D under consideration of $R_\mathrm{L}=\SI{0.2}{\ohm}$.}
+\subtask{From now on, the influences of the resistor $R_\mathrm{L}$ are considered. Derive the efficiency $\eta$ and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter, in dependence on the duty cycle $D$ and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both functions, $\eta$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle $D$ and give comments. Calculate $D$ under consideration of $R_\mathrm{L}=\SI{0.2}{\ohm}$.}
 \begin{solutionblock}
 We are looking for: $\eta= F(D,\alpha)$ and $\frac{U_\mathrm{2}}{U_\mathrm{1}}=F(D,\alpha)$ with $\alpha=\frac{R_\mathrm{L}}{R}$
 Assuming a good smoothing of the inductor current yields to $I_\mathrm{L}=\overline i_\mathrm{L}=i\mathrm{L}(t)$
@@ -208,6 +208,7 @@ If the current $I_\mathrm{L}$ is now assumed to be independent of t, the integra
 Now we insert the equation we have just calculated into equation \eqref{eq:efficiency}.
 \begin{equation}
     \eta=\frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{2}I_\mathrm{2}+\frac{ R_\mathrm{L}I_\mathrm{2}^2}{(1-D)^2}}=\frac{U_\mathrm{2}}{U_\mathrm{2}+R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}=\frac{RI_\mathrm{2}}{RI_\mathrm{2}+R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}=\frac{R}{R+R_\mathrm{L}}{(1-D)^2}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}
+    \label{eq:efficiencyOverD}
 \end{equation}
 If we now look at the original efficiency equation again, the following transformations can be carried out.
 \begin{equation}
@@ -216,6 +217,7 @@ If we now look at the original efficiency equation again, the following transfor
 If you now convert this equation to $U_\mathrm{2}/U_\mathrm{1}$, you get the following expression. Furthermore you have the expression $I_\mathrm{2}=I_\mathrm{L}(1-D)$
 \begin{equation}
     \frac{U_\mathrm{2}}{U_\mathrm{1}}=\eta \frac{I_\mathrm{L}}{I_\mathrm{2}}= \eta \frac{1}{(1-D)}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}\frac{1}{1-D}=\frac{1}{(1-D)+\frac{\alpha}{1-D}}\cdot \frac{(1-D)}{(1-D)}=\frac{1-D}{(1-D)^2+\alpha}
+    \label{eq:voltageRatioOverD}
 \end{equation}
 This results in the following for $\eta$ as a function of D and $\alpha$:
 \begin{equation}
@@ -257,7 +259,320 @@ If you now put these current values in relation to the losses, the following can
 \begin{equation}
     \frac{(\SI{47.321}{\ampere})^2}{(\SI{12.679}{\ampere})^2}=13.9296
 \end{equation}
-The losses are 14 times higher by a duty cycle of 0.958.
+The losses are 14 times higher by a duty cycle of 0.958. 
+
+
+The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:voltageRatioAndEfficiency} on the left side. Both functions for the loss-free and lossy operation are visualized. Moreover, on the right side of \autoref{fig:voltageRatioAndEfficiency} the resulting efficiency cures are shown.
+\begin{solutionfigure}[htb]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                xlabel={$D$},
+                ylabel={$U_{\mathrm{1}}/U_{\mathrm{2}}$},
+                axis lines=left,
+                ymin=0, ymax=10,
+                xmin=0, xmax=1,
+                xtick={0,0.2,0.4,0.6,0.8,1.0},
+                ytick={0,1,2,3,4,5,6,7,8,9,10},
+                xticklabels={0,0.2,0.4,0.6,0.8,1.0},
+                yticklabels={0,1,2,3,4,5,6,7,8,9,10},
+                thick,
+                smooth,
+                no markers,
+                height=7cm,
+                width = 0.99\textwidth,
+                grid
+                ]
+                \addplot[signalblue, domain=0:0.95] {(1-x)/((1-x)^2)};
+                \node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,8) {ideal function};
+                \addplot[signalred, domain=0:1.0] {(1-x)/((1-x)^2+0.2/30)};
+                \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,7) {function with losses};
+                \end{axis}
+        \end{tikzpicture}
+    \end{subfigure}%
+    \begin{subfigure}{0.45\textwidth}
+        \begin{tikzpicture}
+            \begin{axis}[
+                xlabel={$D$},
+                ylabel={$\eta$},
+                axis lines=left,
+                ymin=0, ymax=1.1,
+                xmin=0, xmax=1,
+                xtick={0,0.2,0.4,0.6,0.8,1.0},
+                ytick={0,0.2,0.4,0.6,0.8,1.0},
+                xticklabels={0,0.2,0.4,0.6,0.8,1.0},
+                yticklabels={0,0.2,0.4,0.6,0.8,1.0},
+                thick,
+                smooth,
+                no markers,
+                height=7cm,
+                width = 0.99\textwidth,
+                grid
+                ]
+                \addplot[signalblue, domain=0:1] {1};
+                \node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0.4) {ideal function};
+                \addplot[signalred, domain=0:1] {1/(1+(0.2/30)/(1-x)^2)};
+                \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0.3) {function with losses};
+            \end{axis}
+        \end{tikzpicture}
+    \end{subfigure}
+    \caption{Voltage ratio (on the left) and the efficiency function (on the right) are visualized. Both functions are dependant on the duty cycle $D$.}
+    \label{fig:voltageRatioAndEfficiency}
+\end{solutionfigure}
+
+\end{solutionblock}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subtask{Calculate the efficiencies $\eta_1(D_1)$ and $\eta_2(D_2)$ of the boost converter for an output current of $\SI{2}{\ampere}$ and a coil resistance of $R_{\mathrm{L}} = \SI{0.2}{\Omega}$.}
+
+\begin{solutionblock}
+    With the previous calculated duty cycles, the efficiency is determined with \eqref{eq:efficiencyOverD} for $D_{\mathrm{1}} = 0.842$ by
+    \begin{equation}
+        \eta_{\mathrm{1}} = \frac{1}{1+\frac{\frac{\SI{0.2}{\Omega}}{\SI{30}{\Omega}}}{\left(1-0.842\right)^2}} = 0.789,
+    \end{equation}
+    and, with the second duty cycle $D_2 = 0.958$ the efficiency results into:
+    \begin{equation}
+        \eta_{\mathrm{2}} = \frac{1}{1+\frac{\frac{\SI{0.2}{\Omega}}{\SI{30}{\Omega}}}{\left(1-0.958\right)^2}} = 0.211.
+    \end{equation}
+
+\end{solutionblock}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subtask{In addition, consider the conduction losses of the diode $D$ and the transistor $T$. Assume an equivalent resistance of $R_{\mathrm{D}} = \SI{0.5}{\milli\Omega}$ and voltage of $U_{\mathrm{D}} = \SI{1}{\volt}$ for the diode and an equivalent resistance of $R_{\mathrm{DS,on}} = \SI{30}{\milli\Omega}$ for the transistor. Determine the required duty cycle when the conduction losses are considered.}
+
+\begin{solutionblock}
+    Considering the losses, the equation is extended with the loss terms by
+    \begin{equation}
+        U_1 I_{\mathrm{L}} = U_2 I_2 + R_{\mathrm{L}} I_{\mathrm{L}}^2 + R_{\mathrm{DS,on}} I_{\mathrm{T}}^2 + U_{\mathrm{th}} \overline{i}_{\mathrm{D}} + R_{\mathrm{D}} I_{\mathrm{D}}^2,
+        \label{eq:powerBalanceBoostConverterWithLosses}
+    \end{equation}
+    with the average diode current $\overline{i}_{\mathrm{D}}$ and the rms diode current $I_{\mathrm{D}}$. The diode rms current is determined as:
+    \begin{equation}
+        I_{\mathrm{D}} = \sqrt{\frac{1}{T} \int_{0}^{T} i_{\mathrm{D}}(t)^2 \mathrm{d}t}
+        = \sqrt{\frac{1}{T} \left( \int_{0}^{T_{\mathrm{on}}} 0 \mathrm{d}t + \int_{T_{\mathrm{on}}}^{T_{\mathrm{s}}} I_{\mathrm{L}}(t)^2 \mathrm{d}t \right)}
+        = \sqrt{\frac{T_{\mathrm{s}-T_{\mathrm{on}}}}{T_{\mathrm{s}}}I_{\mathrm{L}}^2}
+        = \sqrt{1-D}I_{\mathrm{L}}.
+    \end{equation}
+    
+    Moreover, the average diode current is calculated with
+    \begin{equation}
+        \overline{i}_{\mathrm{D}} = (1-D)I_{\mathrm{L}} = I_2,
+        \label{eq:avgCurrentDiode}
+    \end{equation}
+
+    and, the current through the transistor is given by:
+    \begin{equation}
+        I_{\mathrm{T}} = \sqrt{\frac{1}{T} \int_{0}^{T} i_{\mathrm{T}}(t)^2 \mathrm{d}t}
+        = \sqrt{\frac{1}{T_{\mathrm{s}}}\left(\int_{0}^{T_{\mathrm{on}}} I_{\mathrm{L}}^2 \mathrm{d} t + \int_{T_{\mathrm{on}}}^{T_{\mathrm{s}}} 0 \mathrm{d} t \right)}
+        = \frac{T_{\mathrm{on}}}{T_{\mathrm{s}}}I_{\mathrm{L}}^2
+        = \sqrt{D} I_{\mathrm{L}}.
+    \end{equation}
+
+    Next, the currents in \eqref{eq:powerBalanceBoostConverterWithLosses} are replaced with $I_{\mathrm{2}}$, which leads into
+    \begin{equation}
+        \frac{U_1 I_2}{1 -D} = U_2 I_2 + R_{\mathrm{L}}\frac{I_2^2}{\left(1-D\right)^2} + R_{\mathrm{DS,on}} \frac{D I_2^2}{\left(1-D\right)^2} + U_{\mathrm{th}}I_2 + R_{\mathrm{D}}\frac{I_2^2}{1-D},
+    \end{equation}
+    with $I_2 = \frac{U_2}{R}$ and $D_{\mathrm{p}} = 1-D$ yields:
+    \begin{equation}
+        U_1 D_{\mathrm{p}} = U_2 D_{\mathrm{p}}^2 + \frac{R_{\mathrm{L}}}{R} U_2 + (1-D_{\mathrm{p}}) \frac{R_{\mathrm{DS,on}}}{R}U_2 + U_{\mathrm{th}}D_{\mathrm{p}}^2 + \frac{R_{\mathrm{D}}}{R}U_2 D_{\mathrm{p}}.
+    \end{equation}
+
+    Rearrange the equation into the abc formula structure by
+    \begin{equation}
+        0 = \left(U_2 + U_{\mathrm{th}} \right)D_{\mathrm{p}}^2 + \left(\frac{R_{\mathrm{D}}}{R}U_2 - \frac{R_{\mathrm{DS,on}}}{R}U_2 -U_1\right)D_{\mathrm{p}} + \frac{R_{\mathrm{DS,on}}+R_{\mathrm{L}}}{R} U_2,
+    \end{equation}
+    to solve the quadratic equation.
+    The first solution is given with
+    \begin{equation}
+        D_{\mathrm{P3}} = -\frac{1}{2} \frac{\frac{R_{\mathrm{D}}}{R}U_2 - \frac{R_{\mathrm{DS,on}}}{R}U_2 - U_1}{U_2 + U_{\mathrm{th}}} + \sqrt{\left(\frac{1}{2} \frac{\frac{R_{\mathrm{D}}}{R}U_2 - \frac{R_{\mathrm{DS,on}}}{R}U_2 - U_1}{U_2 + U_{\mathrm{th}}}\right)^2 - \frac{\frac{R_{\mathrm{DS,on}}+R_{\mathrm{L}}}{R}U_2}{U_2+U_{\mathrm{th}}}}
+        = 0.1458,
+    \end{equation}
+    which results in a duty cycle of $D_3 = 0.8542$.
+    The second solution is calculated in the same way as follows
+    \begin{equation}
+        D_{\mathrm{P3}} = -\frac{1}{2} \frac{\frac{R_{\mathrm{D}}}{R}U_2 - \frac{R_{\mathrm{DS,on}}}{R}U_2 - U_1}{U_2 + U_{\mathrm{th}}} - \sqrt{\left(\frac{1}{2} \frac{\frac{R_{\mathrm{D}}}{R}U_2 - \frac{R_{\mathrm{DS,on}}}{R}U_2 - U_1}{U_2 + U_{\mathrm{th}}}\right)^2 - \frac{\frac{R_{\mathrm{DS,on}}+R_{\mathrm{L}}}{R}U_2}{U_2+U_{\mathrm{th}}}}
+        = 0.0517,
+    \end{equation}
+    resulting in $D = 0.9483$.
+
+\end{solutionblock}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subtask{Beside the conduction losses, also switching losses need to be considered in reality. In \autoref{fig:TurnOffSiliconDiode} the voltage and current waveforms are visualized for the turn-off event of a diode. Therefore, calculate the turn-off losses for a fast diode with a commutation inductivity loop of $L_{\mathrm{c}} = \SI{500}{\nano\henry}$. The peak reverse recovery current is $\hat{i}_{\mathrm{rr}} = \SI{4}{\ampere}$ and the revere recovery time is $t_{\mathrm{rr}} = t_2 - t_0 = \SI{46.6}{\nano\second}$.}
+
+\begin{figure}[htb]
+    \centering
+    \begin{tikzpicture}
+        \tikzmath{
+            real = \t0, \t1, \t2 \x1;
+            \x1 = 3;
+            \t1 = 6;
+            \t2 = 8;
+            \t0 = (\t1-\x1)/0.71;
+        }
+        \begin{axis}[
+            xlabel={$t$},
+            axis lines=middle,
+            ymin=-1.5, ymax=1.2,
+            xmin=0, xmax=10,
+            xtick={\t0,\t1,\t2},
+            xticklabels={$t_0$,$t_1$,$t_2$},
+            ticklabel style ={yshift=0.2cm,anchor=south},
+            yticklabels={},
+            width=12cm,
+            height=5cm,
+            thick,
+            smooth,
+            no markers,
+            grid
+        ]
+        \draw[white,pattern=north east lines, pattern color=signalorange] (\t0,0) -- (\t1,-1) -- (\t1,0);
+        %
+        \node[signalorange, fill=white, inner sep = 1pt, anchor = south] at (axis cs:\t0+1.3,-0.45) {$Q_1$};
+        %
+        \draw[white,pattern=north west lines, pattern color=signalgreen] (\t1,0) -- (\t1,-1) -- (\t2,0);
+        %
+        \node[signalgreen, fill=white, inner sep = 1pt, anchor = south] at (axis cs:\t1+0.6,-0.45) {$Q_2$};
+        %
+        \draw[thick,signalred] (0,0.7) -- (\x1,0.7) -- (\t1,-1) -- (\t2,0);
+        %
+        \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:2,0.8) {$i_{\mathrm{D}}$};
+        % 
+        \draw[thin, signalred] (3.5,0.6) -- (4,0.7);
+        \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:4.5,0.55) {$\frac{\mathrm{d}i_{\mathrm{D}}}{\mathrm{d}t}$};
+        % 
+        \draw[thin, signalred] (7,-0.6) -- (7.8,-0.85);
+        \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:8,-1) {$\frac{\mathrm{d}i_{\mathrm{rr}}}{\mathrm{d}t}$};
+        %
+        \draw[thin, signalred] (\t1-0.05,-1.02) -- (\t1-0.3,-1.2);
+        %
+        \node[signalred, inner sep = 1pt, anchor = south] at (axis cs:\t1-0.4,-1.45) {$\hat{i}_{\mathrm{rr}}$};
+        %
+        \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:2,-0.7) {$Q_{\mathrm{rr}} = Q_{1} + Q_{2}$};
+        %
+        \draw[thick, signalblue, dashed] (0,0.1) -- (\t0,0.1) -- (\t0,-0.1) -- (\t1,-0.1) -- (\t1,-1.3) -- (\t2,-1.3) -- (\t2,-1) -- (10,-1);
+        %
+        \draw[thin, signalblue] (8.1, -1.3) -- (8.5,-1.3);
+        % 
+        \node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:8.8,-1.5) {${U}_{\mathrm{RB}}$};
+        %
+        \node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:2,0.15) {${u}_{\mathrm{D}}$};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Turn-off behavior of a fast silicon diode.}
+    \label{fig:TurnOffSiliconDiode}
+\end{figure}
+
+\begin{solutionblock}
+    Switching losses occur when the diode voltage or current is not zero. In \autoref{fig:TurnOffSiliconDiode} the voltage and current waveforms are shown. The voltage $u_{\mathrm{D}}$ is for the interval $t_0$ until $t_1$ small and, therefore, the switching losses. At the time step $t_1$ the diode is blocking and the reverse breakdown voltage $U_{\mathrm{RB}}$ applies. Due to this much bigger value, the switching losses increases significantly, resulting that only the interval between $t_1$ and $t_2$ is responsible for the switching losses. Hence, the losses are calculated as follows
+    \begin{equation}
+        P_{\mathrm{l}} = \frac{1}{T} \int_{t_1}^{t_2} i_{\mathrm{rr}} U_{\mathrm{RB}} \mathrm{d}t = \frac{1}{T} U_{\mathrm{RB}} \int_{t_1}^{t_2} i_{\mathrm{rr}} \mathrm{d}t,
+    \end{equation}
+    with the electric charge
+    \begin{equation}
+        Q_2 = \int_{t_1}^{t_2} i_{\mathrm{rr}} \mathrm{d}t,
+        \label{eq:chargeQ2}
+    \end{equation}
+    which results to the loss as:
+    \begin{equation}
+        P_{\mathrm{l}} = \frac{U_{\mathrm{RB}}Q_2}{T}.
+    \end{equation}
+
+    With the assumption of a linear current waveform, the derivative is replaced with the difference quotient for the time interval $t_1 - t_2$ by:
+    \begin{equation}
+        \Delta i_{\mathrm{D}} = \frac{\mathrm{d}i_{\mathrm{D}}(t)}{\mathrm{d}t}.
+    \end{equation}
+    
+    The equivalent circuit diagram of the diode switch-off event is shown in \autoref{fig:DiodeSwitchOff}.
+    \begin{solutionfigure}[htb]
+        \centering
+        \begin{circuitikz}[]
+            \draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+            to ++(-5.3,0);
+            \draw (0,2) to (2,2);
+            \draw (2,0) to (0,0);
+            \draw (2,2) to [R, l=$R$](2,0);
+            \draw (-6.375,2) ++(0.625,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
+            let \p1 = (S.mid) in (S.in) to  [short, i=$i_\mathrm{D}(t)$] ++(1,0)
+            to [inductor, l=$L_{\mathrm{c}}$, v = $u_\mathrm{L}(t)$, voltage = straight] ++(2,0)
+            to [short] ++(1,0)
+            to [short, -o, i=$i_2(t)$] (0,2) 
+            (S.mid) to [short, o-*](\x1,0);
+            \draw (-1.5,2) to [capacitor, *-*, l=$C$, i>^=$i_\mathrm{C}(t)$] ++(0,-2);
+        \end{circuitikz}
+        \caption{Equivalent circuit diagram of the diode switch-off event.}
+        \label{fig:DiodeSwitchOff}
+    \end{solutionfigure}
+    The current $i_{\mathrm{D}}(t)$ is dependant on the voltage $U_2$ by:
+    \begin{equation}
+        \Delta i_{\mathrm{D}} = \frac{\mathrm{d}i_{\mathrm{D}}(t)}{\mathrm{d}t} = \frac{U_2}{L_{\mathrm{c}}} = \frac{\SI{60}{\volt}}{\SI{500}{\nano\henry}} = \SI{120}{\ampere\per\micro\second}.
+    \end{equation}
+    
+    With the current slope $\Delta i_{\mathrm{D}}$ and the time $t_{10} = t_1 - t_0$, the maximum reverse current $\hat{i}_{\mathrm{rr}}$ is defined as
+    \begin{equation}
+        \Delta i_{\mathrm{D}} t_{10} = \hat{i}_{\mathrm{rr}},
+    \end{equation}
+    which is rearranged to calculate the time interval with:
+    \begin{equation}
+        t_{10} = \frac{\hat{i_{\mathrm{rr}}}}{i_{\mathrm{D}}} = \frac{\SI{4}{\ampere}}{\SI{120}{\ampere\per\micro\second}} = \SI{33.3}{\nano\second}.
+    \end{equation}
+
+    Hence, the time interval $t_{21}$ is given with:
+    \begin{equation}
+        t_{21} = t_{rr} - t_{10} = \SI{46.6}{\nano\second} - \SI{33.3}{\nano\second} = \SI{13.3}{\nano\second}.
+    \end{equation}
+
+    With \eqref{eq:chargeQ2} the electrical charge $Q_2$ is calculated by:
+    \begin{equation}
+        Q_2 = \frac{1}{2} t_{21} \hat{i}_{\mathrm{rr}} = \frac{\SI{13.3}{\nano\second}}{2} \cdot \SI{4}{\ampere} = \SI{26.6}{\nano\coulomb}.
+    \end{equation}
+
+    Reverse breakdown voltage is determined form the ECD (\autoref{fig:DiodeSwitchOff}) with the second Kirchhoff's law with:
+    \begin{equation}
+        U_{\mathrm{RB}} = U_2 + L_{\mathrm{c}} \frac{\mathrm{d}i_{\mathrm{rr}}(t)}{\mathrm{d}t} = \SI{60}{\volt} + \SI{500}{\nano\henry} \frac{\SI{4}{\ampere}}{\SI{13.3}{\nano\second}} = \SI{210.4}{\volt}.
+        \label{eq:reverseBreakdownVoltage}
+    \end{equation}
+
+    Therefore, the turn-off switching losses are calculated as:
+    \begin{equation}
+        P_{\mathrm{l}} = \frac{U_{\mathrm{RB}}Q_2}{T_{\mathrm{s}}} = \frac{\SI{210.4}{\volt}\cdot \SI{26.6}{\nano\coulomb}}{\frac{1}{\SI{100}{\kilo\hertz}}} = \SI{0.56}{\watt}.
+    \end{equation}
+
+\end{solutionblock}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subtask{Determine the turn-off switching losses of a normal silicon diode with a reverse recovery work $Q_{\mathrm{rr}} = \SI{16}{\micro\coulomb}$ and a rate of current rise $\frac{\mathrm{d}i_{\mathrm{rr}}}{\mathrm{d}t} = \SI{40}{\ampere\per\micro\second}$. Compare the result with the previous subtask.}
+
+\begin{solutionblock}
+    The reverse breakdown voltage is calculated with \eqref{eq:reverseBreakdownVoltage}, resulting in:
+    \begin{equation}
+        U_{\mathrm{RB,2}} = \SI{60}{\volt} \cdot \SI{500}{\nano\henry} \cdot \SI{40}{\ampere\per\micro\second} = \SI{80}{\volt}. 
+    \end{equation}
+
+    For the switch-off loss only the time interval $t_1$ until $t_2$ is relevant. Therefore, also the total given charge $Q_{\mathrm{rr}}$ must split into $Q_1$ and $Q_2$ as follows:
+    \begin{equation}
+        Q_2 = 
+    \end{equation}
+
+    \begin{equation}
+        t_{21} = \frac{\hat{i}_{\mathrm{rr}}}{\frac{\mathrm{d}i_{\mathrm{rr}}}{\mathrm{d}t}}
+    \end{equation}
+
+
+    With the loss work $Q_2$ form the task description, the losses are
+    \begin{equation}
+        P_{\mathrm{l}} = \frac{U_{\mathrm{RB,2}}}{}
+    \end{equation}
+
 \end{solutionblock}
 
 
@@ -281,15 +596,16 @@ The ripple of the output voltage and the current in the inductance can be ignore
 Both transistors operates with the same relative duty cycle $D_1 = D_2 = D$.
 
 \subtask{Calculate the relative duty cycle of the transistors $T_1$ and $T_2$ depending on the voltage transformation ratio $U_\mathrm{2}/U_\mathrm{1}$}
-\subtask{Calculate $I_L$ depending on $D$. Plot $D$ and $I_L$ against $U_\mathrm{1}$ and enter the numerical values for $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
+
+\subtask{Calculate $i_\mathrm{L}$ depending on $D$. Plot $D$ and $i_\mathrm{L}$ against $U_\mathrm{1}$ and enter the numerical values for $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
 \vspace{2em}\par
 % Explaining text for the next subtask
 Both transistors should now be able to have different duty cycles. Assume that the transistors are switched on at the same time.
 
 \subtask{Graphically represent the time profiles of the voltage at $L$ for $U_\mathrm{1}$ = $\SI{320}{\volt}$ and
- $D_1 = 0.9$ or for $U_\mathrm{1}$ = 720V and $D_2 = 0.1$ for one pulse period each.}
+ $D_1 = 0.9$ or for $U_\mathrm{1}$ = $\SI{720}{\volt}$ and $D_2 = 0.1$ for one pulse period each.}
 \subtask{Calculate the voltage transformation ratio in general as a function of $D_1$ and $D_2$.}
-\subtask{Express the current IL as a function of the specified operating parameters
+\subtask{Express the current $i_\mathrm{L}$ as a function of the specified operating parameters
 ($U_\mathrm{1}$, $U_\mathrm{2}$, $P_\mathrm{2}$) and as a function of $D_\mathrm{1}$ and $D_\mathrm{2}$.}
 \subtask{Are the calculated relationships valid if $T_1$ and $T_2$ do not switch synchronously or operate with
  different clock frequencies?}
@@ -298,16 +614,9 @@ Both transistors should now be able to have different duty cycles. Assume that t
 If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\mathrm{F}=\SI{2.5}{\volt}$ occurs at transistors,
  regardless of the current. All other components are considered ideal and loss-free.
 
-\subtask{How should $D_1$ and $D_2$ be selected so that the losses of the overall system are minimal? Take the relationships
- of previous calculation for the voltage transformation ratio and the value of $I_L$.}
+\subtask{How should $D_1$ and $D_2$ be selected so that the losses of the overall system are minimal?
+ The relationships calculated under subtask 3.4 and 3.5 can be used for the voltage transformation ratio and the value of $i_\mathrm{L}$.}
 \subtask{Plot $D_\mathrm{1}$ and $D_\mathrm{2}$ and the efficiency graphically over $U_\mathrm{1}$ and give numerical values
  for $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
-\subtask{Calculate the efficiency for following three cases:\\
-$U_\mathrm{1}=\SI{320}{\volt}$, $D_1 = D_2 = 0.56$,  $I_L = \SI{28}{\ampere}$  \\
-$U_\mathrm{1}=\SI{400}{\volt}$, $D_1 = D_2 = 0.5$, $I_L = \SI{22.5}{\ampere}$  \\
-$U_\mathrm{1}=\SI{720}{\volt}$, $D_1 = D_2 = 0.36$,  $I_L = \SI{19.5}{\ampere}$ \\
-and compare the numerical values.}
+\subtask{Calculate the efficiency for the three operating points in subtask 3.2 and compare the numerical values.}
 \subtask{How high is the maximum efficiency gain and at which operating point does it occur? Give a clear explanation.}
-
-
-
