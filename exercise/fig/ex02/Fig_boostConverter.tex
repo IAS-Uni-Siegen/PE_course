@@ -10,17 +10,17 @@
         (2.5,0) to[L, l=${L}$] (4.5,0)
 
         (4,0) coordinate(N1) to [short] ++(1.5,0) coordinate(Ud)
-        ++(0,-1.5) node[nigfete](Trans){}
+        ++(0,-1.5) node[nigfete,bodydiode](Trans){}
         (Ud) to [short] (Trans.drain)
         (Trans.source) to [short,-] ++(0,0) coordinate(U2p)
       
-        (Trans) ++(-1,0) node {$T$}
+        (Trans) ++(-1,0) node {$\mathrm{T}$}
 
         (4,0) to [short,-] (9.5,0)
 
         (5.5,-1.5) to [short,-] ++(0,-1.5) 
 
-        (6.5,0) to[D, l=$D$] (8,0)
+        (6.5,0) to[D, l=$\mathrm{D}$] (8,0)
                 
         (8,0) to[C,l_=$C$] (8,-3)
 
