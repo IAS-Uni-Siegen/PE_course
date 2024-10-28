@@ -493,7 +493,7 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
     The equivalent circuit diagram of the diode switch-off event is shown in \autoref{fig:DiodeSwitchOff}.
     \begin{solutionfigure}[htb]
         \centering
-        \begin{circuitikz}[]
+        \begin{circuitikz}[european currents,european resistors,american inductors]
             \draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
             to ++(-5.3,0);
             \draw (0,2) to (2,2);
@@ -542,7 +542,7 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
 
     Therefore, the turn-off switching losses are calculated as:
     \begin{equation}
-        P_{\mathrm{l}} = \frac{U_{\mathrm{RB}}Q_2}{T_{\mathrm{s}}} = \frac{\SI{210.4}{\volt}\cdot \SI{26.6}{\nano\coulomb}}{\frac{1}{\SI{100}{\kilo\hertz}}} = \SI{0.56}{\watt}.
+        P_{\mathrm{l,D1}} = \frac{U_{\mathrm{RB}}Q_2}{T_{\mathrm{s}}} = \frac{\SI{210.4}{\volt}\cdot \SI{26.6}{\nano\coulomb}}{\frac{1}{\SI{100}{\kilo\hertz}}} = \SI{0.56}{\watt}.
     \end{equation}
 
 \end{solutionblock}
@@ -555,23 +555,57 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
 \begin{solutionblock}
     The reverse breakdown voltage is calculated with \eqref{eq:reverseBreakdownVoltage}, resulting in:
     \begin{equation}
-        U_{\mathrm{RB,2}} = \SI{60}{\volt} \cdot \SI{500}{\nano\henry} \cdot \SI{40}{\ampere\per\micro\second} = \SI{80}{\volt}. 
+        U_{\mathrm{RB,2}} = \SI{60}{\volt} \cdot \SI{500}{\nano\henry} \cdot \SI{40}{\ampere\per\micro\second} = \SI{80}{\volt}.
+        \label{eq:RB_2}
     \end{equation}
 
-    For the switch-off loss only the time interval $t_1$ until $t_2$ is relevant. Therefore, also the total given charge $Q_{\mathrm{rr}}$ must split into $Q_1$ and $Q_2$ as follows:
+    Furthermore, the time intervals are necessary to calculate the diode switch-off loss, which is given by  
     \begin{equation}
-        Q_2 = 
+        t_{10} = t_1 - t_0 = \frac{\hat{i}_{\mathrm{rr}}}{\Delta i_{\mathrm{D}}}
     \end{equation}
-
+    and
     \begin{equation}
-        t_{21} = \frac{\hat{i}_{\mathrm{rr}}}{\frac{\mathrm{d}i_{\mathrm{rr}}}{\mathrm{d}t}}
+        t_{21} = t_2 - t_1 = \frac{\hat{i}_{\mathrm{rr}}}{\Delta i_{\mathrm{rr}}}.
     \end{equation}
 
-
-    With the loss work $Q_2$ form the task description, the losses are
+    With the determined time intervals, the corresponding electric charge is defined with
     \begin{equation}
-        P_{\mathrm{l}} = \frac{U_{\mathrm{RB,2}}}{}
+        Q_1 = \frac{t_{10}}{2}\hat{i}_{\mathrm{rr}}
     \end{equation}
+    and
+    \begin{equation}
+        Q_2 = \frac{t_{21}}{2} \hat{i}_{\mathrm{rr}}.
+    \end{equation}
+
+    With $\Delta i_{\mathrm{rr}}$ given in this subtask and with $\Delta i_{\mathrm{D}}$ from the previous subtask, the relation of the two electric charges is built to eliminate the time intervals as
+    \begin{equation}
+        \frac{Q_{1}}{Q_{2}} = \frac{\frac{\frac{\hat{i}_{\mathrm{rr}}}{\Delta i_{\mathrm{D}}}}{2}\hat{i}_{\mathrm{rr}}}{\frac{\frac{\hat{i}_{\mathrm{rr}}}{\Delta i_{\mathrm{rr}}}}{2}\hat{i}_{\mathrm{rr}}} 
+        = \frac{\Delta i_{\mathrm{rr}}}{\Delta i_{\mathrm{D}}}
+        = \frac{\SI{40}{\ampere\per\micro\second}}{\SI{120}{\ampere\per\micro\second}}
+        = \frac{1}{3},
+    \end{equation}
+    which means, that the charge of $Q_1 = \frac{1}{3} Q_2$.
+    The total electric charge is defined by
+    \begin{equation}
+        Q_{\mathrm{rr}} = Q_1 + Q_2 = \frac{1}{3}Q_2 + Q_2 = \frac{4}{3},
+    \end{equation}
+    which is resorted to determine $Q_2$ by:
+    \begin{equation}
+        Q_2 = \frac{3}{4}Q_{\mathrm{rr}} = \frac{3}{4}\cdot \SI{16\cdot10^{-6}}{\ampere\second}
+        = \SI{12}{\micro\coulomb}.
+    \end{equation}
+
+    As in the previous task, the main losses occur during the $t_{21}$ time interval with the electric charge $Q_{2}$. Using \eqref{eq:RB_2} from the beginning, the total switch-off loss are calculated by:
+    \begin{equation}
+        P_{\mathrm{l,D2}} = \frac{U_{\mathrm{RB,2}}Q_2}{T_{\mathrm{s}}}
+        = \frac{\SI{80}{\volt}\cdot\SI{12}{\micro\coulomb}}{\SI{10}{\micro\second}} = \SI{96}{\watt}.
+    \end{equation}
+
+    Comparing the switch-off losses of the two diodes with
+    \begin{equation}
+        \frac{P_{\mathrm{l,D2}}}{P_{\mathrm{l,D1}}} = \frac{\SI{96}{\watt}}{\SI{0.59}{\watt}} = 171.4,
+    \end{equation}
+    which means, that the loss of the second diode are approx. 171 times higher than of the first diode. This results in a dramatic higher cooling effort for the second diode assuming the same operation area.
 
 \end{solutionblock}
 
