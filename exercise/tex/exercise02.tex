@@ -595,34 +595,27 @@ The output voltage is kept at the specified constant value by adjusting the duty
 The ripple of the output voltage and the current in the inductance can be ignored. The current in L shows a continuous course.
 Both transistors operates with the same relative duty cycle $D_1 = D_2 = D$.
 
-\subtask{Calculate the relative duty cycle of the transistors $T_1$ and $T_2$ depending on the voltage transformation ratio $U_\mathrm{2}/U_\mathrm{1}$}
-\subtask{Calculate $I_L$ depending on $D$. Plot $D$ and $I_L$ against $U_\mathrm{1}$ and enter the numerical values for $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
+\subtask{Calculate the relative duty cycle of the transistors $\mathrm{T_1}$ and $\mathrm{T_2}$ depending on the voltage transformation ratio $U_\mathrm{2}/U_\mathrm{1}$}
+\subtask{Calculate $i_\mathrm{L}$ depending on $D$. Plot $D$ and $i_\mathrm{L}$ against $U_\mathrm{1}$ and enter the numerical values for $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
 \vspace{2em}\par
 % Explaining text for the next subtask
 Both transistors should now be able to have different duty cycles. Assume that the transistors are switched on at the same time.
 
 \subtask{Graphically represent the time profiles of the voltage at $L$ for $U_\mathrm{1}$ = $\SI{320}{\volt}$ and
- $D_1 = 0.9$ or for $U_\mathrm{1}$ = 720V and $D_2 = 0.1$ for one pulse period each.}
+ $D_1 = 0.9$ or for $U_\mathrm{1}$ = $\SI{720}{\volt}$ and $D_2 = 0.1$ for one pulse period each.}
 \subtask{Calculate the voltage transformation ratio in general as a function of $D_1$ and $D_2$.}
-\subtask{Express the current IL as a function of the specified operating parameters
+\subtask{Express the current $i_\mathrm{L}$ as a function of the specified operating parameters
 ($U_\mathrm{1}$, $U_\mathrm{2}$, $P_\mathrm{2}$) and as a function of $D_\mathrm{1}$ and $D_\mathrm{2}$.}
-\subtask{Are the calculated relationships valid if $T_1$ and $T_2$ do not switch synchronously or operate with
+\subtask{Are the calculated relationships valid if $\mathrm{T_1}$ and $\mathrm{T_2}$ do not switch synchronously or operate with
  different clock frequencies?}
 \vspace{2em}\par
 % Explaining text for the next subtask
-If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\mathrm{F}=\SI{2.5}{\volt}$ occurs at transistors,
+If the transistors $\mathrm{T_1}$ and $\mathrm{T_2}$ are switched on, a constant voltage drop $U_\mathrm{F}=\SI{2.5}{\volt}$ occurs at transistors,
  regardless of the current. All other components are considered ideal and loss-free.
 
-\subtask{How should $D_1$ and $D_2$ be selected so that the losses of the overall system are minimal? Take the relationships
- of previous calculation for the voltage transformation ratio and the value of $I_L$.}
+\subtask{How should $D_1$ and $D_2$ be selected so that the losses of the overall system are minimal?
+ The relationships calculated under subtask 3.4 and 3.5 can be used for the voltage transformation ratio and the value of $i_\mathrm{L}$.}
 \subtask{Plot $D_\mathrm{1}$ and $D_\mathrm{2}$ and the efficiency graphically over $U_\mathrm{1}$ and give numerical values
  for $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
-\subtask{Calculate the efficiency for following three cases:\\
-$U_\mathrm{1}=\SI{320}{\volt}$, $D_1 = D_2 = 0.56$,  $I_L = \SI{28}{\ampere}$  \\
-$U_\mathrm{1}=\SI{400}{\volt}$, $D_1 = D_2 = 0.5$, $I_L = \SI{22.5}{\ampere}$  \\
-$U_\mathrm{1}=\SI{720}{\volt}$, $D_1 = D_2 = 0.36$,  $I_L = \SI{19.5}{\ampere}$ \\
-and compare the numerical values.}
+\subtask{Calculate the efficiency for the three operating points in subtask 3.2 and compare the numerical values.}
 \subtask{How high is the maximum efficiency gain and at which operating point does it occur? Give a clear explanation.}
-
-
-
