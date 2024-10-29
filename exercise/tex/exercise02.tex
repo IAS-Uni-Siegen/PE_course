@@ -34,37 +34,37 @@ First, all losses of the boost converter are neglected.
 
 \begin{solutionblock}
     \input{./fig/ex02/Fig_ECDTeTa.tex}
-    ECD is short for equivalent circuit diagram.
-    As there are no losses at the transistor, the voltage $U_{\mathrm{1}}$ is equal to $u_{\mathrm{L}}$ for the switch-on period $T_{\mathrm{on}}$.
+    The equivalent circuit diagram (ECD) is shown in \autoref{fig:switching_states_step-down_converter}.
+    As there are no losses at the transistor, the voltage $U_{\mathrm{1}}$ is equal to $u_{\mathrm{L}}$ for the switch-on period $T_{\mathrm{on}}$ and is defined as
     \begin{equation}
-        U_{\mathrm{1}} = u_{\mathrm{L}} = L \frac{\Delta i_{\mathrm{L}} }{\Delta t} 
+        U_{\mathrm{1}} = u_{\mathrm{L}} = L \frac{\Delta i_{\mathrm{L}} }{\Delta t}. 
     \end{equation}
     This subtask does not consider the complete period $T_{\mathrm{s}}$, but only the switch-on period $T_{\mathrm{on}}$. Furthermore, the initial state of the current $i_{\mathrm{L}}$ must also be considered.
-    That is why we can completely rearrange the equation.
+    That is why we can completely rearrange the equation into:
     \begin{equation}
-        i_{\mathrm{L}}(T_{\mathrm{on}}) =  \frac{U_{\mathrm{1}} }{L}T_{\mathrm{on}} +  i_{\mathrm{L}}(0)
+        i_{\mathrm{L}}(T_{\mathrm{on}}) =  \frac{U_{\mathrm{1}} }{L}T_{\mathrm{on}} +  i_{\mathrm{L}}(0).
     \end{equation}
-    The following meshing can be used for the switch-off time $T_{\mathrm{off}}$.
+    Applying Kirchhoff's second law, the voltage equation for the  the switch-off time $T_{\mathrm{off}}$ is given with:
     \begin{equation}
-        U_{\mathrm{1}} = u_{\mathrm{L}} + U_{\mathrm{2}}
+        U_{\mathrm{1}} = u_{\mathrm{L}} + U_{\mathrm{2}}.
     \end{equation}
-    Now insert the differential expression for $u_{\mathrm{L}}$. 
+    Now insert the differential expression for $u_{\mathrm{L}}$ 
     \begin{equation}
-        L \frac{\Delta i_{\mathrm{L}} }{\Delta t} = U_{\mathrm{1}} - U_{\mathrm{2}}
+        L \frac{\Delta i_{\mathrm{L}} }{\Delta t} = U_{\mathrm{1}} - U_{\mathrm{2}}.
     \end{equation}
-    The equation for the current $i_{\mathrm{L}}$ at the switch-off time $T_{\mathrm{s,off}}$ results from the term describing the discharge of the inductance from $T_{\mathrm{s,off}}$ together with the initial condition of the current at this time.
+    The equation for the current $i_{\mathrm{L}}$ at the switch-off time $T_{\mathrm{s,off}}$ results from the term describing the discharge of the inductance from $T_{\mathrm{s,off}}$ together with the initial condition of the current at this time
     \begin{equation}
-        i_{\mathrm{L}}(t) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (t-T_{\mathrm{s,on}})+i_{\mathrm{L}}(T_{\mathrm{s,on}})
+        i_{\mathrm{L}}(t) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (t-T_{\mathrm{s,on}})+i_{\mathrm{L}}(T_{\mathrm{s,on}}).
     \end{equation}
     This results in the equation for the entire current curve over the period: 
     \begin{equation}
-        i_{\mathrm{L}}(t) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (t-T_{\mathrm{s,on}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}+i_{\mathrm{L}}(0)
+        i_{\mathrm{L}}(t) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (t-T_{\mathrm{s,on}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}+i_{\mathrm{L}}(0).
     \end{equation}
     If you now consider the steady state $i_{\mathrm{L}}(t=0)=i_{\mathrm{L}}(t=T_{\mathrm{s}})$, this results in the following:
     \begin{equation}
-        i_{\mathrm{L}}(0) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{s,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}+i_{\mathrm{L}}(0)
+        i_{\mathrm{L}}(0) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{s,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}+i_{\mathrm{L}}(0).
     \end{equation}
-    Now the initial condition $i_{\mathrm{L}}(0)=0$ is assumed.
+    Now the initial condition $i_{\mathrm{L}}(0)=0$ is assumed as
     \begin{equation}
         0 = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{s,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}
     \end{equation}
@@ -74,38 +74,38 @@ First, all losses of the boost converter are neglected.
     \end{equation}
 
     \begin{equation}
-        U_{\mathrm{1}}(T_{\mathrm{s,off}}+T_{\mathrm{s,on}})=  U_{\mathrm{2}}T_{\mathrm{s,off}}
+        U_{\mathrm{1}}(T_{\mathrm{s,off}}+T_{\mathrm{s,on}})=  U_{\mathrm{2}}T_{\mathrm{s,off}}.
     \end{equation}
     The switch-off period $T_{\mathrm{s,off}}$ plus the switch-on period $T_{\mathrm{s,on}}$ is the total period $T_{\mathrm{s}}$.
 
-    The following equation can now be established for the duty cycle.
+    The following equation can now be established for the duty cycle:
     \begin{equation}
-        \frac{U_{\mathrm{1}}}{U_{\mathrm{2}}}= \frac{T_{\mathrm{s,off}}}{T_{\mathrm{s}}}= \frac{T_{\mathrm{s}}}{T_{\mathrm{s}}}-\frac{T_{\mathrm{s,on}}}{T_{\mathrm{s}}} = 1-D
+        \frac{U_{\mathrm{1}}}{U_{\mathrm{2}}}= \frac{T_{\mathrm{s,off}}}{T_{\mathrm{s}}}= \frac{T_{\mathrm{s}}}{T_{\mathrm{s}}}-\frac{T_{\mathrm{s,on}}}{T_{\mathrm{s}}} = 1-D.
     \end{equation}
-
+    And with the values set, the result is as follows:
     \begin{equation}
-        D = 1-\frac{U_{\mathrm{1}}}{U_{\mathrm{2}}} = 1- \frac {\SI{12}{\volt}} {\SI{60}{\volt}} = 0.8
+        D = 1-\frac{U_{\mathrm{1}}}{U_{\mathrm{2}}} = 1- \frac {\SI{12}{\volt}} {\SI{60}{\volt}} = 0.8.
     \end{equation}
 \end{solutionblock}
 
 
 \subtask{Determine the average input current $\overline i_{\mathrm{L}}$.}
 \begin{solutionblock}
-    With neglecting the losses $P_{\mathrm{l}} = \SI{0}{\watt}$ of the boost converter and assuming a good smoothing of the inductor current, the average value $\overline i_{\mathrm{L}}$ is equal $i_{\mathrm{1}}$ and can be calculated using the power balance.
+    With neglecting the losses $(P_{\mathrm{l}} = \SI{0}{\watt})$ of the boost converter and assuming a good smoothing of the inductor current, the average value $\overline i_{\mathrm{L}}$ is equal $I_{\mathrm{1}}$ and can be calculated using the power balance
     \begin{equation}
-        P_{\mathrm{2}} = U_{\mathrm{2}} I_{\mathrm{2}} = {\SI{60}{\volt}} \cdot {\SI{2}{\ampere}} = {\SI{120}{\watt}}
+        P_{\mathrm{2}} = U_{\mathrm{2}} I_{\mathrm{2}} = {\SI{60}{\volt}} \cdot {\SI{2}{\ampere}} = {\SI{120}{\watt}}.
     \end{equation}
     Since no losses are taken, the power  $P_{\mathrm{1}}$ is equal to  $P_{\mathrm{2}}$.
     This results in the average current $\overline i_{\mathrm{L}}$:
     \begin{equation}
-         I_{\mathrm{1}} = \overline i_{\mathrm{L}} = \frac{P_{\mathrm{1}}}{U_{\mathrm{1}}}= \frac{\SI{120}{\watt}}{\SI{12}{\volt}} = \SI{12}{\ampere}
+         I_{\mathrm{1}} = \overline i_{\mathrm{L}} = \frac{P_{\mathrm{1}}}{U_{\mathrm{1}}}= \frac{\SI{120}{\watt}}{\SI{12}{\volt}} = \SI{12}{\ampere}.
     \end{equation}
-    An alternative solution would be to determine the average current $\overline i_{\mathrm{L}}$ via the duty cycle.
+    An alternative solution would be to determine the average current $\overline i_{\mathrm{L}}$ via the duty cycle
     \begin{equation}
     \frac{I_{\mathrm{1}}}{I_{\mathrm{2}}}=\frac{1}{1-D}
     \end{equation}
     \begin{equation}
-     I_{\mathrm{1}}=\frac{I_{\mathrm{2}}}{1-D}=\frac{\SI{2}{\ampere}}{1-0.8}= \SI{10}{\ampere}
+     I_{\mathrm{1}}=\frac{I_{\mathrm{2}}}{1-D}=\frac{\SI{2}{\ampere}}{1-0.8}= \SI{10}{\ampere}.
     \end{equation}
 \end{solutionblock}
 
