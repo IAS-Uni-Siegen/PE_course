@@ -12,13 +12,25 @@ The boost converter which is shown in \autoref{fig:boost converter with no losse
 
 \input{./fig/ex02/Fig_boostConverter.tex}
 
-The specification of the boost converter is given in \autoref{table:Parameters of the circuit}.
+The specification of the boost converter is given in \autoref{table:ex02_Parameters of the circuit}.
 
-\input{./fig/ex02/Fig_ParamtersboostConverter.tex}
+\begin{table}[ht]
+    \centering  % Zentriert die Tabelle
+    \begin{tabular}{llll}
+        \toprule
+        
+        Input voltage: &  $U_{\mathrm{1}} = \SI{12}{\volt}$ & Output voltage: & $U_{\mathrm{2}} = \SI{60}{\volt}$ \\ 
+        Output current: & $I_2 = \SI{2}{A}$  & Minimal output power: & $P_{\mathrm{out,min}} = \SI{10}{\watt}$ \\ 
+        Output voltage ripple: & $\triangle u_{\mathrm{2}} = \SI{120}{\milli\volt}$  & Switching frequency: & $f_{\mathrm{s}} = \SI{100}{\kilo\hertz}$ \\ 
+        \bottomrule
+    \end{tabular}
+    \caption{Parameters of the boost converter.}  % Beschriftung der Tabelle
+    \label{table:ex02_Parameters of the circuit}
+\end{table}
 
-First, all losses of the boost converter including the resistance of the inductor $R_\mathrm{L}$ are neglected.
+First, all losses of the boost converter are neglected.
 
-\subtask{Derive the duty cycle $D$ which leads to the specific output voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The steady state is considered when $i_{\mathrm{L}}(t=0)=i_{\mathrm{L}}(t=T_{\mathrm{s}})$.}
+\subtask{Derive the duty cycle $D$ which leads to the specific output voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$.}
 
 \begin{solutionblock}
     \input{./fig/ex02/Fig_ECDTeTa.tex}
@@ -97,7 +109,7 @@ First, all losses of the boost converter including the resistance of the inducto
     \end{equation}
 \end{solutionblock}
 
-\subtask{ Define a suitable inductance for the coil $L$, so that the boost converter is operating in continuous conduction mode (CCM), when supplying the minimum output power $P_\mathrm{out,min}$. Determine the maximal switch-off current $i_{\mathrm{T}}$ of the transistor $T$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
+\subtask{ Define a suitable inductance for the coil $L$, so that the boost converter is operating in continuous conduction mode (CCM) when supplying the minimum output power $P_\mathrm{out,min}$. Determine the maximal switch-off current $i_{\mathrm{T}}$ of the transistor $T$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
 \begin{solutionblock}
     Because no losses are assumed, $P_{\mathrm{1min}}=P_{\mathrm{2min}}$.
     The following equation is used for the average current $I_{\mathrm{1min}}$ over a period to generate the minimum power.
@@ -410,7 +422,7 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subtask{Beside the conduction losses, also switching losses need to be considered in practise. In \autoref{fig:TurnOffSiliconDiode} the voltage and current waveforms are visualized for the turn-off event of a diode (reverse recovery effect). Therefore, calculate the turn-off losses for a fast diode with a commutation inductivity loop of $L_{\mathrm{c}} = \SI{500}{\nano\henry}$. The peak reverse recovery current is $\hat{i}_{\mathrm{rr}} = \SI{4}{\ampere}$ and the reverse recovery time is $t_{\mathrm{rr}} = t_2 - t_0 = \SI{46.6}{\nano\second}$.}
+\subtask{Beside the conduction losses, also switching losses need to be considered in practice. In \autoref{fig:TurnOffSiliconDiode} the voltage and current waveforms are visualized for the turn-off event of a diode (reverse recovery effect). Therefore, calculate the turn-off losses for a fast diode with a commutation inductivity loop of $L_{\mathrm{c}} = \SI{500}{\nano\henry}$. The peak reverse recovery current is $\hat{i}_{\mathrm{rr}} = \SI{4}{\ampere}$ and the reverse recovery time is $t_{\mathrm{rr}} = t_2 - t_0 = \SI{46.6}{\nano\second}$.}
 
 \begin{figure}[htb]
     \centering

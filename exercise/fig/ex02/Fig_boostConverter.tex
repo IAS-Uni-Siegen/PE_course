@@ -4,9 +4,9 @@
     %\begin{tikzpicture}
     \begin{circuitikz}[european currents,european resistors,american inductors]
         \draw
-        (0,0) coordinate(u1o)
+        (1.5,0) coordinate(u1o)
         to [V,v_=$U_1$] ++(0,-3) coordinate(u1u)
-        (0,0) to[short] (2.5,0)
+       
         (2.5,0) to[L, l=${L}$] (4,0)
 
         (4,0) coordinate(N1) to [short] ++(1.5,0) coordinate(Ud)
@@ -17,6 +17,7 @@
         (Trans) ++(-1,0) node {$T$}
 
         (4,0) to [short,-] (9.5,0)
+        (8,-3) to[short,*-] ++(0,0) 
 
         (5.5,-1.5) to [short,-] ++(0,-1.5) 
 
@@ -27,9 +28,9 @@
 
         (9.5,0) to [R,l_=$R$,v^=$U_\text{2}$,voltage shift=0.5, voltage=straight] (9.5,-3)
 
-        (9.5,-3) to [short,-] (0,-3)
+        (9.5,-3) to [short,-] (1.5,-3)
 
-        (0.70,0) to [short,i_<=$i_1$(t)] (u1o)
+        (2.5,0) to [short,i_<=$i_1$(t)] (u1o)
         (4.5,0) to [short,-*,i^>=$i_\mathrm{L}$(t)] (5.5,0)
 
         (5.5,-0.5) to [short,i^<=$i_\mathrm{T}$(t)] (5.5,-1)
