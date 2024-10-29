@@ -962,7 +962,6 @@
             to [inductor, l=$L$, v = $u_\mathrm{L}(t)$, voltage = straight] ++(1.8,0)
             to [short, -o, i=$i_2(t)$] (0,2);
             \draw (S)--++(0,-2) to [diode, *-*, l=$D$, v_<=$u_\mathrm{s}(t)$, voltage = straight] ++(0,2);
-            %\draw  [node]{$T$} at (npn1.B)++(0,-0.5);
             \draw let \p1 = (npn1.B) in node[anchor=north] at (\x1,\y1) {$T$};
         \end{circuitikz}
         \caption{Step-down converter with real components (single quadrant type)}
@@ -2121,7 +2120,7 @@
     \onslide<4->{Solving for $D'$ yields
     \begin{equation}
         D' = \frac{U_1}{U_2-U_1}D.
-    \end{equation}}
+    \end{equation}}%
     \onslide<5->{The average load current is
     \begin{equation}}
         \onslide<5->{\overline{i}_2 = \frac{\Delta i_\mathrm{L}}{2}\frac{T'_\mathrm{off}}{T_\mathrm{s}}} \onslide<6->{= \frac{\Delta i_\mathrm{L,max}D}{2}D'}\onslide<7->{= \frac{\Delta i_\mathrm{L,max}}{2}\frac{U_1}{U_2-U_1}D^2.}
@@ -2267,7 +2266,7 @@
                 (S1.out) node[below, anchor = north east] {$S_\mathrm{1,on}$}
                 ([yshift = -0.3cm]S1.mid) node[below, anchor = north east] {$S_\mathrm{1,off}$}
                 (S2.out) node[below, anchor = north west] {$S_\mathrm{2,off}$}
-                ([yshift = -0.3cm]S2.mid) node[below, anchor = north west] {$S_\mathrm{2,on}$};;
+                ([yshift = -0.3cm]S2.mid) node[below, anchor = north west] {$S_\mathrm{2,on}$};
             \end{circuitikz}
             \caption{Buck-boost converter (ideal switch representation)}
             \label{fig:buck-boost-simple}
@@ -2327,7 +2326,7 @@
             \caption{Switch-off time}
         \end{subfigure}
         }%
-        \onslide<2->{\caption{Switch states of the buck-boost converter}} 
+        \onslide<2->{\caption{Switch states of the (synchronous) buck-boost converter}} 
     \label{fig:buck-boost-converter-switch-states}
     \end{figure}
 \end{frame}
@@ -2437,14 +2436,14 @@
         \begin{split}
             \onslide<1->{ \Delta i_\mathrm{L} &= \max\{i_\mathrm{L}(t)\} - \min\{i_\mathrm{L}(t)\}}  \onslide<2->{= i_\mathrm{L}(t=T_\mathrm{on}) - i_\mathrm{L}(t=T_\mathrm{s})}\\
                                 &\onslide<3->{=\frac{U_1}{L} T_\mathrm{on}} \onslide<4->{= \frac{U_2}{L} T_\mathrm{off}}\\
-                                & \onslide<5->{= \frac{DT_\mathrm{s}}{L}U_1=D \Delta i_\mathrm{L,max}.}
+                                & \onslide<5->{= D\frac{T_\mathrm{s}}{L}U_1=D \Delta i_\mathrm{L,max}.}
         \end{split}
         \label{eq:current-ripple-simple-buck-boost}
     \end{equation}
-    \onslide<6->{The buck-boost converter current ripple characteristic matches the previous boost converter behavior (cf. \eqref{eq:ripple-current-duty-cycle-max-step-up_converter}):}
+    \onslide<6->{The buck-boost converter current ripple characteristic matches the previous boost converter behavior -- compare \eqref{eq:ripple-current-duty-cycle-max-step-up_converter}:}
     \begin{itemize}
         \item<6-> Its minimal for $D \rightarrow 0$ since the output voltage becomes zero and the inductor is connected to the output voltage over the entire switching period. 
-        \item<7-> Its maximal for $D \rightarrow 1$ since the inductor is connected to the (none-zero) input voltage over the entire switching period.
+        \item<7-> Its maximal for $D \rightarrow 1$ since the inductor is connected to the (non-zero) input voltage over the entire switching period.
     \end{itemize}%
 \end{frame}
 
@@ -2595,7 +2594,7 @@
                 \caption{Switch-off time $T''_\mathrm{off}$}
             \end{subfigure}
             }%
-        \caption{Switch states of the buck-boost converter including DCM} 
+        \caption{Switch states of the (synchronous) buck-boost converter including DCM} 
         \label{fig:buck-boost-converter-switch-states-DCM}
         \end{figure}
     \end{frame}
@@ -2635,10 +2634,12 @@
         \frac{U_2}{U_1} = \frac{D^2}{2} \frac{\Delta i_\mathrm{L,max}}{\overline{i}_2}.
         \label{eq:voltage-ratio-DCM-buck-boost}
     \end{equation}
-    Since $\Delta i_\mathrm{L,max}$ also depends on $U_1$, the relation \eqref{eq:voltage-ratio-DCM-buck-boost} only holds for a given $U_1$. Hence, we can insert \eqref{eq:current-ripple-simple-buck-boost} in \eqref{eq:current-ripple-simple-buck-boost} and solve for $U_2$ to receive
+    \pause%
+    Since $\Delta i_\mathrm{L,max}$ also depends on $U_1$, the relation \eqref{eq:voltage-ratio-DCM-buck-boost} only holds for a given $U_1$. Hence, we can insert \eqref{eq:current-ripple-simple-buck-boost} in \eqref{eq:voltage-ratio-DCM-buck-boost} and solve for $U_2$ to receive
     \begin{equation}
         U_2= U_1^2 \frac{D^2}{2} \frac{T_\mathrm{s}}{L \overline{i}_2}.
     \end{equation}
+    \pause%
     Finally, the buck-boost converter \hl{operates in BCM} if
     \begin{equation}
         \overline{i}_\mathrm{L} = \frac{\Delta i_\mathrm{L}}{2} \quad \Leftrightarrow \quad  \overline{i}_2 = \Delta i_\mathrm{L,max} \frac{1}{2} \frac{D}{1-D}. 
@@ -2754,7 +2755,7 @@
     \begin{figure}
         \begin{itemize}
             \item Voltage change at the inductor can be also achieved by a \hl{single switch} which input is connected to the inductor.
-            \item Assuming an ideal, infinitely fast switch, the inductor current $i_\mathrm{L}(t)$ remains well-defined (no open switch at inductor).
+            \item<2-> Assuming an ideal, infinitely fast switch, the inductor current $i_\mathrm{L}(t)$ remains well-defined (no open switch at inductor).
         \end{itemize}
         \begin{circuitikz}[]
             \draw(0,3) node[cute spdt mid, rotate=90] (S) {}
@@ -2781,7 +2782,7 @@
     \begin{itemize}
         \item One side of the inductor remains connected to the common connection rail between input and output side.
         \item The other inductor side switches between the upper input and output rail.
-        \item Consequence: voltage and current directions are inverted between the two switch states. 
+        \item<2-> Consequence: voltage and current directions are inverted between the two switch states. 
     \end{itemize}
     \begin{figure}
         \centering	
@@ -2828,22 +2829,23 @@
 
 \begin{frame}
     \frametitle{Inverting buck-boost converter: voltage transfer ratios}
+    \onslide<1->{
     In CCM, the voltage balance of the inductor $L$ delivers:
     \begin{equation}
         u_\mathrm{L}(t) = \begin{cases} 
             U_1, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],\\ 
             U_2 & t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].
         \end{cases}
-    \end{equation}
-    In steady state, the average inductor voltage per period must be zero, yielding
+    \end{equation}}%
+    \onslide<2->{In steady state, the average inductor voltage per period must be zero, yielding}%
     \begin{equation}
-        U_1 T_\mathrm{on} = -U_2 T_\mathrm{off}  \quad \Leftrightarrow \quad  U_1 D T_\mathrm{s} = -U_2 (1-D) T_\mathrm{s} \quad \Leftrightarrow \quad \frac{U_2}{U_1} = -\frac{D}{1-D}.
+        \onslide<2->{U_1 T_\mathrm{on} = -U_2 T_\mathrm{off}  \quad}\onslide<3->{ \Leftrightarrow \quad  U_1 D T_\mathrm{s} = -U_2 (1-D) T_\mathrm{s} \quad}\onslide<4->{ \Leftrightarrow \quad \frac{U_2}{U_1} = -\frac{D}{1-D}.}
     \end{equation}
-    Likewise, the analysis of the DCM mode reveals
+    \onslide<5->{Likewise, the analysis of the DCM mode reveals}%
     \begin{equation}
-        \frac{U_2}{U_1} = -\frac{D^2}{2} \frac{\Delta i_\mathrm{L,max}}{\overline{i}_2} \quad \Leftrightarrow \quad U_2 = -U_1^2 \frac{D^2}{2} \frac{T_\mathrm{s}}{L \overline{i}_2}.
+        \onslide<5->{\frac{U_2}{U_1} = -\frac{D^2}{2} \frac{\Delta i_\mathrm{L,max}}{\overline{i}_2} \quad} \onslide<6->{\Leftrightarrow \quad U_2 = -U_1^2 \frac{D^2}{2} \frac{T_\mathrm{s}}{L \overline{i}_2}.}
     \end{equation}
-    Hence, the inverting buck-boost converter has a \hl{negative voltage transfer ratio} in CCM and DCM, but the same absolute voltage gain as the synchronous buck-boost converter.
+    \onslide<7->{Hence, the inverting buck-boost converter has a \hl{negative voltage transfer ratio} in CCM and DCM, but the same absolute voltage gain as the synchronous buck-boost converter.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2852,9 +2854,9 @@
 \begin{frame}
     \frametitle{Inverting buck-boost converter: circuit realization}
     \begin{itemize}
-        \item Energy transfer takes place solely indirect by intermediate storage within inductor.
-        \item Further characteristics (current and voltage ripple, operation modes) are analogous to the synchronous buck-boost converter.  
-        \item Transistor needs to block up to $|u_1(t)|+|u_2(t)|$, in contrast to step-down/up converter where only the input or output voltage is blocked by the transistor.
+        \item<2-> Energy transfer takes place solely \hl{indirect by intermediate storage within inductor.}
+        \item<3-> Further characteristics (current and voltage ripple, operation modes) are analogous to the synchronous buck-boost converter.  
+        \item<4-> Transistor needs to block up to $|u_1(t)|+|u_2(t)|$, in contrast to step-down/up converter where only the input or output voltage is blocked by the transistor.
     \end{itemize}
     \begin{figure}
         \begin{circuitikz}[]
@@ -2885,20 +2887,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Semiconductor utilization}
-    We define the \hl{semiconductor utilization} as the ratio of the average output power to the transistor (peak) power:
+    \onslide<1->{We define the \hl{semiconductor utilization} as the ratio of the average output power to the transistor (peak) power:
     \begin{equation}
         \frac{P_2}{P_\mathrm{T}} = \frac{U_2 I_2}{\max\{u_\mathrm{T}\}\cdot\max\{i_\mathrm{T}\}}.
-    \end{equation}
-    Background and interpretation:
+    \end{equation}}%
+    \onslide<2->{Background and interpretation:}%
     \begin{itemize}
-        \item Transistor rating needs to withstand the peak voltage and current. 
-        \item The lower the semiconductor utilization, the more costly / bulky the transistor for a given converter power (key parameter for the selection of the power stage).
+        \item<2-> Transistor needs to withstand the peak voltage and current (rating requirement). 
+        \item<3-> The lower the semiconductor utilization, the more costly / bulky the transistor for a given converter power (key parameter for the selection of the power stage).
     \end{itemize}
-    Assumptions for following calculations:
+    \onslide<4->{Assumptions for following calculations:}
     \begin{itemize}
-        \item Lossless operation in CCM,
-        \item Current and voltage ripple are marginal and can be neglected,
-        \item Given a constant $P_2$, the duty cycle $D$ is adjusted to achieve the desired output power.
+        \item<4-> Lossless operation in CCM,
+        \item<5-> Current and voltage ripple are marginal and can be neglected,
+        \item<6-> Given a constant $P_2$, the duty cycle $D$ is adjusted to achieve the desired output power.
     \end{itemize}
 \end{frame}
 
@@ -2917,14 +2919,14 @@
                 \end{split}
                 \label{eq:step-down-converter-transistor-peak-voltage-current}
             \end{equation}
-            The transistor must block the (constant) input voltage $U_1$ and step-like changing current $i_1(t)=i_\mathrm{T}(t)$. The semiconductor utilization is
+            The transistor must block the (constant) input voltage $U_1$ and step-like changing current $i_1(t)=i_\mathrm{T}(t)$. \onslide<2->{The semiconductor utilization is
             \begin{equation}
                 \begin{split}
                 \frac{P_2}{P_\mathrm{T}} &= \frac{U_2 I_2}{U_1 \frac{\overline{i}_1}{D}} = \frac{U_1 I_1}{U_1 \frac{I_1}{D}}\\
                 & = D.
             \end{split}
-            \end{equation}
-                
+            \end{equation}}
+            %    
         \end{column}
         \begin{column}{0.5\textwidth}
             \begin{figure}
@@ -2985,14 +2987,14 @@
                     \max\{i_\mathrm{T}\} &= \max\{i_\mathrm{L}\}= I_1.                                            
                 \end{split}
             \end{equation}
-            The transistor must block the (constant) output voltage $U_2$ and (constant) input current $i_1(t)=i_\mathrm{T}(t)$, which is filtered by the inductor. The semiconductor utilization is
+            The transistor must block the (constant) output voltage $U_2$ and (constant) input current $i_1(t)=i_\mathrm{T}(t)$, which is filtered by the inductor. \onslide<2->{The semiconductor utilization is
             \begin{equation}
                 \begin{split}
                 \frac{P_2}{P_\mathrm{T}} &= \frac{U_2 I_2}{U_2 I_1} = \frac{I_2}{I_1}\\
                 & = 1-D.
             \end{split}
-            \end{equation}
-                
+            \end{equation}}
+            %    
         \end{column}
         \begin{column}{0.5\textwidth}
             \begin{figure}
@@ -3053,14 +3055,14 @@
                     \max\{i_\mathrm{T}\} &= \frac{\overline{i}_1}{D}= \frac{I_1}{D}.                                            
                 \end{split}
             \end{equation}
-            The transistor must block the (combined) input and output voltage and step-like changing current $i_1(t)=i_\mathrm{T}(t)$. The semiconductor utilization is
+            The transistor must block the (combined) input and output voltage and step-like changing current $i_1(t)=i_\mathrm{T}(t)$.\onslide<2->{ The semiconductor utilization is
             \begin{equation}
                 \begin{split}
                 \frac{P_2}{P_\mathrm{T}} &= \frac{U_2 I_2}{(U_1-U_2) \frac{\overline{i}_1}{D}} = \frac{U_1 I_1}{U_1\frac{1}{1-D} \frac{I_1}{D}}\\
                 & = (1-D)D.
             \end{split}
-            \end{equation}
-                
+            \end{equation}}
+            %    
         \end{column}
         \begin{column}{0.5\textwidth}
             \begin{figure}
@@ -3115,14 +3117,14 @@
     \begin{columns}
         \begin{column}{0.4\textwidth}
              \begin{itemize}
-                \item The converters' semiconductor utilization is generally the highest if the input and output voltages are similar:
+                \item<2-> The converters' semiconductor utilization is generally the highest if the input and output voltages are similar:
                 \begin{itemize}
-                    \item Step-down: $D\rightarrow1$,
-                    \item Step-up: $D\rightarrow0$,
-                    \item Inv. buck-boost: $D\rightarrow0.5$.
+                    \item<2-> Step-down: $D\rightarrow1$,
+                    \item<3-> Step-up: $D\rightarrow0$,
+                    \item<4-> Inv. buck-boost: $D\rightarrow0.5$.
                 \end{itemize}
-                \item Inverting buck-boost has generally a lower utilization.
-                \item Finding indicates that the inv. buck-boost  should be only considered if an application truly requires both step-up and step-down operation.
+                \item<5-> Inverting buck-boost has generally a lower utilization.
+                \item<6-> Finding indicates that the inv. buck-boost  should be only considered if an application truly requires both step-up and step-down operation.
              \end{itemize}
         \end{column}
         \begin{column}{0.6\textwidth}
