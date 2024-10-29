@@ -1,0 +1,51 @@
+\begin{figure}[htb]
+    \begin{center}
+        
+    %\begin{tikzpicture}
+    \begin{circuitikz}[european currents,european resistors,american inductors]
+        \draw
+        (0,0) coordinate(u1o)
+        to [V,v_=$U_1$] ++(0,-3) coordinate(u1u)
+        (0,0) to[R, l=$R_\mathrm{L}$] (2.5,0)
+        (2.5,0) to[L, l=${L}$] (4,0)
+
+        (4,0) coordinate(N1) to [short] ++(1.5,0) coordinate(Ud)
+        ++(0,-2.23) node[nigfete](Trans){}
+        %(Ud) to [short] (Trans.drain)
+        (Trans.source) to [short,-*] ++(0,0) coordinate(U2p)
+        
+        (5.5,0) to[R, l_=$R_\mathrm{T}$] (5.5,-1.5)
+
+        (Trans) ++(-1,0) node {$T$}
+
+        (9,0) to [short,-] (12,0)
+        (12.5,-3) to [short,-] (9.5,-3)
+        (11,-3) to[short,*-] ++(0,0) 
+
+        (5.5,-1.5) to [short,-] ++(0,-1.5) 
+
+        (5,0) to[R, l=$R_\mathrm{D}$] (7.8,0)
+        (7.5,0) to[L, l=$L_\mathrm{c}$] (9.3,0)
+        (9,0) to[D, l=$D$] (12,0)
+
+        (11,0) to[short,*-] ++(0,0) % Punkt direkt hinter der Diode
+
+        (11,0) to[C,l_=$C$] (11,-3)
+
+        (12.5,0) to [R,l_=$R$,v^=$U_\text{2}$,voltage shift=0.5, voltage=straight] (12.5,-3)
+
+        (9.5,-3) to [short,-] (0,-3)
+
+        (0.70,0) to [short,i_<=$i_1$(t)] (u1o)
+        (4.5,0) to [short,-*,i^>=$i_\mathrm{L}$(t)] (5.5,0)
+
+        (5.5,-1.7) to [short,i^>=$i_\mathrm{T}$(t)] (5.5,-1.5)
+
+        (11,0) to [short,i^>=$i_2$(t)] (12.5,0)
+        ;
+\end{circuitikz}
+    \caption{Boost converter with losses}
+     \label{fig:boost converter with losses}
+\end{center}
+%\end{tikzpicture}
+\end{figure}

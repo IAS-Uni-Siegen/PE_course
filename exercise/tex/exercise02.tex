@@ -8,7 +8,7 @@
 %% Task 1: Boost Converter with no losses %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task {Boost converter with no losses}
-The boost converter which is shown in \autoref{fig:boost converter} supplies an amplifier with a rated voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. For this exercise steady-state operation is assumed.
+The boost converter which is shown in \autoref{fig:boost converter with no losses} supplies a resistive load with a rated voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The converter operates in steady state.
 
 \input{./fig/ex02/Fig_boostConverter.tex}
 
@@ -16,9 +16,9 @@ The specification of the boost converter is given in \autoref{table:Parameters o
 
 \input{./fig/ex02/Fig_ParamtersboostConverter.tex}
 
-First, all losses of the boost converter including the resistance of the inductor are neglected.
+First, all losses of the boost converter including the resistance of the inductor $R_\mathrm{L}$ are neglected.
 
-\subtask{Derive the duty cycle $D$ which leads to the specific output voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The steady state is considered when $i_{\mathrm{L}}(t=0)=i_{\mathrm{L}}(t=T_{\mathrm{s}})$}.
+\subtask{Derive the duty cycle $D$ which leads to the specific output voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The steady state is considered when $i_{\mathrm{L}}(t=0)=i_{\mathrm{L}}(t=T_{\mathrm{s}})$.}
 
 \begin{solutionblock}
     \input{./fig/ex02/Fig_ECDTeTa.tex}
@@ -77,7 +77,7 @@ First, all losses of the boost converter including the resistance of the inducto
 \end{solutionblock}
 
 
-\subtask{Determine the average input current $\overline i_{\mathrm{L}}$}
+\subtask{Determine the average input current $\overline i_{\mathrm{L}}$.}
 \begin{solutionblock}
     With neglecting the losses $P_{\mathrm{l}} = \SI{0}{\watt}$ of the boost converter and assuming a good smoothing of the inductor current, the average value $\overline i_{\mathrm{L}}$ is equal $i_{\mathrm{1}}$ and can be calculated using the power balance.
     \begin{equation}
@@ -97,7 +97,7 @@ First, all losses of the boost converter including the resistance of the inducto
     \end{equation}
 \end{solutionblock}
 
-\subtask{ Define a suitable inductivity for the coil L, so that the boost converter is operating in continuous conduction mode (CCM), for the minimum output power given in the specification above. Determine the maximal switch-off current $i_{\mathrm{T}}$ of the transistor $T_1$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
+\subtask{ Define a suitable inductance for the coil $L$, so that the boost converter is operating in continuous conduction mode (CCM), when supplying the minimum output power $P_\mathrm{out,min}$. Determine the maximal switch-off current $i_{\mathrm{T}}$ of the transistor $T$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
 \begin{solutionblock}
     Because no losses are assumed, $P_{\mathrm{1min}}=P_{\mathrm{2min}}$.
     The following equation is used for the average current $I_{\mathrm{1min}}$ over a period to generate the minimum power.
@@ -132,7 +132,7 @@ First, all losses of the boost converter including the resistance of the inducto
     \end{equation}
 \end{solutionblock}
 
-\subtask{Calculate a suitable capacity, using the output voltage ripple given in the specification. Determine the current stress of the capacitor $I_\mathrm{C,RMS}$.}
+\subtask{Calculate a suitable capacitance to meet the output voltage ripple specification. Determine the current stress of the capacitor $I_\mathrm{C,RMS}$.}
 \begin{solutionblock}
     The reaction of the voltage fluctuation on the current fluctuation is neglected. During on-state of the transistor, the output capacitor feed the load. Assuming an constant output current and an ideal capacitor, the output can be adopted as linearly decreasing for this interval.
 
@@ -178,10 +178,12 @@ First, all losses of the boost converter including the resistance of the inducto
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: Boost Converter with losses %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\task{Boost Converter with losses}
-The same parameters as in task 1 are assumed as well as the equivalent circuit diagram. For the following points an ideal smoothed input current and a ripple-free output voltage are assumed.
+\task{Boost converter with losses}
+Next, the impact of power losses on the above's converter behavior is investigated. For the following points an ideal smoothed input current and a ripple-free output voltage are assumed. The boost converter with losses  is shown in \autoref{fig:boost converter with losses}.
 
-\subtask{From now on, the influences of the resistor $R_\mathrm{L}$ are considered. Derive the efficiency $\eta$ and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter, in dependence on the duty cycle $D$ and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both functions, $\eta$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle $D$ and give comments. Calculate $D$ under consideration of $R_\mathrm{L}=\SI{0.2}{\ohm}$.}
+\input{./fig/ex02/Fig_boostConverterlosses.tex}
+
+\subtask{From now on, the influence of the resistor $R_\mathrm{L}$ is considered. Derive the efficiency $\eta$ and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter, in dependence on the duty cycle $D$ and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both functions, $\eta$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle $D$ and analyze the findings.} 
 \begin{solutionblock}
 We are looking for: $\eta= F(D,\alpha)$ and $\frac{U_\mathrm{2}}{U_\mathrm{1}}=F(D,\alpha)$ with $\alpha=\frac{R_\mathrm{L}}{R}$
 Assuming a good smoothing of the inductor current yields to $I_\mathrm{L}=\overline i_\mathrm{L}=i\mathrm{L}(t)$
@@ -227,6 +229,10 @@ And this results in the following for $\frac{U_\mathrm{2}}{U_\mathrm{1}}$ as a f
 \begin{equation}
     \frac{U_\mathrm{2}}{U_\mathrm{1}}(D,\alpha)=\frac{1-D}{(1-D)^2+\alpha}
 \end{equation}
+\end{solutionblock}
+
+\subtask{For $R_\mathrm{L}=\SI{0.2}{\ohm}$, determine the required duty cycle value for the given input and output voltages.}
+\begin{solutionblock}
 Now determine the required dutycycle under consideration of inductor losses:
 $\frac{U_\mathrm{2}}{U_\mathrm{1}}=\frac{D_\mathrm{P}}{(D_\mathrm{P})^2+\alpha}$with $D_\mathrm{P}=1-D$.
 As this expression is a quadratic term, the pq formula must be used. To be able to use this, it must first be converted to $D_\mathrm{P}$.
@@ -247,7 +253,7 @@ The second term resulting from the pq formula is:
     D_\mathrm{P2}=\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}-\sqrt{(\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}})^2-\alpha}= \frac{1}{2}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}-\sqrt{({\frac{1}{2}}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}})^2-\frac{\SI{0.2}{\ohm}}{\SI{30}{\ohm}}}= 0.042
 \end{equation}
 If you now insert this into the equation $D_\mathrm{2}=1-D_\mathrm{P2}$, you get the result $D_\mathrm{2}=0.958$.
-The duty cycle of $D_\mathrm{2}=0.958$ is only a theoretical value. For the design of the converter, the smaller duty cycle will bechosen, because of lower losses.
+The duty cycle of $D_\mathrm{2}=0.958$ is only a theoretical value. For the design of the converter, the smaller duty cycle will be chosen, because of lower losses.
 In the following, the currents $I_\mathrm{L1}$ and $I_\mathrm{L2}$ are determined in order to be able to make a statement about the losses.
 \begin{equation}
     I_\mathrm{L1} = \frac{I_\mathrm{2}}{1-D_\mathrm{1}}= \frac{\SI{2}{\ampere}}{1-0.842}=\SI{12.679}{\ampere}
@@ -325,7 +331,6 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
 \end{solutionblock}
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subtask{Calculate the efficiencies $\eta_1(D_1)$ and $\eta_2(D_2)$ of the boost converter for an output current of $\SI{2}{\ampere}$ and a coil resistance of $R_{\mathrm{L}} = \SI{0.2}{\Omega}$.}
 
@@ -344,7 +349,7 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subtask{In addition, consider the conduction losses of the diode $D$ and the transistor $T$. Assume an equivalent resistance of $R_{\mathrm{D}} = \SI{0.5}{\milli\Omega}$ and voltage of $U_{\mathrm{D}} = \SI{1}{\volt}$ for the diode and an equivalent resistance of $R_{\mathrm{DS,on}} = \SI{30}{\milli\Omega}$ for the transistor. Determine the required duty cycle when the conduction losses are considered.}
+\subtask{In addition, consider the conduction losses of the diode $D$ and the transistor $T$. Assume an equivalent resistance of $R_{\mathrm{D}} = \SI{0.5}{\milli\Omega}$ and voltage of $U_{\mathrm{D}} = \SI{1}{\volt}$ for the diode and an equivalent resistance of $R_{\mathrm{DS,on}} = \SI{30}{\milli\Omega}$ for the transistor. Determine the required duty cycle value when the conduction losses are considered.}
 
 \begin{solutionblock}
     Considering the losses, the equation is extended with the loss terms by
@@ -405,7 +410,7 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subtask{Beside the conduction losses, also switching losses need to be considered in reality. In \autoref{fig:TurnOffSiliconDiode} the voltage and current waveforms are visualized for the turn-off event of a diode. Therefore, calculate the turn-off losses for a fast diode with a commutation inductivity loop of $L_{\mathrm{c}} = \SI{500}{\nano\henry}$. The peak reverse recovery current is $\hat{i}_{\mathrm{rr}} = \SI{4}{\ampere}$ and the revere recovery time is $t_{\mathrm{rr}} = t_2 - t_0 = \SI{46.6}{\nano\second}$.}
+\subtask{Beside the conduction losses, also switching losses need to be considered in practise. In \autoref{fig:TurnOffSiliconDiode} the voltage and current waveforms are visualized for the turn-off event of a diode (reverse recovery effect). Therefore, calculate the turn-off losses for a fast diode with a commutation inductivity loop of $L_{\mathrm{c}} = \SI{500}{\nano\henry}$. The peak reverse recovery current is $\hat{i}_{\mathrm{rr}} = \SI{4}{\ampere}$ and the reverse recovery time is $t_{\mathrm{rr}} = t_2 - t_0 = \SI{46.6}{\nano\second}$.}
 
 \begin{figure}[htb]
     \centering
