@@ -962,7 +962,6 @@
             to [inductor, l=$L$, v = $u_\mathrm{L}(t)$, voltage = straight] ++(1.8,0)
             to [short, -o, i=$i_2(t)$] (0,2);
             \draw (S)--++(0,-2) to [diode, *-*, l=$D$, v_<=$u_\mathrm{s}(t)$, voltage = straight] ++(0,2);
-            %\draw  [node]{$T$} at (npn1.B)++(0,-0.5);
             \draw let \p1 = (npn1.B) in node[anchor=north] at (\x1,\y1) {$T$};
         \end{circuitikz}
         \caption{Step-down converter with real components (single quadrant type)}
