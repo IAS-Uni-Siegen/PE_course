@@ -1,7 +1,6 @@
 # Fundamentals of power electronics course
 [![Build LaTeX PDFs](https://github.com/IAS-Uni-Siegen/PE_course/actions/workflows/buildPDFs.yml/badge.svg?event=workflow_dispatch)](https://github.com/IAS-Uni-Siegen/PE_course/actions/workflows/buildPDFs.yml)
 [![CC BY 4.0][cc-by-shield]][cc-by]
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![made-with-latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg)](https://www.latex-project.org/)
 
 This work is licensed under a
@@ -14,7 +13,7 @@ This work is licensed under a
 [cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
 
 ## Lecture slides (click on preview picture)
-<a href="https://ias-uni-siegen.github.io/EMD_course/lecture.pdf" target="_blank" class="image fit"><img src="misc/Lecture_preview.png" alt=""></a>
+<a href="https://ias-uni-siegen.github.io/PE_course/lecture.pdf" target="_blank" class="image fit"><img src="misc/Lecture_preview.png" alt=""></a>
 
 The covered topics are:
 - An initial overview of power electronics
