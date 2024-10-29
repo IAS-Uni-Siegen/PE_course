@@ -621,36 +621,116 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \task{Buck-Boost converter}
-A wide input voltage range where can be realized by the cascade of buck and boost converter with a common inductance.
+A wide input voltage range can be realized by the cascade of buck and boost converter with a common inductance.
 With this topology the output voltage can be adjust to a value, which is higher or lower than the input voltage.
 \par
 % Schematic of Buck Boost Converter cascade
-\input{./fig/ex02/Fig_BuckBoostConverterCascade.tex}
+\input{./fig/ex02/Fig_BuckBoostConverterCascade}
 \par
 %Table of parameter values 
-\input{./fig/ex02/FigTab_BuckBoostConverterCascade.tex}
+\input{./fig/ex02/FigTab_BuckBoostConverterCascade}
 
 The output voltage is kept at the specified constant value by adjusting the duty cycles $D_1$ 
 (of transistor  $T_1$) and $D_2$ (of transistor $T_2$) using a control system. Both transistors operate at the same switching frequency.
 The ripple of the output voltage and of the current in the inductor can be ignored. The current in $L$ is continuous.
 Initially, both transistors operate with the same duty cycle $D_1 = D_2 = D$ and their switching patterns are synchronized.
 
+
 \subtask{Calculate the duty cycle of the transistors $T_1$ and $T_2$ depending on the voltage transformation ratio $U_\mathrm{2}/U_\mathrm{1}$.}
+
+\begin{solutionblock}
+% Solution
+    For calculation of $U_\mathrm{2}$ use the formular for boost converter:
+    \begin{equation}
+        U_\mathrm{2}=U \frac{1}{1-D_\mathrm{2}} 
+        \hspace{1cm} \mathrm{and} \hspace{1cm}  
+        U=U_\mathrm{1} \cdot D_\mathrm{1}
+    \end{equation}
+    with $D_\mathrm{1}=D_\mathrm{2}=D$ you get
+    \begin{equation}
+        U_\mathrm{2}=\frac{D}{1-D} U_\mathrm{1}
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        D=\frac{U_\mathrm{2}}{U_\mathrm{1}+U_\mathrm{2}}
+    \end{equation}
+    both equations leads to
+    \begin{equation}
+        D = \frac{\frac{U_\mathrm{2}}{U_\mathrm{1}}} {1+{\frac{U_\mathrm{2}}{U_\mathrm{1}}}}
+    \end{equation}   
+\end{solutionblock}
 
 \subtask{Calculate $i_\mathrm{L}$ depending on $D$. Plot $D$ and $i_\mathrm{L}$ against $U_\mathrm{1}$ and enter the numerical values for
  $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
+\begin{solutionblock}
+% Solution
+    The current $i_\mathrm{2}$ though the load depends on the power:
+    \begin{equation}
+        i_\mathrm{2}=\frac{P_\mathrm{2}}{U_\mathrm{2}} = \frac{\SI{400}{\watt}}{\SI{400}{\volt}}=\SI{12.5}{\ampere}
+    \end{equation}
+    The current though the inductor depends on the duty cycle and the current $i_\mathrm{2}$:
+    \begin{equation}
+        i_\mathrm{L}=i_\mathrm{2} \frac{D}{1-D} = i_\mathrm{2} \left(1+\frac{U_\mathrm{2}}{U_\mathrm{1}} \right)
+    \end{equation}
+    If you calculate the current $i_\mathrm{2}$ though the load and use it to calculate $i_\mathrm{L}$, you get following results:
+
+    \input{./fig/ex02/sFigTab_VoltageIlDutycycle}
+    
+\end{solutionblock}
+ 
+
 \vspace{2em}\par
 % Explaining text for the next subtask
 Both transistors should now be able to have different duty cycles. Assume that the transistors are switched on at the same time.
 
 \subtask{Graphically represent the time profiles of the voltage at $L$ for $U_\mathrm{1}$ = $\SI{320}{\volt}$ and
  $D_1 = 0.9$ and for $U_\mathrm{1}$ = $\SI{720}{\volt}$ and $D_2 = 0.1$ for one pulse period each.}
+
+\begin{solutionblock}
+% Solution
+    Case 1: With $U_\mathrm{1}$ = $\SI{320}{\volt}$ and $D_1 = 0.9$
+    \begin{equation}
+        D_2 = 1 - D_1 \frac{U_\mathrm{1}}{U_\mathrm{2}} = 1 - 0.9 \cdot \frac{\SI{320}{\volt}}{\SI{400}{\volt}}= 0.28
+    \end{equation}
+
+    \input{./fig/ex02/sFigTab_Case1a2}
+
+    Case 2: With $U_\mathrm{1}$ = $\SI{720}{\volt}$ and $D_1 = 0.1$
+    \begin{equation}
+        D_1 = \frac{U_\mathrm{2}}{U_\mathrm{1}} \left(1 - D_2 \right)= \frac{\SI{400}{\volt}}{\SI{720}{\volt}} \cdot \left(1 - 0.1\right) = 0.5
+    \end{equation}
+
+    \input{./fig/ex02/sFigTab_Case1a2}    
+        
+\end{solutionblock}
+
 \subtask{Calculate the voltage transformation ratio as a function of $D_1$ and $D_2$.}
+\begin{solutionblock}
+% Solution
+    With $U_\mathrm{L} = 0$ it follows
+    \begin{equation}
+        \frac{U_\mathrm{1}}{U_\mathrm{2}} = D_2 = 1 - D_1 \frac{D_1}{1-D_2}
+    \end{equation}
+\end{solutionblock}
+
+
 \subtask{Express the current $i_\mathrm{L}$ as a function of the specified operating parameters
 ($U_\mathrm{1}$, $U_\mathrm{2}$, $P_\mathrm{2}$) and as a function of $D_\mathrm{1}$ and $D_\mathrm{2}$.}
+\begin{solutionblock}
+% Solution
+    With the dependency of $i_\mathrm{L}$ from $i_\mathrm{2}$ and the duty cycle you get
+    \begin{equation}
+        i_\mathrm{L}=i_\mathrm{2} \frac{1}{1-D_2}= \frac{P_\mathrm{2}}{U_\mathrm{2}} \frac{1}{1-D_2}
+    \end{equation}
+\end{solutionblock}
+
 \subtask{Are the calculated relationships valid if $T_1$ and $T_2$ do not switch synchronously or operate with
  different clock frequencies?}
-\vspace{2em}\par
+
+\begin{solutionblock}
+% Solution
+    Yes, the relationsships are independent from the switching frequency and switching points.
+\end{solutionblock}
+
+    \vspace{2em}\par
 % Explaining text for the next subtask
 If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\mathrm{F}=\SI{2.5}{\volt}$ occurs at the transistors
  regardless of the current. All other components are considered ideal and loss-free.
