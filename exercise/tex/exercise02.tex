@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Begin exercise %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ex{Step-up and synchronous buck-boost converters}
+\ex{Step-up and (synchronous) buck-boost converters}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 1: Boost Converter with no losses %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task {Boost converter with no losses}
-The boost converter which is shown in \autoref{fig:boost converter with no losses} supplies a resistive load with a rated voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The converter operates in steady state.
+The boost converter which is shown in \autoref{fig:boost converter with no losses} supplies a resistive load with a rated voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The converter operates in steady state and all losses of the boost converter are neglected.
 
 \input{./fig/ex02/Fig_boostConverter.tex}
 
@@ -27,9 +27,7 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
     \caption{Parameters of the boost converter.}  % Beschriftung der Tabelle
     \label{table:ex02_Parameters of the circuit}
 \end{table}
-
-First, all losses of the boost converter are neglected.
-
+%
 \subtask{Derive the duty cycle $D$ which leads to the specific output voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$.}
 
 \begin{solutionblock}
@@ -195,7 +193,7 @@ Next, the impact of power losses on the above's converter behavior is investigat
 
 \input{./fig/ex02/Fig_boostConverterlosses.tex}
 
-\subtask{From now on, the influence of the resistor $R_\mathrm{L}$ is considered. Derive the efficiency $\eta$ and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter, in dependence on the duty cycle $D$ and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both functions, $\eta$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle $D$ and analyze the findings.} 
+\subtask{From now on, the influence of the resistor $R_\mathrm{L}$ is considered. Derive the efficiency $\eta$ and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter in dependence on the duty cycle $D$ and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both functions, $\eta$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle $D$ and analyze the findings.} 
 \begin{solutionblock}
 We are looking for: $\eta= F(D,\alpha)$ and $\frac{U_\mathrm{2}}{U_\mathrm{1}}=F(D,\alpha)$ with $\alpha=\frac{R_\mathrm{L}}{R}$
 Assuming a good smoothing of the inductor current yields to $I_\mathrm{L}=\overline i_\mathrm{L}=i\mathrm{L}(t)$
@@ -632,9 +630,9 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
 %% Task 3: Buck-Boost converter combination
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\task{Buck-Boost converter}
-A wide input voltage range where can be realized by the cascade of buck and boost converter with a common inductance.
-With this topology the output voltage can be adjust to a value, which is higher or lower than the input voltage.
+\task{Buck-boost converter}
+A wide input-to-output voltage range can be realized by the cascade of buck and boost converters with a common inductance.
+With this topology the output voltage can be adjusted to a value which is higher or lower than the input voltage.
 \par
 % Schematic of Buck Boost Converter cascade
 \input{./fig/ex02/Fig_BuckBoostConverterCascade.tex}
