@@ -668,7 +668,7 @@ Initially, both transistors operate with the same duty cycle $D_1 = D_2 = D$ and
     \end{equation}   
 \end{solutionblock}
 
-\subtask{Calculate $i_\mathrm{L}$ depending on $D$. Plot $D$ and $i_\mathrm{L}$ against $U_\mathrm{1}$ and enter the numerical values for
+\subtask{Calculate $I_\mathrm{L}$ depending on $D$. Plot $D$ and $I_\mathrm{L}$ against $U_\mathrm{1}$ and enter the numerical values for
  $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
 \begin{solutionblock}
 % Solution
@@ -678,9 +678,9 @@ Initially, both transistors operate with the same duty cycle $D_1 = D_2 = D$ and
     \end{equation}
     The current though the inductor depends on the duty cycle and the current $i_\mathrm{2}$:
     \begin{equation}
-        i_\mathrm{L}=i_\mathrm{2} \frac{D}{1-D} = i_\mathrm{2} \left(1+\frac{U_\mathrm{2}}{U_\mathrm{1}} \right)
+        I_\mathrm{L}=i_\mathrm{2} \frac{D}{1-D} = i_\mathrm{2} \left(1+\frac{U_\mathrm{2}}{U_\mathrm{1}} \right)
     \end{equation}
-    If you calculate the current $i_\mathrm{2}$ though the load and use it to calculate $i_\mathrm{L}$, you get following results:
+    If you calculate the current $i_\mathrm{2}$ though the load and use it to calculate $I_\mathrm{L}$, you get following results:
 
     \input{./fig/ex02/sFigTab_VoltageIlDutycycle}
     
@@ -722,13 +722,13 @@ Both transistors should now be able to have different duty cycles. Assume that t
 \end{solutionblock}
 
 
-\subtask{Express the current $i_\mathrm{L}$ as a function of the specified operating parameters
+\subtask{Express the current $I_\mathrm{L}$ as a function of the specified operating parameters
 ($U_\mathrm{1}$, $U_\mathrm{2}$, $P_\mathrm{2}$) and as a function of $D_\mathrm{1}$ and $D_\mathrm{2}$.}
 \begin{solutionblock}
 % Solution
-    With the dependency of $i_\mathrm{L}$ from $i_\mathrm{2}$ and the duty cycle you get
+    With the dependency of $I_\mathrm{L}$ from $i_\mathrm{2}$ and the duty cycle you get
     \begin{equation}
-        i_\mathrm{L}=i_\mathrm{2} \frac{1}{1-D_2}= \frac{P_\mathrm{2}}{U_\mathrm{2}} \frac{1}{1-D_2}
+        I_\mathrm{L}=i_\mathrm{2} \frac{1}{1-D_2}= \frac{P_\mathrm{2}}{U_\mathrm{2}} \frac{1}{1-D_2}
     \end{equation}
 \end{solutionblock}
 
@@ -746,9 +746,132 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
  regardless of the current. All other components are considered ideal and loss-free.
 
 \subtask{How should $D_1$ and $D_2$ be selected so that the losses of the overall system are minimal?
- The relationships calculated under subtask 3.4 and 3.5 can be used for the voltage transformation ratio and the value of $i_\mathrm{L}$.}
+ The relationships calculated under subtask 3.4 and 3.5 can be used for the voltage transformation ratio and the value of $I_\mathrm{L}$.}
+\begin{solutionblock}
+% Solution
+    The losses of the transistors are to consider:
+    \begin{equation}
+        P_\mathrm{l,T1}=D_1 U_\mathrm{F} I_\mathrm{L}=D_1 U_\mathrm{F} \frac{P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{1}{1-D_2}
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        P_\mathrm{l,T2}=D_2 U_\mathrm{F} I_\mathrm{L}=D_2 U_\mathrm{F} \frac{P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{1}{1-D_2}
+    \end{equation}
+    So the losses of both transitors can be expressed by
+    \begin{equation}
+        P_\mathrm{l}=\left(D_1 +D_2\right) U_\mathrm{F} \frac{P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{1}{1-D_2}
+    \end{equation}
+    and with
+    \begin{equation}
+        D_1 =\frac{U_\mathrm{1}}{U_\mathrm{2}} \left(1 - D_2 \right) 
+        \hspace{1cm} \Rightarrow \hspace{1cm}
+        P_\mathrm{l}=\left(\frac{U_\mathrm{1}}{U_\mathrm{2}} \left(1 - D_2 \right)+D_2\right) U_\mathrm{F} \frac{P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{1}{1-D_2}
+    \end{equation}
+    This leads to
+    \begin{equation}
+        P_\mathrm{l}=P_\mathrm{2} U_\mathrm{F} \left(\frac{1}{U_\mathrm{1}} + \frac{1}{U_\mathrm{2}} \cdot \frac{D_2}{1-D_2}\right)
+    \end{equation}
+    To minimize the losses depending on duty cycle you consider $P_\mathrm{l}$=$f(D_2)$
+    \begin{equation}
+        \frac{d}{dD_2} f(D_2)= \frac{1}{\left(1 - D_2 \right)^2}=0
+    \end{equation}
+    The The following can be conclude from the result: \\
+    $\Rightarrow$ Set $D_2$ as small as possible \\
+    $\Rightarrow$ Activate $T_2$ only for boost mode \\
+    $\Rightarrow$ Set $D_1$ as big as as possible \\
+\end{solutionblock}
+
 \subtask{Plot $D_\mathrm{1}$ and $D_\mathrm{2}$ and the efficiency over $U_\mathrm{1}$ and give numerical values
  for $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
+\begin{solutionblock}
+% Solution
+    With equation 2.94!!! and
+    \begin{equation}
+        \eta = \frac{P_\mathrm{2}}{P_\mathrm{l}+P_\mathrm{2}}
+    \end{equation}
+    you get following result:
+
+    \input{./fig/ex02/sFigTab_EfficiencyOpt}
+    
+\end{solutionblock}
+
 \subtask{Calculate the efficiency for the three operating points in subtask 3.2.}
+
+\begin{solutionblock}
+% Solution
+    Again the equation 2.94!!! is used with the condition $D_1$=$D_2$=$D$. This leads to
+    \begin{equation}
+        P_\mathrm{l}=2D U_\mathrm{F} I_\mathrm{L} = \frac{U_\mathrm{f} P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{2D}{1-D}
+    \end{equation}
+    you get following result:
+
+    \input{./fig/ex02/sFigTab_EfficiencySync}
+    
+\end{solutionblock}
+
 \subtask{How high is the maximum efficiency gain and at which operating point does it occur? Give an explanation
  for the observed finding.}
+
+\begin{solutionblock}
+% Solution
+    The efficiency gain is calculated by $\Delta \eta$=$\eta_opt$-$\eta_sync$.
+    You get following result:
+
+    \input{./fig/ex02/sFigTab_EfficiencyGain}
+    
+    Maximum efficiency gain at $U_\mathrm{1}=\SI{400}{\volt}$ \\
+    It looks like the efficiency gain is higher within boost mode, but why is the highest efficiency gain at $\SI{400}{\volt}$? (truncate issue?) \\
+    Let's consider the power loss at boost mode for the two cases. The power loss needs to be expressed by a function of the voltages:
+
+    \begin{equation}
+        P_\mathrm{l}=D_1 U_\mathrm{F} I_\mathrm{L} + D_2 U_\mathrm{F} I_\mathrm{L}
+    \end{equation}
+    If following is considered
+    \begin{equation}
+        I_\mathrm{L}=\frac{P_\mathrm{2}}{U_\mathrm{1}} 
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        D_1=1
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        D_2=1-\frac{U_\mathrm{1}}{U_\mathrm{2}} 
+    \end{equation}
+    this leads to
+    \begin{equation}
+        P_\mathrm{l,opt}=\frac{2 P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{1}} - \frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{2}}
+    \end{equation}
+
+    For the synchronous operation mode following is valid:
+    consider:
+    \begin{equation}
+        I_\mathrm{L}=\frac{P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{1}{1-D}  
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        D_1=D_2=D
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        D=\frac{U_\mathrm{2}}{U_\mathrm{1}+U_\mathrm{2}} 
+    \end{equation}
+    With equation 2.98!!! this leads now to
+    \begin{equation}
+        P_\mathrm{l,sync}=\frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{1}} + \frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{1}}=\frac{2 P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{1}}
+    \end{equation}
+
+    The efficiency can be expressed by 
+    \begin{equation}
+        \eta = \frac{P_\mathrm{2}}{P_\mathrm{l}+P_\mathrm{2}}=\frac{1}{1+\frac{P_\mathrm{l}}{P_\mathrm{2}}}
+    \end{equation}
+    If the result of the power losses is inserted into the formula, you get:
+    \begin{equation}
+        \eta_\mathrm{opt} = \frac{1}{1+U_\mathrm{F} \left(\frac{2}{U_\mathrm{1}}-\frac{1}{U_\mathrm{2}}\right)}
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        \eta_\mathrm{sync} = \frac{1}{1+U_\mathrm{F} \frac{2}{U_\mathrm{1}}}
+    \end{equation}
+
+    The minimal efficiency gain is the minimum of $\Delta \eta=\eta_\mathrm{opt}-\eta_\mathrm{sync}$ is a minimum.
+    
+    \begin{equation}
+        \Delta \eta= \frac{\frac{U_\mathrm{F}}{U_\mathrm{2}}}{\left(1+ \frac{2 U_\mathrm{F}}{U_\mathrm{1}}-\frac{U_\mathrm{F}}{U_\mathrm{2}} \right) \left(1+\frac{2 U_\mathrm{F}}{U_\mathrm{1}}\right)}
+    \end{equation}
+
+    Conclusion: \\
+    $\Rightarrow$ You get the minimal efficiency gain at maximal $U_\mathrm{1}$. \\
+    $\Rightarrow$ The difference between the power losses of $P_\mathrm{l,opt}$ and $P_\mathrm{l,sync}$ in boost mode is the constant factor 
+    $\frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{2}}$
+    which has a proportionally greater effect on the efficiency with smaller $U_\mathrm{2}$ power losses (here larger $U_\mathrm{1}$ ).
+
+\end{solutionblock}
