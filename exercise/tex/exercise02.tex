@@ -109,38 +109,38 @@ First, all losses of the boost converter are neglected.
     \end{equation}
 \end{solutionblock}
 
-\subtask{ Define a suitable inductance for the coil $L$, so that the boost converter is operating in continuous conduction mode (CCM) when supplying the minimum output power $P_\mathrm{out,min}$. Determine the maximal switch-off current $i_{\mathrm{T}}$ of the transistor $T$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
+\subtask{ Define a suitable inductance for the coil $L$, so that the boost converter is operating in boundary conduction mode (BCM) when supplying the minimum output power $P_\mathrm{out,min}$. Determine the maximal switch-off current $i_{\mathrm{T}}$ of the transistor $T$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
 \begin{solutionblock}
-    Because no losses are assumed, $P_{\mathrm{1min}}=P_{\mathrm{2min}}$.
-    The following equation is used for the average current $I_{\mathrm{1min}}$ over a period to generate the minimum power.
+    Because no losses are assumed, $P_{\mathrm{1,min}}=P_{\mathrm{2,min}}$.
+    The following equation is used for the average current $I_{\mathrm{1,min}}$ over a period to generate the minimum power
     \begin{equation}
-        I_{\mathrm{1min}} = \frac{P_{\mathrm{1min}}}{U_{\mathrm{1}}} = \frac{\SI{10}{\watt}}{\SI{12}{\volt}}= \SI{0.833}{\ampere}
+        I_{\mathrm{1,min}} = \frac{P_{\mathrm{1,min}}}{U_{\mathrm{1}}} = \frac{\SI{10}{\watt}}{\SI{12}{\volt}}= \SI{0.833}{\ampere}.
     \end{equation}
-    Requirement for BCM, Current is zero at starting point of the period  $i_\mathrm{1BCM}(0)=\SI{0}{\ampere}$.
-    At time $T_{\mathrm{s,on}}$, the average current to provide the minimum power corresponds to twice the value of the $I_{\mathrm{1min}}$.
+    Requirement for BCM, current is zero at starting point of the period  $i_\mathrm{1BCM}(0)=\SI{0}{\ampere}$.
+    At time $T_{\mathrm{s,on}}$, the average current to provide the minimum power corresponds to twice the value of the $I_{\mathrm{1,min}}$
     \begin{equation}
-        i_\mathrm{1BCM}(T_{\mathrm{s,on}})= 2I_{\mathrm{1min}}= 2\cdot \SI{0.833}{\ampere} = \SI{1.667}{\ampere}
+        i_\mathrm{1BCM}(T_{\mathrm{s,on}})= 2I_{\mathrm{1min}}= 2\cdot \SI{0.833}{\ampere} = \SI{1.667}{\ampere}.
     \end{equation}
-    The differential form of the inductance equation is used for the further calculation.
+    The differential form of the inductance equation is used for the further calculation
     \begin{equation}
-        u_\mathrm{L}=L\frac{\mathrm{d}i_\mathrm{L}}{\mathrm{d}t}
+        u_\mathrm{L}=L\frac{\mathrm{d}i_\mathrm{L}(t)}{\mathrm{d}t}.
     \end{equation}
-    Simplifications can be assumed for the lossless case.
+    Simplifications can be assumed for the case without saturation
     \begin{equation}
-        u_\mathrm{L}=L\frac{\Delta i_\mathrm{L}}{\Delta t}
+        u_\mathrm{L}=L\frac{\Delta i_\mathrm{L}}{\Delta t}.
     \end{equation}
     Only the switch-on period is considered, therefore $\Delta t = T_{\mathrm{s,on}}$. Furthermore, $u_\mathrm{L}=U_\mathrm{1}$ and $\Delta i_\mathrm{L} = 2 I_\mathrm{1min}$.
-    The switch-on period can be determined by the known duty cycle D and the known frequency $f_{\mathrm{s}}$.
+    The switch-on period can be determined by the known duty cycle $D$ and the known frequency $f_{\mathrm{s}}$
     \begin{equation}
-        T_{\mathrm{s,on}} = D T_{\mathrm{s}} = \Delta t = \frac{D}{f_{\mathrm{s}}} = \frac{0.8}{\SI{100}{\kilo\hertz}}=\SI{8}{\micro\sec}
+        T_{\mathrm{s,on}} = D T_{\mathrm{s}} = \Delta t = \frac{D}{f_{\mathrm{s}}} = \frac{0.8}{\SI{100}{\kilo\hertz}}=\SI{8}{\micro\second}.
     \end{equation}
-    The following inductivity equation can be derived from this.
+    The following inductivity equation can be derived from this
     \begin{equation}
-        L=\frac{\Delta t \cdot u_\mathrm{L} }{\Delta i_\mathrm{L}}= \frac{D U_\mathrm{1}}{f_{\mathrm{s}}2I_{\mathrm{1min}}} = \frac{0.8 \cdot \SI{12}{\volt}}{\SI{100}{\kilo\hertz\cdot 2\cdot \SI{10}{\ampere}}} = \SI{57.6}{\micro\henry}
+        L=\frac{\Delta t u_\mathrm{L} }{\Delta i_\mathrm{L}}= \frac{D U_\mathrm{1}}{f_{\mathrm{s}}2I_{\mathrm{1min}}} = \frac{0.8 \cdot \SI{12}{\volt}}{\SI{100}{\kilo\hertz\cdot 2\cdot \SI{10}{\ampere}}} = \SI{57.6}{\micro\henry}.
     \end{equation}
-    The maximum current flows through the transistor at the end of the switch-on interval.
+    The maximum current flows through the transistor at the end of the switch-on interval
     \begin{equation}
-        I_\mathrm{V1max} = I_\mathrm{ein} + \frac{\Delta I_\mathrm{L}}{2}=\SI{10}{\ampere}+\frac{\SI{1.667}{\ampere}}{2} = \SI{10.833}{\ampere}
+        I_\mathrm{T,max} = I_\mathrm{on} + \frac{\Delta I_\mathrm{L}}{2}=\SI{10}{\ampere}+\frac{\SI{1.667}{\ampere}}{2} = \SI{10.833}{\ampere}.
     \end{equation}
 \end{solutionblock}
 
@@ -148,42 +148,42 @@ First, all losses of the boost converter are neglected.
 \begin{solutionblock}
     The reaction of the voltage fluctuation on the current fluctuation is neglected. During on-state of the transistor, the output capacitor feed the load. Assuming an constant output current and an ideal capacitor, the output can be adopted as linearly decreasing for this interval.
 
-    The differential form of the capacitor equation is used for this task.
+    The differential form of the capacitor equation is used for this task
     \begin{equation}
-        i_\mathrm{C}=C \frac{\mathrm{d}u_\mathrm{c}}{\mathrm{d}t}
+        i_\mathrm{C}=C \frac{\mathrm{d}u_\mathrm{c}(t)}{\mathrm{d}t}.
     \end{equation}
-    Simplifications can be assumed for the lossless case.
+    Simplifications can be assumed for the case without saturation
     \begin{equation}
-        i_\mathrm{C}=C \frac{\Delta u_\mathrm{c}}{\Delta t}
+        i_\mathrm{C}=C \frac{\Delta u_\mathrm{c}}{\Delta t}.
     \end{equation}
     In addition, $i_\mathrm{C}=I_\mathrm{2}$ and $\Delta u_\mathrm{c}=\Delta u_\mathrm{2}$.
-    $\Delta t$ is again equal to the switch-on period and can be represented by the following equation.
+    $\Delta t$ is again equal to the switch-on period and can be represented by the following equation
     \begin{equation}
-        \Delta t = \frac{D}{f_\mathrm{s}}  
+        \Delta t = \frac{D}{f_\mathrm{s}}. 
     \end{equation}
-    Now that everything is known, the capacity can be determined.
+    Now that everything is known, the capacity can be determined
     \begin{equation}
-        C = \frac{I_\mathrm{2}\Delta t}{\Delta u_\mathrm{2}}= \frac{I_\mathrm{2}D}{\Delta u_\mathrm{2}f_\mathrm{s}}=\frac{\SI{2}{\ampere}\cdot 0.8}{\SI{120}{\milli\volt} \cdot \SI{100}{\kilo\hertz}}=\SI{133.333}{\micro\farad}
+        C = \frac{I_\mathrm{2}\Delta t}{\Delta u_\mathrm{2}}= \frac{I_\mathrm{2}D}{\Delta u_\mathrm{2}f_\mathrm{s}}=\frac{\SI{2}{\ampere}\cdot 0.8}{\SI{120}{\milli\volt} \cdot \SI{100}{\kilo\hertz}}=\SI{133.333}{\micro\farad}.
     \end{equation}
      During the on-state of the transistor we can assume an constant current which discharges the capacitor. During of-state the capacitor is charge with the current $i_\mathrm{1}-i_\mathrm{2}$.The average of the capacitor current is zero. An important rule during dimensioning the capacitor is the RMS Value of the current.
-     The RMS Value of the current is determined using the following equation.
+     The RMS Value of the current is determined using the following equation
      \begin{equation}
-        I_\mathrm{C}=\sqrt{\frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{s}}i_\mathrm{c}(t)^2\mathrm{d}t}
+        I_\mathrm{C}=\sqrt{\frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{s}}i_\mathrm{c}(t)^2\mathrm{d}t}.
      \end{equation}
-     The switch-on and switch-off periods are now set.
+     The switch-on and switch-off periods are now set
      \begin{equation}
-        I_\mathrm{C}=\sqrt{\frac{1}{T_\mathrm{s}}\int_{0}^{DT_\mathrm{s}}i_\mathrm{c}(t)^2\mathrm{d}t+\frac{1}{T_\mathrm{s}}\int_{DT_\mathrm{s}}^{T_\mathrm{s}}i_\mathrm{c}(t)^2\mathrm{d}t}
+        I_\mathrm{C}=\sqrt{\frac{1}{T_\mathrm{s}}\int_{0}^{DT_\mathrm{s}}i_\mathrm{c}(t)^2\mathrm{d}t+\frac{1}{T_\mathrm{s}}\int_{DT_\mathrm{s}}^{T_\mathrm{s}}i_\mathrm{c}(t)^2\mathrm{d}t}.
      \end{equation}
      With neglecting the current ripple (goodsmoothing):
      \begin{equation}
-        I_\mathrm{C}=\sqrt{D (I_\mathrm{2})^2+(1-D)(I_\mathrm{1}-I_\mathrm{2})^2}=\sqrt{0.8\cdot (\SI{2}{\ampere})^2+(1-0.8)\cdot(\SI{10}{\ampere}-\SI{2}{\ampere})^2} = \SI{4}{\ampere}
+        I_\mathrm{C}=\sqrt{D (I_\mathrm{2})^2+(1-D)(I_\mathrm{1}-I_\mathrm{2})^2}=\sqrt{0.8\cdot (\SI{2}{\ampere})^2+(1-0.8)\cdot(\SI{10}{\ampere}-\SI{2}{\ampere})^2} = \SI{4}{\ampere}.
      \end{equation}
-     The following equation is now used for the current ripple.
+     The following equation is now used for the current ripple
      \begin{equation}
-        I_\mathrm{C}=\sqrt{D (I_\mathrm{2})^2[1+\frac{1}{3}[\frac{\Delta i_\mathrm{L}}{2I_\mathrm{2}}]^2]+(1-D)(I_\mathrm{1}-I_\mathrm{2})^2[1+\frac{1}{3}[\frac{\Delta i_\mathrm{L}}{2(I_\mathrm{1}-I_\mathrm{2})}]^2]} 
+        I_\mathrm{C}=\sqrt{D (I_\mathrm{2})^2[1+\frac{1}{3}[\frac{\Delta i_\mathrm{L}}{2I_\mathrm{2}}]^2]+(1-D)(I_\mathrm{1}-I_\mathrm{2})^2[1+\frac{1}{3}[\frac{\Delta i_\mathrm{L}}{2(I_\mathrm{1}-I_\mathrm{2})}]^2]}
     \end{equation}
     \begin{equation}
-        I_\mathrm{C}=\sqrt{0.8 \cdot (\SI{2}{\ampere})^2 [1+\frac{1}{3}[\frac{\SI{0.833}{\ampere}}{2\cdot (\SI{2}{\ampere})}]^2]+(1-0.8)(\SI{10}{\ampere}- \SI{2}{\ampere})^2[1+\frac{1}{3}[\frac{\SI{0.833}{\ampere}}{2(\SI{10}{\ampere}- \SI{2}{\ampere})}]^2]}=\SI{4.023}{\ampere}
+        I_\mathrm{C}=\sqrt{0.8 \cdot (\SI{2}{\ampere})^2 [1+\frac{1}{3}[\frac{\SI{0.833}{\ampere}}{2\cdot (\SI{2}{\ampere})}]^2]+(1-0.8)(\SI{10}{\ampere}- \SI{2}{\ampere})^2[1+\frac{1}{3}[\frac{\SI{0.833}{\ampere}}{2(\SI{10}{\ampere}- \SI{2}{\ampere})}]^2]}=\SI{4.023}{\ampere}.
     \end{equation}
 \end{solutionblock}
 
@@ -198,48 +198,48 @@ Next, the impact of power losses on the above's converter behavior is investigat
 \subtask{From now on, the influence of the resistor $R_\mathrm{L}$ is considered. Derive the efficiency $\eta$ and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter, in dependence on the duty cycle $D$ and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both functions, $\eta$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle $D$ and analyze the findings.} 
 \begin{solutionblock}
 We are looking for: $\eta= F(D,\alpha)$ and $\frac{U_\mathrm{2}}{U_\mathrm{1}}=F(D,\alpha)$ with $\alpha=\frac{R_\mathrm{L}}{R}$
-Assuming a good smoothing of the inductor current yields to $I_\mathrm{L}=\overline i_\mathrm{L}=i\mathrm{L}(t)$
-The efficiency is given by the following equation.
+Assuming a good smoothing of the inductor current yields to $I_\mathrm{L}=\overline i_\mathrm{L}=i_\mathrm{L}(t)$
+The efficiency is given by the following equation
 \begin{equation}
-    \eta = \frac{P_\mathrm{2}}{P_\mathrm{1}} = \frac{P_\mathrm{2}}{P_\mathrm{2}+P_\mathrm{l}} = \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} +R_\mathrm{L} I_\mathrm{L}^2} \label{eq:efficiency}
+    \eta = \frac{P_\mathrm{2}}{P_\mathrm{1}} = \frac{P_\mathrm{2}}{P_\mathrm{2}+P_\mathrm{l}} = \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} +R_\mathrm{L} I_\mathrm{L}^2} \label{eq:efficiency}.
 \end{equation}
-Determine $I_\mathrm{2}$ depending on D and $I_\mathrm{L}$.
+Determine $I_\mathrm{2}$ depending on D and $I_\mathrm{L}$
 \begin{equation}
-    I_\mathrm{2}=\frac{1}{T_\mathrm{s}} \int_{0}^{DT_\mathrm{s}} i_\mathrm{C discharg}(t)\mathrm{d}t-\frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} i_\mathrm{C charg}(t)\mathrm{d}t+\frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} I_\mathrm{L}(t)\mathrm{d}t
+    I_\mathrm{2}=\frac{1}{T_\mathrm{s}} \int_{0}^{DT_\mathrm{s}} i_\mathrm{C, discharg}(t)\mathrm{d}t-\frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} i_\mathrm{C,charg}(t)\mathrm{d}t+\frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} I_\mathrm{L}(t)\mathrm{d}t.
 \end{equation}
-The following property can now be used.
+The following property can now be used
 \begin{equation}
-    0 = \frac{1}{T_\mathrm{s}} \int_{0}^{DT_\mathrm{s}} i_\mathrm{C discharg}(t)\mathrm{d}t-\frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} i_\mathrm{C charg}(t)\mathrm{d}t
+    0 = \frac{1}{T_\mathrm{s}} \int_{0}^{DT_\mathrm{s}} i_\mathrm{C discharg}(t)\mathrm{d}t-\frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} i_\mathrm{C charg}(t)\mathrm{d}t.
 \end{equation}
-This simplifies the explanation of this expression.
+This simplifies the explanation of this expression
 \begin{equation}
-    I_\mathrm{2}= \frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} I_\mathrm{L}(t)\mathrm{d}t
+    I_\mathrm{2}= \frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} I_\mathrm{L}(t)\mathrm{d}t.
 \end{equation}
-If the current $I_\mathrm{L}$ is now assumed to be independent of t, the integral can be solved.
+If the current $I_\mathrm{L}$ is now assumed to be independent of t, the integral can be solved
 \begin{equation}
-    I_\mathrm{2}= \frac{I_\mathrm{L}}{T_\mathrm{s}}(T_\mathrm{s}-(DT_\mathrm{s}))=I_\mathrm{L}(1-D)
+    I_\mathrm{2}= \frac{I_\mathrm{L}}{T_\mathrm{s}}(T_\mathrm{s}-(DT_\mathrm{s}))=I_\mathrm{L}(1-D).
 \end{equation}
-Now we insert the equation we have just calculated into equation \eqref{eq:efficiency}.
+Now we insert the equation we have just calculated into equation \eqref{eq:efficiency}
 \begin{equation}
-    \eta=\frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{2}I_\mathrm{2}+\frac{ R_\mathrm{L}I_\mathrm{2}^2}{(1-D)^2}}=\frac{U_\mathrm{2}}{U_\mathrm{2}+R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}=\frac{RI_\mathrm{2}}{RI_\mathrm{2}+R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}=\frac{R}{R+R_\mathrm{L}}{(1-D)^2}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}
+    \eta=\frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{2}I_\mathrm{2}+\frac{ R_\mathrm{L}I_\mathrm{2}^2}{(1-D)^2}}=\frac{U_\mathrm{2}}{U_\mathrm{2}+R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}=\frac{RI_\mathrm{2}}{RI_\mathrm{2}+R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}=\frac{R}{R+R_\mathrm{L}}{(1-D)^2}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}.
     \label{eq:efficiencyOverD}
 \end{equation}
-If we now look at the original efficiency equation again, the following transformations can be carried out.
+If we now look at the original efficiency equation again, the following transformations can be carried out
 \begin{equation}
-    \eta=\frac{P_\mathrm{2}}{P_\mathrm{1}} = \frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{1}I_\mathrm{L}}
+    \eta=\frac{P_\mathrm{2}}{P_\mathrm{1}} = \frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{1}I_\mathrm{L}}.
 \end{equation}
 If you now convert this equation to $U_\mathrm{2}/U_\mathrm{1}$, you get the following expression. Furthermore you have the expression $I_\mathrm{2}=I_\mathrm{L}(1-D)$
 \begin{equation}
-    \frac{U_\mathrm{2}}{U_\mathrm{1}}=\eta \frac{I_\mathrm{L}}{I_\mathrm{2}}= \eta \frac{1}{(1-D)}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}\frac{1}{1-D}=\frac{1}{(1-D)+\frac{\alpha}{1-D}}\cdot \frac{(1-D)}{(1-D)}=\frac{1-D}{(1-D)^2+\alpha}
+    \frac{U_\mathrm{2}}{U_\mathrm{1}}=\eta \frac{I_\mathrm{L}}{I_\mathrm{2}}= \eta \frac{1}{(1-D)}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}\frac{1}{1-D}=\frac{1}{(1-D)+\frac{\alpha}{1-D}}\cdot \frac{(1-D)}{(1-D)}=\frac{1-D}{(1-D)^2+\alpha}.
     \label{eq:voltageRatioOverD}
 \end{equation}
 This results in the following for $\eta$ as a function of D and $\alpha$:
 \begin{equation}
-    \eta(D,\alpha)=\frac{1}{1+\frac{\alpha}{(1-D)^2}}
+    \eta(D,\alpha)=\frac{1}{1+\frac{\alpha}{(1-D)^2}}.
 \end{equation}
 And this results in the following for $\frac{U_\mathrm{2}}{U_\mathrm{1}}$ as a function of D and $\alpha$:
 \begin{equation}
-    \frac{U_\mathrm{2}}{U_\mathrm{1}}(D,\alpha)=\frac{1-D}{(1-D)^2+\alpha}
+    \frac{U_\mathrm{2}}{U_\mathrm{1}}(D,\alpha)=\frac{1-D}{(1-D)^2+\alpha}.
 \end{equation}
 \end{solutionblock}
 
@@ -247,35 +247,35 @@ And this results in the following for $\frac{U_\mathrm{2}}{U_\mathrm{1}}$ as a f
 \begin{solutionblock}
 Now determine the required dutycycle under consideration of inductor losses:
 $\frac{U_\mathrm{2}}{U_\mathrm{1}}=\frac{D_\mathrm{P}}{(D_\mathrm{P})^2+\alpha}$with $D_\mathrm{P}=1-D$.
-As this expression is a quadratic term, the pq formula must be used. To be able to use this, it must first be converted to $D_\mathrm{P}$.
+As this expression is a quadratic term, the pq formula can be used. To be able to use this, it must first be converted to $D_\mathrm{P}$
 \begin{equation}
     \frac{U_\mathrm{2}}{U_\mathrm{1}}(D_\mathrm{P})^2-D_\mathrm{P}+\frac{U_\mathrm{2}\alpha}{U_\mathrm{1}}=0
 \end{equation}
 \begin{equation}
-    D_\mathrm{P}^2 - \frac{U_\mathrm{1}}{U_\mathrm{2}} D_\mathrm{P}+\alpha
+    D_\mathrm{P}^2 - \frac{U_\mathrm{1}}{U_\mathrm{2}} D_\mathrm{P}+\alpha.
 \end{equation}
 The first term resulting from the pq formula is:
 \begin{equation}
-    D_\mathrm{P1}=\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}+\sqrt{(\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}})^2-\alpha}= \frac{1}{2}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}+\sqrt{({\frac{1}{2}}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}})^2-\frac{\SI{0.2}{\ohm}}{\SI{30}{\ohm}}}= 0.158
+    D_\mathrm{P1}=\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}+\sqrt{(\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}})^2-\alpha}= \frac{1}{2}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}+\sqrt{({\frac{1}{2}}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}})^2-\frac{\SI{0.2}{\ohm}}{\SI{30}{\ohm}}}= 0.158.
 \end{equation}
 If you now insert this into the equation $D_\mathrm{1}=1-D_\mathrm{P1}$, you get the result $D_\mathrm{1}=0.842$.
 
 The second term resulting from the pq formula is:
 \begin{equation}
-    D_\mathrm{P2}=\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}-\sqrt{(\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}})^2-\alpha}= \frac{1}{2}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}-\sqrt{({\frac{1}{2}}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}})^2-\frac{\SI{0.2}{\ohm}}{\SI{30}{\ohm}}}= 0.042
+    D_\mathrm{P2}=\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}-\sqrt{(\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}})^2-\alpha}= \frac{1}{2}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}-\sqrt{({\frac{1}{2}}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}})^2-\frac{\SI{0.2}{\ohm}}{\SI{30}{\ohm}}}= 0.042.
 \end{equation}
 If you now insert this into the equation $D_\mathrm{2}=1-D_\mathrm{P2}$, you get the result $D_\mathrm{2}=0.958$.
 The duty cycle of $D_\mathrm{2}=0.958$ is only a theoretical value. For the design of the converter, the smaller duty cycle will be chosen, because of lower losses.
-In the following, the currents $I_\mathrm{L1}$ and $I_\mathrm{L2}$ are determined in order to be able to make a statement about the losses.
+In the following, the currents $I_\mathrm{L1}$ and $I_\mathrm{L2}$ are determined in order to be able to make a statement about the losses
 \begin{equation}
     I_\mathrm{L1} = \frac{I_\mathrm{2}}{1-D_\mathrm{1}}= \frac{\SI{2}{\ampere}}{1-0.842}=\SI{12.679}{\ampere}
 \end{equation}
 \begin{equation}
-    I_\mathrm{L2} = \frac{I_\mathrm{2}}{1-D_\mathrm{2}}= \frac{\SI{2}{\ampere}}{1-0.958}=\SI{47.321}{\ampere}
+    I_\mathrm{L2} = \frac{I_\mathrm{2}}{1-D_\mathrm{2}}= \frac{\SI{2}{\ampere}}{1-0.958}=\SI{47.321}{\ampere}.
 \end{equation}
-If you now put these current values in relation to the losses, the following can be determined by using the relation $P=I^2R$.
+If you now put these current values in relation to the losses, the following can be determined by using the relation $P=I^2R$
 \begin{equation}
-    \frac{(\SI{47.321}{\ampere})^2}{(\SI{12.679}{\ampere})^2}=13.9296
+    \frac{(\SI{47.321}{\ampere})^2}{(\SI{12.679}{\ampere})^2}=13.9296.
 \end{equation}
 The losses are 14 times higher by a duty cycle of 0.958. 
 
