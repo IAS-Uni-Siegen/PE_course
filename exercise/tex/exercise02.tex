@@ -683,7 +683,9 @@ Initially, both transistors operate with the same duty cycle $D_1 = D_2 = D$ and
     If you calculate the current $i_\mathrm{2}$ though the load and use it to calculate $I_\mathrm{L}$, you get following results:
 
     \input{./fig/ex02/sFigTab_VoltageIlDutycycle}
-    
+    \input{./fig/ex02/sFigDia_DutyCycleVSVoltage}
+    \input{./fig/ex02/sFigDia_IlVSVoltage}
+
 \end{solutionblock}
  
 
@@ -702,13 +704,15 @@ Both transistors should now be able to have different duty cycles. Assume that t
     \end{equation}
 
     \input{./fig/ex02/sFigTab_Case1a2}
+    \input{./fig/ex02/sFigDia_InductorVoltageCase1}
+
 
     Case 2: With $U_\mathrm{1}$ = $\SI{720}{\volt}$ and $D_1 = 0.1$
     \begin{equation}
         D_1 = \frac{U_\mathrm{2}}{U_\mathrm{1}} \left(1 - D_2 \right)= \frac{\SI{400}{\volt}}{\SI{720}{\volt}} \cdot \left(1 - 0.1\right) = 0.5
     \end{equation}
-
-    \input{./fig/ex02/sFigTab_Case1a2}    
+    \input{./fig/ex02/sFigTab_Case1a2}
+    \input{./fig/ex02/sFigDia_InductorVoltageCase2}
         
 \end{solutionblock}
 
@@ -768,11 +772,13 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
     This leads to
     \begin{equation}
         P_\mathrm{l}=P_\mathrm{2} U_\mathrm{F} \left(\frac{1}{U_\mathrm{1}} + \frac{1}{U_\mathrm{2}} \cdot \frac{D_2}{1-D_2}\right)
+        \label{eq:ploss}
     \end{equation}
     To minimize the losses depending on duty cycle you consider $P_\mathrm{l}$=$f(D_2)$
     \begin{equation}
         \frac{d}{dD_2} f(D_2)= \frac{1}{\left(1 - D_2 \right)^2}=0
     \end{equation}
+
     The The following can be conclude from the result: \\
     $\Rightarrow$ Set $D_2$ as small as possible \\
     $\Rightarrow$ Activate $T_2$ only for boost mode \\
@@ -783,12 +789,13 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
  for $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
 \begin{solutionblock}
 % Solution
-    With equation 2.94!!! and
+    With equation \eqref{eq:ploss} and
     \begin{equation}
         \eta = \frac{P_\mathrm{2}}{P_\mathrm{l}+P_\mathrm{2}}
     \end{equation}
     you get following result:
 
+    \input{./fig/ex02/sFigDia_DutyCycleVSVoltageOpt}
     \input{./fig/ex02/sFigTab_EfficiencyOpt}
     
 \end{solutionblock}
@@ -797,12 +804,13 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
 
 \begin{solutionblock}
 % Solution
-    Again the equation 2.94!!! is used with the condition $D_1$=$D_2$=$D$. This leads to
+    Again the equation \eqref{eq:ploss} is used with the condition $D_1$=$D_2$=$D$. This leads to
     \begin{equation}
         P_\mathrm{l}=2D U_\mathrm{F} I_\mathrm{L} = \frac{U_\mathrm{f} P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{2D}{1-D}
     \end{equation}
     you get following result:
 
+    \input{./fig/ex02/sFigDia_EfficiencyVSVoltage}
     \input{./fig/ex02/sFigTab_EfficiencySync}
     
 \end{solutionblock}

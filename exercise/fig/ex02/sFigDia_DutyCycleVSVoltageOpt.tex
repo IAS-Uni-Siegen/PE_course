@@ -1,0 +1,50 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dutycycle versus Input voltage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{solutionfigure}[htb]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+                domain=0:15,
+                xmin=300, xmax=820,
+                ymin=0, ymax=1,
+                samples=500,
+                axis y line=center,
+                axis x line=middle,
+                % xtick distance=10,
+                % ytick distance=100,
+                extra y ticks=0,
+                x label style={at={(axis description cs:1,0)},anchor=west},
+                y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                width=0.6\textwidth,
+                height=0.3\textwidth,
+                xlabel={$U \text{[V]}$},
+                ylabel={$D_(U_\mathrm{1})$},
+                xtick={300,400,500,600,700,800},
+                xticklabels={300,400,500,600,700,800},
+                yticklabel style = {anchor=east,yshift=-0.2cm},
+                grid=both,
+                grid style={line width=.1pt, draw=gray!10},
+                major grid style={line width=.2pt,draw=gray!50},
+            ]
+            \addplot[color=red,mark=none,solid] coordinates{
+             (320, 1)
+             (400, 1)
+            };
+            \addplot[signalred, domain=400:720] {400/x};
+            \addplot[color=blue,mark=none,solid] coordinates{
+             (400, 0)
+             (720, 0)
+            };
+            \addplot[signalblue, domain=320:400] {1-(x/400)};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Duty cycle versus input voltage.}
+\end{solutionfigure}
+
+
+
+
+
+
