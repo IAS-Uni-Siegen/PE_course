@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Begin exercise %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ex{Step-up and synchronous buck-boost converters}
+\ex{Step-up and (synchronous) buck-boost converters}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 1: Boost Converter with no losses %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task {Boost converter with no losses}
-The boost converter which is shown in \autoref{fig:boost converter with no losses} supplies a resistive load with a rated voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The converter operates in steady state.
+The boost converter which is shown in \autoref{fig:boost converter with no losses} supplies a resistive load with a rated voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$. The converter operates in steady state and all losses of the boost converter are neglected.
 
 \input{./fig/ex02/Fig_boostConverter.tex}
 
@@ -27,9 +27,7 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
     \caption{Parameters of the boost converter.}  % Beschriftung der Tabelle
     \label{table:ex02_Parameters of the circuit}
 \end{table}
-
-First, all losses of the boost converter are neglected.
-
+%
 \subtask{Derive the duty cycle $D$ which leads to the specific output voltage of $U_{\mathrm{2}} = \SI{60}{\volt}$.}
 
 \begin{solutionblock}
@@ -195,7 +193,7 @@ Next, the impact of power losses on the above's converter behavior is investigat
 
 \input{./fig/ex02/Fig_boostConverterlosses.tex}
 
-\subtask{From now on, the influence of the resistor $R_\mathrm{L}$ is considered. Derive the efficiency $\eta$ and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter, in dependence on the duty cycle $D$ and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both functions, $\eta$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle $D$ and analyze the findings.} 
+\subtask{From now on, the influence of the resistor $R_\mathrm{L}$ is considered. Derive the efficiency $\eta$ and voltage ratio $U_\mathrm{1}/U_\mathrm{2}$ of the boost converter in dependence on the duty cycle $D$ and the resistance ratio $\alpha= R_\mathrm{L}/R$. Sketch both functions, $\eta$ and  $U_\mathrm{2}/U_\mathrm{1}$ over the duty cycle $D$ and analyze the findings.} 
 \begin{solutionblock}
 We are looking for: $\eta= F(D,\alpha)$ and $\frac{U_\mathrm{2}}{U_\mathrm{1}}=F(D,\alpha)$ with $\alpha=\frac{R_\mathrm{L}}{R}$
 Assuming a good smoothing of the inductor current yields to $I_\mathrm{L}=\overline i_\mathrm{L}=i_\mathrm{L}(t)$
@@ -632,45 +630,256 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
 %% Task 3: Buck-Boost converter combination
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\task{Buck-Boost converter}
-A wide input voltage range where can be realized by the cascade of buck and boost converter with a common inductance.
-With this topology the output voltage can be adjust to a value, which is higher or lower than the input voltage.
+\task{Buck-boost converter}
+A wide input-to-output voltage range can be realized by the cascade of buck and boost converters with a common inductance.
+With this topology the output voltage can be adjusted to a value which is higher or lower than the input voltage.
 \par
 % Schematic of Buck Boost Converter cascade
-\input{./fig/ex02/Fig_BuckBoostConverterCascade.tex}
+\input{./fig/ex02/Fig_BuckBoostConverterCascade}
 \par
 %Table of parameter values 
-\input{./fig/ex02/FigTab_BuckBoostConverterCascade.tex}
+\input{./fig/ex02/FigTab_BuckBoostConverterCascade}
 
 The output voltage is kept at the specified constant value by adjusting the duty cycles $D_1$ 
 (of transistor  $T_1$) and $D_2$ (of transistor $T_2$) using a control system. Both transistors operate at the same switching frequency.
 The ripple of the output voltage and of the current in the inductor can be ignored. The current in $L$ is continuous.
 Initially, both transistors operate with the same duty cycle $D_1 = D_2 = D$ and their switching patterns are synchronized.
 
+
 \subtask{Calculate the duty cycle of the transistors $T_1$ and $T_2$ depending on the voltage transformation ratio $U_\mathrm{2}/U_\mathrm{1}$.}
 
-\subtask{Calculate $i_\mathrm{L}$ depending on $D$. Plot $D$ and $i_\mathrm{L}$ against $U_\mathrm{1}$ and enter the numerical values for
+\begin{solutionblock}
+% Solution
+    For calculation of $U_\mathrm{2}$ use the formular for boost converter:
+    \begin{equation}
+        U_\mathrm{2}=U \frac{1}{1-D_\mathrm{2}} 
+        \hspace{1cm} \mathrm{and} \hspace{1cm}  
+        U=U_\mathrm{1} \cdot D_\mathrm{1}
+    \end{equation}
+    with $D_\mathrm{1}=D_\mathrm{2}=D$ you get
+    \begin{equation}
+        U_\mathrm{2}=\frac{D}{1-D} U_\mathrm{1}
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        D=\frac{U_\mathrm{2}}{U_\mathrm{1}+U_\mathrm{2}}
+    \end{equation}
+    both equations leads to
+    \begin{equation}
+        D = \frac{\frac{U_\mathrm{2}}{U_\mathrm{1}}} {1+{\frac{U_\mathrm{2}}{U_\mathrm{1}}}}
+    \end{equation}   
+\end{solutionblock}
+
+\subtask{Calculate $I_\mathrm{L}$ depending on $D$. Plot $D$ and $I_\mathrm{L}$ against $U_\mathrm{1}$ and enter the numerical values for
  $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
+\begin{solutionblock}
+% Solution
+    The current $i_\mathrm{2}$ though the load depends on the power:
+    \begin{equation}
+        i_\mathrm{2}=\frac{P_\mathrm{2}}{U_\mathrm{2}} = \frac{\SI{400}{\watt}}{\SI{400}{\volt}}=\SI{12.5}{\ampere}
+    \end{equation}
+    The current though the inductor depends on the duty cycle and the current $i_\mathrm{2}$:
+    \begin{equation}
+        I_\mathrm{L}=i_\mathrm{2} \frac{D}{1-D} = i_\mathrm{2} \left(1+\frac{U_\mathrm{2}}{U_\mathrm{1}} \right)
+    \end{equation}
+    If you calculate the current $i_\mathrm{2}$ though the load and use it to calculate $I_\mathrm{L}$, you get following results:
+
+    \input{./fig/ex02/sFigTab_VoltageIlDutycycle}
+    \input{./fig/ex02/sFigDia_DutyCycleVSVoltage}
+    \input{./fig/ex02/sFigDia_IlVSVoltage}
+
+\end{solutionblock}
+ 
+
 \vspace{2em}\par
 % Explaining text for the next subtask
 Both transistors should now be able to have different duty cycles. Assume that the transistors are switched on at the same time.
 
 \subtask{Graphically represent the time profiles of the voltage at $L$ for $U_\mathrm{1}$ = $\SI{320}{\volt}$ and
  $D_1 = 0.9$ and for $U_\mathrm{1}$ = $\SI{720}{\volt}$ and $D_2 = 0.1$ for one pulse period each.}
+
+\begin{solutionblock}
+% Solution
+    Case 1: With $U_\mathrm{1}$ = $\SI{320}{\volt}$ and $D_1 = 0.9$
+    \begin{equation}
+        D_2 = 1 - D_1 \frac{U_\mathrm{1}}{U_\mathrm{2}} = 1 - 0.9 \cdot \frac{\SI{320}{\volt}}{\SI{400}{\volt}}= 0.28
+    \end{equation}
+
+    \input{./fig/ex02/sFigTab_Case1a2}
+    \input{./fig/ex02/sFigDia_InductorVoltageCase1}
+
+
+    Case 2: With $U_\mathrm{1}$ = $\SI{720}{\volt}$ and $D_1 = 0.1$
+    \begin{equation}
+        D_1 = \frac{U_\mathrm{2}}{U_\mathrm{1}} \left(1 - D_2 \right)= \frac{\SI{400}{\volt}}{\SI{720}{\volt}} \cdot \left(1 - 0.1\right) = 0.5
+    \end{equation}
+    \input{./fig/ex02/sFigTab_Case1a2}
+    \input{./fig/ex02/sFigDia_InductorVoltageCase2}
+        
+\end{solutionblock}
+
 \subtask{Calculate the voltage transformation ratio as a function of $D_1$ and $D_2$.}
-\subtask{Express the current $i_\mathrm{L}$ as a function of the specified operating parameters
+\begin{solutionblock}
+% Solution
+    With $U_\mathrm{L} = 0$ it follows
+    \begin{equation}
+        \frac{U_\mathrm{1}}{U_\mathrm{2}} = D_2 = 1 - D_1 \frac{D_1}{1-D_2}
+    \end{equation}
+\end{solutionblock}
+
+
+\subtask{Express the current $I_\mathrm{L}$ as a function of the specified operating parameters
 ($U_\mathrm{1}$, $U_\mathrm{2}$, $P_\mathrm{2}$) and as a function of $D_\mathrm{1}$ and $D_\mathrm{2}$.}
+\begin{solutionblock}
+% Solution
+    With the dependency of $I_\mathrm{L}$ from $i_\mathrm{2}$ and the duty cycle you get
+    \begin{equation}
+        I_\mathrm{L}=i_\mathrm{2} \frac{1}{1-D_2}= \frac{P_\mathrm{2}}{U_\mathrm{2}} \frac{1}{1-D_2}
+    \end{equation}
+\end{solutionblock}
+
 \subtask{Are the calculated relationships valid if $T_1$ and $T_2$ do not switch synchronously or operate with
  different clock frequencies?}
-\vspace{2em}\par
+
+\begin{solutionblock}
+% Solution
+    Yes, the relationsships are independent from the switching frequency and switching points.
+\end{solutionblock}
+
+    \vspace{2em}\par
 % Explaining text for the next subtask
 If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\mathrm{F}=\SI{2.5}{\volt}$ occurs at the transistors
  regardless of the current. All other components are considered ideal and loss-free.
 
 \subtask{How should $D_1$ and $D_2$ be selected so that the losses of the overall system are minimal?
- The relationships calculated under subtask 3.4 and 3.5 can be used for the voltage transformation ratio and the value of $i_\mathrm{L}$.}
+ The relationships calculated under subtask 3.4 and 3.5 can be used for the voltage transformation ratio and the value of $I_\mathrm{L}$.}
+\begin{solutionblock}
+% Solution
+    The losses of the transistors are to consider:
+    \begin{equation}
+        P_\mathrm{l,T1}=D_1 U_\mathrm{F} I_\mathrm{L}=D_1 U_\mathrm{F} \frac{P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{1}{1-D_2}
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        P_\mathrm{l,T2}=D_2 U_\mathrm{F} I_\mathrm{L}=D_2 U_\mathrm{F} \frac{P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{1}{1-D_2}
+    \end{equation}
+    So the losses of both transitors can be expressed by
+    \begin{equation}
+        P_\mathrm{l}=\left(D_1 +D_2\right) U_\mathrm{F} \frac{P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{1}{1-D_2}
+    \end{equation}
+    and with
+    \begin{equation}
+        D_1 =\frac{U_\mathrm{1}}{U_\mathrm{2}} \left(1 - D_2 \right) 
+        \hspace{1cm} \Rightarrow \hspace{1cm}
+        P_\mathrm{l}=\left(\frac{U_\mathrm{1}}{U_\mathrm{2}} \left(1 - D_2 \right)+D_2\right) U_\mathrm{F} \frac{P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{1}{1-D_2}
+    \end{equation}
+    This leads to
+    \begin{equation}
+        P_\mathrm{l}=P_\mathrm{2} U_\mathrm{F} \left(\frac{1}{U_\mathrm{1}} + \frac{1}{U_\mathrm{2}} \cdot \frac{D_2}{1-D_2}\right)
+        \label{eq:ploss}
+    \end{equation}
+    To minimize the losses depending on duty cycle you consider $P_\mathrm{l}$=$f(D_2)$
+    \begin{equation}
+        \frac{d}{dD_2} f(D_2)= \frac{1}{\left(1 - D_2 \right)^2}=0
+    \end{equation}
+
+    The The following can be conclude from the result: \\
+    $\Rightarrow$ Set $D_2$ as small as possible \\
+    $\Rightarrow$ Activate $T_2$ only for boost mode \\
+    $\Rightarrow$ Set $D_1$ as big as as possible \\
+\end{solutionblock}
+
 \subtask{Plot $D_\mathrm{1}$ and $D_\mathrm{2}$ and the efficiency over $U_\mathrm{1}$ and give numerical values
  for $U_\mathrm{1} = \SI{320}{\volt}$, $U_\mathrm{1} = \SI{400}{\volt}$ and $U_\mathrm{1} = \SI{720}{\volt}$.}
+\begin{solutionblock}
+% Solution
+    With equation \eqref{eq:ploss} and
+    \begin{equation}
+        \eta = \frac{P_\mathrm{2}}{P_\mathrm{l}+P_\mathrm{2}}
+    \end{equation}
+    you get following result:
+
+    \input{./fig/ex02/sFigDia_DutyCycleVSVoltageOpt}
+    \input{./fig/ex02/sFigTab_EfficiencyOpt}
+    
+\end{solutionblock}
+
 \subtask{Calculate the efficiency for the three operating points in subtask 3.2.}
+
+\begin{solutionblock}
+% Solution
+    Again the equation \eqref{eq:ploss} is used with the condition $D_1$=$D_2$=$D$. This leads to
+    \begin{equation}
+        P_\mathrm{l}=2D U_\mathrm{F} I_\mathrm{L} = \frac{U_\mathrm{f} P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{2D}{1-D}
+    \end{equation}
+    you get following result:
+
+    \input{./fig/ex02/sFigDia_EfficiencyVSVoltage}
+    \input{./fig/ex02/sFigTab_EfficiencySync}
+    
+\end{solutionblock}
+
 \subtask{How high is the maximum efficiency gain and at which operating point does it occur? Give an explanation
  for the observed finding.}
+
+\begin{solutionblock}
+% Solution
+    The efficiency gain is calculated by $\Delta \eta$=$\eta_opt$-$\eta_sync$.
+    You get following result:
+
+    \input{./fig/ex02/sFigTab_EfficiencyGain}
+    
+    Maximum efficiency gain at $U_\mathrm{1}=\SI{400}{\volt}$ \\
+    It looks like the efficiency gain is higher within boost mode, but why is the highest efficiency gain at $\SI{400}{\volt}$? (truncate issue?) \\
+    Let's consider the power loss at boost mode for the two cases. The power loss needs to be expressed by a function of the voltages:
+
+    \begin{equation}
+        P_\mathrm{l}=D_1 U_\mathrm{F} I_\mathrm{L} + D_2 U_\mathrm{F} I_\mathrm{L}
+    \end{equation}
+    If following is considered
+    \begin{equation}
+        I_\mathrm{L}=\frac{P_\mathrm{2}}{U_\mathrm{1}} 
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        D_1=1
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        D_2=1-\frac{U_\mathrm{1}}{U_\mathrm{2}} 
+    \end{equation}
+    this leads to
+    \begin{equation}
+        P_\mathrm{l,opt}=\frac{2 P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{1}} - \frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{2}}
+    \end{equation}
+
+    For the synchronous operation mode following is valid:
+    consider:
+    \begin{equation}
+        I_\mathrm{L}=\frac{P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{1}{1-D}  
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        D_1=D_2=D
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        D=\frac{U_\mathrm{2}}{U_\mathrm{1}+U_\mathrm{2}} 
+    \end{equation}
+    With equation 2.98!!! this leads now to
+    \begin{equation}
+        P_\mathrm{l,sync}=\frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{1}} + \frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{1}}=\frac{2 P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{1}}
+    \end{equation}
+
+    The efficiency can be expressed by 
+    \begin{equation}
+        \eta = \frac{P_\mathrm{2}}{P_\mathrm{l}+P_\mathrm{2}}=\frac{1}{1+\frac{P_\mathrm{l}}{P_\mathrm{2}}}
+    \end{equation}
+    If the result of the power losses is inserted into the formula, you get:
+    \begin{equation}
+        \eta_\mathrm{opt} = \frac{1}{1+U_\mathrm{F} \left(\frac{2}{U_\mathrm{1}}-\frac{1}{U_\mathrm{2}}\right)}
+        \hspace{1cm} \mathrm{and} \hspace{1cm}
+        \eta_\mathrm{sync} = \frac{1}{1+U_\mathrm{F} \frac{2}{U_\mathrm{1}}}
+    \end{equation}
+
+    The minimal efficiency gain is the minimum of $\Delta \eta=\eta_\mathrm{opt}-\eta_\mathrm{sync}$ is a minimum.
+    
+    \begin{equation}
+        \Delta \eta= \frac{\frac{U_\mathrm{F}}{U_\mathrm{2}}}{\left(1+ \frac{2 U_\mathrm{F}}{U_\mathrm{1}}-\frac{U_\mathrm{F}}{U_\mathrm{2}} \right) \left(1+\frac{2 U_\mathrm{F}}{U_\mathrm{1}}\right)}
+    \end{equation}
+
+    Conclusion: \\
+    $\Rightarrow$ You get the minimal efficiency gain at maximal $U_\mathrm{1}$. \\
+    $\Rightarrow$ The difference between the power losses of $P_\mathrm{l,opt}$ and $P_\mathrm{l,sync}$ in boost mode is the constant factor 
+    $\frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{2}}$
+    which has a proportionally greater effect on the efficiency with smaller $U_\mathrm{2}$ power losses (here larger $U_\mathrm{1}$ ).
+
+\end{solutionblock}

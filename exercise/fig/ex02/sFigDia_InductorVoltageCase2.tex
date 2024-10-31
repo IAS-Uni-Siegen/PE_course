@@ -1,0 +1,55 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% QualitativeInductorCurrentDuringBCM
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{solutionfigure}[htb]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+                domain=0:15,
+                xmin=0, xmax=90,
+                ymin=-500, ymax=500,
+                samples=500,
+                axis y line=center,
+                axis x line=middle,
+                % xtick distance=10,
+                % ytick distance=100,
+                extra y ticks=0,
+                x label style={at={(axis description cs:1,0.5)},anchor=west},
+                y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                width=0.6\textwidth,
+                height=0.3\textwidth,
+                xlabel={$t [10^{-5}]$},
+                ylabel={$u_\text{L}(t)$},
+                xtick={0,10,20,30,40,50,60,70,80},
+                xticklabels={0,,20,,40,,60,,80},
+                ticklabel style = {yshift=0.2cm,anchor=east},
+                ytick={400,200,0,-200,-400},
+                yticklabels={400,200,,-200,-400},
+                % yticklabels={0,$\frac{\Delta i_\text{L}}{2}$,$\Delta i_\text{L}$},
+                grid=both,
+                grid style={line width=.1pt, draw=gray!10},
+                major grid style={line width=.2pt,draw=gray!50},
+            ]
+            \addplot[color=blue,mark=none,solid] coordinates{
+                (0, 320)
+                (4, 320)
+                (4, -80)
+                (20, -80)
+                (20, -400)
+                (40, -400)
+                (40, 320)
+                (44, 320)
+                (44, -80)
+                (60, -80)
+                (60, -400)
+                (75, -400)
+                };                 
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Voltage at inductor in case 2}
+\end{solutionfigure}
+
+
+
+
