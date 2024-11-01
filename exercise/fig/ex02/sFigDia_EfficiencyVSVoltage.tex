@@ -6,29 +6,43 @@
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-                %domain=0:15,
+                % x/y range adjustment
                 xmin=300, xmax=820,
-                ymin=98, ymax=100,
+                ymin=0.975, ymax=1.005,
                 samples=500,
                 axis y line=center,
                 axis x line=middle,
                 extra y ticks=0,
+                % Label text
+                xlabel={$U_\mathrm{1} \text{/V}$},
+                ylabel={$\eta$},
+                % Label adjustment                                
                 x label style={at={(axis description cs:1,0)},anchor=west},
                 y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                % ylabel style = {yshift=0.2cm},
                 width=0.6\textwidth,
                 height=0.3\textwidth,
-                xlabel={$U \text{[V]}$},
-                ylabel={Efficiency $[\%]$},
-                ylabel style = {yshift=0.2cm},
+                % x-Ticks 
                 xtick={300,400,500,600,700,800},
                 xticklabels={300,400,500,600,700,800},
+                xticklabel style = {anchor=north},                
+                % y-Ticks
+                ytick={0.975,0.98,0.985,0.99,0.995,1},
+                yticklabels={0.975,0.98,0.985,0.99,0.995,1},                                 
                 yticklabel style = {anchor=east},
+                % Grid layout 
                 grid=both,
                 grid style={line width=.1pt, draw=gray!10},
                 major grid style={line width=.2pt,draw=gray!50},
             ]
-            \addplot[signalred, domain=320:720] {100/(1+(2.5*2/x))};
-            \addplot[signalblue, domain=320:720] {100/(1+(2.5*((2/x)-(1/400))))};
+            % Eta-Sync plot
+            \addplot[signalred, domain=320:720] {1/(1+(2.5*2/x))};
+            % label of Eta-Sync
+            \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:750,0.992) {$\eta_{\mathrm{sync}}$};
+            % Eta-opt plot
+            \addplot[signalblue, domain=320:720] {1/(1+(2.5*((2/x)-(1/400))))};
+            % label of Eta-Sync
+            \node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:750,0.997) {$\eta_{\mathrm{opt}}$};
         \end{axis}
     \end{tikzpicture}
     \caption{Duty cycle versus input voltage.}
