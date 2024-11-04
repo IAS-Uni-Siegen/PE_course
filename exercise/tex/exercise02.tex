@@ -20,7 +20,7 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
         \toprule
         
         Input voltage: &  $U_{\mathrm{1}} = \SI{12}{\volt}$ & Output voltage: & $U_{\mathrm{2}} = \SI{60}{\volt}$ \\ 
-        Output current: & $I_2 = \SI{2}{A}$  & Minimal output power: & $P_{\mathrm{out,min}} = \SI{10}{\watt}$ \\ 
+        Output current: & $I_2 = \SI{2}{A}$  & Minimal output power: & $P_{\mathrm{2,min}} = \SI{10}{\watt}$ \\ 
         Output voltage ripple: & $\triangle u_{\mathrm{2}} = \SI{120}{\milli\volt}$  & Switching frequency: & $f_{\mathrm{s}} = \SI{100}{\kilo\hertz}$ \\ 
         \bottomrule
     \end{tabular}
@@ -46,7 +46,7 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
     \begin{equation}
         U_{\mathrm{1}} = u_{\mathrm{L}} + U_{\mathrm{2}}.
     \end{equation}
-    Now insert the differential expression for $u_{\mathrm{L}}$ 
+    Now, the differential expression for $u_{\mathrm{L}}$ leads to:
     \begin{equation}
         L \frac{\Delta i_{\mathrm{L}} }{\Delta t} = U_{\mathrm{1}} - U_{\mathrm{2}}.
     \end{equation}
@@ -62,25 +62,23 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
     \begin{equation}
         i_{\mathrm{L}}(0) = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{s,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}+i_{\mathrm{L}}(0).
     \end{equation}
-    Now the initial condition $i_{\mathrm{L}}(0)=0$ is assumed as
+    Now the initial condition $i_{\mathrm{L}}(0)=0$ is assumed as 
     \begin{equation}
-        0 = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{s,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}
+        0 = \frac{U_{\mathrm{1}}-U_{\mathrm{2}} }{L} (T_{\mathrm{s,off}})+\frac{U_{\mathrm{1}}}{L}T_{\mathrm{s,on}}.
     \end{equation}
-
+    Canceling out the inductance leads to
     \begin{equation}
-        U_{\mathrm{1}}T_{\mathrm{s,on}}= (-U_{\mathrm{1}}+U_{\mathrm{2}})T_{\mathrm{s,off}}
+        U_{\mathrm{1}}T_{\mathrm{s,on}}= (-U_{\mathrm{1}}+U_{\mathrm{2}})T_{\mathrm{s,off}},
     \end{equation}
-
+    rearranging the time results into:
     \begin{equation}
         U_{\mathrm{1}}(T_{\mathrm{s,off}}+T_{\mathrm{s,on}})=  U_{\mathrm{2}}T_{\mathrm{s,off}}.
     \end{equation}
-    The switch-off period $T_{\mathrm{s,off}}$ plus the switch-on period $T_{\mathrm{s,on}}$ is the total period $T_{\mathrm{s}}$.
-
-    The following equation can now be established for the duty cycle:
+    The switch-off period $T_{\mathrm{s,off}}$ plus the switch-on period $T_{\mathrm{s,on}}$ is the total period $T_{\mathrm{s}}$. The following equation can now be established for the duty cycle:
     \begin{equation}
         \frac{U_{\mathrm{1}}}{U_{\mathrm{2}}}= \frac{T_{\mathrm{s,off}}}{T_{\mathrm{s}}}= \frac{T_{\mathrm{s}}}{T_{\mathrm{s}}}-\frac{T_{\mathrm{s,on}}}{T_{\mathrm{s}}} = 1-D.
     \end{equation}
-    And with the values set, the result is as follows:
+    And with the values given in the task, the duty cycle is calculated as follows:
     \begin{equation}
         D = 1-\frac{U_{\mathrm{1}}}{U_{\mathrm{2}}} = 1- \frac {\SI{12}{\volt}} {\SI{60}{\volt}} = 0.8.
     \end{equation}
@@ -100,30 +98,30 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
     \end{equation}
     An alternative solution would be to determine the average current $\overline i_{\mathrm{L}}$ via the duty cycle
     \begin{equation}
-    \frac{I_{\mathrm{1}}}{I_{\mathrm{2}}}=\frac{1}{1-D}
+    \frac{I_{\mathrm{1}}}{I_{\mathrm{2}}}=\frac{1}{1-D}.
     \end{equation}
     \begin{equation}
      I_{\mathrm{1}}=\frac{I_{\mathrm{2}}}{1-D}=\frac{\SI{2}{\ampere}}{1-0.8}= \SI{10}{\ampere}.
     \end{equation}
 \end{solutionblock}
 
-\subtask{ Define a suitable inductance for the coil $L$, so that the boost converter is operating in boundary conduction mode (BCM) when supplying the minimum output power $P_\mathrm{out,min}$. Determine the maximal switch-off current $i_{\mathrm{T}}$ of the transistor $T$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
+\subtask{ Define a suitable inductance for the coil $L$, so that the boost converter is operating in boundary conduction mode (BCM) when supplying the minimum output power $P_\mathrm{2,min}$. Determine the maximal switch-off current $i_{\mathrm{T}}$ of the transistor $T$ for the rated output current $I_{\mathrm{2}} = \SI{2}{\ampere}$.}
 \begin{solutionblock}
     Because no losses are assumed, $P_{\mathrm{1,min}}=P_{\mathrm{2,min}}$.
-    The following equation is used for the average current $I_{\mathrm{1,min}}$ over a period to generate the minimum power
+    The following equation is used to calculate the average current $I_{\mathrm{1,min}}$ over a period to achieve the minimum input power
     \begin{equation}
         I_{\mathrm{1,min}} = \frac{P_{\mathrm{1,min}}}{U_{\mathrm{1}}} = \frac{\SI{10}{\watt}}{\SI{12}{\volt}}= \SI{0.833}{\ampere}.
     \end{equation}
-    Requirement for BCM, current is zero at starting point of the period  $i_\mathrm{1BCM}(0)=\SI{0}{\ampere}$.
-    At time $T_{\mathrm{s,on}}$, the average current to provide the minimum power corresponds to twice the value of the $I_{\mathrm{1,min}}$
+    The requirement for BCM is, that the current is zero at the starting point of the period  $i_\mathrm{1,BCM}(0)=\SI{0}{\ampere}$.
+    Due to the triagular current waveform of the inductor current $i_{\mathrm{L}}$, the maximum current is given with:
     \begin{equation}
-        i_\mathrm{1BCM}(T_{\mathrm{s,on}})= 2I_{\mathrm{1min}}= 2\cdot \SI{0.833}{\ampere} = \SI{1.667}{\ampere}.
+        i_\mathrm{1,BCM}(T_{\mathrm{s,on}})= 2I_{\mathrm{1,min}}= 2\cdot \SI{0.833}{\ampere} = \SI{1.667}{\ampere}.
     \end{equation}
-    The differential form of the inductance equation is used for the further calculation
+    The differential equation of the inductance is defined as:
     \begin{equation}
         u_\mathrm{L}=L\frac{\mathrm{d}i_\mathrm{L}(t)}{\mathrm{d}t}.
     \end{equation}
-    Simplifications can be assumed for the case without saturation
+    Neglecting saturation, the equation simplifies to:
     \begin{equation}
         u_\mathrm{L}=L\frac{\Delta i_\mathrm{L}}{\Delta t}.
     \end{equation}
@@ -132,13 +130,13 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
     \begin{equation}
         T_{\mathrm{s,on}} = D T_{\mathrm{s}} = \Delta t = \frac{D}{f_{\mathrm{s}}} = \frac{0.8}{\SI{100}{\kilo\hertz}}=\SI{8}{\micro\second}.
     \end{equation}
-    The following inductivity equation can be derived from this
+    The following inductivity equation can be derived from the difference quotient equation as:
     \begin{equation}
-        L=\frac{\Delta t u_\mathrm{L} }{\Delta i_\mathrm{L}}= \frac{D U_\mathrm{1}}{f_{\mathrm{s}}2I_{\mathrm{1min}}} = \frac{0.8 \cdot \SI{12}{\volt}}{\SI{100}{\kilo\hertz\cdot 2\cdot \SI{1.667}{\ampere}}} = \SI{57.6}{\micro\henry}.
+        L=\frac{\Delta t u_\mathrm{L} }{\Delta i_\mathrm{L}}= \frac{D U_\mathrm{1}}{f_{\mathrm{s}}2I_{\mathrm{1,min}}} = \frac{0.8 \cdot \SI{12}{\volt}}{\SI{100}{\kilo\hertz\cdot 2\cdot \SI{1.667}{\ampere}}} = \SI{57.6}{\micro\henry}.
     \end{equation}
     The maximum current flows through the transistor at the end of the switch-on interval
     \begin{equation}
-        I_\mathrm{T,max} = I_\mathrm{on} + \frac{\Delta I_\mathrm{L}}{2}=\SI{10}{\ampere}+\frac{\SI{1.667}{\ampere}}{2} = \SI{10.833}{\ampere}.
+        I_\mathrm{T,max} = \frac{\Delta I_\mathrm{L}}{2}=\frac{\SI{1.667}{\ampere}}{2} = \SI{0.833}{\ampere}.
     \end{equation}
 \end{solutionblock}
 
@@ -150,7 +148,7 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
     \begin{equation}
         i_\mathrm{C}=C \frac{\mathrm{d}u_\mathrm{c}(t)}{\mathrm{d}t}.
     \end{equation}
-    Simplifications can be assumed for the case without saturation
+    Simplifications can be assumed as:
     \begin{equation}
         i_\mathrm{C}=C \frac{\Delta u_\mathrm{c}}{\Delta t}.
     \end{equation}
@@ -163,8 +161,8 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
     \begin{equation}
         C = \frac{I_\mathrm{2}\Delta t}{\Delta u_\mathrm{2}}= \frac{I_\mathrm{2}D}{\Delta u_\mathrm{2}f_\mathrm{s}}=\frac{\SI{2}{\ampere}\cdot 0.8}{\SI{120}{\milli\volt} \cdot \SI{100}{\kilo\hertz}}=\SI{133.333}{\micro\farad}.
     \end{equation}
-     During the on-state of the transistor we can assume an constant current which discharges the capacitor. During of-state the capacitor is charge with the current $i_\mathrm{1}-i_\mathrm{2}$.The average of the capacitor current is zero. An important rule during dimensioning the capacitor is the RMS Value of the current.
-     The RMS Value of the current is determined using the following equation
+     During the on-state of the transistor we can assume an constant current which discharges the capacitor. During of-state the capacitor is charge with the current $i_\mathrm{1}-i_\mathrm{2}$.The average of the capacitor current is zero. An important rule during dimensioning the capacitor is the RMS value of the current.
+     The RMS value of the current is determined using the following equation
      \begin{equation}
         I_\mathrm{C}=\sqrt{\frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{s}}i_\mathrm{c}(t)^2\mathrm{d}t}.
      \end{equation}
@@ -178,10 +176,10 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
      \end{equation}
      The following equation is now used for the current ripple
      \begin{equation}
-        I_\mathrm{C}=\sqrt{D (I_\mathrm{2})^2[1+\frac{1}{3}[\frac{\Delta i_\mathrm{L}}{2I_\mathrm{2}}]^2]+(1-D)(I_\mathrm{1}-I_\mathrm{2})^2[1+\frac{1}{3}[\frac{\Delta i_\mathrm{L}}{2(I_\mathrm{1}-I_\mathrm{2})}]^2]}
+        I_\mathrm{C}=\sqrt{D (I_\mathrm{2})^2\left[1+\frac{1}{3}\left[\frac{\Delta i_\mathrm{L}}{2I_\mathrm{2}}\right]^2\right]+(1-D)(I_\mathrm{1}-I_\mathrm{2})^2\left[1+\frac{1}{3}\left[\frac{\Delta i_\mathrm{L}}{2(I_\mathrm{1}-I_\mathrm{2})}\right]^2\right]}
     \end{equation}
     \begin{equation}
-        I_\mathrm{C}=\sqrt{0.8 \cdot (\SI{2}{\ampere})^2 [1+\frac{1}{3}[\frac{\SI{0.833}{\ampere}}{2\cdot (\SI{2}{\ampere})}]^2]+(1-0.8)(\SI{10}{\ampere}- \SI{2}{\ampere})^2[1+\frac{1}{3}[\frac{\SI{0.833}{\ampere}}{2(\SI{10}{\ampere}- \SI{2}{\ampere})}]^2]}=\SI{4.023}{\ampere}.
+        I_\mathrm{C}=\sqrt{0.8 \cdot (\SI{2}{\ampere})^2 \left[1+\frac{1}{3}\left[\frac{\SI{0.833}{\ampere}}{2\cdot (\SI{2}{\ampere})}\right]^2\right]+(1-0.8)(\SI{10}{\ampere}- \SI{2}{\ampere})^2\left[1+\frac{1}{3}\left[\frac{\SI{0.833}{\ampere}}{2(\SI{10}{\ampere}- \SI{2}{\ampere})}\right]^2\right]}=\SI{4.023}{\ampere}.
     \end{equation}
 \end{solutionblock}
 
@@ -201,11 +199,11 @@ The efficiency is given by the following equation
 \begin{equation}
     \eta = \frac{P_\mathrm{2}}{P_\mathrm{1}} = \frac{P_\mathrm{2}}{P_\mathrm{2}+P_\mathrm{l}} = \frac{U_\mathrm{2} I_\mathrm{2}}{U_\mathrm{2} I_\mathrm{2} +R_\mathrm{L} I_\mathrm{L}^2} \label{eq:efficiency}.
 \end{equation}
-Determine $I_\mathrm{2}$ depending on D and $I_\mathrm{L}$
+If we now consider the node around $I_\mathrm{2}$, we can establish the following equation. It must be noted that the capacitor is charged and discharged when it is switched off. The same applies to the inductor, which discharges when it is switched off. The following equation can be created from these assumptions
 \begin{equation}
     I_\mathrm{2}=\frac{1}{T_\mathrm{s}} \int_{0}^{DT_\mathrm{s}} i_\mathrm{C, discharg}(t)\mathrm{d}t-\frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} i_\mathrm{C,charg}(t)\mathrm{d}t+\frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} I_\mathrm{L}(t)\mathrm{d}t.
 \end{equation}
-The following property can now be used
+Since it is assumed that the charging and discharging currents of the capacitor are equal, they cancel each other out
 \begin{equation}
     0 = \frac{1}{T_\mathrm{s}} \int_{0}^{DT_\mathrm{s}} i_\mathrm{C discharg}(t)\mathrm{d}t-\frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} i_\mathrm{C charg}(t)\mathrm{d}t.
 \end{equation}
@@ -213,29 +211,29 @@ This simplifies the explanation of this expression
 \begin{equation}
     I_\mathrm{2}= \frac{1}{T_\mathrm{s}} \int_{DT_\mathrm{s}}^{T_\mathrm{s}} I_\mathrm{L}(t)\mathrm{d}t.
 \end{equation}
-If the current $I_\mathrm{L}$ is now assumed to be independent of t, the integral can be solved
+If the current $I_\mathrm{L}$ is now assumed to be independent of $t$, the integral can be solved as:
 \begin{equation}
     I_\mathrm{2}= \frac{I_\mathrm{L}}{T_\mathrm{s}}(T_\mathrm{s}-(DT_\mathrm{s}))=I_\mathrm{L}(1-D).
 \end{equation}
-Now we insert the equation we have just calculated into equation \eqref{eq:efficiency}
+Now we insert the equation we have just calculated into equation \eqref{eq:efficiency}. This results into: 
 \begin{equation}
     \eta=\frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{2}I_\mathrm{2}+\frac{ R_\mathrm{L}I_\mathrm{2}^2}{(1-D)^2}}=\frac{U_\mathrm{2}}{U_\mathrm{2}+\frac{ R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}}=\frac{RI_\mathrm{2}}{RI_\mathrm{2}+\frac{ R_\mathrm{L}I_\mathrm{2}}{(1-D)^2}}=\frac{R}{R+\frac{ R_\mathrm{L}}{(1-D)^2}}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}.
     \label{eq:efficiencyOverD}
 \end{equation}
-If we now look at the original efficiency equation again, the following transformations can be carried out
+The efficiency is defined as:
 \begin{equation}
     \eta=\frac{P_\mathrm{2}}{P_\mathrm{1}} = \frac{U_\mathrm{2}I_\mathrm{2}}{U_\mathrm{1}I_\mathrm{L}}.
 \end{equation}
-If you now convert this equation to $U_\mathrm{2}/U_\mathrm{1}$, you get the following expression. Furthermore you have the expression $I_\mathrm{2}=I_\mathrm{L}(1-D)$
+If you now convert this equation to $U_\mathrm{2}/U_\mathrm{1}$, you get the following expression. With $I_\mathrm{2}=I_\mathrm{L}(1-D)$ the efficiency equation is rearranged as follows:
 \begin{equation}
     \frac{U_\mathrm{2}}{U_\mathrm{1}}=\eta \frac{I_\mathrm{L}}{I_\mathrm{2}}= \eta \frac{1}{(1-D)}=\frac{1}{1+\frac{\alpha}{(1-D)^2}}\frac{1}{1-D}=\frac{1}{(1-D)+\frac{\alpha}{1-D}}\cdot \frac{(1-D)}{(1-D)}=\frac{1-D}{(1-D)^2+\alpha}.
     \label{eq:voltageRatioOverD}
 \end{equation}
-This results in the following for $\eta$ as a function of D and $\alpha$:
+This results for $\eta$ as a function of D and $\alpha$ by:
 \begin{equation}
     \eta(D,\alpha)=\frac{1}{1+\frac{\alpha}{(1-D)^2}}.
 \end{equation}
-And this results in the following for $\frac{U_\mathrm{2}}{U_\mathrm{1}}$ as a function of D and $\alpha$:
+Moreover, the voltage transfer ration $\frac{U_\mathrm{2}}{U_\mathrm{1}}$ as a function of D and $\alpha$ is given with:
 \begin{equation}
     \frac{U_\mathrm{2}}{U_\mathrm{1}}(D,\alpha)=\frac{1-D}{(1-D)^2+\alpha}.
 \end{equation}
@@ -247,31 +245,31 @@ Now determine the required dutycycle under consideration of inductor losses:
 $\frac{U_\mathrm{2}}{U_\mathrm{1}}=\frac{D_\mathrm{P}}{(D_\mathrm{P})^2+\alpha}$with $D_\mathrm{P}=1-D$.
 As this expression is a quadratic term, the pq formula can be used. To be able to use this, it must first be converted to $D_\mathrm{P}$
 \begin{equation}
-    \frac{U_\mathrm{2}}{U_\mathrm{1}}(D_\mathrm{P})^2-D_\mathrm{P}+\frac{U_\mathrm{2}\alpha}{U_\mathrm{1}}=0
+    \frac{U_\mathrm{2}}{U_\mathrm{1}}(D_\mathrm{P})^2-D_\mathrm{P}+\frac{U_\mathrm{2}\alpha}{U_\mathrm{1}}=0,
 \end{equation}
 \begin{equation}
     D_\mathrm{P}^2 - \frac{U_\mathrm{1}}{U_\mathrm{2}} D_\mathrm{P}+\alpha=0.
 \end{equation}
 The first term resulting from the pq formula is:
 \begin{equation}
-    D_\mathrm{P1}=\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}+\sqrt{(\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}})^2-\alpha}= \frac{1}{2}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}+\sqrt{({\frac{1}{2}}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}})^2-\frac{\SI{0.2}{\ohm}}{\SI{30}{\ohm}}}= 0.158.
+    D_\mathrm{P1}=\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}+\sqrt{\left(\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}\right)^2-\alpha}= \frac{1}{2}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}+\sqrt{\left({\frac{1}{2}}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}\right)^2-\frac{\SI{0.2}{\ohm}}{\SI{30}{\ohm}}}= 0.158.
 \end{equation}
 If you now insert this into the equation $D_\mathrm{1}=1-D_\mathrm{P1}$, you get the result $D_\mathrm{1}=0.842$.
 
 The second term resulting from the pq formula is:
 \begin{equation}
-    D_\mathrm{P2}=\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}-\sqrt{(\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}})^2-\alpha}= \frac{1}{2}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}-\sqrt{({\frac{1}{2}}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}})^2-\frac{\SI{0.2}{\ohm}}{\SI{30}{\ohm}}}= 0.042.
+    D_\mathrm{P2}=\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}-\sqrt{\left(\frac{1}{2}\frac{U_\mathrm{1}}{U_\mathrm{2}}\right)^2-\alpha}= \frac{1}{2}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}-\sqrt{\left({\frac{1}{2}}\cdot\frac{\SI{12}{\volt}}{\SI{60}{\volt}}\right)^2-\frac{\SI{0.2}{\ohm}}{\SI{30}{\ohm}}}= 0.042.
 \end{equation}
 If you now insert this into the equation $D_\mathrm{2}=1-D_\mathrm{P2}$, you get the result $D_\mathrm{2}=0.958$.
 The duty cycle of $D_\mathrm{2}=0.958$ is only a theoretical value. For the design of the converter, the smaller duty cycle will be chosen, because of lower losses.
 In the following, the currents $I_\mathrm{L1}$ and $I_\mathrm{L2}$ are determined in order to be able to make a statement about the losses
 \begin{equation}
-    I_\mathrm{L1} = \frac{I_\mathrm{2}}{1-D_\mathrm{1}}= \frac{\SI{2}{\ampere}}{1-0.842}=\SI{12.679}{\ampere}
+    I_\mathrm{L1} = \frac{I_\mathrm{2}}{1-D_\mathrm{1}}= \frac{\SI{2}{\ampere}}{1-0.842}=\SI{12.679}{\ampere},
 \end{equation}
 \begin{equation}
     I_\mathrm{L2} = \frac{I_\mathrm{2}}{1-D_\mathrm{2}}= \frac{\SI{2}{\ampere}}{1-0.958}=\SI{47.321}{\ampere}.
 \end{equation}
-If you now put these current values in relation to the losses, the following can be determined by using the relation $P=I^2R$
+If you now put these current values in relation to the losses, the following can be determined by using the relation $P=I^2R$ as follows:
 \begin{equation}
     \frac{(\SI{47.321}{\ampere})^2}{(\SI{12.679}{\ampere})^2}=13.9296.
 \end{equation}
@@ -367,7 +365,7 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
         U_1 I_{\mathrm{L}} = U_2 I_2 + R_{\mathrm{L}} I_{\mathrm{L}}^2 + R_{\mathrm{DS,on}} I_{\mathrm{T}}^2 + U_{\mathrm{th}} \overline{i}_{\mathrm{D}} + R_{\mathrm{D}} I_{\mathrm{D}}^2,
         \label{eq:powerBalanceBoostConverterWithLosses}
     \end{equation}
-    with the average diode current $\overline{i}_{\mathrm{D}}$ and the rms diode current $I_{\mathrm{D}}$. The diode rms current is determined as:
+    with the average diode current $\overline{i}_{\mathrm{D}}$ and the RMS diode current $I_{\mathrm{D}}$. The diode RMS current is determined as:
     \begin{equation}
         I_{\mathrm{D}} = \sqrt{\frac{1}{T} \int_{0}^{T} i_{\mathrm{D}}(t)^2 \mathrm{d}t}
         = \sqrt{\frac{1}{T} \left( \int_{0}^{T_{\mathrm{on}}} 0 \mathrm{d}t + \int_{T_{\mathrm{on}}}^{T_{\mathrm{s}}} I_{\mathrm{L}}(t)^2 \mathrm{d}t \right)}
@@ -536,7 +534,7 @@ The voltage ratio dependant on the duty cycle $D$ is shown in \autoref{fig:volta
     \end{equation}
     which is rearranged to calculate the time interval with:
     \begin{equation}
-        t_{10} = \frac{\hat{i_{\mathrm{rr}}}}{i_{\mathrm{D}}} = \frac{\SI{4}{\ampere}}{\SI{120}{\ampere\per\micro\second}} = \SI{33.3}{\nano\second}.
+        t_{10} = \frac{\hat{i}_{\mathrm{rr}}}{i_{\mathrm{D}}} = \frac{\SI{4}{\ampere}}{\SI{120}{\ampere\per\micro\second}} = \SI{33.3}{\nano\second}.
     \end{equation}
 
     Hence, the time interval $t_{21}$ is given with:
