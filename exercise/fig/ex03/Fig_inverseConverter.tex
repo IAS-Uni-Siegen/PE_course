@@ -1,0 +1,65 @@
+\begin{figure}[htb]
+    \begin{center}
+        \begin{circuitikz}[european currents,european resistors,american inductors]
+            \draw 
+                    % Base coordinates
+                    (0,0) coordinate (jU1v)
+                    (0,-3) coordinate (jU1g)
+                    % Add components
+                    % Add primary source U1
+                    (jU1v) to [V,v_=$U_1$] (jU1g)
+                    % Add current symbole
+                    (jU1v) to [short,i^>=$i_\mathrm{1}$(t)] (1,0)
+                    % Add T1 with Control
+                    (jU1v) ++(2,0) node[nigfete,rotate=90](Trans1){} -- ++(2.5,0) coordinate(T1)
+                    % At transistor label T1
+                    (Trans1)  node[anchor=south,color=black]{$T_1$}                    
+                    % Short horizontal line
+                    (jU1v) to [short,-] (Trans1.D)
+                    % Add junction point for inductor
+                    (T1) to [short,-*] ++(0,0) coordinate (jLv)
+                    % Add junction point for P-buck diode
+                    (jLv) ++(0,-3) coordinate (jLg)
+                    % Add inductance
+                    (jLv) to  [L=$L$] (jLg)
+                    % Add current IL symbole
+                    (jLv)  to [short,i^>=$i_\mathrm{L}$(t)] (4.5,-0.7)
+                    % Continue horisontal line
+                    (jLv) to  [short,-] ++ (1.5,0) coordinate (jPtv)
+                    % Continue vertical line
+                    (jPtv) to  [short,-] ++ (0,-6) coordinate (jPtg)
+                    % Add positiv Diode connection point
+                    (jPtg)  ++ (3,0) coordinate  (jDP)
+                    % Add Diode
+                    (jDP) to  [D-,l^=$D$] (jPtg)
+                    % Add current Diode
+                    (jPtg)  to [short,i^<=$i_\mathrm{D}$(t)] (7,-6)
+                    % Add junction point for P-buck diode
+                    (jDP) to [short,-*] ++(0,-0) 
+                    % Add junction point for capacitor
+                    (jDP)  ++(0,3) coordinate (jCv)                    
+                    % Add line to secondary source U2
+                    (jDP) to  [short,-] ++ (2,0) coordinate (jU2g)
+                    % Add positive connection point
+                    (jU2g) ++(0,3) coordinate (jU2v)                    
+                    % Add secondary source U2
+                    (jU2v)  to [V=$U_2$] (jU2g)
+                    % Add current I2
+                    (jCv)  to [short,i^>=$i_\mathrm{2}$(t)] (11,-3)
+                    % Add line to capacitor
+                    (jU2v)  to [short,-*] (jCv)
+                    % Add capacitor
+                    (jCv)  to [C=$C_2$] (jDP)
+                    % Add current capacitor
+                    (jCv)  to [short,i^>=$i_\mathrm{C}$(t)] (9,-4)
+                    % Add horizontal from C to L
+                    (jCv) to [short,-*] (jLg)
+
+                    % Connect U1
+                    (jDBuckP) to [short,-] (jU1g)
+           ;
+        \end{circuitikz}
+    \end{center}
+    \caption{Inverse converter.}
+    \label{fig:inverse converter}
+\end{figure}

@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Begin exercise %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ex{Step-down converter and power loss calculation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Task 1: Inverse converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\task {Inverse converter}
+An inverse converter (see Fig. 1) is used to generate the negative supply voltage of a control control electronics, an inverse converter (see Fig. 1) is used. The input voltage is specified as $U_\mathrm{1}=\SI{18}{\volt}$, the output voltage is regulated to $U_\mathrm{2}=\SI{12}{\volt}$. The output power can be values in the range $P_\mathrm{2}=\SI{2}{\watt}$ to $\SI{25}{\watt}$.
+
+\input{./fig/ex03/Fig_inverseConverter.tex}
+
+\subtask{The system should operate at the limit of gap-free operation throughout the entire output power range. How should the inductance be selected so that the switching frequency is always above the hearing threshold $f_\mathrm{P}=\SI{20}{\kilo\hertz}$?}
+
+\begin{solutionblock}
+    \begin{equation}
+        U_{\mathrm{1}} = u_{\mathrm{L}} = L \frac{\Delta i_{\mathrm{L}} }{\Delta t}. 
+    \end{equation}
+\begin{equation}
+    D = \frac{U_\mathrm{2}}{U_\mathrm{1}+U_\mathrm{2}} = \frac{\SI{12}{\volt}}{\SI{18}{\volt}+\SI{12}{\volt}} = 0.4
+\end{equation}
+BCM is assumed
+\begin{equation}
+    I_\mathrm{2,min} = \frac{P_\mathrm{2}}{U_\mathrm{2}}=\frac{\SI{25}{\watt}}{\SI{12}{\volt}}=\SI{2.083}{\volt}
+\end{equation}
+The maximum current at BCM $\Delta i_{\mathrm{L}}$ is twice  $I_\mathrm{2,min}$.
+\begin{equation}
+    \Delta i_{\mathrm{L}} = 2  I_\mathrm{2,min} = \SI{4.16}{\ampere}
+\end{equation}
+\begin{equation}
+    \Delta t = \frac{D}{f_\mathrm{P}}
+\end{equation}
+The inductance can therefore be determined using the following equation:
+\begin{equation}
+    L = \frac{\Delta t  u_{\mathrm{L}}}{\Delta i_{\mathrm{L}}}= \frac{D u_{\mathrm{L}}}{f_\mathrm{P}\Delta i_{\mathrm{L}}}= \frac{D u_{\mathrm{1}}}{f_\mathrm{P}\Delta i_{\mathrm{L}}} = \frac{0.4 \cdot \SI{18}{\volt}}{\SI{20}{\kilo\hertz}\cdot \SI{4.16}{\ampere }} = \SI{86.4}{\micro\henry}
+\end{equation}
+
+\end{solutionblock}
+\subtask{In what range does the switching frequency $f_\mathrm{P}$ vary?}
+
+\begin{solutionblock}
+    The inductance equation is used again for this task:
+    \begin{equation}
+        
+    \end{equation}
+\end{solutionblock}
