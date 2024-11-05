@@ -1,0 +1,62 @@
+\begin{figure}[htb]
+    \centering
+    \begin{tikzpicture}
+        \tikzmath{
+            real = \t0, \t1, \t2 \x1;
+            \x1 = 3;
+            \t1 = 6;
+            \t2 = 8;
+            \t0 = (\t1-\x1)/0.71;
+        }
+        \begin{axis}[
+            xlabel={$t$},
+            axis lines=middle,
+            ymin=-1.5, ymax=1.2,
+            xmin=0, xmax=10,
+            xtick={\t0,\t1,\t2},
+            xticklabels={$t_0$,$t_1$,$t_2$},
+            ticklabel style ={yshift=0.2cm,anchor=south},
+            yticklabels={},
+            width=12cm,
+            height=5cm,
+            thick,
+            smooth,
+            no markers,
+            grid
+        ]
+        \draw[white,pattern=north east lines, pattern color=signalorange] (\t0,0) -- (\t1,-1) -- (\t1,0);
+        %
+        \node[signalorange, fill=white, inner sep = 1pt, anchor = south] at (axis cs:\t0+1.3,-0.45) {$Q_1$};
+        %
+        \draw[white,pattern=north west lines, pattern color=signalgreen] (\t1,0) -- (\t1,-1) -- (\t2,0);
+        %
+        \node[signalgreen, fill=white, inner sep = 1pt, anchor = south] at (axis cs:\t1+0.6,-0.45) {$Q_2$};
+        %
+        \draw[thick,signalred] (0,0.7) -- (\x1,0.7) -- (\t1,-1) -- (\t2,0);
+        %
+        \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:2,0.8) {$i_{\mathrm{D}}$};
+        % 
+        \draw[thin, signalred] (3.5,0.6) -- (4,0.7);
+        \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:4.5,0.55) {$\frac{\mathrm{d}i_{\mathrm{D}}}{\mathrm{d}t}$};
+        % 
+        \draw[thin, signalred] (7,-0.6) -- (7.8,-0.85);
+        \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:8,-1) {$\frac{\mathrm{d}i_{\mathrm{rr}}}{\mathrm{d}t}$};
+        %
+        \draw[thin, signalred] (\t1-0.05,-1.02) -- (\t1-0.3,-1.2);
+        %
+        \node[signalred, inner sep = 1pt, anchor = south] at (axis cs:\t1-0.4,-1.45) {$\hat{i}_{\mathrm{rr}}$};
+        %
+        \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:2,-0.7) {$Q_{\mathrm{rr}} = Q_{1} + Q_{2}$};
+        %
+        \draw[thick, signalblue, dashed] (0,0.1) -- (\t0,0.1) -- (\t0,-0.1) -- (\t1,-0.1) -- (\t1,-1.3) -- (\t2,-1.3) -- (\t2,-1) -- (10,-1);
+        %
+        \draw[thin, signalblue] (8.1, -1.3) -- (8.5,-1.3);
+        % 
+        \node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:8.8,-1.5) {${U}_{\mathrm{RB}}$};
+        %
+        \node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:2,0.15) {${u}_{\mathrm{D}}$};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Turn-off behavior of a fast silicon diode.}
+    \label{fig:TurnOffSiliconDiode}
+\end{figure}
