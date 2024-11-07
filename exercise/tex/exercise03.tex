@@ -8,7 +8,7 @@
 %% Task 1: Inverse converter %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task {Inverse converter}
-An inverse converter (see Fig. 1) is used to generate the negative supply voltage of a control control electronics, an inverse converter (see Fig. 1) is used. The input voltage is specified as $U_\mathrm{1}=\SI{18}{\volt}$, the output voltage is regulated to $U_\mathrm{2}=\SI{12}{\volt}$. The output power can be values in the range $P_\mathrm{2}=\SI{2}{\watt}$ to $\SI{25}{\watt}$.
+An inverse converter (see Fig. 1) is used to generate the negative supply voltage of a control control electronics, an inverse converter (see Fig. 1) is used. The input voltage is specified as $U_\mathrm{1}=\SI{18}{\volt}$, the output voltage is regulated to $U_\mathrm{2}=\SI{12}{\volt}$. The output power can be values in the range $P_\mathrm{2}=\SI{2}{\watt}$ to $\SI{15}{\watt}$.
 
 \input{./fig/ex03/Fig_inverseConverter.tex}
 
@@ -21,9 +21,9 @@ An inverse converter (see Fig. 1) is used to generate the negative supply voltag
 \begin{equation}
     D = \frac{U_\mathrm{2}}{U_\mathrm{1}+U_\mathrm{2}} = \frac{\SI{12}{\volt}}{\SI{18}{\volt}+\SI{12}{\volt}} = 0.4
 \end{equation}
-BCM is assumed
+BCM is assumed. A current $I_\mathrm{2}$ is only present when the transistor is open, otherwise the diode blocks. This is taken into account in the following equation as the duty cycle $D = 0.6$ is used for $T_\mathrm{off}$. The equation thus looks as follows:
 \begin{equation}
-    I_\mathrm{2,min} = \frac{P_\mathrm{2}}{U_\mathrm{2}}=\frac{\SI{25}{\watt}}{\SI{12}{\volt}}=\SI{2.083}{\volt}
+    I_\mathrm{2,min} = \frac{P_\mathrm{2}}{U_\mathrm{2}} \frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.083}{\volt}
 \end{equation}
 The maximum current at BCM $\Delta i_{\mathrm{L}}$ is twice  $I_\mathrm{2,min}$.
 \begin{equation}
@@ -49,12 +49,14 @@ The inductance can therefore be determined using the following equation:
      \begin{equation}
         f_\mathrm{P} = \frac{Du_{\mathrm{1}}}{L\Delta i_{\mathrm{L}}} \label{equation 1.8}
      \end{equation}
-     As the output power is given as a value range, the highest and lowest values can be used. The lowest and highest current should be determined from these two values, from which the value range of the frequency can then be determined.
+      
+As the output power is specified as a value range, the highest and lowest values can be used. The lowest and highest current should be determined from these two values, from which the value range of the frequency $f_\mathrm{P}$ can then be determined. Here the inverse converter is considered on the output side and therefore a duty cycle $D = 0.6$ is used again. The following equations can be derived from this:
+
      \begin{equation}
-        I_\mathrm{1,min}= \frac{P_\mathrm{2}}{U_\mathrm{1}}=\frac{\SI{2}{\watt}}{\SI{18}{\volt}}=\SI{0.1}{\volt}
+        I_\mathrm{1,min}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{2}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{0.278}{\volt}
      \end{equation}
      \begin{equation}
-        I_\mathrm{1,max}= \frac{P_\mathrm{2}}{U_\mathrm{1}}=\frac{\SI{25}{\watt}}{\SI{18}{\volt}}=\SI{1.38}{\volt}
+        I_\mathrm{1,max}= \frac{P_\mathrm{2}}{U_\mathrm{2}}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}=\SI{2.0833}{\volt}
      \end{equation}
      Now we can use these two terms in \ref{equation 1.8}:
      \begin{equation}
