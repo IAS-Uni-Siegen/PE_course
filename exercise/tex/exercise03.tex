@@ -69,3 +69,64 @@ The inductance can therefore be determined using the following equation:
  \begin{solutionblock}
     As the maximum current through the transistor is the current $I_1$, these values are the same. Since the BCM is considered in this circuit, the maximum current is the peak current, which corresponds to the value of $\SI{4.16}{\ampere}$.
  \end{solutionblock}
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Task 2: Boost-Buck converter and SEPIC topology
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\task {Boost-Buck converter and SEPIC topology}
+
+Versorgung einer Plasmabeschichtungsanlage mit variabler Spannung U2 ausgehend von einer
+geregelten Spannung U1 über Kopplung eines Hochsetzstellers und eines Tiefsetzstellers (mit
+gemeinsamer Kapazität).
+
+
+Bild
+
+
+Angaben:
+T2
+DBoost
+T1
+C
+U
+L2
+DBuck
+U2
+U1 = 380V
+U2 = 285V ... 450V
+P2 = 3000W konstant (falls nicht anders angegeben)
+Schaltfrequenz: fP = 50kHz
+
+
+Die Ausgangsspannung wird durch entsprechende Einstellung der Tastverhältnisse D1 (von Transistor
+T1) und D2 (von Transistor T2) mittels einer Regelung auf den vorgegebenen Wert eingestellt. Beide
+Transistoren arbeiten mit gleicher Schaltfrequenz. Die schaltfrequente Schwankung der
+Zwischenkreisspannung und der Ströme in den Induktivitäten können falls nicht anders
+angegeben vernachlässigt werden. Die Ströme in L1 und L2 zeigen kontinuierlichen Verlauf.
+
+Beide Transistoren werden mit gleicher relativer Einschaltdauer D1 = D2 = D betrieben.
+
+\subtask{Berechnen Sie die zur Realisierung einer Ausgangsspannung U2 einzustellende relative
+Einschaltdauer D der Transistoren T1 und T2.}
+
+\subtask{Welche Zwischenkreisspannung U stellt sich in Abhängigkeit von U2 ein?}
+
+\subtask{Stellen Sie D und U über U2 graphisch dar und geben Sie die Zahlenwerte für U2 = 285V, U2 =
+380V und U2 = 450V an.}
+
+\subtask{Welche Sperrspannungsfestigkeit müssen die Transistoren T1 und T2 und die Dioden DBoost und
+DBuck aufweisen?}
+
+Die Steuerung erfolge weiterhin mit D1 = D2 = D. Die ein- und ausgangsseitigen Induktivitäten
+weisen gleichen Wert L1 = L2 = L = 0.5mH auf.
+
+% \subtask{Berechnen Sie allgemein die Abhängigkeit des eingangs- und ausgangsseitigen Induktivitätsstromrippels $\Delta$iL1,pp(D) und $\Delta$i_{L2},pp(D) ausschliesslich vom Tastverhältnis D.}
+\subtask {Berechnen Sie allgemein die Abhängigkeit des eingangs- und ausgangsseitigen Induktivitätsrippels $\Delta i_{L1}$, pp(D) und $\Delta i_{L2}$,pp(D)} 
+
+\subtask{Wie weit darf die Ausgangleistung reduziert werden, um gerade noch kontinuierlichen Betrieb für
+den gesamten Ausgangsspannungsbereich sicherzustellen (d.h. kontinuierlicher Stromverlauf in L1
+und L2)?}
+
+\subtask{In welchem Abschnitt des Ausgangsspannungsbereiches wird diese Grenze zuerst
+eingangsseitig, in welchem zuerst ausgangsseitig erreicht?}
