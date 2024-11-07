@@ -1,0 +1,57 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Single Ended Primary Inductance Converter Schematic
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[ht]
+    \begin{center}
+        \begin{circuitikz}[european currents,european resistors,american inductors]
+            \draw 
+                    % Base coordinates
+                    (0,0) coordinate (jU1v)
+                    (0,-3) coordinate (jU1g)
+                    % Add primary source U1
+                    (jU1v) to [V=$U_1$] (jU1g)
+                    % Add line to L1
+                    (jU1v) to [short,-] ++ (0.5,0) coordinate (jL1v)
+                    % Add Inductance L1
+                    (jL1v) to  [L, l=$L_1$] ++ (3,0) coordinate (jTv)
+                    % Add arrow and Text
+                    ++(-0.5,0) node[currarrow](IL){}
+                    (IL)  node[anchor=south,color=black]{$i_\mathrm{L}$}
+                    % Add junction for Transistor
+                    (jTv) ++(0,-3) coordinate (jTg)
+                    % Add transistor T2
+                    (jTv) ++ (0,-1.5) node[nigfete](Trans1){}
+                    % At transistor label T2
+                    (Trans1)  node[anchor=west,color=black]{$T$}                     
+                    % Connect Transistor
+                    (jTv) to [short,-] (Trans1.D)
+                    (jTg) to [short,-] (Trans1.S)
+                    (Trans1.G) to [sqV] ++(-1,0)
+                    % Add capacitor C
+                    (jTv) to  [C,l=$C$] ++ (2,0) coordinate (jL2v)
+                    % Add junction for L2
+                    (jL2v) to [short,-*] ++(0,0)
+                    % Add coordinate jL2v and jL2g
+                    (jL2v)  ++(0,-3) coordinate (jL2g)
+                    % Add  L2
+                    (jL2v)  to [L, l=$L_2$] (jL2g)
+                    % Add Diode
+                    (jL2v) to  [D-,l^=$D$] ++ (2,0) coordinate (jU2v) 
+                    % Add coordinate jU2v and jU2g
+                    (jU2v) to [short,-] ++(0,-3) coordinate (jU2g)
+                    % Add secondary source U2
+                    (jU2v) to [V=$U_2$] (jU2g)
+                    % Add Junction point for jL2g
+                    (jU2g) to [short,-*] (jL2g)
+                    % Add line and junction point for T1g
+                    (jL2g) to [short,-*] (jTg)
+                    % Add line to U1g
+                    (jTg) to [short,-] (jU1g)
+           ;
+        \end{circuitikz}
+    \end{center}
+    \caption{Single ended  primary inductance converter circuit.}
+    \label{fig:ex03_SEPIC}
+\end{figure}
