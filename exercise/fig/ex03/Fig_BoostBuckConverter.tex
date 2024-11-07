@@ -6,52 +6,65 @@
                     % Base coordinates
                     (0,0) coordinate (jU1v)
                     (0,-3) coordinate (jU1g)
-                    % Add components
                     % Add primary source U1
                     (jU1v) to [V=$U_1$] (jU1g)
-                    % Add current symbol and T1 with Control
-                    (jU1v) ++(2,0) node[nigfete,rotate=90](Trans1){} -- ++(2.5,0) coordinate(T1)
-                    (Trans1.G)  to [sqV] ++(0,-1)
-                    % At transistor label T1
-                    (Trans1)  node[anchor=south,color=black]{$T_1$}                    
-                    % Short horizontal line
-                    (jU1v) to [short,-] (Trans1.D)
-                    % Add junction point for M-buck diode
-                    (T1) to [short,-*] ++(0,0) coordinate (jDBuckM)
-                    % Add junction point for P-buck diode
-                    (jDBuckM) ++(0,-3) coordinate (jDBuckP)
-                    % Add Inductance
-                    (jDBuckM) to  [L, l=$L$] ++ (3,0) coordinate (jT2v)
+                    % Add line to L1
+                    (jU1v) to [short,-] ++ (0.5,0) coordinate (jL1v)
+                    % Add Inductance L1
+                    (jL1v) to  [L, l=$L_1$] ++ (3,0) coordinate (jT1v)
                     % Add arrow and Text
-                    ++(-0.5,0) node[currarrow](IL){}
-                    (IL)  node[anchor=south,color=black]{$i_\mathrm{L}$}
-                    % Add junction point for Transistor
-                    (jT2v) to [short,-*] ++(0,0)
-                    % Add junction for Transistor
-                    (jT2v) ++(0,-3) coordinate (jT2g)  
-                    % Add Diode
-                    (jT2v) to  [D-,l^=$D_{\mathrm{boost}}$] ++ (2,0) coordinate (jU2v)           
+                    ++(-0.5,0) node[currarrow](IL1){}
+                    (IL1)  node[anchor=south,color=black]{$i_\mathrm{L1}$}
+                    % Add junction for T1
+                    (jT1v) to [short,-*] ++(0,0)
+                    % Add coordinate for Transistor
+                    (jT1v) ++(0,-3) coordinate (jT1g)
+                    % Add transistor T2
+                    (jT1v) ++ (0,-1.5) node[nigfete](Trans1){}
+                    % At transistor label T2
+                    (Trans1)  node[anchor=west,color=black]{$T_1$}                     
+                    % Connect Transistor
+                    (jT1v) to [short,-] (Trans1.D)
+                    (jT1g) to [short,-] (Trans1.S)
+                    (Trans1.G) to [sqV] ++(-1,0)
+                    % Add diode D1
+                    (jT1v) to  [D,l=$D_1$] ++ (2,0) coordinate (jCv)
+                    % Add junction for C
+                    (jCv) to [short,-*] ++(0,0)
+                    % Add coordinate jCv and jCg
+                    (jCv)  ++(0,-3) coordinate (jCg)
+                    % Add  capacitor C
+                    (jCv)  to [C, l=$C$] (jCg)
+                    % Add current symbol and T2 with Control
+                    (jCv) ++(2,0) node[nigfete,rotate=90](Trans2){} -- ++(2.5,0) coordinate(T2)
+                    (Trans2.G)  to [sqV] ++(0,-1)
+                    % At transistor label T2
+                    (Trans2)  node[anchor=south,color=black]{$T_2$}                    
+                    % Short horizontal line
+                    (jCv) to [short,-] (Trans2.D)
+                    % Add junction point for M-buck diode
+                    (T2) to [short,-*] ++(0,0) coordinate (jD2M)
+                    % Add junction point for diode D2
+                    (jD2M) ++(0,-3) coordinate (jD2P)
+                    % Add diode D2
+                    (jD2P) to  [D,l=$D_2$] (jD2M)                                      
+                    % Add inductor L2
+                    (jD2M) to  [L,l^=$L_2$] ++ (3,0) coordinate (jU2v)
+                    % Add arrow and Text
+                    (jU2v) ++(-0.5,0) node[currarrow](IL2){}
+                    (IL2)  node[anchor=south,color=black]{$i_\mathrm{L2}$}
                     % Add coordinate jU2v and jU2g
                     (jU2v) to [short,-] ++(0,-3) coordinate (jU2g)
                     % Add secondary source U2
-                    (jU2v) to [V=$U_2$] (jU2g)          
-                    % Add junction point for transistor T2g
-                    (jU2g) to [short,-*] (jT2g)
-                    % Add transistor T2
-                    (jT2v) ++ (0,-1.5) node[nigfete](Trans2){}
-                    % At transistor label T2
-                    (Trans2)  node[anchor=west,color=black]{$T_2$}                     
-                    % Connect Transistor
-                    (jT2v) to [short,-] (Trans2.D)
-                    (jT2g) to [short,-] (Trans2.S)
-                    (Trans2.G) to [sqV] ++(-1,0)
-                    % Add Junction point for diode D2g
-                    (jT2g) to [short,-*] (jDBuckP)
-                    % Add diode D2g
-                    % (jDBuckP) to  [D-,l^=$D_{buck}$,v =$U$,voltage shift=0, voltage=straight] (jDBuckM)
-                    (jDBuckP) to  [D-, l^=$D_{\mathrm{buck}}$, v_<=$U_0$, voltage=straight]  (jDBuckM)
-                    % Connect U1
-                    (jDBuckP) to [short,-] (jU1g)
+                    (jU2v) to [V=$U_2$] (jU2g)
+                    % Add line and junction to D2
+                    (jU2g) to [short,-*] (jD2P)
+                    % Add line and junction to C
+                    (jD2P) to [short,-*] (jCg)                    
+                    % Add line and junction to T1
+                    (jCg) to [short,-*] (jT1g)                    
+                    % Add line and junction to U1
+                    (jT1g) to [short,-] (jU1g)                    
            ;
         \end{circuitikz}
     \end{center}

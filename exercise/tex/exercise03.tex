@@ -78,7 +78,7 @@ The inductance can therefore be determined using the following equation:
 
 The supply of a plasma coating system is realized by a boost converter and a buck converter (with common capacitance).
 The converter is connected to a voltage $U_\mathrm{1}$ and provides a variable output voltage $U_\mathrm{2}$.
-
+\vspace{2em}\par
 
 \par
 % Schematic of Buck Boost Converter cascade
@@ -106,9 +106,21 @@ DBuck have?}
 The control continues with $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$. The input and output inductances 
 have the same value $L_\mathrm{1}$ = $L_\mathrm{2}$ = $L$ = $\SI{0.5}{m\henry}$.
 
-\subtask{Write the formula for the dependence of the input and output inductance ripple $\Delta i_{L1}$ and $\Delta i_{L2}$}
+\subtask{Write the formula for the dependence of the input and output inductance ripple $\Delta i_{L1}$ and $\Delta i_{L2}$ from the duty cycle}
 
 \subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range? 
 (i.e. continuous current flow in $L_\mathrm{1}$  and L$L_\mathrm{2}$)?}
 
 \subtask{In which section of the output voltage range is this limit reached first on the input side and in which section is it reached first on the output side?}
+\vspace{2em}\par
+The single ended primary inductance converter shall be considered under similar conditions.
+
+% Schematic of Buck Boost Converter cascade
+\input{./fig/ex03/Fig_SepicConverter}
+
+\subtask{What blocking voltage strength must the transistors $T_\mathrm{1}$ and the diode $D$ have?}
+
+\subtask{Write the formula for the dependence of the input and output inductance ripple $\Delta i_{L1}$ and $\Delta i_{L2}$ from the duty cycle}
+
+\subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range? 
+(i.e. continuous current flow in $L_\mathrm{1}$  and L$L_\mathrm{2}$)?}
