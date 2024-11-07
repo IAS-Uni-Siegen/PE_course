@@ -3584,7 +3584,7 @@
 \begin{frame}
     \frametitle{SEPIC: switching states}
     \begin{itemize}
-        \item During switch on-time, the transistor is conducting and the diode is blocking (cause the output current pulsation).
+        \item During switch on-time, the transistor is conducting and the diode is blocking (causing the output current pulsation).
         \item During switch off-time, the diode is conducting and the transistor is blocking.
     \end{itemize}
     \begin{figure}
@@ -3644,4 +3644,208 @@
         \frac{U_2}{U_1} = \frac{D}{1-D}.
     \end{equation}
     Similar to the synchronous buck-boost, the SEPIC comes with a positive voltage gain, but with the advantages of a single transistor and diode as well as non-pulsating input currents (at the cost of more filter components).
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Buck/boost converter for both current polarities %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Buck/boost converter for both current polarities}
+    \begin{columns}
+        \begin{column}{0.45\textwidth}
+            \begin{itemize}
+                \item Previous buck/boost realizations allowed only unidirectional current flow (cf. \figref{fig:step-down-converter-realization-1Q} and \figref{fig:step-up-converter-realization-1Q}).
+                \item Right realization with two transistors and body diodes enables both current polarities (two quadrant type).
+                \item No discontinuous current flow (\hl{no DCM mode}).
+                \item Transistors must be \hl{switched complementary} to prevent a \hl{DC-link short-circuit}: 
+                \begin{itemize}
+                    \item $T_1$: on, $T_2$: off,
+                    \item $T_1$: off, $T_2$: on.
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+        \hfill
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \begin{circuitikz}[]
+                    \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-4) coordinate (B)
+                    (A) to [short, o-, i=$i_1(t)$] ++(2,0)
+                    to [Tnpn, bodydiode, n=npn1, invert] ++(0,-2) coordinate (C)
+                    to [Tnpn, bodydiode, n=npn2, invert] ++(0,-2) coordinate (D)
+                    (C) to [short, *-, i=$i_2(t)$] ++(2,0)
+                    to [open, o-o, v = $\hspace{1.9cm}u_2(t)$, voltage = straight] ++(0,-2) 
+                    (D) to [short, *-] ++(2,0)
+                    (B) to [short, o-*] (D);
+                    \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+                    \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+                \end{circuitikz}
+                \caption{DC-DC converter realization for both current polarities (w/o filter components, aka \hl{half-bridge})}
+                \label{fig:DCDC-switch-two-current-polarities}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Buck/boost converter for both voltage polarities %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Buck/boost converter for both voltage polarities}
+    \begin{columns}
+        \begin{column}{0.45\textwidth}
+            \begin{itemize}
+                \item Required constraints are: 
+                \begin{itemize}
+                    \item $u_1>0$: otherwise DC link short-circuit,
+                    \item $i_2>0$: to meet semiconductor capabilities. 
+                \end{itemize}
+                \item Possible switching states:
+            \end{itemize}
+        \begin{center}
+            \begin{tabular}{c c c c}
+                \toprule
+                $T_1$ & $T_2$ & $u_2$ & $i_1$\\
+                \midrule
+                on & off & $+u_1$ & $+i_2$\\
+                off & on & $-u_1$ & $-i_2$\\
+                on & on & $0$ & $0$\\
+                off & off & $0$ & $0$\\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        
+        \end{column}
+        \hfill
+        \begin{column}{0.55\textwidth}
+            \begin{figure}
+                \begin{circuitikz}[]
+                    \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-5) coordinate (B)
+                    (A) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (E)
+                    to [Tnpn, n=npn1, invert] ++(0,-2) coordinate (C)
+                    to [short,*-] ++(2,0)  
+                    to [short, i=$i_2(t)$, -o] ++(2,0) coordinate (G)
+                    (C) to [short] ++(0,-1) 
+                    to [diode, l_=$D_1$, invert] ++(0,-2) coordinate (D)
+                    (E) to [short, *-] ++(2,0)
+                    to [diode, l_=$D_2$, invert] ++(0,-2)
+                    to [short] ++(0,-1) coordinate (F)
+                    to [Tnpn, n=npn2, invert] ++(0,-2) 
+                    to [short, -*] ++(-2,0)
+                    to [short, -o] (B)
+                    (F) to [short,*-o] ++(2,0) coordinate (H)
+                    (G) to [open, o-o, v = $\hspace{1.9cm}u_2(t)$, voltage = straight] (H);
+                    \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+                    \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+                \end{circuitikz}
+                \caption{DC-DC converter realization for both voltage polarities (w/o filter components, aka \hl{asymmetrical half-bridge})}
+                \label{fig:DCDC-switch-two-voltage-polarities}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Buck/boost converter for both current and voltage polarities %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Buck/boost converter for both current and voltage polarities}
+    \begin{columns}
+        \begin{column}{0.45\textwidth}
+            \begin{itemize}
+                \item For achieving full \hl{four quadrant operation (4Q)}, we combine the previous half-bridge variants. 
+                \item Also requires complementary switching of $\{T_1, T_2\}$ and $\{T_3, T_4\}$ to prevent a DC-link short-circuit. 
+                \item Possible (allowed) switching states:
+            \end{itemize}      
+            \begin{center}
+                \begin{tabular}{c c c c c c}
+                    \toprule
+                    $T_1$ & $T_2$ &$T_3$ & $T_4$ & $u_2$ & $i_1$\\
+                    \midrule
+                    on & off & off & on & $+u_1$ & $+i_2$\\
+                    off & on & on & off & $-u_1$ & $-i_2$\\
+                    on & off & on & off & $0$ & $0$\\
+                    off & on & off & on & $0$ & $0$\\
+                    \bottomrule
+                \end{tabular}
+            \end{center}  
+        \end{column}
+        \hfill
+        \begin{column}{0.55\textwidth}
+            \begin{figure}
+                \begin{circuitikz}[]
+                    \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-5) coordinate (B)
+                    (A) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (E)
+                    to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
+                    to [short,*-] ++(2,0)  
+                    to [short, i=$i_2(t)$, -o] ++(2,0) coordinate (G)
+                    (C) to [short] ++(0,-1) 
+                    to [Tnpn, n=npn2, invert, bodydiode] ++(0,-2) coordinate (D)
+                    (E) to [short, *-] ++(2,0)
+                    to [Tnpn, n=npn3, invert, bodydiode] ++(0,-2)
+                    to [short] ++(0,-1) coordinate (F)
+                    to [Tnpn, n=npn4, invert, bodydiode] ++(0,-2) 
+                    to [short, -*] ++(-2,0)
+                    to [short, -o] (B)
+                    (F) to [short,*-o] ++(2,0) coordinate (H)
+                    (G) to [open, o-o, v = $\hspace{1.9cm}u_2(t)$, voltage = straight] (H);
+                    \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+                    \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+                    \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
+                    \draw let \p1 = (npn4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
+                \end{circuitikz}
+                \caption{DC-DC converter realization for both current and voltage polarities (w/o filter components, aka \hl{full-bridge})}
+                \label{fig:DCDC-4Q-switch}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Buck/boost converter for both current and voltage polarities %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Buck/boost converter for both current and voltage polarities (cont.)}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            Define duty cycle as relative on-times of $\{T_1, T_4\}$:
+            $$ D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \quad T_1, T_4
+            $$
+            and conversely for $\{T_2, T_3\}$
+            $$
+            D' = \frac{T_\mathrm{on}}{T_\mathrm{s}}=(1-D), \quad T_2, T_3.
+            $$
+        This leads to the average output voltage of
+        \begin{equation}
+            U_2 = (2D-1) U_1.
+        \end{equation}
+
+        \begin{itemize}
+            \item Also holds 2Q converter from \figref{fig:DCDC-switch-two-voltage-polarities}.
+            \item Boost mode follows from flipping input and output.
+        \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        xlabel={$D$},
+                        ylabel={$\frac{U_2}{U_1}$},
+                        ymin=-1.0, ymax=1.0,
+                        xmin=0, xmax=1.0,
+                        width = 0.8\textwidth,
+                        height = 0.6\textheight,
+                        grid,
+                        thick,
+                        clip = true,
+                        xtick = {0, 0.25, 0.5, 0.75, 1.0}, 
+                        ytick = {-1.0, -0.5, 0, 0.5, 1.0}
+                        ]
+                        \addplot[signalblue, domain=0:1, samples=25] {2*x-1};
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Voltage gain for a buck converter with two voltage polarities}
+                \label{fig:DCDC-input-output-voltage-two-voltage-pol}
+            \end{figure}
+        \end{column}
+    \end{columns}
 \end{frame}
