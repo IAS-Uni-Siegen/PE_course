@@ -8,7 +8,7 @@
 %% Task 1: Inverse converter %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task {Inverse converter}
-An inverse converter (see Fig. 1) is used to generate the negative supply voltage of a control control electronics, an inverse converter (see Fig. 1) is used. The input voltage is specified as $U_\mathrm{1}=\SI{18}{\volt}$, the output voltage is regulated to $U_\mathrm{2}=\SI{12}{\volt}$. The output power can be values in the range $P_\mathrm{2}=\SI{2}{\watt}$ to $\SI{25}{\watt}$.
+An inverse converter (see Fig. 1) is used to generate the negative supply voltage of a control control electronics, an inverse converter (see Fig. 1) is used. The input voltage is specified as $U_\mathrm{1}=\SI{18}{\volt}$, the output voltage is regulated to $U_\mathrm{2}=\SI{12}{\volt}$. The output power can be values in the range $P_\mathrm{2}=\SI{2}{\watt}$ to $\SI{15}{\watt}$.
 
 \input{./fig/ex03/Fig_inverseConverter.tex}
 
@@ -21,9 +21,9 @@ An inverse converter (see Fig. 1) is used to generate the negative supply voltag
 \begin{equation}
     D = \frac{U_\mathrm{2}}{U_\mathrm{1}+U_\mathrm{2}} = \frac{\SI{12}{\volt}}{\SI{18}{\volt}+\SI{12}{\volt}} = 0.4
 \end{equation}
-BCM is assumed
+BCM is assumed. A current $I_\mathrm{2}$ is only present when the transistor is open, otherwise the diode blocks. This is taken into account in the following equation as the duty cycle $D = 0.6$ is used for $T_\mathrm{off}$. The equation thus looks as follows:
 \begin{equation}
-    I_\mathrm{2,min} = \frac{P_\mathrm{2}}{U_\mathrm{2}}=\frac{\SI{25}{\watt}}{\SI{12}{\volt}}=\SI{2.083}{\volt}
+    I_\mathrm{2,min} = \frac{P_\mathrm{2}}{U_\mathrm{2}} \frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.083}{\volt}
 \end{equation}
 The maximum current at BCM $\Delta i_{\mathrm{L}}$ is twice  $I_\mathrm{2,min}$.
 \begin{equation}
@@ -49,12 +49,14 @@ The inductance can therefore be determined using the following equation:
      \begin{equation}
         f_\mathrm{P} = \frac{Du_{\mathrm{1}}}{L\Delta i_{\mathrm{L}}} \label{equation 1.8}
      \end{equation}
-     As the output power is given as a value range, the highest and lowest values can be used. The lowest and highest current should be determined from these two values, from which the value range of the frequency can then be determined.
+      
+As the output power is specified as a value range, the highest and lowest values can be used. The lowest and highest current should be determined from these two values, from which the value range of the frequency $f_\mathrm{P}$ can then be determined. Here the inverse converter is considered on the output side and therefore a duty cycle $D = 0.6$ is used again. The following equations can be derived from this:
+
      \begin{equation}
-        I_\mathrm{1,min}= \frac{P_\mathrm{2}}{U_\mathrm{1}}=\frac{\SI{2}{\watt}}{\SI{18}{\volt}}=\SI{0.1}{\volt}
+        I_\mathrm{1,min}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{2}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{0.278}{\volt}
      \end{equation}
      \begin{equation}
-        I_\mathrm{1,max}= \frac{P_\mathrm{2}}{U_\mathrm{1}}=\frac{\SI{25}{\watt}}{\SI{18}{\volt}}=\SI{1.38}{\volt}
+        I_\mathrm{1,max}= \frac{P_\mathrm{2}}{U_\mathrm{2}}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}=\SI{2.0833}{\volt}
      \end{equation}
      Now we can use these two terms in \ref{equation 1.8}:
      \begin{equation}
@@ -70,63 +72,59 @@ The inductance can therefore be determined using the following equation:
     As the maximum current through the transistor is the current $I_1$, these values are the same. Since the BCM is considered in this circuit, the maximum current is the peak current, which corresponds to the value of $\SI{4.16}{\ampere}$.
  \end{solutionblock}
 
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: Boost-Buck converter and SEPIC topology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \task {Boost-Buck converter and SEPIC topology}
 
-Versorgung einer Plasmabeschichtungsanlage mit variabler Spannung U2 ausgehend von einer
-geregelten Spannung U1 über Kopplung eines Hochsetzstellers und eines Tiefsetzstellers (mit
-gemeinsamer Kapazität).
+The supply of a plasma coating system is realized by a boost converter followed by a buck converter acccording \autoref{fig:ex03_boost_buck_converter} (with common capacitance).
+The converter is connected to a voltage $U_\mathrm{1}$ and provides a variable output voltage $U_\mathrm{2}$. The parameters are displayed in \autoref{table:ParametersOfBoostBuckConverter}.
+\vspace{2em}\par
 
+\par
+% Schematic of Buck Boost Converter cascade
+\input{./fig/ex03/Fig_BoostBuckConverter}
+\par
+%Table of parameter values 
+\input{./fig/ex03/FigTab_BoostBuckConverter}
 
-Bild
+The output voltage is set to the specified value by adjusting the duty cycles $D_\mathrm{1}$ (of transistor $T_\mathrm{1}$) 
+and $D_\mathrm{2}$ (of transistor $T_\mathrm{2}$) using a control system. Both transistors operate at the same switching frequency. 
+The switching frequency fluctuation of the intermediate circuit voltage and the currents in the inductors can be neglected unless otherwise stated. 
+The currents in $L_\mathrm{1}$ and $L_\mathrm{2}$ show a continuous course. Both transistors are operated with the 
+same relative duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
 
+\subtask{Calculate the relative duty cycle $D$ of the transistors $T_\mathrm{1}$ and $T_\mathrm{1}$ to be set to achieve an output voltage $U_\mathrm{2}$.}
 
-Angaben:
-T2
-DBoost
-T1
-C
-U
-L2
-DBuck
-U2
-U1 = 380V
-U2 = 285V ... 450V
-P2 = 3000W konstant (falls nicht anders angegeben)
-Schaltfrequenz: fP = 50kHz
+\subtask{Which intermediate circuit voltage U is determined depending on $U_\mathrm{2}$?}
 
+\subtask{Plot $D$ and the voltage against $U_\mathrm{2}$ and calculate the numerical values for $U_\mathrm{2}$ = 285V, $U_\mathrm{2}$ =
+380V and $U_\mathrm{2}$ = 450V.}
 
-Die Ausgangsspannung wird durch entsprechende Einstellung der Tastverhältnisse D1 (von Transistor
-T1) und D2 (von Transistor T2) mittels einer Regelung auf den vorgegebenen Wert eingestellt. Beide
-Transistoren arbeiten mit gleicher Schaltfrequenz. Die schaltfrequente Schwankung der
-Zwischenkreisspannung und der Ströme in den Induktivitäten können falls nicht anders
-angegeben vernachlässigt werden. Die Ströme in L1 und L2 zeigen kontinuierlichen Verlauf.
+\subtask{What blocking voltage strength must the transistors $T_\mathrm{1}$ and $T_\mathrm{2}$ and the diodes $D_1$ and
+$D_2$ have?}
+\vspace{2em}\par
+The control continues with $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$. The input and output inductances 
+have the same value $L_\mathrm{1}$ = $L_\mathrm{2}$ = $L$ = $\SI{0.5}{m\henry}$.
 
-Beide Transistoren werden mit gleicher relativer Einschaltdauer D1 = D2 = D betrieben.
+\subtask{Write the formula for the dependence of the input and output inductance ripple $\Delta i_{L1}$ and $\Delta i_{L2}$ from the duty cycle.}
 
-\subtask{Berechnen Sie die zur Realisierung einer Ausgangsspannung U2 einzustellende relative
-Einschaltdauer D der Transistoren T1 und T2.}
+\subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range? 
+(i.e. continuous current flow in $L_\mathrm{1}$  and L$L_\mathrm{2}$)?}
 
-\subtask{Welche Zwischenkreisspannung U stellt sich in Abhängigkeit von U2 ein?}
+\subtask{In which section of the output voltage range is this limit reached first on the input side and in which section is it reached first on the output side?}
+\vspace{2em}\par
+The single ended primary inductance converter in \autoref{fig:ex03_SEPIC} shall be considered under similar conditions.
 
-\subtask{Stellen Sie D und U über U2 graphisch dar und geben Sie die Zahlenwerte für U2 = 285V, U2 =
-380V und U2 = 450V an.}
+% Schematic of Buck Boost Converter cascade
+\input{./fig/ex03/Fig_SepicConverter}
 
-\subtask{Welche Sperrspannungsfestigkeit müssen die Transistoren T1 und T2 und die Dioden DBoost und
-DBuck aufweisen?}
+\subtask{What blocking voltage strength must the transistors $T_\mathrm{1}$ and the diode $D$ have?}
 
-Die Steuerung erfolge weiterhin mit D1 = D2 = D. Die ein- und ausgangsseitigen Induktivitäten
-weisen gleichen Wert L1 = L2 = L = 0.5mH auf.
+\subtask{Write the formula for the dependence of the input and output inductance ripple $\Delta i_{L1}$ and $\Delta i_{L2}$ from the duty cycle.}
 
-% \subtask{Berechnen Sie allgemein die Abhängigkeit des eingangs- und ausgangsseitigen Induktivitätsstromrippels $\Delta$iL1,pp(D) und $\Delta$i_{L2},pp(D) ausschliesslich vom Tastverhältnis D.}
-\subtask {Berechnen Sie allgemein die Abhängigkeit des eingangs- und ausgangsseitigen Induktivitätsrippels $\Delta i_{L1}$, pp(D) und $\Delta i_{L2}$,pp(D)} 
+\subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range? 
+(i.e. continuous current flow in $L_\mathrm{1}$  and L$L_\mathrm{2}$)?}
 
-\subtask{Wie weit darf die Ausgangleistung reduziert werden, um gerade noch kontinuierlichen Betrieb für
-den gesamten Ausgangsspannungsbereich sicherzustellen (d.h. kontinuierlicher Stromverlauf in L1
-und L2)?}
-
-\subtask{In welchem Abschnitt des Ausgangsspannungsbereiches wird diese Grenze zuerst
-eingangsseitig, in welchem zuerst ausgangsseitig erreicht?}
+\subtask{Describe the advantages and disadvantages of the single ended primary inductance converter compared to the boost buck converter. Consider the components and the quality of the output voltage.}
