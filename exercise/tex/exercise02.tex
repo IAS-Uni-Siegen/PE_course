@@ -545,10 +545,10 @@ Initially, both transistors operate with the same duty cycle $D_1 = D_2 = D$ and
         I_\mathrm{L}=I_\mathrm{2} \frac{D}{1-D} = I_\mathrm{2} \left(1+\frac{U_\mathrm{2}}{U_\mathrm{1}} \right).
         \label{eq:InductorCurrent}
     \end{equation}
-    If you calculate the current $I_\mathrm{2}$ though the load and use it to calculate $I_\mathrm{L}$,
-     you get the result for the current through the inductor.
-    With \eqref{eq:DutyCycle} and \eqref{eq:InductorCurrent} you calculate the numerical values for the three voltages
-    and get the values displayed in \autoref{table:InductorCurrentDutyCycle}. The plots are shown in 
+    The current $I_\mathrm{2}$ can be calculated based on the power and with $I_\mathrm{2}$, 
+    the current through the inductor is subsequently determined.
+    The numerical values for the three voltages are calculated with \eqref{eq:DutyCycle} and \eqref{eq:InductorCurrent}.
+    The result is displayed in \autoref{table:InductorCurrentDutyCycle}. The plots are shown in 
     \autoref{fig:DutyCycleSyncAtInputVoltage} and \autoref{fig:InductorCurrentAtInputVoltage}
 
     \input{./fig/ex02/sFigTab_VoltageIlDutycycle}
@@ -567,18 +567,18 @@ Both transistors should now be able to have different duty cycles. Assume that t
 
 \begin{solutionblock}
 % Solution
-    Case 1: With $U_\mathrm{1}$ = $\SI{320}{\volt}$ and $D_1 = 0.9$ you calculate the duty cycle $D_2$ by
+    Case 1: Using $U_\mathrm{1}$ = $\SI{320}{\volt}$ and $D_1 = 0.9$ the duty cycle $D_2$ is obtained as
     \begin{equation}
         D_2 = 1 - D_1 \frac{U_\mathrm{1}}{U_\mathrm{2}} = 1 - 0.9 \cdot \frac{\SI{320}{\volt}}{\SI{400}{\volt}}= 0.28.
     \end{equation}
 
-    Consider one period you calculated the inductor voltage according \autoref{table:VoltageAtInductorInCase1_2}.
+    \autoref{table:VoltageAtInductorInCase1_2} displays the inductor voltage of one period.
     \input{./fig/ex02/sFigTab_Case1a2}
     This is displayed in \autoref{fig:VoltageAtInductorInCase1}.
     \input{./fig/ex02/sFigDia_InductorVoltageCase1}
 
     
-    Case 2: With $U_\mathrm{1}$ = $\SI{720}{\volt}$ and $D_1 = 0.1$ you calculate the duty cycle $D_1$ by
+    Case 2: Using $U_\mathrm{1}$ = $\SI{720}{\volt}$ and $D_1 = 0.1$ the duty cycle $D_1$ is obtained as
     \begin{equation}
         D_1 = \frac{U_\mathrm{2}}{U_\mathrm{1}} \left(1 - D_2 \right)= \frac{\SI{400}{\volt}}{\SI{720}{\volt}} \cdot \left(1 - 0.1\right) = 0.5.
         \label{eq:DutyCycleD1}
@@ -606,7 +606,7 @@ Both transistors should now be able to have different duty cycles. Assume that t
 ($U_\mathrm{1}$, $U_\mathrm{2}$, $P_\mathrm{2}$) and as a function of $D_\mathrm{1}$ and $D_\mathrm{2}$.}
 \begin{solutionblock}
 % Solution
-    With the dependency of $I_\mathrm{L}$ from $I_\mathrm{2}$ and the duty cycle you get
+    The dependency of $I_\mathrm{L}$ from $I_\mathrm{2}$ and the duty cycle is leading to
     \begin{equation}
         I_\mathrm{L}=I_\mathrm{2} \frac{1}{1-D_2}= \frac{P_\mathrm{2}}{U_\mathrm{2}} \frac{1}{1-D_2}.
     \end{equation}.
@@ -618,6 +618,8 @@ Both transistors should now be able to have different duty cycles. Assume that t
 \begin{solutionblock}
 % Solution
     Yes, the relationsships are independent from the switching frequency and switching points.
+    In \autoref{fig:VoltageAtInductorInCase1} and \autoref{fig:VoltageAtInductorInCase2} the area size above and below the zero-line are equal.
+    This is kept independent of the the switching frequency and the switching points.
 \end{solutionblock}
 
 \vspace{2em}\par
@@ -629,7 +631,7 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
  The relationships calculated under subtask 3.4 and 3.5 can be used for the voltage transformation ratio and the value of $I_\mathrm{L}$.}
 \begin{solutionblock}
 % Solution
-    The losses of the transistors are to consider:
+    The losses of the transistors are:
     \begin{equation}
         P_\mathrm{loss,T1}=D_1 U_\mathrm{F} I_\mathrm{L}=D_1 U_\mathrm{F} \frac{P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{1}{1-D_2}
         \hspace{1cm} \mathrm{and} \hspace{1cm}
@@ -651,18 +653,22 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
         \frac{1}{U_\mathrm{2}} \cdot \frac{D_2}{1-D_2}\right).
         \label{eq:ploss}
     \end{equation}
-    To minimize the losses depending on duty cycle you consider $P_\mathrm{loss}$=$f(D_2)$.
+    The losses minimum is determined by differentiating with respect to the duty cycle $D_2$.    
     \begin{equation}
+        P_\mathrm{loss}=f(D_2)
+        \hspace{1cm} \Rightarrow \hspace{1cm}
         \frac{\mathrm{d}}{\mathrm{d}D_2} f(D_2)= \frac{1}{\left(1 - D_2 \right)^2}=0.
         \label{eq:derivateDutycyle}
     \end{equation}
 
     There is no solution in the real number space for equation \eqref{eq:derivateDutycyle}.
-    If you consider \eqref{eq:ploss} the power loss decreases, when $\frac{D_2}{1-D_2}$ decrease.
-    The following can be conclude from the result: \\
-    $\Rightarrow$ Set $D_2$ as small as possible.\\
-    $\Rightarrow$ Activate $T_2$ only for boost mode.\\
-    $\Rightarrow$ Set $D_1$ as big as as possible.\\
+    According \eqref{eq:ploss} the power loss decreases, when $\frac{D_2}{1-D_2}$ decrease.
+    The following can be conclude from the result:
+    \begin{itemize}
+        \item Set $D_2$ as small as possible.
+        \item Activate $T_2$ only for boost mode.
+        \item Set $D_1$ as big as as possible.
+    \end{itemize}     
 \end{solutionblock}
 
 \subtask{Plot $D_\mathrm{1}$ and $D_\mathrm{2}$ and the efficiency over $U_\mathrm{1}$ and give numerical values
@@ -670,12 +676,12 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
 \begin{solutionblock}
 % Solution
     The power loss is to calculate with \eqref{eq:ploss} for the 3 different voltages.
-    You get the efficiency by applying
+    The efficiency is obtained by applying
     \begin{equation}
         \eta = \frac{P_\mathrm{2}}{P_\mathrm{loss}+P_\mathrm{2}}.
     \end{equation}
-    With both equations you get the results according \autoref{table:PowerlossDutyCycleEfficiencyOpt}.
-    This is displayed in \autoref{fig:DutyCycleOptAtInputVoltage}.
+    Using both equations lead to the results displayed in \autoref{table:PowerlossDutyCycleEfficiencyOpt} 
+    and plotted in \autoref{fig:DutyCycleOptAtInputVoltage}.
 
     \input{./fig/ex02/sFigTab_EfficiencyOpt}
     \input{./fig/ex02/sFigDia_DutyCycleVSVoltageOpt}
@@ -688,7 +694,7 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
 % Solution
     Again the equation \eqref{eq:ploss} is used with the condition $D_1$=$D_2$=$D$. This leads to
     \begin{equation}
-        P_\mathrm{loss}=2D U_\mathrm{F} I_\mathrm{L} = \frac{U_\mathrm{f} P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{2D}{1-D}
+        P_\mathrm{loss}=2D U_\mathrm{F} I_\mathrm{L} = \frac{U_\mathrm{f} P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{2D}{1-D}.
     \end{equation}
     If you enter the 3 operation voltages you get the results according \autoref{table:PowerlossDutyCycleEfficiencySync}.
     \input{./fig/ex02/sFigTab_EfficiencySync}
@@ -705,16 +711,15 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
 
     \input{./fig/ex02/sFigTab_EfficiencyGain}
     
-    The maximum efficiency gain is at $U_\mathrm{1}=\SI{400}{\volt}$. \\
-    It looks like the efficiency gain is higher within boost mode,
-     but why is the highest efficiency gain at $\SI{400}{\volt}$? \\
+    The maximum efficiency gain is at $U_\mathrm{1}=\SI{400}{\volt}$.
+    It looks like the efficiency gain is higher within boost mode, but why is the highest efficiency gain at $\SI{400}{\volt}$?
     Let's consider the power loss at boost mode for the two cases. The power loss needs to be expressed by a function of the voltages:
 
     \begin{equation}
         P_\mathrm{loss}=D_1 U_\mathrm{F} I_\mathrm{L} + D_2 U_\mathrm{F} I_\mathrm{L}.
         \label{eq:ploss2}
     \end{equation}
-    If following is considered
+    Considering the following
     \begin{equation}
         I_\mathrm{L}=\frac{P_\mathrm{2}}{U_\mathrm{1}} 
         \hspace{1cm} \mathrm{and} \hspace{1cm}
@@ -722,13 +727,13 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
         \hspace{1cm} \mathrm{and} \hspace{1cm}
         D_2=1-\frac{U_\mathrm{1}}{U_\mathrm{2}} 
     \end{equation}
-    this leads to
+    leads to
     \begin{equation}
         P_\mathrm{loss,opt}=\frac{2 P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{1}} - \frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{2}}.
+        \label{eq:Plossopt}
     \end{equation}
 
     For the synchronous operation mode following is valid:
-    consider:
     \begin{equation}
         I_\mathrm{L}=\frac{P_\mathrm{2}}{U_\mathrm{2}} \cdot \frac{1}{1-D}  
         \hspace{1cm} \mathrm{and} \hspace{1cm}
@@ -736,16 +741,18 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
         \hspace{1cm} \mathrm{and} \hspace{1cm}
         D=\frac{U_\mathrm{2}}{U_\mathrm{1}+U_\mathrm{2}}.
     \end{equation}
-    With \eqref{eq:ploss2} this leads now to
+    Using \eqref{eq:ploss2} leads to:
     \begin{equation}
         P_\mathrm{loss,sync}=\frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{1}} + \frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{1}}=\frac{2 P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{1}}.
+        \label{eq:Plosssync}
     \end{equation}
 
     The efficiency can be expressed by 
     \begin{equation}
         \eta = \frac{P_\mathrm{2}}{P_\mathrm{loss}+P_\mathrm{2}}=\frac{1}{1+\frac{P_\mathrm{loss}}{P_\mathrm{2}}}.
+        \label{eq:efficiencysyncopt}
     \end{equation}
-    If the result of the power losses is inserted into the formula, you get:
+    Using \eqref{eq:Plosssync} and \eqref{eq:Plossopt} in \eqref{eq:efficiencysyncopt} results in:
     \begin{equation}
         \eta_\mathrm{opt} = \frac{1}{1+U_\mathrm{F} \left(\frac{2}{U_\mathrm{1}}-\frac{1}{U_\mathrm{2}}\right)}
         \hspace{1cm} \mathrm{and} \hspace{1cm}
@@ -753,10 +760,11 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
         \label{eq:efficiencies}
     \end{equation}
 
-    The minimal efficiency gain is the minimum of $\Delta \eta=\eta_\mathrm{opt}-\eta_\mathrm{sync}$.
+    The efficiency gain is $\Delta \eta=\eta_\mathrm{opt}-\eta_\mathrm{sync}$:
     
     \begin{equation}
         \Delta \eta= \frac{\frac{U_\mathrm{F}}{U_\mathrm{2}}}{\left(1+ \frac{2 U_\mathrm{F}}{U_\mathrm{1}}-\frac{U_\mathrm{F}}{U_\mathrm{2}} \right) \left(1+\frac{2 U_\mathrm{F}}{U_\mathrm{1}}\right)}.
+        \label{eq:efficiencygain}
     \end{equation}
 
     The two efficiencies are calculated with \eqref{eq:efficiencies} and displayed in \autoref{fig:EfficiencyAtInputVoltage}.
@@ -764,9 +772,12 @@ If the transistors $T_1$ and $T_2$ are switched on, a constant voltage drop $U_\
 
 
     Conclusion: \\
-    $\Rightarrow$ You get the minimal efficiency gain at maximal $U_\mathrm{1}$. \\
-    $\Rightarrow$ The difference between the power losses of $P_\mathrm{loss,opt}$ and $P_\mathrm{loss,sync}$ in boost mode is the constant factor 
-    $\frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{2}}$
-    which has a proportionally greater effect on the efficiency with smaller $U_\mathrm{2}$ power losses (here larger $U_\mathrm{1}$ ).
+    \begin{itemize}
+        \item \eqref{eq:efficiencies}  shows, that $\eta_\mathrm{opt}$ and $\eta_\mathrm{opt}$ in 
+        boost mode differ only by the constant factor $\frac{U_\mathrm{F}}{U_\mathrm{2}}$ which has a relatively greater impact on efficiency at lower $U_\mathrm{2}$ (in this case, higher $U_\mathrm{1}$).
+        \item The difference between the power losses of $P_\mathrm{loss,opt}$ and $P_\mathrm{loss,sync}$ in boost mode is the constant factor 
+        $\frac{P_\mathrm{2} U_\mathrm{F}}{U_\mathrm{2}}$
+        which has a proportionally greater effect on the efficiency with smaller $U_\mathrm{2}$ power losses (here larger $U_\mathrm{1}$ ).
+    \end{itemize}      
 
 \end{solutionblock}
