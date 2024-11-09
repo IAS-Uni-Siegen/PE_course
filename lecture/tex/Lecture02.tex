@@ -3464,9 +3464,9 @@
 \begin{frame}
     \frametitle{Ćuk converter: switching states}
     \begin{itemize}
-        \item The Ćuk converter uses the capacitor $C$ to transfer energy between the input and output.
+        \item The Ćuk converter uses the \hl{capacitor $C$ to transfer energy} between the input and output.
         \item The polarity of $C$ is changed between the two switch states (inverting voltage gain).
-        \item In contrast to the previous topologies, there is no pulsating output or input current thanks to the outer inductors.
+        \item In contrast to the previous topologies, there is no pulsating output or input current thanks to the outer two inductors.
     \end{itemize}
     \begin{figure}
         \centering	
@@ -3807,12 +3807,12 @@
     \frametitle{Buck/boost converter for both current and voltage polarities (cont.)}
     \begin{columns}
         \begin{column}{0.5\textwidth}
-            Define duty cycle as relative on-times of $\{T_1, T_4\}$:
-            $$ D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \quad T_1, T_4
+            Define duty cycle as relative on-times
+            $$ D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \quad \mbox{for } T_1, T_4,
             $$
-            and conversely for $\{T_2, T_3\}$
+            and conversely
             $$
-            D' = \frac{T_\mathrm{on}}{T_\mathrm{s}}=(1-D), \quad T_2, T_3.
+            D' = \frac{T_\mathrm{on}}{T_\mathrm{s}}=(1-D), \quad \mbox{for } T_2, T_3.
             $$
         This leads to the average output voltage of
         \begin{equation}

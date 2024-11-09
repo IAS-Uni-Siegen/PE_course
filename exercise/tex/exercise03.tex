@@ -139,21 +139,97 @@ same relative duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
 
 \subtask{Calculate the relative duty cycle $D$ of the transistors $T_\mathrm{1}$ and $T_\mathrm{1}$ to be set to achieve an output voltage $U_\mathrm{2}$.}
 
-\subtask{Which intermediate circuit voltage U is determined depending on $U_\mathrm{2}$?}
+\begin{solutionblock}
+    % Solution
+    For the boost-buck converter \eqref{eq:DutyCycleEx03} is to apply:
+    \begin{equation}
+        D = \frac{\frac{U_\mathrm{2}}{U_\mathrm{1}}} {1+{\frac{U_\mathrm{2}}{U_\mathrm{1}}}}.
+        \label{eq:DutyCycleEx03}
+    \end{equation}
+    In case of $U_\mathrm{2}$ = $\SI{380}{\volt}$, the duty cycle is determined using \eqref{eq:DutyCycleEx03} as
+    \begin{equation}
+       \frac{\frac{\SI{285}{\volt}}{\SI{380}{\volt}}} {1+{\frac{\SI{285}{\volt}}{\SI{380}{\volt}}}} = 0.429.
+    \end{equation}
+\end{solutionblock}
 
-\subtask{Plot $D$ and the voltage against $U_\mathrm{2}$ and calculate the numerical values for $U_\mathrm{2}$ = 285V, $U_\mathrm{2}$ =
+
+\subtask{Which intermediate circuit voltage $U_\mathrm{0}$ is determined depending on $U_\mathrm{2}$?}
+
+\begin{solutionblock}
+    % Solution
+    The first part is the boost converter part. For the output voltage 
+    of $\SI{285}{\volt}$, the intermediate circuit voltage $U_\mathrm{0}$ is calculated as
+    \begin{equation}
+        U_\mathrm{0}=U_\mathrm{1} \frac{1}{1-D_\mathrm{2}} 
+        \hspace{1cm} \mathrm{and} \hspace{1cm}  
+        \SI{380}{\volt} \frac{1}{1-0.429} = \SI{665}{\volt}.
+        \label{eq:DCLinkEx03}        
+    \end{equation}
+\end{solutionblock}
+
+
+\subtask{Plot $D$ and the voltage $U_\mathrm{0}$ against $U_\mathrm{2}$ and calculate the numerical values for $U_\mathrm{2}$ = 285V, $U_\mathrm{2}$ =
 380V and $U_\mathrm{2}$ = 450V.}
+
+\begin{solutionblock}
+    % Solution
+    For the plot \eqref{fig:DutyCycleDCLinkVoltageAtOutputVoltage} and \eqref{eq:DCLinkEx03} are used for the function and 
+    displayed in \autoref{fig:DCLinkVoltageAtOutputVoltage} and \autoref{fig:DutyCycleDCAtOutputVoltage}. The results for the different output values are listed in \autoref{table:DutyCycleDCLinkVoltageAtOutputVoltage}.
+
+    %Plot of DCLinkVoltage
+    \input{./fig/ex03/sFigDia_DCLinkVSUoutE3T2}
+    %Plot of duty cycle
+    \input{./fig/ex03/sFigDia_DutyCycleVSUoutE3T2}
+
+
+    %Result table
+    \input{./fig/ex03/sFigTab_DCLinkVoltageDutycycleE3T2}
+\end{solutionblock}
 
 \subtask{What blocking voltage strength must the transistors $T_\mathrm{1}$ and $T_\mathrm{2}$ and the diodes $D_1$ and
 $D_2$ have?}
+
+\begin{solutionblock}
+    % Solution
+    Based on the schematic \autoref{fig:ex03_boost_buck_converter} the intermediate circuit voltage is to block by the diodes and 
+    the transistors within one switching period. The minimum blocking voltage of the component needs to be higher than $U_\mathrm{0}$.
+\end{solutionblock}
+
 \vspace{2em}\par
 The control continues with $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$. The input and output inductances 
 have the same value $L_\mathrm{1}$ = $L_\mathrm{2}$ = $L$ = $\SI{0.5}{m\henry}$.
 
-\subtask{Write the formula for the dependence of the input and output inductance ripple $\Delta i_{L1}$ and $\Delta i_{L2}$ from the duty cycle.}
+\subtask{Write the formula for the dependence of the input and output inductance ripple $\Delta i_\mathrm{L1}$ and $\Delta i_\mathrm{L2}$ from the duty cycle.}
+
+\begin{solutionblock}
+    % Solution
+    The current ripple depends on the duty cycle, switching period and inductor voltage.
+    This is expressed by:
+    \begin{equation}
+        \Delta i_\mathrm{L1}=\Delta i_\mathrm{L2}=\frac{U_\mathrm{1}D}{f_\mathrm{s}L}
+    \end{equation}
+\end{solutionblock}
 
 \subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range? 
 (i.e. continuous current flow in $L_\mathrm{1}$  and L$L_\mathrm{2}$)?}
+
+\begin{solutionblock}
+    % Solution
+    The average inductor current is the half of the ripple current. This is expressed by:
+    \begin{equation}
+        I_\mathrm{L1}=I_\mathrm{L2}=\frac{\Delta i_\mathrm{L1}}{2}
+    \end{equation}
+    The maximal current is required at minimal output voltage at constant power.
+    \begin{equation}
+        P_\mathrm{2,min}=U_\mathrm{2}\frac{U_\mathrm{1}D}{2f_\mathrm{s}L}
+    \end{equation}
+    The maximal current is required at minimal output voltage at constant power.
+    \begin{equation}
+        U_\mathrm{2}\frac{U_\mathrm{1}D}{2f_\mathrm{s}L}=
+    \end{equation}
+\end{solutionblock}
+
+
 
 \subtask{In which section of the output voltage range is this limit reached first on the input side and in which section is it reached first on the output side?}
 \vspace{2em}\par
