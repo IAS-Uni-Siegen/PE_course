@@ -2,21 +2,22 @@
 %% Begin exercise %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ex{Step-down converter and power loss calculation}
+\ex{Inverting buck-boost converter}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Task 1: Inverse converter %%
+%% Task 1: Inverting buck-boost converter %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task {Inverse converter}
-An inverse converter (see Fig. 1) is used to generate the negative supply voltage of a control control electronics, an inverse converter (see Fig. 1) is used. The input voltage is specified as $U_\mathrm{1}=\SI{18}{\volt}$, the output voltage is regulated to $U_\mathrm{2}=\SI{12}{\volt}$. The output power can be values in the range $P_\mathrm{2}=\SI{2}{\watt}$ to $\SI{15}{\watt}$.
+An inverting buck-boost converter (see \autoref{fig:Inverting buck-boost converter}) is used to generate the negative supply voltage of a control control electronics, an inverse converter (see \autoref{fig:Inverting buck-boost converter}) is used. The input voltage is specified as $U_\mathrm{1}=\SI{18}{\volt}$, the output voltage is regulated to $U_\mathrm{2}=\SI{12}{\volt}$. The output power can be values in the range $P_\mathrm{2} = \SI{2}{\watt} \, \dots \, \SI{15}{\watt}$.
 
 \input{./fig/ex03/Fig_inverseConverter.tex}
 
-\subtask{The system should operate at the limit of gap-free operation throughout the entire output power range. How should the inductance be selected so that the switching frequency is always above the hearing threshold $f_\mathrm{P}=\SI{20}{\kilo\hertz}$?}
+\subtask{The system should operate at boundary conduction mode (BCM)   throughout the entire output power range. How should the inductance be selected so that the switching frequency is always above the hearing threshold $f_\mathrm{P}=\SI{20}{\kilo\hertz}$?}
 
 \begin{solutionblock}
+The $\Delta$ is an approximation of the total differential using a difference equation with the differences $\Delta$. This results in the component differential equations becoming average value equations. The nabla operator is not understood here due to the $\Delta$.
     \begin{equation}
-        U_{\mathrm{1}} = u_{\mathrm{L}} = L \frac{\Delta i_{\mathrm{L}} }{\Delta t}. 
+        U_{\mathrm{1}} = \overline u_{\mathrm{L}} = L \frac{\Delta i_{\mathrm{L}} }{\Delta t}. 
     \end{equation}
 \begin{equation}
     D = \frac{U_\mathrm{2}}{U_\mathrm{1}+U_\mathrm{2}} = \frac{\SI{12}{\volt}}{\SI{18}{\volt}+\SI{12}{\volt}} = 0.4
@@ -25,57 +26,86 @@ BCM is assumed. A current $I_\mathrm{2}$ is only present when the transistor is 
 \begin{equation}
     I_\mathrm{2,min} = \frac{P_\mathrm{2}}{U_\mathrm{2}} \frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.083}{\volt}
 \end{equation}
-The maximum current at BCM $\Delta i_{\mathrm{L}}$ is twice  $I_\mathrm{2,min}$.
+The maximum current at BCM $\Delta i_{\mathrm{L}}$ is twice  $I_\mathrm{2,min}$:
 \begin{equation}
-    \Delta i_{\mathrm{L}} = 2  I_\mathrm{2,min} = \SI{4.16}{\ampere}
+    \Delta i_{\mathrm{L}} = 2  I_\mathrm{2,min} = \SI{4.16}{\ampere}.
 \end{equation}
+Delta $\Delta t$ can also be expressed as:
 \begin{equation}
-    \Delta t = \frac{D}{f_\mathrm{P}}
+    \Delta t = \frac{D}{f_\mathrm{P}}.
 \end{equation}
-The inductance can therefore be determined using the following equation:
+This expression can now be used in the inductance equation. The inductance can therefore be determined using the following equation:
 \begin{equation}
-    L = \frac{\Delta t  u_{\mathrm{L}}}{\Delta i_{\mathrm{L}}}= \frac{D u_{\mathrm{L}}}{f_\mathrm{P}\Delta i_{\mathrm{L}}}= \frac{D u_{\mathrm{1}}}{f_\mathrm{P}\Delta i_{\mathrm{L}}} = \frac{0.4 \cdot \SI{18}{\volt}}{\SI{20}{\kilo\hertz}\cdot \SI{4.16}{\ampere }} = \SI{86.4}{\micro\henry}
+    L = \frac{\Delta t  \overline u_{\mathrm{L}}}{\Delta i_{\mathrm{L}}}= \frac{D \overline u_{\mathrm{L}}}{f_\mathrm{P}\Delta i_{\mathrm{L}}}= \frac{D U_{\mathrm{1}}}{f_\mathrm{P}\Delta i_{\mathrm{L}}} = \frac{0.4 \cdot \SI{18}{\volt}}{\SI{20}{\kilo\hertz}\cdot \SI{4.16}{\ampere }} = \SI{86.4}{\micro\henry}.
 \end{equation}
 
 \end{solutionblock}
-\subtask{In what range does the switching frequency $f_\mathrm{P}$ vary?}
+\subtask{In what range does the switching frequency $f_\mathrm{P}$ considering the inductance choice from the previous subtask}
 
  \begin{solutionblock}
      The inductance equation is used again for this task:
      \begin{equation}
-        L = \frac{\Delta t  u_{\mathrm{L}}}{\Delta i_{\mathrm{L}}}= \frac{D u_{\mathrm{L}}}{f_\mathrm{P}\Delta i_{\mathrm{L}}}
+        L = \frac{\Delta t \overline u_{\mathrm{L}}}{\Delta i_{\mathrm{L}}}= \frac{D \overline u_{\mathrm{L}}}{f_\mathrm{P}\Delta i_{\mathrm{L}}}
      \end{equation}
      This equation can be converted to $f_\mathrm{P}$ and used to determine the frequency as follows:
      \begin{equation}
-        f_\mathrm{P} = \frac{Du_{\mathrm{1}}}{L\Delta i_{\mathrm{L}}} \label{equation 1.8}
+        f_\mathrm{P} = \frac{DU_{\mathrm{1}}}{L\Delta i_{\mathrm{L}}} \label{equation 1.8}
      \end{equation}
       
 As the output power is specified as a value range, the highest and lowest values can be used. The lowest and highest current should be determined from these two values, from which the value range of the frequency $f_\mathrm{P}$ can then be determined. Here the inverse converter is considered on the output side and therefore a duty cycle $D = 0.6$ is used again. The following equations can be derived from this:
 
      \begin{equation}
-        I_\mathrm{1,min}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{2}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{0.278}{\volt}
+        I_\mathrm{2,min}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{2}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{0.278}{\volt}
      \end{equation}
      \begin{equation}
-        I_\mathrm{1,max}= \frac{P_\mathrm{2}}{U_\mathrm{2}}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}=\SI{2.0833}{\volt}
+        I_\mathrm{2,max}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.0833}{\volt}
      \end{equation}
      Now we can use these two terms in \ref{equation 1.8}:
      \begin{equation}
-        f_\mathrm{P,min}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{0.1}{\volt}}=\SI{416.667}{\kilo \hertz}
+        f_\mathrm{P,max}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{0.278}{\volt}}=\SI{150}{\kilo \hertz}
      \end{equation}
      \begin{equation}
-        f_\mathrm{P,max}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{1.38}{\volt}}=\SI{30.193}{\kilo \hertz}
+        f_\mathrm{P,min}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{2.0833}{\volt}}=\SI{20}{\kilo \hertz}
      \end{equation}
+     The switching frequency $f_\mathrm{P}$ varies in the range from $\SI{20}{\kilo \hertz} \, \dots \, \SI{150}{\kilo \hertz}$.
  \end{solutionblock}
 
- \subtask{What is the peak value $\hat I_1$ of the transistor current?}
+ \subtask{What is the peak value $\hat i_1$ of the transistor current?}
  \begin{solutionblock}
-    As the maximum current through the transistor is the current $I_1$, these values are the same. Since the BCM is considered in this circuit, the maximum current is the peak current, which corresponds to the value of $\SI{4.16}{\ampere}$.
+    As the maximum current through the transistor is the current $i_1$, these values are the same. Since the BCM is considered in this circuit, the maximum current is the peak current, which corresponds to the value of $\SI{4.16}{\ampere}$.
  \end{solutionblock}
 
  \subtask{How does the duty cycle $D$ change with the output power? Enter the duty cycle values and the absolute values of the transistor switch-on times $T_\mathrm{on} = D T_\mathrm{s}$ for minimum and maximum output power.}
+ \begin{solutionblock}
+ The following applies to the switching period $T_\mathrm{s}$ for the respective services:  
+ \begin{equation}
+    T_\mathrm{s} = \frac{1}{f_\mathrm{P}}. \label{switching frequency}
+ \end{equation}
+ The different switching frequencies can now be inserted into \ref{switching frequency}:
+ \begin{equation}
+    T_\mathrm{s,min}(\SI{2}{\watt}) = \frac{1}{\SI{150}{\kilo \hertz}}= \SI{6.67}{\micro \s}
+ \end{equation}
+ \begin{equation}
+    T_\mathrm{s,max}(\SI{15}{\watt}) = \frac{1}{\SI{20}{\kilo \hertz}}= \SI{50}{\micro \s}.
+ \end{equation}
+ The absolute values of the transistor switch-on times can be determined using the following equation
+ \begin{equation}
+    T_\mathrm{on} = D T_\mathrm{s}. \label{absolut value switch-on-times}
+ \end{equation}
+ The different switching periods can now be inserted into \ref{absolut value switch-on-times}:
+ \begin{equation}
+    T_\mathrm{on,min}(\SI{2}{\watt}) = 0.4 \cdot \SI{6.67}{\micro \s} = \SI{2.67}{\micro \s}
+ \end{equation}
+ \begin{equation}
+    T_\mathrm{on,max}(\SI{15}{\watt}) = 0.4 \cdot \SI{50}{\micro \s}= \SI{20}{\micro \s}.
+ \end{equation}
+ \end{solutionblock}
 
  \subtask{Sketch the course of the current $i_\mathrm{L}$ in the inductance for minimum and maximum output power.}
-
+\begin{solutionblock}
+    \input{fig/ex03/Fig_courseILminmaxOutputPower.tex}   
+\end{solutionblock}
+    
  \subtask{At which operating point does the maximum switching frequency fluctuation of the output voltage $\Delta u_\mathrm{2pp}$ occurs (the load approximately draws a constant current)?} 
 
  \subtask{How high should the output capacitance be selected to ensure $Delta u_\mathrm{2pp} < 0.02 U_\mathrm{2}?$}

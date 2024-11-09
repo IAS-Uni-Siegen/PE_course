@@ -8,7 +8,7 @@
                     % Add components
                     % Add primary source U1
                     (jU1v) to [V,v_=$U_1$] (jU1g)
-                    % Add current symbole
+                    % Add current symbol
                     (jU1v) to [short,i^>=$i_\mathrm{1}$(t)] (1,0)
                     % Add T1 with Control
                     (jU1v) ++(2,0) node[nigfete,rotate=90](Trans1){} -- ++(2.5,0) coordinate(T1)
@@ -22,13 +22,13 @@
                     (jLv) ++(0,-3) coordinate (jLg)
                     % Add inductance
                     (jLv) to  [L=$L$] (jLg)
-                    % Add current IL symbole
+                    % Add current IL symbol
                     (jLv)  to [short,i^>=$i_\mathrm{L}$(t)] (4.5,-0.7)
-                    % Continue horisontal line
+                    % Continue horizontal line
                     (jLv) to  [short,-] ++ (1.5,0) coordinate (jPtv)
                     % Continue vertical line
-                    (jPtv) to  [short,-] ++ (0,-6) coordinate (jPtg)
-                    % Add positiv Diode connection point
+                    (jPtv) to  [short,-, crossing] ++ (0,-6) coordinate (jPtg)
+                    % Add positive Diode connection point
                     (jPtg)  ++ (3,0) coordinate  (jDP)
                     % Add Diode
                     (jDP) to  [D-,l^=$D$] (jPtg)
@@ -60,6 +60,6 @@
            ;
         \end{circuitikz}
     \end{center}
-    \caption{Inverse converter.}
-    \label{fig:inverse converter}
+    \caption{Inverting buck-boost converter.}
+    \label{fig:Inverting buck-boost converter}
 \end{figure}
