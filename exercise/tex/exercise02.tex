@@ -174,14 +174,14 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
      \begin{equation}
         I_\mathrm{C}=\sqrt{D (I_\mathrm{2})^2+(1-D)(I_\mathrm{1}-I_\mathrm{2})^2}=\sqrt{0.8\cdot (\SI{2}{\ampere})^2+(1-0.8)\cdot(\SI{10}{\ampere}-\SI{2}{\ampere})^2} = \SI{4}{\ampere}. \label{eq:neglecting the current ripple}
      \end{equation}
-     The following equation is used for the current ripple
+     The current ripple causes an additional fluctuation in the current through the capacitor, which leads to a higher RMS value. The following equation is used for the current ripple
      \begin{equation}
         I_\mathrm{C}=\sqrt{D (I_\mathrm{2})^2\left[1+\frac{1}{3}\left[\frac{\Delta i_\mathrm{L}}{2I_\mathrm{2}}\right]^2\right]+(1-D)(I_\mathrm{1}-I_\mathrm{2})^2\left[1+\frac{1}{3}\left[\frac{\Delta i_\mathrm{L}}{2(I_\mathrm{1}-I_\mathrm{2})}\right]^2\right]} 
     \end{equation}
     \begin{equation}
         I_\mathrm{C}=\sqrt{0.8 \cdot (\SI{2}{\ampere})^2 \left[1+\frac{1}{3}\left[\frac{\SI{0.833}{\ampere}}{2\cdot (\SI{2}{\ampere})}\right]^2\right]+(1-0.8)(\SI{10}{\ampere}- \SI{2}{\ampere})^2\left[1+\frac{1}{3}\left[\frac{\SI{0.833}{\ampere}}{2(\SI{10}{\ampere}- \SI{2}{\ampere})}\right]^2\right]}=\SI{4.023}{\ampere}. \label{eq:with curret ripple}
     \end{equation}
-    The current ripple causes an additional fluctuation in the current through the capacitor, which leads to a higher RMS value. As the effective value (RMS) of currents increases due to fluctuations, the value of $ I_\mathrm{C}$ in equation \eqref{eq:with curret ripple} is slightly higher than in equation \eqref{eq:neglecting the current ripple}.
+    As the effective value (RMS) of currents increases due to fluctuations, the value of $ I_\mathrm{C}$ in equation \eqref{eq:with curret ripple} is slightly higher than in equation \eqref{eq:neglecting the current ripple}.
 \end{solutionblock}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
