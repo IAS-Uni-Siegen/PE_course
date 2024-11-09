@@ -38,7 +38,7 @@
                     % Add coordinate jCv and jCg
                     (jCv)  ++(0,-3) coordinate (jCg)
                     % Add  capacitor C
-                    (jCv)  to [C, l=$C$] (jCg)
+                    (jCv)  to [C, l=$C$, v_>=$U_0$, voltage=straight] (jCg)
                     % Add current symbol and T2 with Control
                     (jCv) ++(2,0) node[nigfete,rotate=90](Trans2){} -- ++(2.5,0) coordinate(T2)
                     (Trans2.G)  to [sqV] ++(0,-1)
