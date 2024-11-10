@@ -4,39 +4,42 @@
 
 \begin{solutionfigure}[htb]
     \centering
-    \begin{tikzpicture}
-        \begin{axis}[,
-                % x/y range adjustment
-                xmin=250, xmax=500,
-                ymin=580, ymax=900,
-                samples=500,
-                axis y line=center,
-                axis x line=middle,
-                extra y ticks=0,
-                % Label text
-                xlabel={$U_\mathrm{2} \text{/V}$},
-                ylabel={$U_\mathrm{0} \text{/V}$},
-                % Label adjustment
-                x label style={at={(axis description cs:1,0)},anchor=west},
-                y label style={at={(axis description cs:-.05,1)},anchor=south},
-                width=0.6\textwidth,
-                height=0.3\textwidth,
-                % x-Ticks                
-                xtick={250,300,350,400,450,800},
-                xticklabels={250,300,350,400,450,800},
-                xticklabel style = {anchor=north},
-                % y-Ticks                
-                ytick={600,650,700,750,800,850},
-                yticklabels={600,650,700,750,800,850},
-                yticklabel style = {anchor=east},
-                % Grid layout                
-                grid=both,
-                grid style={line width=.1pt, draw=gray!10},
-                major grid style={line width=.2pt,draw=gray!50},
-            ]
-            \addplot[signalblue, domain=282:450] {x+380};
-        \end{axis}
-    \end{tikzpicture}
+    \begin{minipage}{0.8\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[,
+                    % x/y range adjustment
+                    xmin=250, xmax=500,
+                    ymin=580, ymax=900,
+                    samples=500,
+                    axis y line=center,
+                    axis x line=middle,
+                    extra y ticks=0,
+                    % Label text
+                    xlabel={$U_\mathrm{2} \text{/V}$},
+                    ylabel={$U_\mathrm{0} \text{/V}$},
+                    % Label adjustment
+                    x label style={at={(axis description cs:1,0)},anchor=west},
+                    y label style={at={(axis description cs:-.05,1)},anchor=south},
+                    width=0.6\textwidth,
+                    height=0.3\textwidth,
+                    % x-Ticks                
+                    xtick={250,300,350,400,450,800},
+                    xticklabels={250,300,350,400,450,800},
+                    xticklabel style = {anchor=north},
+                    % y-Ticks                
+                    ytick={600,650,700,750,800,850},
+                    yticklabels={600,,700,,800,},
+                    yticklabel style = {anchor=east},
+                    % Grid layout                
+                    grid=both,
+                    grid style={line width=.1pt, draw=gray!10},
+                    major grid style={line width=.2pt,draw=gray!50},
+                ]
+                \addplot[signalblue, domain=282:450] {x+380};
+            \end{axis}
+        \end{tikzpicture}
+    \end{minipage}
     \caption{Intermediate circuit voltage versus output voltage.}
     \label{fig:DCLinkVoltageAtOutputVoltage}     
 \end{solutionfigure}
