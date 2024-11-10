@@ -88,7 +88,7 @@ As the output power is specified as a value range, the highest and lowest values
 %% Task 2: Boost-Buck converter and SEPIC topology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\task {Boost-Buck converter and SEPIC topology}
+\task {Boost-buck converter and SEPIC topology}
 
 The supply of a plasma coating system is realized by a boost converter followed by a buck converter acccording \autoref{fig:ex03_boost_buck_converter} (with common capacitance).
 The converter is connected to a voltage $U_\mathrm{1}$ and provides a variable output voltage $U_\mathrm{2}$. The parameters are displayed in \autoref{table:ParametersOfBoostBuckConverter}.
@@ -107,7 +107,7 @@ The switching frequency fluctuation of the intermediate circuit voltage and the 
 The currents in $L_\mathrm{1}$ and $L_\mathrm{2}$ show a continuous course. Both transistors are operated with the 
 same relative duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
 
-\subtask{Calculate the relative duty cycle $D$ of the transistors $T_\mathrm{1}$ and $T_\mathrm{1}$ to be set to achieve an output voltage $U_\mathrm{2}$.}
+\subtask{Calculate the duty cycle $D$ range to achieve the stated output voltage $U_\mathrm{2}$.}
 
 \begin{solutionblock}
     % Solution
@@ -138,7 +138,7 @@ same relative duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
 \end{solutionblock}
 
 
-\subtask{Plot $D$ and the voltage $U_\mathrm{0}$ against $U_\mathrm{2}$ and calculate the numerical values for $U_\mathrm{2}$ = 285V, $U_\mathrm{2}$ =
+\subtask{Plot $D$ and $U_\mathrm{0}$ against $U_\mathrm{2}$ and calculate the numerical values for $U_\mathrm{2}$ = 285V, $U_\mathrm{2}$ =
 380V and $U_\mathrm{2}$ = 450V.}
 
 \begin{solutionblock}
@@ -156,7 +156,7 @@ same relative duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
     \input{./fig/ex03/sFigTab_DCLinkVoltageDutycycleE3T2}
 \end{solutionblock}
 
-\subtask{What blocking voltage strength must the transistors $T_\mathrm{1}$ and $T_\mathrm{2}$ and the diodes $D_1$ and
+\subtask{What blocking voltage ratings must the transistors $T_\mathrm{1}$ and $T_\mathrm{2}$ and the diodes $D_1$ and
 $D_2$ have?}
 
 \begin{solutionblock}
@@ -166,10 +166,10 @@ $D_2$ have?}
 \end{solutionblock}
 
 \vspace{2em}\par
-The control continues with $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$. The input and output inductances 
+The converter operation continues with $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$. The input and output inductances 
 have the same value $L_\mathrm{1}$ = $L_\mathrm{2}$ = $L$ = $\SI{0.5}{m\henry}$.
 
-\subtask{Write the formula for the dependence of the input and output inductance ripple $\Delta i_\mathrm{L1}$ and $\Delta i_\mathrm{L2}$ from the duty cycle.}
+\subtask{Drive the input and output current ripple $\Delta i_\mathrm{L1}$ and $\Delta i_\mathrm{L2}$ depending on the duty cycle.}
 
 \begin{solutionblock}
     % Solution
@@ -180,8 +180,8 @@ have the same value $L_\mathrm{1}$ = $L_\mathrm{2}$ = $L$ = $\SI{0.5}{m\henry}$.
     \end{equation}
 \end{solutionblock}
 
-\subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range? 
-(i.e. continuous current flow in $L_\mathrm{1}$  and L$L_\mathrm{2}$)?}
+\subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range 
+(i.e., continuous current flow in $L_\mathrm{1}$  and $L_\mathrm{2}$)?}
 
 \begin{solutionblock}
     % Solution
@@ -201,18 +201,18 @@ have the same value $L_\mathrm{1}$ = $L_\mathrm{2}$ = $L$ = $\SI{0.5}{m\henry}$.
 
 
 
-\subtask{In which section of the output voltage range is this limit reached first on the input side and in which section is it reached first on the output side?}
+\subtask{At which value of the output voltage range is this limit reached first on the input side and at which value is it reached first on the output side?}
 \vspace{2em}\par
-The single ended primary inductance converter in \autoref{fig:ex03_SEPIC} shall be considered under similar conditions.
+For comparison reasons, the single ended primary inductance converter (SEPIC) in \autoref{fig:ex03_SEPIC} shall be considered under similar conditions.
 
 % Schematic of Buck Boost Converter cascade
 \input{./fig/ex03/Fig_SepicConverter}
 
-\subtask{What blocking voltage strength must the transistors $T_\mathrm{1}$ and the diode $D$ have?}
+\subtask{What blocking voltage ratings must the transistors $T_\mathrm{1}$ and the diode $D$ have?}
 
-\subtask{Write the formula for the dependence of the input and output inductance ripple $\Delta i_{L1}$ and $\Delta i_{L2}$ from the duty cycle.}
+\subtask{Drive the input and output current ripple $\Delta i_\mathrm{L1}$ and $\Delta i_\mathrm{L2}$ depending on the duty cycle.}
 
 \subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range? 
-(i.e. continuous current flow in $L_\mathrm{1}$  and L$L_\mathrm{2}$)?}
+(i.e., continuous current flow in $L_\mathrm{1}$  and $L_\mathrm{2}$)?}
 
-\subtask{Describe the advantages and disadvantages of the single ended primary inductance converter compared to the boost buck converter. Consider the components and the quality of the output voltage.}
+\subtask{Describe the advantages and disadvantages of the SEPIC topology compared to the boost-buck converter. Consider the necessary components and the quality of the output voltage.}
