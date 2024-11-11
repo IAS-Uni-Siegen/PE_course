@@ -2,7 +2,7 @@
 %% Begin exercise %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ex{Buck-boost converters}
+\ex{Combined step-up / step-down converters}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 1: Inverting buck-boost converter %%
@@ -249,7 +249,7 @@ continuous operation across the entire output voltage range
 \end{solutionblock}
 
 \vspace{2em}\par
-For comparison reasons, the single ended primary inductance converter (SEPIC) in \autoref{fig:ex03_SEPIC} shall be considered under similar conditions.
+For comparison reasons, the single ended primary inductance converter (SEPIC) in \autoref{fig:ex03_SEPIC} shall be considered under similar conditions as an alternative circuit.
 
 % Schematic of Buck Boost Converter cascade
 \input{./fig/ex03/Fig_SepicConverter}
@@ -274,26 +274,10 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
     The transistor needs to block the sum of input and output voltage.
 \end{solutionblock}
 
-\subtask{Derive the input and output current ripple $\Delta i_\mathrm{L1}$ and $\Delta i_\mathrm{L2}$ depending on the duty cycle.}
-\begin{solutionblock}
-    % Solution
-    The current ripple depends on the duty cycle, switching frequency and inductor voltage.
-    \eqref{eq:L1ripplesepic} express the input current ripple $\Delta i_\mathrm{L1}$ as:
-    \begin{equation}
-        \Delta i_\mathrm{L1}=\frac{U_\mathrm{1}D}{f_\mathrm{s}L_\mathrm{1}}
-        \label{eq:L1ripplesepic}
-    \end{equation}
-    and \eqref{eq:L2ripplesepic} the output current ripple $\Delta i_\mathrm{L2}$ as:
-    \begin{equation}
-        \Delta i_\mathrm{L2}=\frac{U_\mathrm{c}D}{f_\mathrm{s}L_\mathrm{2}}
-        =\frac{U_\mathrm{1}D}{f_\mathrm{s}L_\mathrm{2}}.
-        \label{eq:L2ripplesepic}
-    \end{equation}
-\end{solutionblock}
+\subtask{Derive the input and output current ripple $\Delta i_\mathrm{L_1}$ and $\Delta i_\mathrm{L_2}$ depending on the duty cycle.}
 
-\subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range 
-(i.e., continuous current flow in $L_\mathrm{1}$  and $L_\mathrm{2}$)? Use the values
-$L_\mathrm{1}$ = $L_\mathrm{2}$= \SI{0.5}{\milli\volt} and D1 = D2 = D.}
+\subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range? 
+(i.e., continuous current flow in $L_\mathrm{1}$  and $L_\mathrm{2}$)?}
 
 \begin{solutionblock}
     % Solution
