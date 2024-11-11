@@ -1010,10 +1010,10 @@
     \begin{columns}
         \begin{column}{0.4\textwidth}
             \begin{itemize}
-                \item \hl{Forward converter = galvanically isolated buck converter}.
+                \item \hl{Forward converter = galvanically isolated buck converter.}
                 \item Main energy buffer: inductor $L$.
                 \item Transformer: galvanic isolation plus voltage scaling: $$u_\mathrm{s}(t)=\frac{N_2}{N_1}u_\mathrm{p}(t) $$ with $u_\mathrm{p}(t)=u_\mathrm{1}(t), t\in[0, T_\mathrm{on}]$.
-                \item Difference to flyback, where the transformer both stores energy and provides galvanic isolation.
+                \item Different to flyback, where the transformer both stores energy and provides galvanic isolation.
             \end{itemize}
         \end{column}
         %
@@ -1048,3 +1048,137 @@
     \end{columns}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter: steady-state time-domain behavior (ideal transformer) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Forward converter: steady-state time-domain behavior (ideal transformer)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfmathsetmacro{\D}{0.6} % duty cycle
+            \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
+
+                % Top plot: voltage at the switch
+                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $\frac{N_2}{N_1}U_1$}]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
+                        \AddPlot
+                    }
+                    \draw[signalblue, thick, dashed, visible on=<2->] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
+                    \node[above, inner sep = 2pt, anchor = south, visible on=<2->] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
+                    \draw [thick,<->]  (0,0.5) -- node[below]{$T_\mathrm{on}$}(\D, 0.5); % T_on 
+                    \draw [thick,<->]  (\D,0.5) -- node[below]{$T_\mathrm{off}$}(1.0, 0.5); % T_off
+                    \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{s}$}(1.0, -0.2); % T_s 
+
+
+                % Middle plot: inductor current
+                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$, }, visible on=<3->]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({1 + #1},0.25)};}
+                        \AddPlot
+                    }
+                    \draw[signalred, thick, dashed] (axis cs:0,0.5) -- (axis cs:4,0.5); % dashed line at average current
+                    \draw[{Latex[length=2mm]}-, thin, visible on=<4->] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
+                    \draw[-{Latex[length=2mm]}, thin, visible on=<4->] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
+                    \draw[thin, visible on=<5->] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
+                    \node[above, inner sep = 2pt, anchor = south, xshift = -4mm, visible on=<5->] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{(\frac{N_2}{N_1}U_1-U_2)}{L}$}; % label positive current slope
+                    \draw[thin, visible on=<6->] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
+                    \node[above, inner sep = 2pt, anchor = south, xshift = 0mm, visible on=<6->] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_2}{L}$}; % label negative current slope
+                
+                % Bottom plot: input current
+                \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}, visible on=<7->]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
+                        \AddPlot
+                    }
+                    \draw[signalred, thick, dashed, visible on=<8->] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
+                    \node[above, inner sep = 2pt, anchor = south, fill = white, visible on=<8->] at (axis cs:1.5+\D/2, 0.5 * \D) {$\overline{i}_1$}; % label average current
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter: idealized steady-state operation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Forward converter: idealized steady-state operation}
+    Assumption:
+    \begin{itemize}
+        \item The transformer is ideal and does not exhibit a magnetizing inductance.
+    \end{itemize}
+    Consequence:
+    \begin{itemize}
+        \item The transformer's secondary output voltage $u_\mathrm{s}(t)$ is a $\nicefrac{N_2}{N_1}$ scaled version of the standard buck converter's switch voltage (compare \figref{fig:step-down-converter-realization-1Q}).
+        \item The (idealized) forward converter characteristics are analogous to the buck converter.
+    \end{itemize}
+    Hence, the voltage input-to-output voltage ratios for the (idealized) forward converter are:
+    \begin{equation}
+        \mbox{CCM:}\quad \frac{U_2}{U_1} = \frac{N_2}{N_1}D, \qquad \mbox{DCM:}\quad U_2 = \frac{N_2^2}{N_1^2}\frac{D^2T_\mathrm{s}U_1^2}{D^2T_\mathrm{s}\frac{N_2}{N_1}U_1+2L\overline{i}_2}.
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter: magnetizing inductance issue %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Forward converter: magnetizing inductance issue}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            \begin{varblock}{Magnetizing inductance}
+                    With every switching cycle, the primary magnetizing current $i_\mathrm{L_\mathrm{m}}(t)$ increases (transformer saturates, overheating).
+            \end{varblock}
+            \begin{figure}
+                \begin{tikzpicture}
+                    \pgfmathsetmacro{\D}{0.6} % duty cycle
+                    \begin{axis}[
+                        xlabel={$t/T_\mathrm{s}$},
+                        ymin=0, ymax=2.4,
+                        xmin=0, xmax=2.25,
+                        width = \textwidth,
+                        height = 0.5\textheight,
+                        grid,
+                        thick,
+                        clip = true,
+                        ytick = {0, 1, 2}, 
+                        yticklabels = {$0$, $1\frac{U_1}{L_\mathrm{m}}T_\mathrm{on}$, $2 \frac{U_1}{L_\mathrm{m}}T_\mathrm{on}$}
+                        ]
+                        \addplot[signalred] coordinates {(0,0) (\D,1) (1,1) (1+\D, 2) (2,2)};
+                        \addplot[signalred, dashed] coordinates {(2,2) (2+\D,3)};
+                        \node[signalred, above, inner sep = 2pt, anchor = south, fill=white] at (axis cs:0.6, 1.1) {$i_\mathrm{L_\mathrm{m}}(t)$};
+                    \end{axis}
+                \end{tikzpicture}
+            \end{figure}
+        \end{column}
+        %
+        \begin{column}{0.6\textwidth}
+            \begin{figure}
+                \begin{circuitikz}[]
+                    \draw (0,0) to [short, i=$i_1(t)$] ++(0.75,0) coordinate (A1)
+                    to [short] ++(1,0)
+                    to [inductor, n=l1] ++(0,-2) coordinate (A2)
+                    to [Tnpn, n=npn1, invert] ++(0,-2)   -- (0,-4.0)
+                    (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-4.0);
+                    \draw  (2.5,0) to [inductor, n=l2, mirror] ++(0,-2) 
+                    to [short] ++(2,0) coordinate (A)
+                    to [diode, l_=$D_\mathrm{F}$, *-*] ++(0,2) coordinate (B)
+                    to [inductor, l=$L$] ++(2,0)
+                    to [short, i=$i_2(t)$] ++(0.75,0)
+                    to [open, o-o, v = $u_2(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
+                    to [short] (A)
+                    (2.5,0) to [diode, l=$D_2$] (B)
+                    (A1) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-] ++(-0,-2)
+                    to [short, -*] (A2);
+                    \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T$};
+                    \path (l1.ul dot) node[circ]{}
+                          (l2.ul dot) node[circ]{};
+                    \draw (l1.midtap) node[left]{$N_1$}
+                    (l2.midtap) node[right]{$N_2$};
+                    \draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
+                \end{circuitikz}
+                \caption{Forward converter topology with primary magnetizing inductance}
+                \label{fig:forward_converter_topology_magnetizing_inductance}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
