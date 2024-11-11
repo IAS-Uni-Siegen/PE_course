@@ -234,7 +234,9 @@ continuous operation across the entire output voltage range
     \end{equation}
     Entering the values in \label{eq:Boostripple} and \label{eq:Buckripple} leads to \autoref{table:PowerminInputOutputStage}.
     %Solution table Minimal Power 
-    \input{./fig/ex03/sFigTab_PowerminInputOutputStage}    
+    \input{./fig/ex03/sFigTab_PowerminInputOutputStage}
+    The minimal power, which ensuring continuous operation across the entire output voltage range
+    yields  $\SI{1854}{\watt}$.
 \end{solutionblock}
 
 \subtask{At which value of the output voltage range is this limit reached first on the input side and at which value is it reached first on the output side?}
@@ -252,6 +254,18 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
 \input{./fig/ex03/Fig_SepicConverter}
 
 \subtask{What blocking voltage ratings must the transistors $T_\mathrm{1}$ and the diode $D$ have?}
+\begin{solutionblock}
+    % Solution
+    For the SEPIC topology the voltage at the transistor blocking voltage is calculated by the sum of 
+    $U_\mathrm{c}$ and $U_\mathrm{2}$.
+    \begin{equation}
+        U_\mathrm{T1,block}=(U_\mathrm{c})U_\mathrm{2}.
+    \end{equation}
+    \begin{equation}
+        U_\mathrm{T1,block}=\left( \frac{1}{D}-1\right) U_\mathrm{2}+U_\mathrm{2}=\frac{U_\mathrm{2}}{D}.
+    \end{equation}
+    The transistor needs to block the sum of input and output voltage.
+\end{solutionblock}
 
 \subtask{Drive the input and output current ripple $\Delta i_\mathrm{L1}$ and $\Delta i_\mathrm{L2}$ depending on the duty cycle.}
 
