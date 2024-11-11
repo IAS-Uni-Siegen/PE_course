@@ -3531,7 +3531,7 @@
     \frametitle{Ćuk converter: circuit realization}
     \begin{itemize}
         \item Like the inverting buck-boost, the Ćuk converter only requires one diode and transistor.
-        \item Transistor $T$ needs to block $U_1$ during the off-time, while it covers both the input and output current during the on-time: semiconductor utilization is also $\nicefrac{P_2}{P_\mathrm{T}}=(1-D)D$ as for the inverting buck-boost (cf. \figref{fig:semiconductor-utilization-summary}).
+        \item Transistor $T$ needs to block $u_\mathrm{C}(t)$ during the off-time, while it covers both the input and output current during the on-time: semiconductor utilization is also $\nicefrac{P_2}{P_\mathrm{T}}=(1-D)D$ as for the inverting buck-boost (cf. \figref{fig:semiconductor-utilization-summary}).
     \end{itemize}
     \begin{figure}
         \begin{circuitikz}[]
@@ -3637,7 +3637,7 @@
     \end{equation}
     Above, $U_1$, $U_2$, and $U_\mathrm{C}$ are considered constant. From those we can derive:
     \begin{equation}
-        L_1:\quad U_\mathrm{C}=\frac{U_1}{1-D}-U_2, \qquad L_2:\quad U_\mathrm{C}=\left(\frac{1}{D}-1\right)\frac{U_2}{D}.
+        L_1:\quad U_\mathrm{C}=\frac{U_1}{1-D}-U_2, \qquad L_2:\quad U_\mathrm{C}=\left(\frac{1}{D}-1\right)U_2.
     \end{equation}
     Combining both equations delivers the voltage gain of the SEPIC:
     \begin{equation}
