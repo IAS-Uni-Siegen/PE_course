@@ -225,13 +225,15 @@ continuous operation across the entire output voltage range
      ($U_\mathrm{0}$) and average current calculated by using \eqref{eq:Boostripple}:
     \begin{equation}
         P_\mathrm{lim,boost}=U_\mathrm{0}\frac{\Delta i_\mathrm{L1}}{2}D.
+        \label{eq:PowerBoostripple}
     \end{equation}
     For the buck stage the power is the product of output voltage
     ($U_\mathrm{2}$) and average current calculated by using \eqref{eq:Buckripple}:
     \begin{equation}
         P_\mathrm{lim,buck}=U_\mathrm{2}\frac{\Delta i_\mathrm{L2}}{2}.
+        \label{eq:PowerBuckripple}
     \end{equation}
-    Entering the values in \label{eq:Boostripple} and \label{eq:Buckripple} leads to \autoref{table:PowerminInputOutputStage}.
+    Entering the values in \eqref{eq:PowerBoostripple} and \eqref{eq:PowerBuckripple} leads to \autoref{table:PowerminInputOutputStage}.
     %Solution table Minimal Power 
     \input{./fig/ex03/sFigTab_PowerminInputOutputStage}
     The minimal power, which ensuring continuous operation across the entire output voltage range
@@ -258,8 +260,14 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
     For the SEPIC topology the voltage at the transistor blocking voltage is calculated by the sum of 
     $U_\mathrm{c}$ and $U_\mathrm{2}$.
     \begin{equation}
-        U_\mathrm{T1,block}=(U_\mathrm{c})U_\mathrm{2}.
+        U_\mathrm{T1,block}=U_\mathrm{c}+U_\mathrm{2}.
     \end{equation}
+    The voltage at the capacitor is obtained by
+    \begin{equation}
+        U_\mathrm{c}=\left( \frac{1}{D}-1\right) U_\mathrm{2}.
+        \label{eq:ucapacitor}        
+    \end{equation}
+    $U_\mathrm{c}$ corresponds to the input voltage $U_\mathrm{1}$. The substitution of $U_\mathrm{c}$ in \eqref{eq:ucapacitor} leads to 
     \begin{equation}
         U_\mathrm{T1,block}=\left( \frac{1}{D}-1\right) U_\mathrm{2}+U_\mathrm{2}=\frac{U_\mathrm{2}}{D}.
     \end{equation}
@@ -271,4 +279,38 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
 \subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range? 
 (i.e., continuous current flow in $L_\mathrm{1}$  and $L_\mathrm{2}$)?}
 
-\subtask{Describe the advantages and disadvantages of the SEPIC topology compared to the boost-buck converter. Consider the necessary components and the quality of the output voltage.}
+\begin{solutionblock}
+    % Solution
+    Both inductors have the same ripple current as long as they have the same inductance.
+    For the inductor L1 the power is the product of output voltage
+     ($U_\mathrm{2}$) and average current calculated by using \eqref{eq:L1ripplesepic}:
+    \begin{equation}
+        P_\mathrm{min}=U_\mathrm{1}\frac{\Delta i_\mathrm{L1}}{2}D.
+        \label{eq:PowerL1ripplesepic}
+    \end{equation}
+    Entering the values in \eqref{eq:PowerL1ripplesepic} leads to \autoref{table:PowerminSepic}.
+    %Solution table Minimal Power 
+    \input{./fig/ex03/sFigTab_PowerminSepic}
+    The minimal power, which ensuring continuous operation across the entire output voltage range
+    yields  $\SI{849}{\watt}$.
+
+\end{solutionblock}
+
+\subtask{Describe the advantages and disadvantages of the SEPIC topology 
+compared to the boost-buck converter. Consider the necessary components 
+and the quality of the output voltage.}
+
+
+\begin{solutionblock}
+    % Solution
+    Advantages of SEPIC-topology compared to boost-buck converter
+    \begin{itemize}
+        \item Minimal Power limit is much lower (nearly factor 2).
+        \item The amount of components are reduced (only 1 transistor and 1 diode is needed).
+    \end{itemize}  
+    Disadvantages of SEPIC-topology compared to boost-buck converter
+    \begin{itemize}
+        \item The blocking voltage rating for the transistor is higher ($U_\mathrm{1}+U_\mathrm{2}$ instead of $U_\mathrm{1}$).
+        \item The output current is pulsating (Needs more filtering components).
+    \end{itemize}  
+\end{solutionblock}
