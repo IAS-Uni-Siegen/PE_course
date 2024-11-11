@@ -2,17 +2,17 @@
 %% Begin exercise %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ex{Inverting buck-boost converter}
+\ex{Buck-boost converters}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 1: Inverting buck-boost converter %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\task {Inverse converter}
-An inverting buck-boost converter (see \autoref{fig:Inverting buck-boost converter}) is used to generate the negative supply voltage of a control control electronics, an inverse converter (see \autoref{fig:Inverting buck-boost converter}) is used. The input voltage is specified as $U_\mathrm{1}=\SI{18}{\volt}$, the output voltage is regulated to $U_\mathrm{2}=\SI{12}{\volt}$. The output power can be values in the range $P_\mathrm{2} = \SI{2}{\watt} \, \dots \, \SI{15}{\watt}$.
+\task {Inverting buck-boost converter}
+An inverting buck-boost converter (see \autoref{fig:Inverting buck-boost converter}) is used to generate the negative supply voltage of a control electronics. The input voltage is specified as $U_\mathrm{1}=\SI{18}{\volt}$, the output voltage is regulated to $U_\mathrm{2}=\SI{12}{\volt}$. The output power can vary in the range $P_\mathrm{2} = \SI{2}{\watt} \, \dots \, \SI{15}{\watt}$.
 
 \input{./fig/ex03/Fig_inverseConverter.tex}
 
-\subtask{The system should operate at boundary conduction mode (BCM)   throughout the entire output power range. How should the inductance be selected so that the switching frequency is always above the hearing threshold $f_\mathrm{P}=\SI{20}{\kilo\hertz}$?}
+\subtask{The system should operate at boundary conduction mode (BCM)   throughout the entire output power range. How should the inductance be selected so that the switching frequency is always above the hearing threshold $f_\mathrm{s}=\SI{20}{\kilo\hertz}$?}
 
 \begin{solutionblock}
 The $\Delta$ is an approximation of the total differential using a difference equation with the differences $\Delta$. This results in the component differential equations becoming average value equations. The nabla operator is not understood here due to the $\Delta$.
@@ -32,27 +32,27 @@ The maximum current at BCM $\Delta i_{\mathrm{L}}$ is twice  $I_\mathrm{2,min}$:
 \end{equation}
 Delta $\Delta t$ can also be expressed as:
 \begin{equation}
-    \Delta t = \frac{D}{f_\mathrm{P}}.
+    \Delta t = \frac{D}{f_\mathrm{s}}.
 \end{equation}
 This expression can now be used in the inductance equation. The inductance can therefore be determined using the following equation:
 \begin{equation}
-    L = \frac{\Delta t  \overline u_{\mathrm{L}}}{\Delta i_{\mathrm{L}}}= \frac{D \overline u_{\mathrm{L}}}{f_\mathrm{P}\Delta i_{\mathrm{L}}}= \frac{D U_{\mathrm{1}}}{f_\mathrm{P}\Delta i_{\mathrm{L}}} = \frac{0.4 \cdot \SI{18}{\volt}}{\SI{20}{\kilo\hertz}\cdot \SI{4.16}{\ampere }} = \SI{86.4}{\micro\henry}.
+    L = \frac{\Delta t  \overline u_{\mathrm{L}}}{\Delta i_{\mathrm{L}}}= \frac{D \overline u_{\mathrm{L}}}{f_\mathrm{s}\Delta i_{\mathrm{L}}}= \frac{D U_{\mathrm{1}}}{f_\mathrm{s}\Delta i_{\mathrm{L}}} = \frac{0.4 \cdot \SI{18}{\volt}}{\SI{20}{\kilo\hertz}\cdot \SI{4.16}{\ampere }} = \SI{86.4}{\micro\henry}.
 \end{equation}
 
 \end{solutionblock}
-\subtask{In what range does the switching frequency $f_\mathrm{P}$ considering the inductance choice from the previous subtask}
+\subtask{In what value range does the switching frequency $f_\mathrm{s}$ vary considering the inductance choice from the previous subtask and the given output power range?}
 
  \begin{solutionblock}
      The inductance equation is used again for this task:
      \begin{equation}
-        L = \frac{\Delta t \overline u_{\mathrm{L}}}{\Delta i_{\mathrm{L}}}= \frac{D \overline u_{\mathrm{L}}}{f_\mathrm{P}\Delta i_{\mathrm{L}}}
+        L = \frac{\Delta t \overline u_{\mathrm{L}}}{\Delta i_{\mathrm{L}}}= \frac{D \overline u_{\mathrm{L}}}{f_\mathrm{s}\Delta i_{\mathrm{L}}}
      \end{equation}
-     This equation can be converted to $f_\mathrm{P}$ and used to determine the frequency as follows:
+     This equation can be converted to $f_\mathrm{s}$ and used to determine the frequency as follows:
      \begin{equation}
-        f_\mathrm{P} = \frac{DU_{\mathrm{1}}}{L\Delta i_{\mathrm{L}}} \label{equation 1.8}
+        f_\mathrm{s} = \frac{DU_{\mathrm{1}}}{L\Delta i_{\mathrm{L}}} \label{equation 1.8}
      \end{equation}
       
-As the output power is specified as a value range, the highest and lowest values can be used. The lowest and highest current should be determined from these two values, from which the value range of the frequency $f_\mathrm{P}$ can then be determined. Here the inverse converter is considered on the output side and therefore a duty cycle $D = 0.6$ is used again. The following equations can be derived from this:
+As the output power is specified as a value range, the highest and lowest values can be used. The lowest and highest current should be determined from these two values, from which the value range of the frequency $f_\mathrm{s}$ can then be determined. Here the inverse converter is considered on the output side and therefore a duty cycle $D = 0.6$ is used again. The following equations can be derived from this:
 
      \begin{equation}
         I_\mathrm{2,min}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{2}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{0.278}{\volt}
@@ -67,19 +67,19 @@ As the output power is specified as a value range, the highest and lowest values
      \begin{equation}
         f_\mathrm{P,min}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{2.0833}{\volt}}=\SI{20}{\kilo \hertz}
      \end{equation}
-     The switching frequency $f_\mathrm{P}$ varies in the range from $\SI{20}{\kilo \hertz} \, \dots \, \SI{150}{\kilo \hertz}$.
+     The switching frequency $f_\mathrm{s}$ varies in the range from $\SI{20}{\kilo \hertz} \, \dots \, \SI{150}{\kilo \hertz}$.
  \end{solutionblock}
 
- \subtask{What is the peak value $\hat i_1$ of the transistor current?}
+ \subtask{What is the peak value $\hat i_1=\max\{i_1(t)\}$ of the transistor current?}
  \begin{solutionblock}
     As the maximum current through the transistor is the current $i_1$, these values are the same. Since the BCM is considered in this circuit, the maximum current is the peak current, which corresponds to the value of $\SI{4.16}{\ampere}$.
  \end{solutionblock}
 
- \subtask{How does the duty cycle $D$ change with the output power? Enter the duty cycle values and the absolute values of the transistor switch-on times $T_\mathrm{on} = D T_\mathrm{s}$ for minimum and maximum output power.}
+ \subtask{How does the duty cycle $D$ change with the output power? Calculate the duty cycle values and the absolute values of the transistor switch-on times $T_\mathrm{on} = D T_\mathrm{s}$ for minimum and maximum output power.}
  \begin{solutionblock}
  The following applies to the switching period $T_\mathrm{s}$ for the respective services:  
  \begin{equation}
-    T_\mathrm{s} = \frac{1}{f_\mathrm{P}}. \label{switching frequency}
+    T_\mathrm{s} = \frac{1}{f_\mathrm{s}}. \label{switching frequency}
  \end{equation}
  The different switching frequencies can now be inserted into \ref{switching frequency}:
  \begin{equation}
@@ -101,18 +101,18 @@ As the output power is specified as a value range, the highest and lowest values
  \end{equation}
  \end{solutionblock}
 
- \subtask{Sketch the course of the current $i_\mathrm{L}$ in the inductance for minimum and maximum output power.}
+ \subtask{Sketch the course of the inductor current $i_\mathrm{L}(t)$  for minimum and maximum output power.}
 \begin{solutionblock}
     \input{fig/ex03/Fig_courseILminmaxOutputPower.tex}   
 \end{solutionblock}
     
- \subtask{At which operating point does the maximum switching frequency fluctuation of the output voltage $\Delta u_\mathrm{2,pp}$ occurs (the load approximately draws a constant current)?} 
+ \subtask{At which operating point does the maximum output voltage ripple $\Delta u_\mathrm{2}$ occur (assumption: the load draws a constant current)?} 
 
- \subtask{How high should the output capacitance be selected to ensure $\Delta u_\mathrm{2,pp} < 0.02 U_\mathrm{2}?$}
+ \subtask{How high should the output capacitance be selected to ensure $\Delta u_\mathrm{2} < 0.02 \cdot U_\mathrm{2}?$}
 
  \subtask{What is the maximum effective value $i_\mathrm{C,RMS}$ of the output capacitor current?}
 
- \subtask{Sketch the time curve of the voltage $u_\mathrm{T}$ at the power transistor and the current $i_\mathrm{D}$ in the output diode for $P_\mathrm{2}=\SI{2}{\watt}$. What is the maximum reverse voltage of the transistor?}
+ \subtask{Sketch the curves of the voltage $u_\mathrm{T}(t)$ at the power transistor and the current $i_\mathrm{D}(t)$ in the output diode for $P_\mathrm{2}=\SI{2}{\watt}$. What is the maximum blocking voltage of the transistor?}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: Boost-Buck converter and SEPIC topology
@@ -137,7 +137,7 @@ The switching frequency fluctuation of the intermediate circuit voltage and the 
 The currents in $L_\mathrm{1}$ and $L_\mathrm{2}$ show a continuous course. Both transistors are operated with the 
 same relative duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
 
-\subtask{Calculate the duty cycle $D$ range to achieve the stated output voltage $U_\mathrm{2}$.}
+\subtask{Calculate the duty cycle $D$ range to achieve the stated output voltage $U_\mathrm{2}$ range.}
 
 \begin{solutionblock}
     % Solution
@@ -153,7 +153,7 @@ same relative duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
 \end{solutionblock}
 
 
-\subtask{Which intermediate circuit voltage $U_\mathrm{0}$ is determined depending on $U_\mathrm{2}$?}
+\subtask{Which intermediate circuit voltage $U_\mathrm{0}$ results depending on $U_\mathrm{2}$?}
 
 \begin{solutionblock}
     % Solution
@@ -168,8 +168,7 @@ same relative duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
 \end{solutionblock}
 
 
-\subtask{Plot $D$ and $U_\mathrm{0}$ against $U_\mathrm{2}$ and calculate the numerical values for $U_\mathrm{2}$ = 285V, $U_\mathrm{2}$ =
-380V and $U_\mathrm{2}$ = 450V.}
+\subtask{Plot $D$ and $U_\mathrm{0}$ against $U_\mathrm{2}$ and calculate the numerical values for $U_\mathrm{2}=\SI{285}{\volt}$, $U_\mathrm{2}=\SI{380}{\volt}$ and $U_\mathrm{2}=\SI{450}{\volt}$.}
 
 \begin{solutionblock}
     % Solution
@@ -199,7 +198,7 @@ $D_2$ have?}
 The converter operation continues with $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$. The input and output inductances 
 have the same value $L_\mathrm{1}$ = $L_\mathrm{2}$ = $L$ = $\SI{0.5}{m\henry}$.
 
-\subtask{Drive the input and output current ripple $\Delta i_\mathrm{L1}$ and $\Delta i_\mathrm{L2}$ depending on the duty cycle.}
+\subtask{Derive the input and output current ripple $\Delta i_\mathrm{L_1}$ and $\Delta i_\mathrm{L_2}$ depending on the duty cycle.}
 
 \begin{solutionblock}
     % Solution
@@ -226,13 +225,15 @@ continuous operation across the entire output voltage range
      ($U_\mathrm{0}$) and average current calculated by using \eqref{eq:Boostripple}:
     \begin{equation}
         P_\mathrm{lim,boost}=U_\mathrm{0}\frac{\Delta i_\mathrm{L1}}{2}D.
+        \label{eq:PowerBoostripple}
     \end{equation}
     For the buck stage the power is the product of output voltage
     ($U_\mathrm{2}$) and average current calculated by using \eqref{eq:Buckripple}:
     \begin{equation}
         P_\mathrm{lim,buck}=U_\mathrm{2}\frac{\Delta i_\mathrm{L2}}{2}.
+        \label{eq:PowerBuckripple}
     \end{equation}
-    Entering the values in \label{eq:Boostripple} and \label{eq:Buckripple} leads to \autoref{table:PowerminInputOutputStage}.
+    Entering the values in \eqref{eq:PowerBoostripple} and \eqref{eq:PowerBuckripple} leads to \autoref{table:PowerminInputOutputStage}.
     %Solution table Minimal Power 
     \input{./fig/ex03/sFigTab_PowerminInputOutputStage}
     The minimal power, which ensuring continuous operation across the entire output voltage range
@@ -259,17 +260,73 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
     For the SEPIC topology the voltage at the transistor blocking voltage is calculated by the sum of 
     $U_\mathrm{c}$ and $U_\mathrm{2}$.
     \begin{equation}
-        U_\mathrm{T1,block}=(U_\mathrm{c})U_\mathrm{2}.
+        U_\mathrm{T1,block}=U_\mathrm{c}+U_\mathrm{2}.
     \end{equation}
+    The voltage at the capacitor is obtained by
+    \begin{equation}
+        U_\mathrm{c}=\left( \frac{1}{D}-1\right) U_\mathrm{2}.
+        \label{eq:ucapacitor}        
+    \end{equation}
+    $U_\mathrm{c}$ corresponds to the input voltage $U_\mathrm{1}$. The substitution of $U_\mathrm{c}$ in \eqref{eq:ucapacitor} leads to 
     \begin{equation}
         U_\mathrm{T1,block}=\left( \frac{1}{D}-1\right) U_\mathrm{2}+U_\mathrm{2}=\frac{U_\mathrm{2}}{D}.
     \end{equation}
     The transistor needs to block the sum of input and output voltage.
 \end{solutionblock}
 
-\subtask{Drive the input and output current ripple $\Delta i_\mathrm{L1}$ and $\Delta i_\mathrm{L2}$ depending on the duty cycle.}
+\subtask{Derive the input and output current ripple $\Delta i_\mathrm{L1}$ and $\Delta i_\mathrm{L2}$ depending on the duty cycle.}
+\begin{solutionblock}
+    % Solution
+    The current ripple depends on the duty cycle, switching frequency and inductor voltage.
+    \eqref{eq:L1ripplesepic} express the input current ripple $\Delta i_\mathrm{L1}$ as:
+    \begin{equation}
+        \Delta i_\mathrm{L1}=\frac{U_\mathrm{1}D}{f_\mathrm{s}L_\mathrm{1}}
+        \label{eq:L1ripplesepic}
+    \end{equation}
+    and \eqref{eq:L2ripplesepic} the output current ripple $\Delta i_\mathrm{L2}$ as:
+    \begin{equation}
+        \Delta i_\mathrm{L2}=\frac{U_\mathrm{c}D}{f_\mathrm{s}L_\mathrm{2}}
+        =\frac{U_\mathrm{1}D}{f_\mathrm{s}L_\mathrm{2}}.
+        \label{eq:L2ripplesepic}
+    \end{equation}
+\end{solutionblock}
 
-\subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range? 
-(i.e., continuous current flow in $L_\mathrm{1}$  and $L_\mathrm{2}$)?}
+\subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range 
+(i.e., continuous current flow in $L_\mathrm{1}$  and $L_\mathrm{2}$)? Use the values
+$L_\mathrm{1}$ = $L_\mathrm{2}$= \SI{0.5}{\milli\volt} and D1 = D2 = D.}
 
-\subtask{Describe the advantages and disadvantages of the SEPIC topology compared to the boost-buck converter. Consider the necessary components and the quality of the output voltage.}
+\begin{solutionblock}
+    % Solution
+    Both inductors have the same ripple current as long as they have the same inductance.
+    For the inductor L1 the power is the product of output voltage
+     ($U_\mathrm{2}$) and average current calculated by using \eqref{eq:L1ripplesepic}:
+    \begin{equation}
+        P_\mathrm{min}=U_\mathrm{1}\frac{\Delta i_\mathrm{L1}}{2}D.
+        \label{eq:PowerL1ripplesepic}
+    \end{equation}
+    Entering the values in \eqref{eq:PowerL1ripplesepic} leads to \autoref{table:PowerminSepic}.
+    %Solution table Minimal Power 
+    \input{./fig/ex03/sFigTab_PowerminSepic}
+    The minimal power, which ensuring continuous operation across the entire output voltage range
+    yields  $\SI{849}{\watt}$.
+
+\end{solutionblock}
+
+\subtask{Describe the advantages and disadvantages of the SEPIC topology 
+compared to the boost-buck converter. Consider the necessary components 
+and the quality of the output voltage.}
+
+
+\begin{solutionblock}
+    % Solution
+    Advantages of SEPIC-topology compared to boost-buck converter
+    \begin{itemize}
+        \item Minimal Power limit is much lower (nearly factor 2).
+        \item The amount of components are reduced (only 1 transistor and 1 diode is needed).
+    \end{itemize}  
+    Disadvantages of SEPIC-topology compared to boost-buck converter
+    \begin{itemize}
+        \item The blocking voltage rating for the transistor is higher ($U_\mathrm{1}+U_\mathrm{2}$ instead of $U_\mathrm{1}$).
+        \item The output current is pulsating (Needs more filtering components).
+    \end{itemize}  
+\end{solutionblock}
