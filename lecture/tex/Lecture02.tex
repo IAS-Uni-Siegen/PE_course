@@ -3165,11 +3165,12 @@
     \begin{itemize}
         \item How large do the filter components need to be sized to ensure sufficiently smooth input and output signals?
     \end{itemize}
-        To answer this, we consider the following assumptions:
+        \onslide<2->{
+        To answer this, we consider the following assumptions:}
         \begin{itemize}
-            \item The input and output current are constant: $i_1(t) = I_1$, $i_2(t) = I_2$.
-            \item Additional input capacitor necessary to buffer the pulsating input current.
-            \item Voltage and current ripples do not influence each other (simplified superposition).
+            \item<2-> The input and output current are constant: $i_1(t) = I_1$, $i_2(t) = I_2$.
+            \item<3-> Additional input capacitor necessary to buffer the pulsating input current.
+            \item<4-> Voltage and current ripples do not influence each other (simplified superposition).
         \end{itemize}
         \vspace{-0.15cm}
         \begin{figure}
@@ -3204,13 +3205,13 @@
     \begin{equation}
         \Delta u_\mathrm{C_1} = \frac{I_1(1-D)T_\mathrm{s}}{C_1}
     \end{equation}
-    assuming that the input capacitor is loaded with the input current $I_1$ during the off-time $T_\mathrm{off}=(1-D)T_\mathrm{s}$. Assuming that there is an \hl{input voltage ripple requirement} on $\Delta u_\mathrm{C_1}$, that is, an upper limit ripple, the minimum input capacitance is 
+    assuming that the input capacitor is loaded with the input current $I_1$ during the off-time $T_\mathrm{off}=(1-D)T_\mathrm{s}$. \pause Assuming that there is an \hl{input voltage ripple requirement} on $\Delta u_\mathrm{C_1}$, that is, an upper limit ripple, the minimum input capacitance is 
     \begin{equation}
         C_1 \geq \frac{I_1(1-D)T_\mathrm{s}}{\Delta u_\mathrm{C_1}}=C_{1,\mathrm{min}}.
-    \end{equation}
+    \end{equation}\pause
     The stored input capacitor energy yields
     \begin{equation}
-        E_\mathrm{C_1} = \frac{1}{2} C_{1,\mathrm{min}} \left(U_1 + \frac{1}{2}\Delta u_\mathrm{C_1}\right)^2 = \frac{1}{2} (1-D)\frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{u_\mathrm{C_1}}}{2}\right)^2}{\varepsilon_{u_\mathrm{C_1}}}
+        E_\mathrm{C_1} = \frac{1}{2} C_{1,\mathrm{min}} \left(U_1 + \frac{1}{2}\Delta u_\mathrm{C_1}\right)^2 \pause = \frac{1}{2} (1-D)\frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{u_\mathrm{C_1}}}{2}\right)^2}{\varepsilon_{u_\mathrm{C_1}}}
     \end{equation}
     with the \hl{normalized ripple factor} $\varepsilon_{u_\mathrm{C_1}} = \nicefrac{\Delta u_\mathrm{C_1}}{U_1}$.
 \end{frame}
@@ -3221,19 +3222,19 @@
 
 \begin{frame}
     \frametitle{Filter component requirements: step-down converter (cont.)}
-    We already know from \eqref{eq:current-ripple-simple-step-down} the inductor current ripple being
+    \onslide<+->We already know from \eqref{eq:current-ripple-simple-step-down} the inductor current ripple being
     \begin{equation*}
         \Delta i_\mathrm{L} = \frac{(1-D)U_2T_\mathrm{s}}{L}.
-    \end{equation*}
+    \end{equation*}\onslide<+->
     Assuming that there is an \hl{inductor current ripple requirement} on $\Delta i_\mathrm{L}$, that is, an upper limit ripple, the minimum inductance is
     \begin{equation}
         L \geq \frac{(1-D)U_2T_\mathrm{s}}{\Delta i_\mathrm{L}} = L_{\mathrm{min}}.
         \label{eq:inductor-minimum-inductance-step-down}
-    \end{equation}
+    \end{equation}\onslide<+->
     The stored inductor energy is
     \begin{equation}
-        E_\mathrm{L} = \frac{1}{2} L_{\mathrm{min}} \left(I_2 + \frac{1}{2}\Delta i_\mathrm{L}\right)^2 = \frac{1}{2} (1-D)\frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{i_\mathrm{L}}}{2}\right)^2}{\varepsilon_{i_\mathrm{L}}}
-    \end{equation}
+        E_\mathrm{L} = \frac{1}{2} L_{\mathrm{min}} \left(I_2 + \frac{1}{2}\Delta i_\mathrm{L}\right)^2 \uncover<+->{= \frac{1}{2} (1-D)\frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{i_\mathrm{L}}}{2}\right)^2}{\varepsilon_{i_\mathrm{L}}}}
+    \end{equation}\onslide<4->
     with the \hl{normalized ripple factor} $\varepsilon_{i_\mathrm{L}} = \nicefrac{\Delta i_\mathrm{L}}{I_2}$. 
 \end{frame}
 
@@ -3245,19 +3246,19 @@
     \frametitle{Filter component requirements: step-down converter (cont.)}
     We already know from \eqref{eq:voltage-ripple-step-down-converter} the output capacitor voltage ripple being
     \begin{equation*}
-        \Delta u_\mathrm{C_2} = \frac{D(1-D)T_\mathrm{s}^2U_1}{8LC_2} = \frac{(1-D)}{8LC_2}\frac{U_2}{f_\mathrm{s}^2}.
-    \end{equation*}
+        \Delta u_\mathrm{C_2} = \frac{D(1-D)T_\mathrm{s}^2U_1}{8LC_2} \pause = \frac{(1-D)}{8LC_2}\frac{U_2}{f_\mathrm{s}^2}.
+    \end{equation*}  \pause
     Inserting the inductor sizing \eqref{eq:inductor-minimum-inductance-step-down} delivers
     \begin{equation}
-        \Delta u_\mathrm{C_2} = \frac{1}{8C_2} \frac{\Delta i_\mathrm{L}}{f_\mathrm{s}} = \frac{\varepsilon_{i_\mathrm{L}}}{8C_2} \frac{I_2}{f_\mathrm{s}}.
-    \end{equation}
+        \Delta u_\mathrm{C_2} = \frac{1}{8C_2} \frac{\Delta i_\mathrm{L}}{f_\mathrm{s}}\pause = \frac{\varepsilon_{i_\mathrm{L}}}{8C_2} \frac{I_2}{f_\mathrm{s}}.
+    \end{equation}\pause
     Assuming that there is an \hl{output voltage ripple requirement} on $\Delta u_\mathrm{C_2}$, that is, an upper limit ripple, the minimum output capacitance is 
     \begin{equation}
         C_2 \geq \frac{\varepsilon_{i_\mathrm{L}}I_2}{8f_\mathrm{s}\Delta u_\mathrm{C_2}} = C_{2,\mathrm{min}}.
-    \end{equation}
+    \end{equation}\pause
     The stored output capacitor energy yields
     \begin{equation}
-        E_\mathrm{C_2} = \frac{1}{2} C_{2,\mathrm{min}} \left(U_2 + \frac{1}{2}\Delta u_\mathrm{C_2}\right)^2 = \frac{1}{16} \varepsilon_{i_\mathrm{L}}\frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{u_\mathrm{C_2}}}{2}\right)^2}{\varepsilon_{u_\mathrm{C_2}}}.
+        E_\mathrm{C_2} = \frac{1}{2} C_{2,\mathrm{min}} \left(U_2 + \frac{1}{2}\Delta u_\mathrm{C_2}\right)^2 \pause = \frac{1}{16} \varepsilon_{i_\mathrm{L}}\frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{u_\mathrm{C_2}}}{2}\right)^2}{\varepsilon_{u_\mathrm{C_2}}}.
     \end{equation}
 \end{frame}
 
@@ -3267,17 +3268,17 @@
 
 \begin{frame}
     \frametitle{Filter component requirements: step-down converter interpretation}
-    The \hl{stored energy} in the filter components is a good proxy for the \hl{filter size and weight}. All three step-down converter filter components share the following characteristics:
+    The \hl{stored energy} in the filter components is a good proxy for the \hl{filter size and weight}. \onslide<+->All three step-down converter filter components share the following characteristics:
     \begin{itemize}
-        \item The stored energy is proportional to the output power $P_2$.
-        \item The stored energy is inversely proportional to the switching frequency $f_\mathrm{s}$.
-        \item The stored energy is minimal at $\varepsilon_{u_\mathrm{C_1}} = \varepsilon_{i_\mathrm{L}} = \varepsilon_{u_\mathrm{C_2}} = \nicefrac{1}{2}$ (i.e., large signal ripples).
+        \item<+-> The stored energy is proportional to the output power $P_2$.
+        \item<+-> The stored energy is inversely proportional to the switching frequency $f_\mathrm{s}$.
+        \item<+-> The stored energy is minimal at $\varepsilon_{u_\mathrm{C_1}} = \varepsilon_{i_\mathrm{L}} = \varepsilon_{u_\mathrm{C_2}} = \nicefrac{1}{2}$ (i.e., large signal ripples).
         \begin{itemize}
-            \item $\varepsilon_{i_\mathrm{L}}=\nicefrac{1}{2}$ refers to BCM mode.
-            \item Increased input voltage ripple and inductor current ripple also increases the transistor requirements, see \eqref{eq:step-down-converter-transistor-peak-voltage-current}.
+            \item<+-> $\varepsilon_{i_\mathrm{L}}=\nicefrac{1}{2}$ refers to BCM mode.
+            \item<+-> Increased input voltage ripple and inductor current ripple also increases the transistor requirements, see \eqref{eq:step-down-converter-transistor-peak-voltage-current}.
         \end{itemize}
-    \end{itemize}
-    In addition, $E_\mathrm{L}$ and $E_\mathrm{C_1}$ also scale with $$(1-D),$$ that is, are small if the converter's input and output voltage are similar.    
+    \end{itemize}\onslide<+->
+    In addition, $E_\mathrm{L}$ and $E_\mathrm{C_1}$ also scale with $$(1-D),$$ that is, are small if the converter's input and output voltage are similar. In the following, we do not analyze the step-up converter in detail, since the findings are analogous.    
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3319,20 +3320,20 @@
 
 \begin{frame}
     \frametitle{Filter component requirements: inverting buck-boost converter (cont.)}
-    We further assume an identical normalized input and output voltage ripple requirement 
+    \onslide<+->We further assume an identical normalized input and output voltage ripple requirement 
     $$
     \varepsilon_{u_\mathrm{C_1}} =\frac{\Delta u_\mathrm{C_1}}{U_1} =  \varepsilon_{u_\mathrm{C_2}} = \frac{\Delta u_\mathrm{C_2}}{U_2} = \varepsilon_{u_\mathrm{C}}.
-    $$
+    $$\onslide<+->
     Following the same derivation as for the step-down converter, the stored filter energies are
     \begin{equation}
             E_\mathrm{C} = E_\mathrm{C_1} + E_\mathrm{C_2} = \frac{1}{2} \frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{u_\mathrm{C}}}{2}\right)^2}{\varepsilon_{u_\mathrm{C}}}, \qquad
             E_\mathrm{L} = \frac{1}{2} \frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{i_\mathrm{L}}}{2}\right)^2}{\varepsilon_{i_\mathrm{L}}}.
-    \end{equation}
+    \end{equation}\onslide<3->
     Compared to the step-down converter we can find:
     \begin{itemize}
-        \item Same dependence on $P_2$, $f_\mathrm{s}$, and $\varepsilon_{u_\mathrm{C}}$ or $\varepsilon_{i_\mathrm{L}}$.
-        \item Missing $(1-D)$ scaling factor.
-        \item Result: The inverting buck-boost converter passive components are generally larger due to the pulsating input and output current which needs to be filtered.
+        \item<3-> Same dependence on $P_2$, $f_\mathrm{s}$, and $\varepsilon_{u_\mathrm{C}}$ or $\varepsilon_{i_\mathrm{L}}$.
+        \item<4-> Missing $(1-D)$ scaling factor.
+        \item<4-> Result: The inverting buck-boost converter's passive components are generally larger due to the pulsating input and output current which needs to be filtered.
     \end{itemize} 
 \end{frame}
 
@@ -3464,9 +3465,9 @@
 \begin{frame}
     \frametitle{Ćuk converter: switching states}
     \begin{itemize}
-        \item The Ćuk converter uses the \hl{capacitor $C$ to transfer energy} between the input and output.
-        \item The polarity of $C$ is changed between the two switch states (inverting voltage gain).
-        \item In contrast to the previous topologies, there is no pulsating output or input current thanks to the outer two inductors.
+        \item<3-> The Ćuk converter uses the \hl{capacitor $C$ to transfer energy} between the input and output.
+        \item<4-> The polarity of $C$ is changed between the two switch states (inverting voltage gain).
+        \item<5-> In contrast to the previous topologies, there is no pulsating output or input current thanks to the outer two inductors.
     \end{itemize}
     \begin{figure}
         \centering	
@@ -3483,7 +3484,7 @@
             \end{circuitikz}
             \caption{Switch-on time}
         \end{subfigure}%
-        \hspace{0.5cm}
+        \hspace{0.5cm}\onslide<2->
         \begin{subfigure}{0.45\textwidth}
             \centering
             \begin{circuitikz}[]
@@ -3511,16 +3512,16 @@
     \frametitle{Ćuk converter: voltage gain}
     In periodic steady-state operation, the voltage balance during a switching period of the two inductors must be fulfilled:
     \begin{equation}
-        L_1:\quad D U_1 + (1-D)(U_1-U_\mathrm{C})=0, \qquad L_2:\quad D(U_2+U_\mathrm{C}) + (1-D)U_2=0.
+        L_1:\quad D U_1 + (1-D)(U_1-U_\mathrm{C})=0, \pause \qquad L_2:\quad D(U_2+U_\mathrm{C}) + (1-D)U_2=0.
     \end{equation}
-    Above, $U_1$, $U_2$, and $U_\mathrm{C}$ are considered constant. From those we can derive:
+    Above, $U_1$, $U_2$, and $U_\mathrm{C}$ are considered constant.\pause From those we can derive:
     \begin{equation}
         L_1:\quad U_\mathrm{C}=\frac{U_1}{1-D}, \qquad L_2:\quad U_\mathrm{C}=-\frac{U_2}{D}.
-    \end{equation}
+    \end{equation}\pause
     Combining both equations delivers the voltage gain of the Ćuk converter:
     \begin{equation}
         \frac{U_2}{U_1} = -\frac{D}{1-D}.
-    \end{equation}
+    \end{equation}\pause
     This is the same finding as for the inverting buck-boost converter, which seems quite obvious, as the Ćuk converter just flips the order of the buck and boost parts. 
 \end{frame}
 
@@ -3531,7 +3532,7 @@
     \frametitle{Ćuk converter: circuit realization}
     \begin{itemize}
         \item Like the inverting buck-boost, the Ćuk converter only requires one diode and transistor.
-        \item Transistor $T$ needs to block $u_\mathrm{C}(t)$ during the off-time, while it covers both the input and output current during the on-time: semiconductor utilization is also $\nicefrac{P_2}{P_\mathrm{T}}=(1-D)D$ as for the inverting buck-boost (cf. \figref{fig:semiconductor-utilization-summary}).
+        \item<2-> Transistor $T$ needs to block $u_\mathrm{C}(t)$ during the off-time, while it covers both the input and output current during the on-time: semiconductor utilization is also $\nicefrac{P_2}{P_\mathrm{T}}=(1-D)D$ as for the inverting buck-boost (cf. \figref{fig:semiconductor-utilization-summary}).
     \end{itemize}
     \begin{figure}
         \begin{circuitikz}[]
@@ -3557,8 +3558,8 @@
     \frametitle{Single ended primary inductance converter (SEPIC)}
     \begin{itemize}
         \item Output inductor and diode change places compared to the Ćuk converter.
-        \item Output current becomes pulsating (compared to Ćuk).
-        \item Input to output gain becomes non-inverting (cf. next slides).
+        \item<2-> Output current becomes pulsating (compared to Ćuk).
+        \item<3-> Input to output gain becomes non-inverting (cf. next slides).
     \end{itemize}
     \begin{figure}
         \begin{circuitikz}[]
@@ -3585,7 +3586,7 @@
     \frametitle{SEPIC: switching states}
     \begin{itemize}
         \item During switch on-time, the transistor is conducting and the diode is blocking (causing the output current pulsation).
-        \item During switch off-time, the diode is conducting and the transistor is blocking.
+        \item<2-> During switch off-time, the diode is conducting and the transistor is blocking.
     \end{itemize}
     \begin{figure}
         \centering	
@@ -3605,7 +3606,7 @@
             \end{circuitikz}
             \caption{Switch-on time}
         \end{subfigure}%
-        \hspace{0.5cm}
+        \hspace{0.5cm}\onslide<2->
         \begin{subfigure}{0.45\textwidth}
             \centering
             \begin{circuitikz}[]
@@ -3633,16 +3634,16 @@
     \frametitle{SEPIC: voltage gain}
     In periodic steady-state operation, the voltage balance during a switching period of the two inductors must be fulfilled:
     \begin{equation}
-        L_1:\quad D U_1 + (1-D)(U_1-U_2-U_\mathrm{C})=0, \qquad L_2:\quad -DU_\mathrm{C} + (1-D)U_2=0.
+        L_1:\quad D U_1 + (1-D)(U_1-U_2-U_\mathrm{C})=0,\pause \qquad L_2:\quad -DU_\mathrm{C} + (1-D)U_2=0.
     \end{equation}
-    Above, $U_1$, $U_2$, and $U_\mathrm{C}$ are considered constant. From those we can derive:
+    Above, $U_1$, $U_2$, and $U_\mathrm{C}$ are considered constant.\pause From those we can derive:
     \begin{equation}
         L_1:\quad U_\mathrm{C}=\frac{U_1}{1-D}-U_2, \qquad L_2:\quad U_\mathrm{C}=\left(\frac{1}{D}-1\right)U_2.
-    \end{equation}
+    \end{equation}\pause
     Combining both equations delivers the voltage gain of the SEPIC:
     \begin{equation}
         \frac{U_2}{U_1} = \frac{D}{1-D}.
-    \end{equation}
+    \end{equation}\pause
     Similar to the synchronous buck-boost, the SEPIC comes with a positive voltage gain, but with the advantages of a single transistor and diode as well as non-pulsating input currents (at the cost of more filter components).
 \end{frame}
 
@@ -3656,11 +3657,11 @@
             \begin{itemize}
                 \item Previous buck/boost realizations allowed only unidirectional current flow (cf. \figref{fig:step-down-converter-realization-1Q} and \figref{fig:step-up-converter-realization-1Q}).
                 \item Right realization with two transistors and body diodes enables both current polarities (two quadrant type).
-                \item No discontinuous current flow (\hl{no DCM mode}).
-                \item Transistors must be \hl{switched complementary} to prevent a \hl{DC-link short-circuit}: 
+                \item<2-> No discontinuous current flow (\hl{no DCM mode}).
+                \item<3-> Transistors must be \hl{switched complementary} to prevent a \hl{DC-link short-circuit}: 
                 \begin{itemize}
-                    \item $T_1$: on, $T_2$: off,
-                    \item $T_1$: off, $T_2$: on.
+                    \item<4-> $T_1$: on, $T_2$: off,
+                    \item<4-> $T_1$: off, $T_2$: on.
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -3699,9 +3700,9 @@
                     \item $u_1>0$: otherwise DC link short-circuit,
                     \item $i_2>0$: to meet semiconductor capabilities. 
                 \end{itemize}
-                \item Possible switching states:
+                \item<2-> Possible switching states:
             \end{itemize}
-        \begin{center}
+        \begin{center}\onslide<2->
             \begin{tabular}{c c c c}
                 \toprule
                 $T_1$ & $T_2$ & $u_2$ & $i_1$\\
@@ -3716,7 +3717,7 @@
         
         \end{column}
         \hfill
-        \begin{column}{0.55\textwidth}
+        \begin{column}{0.55\textwidth}\onslide<1->
             \begin{figure}
                 \begin{circuitikz}[]
                     \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-5) coordinate (B)
@@ -3753,10 +3754,10 @@
         \begin{column}{0.45\textwidth}
             \begin{itemize}
                 \item For achieving full \hl{four quadrant operation (4Q)}, we combine the previous half-bridge variants. 
-                \item Also requires complementary switching of $\{T_1, T_2\}$ and $\{T_3, T_4\}$ to prevent a DC-link short-circuit. 
-                \item Possible (allowed) switching states:
+                \item<2-> Also requires complementary switching of $\{T_1, T_2\}$ and $\{T_3, T_4\}$ to prevent a DC-link short-circuit. 
+                \item<3-> Possible (allowed) switching states:
             \end{itemize}      
-            \begin{center}
+            \begin{center}\onslide<3->
                 \begin{tabular}{c c c c c c}
                     \toprule
                     $T_1$ & $T_2$ &$T_3$ & $T_4$ & $u_2$ & $i_1$\\
@@ -3770,7 +3771,7 @@
             \end{center}  
         \end{column}
         \hfill
-        \begin{column}{0.55\textwidth}
+        \begin{column}{0.55\textwidth}\onslide<1->
             \begin{figure}
                 \begin{circuitikz}[]
                     \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-5) coordinate (B)
@@ -3807,24 +3808,24 @@
     \frametitle{Buck/boost converter for both current and voltage polarities (cont.)}
     \begin{columns}
         \begin{column}{0.5\textwidth}
-            Define duty cycle as relative on-times
+            \onslide<1->Define duty cycle as relative on-times
             $$ D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \quad \mbox{for } T_1, T_4,
-            $$
+            $$\onslide<2->
             and conversely
             $$
             D' = \frac{T_\mathrm{on}}{T_\mathrm{s}}=(1-D), \quad \mbox{for } T_2, T_3.
-            $$
+            $$\onslide<3->
         This leads to the average output voltage of
         \begin{equation}
             U_2 = (2D-1) U_1.
         \end{equation}
 
         \begin{itemize}
-            \item Also holds 2Q converter from \figref{fig:DCDC-switch-two-voltage-polarities}.
-            \item Boost mode follows from flipping input and output.
+            \item<3-> Also holds 2Q converter from \figref{fig:DCDC-switch-two-voltage-polarities}.
+            \item<4-> Boost mode follows analogously.
         \end{itemize}
         \end{column}
-        \begin{column}{0.5\textwidth}
+        \begin{column}{0.5\textwidth}\onslide<3->
             \begin{figure}
                 \begin{tikzpicture}
                     \begin{axis}[
