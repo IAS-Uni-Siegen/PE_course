@@ -564,7 +564,7 @@
             \begin{equation*}
                 u_\mathrm{T}(t) = u_1 (t) + \frac{N_1}{N_2}u_2 (t), \quad t\in [T_\mathrm{on}, T_\mathrm{s}].
             \end{equation*}
-            Hence, the turn ratio has a significant impact on the voltage stress of the transistor.
+            Hence, the turn ratio has a significant impact on components' stress factors.
         \end{column}
         %
         \begin{column}{0.5\textwidth}
@@ -623,7 +623,7 @@
     \begin{itemize}
         \item<5-> Structurally similar result to the (inverting/synchronous) buck-boost converter.
         \item<6-> The voltage transfer ratio is additionally scaled by the turns ratio $\nicefrac{N_2}{N_1}$.
-        \item<7-> The flyback's tranformer enables additional degrees of freedom to achieve a certain voltage transfer ratio via $D$ or $\nicefrac{N_2}{N_1}$.
+        \item<7-> The flyback's tranformer enables additional degrees of freedom to achieve a certain voltage transfer ratio via $D$ and $\nicefrac{N_2}{N_1}$.
     \end{itemize}
 \end{frame}
 
@@ -839,7 +839,7 @@
     \pause%
     \begin{itemize}
         \item Interestingly, the voltage gain in DCM seems independent of the turns ratio $\nicefrac{N_2}{N_1}$.
-        \item Reason: output voltage $U_2$ depends on the (average) output current $\overline{i}_2$ which is inversely scaled by the turns ratio -- cf. cancelation in \eqref{eq:flyback-converter-average-output-current-DCM}.
+        \item Reason: output voltage $U_2$ depends on the (average) output current $\overline{i}_2$ which is inversely scaled by the turns ratio -- cf. cancelation of $\nicefrac{N_2}{N_1}$ in \eqref{eq:flyback-converter-average-output-current-DCM}.
         \item However, the transformer's magnetizing inductance is actually a function of the turns ratio $L_\mathrm{m}(N_1, N_2)$ (compare \href{https://github.com/IAS-Uni-Siegen/EMD_course}{Electrical Machines and Drives} course material). 
     \end{itemize}
 \end{frame}
@@ -975,14 +975,13 @@
             (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-2.0);
             \draw  (3.75,0) to [inductor, n=l2, mirror] ++(0,-2) 
             to [short] ++(2,0) coordinate (A)
-            to [diode, l_=$D_\mathrm{F}$, *-*] ++(0,2) coordinate (B)
+            to [diode, l_=$D_\mathrm{F}$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
             to [inductor, l=$L$] ++(2,0)
             to [short, i=$i_2(t)$] ++(0.75,0)
             to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
             to [short] (A)
             (3.75,0) to [diode, l=$D_2$] (B);
             \draw (2,-0.25) to [open, v = $u_\mathrm{p}$, voltage = straight] ++(0,-1.5);
-            \draw (4.5,-0.25) to [open, v^= $u_\mathrm{s}$, voltage = straight] ++(0,-1.5);
             \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T$};
             \path (l1.ul dot) node[circ]{}
                   (l2.ul dot) node[circ]{};
@@ -1013,7 +1012,7 @@
                 \item \hl{Forward converter = galvanically isolated buck converter.}
                 \item Main energy buffer: inductor $L$.
                 \item Transformer: galvanic isolation plus voltage scaling: $$u_\mathrm{s}(t)=\frac{N_2}{N_1}u_\mathrm{p}(t) $$ with $u_\mathrm{p}(t)=u_\mathrm{1}(t), t\in[0, T_\mathrm{on}]$.
-                \item Different to flyback, where the transformer both stores energy and provides galvanic isolation.
+                \item \hl{Different to flyback, where the transformer's purpose is to provide both  energy storage and galvanic isolation.}
             \end{itemize}
         \end{column}
         %
@@ -1026,14 +1025,13 @@
                     (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-4.0);
                     \draw  (2.5,0) to [inductor, n=l2, mirror] ++(0,-2) 
                     to [short] ++(2,0) coordinate (A)
-                    to [diode, l_=$D_\mathrm{F}$, *-*] ++(0,2) coordinate (B)
+                    to [diode, l_=$D_\mathrm{F}$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
                     to [inductor, l=$L$] ++(2,0)
                     to [short, i=$i_2(t)$] ++(0.75,0)
                     to [open, o-o, v = $u_2(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
                     to [short] (A)
                     (2.5,0) to [diode, l=$D_2$] (B);
                     \draw (0.75,-0.25) to [open, v = $u_\mathrm{p}$, voltage = straight] ++(0,-1.5);
-                    \draw (3.25,-0.25) to [open, v^= $u_\mathrm{s}$, voltage = straight] ++(0,-1.5);
                     \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T$};
                     \path (l1.ul dot) node[circ]{}
                           (l2.ul dot) node[circ]{};
@@ -1126,7 +1124,7 @@
     \begin{columns}
         \begin{column}{0.4\textwidth}
             \begin{varblock}{Magnetizing inductance}
-                    With every switching cycle the primary magnetizing current $i_\mathrm{L_\mathrm{m}}(t)$ increases (transformer saturates and takes damage).
+                    With every switching cycle the primary magnetizing current $i_\mathrm{L_\mathrm{m}}(t)$ increases (i.e., transformer saturates and takes damage).
             \end{varblock}
             \begin{figure}
                 \begin{tikzpicture}
@@ -1145,7 +1143,7 @@
                         ]
                         \addplot[signalred] coordinates {(0,0) (\D,1) (1,1) (1+\D, 2) (2,2)};
                         \addplot[signalred, dashed] coordinates {(2,2) (2+\D,3)};
-                        \node[signalred, above, inner sep = 2pt, anchor = south, fill=white] at (axis cs:0.6, 1.1) {$i_\mathrm{L_\mathrm{m}}(t)$};
+                        \node[signalred, above, inner sep = 2pt, anchor = south, fill=white] at (axis cs:0.6, 1.1) {$i_\mathrm{\mathrm{m}}(t)$};
                     \end{axis}
                 \end{tikzpicture}
             \end{figure}
@@ -1181,4 +1179,313 @@
             \end{figure}
         \end{column}
     \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter: demagnetization via negative input voltage %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Forward converter: demagnetization via negative input voltage}
+        \begin{figure}
+            \begin{circuitikz}[]
+                %Asym. half-bridge
+                \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-6) coordinate (B)
+                (A) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (E)
+                to [Tnpn, n=npn1, invert] ++(0,-2) coordinate (C)
+                to [short,*-] ++(2,0)  
+                to [short] ++(1,0) coordinate (J)
+                to [short] ++(1,0) coordinate (G)
+                (C) to [short] ++(0,-2) 
+                to [diode, l_=$D_1$, invert] ++(0,-2) coordinate (D)
+                (E) to [short, *-] ++(2,0)
+                to [diode, l_=$D_2$, invert] ++(0,-2)
+                to [short] ++(0,-2) coordinate (F)
+                to [Tnpn, n=npn2, invert] ++(0,-2) 
+                to [short, -*] ++(-2,0)
+                to [short, -o] (B)
+                (F) to [short,*-] ++(1,0) coordinate (I)
+                to [short] ++(1,0) coordinate (H)
+                (J) to [open,v^= $u_\mathrm{p}(t)\hspace{1.6cm}$, voltage = straight] (I);
+                \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+                \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+
+
+                % Transformer + buck filter
+                \draw (G) to [short] ++(1,0) coordinate (A1)
+                to [inductor, n=l1] ++(0,-2) coordinate (B1)
+                (A1) to [open] ++(0.75,0) to [inductor, n=l2, mirror] ++(0,-2) 
+                to [short] ++(2,0) coordinate (C1)
+                to [diode, l_=$D_\mathrm{F}$, *-*, v^<= $u_\mathrm{s}(t)$, voltage = straight] ++(0,2) coordinate (D1)
+                to [inductor, l=$L$] ++(2,0)
+                to [short, i=$i_2(t)$] ++(0.75,0)
+                to [open, o-o, v^= $\hspace{0.5cm}u_2(t)$, voltage = straight] ++(0,-2)
+                to [short] (C1)
+                (A1) to [open] ++(0.75,0) to [diode, l=$D_3$] (D1)
+                (G) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-*] ++(-0,-2)
+                to [short] (B1);
+                \path (l1.ul dot) node[circ]{}
+                        (l2.ul dot) node[circ]{};
+                \draw (l1.midtap) node[left]{$N_1$}
+                (l2.midtap) node[right]{$N_2$};
+                \draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
+            \end{circuitikz}
+            \caption{Forward converter topology with an asymmetrical half-bridge}
+            \label{fig:forward_converter_topology_asymmetrical_half_bridge}
+        \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter: steady-state time-domain behavior (asym. half-bridge) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Forward converter: steady-state time-domain behavior (asym. half-bridge)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfmathsetmacro{\D}{0.35} % duty cycle
+            \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
+
+                % Top plot: input voltage a primary side
+                \nextgroupplot[ylabel = {$u_\mathrm{p}(t)$}, ytick = {-1, 0, 1}, yticklabels = {$-U_1$, 0, $U_1$}, ymin = -1.1, ymax =1.1]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},-1) ({2*\D + #1},-1) ({2*\D + #1},0) ({1 + #1},0)};}
+                        \AddPlot
+                    }
+                    \draw [thick,<->]  (0,0) -- node[below]{$D T_\mathrm{s}$}(\D, 0);  
+                    \draw [thick,<->]  (\D,0) -- node[below]{$2D T_\mathrm{s}$}(2*\D, 0); 
+                    \draw [thick,<->]  (0.0,-1.45) -- node[below]{$T_\mathrm{s}$}(1.0, -1.45);  
+
+
+                % Middle plot: switch voltage at buck side
+                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $\frac{N_2}{N_1}U_1$}]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
+                        \AddPlot
+                    }
+                    \draw[signalblue, thick, dashed, visible on=<2->] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
+                    \node[above, inner sep = 2pt, anchor = south, visible on=<2->] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
+                    \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{on}$}(\D, -0.2);  
+                    \draw [thick,<->]  (\D,-0.2) -- node[below]{$T_\mathrm{off}$}(1, -0.2);  
+    
+                
+                % Bottom plot: magnetizing current
+                \nextgroupplot[ylabel = {$i_\mathrm{m}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}, visible on=<7->]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0) ({\D + #1},0.6) ({2*\D + #1},0) ({1 + #1},0)};}
+                        \AddPlot
+                    }
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter with asym. half-bridge modulation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Forward converter with asym. half-bridge modulation}
+    To demagnetize the transformer, the input voltage $u_\mathrm{p}(t)$ is modulated as follows:
+    \begin{equation}
+        u_\mathrm{p}(t) = \begin{cases}
+            U_1, &  t\in[kT_\mathrm{s}, kT_\mathrm{s}+D T_\mathrm{s}], \quad T_1=\mathrm{on}, T_2=\mathrm{off},\\
+            -U_1, & t\in[kT_\mathrm{s}+D T_\mathrm{s}, kT_\mathrm{s}+2D T_\mathrm{s}], \quad  T_1=\mathrm{off}, T_2=\mathrm{on},\\
+            0, &  t\in[kT_\mathrm{s}+2D T_\mathrm{s}, kT_\mathrm{s}+T_\mathrm{s}], \quad T_1=\mathrm{off}, T_2=\mathrm{off}.
+        \end{cases}  
+    \end{equation}
+    Consequently, we have
+    \begin{equation}
+        \overline{u}_\mathrm{L_\mathrm{m}} = \frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{s}}u_\mathrm{p}(t)\mathrm{d}t = 0
+    \label{eq:average_magnetizing_voltage_asym_half-bridge_forward_converter}
+    \end{equation}
+    and, therefore, the transformer's magnetizing current $i_\mathrm{m}(t)$ does not increase during a pulse period. However, this also limits the applicable duty cycle to 
+    $$
+    D\leq\frac{1}{2}
+    $$
+    since otherwise \eqref{eq:average_magnetizing_voltage_asym_half-bridge_forward_converter} cannot be fulfilled.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter: demagnetization via negative input voltage (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Forward converter: demagnetization via negative input voltage (cont.)}
+        \begin{figure}
+            \begin{circuitikz}[]
+                %full-bridge
+                \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-6) coordinate (B)
+                (A) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (E)
+                to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
+                to [short,*-] ++(2,0)  
+                to [short] ++(1,0) coordinate (J)
+                to [short] ++(1,0) coordinate (G)
+                (C) to [short] ++(0,-2) 
+                to [Tnpn, n=npn2, invert, bodydiode] ++(0,-2) coordinate (D)
+                (E) to [short, *-] ++(2,0)
+                to [Tnpn, n=npn3, invert, bodydiode] ++(0,-2)
+                to [short] ++(0,-2) coordinate (F)
+                to [Tnpn, n=npn4, invert, bodydiode] ++(0,-2) 
+                to [short, -*] ++(-2,0)
+                to [short, -o] (B)
+                (F) to [short,*-] ++(1,0) coordinate (I)
+                to [short] ++(1,0) coordinate (H)
+                (J) to [open,v^= $u_\mathrm{p}(t)\hspace{1.6cm}$, voltage = straight] (I);
+                \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+                \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+                \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
+                \draw let \p1 = (npn4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
+                
+
+                % Transformer + buck filter
+                \draw (G) to [short] ++(1,0) coordinate (A1)
+                to [inductor, n=l1] ++(0,-2) coordinate (B1)
+                (A1) to [open] ++(0.75,0) to [inductor, n=l2, mirror] ++(0,-2) 
+                to [short] ++(2,0) coordinate (C1)
+                to [diode, l_=$D_\mathrm{F}$, *-*, v^<= $u_\mathrm{s}(t)$, voltage = straight] ++(0,2) coordinate (D1)
+                to [inductor, l=$L$] ++(2,0)
+                to [short, i=$i_2(t)$] ++(0.75,0)
+                to [open, o-o, v^= $\hspace{0.5cm}u_2(t)$, voltage = straight] ++(0,-2)
+                to [short] (C1)
+                (A1) to [open] ++(0.75,0) to [diode, l=$D_3$] (D1)
+                (G) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-*] ++(-0,-2)
+                to [short] (B1);
+                \path (l1.ul dot) node[circ]{}
+                        (l2.ul dot) node[circ]{};
+                \draw (l1.midtap) node[left]{$N_1$}
+                (l2.midtap) node[right]{$N_2$};
+                \draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
+            \end{circuitikz}
+            \caption{Forward converter topology with an  full-bridge}
+            \label{fig:forward_converter_topology_asymmetrical_full_bridge}
+        \end{figure}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter: steady-state time-domain behavior (full-bridge) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Forward converter: steady-state time-domain behavior (full-bridge)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfmathsetmacro{\D}{0.35} % duty cycle
+            \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
+
+                % Top plot: input voltage a primary side
+                \nextgroupplot[ylabel = {$u_\mathrm{p}(t)$}, ytick = {-1, 0, 1}, yticklabels = {$-U_1$, 0, $U_1$}, ymin = -1.1, ymax =1.1]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1/2 + #1},0) ({1/2 + #1},-1) ({1/2+\D + #1},-1) ({1/2+\D + #1},0) ({1 + #1},0)};}
+                        \AddPlot
+                    }
+                    \draw [thick,<->]  (0,0) -- node[below]{$D T_\mathrm{s}$}(\D, 0);  
+                    \draw [thick,<->]  (1/2,0) -- node[above]{$D T_\mathrm{s}$}(1/2+\D, 0); 
+                    \draw [thick,<->]  (0.0,-1.45) -- node[below]{$T_\mathrm{s}$}(1.0, -1.45);  
+
+
+                % Middle plot: switch voltage at buck side
+                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $\frac{N_2}{N_1}U_1$}]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
+                        \AddPlot
+                    }
+                    \draw[signalblue, thick, dashed, visible on=<2->] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
+                    \node[above, inner sep = 2pt, anchor = south, visible on=<2->] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
+                    \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{on}$}(\D, -0.2);  
+                    \draw [thick,<->]  (\D,-0.2) -- node[below]{$T_\mathrm{off}$}(1, -0.2);  
+    
+                
+                % Bottom plot: magnetizing current
+                \nextgroupplot[ylabel = {$i_\mathrm{m}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {-0.5, 0, 0.5}, yticklabels = {0, ,}, ymin = -0.6, ymax =0.6, visible on=<7->]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},-0.3) ({\D + #1},0.3) ({1/2 + #1},0.3) ({1/2+\D + #1},-0.3) ({1 + #1},-0.3)};}
+                        \AddPlot
+                    }
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter: hysteresis curves of the transformer %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Forward converter: hysteresis curves of the transformer}
+    \begin{figure}
+        \centering
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{tikzpicture}
+                \tikzmath{
+                    real \a, \b, \c, \d, \hn, \hc, \hm, \bc, \hcc;
+                    \a = 6.0;
+                    \b = 1.7;
+                    \c = 1.5;
+                    \d = 3.0;
+                    \hn = 1.7; % nominal, utilized H field value
+                    \hm = 7.0; % maximal H field value
+                    \hc = -\hn + 2*\c/\b; % hyteresis return H value for nominal H field
+                    \bc = \a/(1 + exp(-\b*\hc+\c))-\d; % hyteresis return B value for nominal H field
+                    \hcc = (-ln(\a/\d-1)+\c)/\b; % coercive H field value
+                }
+                \begin{axis}[very thick,
+                             samples = 100,
+                             xlabel = $H$,
+                             ylabel = $B$,
+                             xmin = -\hm,
+                             xmax = \hm,
+                             ymin = -4,
+                             ymax = 4,
+                             axis x line = middle,
+                             axis y line = middle,
+                             ticks = none,
+                             width=\textwidth]
+                    \addplot[shadecolor, dashed, domain = -\hm:\hm] {\a/(1 + exp(-\b*x+\c))-\d};
+                    \addplot[shadecolor, dashed ,domain = -\hm:\hm] {\a/(1 + exp(-\b*x-\c))-\d};
+                    \addplot[signalred, name path=A, domain=\hcc:\hn, samples = 100] {\a/(1 + exp(-\b*x+\c))-\d};
+                    \addplot[signalred, name path=B, domain=-\hcc:-\hc, samples = 100] {\a/(1 + exp(-\b*x-\c))-\d};
+                    \addplot[shadecolor, opacity=0.3] fill between[of=A and B];
+                    \addplot[signalred] coordinates {(-\hc, -\bc) (\hn, -\bc)};
+                    \addplot[signalred] coordinates {(-\hcc, 0) (\hcc, 0)};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Asym. half-bridge: utilizes only the upper half of the hysteresis curve due to non-negative magnetizing currents}
+        \end{subfigure}
+        \hspace{0.05\textwidth}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \begin{tikzpicture}
+                \tikzmath{
+                    real \a, \b, \c, \d, \hn, \hc, \hm, \bc;
+                    \a = 6.0;
+                    \b = 1.7;
+                    \c = 1.5;
+                    \d = 3.0;
+                    \hn = 1.25; % nominal, utilized H field value
+                    \hm = 7.0; % maximal H field value
+                    \hc = -\hn + 2*\c/\b; % hyteresis return H value for nominal H field
+                    \bc = \a/(1 + exp(-\b*\hc+\c))-\d; % hyteresis return B value for nominal H field
+                }
+                \begin{axis}[very thick,
+                             samples = 100,
+                             xlabel = $H$,
+                             ylabel = $B$,
+                             xmin = -\hm,
+                             xmax = \hm,
+                             ymin = -4,
+                             ymax = 4,
+                             axis x line = middle,
+                             axis y line = middle,
+                             ticks = none,
+                             width=\textwidth]
+                    \addplot[shadecolor, dashed, domain = -\hm:\hm] {\a/(1 + exp(-\b*x+\c))-\d};
+                    \addplot[shadecolor, dashed ,domain = -\hm:\hm] {\a/(1 + exp(-\b*x-\c))-\d};
+                    \addplot[signalred, name path=A, domain=\hc:\hn, samples = 100] {\a/(1 + exp(-\b*x+\c))-\d};
+                    \addplot[signalred, name path=B, domain=-\hn:-\hc, samples = 100] {\a/(1 + exp(-\b*x-\c))-\d};
+                    \addplot[shadecolor, opacity=0.3] fill between[of=A and B];
+                    \addplot[signalred] coordinates {(-\hc, -\bc) (\hn, -\bc)};
+                    \addplot[signalred] coordinates {(-\hn, \bc) (\hc, \bc)};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Full-bridge: utilizes both positive and negative hysteresis curve parts due the four-quadrant input stage}
+        \end{subfigure}
+            \caption{Hysteresis curves of the forward converter's transformer with different input stages (qualitative and simplified representation)}
+        \end{figure}
 \end{frame}
