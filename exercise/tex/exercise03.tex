@@ -16,9 +16,11 @@ An inverting buck-boost converter (see \autoref{fig:Inverting buck-boost convert
 
 \begin{solutionblock}
 The $\Delta$ is an approximation of the total differential using a difference equation with the differences $\Delta$. This results in the component differential equations becoming average value equations. The nabla operator is not understood here due to the $\Delta$.
-    \begin{equation}
-        U_{\mathrm{1}} = \overline u_{\mathrm{L}} = L \frac{\Delta i_{\mathrm{L}} }{\Delta t}. 
-    \end{equation}
+During the transistor on time, the input voltage is equal to the inductor voltage and defined as:
+\begin{equation}
+    U_{\mathrm{1}} = \overline u_{\mathrm{L}} = L \frac{\Delta i_{\mathrm{L}} }{\Delta t}. 
+\end{equation}
+    With voltages $U_1$ and $U_2$ given in the task, the duty cycle is calculated as:
 \begin{equation}
     D = \frac{U_\mathrm{2}}{U_\mathrm{1}+U_\mathrm{2}} = \frac{\SI{12}{\volt}}{\SI{18}{\volt}+\SI{12}{\volt}} = 0.4
 \end{equation}
@@ -55,17 +57,17 @@ This expression can now be used in the inductance equation. The inductance can t
 As the output power is specified as a value range, the highest and lowest values can be used. The lowest and highest current should be determined from these two values, from which the value range of the frequency $f_\mathrm{s}$ can then be determined. Here the inverse converter is considered on the output side and therefore a duty cycle $D = 0.6$ is used again. The following equations can be derived from this:
 
      \begin{equation}
-        I_\mathrm{2,min}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{2}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{0.278}{\volt}
+        I_\mathrm{2,min}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{2}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{0.278}{\ampere}
      \end{equation}
      \begin{equation}
-        I_\mathrm{2,max}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.0833}{\volt}
+        I_\mathrm{2,max}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.0833}{\ampere}
      \end{equation}
      Now we can use these two terms in \ref{equation 1.8}:
      \begin{equation}
-        f_\mathrm{P,max}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{0.278}{\volt}}=\SI{150}{\kilo \hertz}
+        f_\mathrm{P,max}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{0.278}{\ampere}}=\SI{150}{\kilo \hertz}
      \end{equation}
      \begin{equation}
-        f_\mathrm{P,min}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{2.0833}{\volt}}=\SI{20}{\kilo \hertz}
+        f_\mathrm{P,min}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{2.0833}{\ampere}}=\SI{20}{\kilo \hertz}
      \end{equation}
      The switching frequency $f_\mathrm{s}$ varies in the range from $\SI{20}{\kilo \hertz} \, \dots \, \SI{150}{\kilo \hertz}$.
  \end{solutionblock}
@@ -103,16 +105,91 @@ As the output power is specified as a value range, the highest and lowest values
 
  \subtask{Sketch the course of the inductor current $i_\mathrm{L}(t)$  for minimum and maximum output power.}
 \begin{solutionblock}
+    The inductor current is visualized in \autoref{fig:InductorCurrentEx03}.
     \input{fig/ex03/Fig_courseILminmaxOutputPower.tex}   
 \end{solutionblock}
     
- \subtask{At which operating point does the maximum output voltage ripple $\Delta u_\mathrm{2}$ occur (assumption: the load draws a constant current)?} 
+\subtask{At which operating point does the maximum output voltage ripple $\Delta u_\mathrm{2}$ occur (assumption: the load draws a constant current)?}
+ 
+\begin{solutionblock}
+    The capacitor current is given by
+    \begin{equation}
+        i_{\mathrm{C}}(t) = i_{\mathrm{L}}(t)-I_{\mathrm{2}},
+    \end{equation}
+    with the assumption of a constant load current $I_2$, leads to the maximum capacitor current ripple, which is depending on the current through the inductor.
 
- \subtask{How high should the output capacitance be selected to ensure $\Delta u_\mathrm{2} < 0.02 \cdot U_\mathrm{2}?$}
+    The voltage equation of the capacitor is defined as
+    \begin{equation}
+        i_{\mathrm{C}}(t) = C\frac{\mathrm{d}u_{\mathrm{C}}(t)}{\mathrm{d}t},
+    \end{equation}
+    which is rearranged into
+    \begin{equation}
+        u_{\mathrm{C}}(t) = \frac{1}{C} \int i_{\mathrm{C}}(t),
+    \end{equation}
+    showing that the voltage ripple depends on the capacitor current, which is larger a the second operating point ($P = \SI{15}{\watt}$, \autoref{fig:InductorCurrentEx03}), leading to the highest voltage ripple.
+\end{solutionblock}
 
- \subtask{What is the maximum effective value $i_\mathrm{C,RMS}$ of the output capacitor current?}
+\subtask{How high should the output capacitance be selected to ensure $\Delta u_\mathrm{2} < 0.02 \cdot U_\mathrm{2}?$}
 
- \subtask{Sketch the curves of the voltage $u_\mathrm{T}(t)$ at the power transistor and the current $i_\mathrm{D}(t)$ in the output diode for $P_\mathrm{2}=\SI{2}{\watt}$. What is the maximum blocking voltage of the transistor?}
+\begin{solutionblock}
+    The output capacitor $C_2$ is located parallel to the output voltage $U_2$, therefore, the maximum voltage ripple is calculated according to the task description with:
+    \begin{equation}
+        \Delta u_2 = \Delta u_{\mathrm{C}} = 0.02 U_2 = 0.02 \cdot \SI{12}{\volt} = \SI{0.24}{\volt}.
+    \end{equation}
+
+    The relationship between the voltage ripple and the capacitance is identical to the step-up converter, leading into
+    \begin{equation}
+        \Delta u_{\mathrm{C}} = \frac{I_2}{C} D T_{\mathrm{s}},
+    \end{equation}
+    which is rearranged for the maximum power ($P = \SI{15}{\watt}$) into:
+    \begin{equation}
+        C = \frac{I_{\mathrm{2}} D T_{\mathrm{s}}}{\Delta u_{\mathrm{C}}}
+        = \frac{\SI{2.08}{\ampere} \cdot 0.4 \cdot \SI{50}{\micro\second}}{\SI{0.24}{\volt}}
+        = \SI{173.3}{\micro\farad}. 
+    \end{equation}
+
+\end{solutionblock}
+
+\subtask{What is the maximum effective value $i_\mathrm{C,RMS}$ of the output capacitor current?}
+
+\begin{solutionblock}
+
+    \begin{equation}
+        i_{\mathrm{C,RMS}} = 
+    \end{equation}
+    
+\end{solutionblock}
+
+\subtask{Sketch the curves of the voltage $u_\mathrm{T}(t)$ at the power transistor and the current $i_\mathrm{D}(t)$ in the output diode for $P_\mathrm{2}=\SI{2}{\watt}$. What is the maximum blocking voltage of the transistor?}
+
+\begin{solutionblock}
+    The input voltage for an activated transistor is given with
+    \begin{equation}
+        U_1 = u_{\mathrm{T}} + u_{\mathrm{L}},
+    \end{equation}
+    which is rearranged into:
+    \begin{equation}
+        u_{\mathrm{T}} = U_1 - u_{\mathrm{L}}.
+        \label{eq:uT}
+    \end{equation}
+
+    During the off time of the transistor, the inductance voltage is defined as
+    \begin{equation}
+        u_{\mathrm{L}} = -U_2 - u_{\mathrm{D}},
+        \label{eq:U2}
+    \end{equation}
+    where the diode voltage is assumed to be zero during the conduction phase.
+    Hence, the maximum blocking voltage of the transistor is calculated with \eqref{eq:U2} and \eqref{eq:uT}, which results in:
+    \begin{equation}
+        u_{\mathrm{T}} = U_1 - (-U_2)
+        = U_1 + U_2 = \SI{18}{\volt} + \SI{12}{\volt} = \SI{30}{\volt}.
+    \end{equation}
+
+    The diode current and the blocking voltage of the transistor is shown in \autoref{fig:inverseCon_voltage_current}.
+    \input{fig/ex03/sFigDia_Inverse.tex}
+\end{solutionblock}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: Boost-Buck converter and SEPIC topology
@@ -120,7 +197,7 @@ As the output power is specified as a value range, the highest and lowest values
 
 \task {Boost-buck converter and SEPIC topology}
 
-The supply of a plasma coating system is realized by a boost converter followed by a buck converter acccording \autoref{fig:ex03_boost_buck_converter} (with common capacitance).
+The supply of a plasma coating system is realized by a boost converter followed by a buck converter according \autoref{fig:ex03_boost_buck_converter} (with common capacitance).
 The converter is connected to a voltage $U_\mathrm{1}$ and provides a variable output voltage $U_\mathrm{2}$. The parameters are displayed in \autoref{table:ParametersOfBoostBuckConverter}.
 \vspace{2em}\par
 
