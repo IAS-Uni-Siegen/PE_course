@@ -15,7 +15,7 @@ An inverting buck-boost converter (see \autoref{fig:Inverting buck-boost convert
 \subtask{The system should operate at boundary conduction mode (BCM)   throughout the entire output power range. How should the inductance be selected so that the switching frequency is always above the hearing threshold $f_\mathrm{s}=\SI{20}{\kilo\hertz}$?}
 
 \begin{solutionblock}
-The $\Delta$ is an approximation of the total differential using a difference equation with the differences $\Delta$. This results in the component differential equations becoming average value equations. The nabla operator is not understood here due to the $\Delta$.
+The $\Delta$ is an approximation of the total differential using a difference equation with the differences $\Delta$. This results in the component differential equations becoming average value equations.
 During the transistor on time, the input voltage is equal to the inductor voltage and defined as:
 \begin{equation}
     U_{\mathrm{1}} = \overline u_{\mathrm{L}} = L \frac{\Delta i_{\mathrm{L}} }{\Delta t}. 
@@ -24,19 +24,19 @@ During the transistor on time, the input voltage is equal to the inductor voltag
 \begin{equation}
     D = \frac{U_\mathrm{2}}{U_\mathrm{1}+U_\mathrm{2}} = \frac{\SI{12}{\volt}}{\SI{18}{\volt}+\SI{12}{\volt}} = 0.4
 \end{equation}
-BCM is assumed. A current $I_\mathrm{2}$ is only present when the transistor is open, otherwise the diode blocks. This is taken into account in the following equation as the duty cycle $D = 0.6$ is used for $T_\mathrm{off}$. The equation thus looks as follows:
+During the on phase of the transistor, the total energy for one period (on and off phase) must be stored in the inductor. Therefore, the average power and the corresponding inductor current increases with the inverse value of the duty cycle. Hence, the average inductor current is given with:
 \begin{equation}
-    I_\mathrm{2,min} = \frac{P_\mathrm{2}}{U_\mathrm{2}} \frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.083}{\volt}
+    \overline{i}_\mathrm{L} = \frac{P_\mathrm{2}}{U_\mathrm{2}} \frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.083}{\ampere}.
 \end{equation}
-The maximum current at BCM $\Delta i_{\mathrm{L}}$ is twice  $I_\mathrm{2,min}$:
+With BCM the maximum inductor current is defined as:
 \begin{equation}
-    \Delta i_{\mathrm{L}} = 2  I_\mathrm{2,min} = \SI{4.16}{\ampere}.
+    \Delta i_{\mathrm{L}} = 2 \overline{i}_\mathrm{L} = \SI{4.16}{\ampere}.
 \end{equation}
 Delta $\Delta t$ can also be expressed as:
 \begin{equation}
     \Delta t = \frac{D}{f_\mathrm{s}}.
 \end{equation}
-This expression can now be used in the inductance equation. The inductance can therefore be determined using the following equation:
+Therefore, the inductance can is determined using the following equation:
 \begin{equation}
     L = \frac{\Delta t  \overline u_{\mathrm{L}}}{\Delta i_{\mathrm{L}}}= \frac{D \overline u_{\mathrm{L}}}{f_\mathrm{s}\Delta i_{\mathrm{L}}}= \frac{D U_{\mathrm{1}}}{f_\mathrm{s}\Delta i_{\mathrm{L}}} = \frac{0.4 \cdot \SI{18}{\volt}}{\SI{20}{\kilo\hertz}\cdot \SI{4.16}{\ampere }} = \SI{86.4}{\micro\henry}.
 \end{equation}
@@ -54,22 +54,22 @@ This expression can now be used in the inductance equation. The inductance can t
         f_\mathrm{s} = \frac{DU_{\mathrm{1}}}{L\Delta i_{\mathrm{L}}} \label{equation 1.8}
      \end{equation}
       
-As the output power is specified as a value range, the highest and lowest values can be used. The lowest and highest current should be determined from these two values, from which the value range of the frequency $f_\mathrm{s}$ can then be determined. Here the inverse converter is considered on the output side and therefore a duty cycle $D = 0.6$ is used again. The following equations can be derived from this:
-
+As the output power is specified as a value range, the highest and lowest values can be used. The lowest and highest current should be determined from these two values, from which the value range of the frequency $f_\mathrm{s}$ can then be determined.
+The average inductor current is calculated as:
      \begin{equation}
-        I_\mathrm{2,min}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{2}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{0.278}{\ampere}
+        \overline{i}_\mathrm{L,2W}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{2}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{0.278}{\ampere},
      \end{equation}
      \begin{equation}
-        I_\mathrm{2,max}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.0833}{\ampere}
+        \overline{i}_\mathrm{L,15W}= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.0833}{\ampere}.
      \end{equation}
-     Now we can use these two terms in \ref{equation 1.8}:
+     With \ref{equation 1.8} the resulting switching frequencies are:
      \begin{equation}
-        f_\mathrm{P,max}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{0.278}{\ampere}}=\SI{150}{\kilo \hertz}
+        f_\mathrm{s,2W}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{0.278}{\ampere}}=\SI{150}{\kilo \hertz},
      \end{equation}
      \begin{equation}
-        f_\mathrm{P,min}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{2.0833}{\ampere}}=\SI{20}{\kilo \hertz}
+        f_\mathrm{s,15W}=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{2.0833}{\ampere}}=\SI{20}{\kilo \hertz}.
      \end{equation}
-     The switching frequency $f_\mathrm{s}$ varies in the range from $\SI{20}{\kilo \hertz} \, \dots \, \SI{150}{\kilo \hertz}$.
+     The switching frequency $f_\mathrm{s}$ varies in the range from $\SI{20}{\kilo \hertz} \, \dots \, \SI{150}{\kilo \hertz}$ for the specified output power range in the task.
  \end{solutionblock}
 
  \subtask{What is the peak value $\hat i_1=\max\{i_1(t)\}$ of the transistor current?}
@@ -85,10 +85,10 @@ As the output power is specified as a value range, the highest and lowest values
  \end{equation}
  The different switching frequencies can now be inserted into \ref{switching frequency}:
  \begin{equation}
-    T_\mathrm{s,min}(\SI{2}{\watt}) = \frac{1}{\SI{150}{\kilo \hertz}}= \SI{6.67}{\micro \s}
+    T_\mathrm{s,2W} =\frac{1}{f_{\mathrm{s,2W}}} = \frac{1}{\SI{150}{\kilo \hertz}}= \SI{6.67}{\micro \s}
  \end{equation}
  \begin{equation}
-    T_\mathrm{s,max}(\SI{15}{\watt}) = \frac{1}{\SI{20}{\kilo \hertz}}= \SI{50}{\micro \s}.
+    T_\mathrm{s,15W} =\frac{1}{f_{\mathrm{s,15W}}} = \frac{1}{\SI{20}{\kilo \hertz}}= \SI{50}{\micro \s}.
  \end{equation}
  The absolute values of the transistor switch-on times can be determined using the following equation
  \begin{equation}
@@ -96,10 +96,10 @@ As the output power is specified as a value range, the highest and lowest values
  \end{equation}
  The different switching periods can now be inserted into \ref{absolut value switch-on-times}:
  \begin{equation}
-    T_\mathrm{on,min}(\SI{2}{\watt}) = 0.4 \cdot \SI{6.67}{\micro \s} = \SI{2.67}{\micro \s}
+    T_\mathrm{on,2W} = 0.4 \cdot \SI{6.67}{\micro \s} = \SI{2.67}{\micro \s}
  \end{equation}
  \begin{equation}
-    T_\mathrm{on,max}(\SI{15}{\watt}) = 0.4 \cdot \SI{50}{\micro \s}= \SI{20}{\micro \s}.
+    T_\mathrm{on,15W} = 0.4 \cdot \SI{50}{\micro \s}= \SI{20}{\micro \s}.
  \end{equation}
  \end{solutionblock}
 
@@ -126,7 +126,7 @@ As the output power is specified as a value range, the highest and lowest values
     \begin{equation}
         u_{\mathrm{C}}(t) = \frac{1}{C} \int i_{\mathrm{C}}(t),
     \end{equation}
-    showing that the voltage ripple depends on the capacitor current, which is larger a the second operating point ($P = \SI{15}{\watt}$, \autoref{fig:InductorCurrentEx03}), leading to the highest voltage ripple.
+    showing that the voltage ripple depends on the capacitor current, which is larger a the second operating point ($P_2 = \SI{15}{\watt}$, \autoref{fig:InductorCurrentEx03}), leading to the highest voltage ripple.
 \end{solutionblock}
 
 \subtask{How high should the output capacitance be selected to ensure $\Delta u_\mathrm{2} < 0.02 \cdot U_\mathrm{2}?$}
@@ -137,15 +137,15 @@ As the output power is specified as a value range, the highest and lowest values
         \Delta u_2 = \Delta u_{\mathrm{C}} = 0.02 U_2 = 0.02 \cdot \SI{12}{\volt} = \SI{0.24}{\volt}.
     \end{equation}
 
-    The relationship between the voltage ripple and the capacitance is identical to the step-up converter, leading into
+    The relationship between the voltage ripple and the capacitance is identical to the step-up converter, which is defined as:
     \begin{equation}
         \Delta u_{\mathrm{C}} = \frac{I_2}{C} D T_{\mathrm{s}},
     \end{equation}
-    which is rearranged for the maximum power ($P = \SI{15}{\watt}$) into:
+    applying for the maximum power ($P = \SI{15}{\watt}$) results into:
     \begin{equation}
-        C = \frac{I_{\mathrm{2}} D T_{\mathrm{s}}}{\Delta u_{\mathrm{C}}}
-        = \frac{\SI{2.08}{\ampere} \cdot 0.4 \cdot \SI{50}{\micro\second}}{\SI{0.24}{\volt}}
-        = \SI{173.3}{\micro\farad}. 
+        C_2 = \frac{I_{\mathrm{2,15W}} D T_{\mathrm{s,15W}}}{\Delta u_{\mathrm{C}}}
+        = \frac{\SI{1.25}{\ampere} \cdot 0.4 \cdot \SI{50}{\micro\second}}{\SI{0.24}{\volt}}
+        = \SI{104}{\micro\farad}. 
     \end{equation}
 
 \end{solutionblock}
@@ -154,9 +154,23 @@ As the output power is specified as a value range, the highest and lowest values
 
 \begin{solutionblock}
 
+    The general equation to calculate the capacitor RMS current is defined as follows
     \begin{equation}
-        i_{\mathrm{C,RMS}} = 
+        I_{\mathrm{C,RMS}} = \sqrt{\frac{1}{T_{\mathrm{s}}} \int_{0}^{T_{\mathrm{s}}}i_{\mathrm{C}}^2(t)\mathrm{d}t},
     \end{equation}
+    with the capacitor current for the inverting buck-boost converter:
+    \begin{equation}
+        {i_\mathrm{C}(t) = \begin{cases}
+            \frac{D}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2(t-kT_\mathrm{s})}{2T_\mathrm{off}}, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{off}],\\
+            -I_2, & t\in [k T_\mathrm{s}+ T_\mathrm{off}, (k+1) T_\mathrm{s}].
+        \end{cases}}
+    \end{equation}
+    For $k$ = 0 the equation results into:
+    \begin{equation}
+        I_{\mathrm{C,RMS}} = \sqrt{\frac{1}{T_{\mathrm{s}}} \int_{0}^{T_{\mathrm{off}}} \left( \frac{D}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2t}{2T_\mathrm{off}}\right)^2 \mathrm{d}t+ \frac{1}{T_{\mathrm{s}}}\int_{T_{\mathrm{off}}}^{T_{\mathrm{s}}} \left(-I_2 \right)^2 \mathrm{d}t}.
+    \end{equation}
+    This equation can be solved analytically or numerically, however, the RMS capacitor current is $I_{\mathrm{C,RMS}} = \SI{1.38}{\ampere}$.
+   
     
 \end{solutionblock}
 
