@@ -105,7 +105,6 @@ The average inductor current is calculated as:
 
  \subtask{Sketch the course of the inductor current $i_\mathrm{L}(t)$  for minimum and maximum output power.}
 \begin{solutionblock}
-    The inductor current is visualized in \autoref{fig:InductorCurrentEx03}.
     \input{fig/ex03/Fig_courseILminmaxOutputPower.tex}   
 \end{solutionblock}
     
@@ -174,36 +173,7 @@ The average inductor current is calculated as:
     
 \end{solutionblock}
 
-\subtask{Sketch the curves of the voltage $u_\mathrm{T}(t)$ at the power transistor and the current $i_\mathrm{D}(t)$ in the output diode for $P_\mathrm{2}=\SI{2}{\watt}$. What is the maximum blocking voltage of the transistor?}
-
-\begin{solutionblock}
-    The input voltage for an activated transistor is given with
-    \begin{equation}
-        U_1 = u_{\mathrm{T}} + u_{\mathrm{L}},
-    \end{equation}
-    which is rearranged into:
-    \begin{equation}
-        u_{\mathrm{T}} = U_1 - u_{\mathrm{L}}.
-        \label{eq:uT}
-    \end{equation}
-
-    During the off time of the transistor, the inductance voltage is defined as
-    \begin{equation}
-        u_{\mathrm{L}} = -U_2 - u_{\mathrm{D}},
-        \label{eq:U2}
-    \end{equation}
-    where the diode voltage is assumed to be zero during the conduction phase.
-    Hence, the maximum blocking voltage of the transistor is calculated with \eqref{eq:U2} and \eqref{eq:uT}, which results in:
-    \begin{equation}
-        u_{\mathrm{T}} = U_1 - (-U_2)
-        = U_1 + U_2 = \SI{18}{\volt} + \SI{12}{\volt} = \SI{30}{\volt}.
-    \end{equation}
-
-    The diode current and the blocking voltage of the transistor is shown in \autoref{fig:inverseCon_voltage_current}.
-    \input{fig/ex03/sFigDia_Inverse.tex}
-\end{solutionblock}
-
-
+ \subtask{Sketch the curves of the voltage $u_\mathrm{T}(t)$ at the power transistor and the current $i_\mathrm{D}(t)$ in the output diode for $P_\mathrm{2}=\SI{2}{\watt}$. What is the maximum blocking voltage of the transistor?}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: Boost-Buck converter and SEPIC topology
@@ -211,7 +181,7 @@ The average inductor current is calculated as:
 
 \task {Boost-buck converter and SEPIC topology}
 
-The supply of a plasma coating system is realized by a boost converter followed by a buck converter according \autoref{fig:ex03_boost_buck_converter} (with common capacitance).
+The supply of a plasma coating system is realized by a boost converter followed by a buck converter acccording \autoref{fig:ex03_boost_buck_converter} (with common capacitance).
 The converter is connected to a voltage $U_\mathrm{1}$ and provides a variable output voltage $U_\mathrm{2}$. The parameters are displayed in \autoref{table:ParametersOfBoostBuckConverter}.
 \vspace{2em}\par
 
@@ -234,10 +204,12 @@ same relative duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
     % Solution
     For the boost-buck converter \eqref{eq:DutyCycleEx03} is to apply:
     \begin{equation}
+        \frac{U_\mathrm{2}}{U_\mathrm{1}} = \frac{D} {1-D}
+        \hspace{1cm} \Rightarrow \hspace{1cm}
         D = \frac{\frac{U_\mathrm{2}}{U_\mathrm{1}}} {1+{\frac{U_\mathrm{2}}{U_\mathrm{1}}}}.
         \label{eq:DutyCycleEx03}
     \end{equation}
-    In case of $U_\mathrm{2}$ = $\SI{380}{\volt}$, the duty cycle is determined using \eqref{eq:DutyCycleEx03} as
+    In case of $U_\mathrm{2}$ = $\SI{285}{\volt}$, the duty cycle is determined using \eqref{eq:DutyCycleEx03} as
     \begin{equation}
        \frac{\frac{\SI{285}{\volt}}{\SI{380}{\volt}}} {1+{\frac{\SI{285}{\volt}}{\SI{380}{\volt}}}} = 0.429.
     \end{equation}
@@ -251,7 +223,7 @@ same relative duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
     The first part is the boost converter part. For the output voltage 
     of $\SI{285}{\volt}$, the intermediate circuit voltage $U_\mathrm{0}$ is calculated as
     \begin{equation}
-        U_\mathrm{0}=U_\mathrm{1} \frac{1}{1-D_\mathrm{2}} 
+        U_\mathrm{0}=U_\mathrm{1} \frac{1}{1-D} 
         \hspace{1cm} \mathrm{and} \hspace{1cm}  
         \SI{380}{\volt} \frac{1}{1-0.429} = \SI{665}{\volt}.
         \label{eq:DCLinkEx03}        
@@ -263,17 +235,16 @@ same relative duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
 
 \begin{solutionblock}
     % Solution
-    For the plot \eqref{fig:DutyCycleDCLinkVoltageAtOutputVoltage} and \eqref{eq:DCLinkEx03} are used for the function and 
-    displayed in \autoref{fig:DCLinkVoltageAtOutputVoltage} and \autoref{fig:DutyCycleDCAtOutputVoltage}. The results for the different output values are listed in \autoref{table:DutyCycleDCLinkVoltageAtOutputVoltage}.
+    For the plot \eqref{eq:DutyCycleEx03} and \eqref{eq:DCLinkEx03} are used to calculate results in \autoref{table:DutyCycleDCLinkVoltageAtOutputVoltage} 
+    and displayed in \autoref{fig:DCLinkVoltageAtOutputVoltage} and \autoref{fig:DutyCycleDCAtOutputVoltage}.
 
+    %Result table
+    \input{./fig/ex03/sFigTab_DCLinkVoltageDutycycleE3T2}
     %Plot of DCLinkVoltage
     \input{./fig/ex03/sFigDia_DCLinkVSUoutE3T2}
     %Plot of duty cycle
     \input{./fig/ex03/sFigDia_DutyCycleVSUoutE3T2}
 
-
-    %Result table
-    \input{./fig/ex03/sFigTab_DCLinkVoltageDutycycleE3T2}
 \end{solutionblock}
 
 \subtask{What blocking voltage ratings must the transistors $T_\mathrm{1}$ and $T_\mathrm{2}$ and the diodes $D_1$ and
@@ -373,8 +344,8 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
 \begin{solutionblock}
     % Solution
     Both inductors have the same ripple current as long as they have the same inductance.
-    For the inductor L1 the power is the product of output voltage
-     ($U_\mathrm{2}$) and average current calculated by using \eqref{eq:L1ripplesepic}:
+    For the inductor $L_1$ the power is the product of output voltage
+     ($U_\mathrm{2}$) and average current calculated by using \eqref{eq:Boostripple}:
     \begin{equation}
         P_\mathrm{min}=U_\mathrm{1}\frac{\Delta i_\mathrm{L1}}{2}D.
         \label{eq:PowerL1ripplesepic}
