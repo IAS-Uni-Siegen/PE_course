@@ -1659,3 +1659,23 @@
     \end{equation}
     Hence, to allow relatively high duty cycles by a high $N_1$ to $N_3$ ratio, cf. \eqref{eq:forward_converter_demagnetization_turns_ratio_threshold}, the blocking voltage of the transistor increases.
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Summary %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Summary}
+    This section provided a first introduction to isolated DC-DC converters with the forward and flyback converters as examples. The key takeaways are:
+    \begin{itemize}
+        \item The forward converter is a buck-derived topology while the flyback converter is a buck-boost-derived topology.
+        \item A transformer is used to provide galvanic isolation between input and output.
+        \item Limiting the magnetiziation of the transformer is a key aspect in the operation of these converters to prevent saturation (nonlinear behavior, extra losses).
+    \end{itemize}
+    In addition, there are many other isolated topologies that are used in practice, e.g., 
+    \begin{itemize}
+        \item Push-pull converter,
+        \item Isolated Ćuk / SEPIC variants, 
+        \item Boost-derived topologies with full-/half bridge input stages,
+        \item ...
+    \end{itemize}
+\end{frame}

@@ -3850,3 +3850,26 @@
         \end{column}
     \end{columns}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Summary %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Summary}
+    This section introduced non-isolated DC-DC converters. The key takeaways are:
+    \begin{itemize}
+        \item \textbf{Buck converter:} step-down voltage conversion, voltage gain $0\leq D\leq1$,
+        \item \textbf{Boost converter:} step-up voltage conversion, voltage gain $1 \leq \frac{1}{(1-D)}$.
+    \end{itemize}
+    From those basic topologies, we could derive all others:
+    \begin{itemize}
+        \item \textbf{(Inverting) buck-boost converter:} voltage gain $(-)\frac{D}{(1-D)}$,
+        \item \textbf{(Inverting) boost-buck / Ćuk converter and SEPIC:}  voltage gain $(-)\frac{D}{(1-D)}$.
+    \end{itemize}
+    Finally, we discussed the realization of converters for both current and voltage polarities by using bridge-type switch realizations. Also, we have emphasized the \hl{trade-off decisions} between 
+    \begin{itemize}
+        \item semiconductor utilization
+        \item filter requirements / sizing,
+        \item applied voltage gain as well as voltage and current signal quality.
+    \end{itemize}
+\end{frame}
