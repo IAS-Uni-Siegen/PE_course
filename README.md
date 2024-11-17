@@ -18,6 +18,8 @@ This work is licensed under a
 The covered topics are:
 - An initial overview of power electronics
 - DC-DC converters
+- Isolated DC-DC converters
+- Diode-based rectifiers
 
 
 ## Exercise tasks (click on preview picture)
