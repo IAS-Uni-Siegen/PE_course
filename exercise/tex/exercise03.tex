@@ -155,7 +155,7 @@ The average inductor current is calculated as:
 
     The general equation to calculate the capacitor RMS current is defined as follows
     \begin{equation}
-        I_{\mathrm{C,RMS}} = \sqrt{\frac{1}{T_{\mathrm{s}}} \int_{0}^{T_{\mathrm{s}}}i_{\mathrm{C}}^2(t)\mathrm{d}t},
+        i_{\mathrm{C,RMS}} = \sqrt{\frac{1}{T_{\mathrm{s}}} \int_{0}^{T_{\mathrm{s}}}i_{\mathrm{C}}^2(t)\mathrm{d}t},
     \end{equation}
     with the capacitor current for the inverting buck-boost converter:
     \begin{equation}
@@ -164,11 +164,37 @@ The average inductor current is calculated as:
             -I_2, & t\in [k T_\mathrm{s}+ T_\mathrm{off}, (k+1) T_\mathrm{s}].
         \end{cases}}
     \end{equation}
-    For $k$ = 0 the equation results into:
+    For $k$ = 0 the equation results into
     \begin{equation}
-        I_{\mathrm{C,RMS}} = \sqrt{\frac{1}{T_{\mathrm{s}}} \int_{0}^{T_{\mathrm{off}}} \left( \frac{D}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2t}{2T_\mathrm{off}}\right)^2 \mathrm{d}t+ \frac{1}{T_{\mathrm{s}}}\int_{T_{\mathrm{off}}}^{T_{\mathrm{s}}} \left(-I_2 \right)^2 \mathrm{d}t}.
+        i_{\mathrm{C,RMS}} = \sqrt{\frac{1}{T_{\mathrm{s}}} \int_{0}^{T_{\mathrm{off}}} \underbrace{\left( \frac{D}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2t}{2T_\mathrm{off}}\right)^2}_{a} \mathrm{d}t+ \frac{1}{T_{\mathrm{s}}}\int_{T_{\mathrm{off}}}^{T_{\mathrm{s}}} \left(-I_2 \right)^2 \mathrm{d}t},
     \end{equation}
-    This equation can be solved analytically or numerically, however, the RMS capacitor current is $I_{\mathrm{C,RMS}} = \SI{1.38}{\ampere}$.
+    where the variable $a$ is utilized for a shorter description in the following. This first part is solved as:
+    \begin{align}
+        \begin{split}
+        \int_{0}^{T_{\mathrm{off}}} a \mathrm{d}t &= \int_{0}^{T_{\mathrm{off}}} \left( \frac{D}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2t}{2T_\mathrm{off}}\right)^2 \mathrm{d}t \\
+        &= \int_{0}^{T_{\mathrm{off}}} \frac{D^2}{\left(D-1\right)^2}I_2^2 + \frac{D}{(1-D)}I_2 \Delta i_{\mathrm{L}} - 2 \frac{D}{(1-D)} I_2 \Delta i_{\mathrm{L}} \frac{t}{T_{\mathrm{off}}} \\ &\hspace{5mm} + \frac{1}{4} \Delta i_{\mathrm{L}}^2 - \Delta i_{\mathrm{L}}^2 \frac{t}{T_{\mathrm{off}}} + \Delta i_{\mathrm{L}}^2 \frac{t^2}{T_{\mathrm{off}}^2} \mathrm{d}t \\
+        & = \left[\frac{D^2}{\left(1-D\right)^2} I_2^2 t + \frac{D}{(1-D)}I_2 \Delta i_{\mathrm{L}} t - \frac{D}{(1-D)} I_2 i_{\mathrm{L}} \frac{t^2}{T_{\mathrm{off}}} \right. \\ & \left. \hspace{5mm} + \frac{1}{4}\Delta i_{\mathrm{L}}^2 t - \frac{1}{2} \Delta i_{\mathrm{L}}^2 \frac{t^2}{T_{\mathrm{off}}} + \frac{1}{3 }\Delta i_{\mathrm{L}}^2 \frac{t^3}{T_{\mathrm{off}}^2} \right]_{0}^{T_{\mathrm{off}}}.
+        \end{split}
+    \end{align}
+    Applying the limits of the integral and rearranging the expression results into:
+    \begin{align}
+        \begin{split}
+        \int_{0}^{T_{\mathrm{off}}} a \mathrm{d}t &= \left[\frac{D^2}{\left(1-D\right)^2}I_2^2 + \frac{1}{12} \Delta i_{\mathrm{L}}^2 \right] T_{\mathrm{off}} - 0 \\
+        &= \left[\frac{0.4^2}{\left(1-0.4\right)^2} \cdot \left(\SI{1.25}{\ampere}\right)^2 + \frac{1}{12}\cdot \left(\SI{4.16}{\ampere}\right)^2 \right] \cdot \SI{30}{\micro\second} = \SI{64.1}{\micro\ampere\per\second}.
+        \end{split}
+    \end{align}
+    The calculation of the second part (transistor is open) is given by:
+    \begin{equation}
+        \int_{T_{\mathrm{off}}}^{T_{\mathrm{s}}} \left(-I_2 \right)^2 \mathrm{d}t = \left[I_2^2 t \right]_{T_{\mathrm{off}}}^{T_{\mathrm{s}}} = I_2 \left(T_{\mathrm{s}} - T_{\mathrm{off}}\right) = \SI{1.25}{\ampere} \cdot (\SI{50}{\micro\second} - \SI{30}{\micro\second}) = \SI{31.3}{\micro\ampere\per\second}.
+    \end{equation}
+    Hence, the capacitor RMS current is calculated with:
+    \begin{equation}
+        i_{\mathrm{C,RMS}} = \sqrt{\frac{1}{\SI{50}{\micro\second}} \left(\SI{64.1}{\micro\ampere\per\second} + \SI{31.3}{\micro\ampere\per\second}\right)} = \SI{1.38}{\ampere}.
+    \end{equation}
+
+
+
+
    
     
 \end{solutionblock}
