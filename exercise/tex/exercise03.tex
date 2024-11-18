@@ -207,7 +207,7 @@ The average inductor current is calculated as:
 
 \task {Boost-buck converter and SEPIC topology}
 
-The supply of a plasma coating system is realized by a boost converter followed by a buck converter acccording \autoref{fig:ex03_boost_buck_converter} (with common capacitance).
+The supply of a plasma coating system is realized by a boost converter followed by a buck converter according \autoref{fig:ex03_boost_buck_converter} (with common capacitance).
 The converter is connected to a voltage $U_\mathrm{1}$ and provides a variable output voltage $U_\mathrm{2}$. The parameters are displayed in \autoref{table:ParametersOfBoostBuckConverter}.
 \vspace{2em}\par
 
@@ -262,7 +262,7 @@ same relative duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
 \begin{solutionblock}
     % Solution
     For the plot \eqref{eq:DutyCycleEx03} and \eqref{eq:DCLinkEx03} are used to calculate results in \autoref{table:DutyCycleDCLinkVoltageAtOutputVoltage} 
-    and displayed in \autoref{fig:DCLinkVoltageAtOutputVoltage} and \autoref{fig:DutyCycleDCAtOutputVoltage}.
+    and displayed in \autoref{fig:DCLinkVoltageAtOutputVoltage} and \autoref{fig:DutyCycleAtOutputVoltage}.
 
     %Result table
     \input{./fig/ex03/sFigTab_DCLinkVoltageDutycycleE3T2}
@@ -348,18 +348,37 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
     For the SEPIC topology the voltage at the transistor blocking voltage is calculated by the sum of 
     $U_\mathrm{c}$ and $U_\mathrm{2}$.
     \begin{equation}
-        U_\mathrm{T1,block}=U_\mathrm{c}+U_\mathrm{2}.
+        U_\mathrm{T,block}=U_\mathrm{C}+U_\mathrm{2}.
     \end{equation}
-    The voltage at the capacitor is obtained by
+    Using \eqref{eq:PowerL1ripplesepic}, which reflects the voltage balance during a switching period 
+    of inductor $L_1$ as
     \begin{equation}
-        U_\mathrm{c}=\left( \frac{1}{D}-1\right) U_\mathrm{2}.
+        DU_\mathrm{1}+\left(1-D\right)\left(U_\mathrm{1}-U_\mathrm{2}-U_\mathrm{C}\right)=0
+    \end{equation}
+    the voltage $U_\mathrm{C}$ is obtained by
+    \begin{equation}
+        U_\mathrm{c}=\frac{U_\mathrm{1}}{1-D}-U_\mathrm{2}.
+    \end{equation}
+    The substitution of $U_\mathrm{1}$ by $U_\mathrm{2}$ leads to
+    \begin{equation}
+        U_\mathrm{c}=U_\mathrm{2}\frac{\left(1-D\right)}{D}\frac{1}{\left(1-D\right)}-U_\mathrm{2}.
+        \Rightarrow U_\mathrm{C}=\left( \frac{1}{D}-1\right) U_\mathrm{2}.
         \label{eq:ucapacitor}        
     \end{equation}
     $U_\mathrm{c}$ corresponds to the input voltage $U_\mathrm{1}$. The substitution of $U_\mathrm{c}$ in \eqref{eq:ucapacitor} leads to 
     \begin{equation}
-        U_\mathrm{T1,block}=\left( \frac{1}{D}-1\right) U_\mathrm{2}+U_\mathrm{2}=\frac{U_\mathrm{2}}{D}.
+        U_\mathrm{T,block}=\left( \frac{1}{D}-1\right) U_\mathrm{2}+U_\mathrm{2}=\frac{U_\mathrm{2}}{D}.
     \end{equation}
-    The transistor needs to block the sum of input and output voltage.
+    The diode has to block the voltage, when the transistor is active. Applying Kirchhoff's loop rule yields:
+    \begin{equation}
+        U_\mathrm{C}+U_\mathrm{D,block}+U_\mathrm{2}=0.
+    \end{equation}
+    With the used loop direction (right turn) the diode blocks negative voltage, which leads to:
+    \begin{equation}
+        -U_\mathrm{D,block}=U_\mathrm{C}+U_\mathrm{2}.
+    \end{equation}
+    The result shows, that the transistor and the diode needs to block the sum of input and output voltage. 
+    By the way this is the same blocking voltage as for the transistors and diodes in a boost-buck converter.
 \end{solutionblock}
 
 \subtask{Derive the input and output current ripple $\Delta i_\mathrm{L_1}$ and $\Delta i_\mathrm{L_2}$ depending on the duty cycle.}
@@ -398,7 +417,6 @@ and the quality of the output voltage.}
     \end{itemize}  
     Disadvantages of SEPIC-topology compared to boost-buck converter
     \begin{itemize}
-        \item The blocking voltage rating for the transistor is higher ($U_\mathrm{1}+U_\mathrm{2}$ instead of $U_\mathrm{1}$).
         \item The output current is pulsating (Needs more filtering components).
     \end{itemize}  
 \end{solutionblock}

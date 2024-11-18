@@ -504,14 +504,14 @@
 
 
                 % Middle plot: inductor current
-                \nextgroupplot[ylabel = {$i_\mathrm{L_\mathrm{m}}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$, }]
+                \nextgroupplot[ylabel = {$i_\mathrm{m}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{m}$, }]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({1 + #1},0.25)};}
                         \AddPlot
                     }
                     \draw[signalred, thick, dashed] (axis cs:0,0.5) -- (axis cs:4,0.5); % dashed line at average current
-                    \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L_\mathrm{m}}\}$}(axis cs:\D+0.3,0.9); % indicate max current
-                    \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L_\mathrm{m}}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
+                    \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{m}\}$}(axis cs:\D+0.3,0.9); % indicate max current
+                    \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{m}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
                     \draw[thin] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
                     \node[above, inner sep = 2pt, anchor = south, xshift = -4mm] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{U_1}{L_\mathrm{m}}$}; % label positive current slope
                     \draw[thin] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
@@ -754,13 +754,13 @@
 
 
                 % Middle plot: inductor current
-                \nextgroupplot[ylabel = {$i_\mathrm{L_\mathrm{m}}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , }]
+                \nextgroupplot[ylabel = {$i_\mathrm{m}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , }]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0) ({\D + #1},0.75) ({\D + \Doff + #1},0) ({1 + #1},0)};}
                         \AddPlot
                     }
                     \draw[signalred, thick, dashed] (axis cs:0,0.75/2*\D+0.75/2*\Doff) -- (axis cs:4,0.75/2*\D+0.75/2*\Doff); % dashed line at average current
-                    \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L_\mathrm{m}}\}$}(axis cs:\D+0.3,0.9); % indicate max current
+                    \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{m}\}$}(axis cs:\D+0.3,0.9); % indicate max current
                     \draw[thin] (axis cs:2+\D/4,0.75/4) -- (axis cs:2+\D/4,0.75/4*3) -- (axis cs:2+\D*3/4,0.75/4*3); % indicate positive current slopde
                     \node[above, inner sep = 2pt, anchor = south, xshift = -4mm] at (axis cs:2+\D/2, 0.75-0.165) {$\nicefrac{U_1}{L_\mathrm{m}}$}; % label positive current slope
                     \draw[thin] (axis cs:2+\D+\Doff/4,0.75*3/4) -- (axis cs:2+\D+\Doff*3/4,0.75*3/4) -- (axis cs:2+\D+\Doff*3/4,0.75/4); % indicate negative current slope
@@ -802,12 +802,12 @@
 \begin{frame}
     \frametitle{Flyback converter: DCM operation characteristics}
     \onslide<1->{In DCM operation 
-    $$  \overline{i}_\mathrm{L_\mathrm{m}} < \frac{\Delta i_\mathrm{L_\mathrm{m}}}{2} \quad \Rightarrow \quad U_2 \neq U_1 \frac{N_2}{N_1}\frac{D}{1-D}$$
+    $$  \overline{i}_\mathrm{m} < \frac{\Delta i_\mathrm{\mathrm{m}}}{2} \quad \Rightarrow \quad U_2 \neq U_1 \frac{N_2}{N_1}\frac{D}{1-D}$$
     applies due to the non-conducting diode during  $T''_\mathrm{off}$.} \onslide<2->{To find the input-to-output voltage ratio in DCM, we again utilize the current ripple balance:}
     \begin{equation}
         \begin{alignedat}{2}
-            \onslide<2->{\Delta i_\mathrm{L_\mathrm{m}} &= \frac{U_1}{L_\mathrm{m}}T_\mathrm{on} = \frac{U_1}{L}DT_\mathrm{s} \quad &&\mbox{(rising edge)},}\\
-            \onslide<3->{\Delta i_\mathrm{L_\mathrm{m}} &= \frac{N_1}{N_2}\frac{U_2}{L_\mathrm{m}}T'_\mathrm{off} = \frac{N_1}{N_2}\frac{U_2}{L}D'T_\mathrm{s} \quad &&\mbox{(falling edge)}.}
+            \onslide<2->{\Delta i_\mathrm{\mathrm{m}} &= \frac{U_1}{L_\mathrm{m}}T_\mathrm{on} = \frac{U_1}{L}DT_\mathrm{s} \quad &&\mbox{(rising edge)},}\\
+            \onslide<3->{\Delta i_\mathrm{\mathrm{m}} &= \frac{N_1}{N_2}\frac{U_2}{L_\mathrm{m}}T'_\mathrm{off} = \frac{N_1}{N_2}\frac{U_2}{L}D'T_\mathrm{s} \quad &&\mbox{(falling edge)}.}
         \end{alignedat}
     \end{equation}
     \onslide<4->{Solving for $D'$ yields
@@ -816,7 +816,7 @@
     \end{equation}}
     \onslide<5->{The average load current is }
     \begin{equation}
-        \onslide<5->{\overline{i}_2 = \frac{N_1}{N_2}\frac{\Delta i_\mathrm{L_\mathrm{m}}}{2}\frac{T'_\mathrm{off}}{T_\mathrm{s}}} \onslide<6->{= \frac{N_1}{N_2}\frac{\Delta i_\mathrm{L_\mathrm{m},max}D}{2}D'}\onslide<7->{= \frac{N_1}{N_2}\frac{\Delta i_\mathrm{L_\mathrm{m},max}}{2}\frac{U_1}{U_2}D^2 \frac{N_2}{N_1}}\onslide<8->{= \frac{\Delta i_\mathrm{L_\mathrm{m},max}}{2}\frac{U_1}{U_2}D^2.}
+        \onslide<5->{\overline{i}_2 = \frac{N_1}{N_2}\frac{\Delta i_\mathrm{m}}{2}\frac{T'_\mathrm{off}}{T_\mathrm{s}}} \onslide<6->{= \frac{N_1}{N_2}\frac{\Delta i_\mathrm{m,max}D}{2}D'}\onslide<7->{= \frac{N_1}{N_2}\frac{\Delta i_\mathrm{m,max}}{2}\frac{U_1}{U_2}D^2 \frac{N_2}{N_1}}\onslide<8->{= \frac{\Delta i_\mathrm{m,max}}{2}\frac{U_1}{U_2}D^2.}
             \label{eq:flyback-converter-average-output-current-DCM}
     \end{equation}
 \end{frame}
@@ -828,11 +828,11 @@
     \frametitle{Flyback converter: DCM operation characteristics (cont.)}
     Solving \eqref{eq:flyback-converter-average-output-current-DCM} delivers the \hl{flyback converter voltage gain in DCM} as
     \begin{equation}
-        \frac{U_2}{U_1} = \frac{D^2}{2} \frac{\Delta i_\mathrm{L_\mathrm{m},max}}{\overline{i}_2}.
+        \frac{U_2}{U_1} = \frac{D^2}{2} \frac{\Delta i_\mathrm{m,max}}{\overline{i}_2}.
         \label{eq:voltage-ratio-DCM-flyback}
     \end{equation}
     \pause%
-    Since $\Delta i_\mathrm{L_\mathrm{m},max}$ also depends on $U_1$, the relation \eqref{eq:voltage-ratio-DCM-flyback} only holds for a given $U_1$. Hence, we can insert $\Delta i_\mathrm{L_\mathrm{m},max}=\nicefrac{T_\mathrm{s} \cdot U_1}{L}$ in \eqref{eq:flyback-converter-average-output-current-DCM} and solve for $U_2$ to receive
+    Since $\Delta i_\mathrm{m,max}$ also depends on $U_1$, the relation \eqref{eq:voltage-ratio-DCM-flyback} only holds for a given $U_1$. Hence, we can insert $\Delta i_\mathrm{m,max}=\nicefrac{T_\mathrm{s} \cdot U_1}{L}$ in \eqref{eq:flyback-converter-average-output-current-DCM} and solve for $U_2$ to receive
     \begin{equation}
         U_2= U_1^2 \frac{D^2}{2} \frac{T_\mathrm{s}}{L_\mathrm{m} \overline{i}_2}.
     \end{equation}
@@ -1124,7 +1124,7 @@
     \begin{columns}
         \begin{column}{0.4\textwidth}
             \begin{varblock}{Magnetizing inductance}
-                    With every switching cycle the primary magnetizing current $i_\mathrm{L_\mathrm{m}}(t)$ increases (i.e., transformer saturates and takes damage).
+                    With every switching cycle the primary magnetizing current $i_\mathrm{\mathrm{m}}(t)$ increases (i.e., transformer saturates and takes damage).
             \end{varblock}
             \begin{figure}
                 \begin{tikzpicture}
@@ -1143,7 +1143,7 @@
                         ]
                         \addplot[signalred] coordinates {(0,0) (\D,1) (1,1) (1+\D, 2) (2,2)};
                         \addplot[signalred, dashed] coordinates {(2,2) (2+\D,3)};
-                        \node[signalred, above, inner sep = 2pt, anchor = south, fill=white] at (axis cs:0.6, 1.1) {$i_\mathrm{\mathrm{m}}(t)$};
+                        \node[signalred, above, inner sep = 2pt, anchor = south, fill=white] at (axis cs:0.6, 1.1) {$i_\mathrm{m}(t)$};
                     \end{axis}
                 \end{tikzpicture}
             \end{figure}
@@ -1279,10 +1279,10 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Forward converter with asym. half-bridge modulation %%
+%% Forward converter with asym. half-bridge input stage %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Forward converter with asym. half-bridge modulation}
+    \frametitle{Forward converter with asym. half-bridge input stage}
     To demagnetize the transformer, the input voltage $u_\mathrm{p}(t)$ is modulated as follows:
     \begin{equation}
         u_\mathrm{p}(t) = \begin{cases}
@@ -1393,7 +1393,7 @@
     
                 
                 % Bottom plot: magnetizing current
-                \nextgroupplot[ylabel = {$i_\mathrm{m}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {-0.5, 0, 0.5}, yticklabels = {0, ,}, ymin = -0.6, ymax =0.6, visible on=<7->]
+                \nextgroupplot[ylabel = {$i_\mathrm{m}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {-0.5, 0, 0.5}, yticklabels = {, 0,}, ymin = -0.6, ymax =0.6, visible on=<7->]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},-0.3) ({\D + #1},0.3) ({1/2 + #1},0.3) ({1/2+\D + #1},-0.3) ({1 + #1},-0.3)};}
                         \AddPlot
@@ -1488,4 +1488,194 @@
         \end{subfigure}
             \caption{Hysteresis curves of the forward converter's transformer with different input stages (qualitative and simplified representation)}
         \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter with full-bridge input stage %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Forward converter with full-bridge input stage}
+    The average input voltage $\overline{u}_\mathrm{p}$ of the full-bridge forward converter is conceptually identical to the asym. half-bridge variant and with the constraint
+    \begin{equation*}
+        \overline{u}_\mathrm{L_\mathrm{m}} = \frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{s}}u_\mathrm{p}(t)\mathrm{d}t = 0
+    \end{equation*}
+    the duty cycle also remains limited to
+    $$
+    D\leq\frac{1}{2} .
+    $$
+    However, the full-bridge realization comes with distinct differences compared to the asym. half-bridge:
+    \begin{itemize}
+        \item Utilizes magnetic core more efficiently, i.e., core can be made smaller or less winding turns are required.
+        \item Effective switching frequency is doubled allowing for smaller filter components.
+        \item Obvious disadvantage: more complex input stage (costs).
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter with additional demagnetization winding %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[b]
+    \frametitle{Forward converter with additional demagnetization winding}
+    Alternative: transfer the idea of the flyback converter and add another winding $N_3$ to the transformer with reversed polarity. When $T$ blocks, the energy stored in the transformer's magnetic field is inherited by $N_3$ and transferred back to the input. 
+    \begin{figure}
+        \begin{circuitikz}[]
+            %primary side
+            \draw (0,0) to [short, i=$i_1(t)$] ++(1.5,0) -- ++(1.0,0) 
+            to [inductor, n=l1] ++(0,-2) 
+            to [Tnpn, n=npn1, invert] ++(0,-2) coordinate (C) -- (0,-4.0) 
+            (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-4.0);
+            %secondary side
+            \draw  (4.25,0) to [inductor, n=l2, mirror] ++(0,-2) 
+            to [short] ++(2,0) coordinate (A)
+            to [diode, l_=$D_\mathrm{F}$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
+            to [inductor, l=$L$] ++(2,0)
+            to [short, i=$i_2(t)$] ++(0.75,0)
+            to [open, o-o, v = $u_2(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
+            to [short] (A)
+            (4.25,0) to [diode, l=$D_2$] (B);
+            %demag winding
+            \draw  (3.5,0) to [inductor, n=l3, mirror] ++(0,-2) 
+            to [short, i<=$i_3(t)$] ++(0,-2.0)
+            to [short, -*] (C)
+            (3.5,0) -- ++(0,1)
+            to [diode, l=$D_3$] ++(-2,0)
+            to [short, -*] ++(0,-1);    
+            % misc / labels
+            \draw (1.5,-0.25) to [open, v = $u_\mathrm{p}$, voltage = straight] ++(0,-1.5);
+            \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T$};
+            \path (l1.ul dot) node[circ]{}
+                  (l2.ul dot) node[circ]{}
+                  (l3.ur dot) node[circ]{}
+                  (l3.ul dot) node{$N_3$};
+            \draw (l1.midtap) node[left]{$N_1$}
+            (l2.midtap) node[right]{$N_2$};
+            \draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l3.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
+            \draw[double, double distance=3pt, thick, xshift=5mm] let \p1=(l3.core west), \p2=(l2.core east), \p3=(l3.midtap) in (\x3/2+\x2/2, \y1) -- (\x3/2+\x2/2, \y2);
+        \end{circuitikz}
+        \caption{Forward converter with additional demagnetization winding}
+        \label{fig:forward_converter_demagnetization_winding}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter: steady-state time-domain behavior (demag. winding) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+    \frametitle{Forward converter: steady-state time-domain behavior (demag. winding)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfmathsetmacro{\D}{0.35} % duty cycle
+            \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
+
+                % Top plot: input voltage a primary side
+                \nextgroupplot[ylabel = {$u_\mathrm{p}(t)$}, ytick = {-1, 0, 1}, yticklabels = {$-U_1$, 0, $U_1$}, ymin = -1.1, ymax =1.1]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},-0.75) ({\D+\D/0.75 + #1},-0.75) ({\D+\D/0.75 + #1},0) ({1 + #1},0)};}
+                        \AddPlot
+                    }
+                    \draw [thick,<->]  (0,0) -- node[above]{$D T_\mathrm{s}$}(\D, 0);  
+                    \draw [thick,<->]  (\D,0) -- node[above]{$T_\mathrm{m}$}(\D+\D/0.75, 0); 
+                    \draw [thick,<->]  (0.0,-1.45) -- node[below]{$T_\mathrm{s}$}(1.0, -1.45); 
+                    %\node[above, inner sep = 2pt, anchor = south] at (axis cs:1+\D+\D/0.75/2, -0.75) {$-U_1\frac{N_1}{N_3}$}; 
+                    \draw[{Latex[length=2mm]}-, thin] (axis cs:1+\D+\D/0.75/2.5,-0.70) -- node[right=1mm, fill=white, inner sep = 1pt, anchor=south]{$-U_1\frac{N_1}{N_3}$} (axis cs:1+\D+\D/0.75/2.5,0.4); % indicate voltage during demag time interval
+
+
+                % Middle plot: switch voltage at buck side
+                \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $\frac{N_2}{N_1}U_1$}]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
+                        \AddPlot
+                    }
+                    \draw[signalblue, thick, dashed, visible on=<2->] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
+                    \node[above, inner sep = 2pt, anchor = south, visible on=<2->] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
+                    \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{on}$}(\D, -0.2);  
+                    \draw [thick,<->]  (\D,-0.2) -- node[below]{$T_\mathrm{off}$}(1, -0.2);  
+    
+                
+                % Bottom plot: input current
+                \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}, ymin = -0.25, ymax =1.1]
+                    \pgfplotsinvokeforeach{0,...,3}{
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.9) ({\D + #1},-0.15) ({\D+\D/0.75 + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
+                        \AddPlot
+                        \edef\AddPlot{\noexpand\addplot[signalred, thick, name path=A] coordinates {({0 + #1},0.25) ({\D + #1},0.9)};}
+                        \AddPlot
+                        \edef\AddPlot{\noexpand\addplot[signalred, dashed, name path=B] coordinates {({0 + #1},0.25) ({\D + #1},0.7)};}
+                        \AddPlot
+                        \edef\AddPlot{\noexpand\addplot[signalred, dashed, name path=C] coordinates {({\D + #1},-0.15) ({\D+\D/0.75 + #1},0)};}
+                        \AddPlot
+                        \path [name path=D] ({\D + #1},0) -- ({\D+\D/0.75 + #1},0);
+                        \addplot[shadecolor, opacity=0.3] fill between[of=A and B];
+                        \addplot[shadecolor, opacity=0.3] fill between[of=C and D];
+                    }
+                    \draw[{Latex[length=2mm]}-, thin] (axis cs:\D-0.05,0.7) -- node[right=1mm, fill=white, inner sep = 1pt, anchor = west]{$i_\mathrm{m}(t)$} (axis cs:\D+0.2,0.4); % indicate mag current
+                    \draw[{Latex[length=2mm]}-, thin] (axis cs:1+\D+0.05,-0.1) -- node[right=1mm, fill=white, inner sep = 1pt, anchor=south west]{$-i_3(t)$} (axis cs:1+\D+0.3,0.4); % indicate i3 current
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter with additional demagnetization winding (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Forward converter with additional demagnetization winding (cont.)}
+    The maximum magnetizing current is
+    \begin{equation}
+        \max\{i_\mathrm{m}(t)\} = i_\mathrm{m}(t=(k+D)T_\mathrm{s}) = \frac{U_1}{L_\mathrm{m}}DT_\mathrm{s}
+    \end{equation}
+    which is reached at the end of the turn-on time $T_\mathrm{on}$. After switching off the transistor, the winding $N_3$ takes over the magnetizing current leading to
+    \begin{equation}
+        \max\{|i_\mathrm{3}(t)|\} = |i_3(t=(k+D)T_\mathrm{s})| = \frac{N_1}{N_3}\max\{i_\mathrm{m}(t)\} = \frac{N_1}{N_3}\frac{U_1}{L_\mathrm{m}}DT_\mathrm{s}.
+    \end{equation}
+    To ensure that $i_\mathrm{m}(t=kT_\mathrm{s})=0$ holds at the next switch-on event, the voltage balance regarding the magnetizing inductance must be zero:
+    \begin{equation}
+        \overline{u}_\mathrm{L_\mathrm{m}} = \frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{s}}u_\mathrm{p}(t)\mathrm{d}t = U_1 D T_\mathrm{s} - \frac{N_1}{N_3} U_1  T_\mathrm{m} =0
+    \end{equation}
+    Here, $T_\mathrm{m}$ denotes the demagnetization time interval which results in 
+    \begin{equation}
+        T_\mathrm{m} = \frac{N_3}{N_1}DT_\mathrm{s}.
+        \label{eq:forward_converter_demagnetization_time_interval}
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Forward converter with additional demagnetization winding (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Forward converter with additional demagnetization winding (cont.)}
+    Since the transistor switch-on time already covers $D T_\mathrm{s}$, the demagnetization time interval $T_\mathrm{m}$ is limited to
+    \begin{equation}
+        T_\mathrm{m} \leq (1-D)T_\mathrm{s}.
+        \label{eq:forward_converter_demagnetization_time_interval_threshold}
+    \end{equation}
+    Combining \eqref{eq:forward_converter_demagnetization_time_interval} and \eqref{eq:forward_converter_demagnetization_time_interval_threshold} yields
+    \begin{equation}
+        \frac{N_3}{N_1} \leq \frac{1-D}{D} \quad \Leftrightarrow \quad D \leq \frac{N_1}{N_1+N_3}
+        \label{eq:forward_converter_demagnetization_turns_ratio_threshold}
+    \end{equation}
+    as a threshold for the turns ratio to enable certain switch-on times. Also, it should be noted that the turns ratio directly influences the maximum blocking voltage of the transistor:
+    \begin{equation}
+        \max\{u_\mathrm{T}(t)\} = U_1 + U_1 \frac{N_1}{N_3} = U_1 \left(1 + \frac{N_1}{N_3}\right). 
+    \end{equation}
+    Hence, to allow relatively high duty cycles by a high $N_1$ to $N_3$ ratio, cf. \eqref{eq:forward_converter_demagnetization_turns_ratio_threshold}, the blocking voltage of the transistor increases.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Section summary %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Section summary}
+    This section provided a first introduction to isolated DC-DC converters with the forward and flyback converters as examples. The key takeaways are:
+    \begin{itemize}
+        \item The forward converter is a buck-derived topology while the flyback converter is a buck-boost-derived topology.
+        \item A transformer is used to provide galvanic isolation between input and output.
+        \item Limiting the magnetiziation of the transformer is a key aspect in the operation of these converters to prevent saturation (nonlinear behavior, extra losses).
+    \end{itemize}
+    In addition, there are many other isolated topologies that are used in practice, e.g., 
+    \begin{itemize}
+        \item Push-pull converter,
+        \item Isolated Ćuk / SEPIC variants, 
+        \item Boost-derived topologies with full-/half bridge input stages,
+        \item ...
+    \end{itemize}
 \end{frame}
