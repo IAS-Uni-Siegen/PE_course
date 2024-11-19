@@ -1,0 +1,25 @@
+
+            \begin{figure}
+                \begin{circuitikz}[]
+                    \draw (0.5,0) to [short] ++(0.5,0)
+                    to [diode, l=$D$]  ++(1.0,0)
+                    to [short, -o, i=$i_2(t)$] ++(1.0,0)
+                    to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
+                    (-0.5,0) to [short, -o, i_<=$i_1(t)$] ++(-1.5,0)
+                    to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-3.75) coordinate (B)
+                    (-0.5,0) to [inductor, n=l1] ++(0,-2) 
+                    to [Tnpn, n=npn1, mirror] ++(0,-1.75) coordinate (C)
+                    (0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
+                    (D) to [short, -o] (A)
+                    (C) to [short, -o] (B);
+                    \draw let \p1 = (npn1.B) in node[anchor=south] at (\x1,\y1) {$T$};
+                    \path (l1.ul dot) node[circ]{}
+                        (l2.ur dot) node[circ]{};
+                    \draw (l1.midtap) node[left]{$N_1$}
+                    (l2.midtap) node[right]{$N_2$};
+                    \draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
+                \end{circuitikz}
+                \caption{Flyback converter topology}
+                \label{fig:flyback_converter_topology}
+            \end{figure}
+        
