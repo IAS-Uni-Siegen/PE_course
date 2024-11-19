@@ -16,14 +16,14 @@
     \begin{columns}
         \begin{column}{0.5\textwidth}
              \begin{varblock}{A definition}
-                Galvanic isolation is a principle of isolating functional sections of electrical circuits to prevent a direct current flow from input to output, that is, enabling different ground potentials for the circuit sections.   
+                Galvanic isolation is a principle of decoupling functional sections of electrical circuits to prevent a direct current flow from input to output, that is, enabling different ground potentials for the circuit sections.   
              \end{varblock}%
              \vspace{1em}
-        Typical reasons for requiring galvanic isolation are:
+        \onslide<2->{Typical reasons for requiring galvanic isolation are:}
         \begin{itemize}
-            \item Safety (prevention of electric shock),
-            \item Noise reduction,
-            \item contact corrosion reduction.
+            \item<2-> Safety (prevention of electric shock),
+            \item<3-> Noise reduction,
+            \item<4-> contact corrosion reduction.
         \end{itemize}
         \end{column}
         \begin{column}{0.5\textwidth}
@@ -48,6 +48,7 @@
                     \end{circuitikz}
                 \caption{Lack of galvanic isolation}
             \end{subfigure}
+            \onslide<2->{%
             \begin{subfigure}{\textwidth} 
                 \begin{circuitikz}
                     \ctikzset{blocks/scale=2, block lateral anchors pos=0.7}
@@ -67,8 +68,9 @@
                 \end{circuitikz}
                 \caption{Galvanic isolation via inductive separation}
             \end{subfigure}
-                \caption{Why galvanic isolation can be useful}
-                \label{fig:galvanic-isolation}
+            }%
+            \caption{Why galvanic isolation can be useful}
+            \label{fig:galvanic-isolation}
             \end{figure}
         \end{column}
     \end{columns}
@@ -114,14 +116,19 @@
 
             &
 
+            \onslide<2->{
             \includegraphics[height=0.25\textheight]{fig/lec03/Optocoupler_example.jpg}
 
             {\small source: \href{https://en.wikipedia.org/wiki/File:Philips_BDP3280-12_-_Everlight_EL817_on_power_board-1779.jpg}{Wikimedia Commons}, R.~Spekking, \href{https://creativecommons.org/licenses/by-sa/4.0/deed.en}{CC~BY-SA~4.0}}
+            }
 
             &
+
+            \onslide<3->{
             \includegraphics[height=0.25\textheight]{fig/lec03/Transformer_example.jpg}
 
             {\small source: \href{https://commons.wikimedia.org/wiki/File:Trafo-innenleben.jpg}{Wikimedia Commons}, S.~Riepl, public domain}
+            }
 
 		\end{tabular}
 	\end{table}
@@ -136,12 +143,12 @@
         \begin{column}{0.4\textwidth}
             \begin{itemize}
                 \item In power electronics, transformers are mostly used to provide galvanic isolation.
-                \item Reason: the power density per volume and weight is typically higher than for capacitive or optical isolation.
-                \item Assumptions for the following model:
+                \item<2-> Reason: the power density per volume and weight is typically higher than for capacitive or optical isolation.
+                \item<3-> Assumptions for the following model:
                 \begin{itemize}
-                    \item Ideal coupling \newline(no leakage flux),
-                    \item no losses,
-                    \item no saturation.
+                    \item<3-> Ideal coupling \newline(no leakage flux),
+                    \item<4-> no losses,
+                    \item<5-> no saturation.
                 \end{itemize}
             \end{itemize}
         \end{column}
@@ -227,28 +234,30 @@
             \end{tikzpicture}
            \caption{Schematic symbol representation} 
         \end{subfigure}
-        \begin{subfigure}{0.4\textwidth}
-            \centering
-            \begin{tikzpicture}
-                \draw (0,0) node[transformer core](T){$N_1:N_2$}
-                (T.inner dot A1) node[circ]{}
-                (T.inner dot B1) node[circ]{}
-                (T.A1) to [short, -*, i<_=$i'_1(t)$] ++(-1,0) coordinate (A1)
-                (T.A2) to [short, -*] ++(-1,0) coordinate (A2)
-                (A1) to [inductor, l=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$] (A2)
-                (A1) to [short, -o, i<_=$i_1(t)$] ++(-1.5,0) coordinate (A11)
-                (A2) to [short, -o] ++(-1.5,0) coordinate (A22)
-                (T.B1) to [short, -o, i=$i_2(t)$] ++(1,0) coordinate (B1)
-                (T.B2) to [short, -o] ++(1,0) coordinate (B2);
-                \draw (A11) to [open, v=$u_1$, voltage = straight] (A22)
-                (B1) to [open, v^=$u_2$, voltage = straight] (B2);
-                \draw[dashed, thin] let \p1=(A1), \p2=(T.B2) in (\x1 - 3mm,\y1 + 10mm) rectangle (\x2,\y2 - 12.5mm)
-                (\x1/2 + \x2/2 -2.5mm,\y1 + 10mm) node[above] {Transformer};
-                \draw[dashed, thin] let \p1=(T.A1), \p2=(T.B2) in (\x1 + 2mm,\y1 + 5mm) rectangle (\x2 - 2mm,\y2 - 2.5mm)
-                (\x1/2 + \x2/2,\y2 - 2.5mm) node[below, align=center] {Ideal\\ transformer};
-            \end{tikzpicture}
-            \caption{Equivalent circuit model} 
-        \end{subfigure}
+        \onslide<2->{%
+            \begin{subfigure}{0.4\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    \draw (0,0) node[transformer core](T){$N_1:N_2$}
+                    (T.inner dot A1) node[circ]{}
+                    (T.inner dot B1) node[circ]{}
+                    (T.A1) to [short, -*, i<_=$i'_1(t)$] ++(-1,0) coordinate (A1)
+                    (T.A2) to [short, -*] ++(-1,0) coordinate (A2)
+                    (A1) to [inductor, l=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$] (A2)
+                    (A1) to [short, -o, i<_=$i_1(t)$] ++(-1.5,0) coordinate (A11)
+                    (A2) to [short, -o] ++(-1.5,0) coordinate (A22)
+                    (T.B1) to [short, -o, i=$i_2(t)$] ++(1,0) coordinate (B1)
+                    (T.B2) to [short, -o] ++(1,0) coordinate (B2);
+                    \draw (A11) to [open, v=$u_1$, voltage = straight] (A22)
+                    (B1) to [open, v^=$u_2$, voltage = straight] (B2);
+                    \draw[dashed, thin] let \p1=(A1), \p2=(T.B2) in (\x1 - 3mm,\y1 + 10mm) rectangle (\x2,\y2 - 12.5mm)
+                    (\x1/2 + \x2/2 -2.5mm,\y1 + 10mm) node[above] {Transformer};
+                    \draw[dashed, thin] let \p1=(T.A1), \p2=(T.B2) in (\x1 + 2mm,\y1 + 5mm) rectangle (\x2 - 2mm,\y2 - 2.5mm)
+                    (\x1/2 + \x2/2,\y2 - 2.5mm) node[below, align=center] {Ideal\\ transformer};
+                \end{tikzpicture}
+                \caption{Equivalent circuit model} 
+            \end{subfigure}
+        }%
         \caption{Transformer model}
         \label{fig:transformer_model}
     \end{figure}
@@ -259,18 +268,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Simplistic transformer model (cont.)}
-    Based on \figref{fig:transformer_model} we consider the transformer as a combination of an ideal transformer with the conversion ratios
+    Based on \figref{fig:transformer_model} we consider the transformer as a combination of an ideal transformer with the \hl{conversion ratios}
     \begin{equation}
         \frac{u_1(t)}{u_2(t)} = \frac{N_1}{N_2} \quad \text{and} \quad \frac{i'_1(t)}{i_2(t)} = \frac{N_2}{N_1}
-    \end{equation}
-    and an inductor with the magnetizing inductance $L_\mathrm{m}$:
+    \end{equation}\pause%
+    and an inductor with the \hl{magnetizing inductance} $L_\mathrm{m}$:
     \begin{equation}
         u_1(t) = L_\mathrm{m} \frac{\mathrm{d}i_\mathrm{m}(t)}{\mathrm{d}t} \quad \text{and} \quad i_1(t) = i'_1(t) + i_\mathrm{m}(t).
-    \end{equation}
+    \end{equation}\pause %
     \begin{itemize}
-        \item $L_\mathrm{m}$ models the magnetic energy stored in the transformer.
-        \item Above model is a significant simplification (very first principle approach).
-        \item More details on the transformer model can be found in the \href{https://github.com/IAS-Uni-Siegen/EMD_course}{Electrical Machines and Drives} course material.
+        \item<3-> $L_\mathrm{m}$ models the magnetic energy stored in the transformer.
+        \item<4-> Above model is a significant simplification (very first principle approach).
+        \item<5-> More details on the transformer model can be found in the \href{https://github.com/IAS-Uni-Siegen/EMD_course}{Electrical Machines and Drives} course material.
     \end{itemize}
 \end{frame}
 
@@ -379,9 +388,9 @@
         \begin{column}{0.5\textwidth}
             \begin{itemize}
                 \item \hl{Flyback converter = non-inverting, galvanically isolated buck-boost converter}.
-                \item Polarity change of primary and secondary transformer windings compensate for the inverting buck-boost characteristic.
-                \item Transistor $T$ is placed below the transformer to enable a fixed emitter / source potential (beneficial for driver).
-                \item Transformer's magnetizing inductance serves as the converter's energy buffer.
+                \item<2-> Polarity change of primary and secondary transformer windings compensate for the inverting buck-boost characteristic.
+                \item<3-> Transistor $T$ is placed below the transformer to enable a fixed emitter / source potential (beneficial for driver).
+                \item<4-> Transformer's magnetizing inductance serves as the converter's energy buffer.
             \end{itemize}
         \end{column}
         %
@@ -419,8 +428,8 @@
 \begin{frame}
     \frametitle{Flyback converter: switching states in CCM}
     \begin{itemize}
-        \item Switch-on time: rising primary current induces a negative voltage at the transformer's secondary winding leading to blocking diode.
-        \item Switch-off time: primary current is blocked by transistor and an equivalent current is induced in the secondary winding.
+        \item Switch-on time: rising primary current induces a negative voltage at the transformer's secondary winding leading to blocking diode. Energy is stored in $L_\mathrm{m}$.
+        \item<2-> Switch-off time: primary current is blocked by transistor and an equivalent current is induced in the secondary winding. Energy is taken from $L_\mathrm{m}$.
     \end{itemize}
     \begin{figure}
         \begin{subfigure}{0.45\textwidth}
@@ -449,30 +458,32 @@
             \caption{Switch-on time}
         \end{subfigure}
         \hspace{0.75cm}
-        \begin{subfigure}{0.45\textwidth}
-            \centering
-            \begin{circuitikz}[]
-                \draw (0.5,0) to [short] ++(0.5,0)
-                to [short, -o, i={$i_2(t)$}] ++(0.75,0)
-                to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
-                (-0.5,0) to ++(-1,0) coordinate (E)
-                to [short, -o, i_<={$i_1(t)=0$}] ++(-1.0,0)
-                to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-3) coordinate (B)
-                (-0.5,0) to [inductor, n=l1] ++(0,-2) 
-                to [open] ++(0,-1) coordinate (C)
-                (0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
-                (D) to [short, -o] (A)
-                (C) to [short, -o] (B)
-                (E) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-] ++(0,-2) 
-                to [short] ++(1.0,0);;
-                \path (l1.ul dot) node[circ]{}
-                    (l2.ur dot) node[circ]{};
-                \draw (l1.midtap) node[left]{$N_1$}
-                (l2.midtap) node[right]{$N_2$};
-                \draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
-            \end{circuitikz}
-            \caption{Switch-off time}            
-        \end{subfigure}
+        \onslide<2->{%
+            \begin{subfigure}{0.45\textwidth}
+                \centering
+                \begin{circuitikz}[]
+                    \draw (0.5,0) to [short] ++(0.5,0)
+                    to [short, -o, i={$i_2(t)$}] ++(0.75,0)
+                    to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
+                    (-0.5,0) to ++(-1,0) coordinate (E)
+                    to [short, -o, i_<={$i_1(t)=0$}] ++(-1.0,0)
+                    to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-3) coordinate (B)
+                    (-0.5,0) to [inductor, n=l1] ++(0,-2) 
+                    to [open] ++(0,-1) coordinate (C)
+                    (0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
+                    (D) to [short, -o] (A)
+                    (C) to [short, -o] (B)
+                    (E) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-] ++(0,-2) 
+                    to [short] ++(1.0,0);;
+                    \path (l1.ul dot) node[circ]{}
+                        (l2.ur dot) node[circ]{};
+                    \draw (l1.midtap) node[left]{$N_1$}
+                    (l2.midtap) node[right]{$N_2$};
+                    \draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
+                \end{circuitikz}
+                \caption{Switch-off time}            
+            \end{subfigure}
+        }%
             \centering
         \caption{Switch states of the flyback converter}
         \label{fig:flyback-converter-switch-states}
@@ -559,12 +570,13 @@
                 i_2(t=T_\mathrm{on}+\varepsilon) = \frac{N_1}{N_2} i_1(t=T_\mathrm{on}-\varepsilon),
             \end{equation*}
             i.e., the output side may carry significantly different peak currents than the input.
-
+            \onslide<2->{
             Also, when the transistor blocks it must withstand the voltage
             \begin{equation*}
                 u_\mathrm{T}(t) = u_1 (t) + \frac{N_1}{N_2}u_2 (t), \quad t\in [T_\mathrm{on}, T_\mathrm{s}].
             \end{equation*}
             Hence, the turn ratio has a significant impact on components' stress factors.
+            }%
         \end{column}
         %
         \begin{column}{0.5\textwidth}
@@ -836,11 +848,10 @@
     \begin{equation}
         U_2= U_1^2 \frac{D^2}{2} \frac{T_\mathrm{s}}{L_\mathrm{m} \overline{i}_2}.
     \end{equation}
-    \pause%
     \begin{itemize}
-        \item Interestingly, the voltage gain in DCM seems independent of the turns ratio $\nicefrac{N_2}{N_1}$.
-        \item Reason: output voltage $U_2$ depends on the (average) output current $\overline{i}_2$ which is inversely scaled by the turns ratio -- cf. cancelation of $\nicefrac{N_2}{N_1}$ in \eqref{eq:flyback-converter-average-output-current-DCM}.
-        \item However, the transformer's magnetizing inductance is actually a function of the turns ratio $L_\mathrm{m}(N_1, N_2)$ (compare \href{https://github.com/IAS-Uni-Siegen/EMD_course}{Electrical Machines and Drives} course material). 
+        \item<3-> Interestingly, the voltage gain in DCM seems independent of the turns ratio $\nicefrac{N_2}{N_1}$.
+        \item<4-> Reason: output voltage $U_2$ depends on the (average) output current $\overline{i}_2$ which is inversely scaled by the turns ratio -- cf. cancelation of $\nicefrac{N_2}{N_1}$ in \eqref{eq:flyback-converter-average-output-current-DCM}.
+        \item<5-> However, the transformer's magnetizing inductance is actually a function of the turns ratio $L_\mathrm{m}(N_1, N_2)$ (compare \href{https://github.com/IAS-Uni-Siegen/EMD_course}{Electrical Machines and Drives} course material). 
     \end{itemize}
 \end{frame}
 
@@ -903,7 +914,7 @@
             \end{tikzpicture}
             \caption{Equivalent circuit model} 
         \end{subfigure}
-        \caption{Multi-port (flyback) transformer: add multiple secondary windings to a single primary one to enable different input-to-output voltage ratios}
+        \caption{Multi-port (flyback) transformer: add multiple secondary windings to a common core to enable different input-to-output voltage ratios}
         \label{fig:transformer_model_multiport}
     \end{figure}
 \end{frame}
@@ -1010,9 +1021,9 @@
         \begin{column}{0.4\textwidth}
             \begin{itemize}
                 \item \hl{Forward converter = galvanically isolated buck converter.}
-                \item Main energy buffer: inductor $L$.
-                \item Transformer: galvanic isolation plus voltage scaling: $$u_\mathrm{s}(t)=\frac{N_2}{N_1}u_\mathrm{p}(t) $$ with $u_\mathrm{p}(t)=u_\mathrm{1}(t), t\in[0, T_\mathrm{on}]$.
-                \item \hl{Different to flyback, where the transformer's purpose is to provide both  energy storage and galvanic isolation.}
+                \item<2-> Main energy buffer: inductor $L$.
+                \item<3-> Transformer: galvanic isolation plus voltage scaling: $$u_\mathrm{s}(t)=\frac{N_2}{N_1}u_\mathrm{p}(t) $$ with $u_\mathrm{p}(t)=u_\mathrm{1}(t), t\in[0, T_\mathrm{on}]$.
+                \item<4-> \hl{Different to flyback, where the transformer's purpose is to provide both  energy storage and galvanic isolation.}
             \end{itemize}
         \end{column}
         %
@@ -1062,35 +1073,35 @@
                         \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
                         \AddPlot
                     }
-                    \draw[signalblue, thick, dashed, visible on=<2->] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
-                    \node[above, inner sep = 2pt, anchor = south, visible on=<2->] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
+                    \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
+                    \node[above, inner sep = 2pt, anchor = south] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
                     \draw [thick,<->]  (0,0.5) -- node[below]{$T_\mathrm{on}$}(\D, 0.5); % T_on 
                     \draw [thick,<->]  (\D,0.5) -- node[below]{$T_\mathrm{off}$}(1.0, 0.5); % T_off
                     \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{s}$}(1.0, -0.2); % T_s 
 
 
                 % Middle plot: inductor current
-                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$, }, visible on=<3->]
+                \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$, }]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({1 + #1},0.25)};}
                         \AddPlot
                     }
                     \draw[signalred, thick, dashed] (axis cs:0,0.5) -- (axis cs:4,0.5); % dashed line at average current
-                    \draw[{Latex[length=2mm]}-, thin, visible on=<4->] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
-                    \draw[-{Latex[length=2mm]}, thin, visible on=<4->] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
-                    \draw[thin, visible on=<5->] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
-                    \node[above, inner sep = 2pt, anchor = south, xshift = -4mm, visible on=<5->] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{(\frac{N_2}{N_1}U_1-U_2)}{L}$}; % label positive current slope
-                    \draw[thin, visible on=<6->] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
-                    \node[above, inner sep = 2pt, anchor = south, xshift = 0mm, visible on=<6->] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_2}{L}$}; % label negative current slope
+                    \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
+                    \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
+                    \draw[thin] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
+                    \node[above, inner sep = 2pt, anchor = south, xshift = -4mm] at (axis cs:2+\D/2, 0.75-0.125) {$\nicefrac{(\frac{N_2}{N_1}U_1-U_2)}{L}$}; % label positive current slope
+                    \draw[thin] (axis cs:2.25+3*\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.75-0.125) -- (axis cs:2.75+\D/4,0.25+0.125); % indicate negative current slope
+                    \node[above, inner sep = 2pt, anchor = south, xshift = 0mm] at (axis cs:2.5+\D/2, 0.75-0.125) {$\nicefrac{-U_2}{L}$}; % label negative current slope
                 
                 % Bottom plot: input current
-                \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}, visible on=<7->]
+                \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}]
                     \pgfplotsinvokeforeach{0,...,3}{
                         \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
                         \AddPlot
                     }
-                    \draw[signalred, thick, dashed, visible on=<8->] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
-                    \node[above, inner sep = 2pt, anchor = south, fill = white, visible on=<8->] at (axis cs:1.5+\D/2, 0.5 * \D) {$\overline{i}_1$}; % label average current
+                    \draw[signalred, thick, dashed] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
+                    \node[above, inner sep = 2pt, anchor = south, fill = white] at (axis cs:1.5+\D/2, 0.5 * \D) {$\overline{i}_1$}; % label average current
             \end{groupplot}
         \end{tikzpicture}
     \end{figure}
