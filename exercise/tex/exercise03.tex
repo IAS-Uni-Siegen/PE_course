@@ -105,6 +105,7 @@ The average inductor current is calculated as:
 
  \subtask{Sketch the course of the inductor current $i_\mathrm{L}(t)$  for minimum and maximum output power.}
 \begin{solutionblock}
+    The solution sketch is depicted in \autoref{fig:InductorCurrentEx03}.
     \input{fig/ex03/Fig_courseILminmaxOutputPower.tex}   
 \end{solutionblock}
     
@@ -191,15 +192,36 @@ The average inductor current is calculated as:
     \begin{equation}
         i_{\mathrm{C,RMS}} = \sqrt{\frac{1}{\SI{50}{\micro\second}} \left(\SI{64.1}{\micro\ampere\per\second} + \SI{31.3}{\micro\ampere\per\second}\right)} = \SI{1.38}{\ampere}.
     \end{equation}
-
-
-
-
-   
-    
 \end{solutionblock}
 
  \subtask{Sketch the curves of the voltage $u_\mathrm{T}(t)$ at the power transistor and the current $i_\mathrm{D}(t)$ in the output diode for $P_\mathrm{2}=\SI{2}{\watt}$. What is the maximum blocking voltage of the transistor?}
+
+ \begin{solutionblock}
+    The input voltage for an activated transistor is given with
+    \begin{equation}
+        U_1 = u_{\mathrm{T}} + u_{\mathrm{L}},
+    \end{equation}
+    which is rearranged into:
+    \begin{equation}
+        u_{\mathrm{T}} = U_1 - u_{\mathrm{L}}.
+        \label{eq:uT}
+    \end{equation}
+
+    During the off time of the transistor, the inductance voltage is defined as
+    \begin{equation}
+        u_{\mathrm{L}} = -U_2 - u_{\mathrm{D}},
+        \label{eq:U2}
+    \end{equation}
+    where the diode voltage is assumed to be zero during the conduction phase.
+    Hence, the maximum blocking voltage of the transistor is calculated with \eqref{eq:U2} and \eqref{eq:uT}, which results in:
+    \begin{equation}
+        u_{\mathrm{T}} = U_1 - (-U_2)
+        = U_1 + U_2 = \SI{18}{\volt} + \SI{12}{\volt} = \SI{30}{\volt}.
+    \end{equation}
+
+    The diode current and the blocking voltage of the transistor is shown in \autoref{fig:inverseCon_voltage_current}.
+    \input{fig/ex03/sFigDia_Inverse.tex}
+ \end{solutionblock}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: Boost-Buck converter and SEPIC topology
