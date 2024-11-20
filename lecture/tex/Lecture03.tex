@@ -404,7 +404,7 @@
                     (-0.5,0) to [short, -o, i_<=$i_1(t)$] ++(-1.5,0)
                     to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-3.75) coordinate (B)
                     (-0.5,0) to [inductor, n=l1] ++(0,-2) 
-                    to [Tnpn, n=npn1, mirror] ++(0,-1.75) coordinate (C)
+                    to [Tnpn, n=npn1, invert] ++(0,-1.75) coordinate (C)
                     (0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
                     (D) to [short, -o] (A)
                     (C) to [short, -o] (B);
