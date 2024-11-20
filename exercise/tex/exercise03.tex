@@ -395,7 +395,7 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
         =\left( \frac{1}{D}-1\right) U_\mathrm{2}.
         \label{eq:ucapacitor}        
     \end{equation}
-    $U_\mathrm{C}$ corresponds to the input voltage $U_\mathrm{1}$. The substitution of $U_\mathrm{C}$ in \eqref{eq:ucapacitor} leads to 
+    The substitution of $U_\mathrm{C}$ in \eqref{eq:ucapacitor} leads to 
     \begin{equation}
         U_\mathrm{T,block}=\left( \frac{1}{D}-1\right) U_\mathrm{2}+U_\mathrm{2}=\frac{U_\mathrm{2}}{D}.
     \end{equation}
@@ -407,11 +407,31 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
     \begin{equation}
         -U_\mathrm{D,block}=U_\mathrm{C}+U_\mathrm{2}.
     \end{equation}
-    The result shows, that the transistor and the diode needs to block the sum of input and output voltage. 
-    By the way this is the same blocking voltage as for the transistors and diodes in a boost-buck converter.
+    $U_\mathrm{C}$ corresponds to the input voltage $U_\mathrm{1}$, because the voltage transfer ratio of the SEPIC-topology
+    is calculated by:
+    \begin{equation}
+        \frac{U_\mathrm{2}}{U_\mathrm{1}}= \frac{D}{1-D} \Rightarrow
+        U_\mathrm{1}=\frac{1-D}{D}U_\mathrm{2}=\left( \frac{1}{D}-1\right)U_\mathrm{2}=U_\mathrm{C}
+    \end{equation}
+    The result shows, that the transistor and the diode needs to block the sum of input and output voltage, 
+    which is the same blocking voltage as for the transistors and diodes in a boost-buck converter.
 \end{solutionblock}
 
 \subtask{Derive the input and output current ripple $\Delta i_\mathrm{L_1}$ and $\Delta i_\mathrm{L_2}$ depending on the duty cycle.}
+
+\begin{solutionblock}
+    % Solution
+    The current ripple depends on the duty cycle, switching period and inductor voltage. 
+    If $T$ is active, the current through $L_1$ increases. This corresponds to the ripple current
+    \begin{equation}
+        \Delta i_\mathrm{L1}=\frac{U_\mathrm{1}D}{f_\mathrm{s}L_\mathrm{1}}.
+    \end{equation}
+    Also for $L_2$ the current increases while $T$ is active. In this case the voltage of the capacitor $C$ is applied to $L_2$.
+    The ripple current of $L_1$ is obtained by
+    \begin{equation}
+        \Delta i_\mathrm{L2}=\frac{U_\mathrm{C}D}{f_\mathrm{s}L_\mathrm{2}}=\frac{U_\mathrm{1}D}{f_\mathrm{s}L_\mathrm{2}}.
+    \end{equation}
+\end{solutionblock}
 
 \subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range? 
 (i.e., continuous current flow in $L_\mathrm{1}$  and $L_\mathrm{2}$)?}
