@@ -57,17 +57,17 @@ Therefore, the inductance can be determined using the following equation:
 As the output power is specified as a value range, the highest and lowest values can be used. The lowest and highest current should be determined from these two values, from which the value range of the frequency $f_\mathrm{s}$ can then be determined.
 The average inductor current is calculated as:
      \begin{equation}
-        \overline{i}_\mathrm{L}(P_\mathrm{2}=(\SI{2}{\watt}))= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{2}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{0.278}{\ampere},
+        \overline{i}_\mathrm{L}(P_\mathrm{2}=\SI{2}{\watt})= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{2}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{0.278}{\ampere},
      \end{equation}
      \begin{equation}
-        \overline{i}_\mathrm{L}(P_\mathrm{2}=(\SI{15}{\watt}))= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.0833}{\ampere}.
+        \overline{i}_\mathrm{L}(P_\mathrm{2}=\SI{15}{\watt})= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.0833}{\ampere}.
      \end{equation}
      With \eqref{eq:equation switching frequencies ex03} the resulting switching frequencies are:
      \begin{equation}
-        f_\mathrm{s}(P_\mathrm{2}=(\SI{2}{\watt}))=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{0.278}{\ampere}}=\SI{150}{\kilo \hertz},
+        f_\mathrm{s}(P_\mathrm{2}=\SI{2}{\watt})=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{0.278}{\ampere}}=\SI{150}{\kilo \hertz},
      \end{equation}
      \begin{equation}
-        f_\mathrm{s}(P_\mathrm{2}=(\SI{15}{\watt}))=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{2.0833}{\ampere}}=\SI{20}{\kilo \hertz}.
+        f_\mathrm{s}(P_\mathrm{2}=\SI{15}{\watt})=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{2.0833}{\ampere}}=\SI{20}{\kilo \hertz}.
      \end{equation}
      The switching frequency $f_\mathrm{s}$ varies in the range from $\SI{20}{\kilo \hertz} \, \dots \, \SI{150}{\kilo \hertz}$ for the specified output power range in the task.
  \end{solutionblock}
@@ -88,7 +88,7 @@ The average inductor current is calculated as:
     T_\mathrm{s}(P_\mathrm{2}=\SI{2}{\watt}) =\frac{1}{f_{\mathrm{s,2W}}} = \frac{1}{\SI{150}{\kilo \hertz}}= \SI{6.67}{\micro \s},
  \end{equation}
  \begin{equation}
-    T_\mathrm{s}(P_\mathrm{2}=(\SI{15}{\watt})) =\frac{1}{f_{\mathrm{s,15W}}} = \frac{1}{\SI{20}{\kilo \hertz}}= \SI{50}{\micro \s}.
+    T_\mathrm{s}(P_\mathrm{2}=\SI{15}{\watt}) =\frac{1}{f_{\mathrm{s,15W}}} = \frac{1}{\SI{20}{\kilo \hertz}}= \SI{50}{\micro \s}.
  \end{equation}
  The transistor switch-on times can be determined using 
  \begin{equation}
@@ -96,10 +96,10 @@ The average inductor current is calculated as:
  \end{equation}
  leading to:
  \begin{equation}
-    T_\mathrm{on}(P_\mathrm{2}=(\SI{2}{\watt})) = 0.4 \cdot \SI{6.67}{\micro \s} = \SI{2.67}{\micro \s},
+    T_\mathrm{on}(P_\mathrm{2}=\SI{2}{\watt}) = 0.4 \cdot \SI{6.67}{\micro \s} = \SI{2.67}{\micro \s},
  \end{equation}
  \begin{equation}
-    T_\mathrm{on}(P_\mathrm{2}=(\SI{15}{\watt})) = 0.4 \cdot \SI{50}{\micro \s}= \SI{20}{\micro \s}.
+    T_\mathrm{on}(P_\mathrm{2}=\SI{15}{\watt}) = 0.4 \cdot \SI{50}{\micro \s}= \SI{20}{\micro \s}.
  \end{equation}
  \end{solutionblock}
 
@@ -142,7 +142,7 @@ The average inductor current is calculated as:
     \end{equation}
     applying for the maximum power ($P = \SI{15}{\watt}$) results into:
     \begin{equation}
-        C_2 = \frac{I_{\mathrm{2}}(P_\mathrm{2}=(\SI{15}{\watt})) D T_{\mathrm{s}}(P_\mathrm{2}=(\SI{15}{\watt}))}{\Delta u_{\mathrm{C}}}
+        C_2 = \frac{I_{\mathrm{2}}(P_\mathrm{2}=\SI{15}{\watt}) D T_{\mathrm{s}}(P_\mathrm{2}=\SI{15}{\watt})}{\Delta u_{\mathrm{C}}}
         = \frac{\SI{1.25}{\ampere} \cdot 0.4 \cdot \SI{50}{\micro\second}}{\SI{0.24}{\volt}}
         = \SI{104}{\micro\farad}. 
     \end{equation}
