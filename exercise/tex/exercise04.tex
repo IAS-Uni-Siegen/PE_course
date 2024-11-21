@@ -18,7 +18,7 @@ A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} 
         \toprule
         
         Input voltage: &  $U_{\mathrm{1}} = \SI{300}{\volt} \, \dots \, \SI{900}{\volt}$ & Output voltage: & $U_{\mathrm{2}} = \SI{15}{\volt}$ \\ 
-        Output power: & $P_2 = \SI{15}{\watt}$  & Transformation ratio: & $N_\mathrm{1}/N_\mathrm{2}=60/12$ \\ 
+        Output power: & $P_2 = \SI{30}{\watt}$  & Transformation ratio: & $N_\mathrm{1}/N_\mathrm{2}=60/12$ \\ 
         Inductance of the primary winding: & $L_\mathrm{1} = \SI{760}{\micro\henry}$ & Switching frequency: & $f_{\mathrm{s}} = \SI{50}{\kilo\hertz}$ \\ 
         \bottomrule
     \end{tabular}
@@ -26,9 +26,49 @@ A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} 
     \label{table:ex04_Parameters of the circuit}
 \end{table}
 
-\subtask{The input voltage is $U_\mathrm{1}=\SI{760}{\volt}$ at rated power at the output. What is the peak value $\hat I_\mathrm{1}$ of the primary current $i_\mathrm{1}$? What is the peak value $\hat I_\mathrm{2}$ of the primary current $i_\mathrm{2}$? Calculate the duty cycle of the transistor for this operating case.}
+\subtask{The input voltage is $U_\mathrm{1}=\SI{760}{\volt}$ at rated power at the output. What is the peak value $\hat I_\mathrm{1}$ of the primary current $i_\mathrm{1}$? What is the peak value $\hat I_\mathrm{2}$ of the secundary current $i_\mathrm{2}$? Calculate the duty cycle of the transistor for this operating case.}
+
+\begin{solutionblock}
+\begin{equation}
+    P_\mathrm{2} = W_\mathrm{L} f_\mathrm{p}
+\end{equation}
+
+\begin{equation}
+    W_\mathrm{L} = \frac{1}{2}L_\mathrm{1}\hat I_\mathrm{1}^2 
+\end{equation}
+
+\begin{equation}
+    \hat I_\mathrm{1} = \sqrt{\frac{2P_\mathrm{2}}{L_\mathrm{1}f_\mathrm{p}}}= \sqrt{\frac{2\cdot\SI{30}{\watt}}{\SI{760}{\micro\henry}\cdot\SI{50}{\kilo\hertz}}}=\SI{1.257}{\ampere}
+\end{equation}
+
+\begin{equation}
+    \hat I_\mathrm{1} = \hat I_\mathrm{2}
+\end{equation}
+
+\begin{equation}
+    \hat I_\mathrm{2} = \hat I_\mathrm{1} \frac{N_\mathrm{1}}{N_\mathrm{2}} = \SI{1.257}{\ampere} \cdot \frac{60}{12} = \SI{6.28}{\ampere}
+\end{equation}
+Because of CCM the duty cycle $D$ is expressed .....
+\begin{equation}
+    \frac{U_2}{U_1} = \frac{D^2}{2} \frac{\Delta i_\mathrm{m,max}}{\overline{i}_2} \label{eq:Duty cycle ex04}
+\end{equation}
+Because of the unknown $\Delta i_\mathrm{m,max}$ this value has to be calculate first as
+\begin{equation}
+    \Delta i_\mathrm{m,max}= \frac{T_\mathrm{s} \cdot U_1}{L} = \frac{\frac{1}{\SI{50}{\kilo\hertz}}\cdot \SI{760}{\volt}}{\SI{760}{\micro\henry}}=\SI{20}{\ampere}.
+\end{equation}
+Now $\Delta i_\mathrm{m,max}=\SI{20}{\ampere}$ can be used in \eqref{eq:Duty cycle ex04}:
+
+\begin{equation}
+    D = \sqrt{\frac{2U_2\overline{i}_2}{U_1\Delta i_\mathrm{m,max}}} = \sqrt{\frac{2\cdot \SI{15}{\volt}\cdot\SI{30}{\watt}}{\SI{760}{\volt}\cdot\SI{15}{\volt}\cdot\SI{20}{\ampere}}} = 0.063.
+\end{equation}
+
+\end{solutionblock}
 
 \subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Calculate and sketch the following voltage and current curves for this operating case over one cycle period: $u_\mathrm{T}(t), u_\mathrm{s}(t), i_\mathrm{2}(t), i_\mathrm{1}(t)$ (Note: corresponds to the switch-on time of the transistor).}
+
+\input{./fig/ex04/Fig_voltageTransistorPeriodTask1.tex}
+    
+
 
 \subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Determine the mean value $\overline i_\mathrm{T}$ and the effective value of the current $i_\mathrm{T, rms}$ through the transistor. Determine the mean value $\overline i_\mathrm{D}$ and the effective value of the current $i_\mathrm{D, rms}$ through the diode. What is the maximum reverse voltage load $u_\mathrm{T, max}$ of the transistor? What is the maximum reverse voltage load $u_\mathrm{D, max}$ of the diode? Calculate the fluctuation range $\Delta i_\mathrm{C, pp}$ of the current $i_\mathrm{C}$ in the output capacitor.}
 
