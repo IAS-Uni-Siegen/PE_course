@@ -33,3 +33,72 @@ A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} 
 \subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Determine the mean value $\overline i_\mathrm{T}$ and the effective value of the current $i_\mathrm{T, rms}$ through the transistor. Determine the mean value $\overline i_\mathrm{D}$ and the effective value of the current $i_\mathrm{D, rms}$ through the diode. What is the maximum reverse voltage load $u_\mathrm{T, max}$ of the transistor? What is the maximum reverse voltage load $u_\mathrm{D, max}$ of the diode? Calculate the fluctuation range $\Delta i_\mathrm{C, pp}$ of the current $i_\mathrm{C}$ in the output capacitor.}
 
 \subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load.How much energy is transferred from the input to the output per switching period $\Delta E$ and what is the resulting average power? What happens if there is no ideal voltage source on the output side but an unloaded capacitor and the circuit is operated with $D>0$?}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Task 2: Forward converter with asymmetric half-bridge
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\task{Forward converter with asymmetric half-bridge}
+
+Betrachten Sie den in \autoref{fig:ex04_ForwardConverterWithAsymHalfBridge} dargestellten Zwei-Transistor Durchflusswandler unter Annahme idealer Transisto-
+ren und Dioden. 
+
+\input{./fig/ex04/Fig_ForwardConverterWithAsymHalfBridge}
+
+Die Eingangsspannung betrage u 1 = U 1 = 325 V entsprechend der gleichgerichteten, ideal
+kapazitiv geglätteten Netzspannung. Die Ausgangskapazität C ist so gross gewählt, dass die Ausgangsspan-
+nung praktisch konstant ist, u 2 = U 2 = 15 V . Die an die Last abgegebene Leistung bei Nennbetrieb beträgt
+P 2 = 50W . Die Taktfrequenz beträgt f p = 50 kHz . Das Transformator hat das Windungszahlverhältnis
+N 1 ⁄ N 2 = 10 ⁄ 1 und eine Induktivität der Primärwicklung L 1 = 2mH . Die Streuinduktivität, die ohmschen Ver-
+luste und die Kernverluste des Transformators sind vernachlässigbar. Der Wandler arbeite im stationären Be-
+trieb.
+
+\subtask{Mit welchem Tastverhältnis D 1 (= relative Leitdauer von T A und T B ) arbeitet die Schaltung?}
+\subtask{Berechnen Sie den Mittelwert von i 2 und i 1 über eine Taktperiode unter Annahme idealer Glättung von
+i2.}
+\subtask{Berechnen Sie den Spitzenwert $\hat{i}_\mu$ des Magnetisierungsstromes $i_\mu$.}
+\subtask{Skizzieren Sie auf dem Beiblatt 1 für den Fall nichtidealer Stromglättung $L \neq \infty$ den Verlauf von $U_\mathrm{p}$, $U_\mathrm{D2}$' ,
+          $i_\mu$, $i_2$ , $i_\mathrm{2}$ , $i_\mathrm{p}$ und $i_\mathrm{1}$ . Hinweis: $i_\mathrm{2}$ $( t = 0 )$ = $I_\mathrm{2min}$ .}
+\subtask{Berechnen Sie die minimal notwendige Eingangsspannung  $U_\mathrm{1}$ , wenn die Ausgangsspannung
+$U_\mathrm{2}$ = \SI{20}{\volt} konstant bleiben soll.}
+\subtask{Berechnen Sie die Induktivität $L$ , wenn der peak-to-peak Wert}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Task 3: Singled-ended forward converter (demagnetization winding)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\task{Singled-ended forward converter (demagnetization winding)}
+
+Zur Stromversorgung einer Datenverarbeitunganlage soll ein Eintakt-Durchflusswandler nach \autoref{fig:ex04_SingledEndedForwardConverter}
+eingesetzt werden.
+
+\input{./fig/ex04/Fig_SingledEndedForwardConverter}
+
+Entsprechend dem Toleranzbereich der Netzspannung und der Schwankung der Spannung am
+Eingangskondensator liegt die Eingangsspannung des Systems im Bereich U1 = 240...360V. Die
+Schaltfrequenz wird mit fP = 48kHz gewählt. Die Ausgangdiode D1 weise einen stromunabhängigen
+Durchlassspannungsabfall von 0.4V auf. Die Ausgangsinduktivität sei so dimensioniert, dass iL einen
+kontinuierlichen Verlauf zeigt. Die Streuung des Transformators kann vernachlässigt werden.
+\subtask{Berechnen Sie das Windungszahlverhältnis NT/NP so, dass während der Entmagnetisierung
+eine maximale Sperrspannung am Transistor von 600V auftritt.}
+\subtask{Welches maximale Tastverhältnis des Leistungstransistors ist dann zulässig?}
+\subtask{Wie ist das Windungszahlverhältnis NP/NS zu wählen damit die geforderte Sekundärspannung
+gebildet wird?}
+\subtask{Muss das stationäre Tastverhältnis des Transistors bei Änderung der Ausgangsleistung
+verändert werden? In welchem Bereich muss das Tastverhältnis des Transistors unter
+Berücksichtigung des Eingangsspannungsbereiches einstellbar sein?}
+\subtask{Welche maximale Sperrspannung tritt an der Diode D1 und an der Diode DFs auf?}
+\subtask{Wie hoch muss die Primärinduktivität LP sein damit der Spitzenwert des Magnetisierungsstrom
+auf kleiner 10\% des auf die Primärseite übersetzen Stromes iL in der Ausgangsinduktivität bei
+Nennlast P2 = 125W beschränkt bleibt? ( iL kann als näherungsweise konstant angenommen
+werden).}
+\subtask{Skizzieren Sie auf Beiblatt 1 den Verlauf der Spannung am Leistungstransistor, den Verlauf
+des Stromes in der Entmagnetisierungswicklung und des Stromes in der Freilaufdiode DFs für
+U1 = 240V und U1 = 360V.}
+\subtask{Berechnen Sie den jeweiligen Spitzenwert des Magnetisierungsstromes.
+Der Strom in der Ausgangsinduktivität sei für die folgenden Überlegungen als ideal geglättet
+angenommen.}
+\subtask{Könnte bei Verdopplung der Schaltfrequenz des Konverters eine höhere Leistung übertragen
+werden?}
