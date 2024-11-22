@@ -16,7 +16,7 @@
                     % Add junction for diode DFP
                     (jLTv) ++ (0,-3) coordinate (jDFPk)
                     % Add inductor LTv
-                    (jDFPk) to [L,l=$L_\mathrm{T}$,n=L1,v_<=$U_\text{s}$, voltage shift=0.5, voltage=straight] (jLTv)
+                    (jDFPk) to [L,l=$L_\mathrm{T}$,n=L1,v_<=$U_\text{T}$, voltage shift=0.5, voltage=straight] (jLTv)
                     % Add winding text
                     (jDFPk) node[right] {$N_\mathrm{T}$};
                     \path (L1.ul dot) node[circ]{};
@@ -57,7 +57,7 @@
                     (jLtpv) ++(0.8,0) coordinate  (jLtsv) 
                     (jLtpg) ++(0.8,-0.5) coordinate  (jLtsgx)
                     % Add winding text
-                    (jLtpg) node[left] {$N_\mathrm{p}$};         
+                    (jLtpg) node[left] {$N_\mathrm{1}$};         
                     % Add iron core
             \draw 
                     (jLtpv) ++(0.5,-0.5) coordinate  (jLtcorev) 
@@ -69,7 +69,7 @@
                     % Add transformer secondary inductor with voltage arrow
                     (jLtsv) to [L,n=Lts,v^=$U_\text{s}$, voltage shift=0.5, voltage=straight] ++(0,-3) coordinate (jLtsg)
                     % Add winding text
-                    (jLtsg) node[right] {$N_\mathrm{s}$};     
+                    (jLtsg) node[right] {$N_\mathrm{2}$};     
                     \path (Ltp.ul dot) node[circ]{};
                     \path (Lts.ul dot) node[circ]{};                    
             \draw
