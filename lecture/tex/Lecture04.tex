@@ -4,6 +4,184 @@
 \section{Diode-based rectifiers}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% High-level view of the rectification task %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{High-level view of the rectification task}
+    Assuming that the input voltage is an \hl{ideal sinusoidal signal} $$u_1(t) = \hat{u}_1 \sin(\omega t)$$ with the angular frequency $\omega = 2\pi f$ and the amplitude $\hat{u}_1$, the task of a rectifier is to convert this signal into a \hl{unidirectional, ideally constant, signal} $u_2(t)\approx u_2$, as shown in Figure \ref{fig:rectification_task}. A typical application is the grid voltage rectification in power supplies.
+
+    \begin{figure}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=0.28\textwidth,
+                height=0.425\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                ylabel={$u_1(\omega t)$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                xmin=0, xmax=2*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0,3.14,6.28},
+                xticklabels={$0$,$\pi$,$2\pi$},
+                ytick={-1,0,1},
+                yticklabels={$-\hat{u}_1$,$0$,$\hat{u}_1$},
+                grid=both,
+                ]
+                \addplot[domain=0:2*pi, samples=100, signalblue, thick]{sin(deg(x))};
+            \end{axis}
+        \end{tikzpicture}
+        \hspace{0.5cm}
+        \begin{circuitikz}[]
+            \ctikzset{blocks/scale=2, block lateral anchors pos=0.7}
+            \path (0,0) node[sacdcshape](acdc){} ; 
+            \draw (acdc.left up) -- ++(-1,0) coordinate (A1) 
+            (acdc.left down) to [short] ++(-1,0) coordinate (A2)
+            (A1) to [open, v_=$u_1$, voltage = straight, o-o] (A2)
+            (acdc.right up) to [short, -o]  ++(1,0) coordinate (B1)
+            (acdc.right down) to [short, -o] ++(1,0) coordinate (B2);
+            \draw (B1) to [open, v^=$u_2$, voltage = straight] (B2);
+        \end{circuitikz}
+        \hspace{0.5cm}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=0.28\textwidth,
+                height=0.425\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                ylabel={$u_2(\omega t)$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                xmin=0, xmax=2*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0,3.14,6.28},
+                xticklabels={$0$,$\pi$,$2\pi$},
+                ytick={-1,0,1},
+                yticklabels={$-\hat{u}_2$,$0$,$\hat{u}_2$},
+                grid=both,
+                ]
+                \addplot[domain=0:2*pi, samples=100, signalblue, thick]{1};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Simplified representation of a single-phase rectifier}
+        \label{fig:rectification_task}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Half-cycle rectification / M1U circuit %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Half-cycle rectification / M1U circuit} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Uncontrolled rectifier circuit %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Uncontrolled rectifier circuit}
+    Based on \figref{fig:M1U_topology}, the output voltage $u_2(t)$ of the M1U rectifier is
+    \begin{equation}
+        u_2(t) = \begin{cases}
+            u_1(t)=\hat{u}_1 \sin(\omega t), & 0\leq \omega t < \pi, \\
+            0, & \pi \leq \omega t < 2\pi.
+        \end{cases}
+        \label{eq:u2_M1U}
+    \end{equation}
+
+    \begin{figure}
+        \begin{tikzpicture} % left plot
+            \begin{axis}[
+                width=0.28\textwidth,
+                height=0.425\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                ylabel={$u_1(\omega t)$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                xmin=0, xmax=2*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0,3.14,6.28},
+                xticklabels={$0$,$\pi$,$2\pi$},
+                ytick={-1,0,1},
+                yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
+                grid=both,
+                ]
+                \addplot[domain=0:2*pi, samples=100, signalblue, thick]{sin(deg(x))};
+            \end{axis}
+        \end{tikzpicture}
+        \hspace{0.5cm}
+        \begin{circuitikz}[] % circuit (center plot)
+            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            (0,0) to [short] ++(1,0)
+            to [diode, l=$D$]  ++(1.5,0)
+            to [short, -o, i=$i_2(t)$] ++(1.0,0)
+            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (B)
+            (A) -- (B);
+        \end{circuitikz}
+        \hspace{0.5cm}
+        \begin{tikzpicture} % right plot
+            \begin{axis}[
+                width=0.28\textwidth,
+                height=0.425\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                ylabel={$u_2(\omega t)$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                xmin=0, xmax=2*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0,3.14,6.28},
+                xticklabels={$0$,$\pi$,$2\pi$},
+                ytick={-1,0,1},
+                yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
+                grid=both,
+                ]
+                \addplot[domain=0:pi, samples=100, signalblue, thick]{sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=10, signalblue, thick]{0};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{M1U topology and typical input and output voltage signals}
+        \label{fig:M1U_topology}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Uncontrolled rectifier circuit %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Uncontrolled rectifier circuit}
+    From \eqref{eq:u2_M1U}, the average output voltage of the M1U rectifier is
+    \begin{equation}
+        \begin{split}
+            \overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{2\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}t\\
+            &= \frac{\hat{u}_1}{2\pi} \left[ - \cos(\omega t) \right]_{0}^{\pi} = \frac{\hat{u}_1}{2\pi} \left( 1+1 \right) = \frac{\hat{u}_1}{\pi} = \frac{\sqrt{2}U_1}{\pi}
+        \end{split}
+        \label{eq:u2_M1U_avg}
+    \end{equation}
+    with $U_1$ being the RMS value of the input voltage $u_1(t)$. The RMS value of the output voltage $u_2(t)$ results in
+    \begin{equation}
+        \begin{split}
+        U_2 &= \sqrt{\frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1^2 \sin^2(\omega t) \mathrm{d}t} = \hat{u}_1 \sqrt{\frac{1}{2\pi}\left[\frac{1}{2}\omega t - \frac{\sin(2 \omega t)}{4}\right]_0^\pi}\\&= \frac{\hat{u}_1}{2} = \frac{U_1}{\sqrt{2}}.
+        \end{split}
+        \label{eq:u2_M1U_rms}
+    \end{equation}
+\end{frame}
