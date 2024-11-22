@@ -80,28 +80,26 @@ Now $\Delta i_\mathrm{m,max}=\SI{20}{\ampere}$ can be used in \eqref{eq:Duty cyc
 
 \task{Forward converter with asymmetric half-bridge}
 
-Betrachten Sie den in \autoref{fig:ex04_ForwardConverterWithAsymHalfBridge} dargestellten Zwei-Transistor Durchflusswandler unter Annahme idealer Transisto-
-ren und Dioden. 
+The schematic of a forward converter with asymmetric half-bridge is shown in \autoref{fig:ex04_ForwardConverterWithAsymHalfBridge}. 
+For the calculations the diodes and transistors are considered as ideal components.
 
 \input{./fig/ex04/Fig_ForwardConverterWithAsymHalfBridge}
 
-Die Eingangsspannung betrage u 1 = U 1 = 325 V entsprechend der gleichgerichteten, ideal
-kapazitiv geglätteten Netzspannung. Die Ausgangskapazität C ist so gross gewählt, dass die Ausgangsspan-
-nung praktisch konstant ist, u 2 = U 2 = 15 V . Die an die Last abgegebene Leistung bei Nennbetrieb beträgt
-P 2 = 50W . Die Taktfrequenz beträgt f p = 50 kHz . Das Transformator hat das Windungszahlverhältnis
-N 1 ⁄ N 2 = 10 ⁄ 1 und eine Induktivität der Primärwicklung L 1 = 2mH . Die Streuinduktivität, die ohmschen Ver-
-luste und die Kernverluste des Transformators sind vernachlässigbar. Der Wandler arbeite im stationären Be-
-trieb.
+The parameters are listed in \autoref{fig:ex04_ForwardConverterWithAsymHalfBridge}
+\input{./fig/ex04/FigTab_ForwardConverterWithAsymHalfBridge}
 
-\subtask{Mit welchem Tastverhältnis D 1 (= relative Leitdauer von T A und T B ) arbeitet die Schaltung?}
-\subtask{Berechnen Sie den Mittelwert von i 2 und i 1 über eine Taktperiode unter Annahme idealer Glättung von
-i2.}
-\subtask{Berechnen Sie den Spitzenwert $\hat{i}_\mu$ des Magnetisierungsstromes $i_\mu$.}
-\subtask{Skizzieren Sie auf dem Beiblatt 1 für den Fall nichtidealer Stromglättung $L \neq \infty$ den Verlauf von $U_\mathrm{p}$, $U_\mathrm{D2}$' ,
-          $i_\mu$, $i_2$ , $i_\mathrm{2}$ , $i_\mathrm{p}$ und $i_\mathrm{1}$ . Hinweis: $i_\mathrm{2}$ $( t = 0 )$ = $I_\mathrm{2min}$ .}
-\subtask{Berechnen Sie die minimal notwendige Eingangsspannung  $U_\mathrm{1}$ , wenn die Ausgangsspannung
-$U_\mathrm{2}$ = \SI{20}{\volt} konstant bleiben soll.}
-\subtask{Berechnen Sie die Induktivität $L$ , wenn der peak-to-peak Wert}
+The leakage inductance, the resistive losses, and the core losses of the transformer are negligible. 
+The converter operates in steady-state conditions. Both transistors are controlled by the same signal.
+
+\subtask{At what duty cycle $D$ does the circuit operate?}
+\subtask{Calculate the average value of $i_\mathrm{2}$ and $i_\mathrm{1}$ over a clock cycle, 
+         assuming ideal filtering of $i_\mathrm{2}$.}
+\subtask{Calculate the peak value of $\hat{i}_\mathrm{m}$ the magnetizing current $i_\mathrm{m}$.}
+\subtask{Sketch the waveforms of $U_\mathrm{p}$, $i_\mathrm{m}$, $i_\mathrm{p}$ and $i_\mathrm{1}$ 
+         for the case of non-ideal current smoothing $L \neq \infty$.}
+\subtask{Calculate the minimal necessary input voltage $U_\mathrm{1}$, if the output voltage $U_\mathrm{2}$ = \SI{20}{\volt} shall being constant.}
+\subtask{Calculate the inductance of $L$, if the peak-to-peak value $\Delta i_\mathrm{pp}$ of the 
+         switching frequency ripple current $\Delta i_\mathrm{2}$ is to be 10\% of the average value $I_\mathrm{2}$?}
 
 
 
@@ -111,34 +109,30 @@ $U_\mathrm{2}$ = \SI{20}{\volt} konstant bleiben soll.}
 
 \task{Singled-ended forward converter (demagnetization winding)}
 
-Zur Stromversorgung einer Datenverarbeitunganlage soll ein Eintakt-Durchflusswandler nach \autoref{fig:ex04_SingledEndedForwardConverter}
-eingesetzt werden.
+The power supply of a data processing system shall be realized by a singled-ended forward converter as shown in \autoref{fig:ex04_SingledEndedForwardConverter}.
 
 \input{./fig/ex04/Fig_SingledEndedForwardConverter}
 
-Entsprechend dem Toleranzbereich der Netzspannung und der Schwankung der Spannung am
-Eingangskondensator liegt die Eingangsspannung des Systems im Bereich U1 = 240...360V. Die
-Schaltfrequenz wird mit fP = 48kHz gewählt. Die Ausgangdiode D1 weise einen stromunabhängigen
-Durchlassspannungsabfall von 0.4V auf. Die Ausgangsinduktivität sei so dimensioniert, dass iL einen
-kontinuierlichen Verlauf zeigt. Die Streuung des Transformators kann vernachlässigt werden.
-\subtask{Berechnen Sie das Windungszahlverhältnis NT/NP so, dass während der Entmagnetisierung
-eine maximale Sperrspannung am Transistor von 600V auftritt.}
-\subtask{Welches maximale Tastverhältnis des Leistungstransistors ist dann zulässig?}
-\subtask{Wie ist das Windungszahlverhältnis NP/NS zu wählen damit die geforderte Sekundärspannung
-gebildet wird?}
-\subtask{Muss das stationäre Tastverhältnis des Transistors bei Änderung der Ausgangsleistung
-verändert werden? In welchem Bereich muss das Tastverhältnis des Transistors unter
-Berücksichtigung des Eingangsspannungsbereiches einstellbar sein?}
-\subtask{Welche maximale Sperrspannung tritt an der Diode D1 und an der Diode DFs auf?}
-\subtask{Wie hoch muss die Primärinduktivität LP sein damit der Spitzenwert des Magnetisierungsstrom
-auf kleiner 10\% des auf die Primärseite übersetzen Stromes iL in der Ausgangsinduktivität bei
-Nennlast P2 = 125W beschränkt bleibt? ( iL kann als näherungsweise konstant angenommen
-werden).}
-\subtask{Skizzieren Sie auf Beiblatt 1 den Verlauf der Spannung am Leistungstransistor, den Verlauf
-des Stromes in der Entmagnetisierungswicklung und des Stromes in der Freilaufdiode DFs für
-U1 = 240V und U1 = 360V.}
-\subtask{Berechnen Sie den jeweiligen Spitzenwert des Magnetisierungsstromes.
-Der Strom in der Ausgangsinduktivität sei für die folgenden Überlegungen als ideal geglättet
-angenommen.}
-\subtask{Könnte bei Verdopplung der Schaltfrequenz des Konverters eine höhere Leistung übertragen
-werden?}
+The parameters are listed in \autoref{table:Ex04_Parameters of the singled ended forward converter.}.
+The output inductance is dimensioned so that the current $i_\mathrm{L}$ exhibits a continuous waveform.
+The transformer's leakage inductance can be neglected.
+\input{./fig/ex04/FigTab_SingledEndedForwardConverter}
+
+\subtask{Calculate the turns ratio $N_\mathrm{T}$/$N_\mathrm{1}$ so that the maximum blocking voltage 
+         across the transistor during demagnetization is $\SI{600}{\volt}$.}
+\subtask{What is the maximum permissible duty cycle of the power transistor in this case?}
+\subtask{What turns ratio $N_\mathrm{1}$/$N_\mathrm{2}$ should be chosen to achieve the required secondary voltage?}
+\subtask{Does the steady-state duty cycle of the transistor need to be adjusted when the output power changes? 
+         Over what range must the transistor's duty cycle be adjustable, considering the input voltage range?}
+\subtask{What is the maximum blocking voltage occurring across diode $D_\mathrm{1}$ and diode $U_\mathrm{DFs}$?}
+\subtask{What should be the value of the primary inductance $L_\mathrm{p}$ to ensure 
+        that the peak value of the magnetizing current remains below 10\% of the current $i_\mathrm{L'}$. 
+        The current $i_\mathrm{L'}$  corresponds to the current $i_\mathrm{L}$ through the output inductance 
+        at a nominal load of $P_2=\SI{125}{\watt}$, which is translated to the primary side. 
+        (Assume $i_\mathrm{L}$ is approximately constant).}
+\subtask{Sketch the waveform of the voltage across the power transistor, the current through the demagnetization 
+        winding, and the current through the freewheeling diode $D_\mathrm{Fs}$ 
+        for $U_\mathrm{1}=\SI{240}{\volt}$ and $U_\mathrm{1}=\SI{360}{\volt}$.}
+\subtask{Calculate the peak value of the magnetizing current for each case. Consider the current in the output 
+          inductance as ideally filtered.}
+\subtask{Could a higher power be transferred by doubling the switching frequency of the converter?}

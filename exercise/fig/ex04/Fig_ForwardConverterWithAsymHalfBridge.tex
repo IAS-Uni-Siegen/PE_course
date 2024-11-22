@@ -9,96 +9,110 @@
                     % Base point for voltage supply
                     (0,0) coordinate (jU1v)
                     % Add supply U1
-                    (jU1v) to [V=$U_1$] ++(0,-7.5) coordinate (jU1g)
-                    % Add junction for Transistor TBc
-                    (jU1v) to [short,-*] ++(2,0) coordinate (jTBc)
-                    % Add junction for Transistor TBe
-                    (jTBc) ++ (0,-2) coordinate (jTBe)
-                    % Add transistor TB
-                    % (jTBc) ++ (0,-1) [Tnpn, n=npn1](TB){}
-                    (jTBc) ++ (0,-2) node[npn, anchor=E](TB){}
-                    % At transistor label T2
-                    (TB)  node[anchor=east,color=black]{$T_\mathrm{B}$}                     
-                    % Connect Transistor
-                    (jTBe) to [short,-] (TB.E)
-                    (jTBc) to [short,-] (TB.C)
-                    (TB.B) to [sqV] ++(-1,0);                    
-                    % Add inductor transistor TB
-                    %(jTBe) to [L,l=$L_\mathrm{T}$,n=L1,v_<=$U_\text{s}$, voltage shift=0.5, voltage=straight] (jTBc);
-            \draw                    
-                    % Add connection point of the diode DFP
-                    (jTBe) ++(0,-3) coordinate (jDFPa)
-                    % Add diode DFP
-                    (jDFPa) to [D,l^=$D_\mathrm{Fp}$] (jTBe)
-                    % Add connection to U1g
-                    (jDFPa) to [short,-] (jU1g)
-                    % Add junction for transformer Ltpv
-                    (jTBc) to [short,-] ++(2,0)  coordinate  (jLtpv)
+                    (jU1v) to [V=$U_1$] ++(0,-5) coordinate (jU1g)
                     % Add arrow and Text
-                    (jTBc) ++(1,0) node[currarrow](IP){}  
-                    (IP)  node[anchor=south,color=black]{$i_\mathrm{p}$}                   
-                    % Add junction for Transistor
-                    (jLtpv) ++(0,-3) coordinate (jTd)
-                    % Add junction for Transistor
-                    (jTd) ++(0,-3) coordinate (jTs)
-                    % Add transistor T2
-                    (jTs) ++ (0,1.5) node[nigfete,xscale=-1](Trans1){}
+                    (jU1v) ++(0.5,0) node[currarrow](I1){}  
+                    (I1)  node[anchor=south,color=black]{$i_\mathrm{1}$}                    
+                    % Add connection to Transistor T1c
+                    (jU1v) to [short,-*] ++(2.5,0) coordinate (jT1c)
+                    % Add connection to Transistor T1e
+                    (jT1c) ++ (0,-1.5) coordinate (jT1e)
+                    % Add transistor T1
+                    (jT1c) ++ (0,-1.5) node[npn, anchor=E](T1){}
                     % At transistor label T2
-                    (Trans1)  node[anchor=east,color=black]{$T$}                     
+                    (T1)  node[anchor=west,color=black]{$T_\mathrm{1}$}                     
                     % Connect Transistor
-                    (jTs) to [short,-] (Trans1.S)
-                    (jTd) to [short,-] (Trans1.D)
-                    (Trans1.G) to [sqV] ++(1,0)
-                    % Add connection to diode DFp
-                    (jTs) to [short,-*] (jDFPa)
-                    % Assign Transistor drain junction to primary junction point
-                    (jTd) coordinate  (jLtpg)
+                    (jT1e) to [short,-] (T1.E)
+                    (jT1c) to [short,-] (T1.C)
+                    (T1.B) to [sqV] ++(-1,0)                 
+                    % Add connection to diode D1k
+                    (jT1e) to [short,-] ++(0,-2) coordinate (jD1k)
+                    % Add connection point of the diode D1a
+                    (jD1k) ++(0,-1.5) coordinate (jD1a)
+                    % Add diode D1
+                    (jD1a) to [D,l^=$D_\mathrm{1}$] (jD1k)
+                    % Add connection to U1g
+                    (jU1g) to [short,-*] (jD1a)
+                    % Add connection to Transistor T2e
+                    (jD1a) to [short,-] ++(2.5,0) coordinate (jT2e)
+                    % Add connection to Transistor T1e
+                    (jT2e) ++ (0,1.5) coordinate (jT2c)
+                    % Add transistor T2
+                    (jT2e) node[npn, anchor=E](T2){}
+                    % At transistor label T2
+                    (T2)  node[anchor=west,color=black]{$T_\mathrm{2}$}                     
+                    % Connect Transistor
+                    (jT2e) to [short,-] (T2.E)
+                    (jT2c) to [short,-] (T2.C)
+                    (T2.B) to [sqV] ++(-1,0) 
+                    % Add connection to diode D2a
+                    (jT2c) to [short,-] ++(0,2) coordinate (jD2a)
+                    % Add diode D2
+                    (jD2a) to [D,l^=$D_\mathrm{2}$] ++(0,1.5) coordinate (jD2k)
+                    % Add connection to T1c
+                    (jT1c) to [short,-] (jD2k)
+
+                    % Add connection point for transformer Ltpcv
+                    (jD2a) ++(1.5,0)  coordinate  (jLtpv)
+                    % Add connection point for transformer Ltpcg
+                    (jT2c) ++(1.5,0)  coordinate  (jLtpg)
+                    % Add connection to half bridge 1
+                    (jLtpv) to [short,-*] (jT1e)
+                    % Add connection to half bridge 2
+                    (jLtpg) to [short,-*] (jT2c)
+                    % Add arrow and Text
+                    (jLtpv) ++(-0.5,0) node[currarrow](IP){}  
+                    (IP)  node[anchor=south,color=black]{$i_\mathrm{p}$}                                          
                     % Add transformer primary inductor with voltage arrow
-                    (jLtpv) to [L, n=Ltp, v_=$U_\text{p}$, voltage=straight] ++(0,-3) coordinate (jLtpg)
-                    % Add junctions for secondary inductor
-                    (jLtpv) ++(0.8,0) coordinate  (jLtsv) 
-                    (jLtpg) ++(0.8,-0.5) coordinate  (jLtsgx)
-                    % Add winding text
-                    (jLtpg) node[left] {$N_\mathrm{p}$};         
+                    (jLtpv) to [L,l_=$N_\mathrm{1}$, n=Ltp, v_=$U_\text{p}$, voltage shift=5, voltage=straight] (jLtpg)
+                    % Add connections point for secondary inductor
+                    (jLtpv) ++(0.8,0) coordinate  (jLtsv);
                     % Add iron core
             \draw 
-                    (jLtpv) ++(0.5,-0.5) coordinate  (jLtcorev) 
-                    (jLtpg) ++(0.5,0.5) coordinate  (jLtcoreg)
+                    (jLtpv) ++(0.4,-0.5) coordinate  (jLtcorev) 
+                    (jLtpg) ++(0.4,0.5) coordinate  (jLtcoreg)
                     (jLtcorev) to [short, double, double distance=3pt, thick]  (jLtcoreg)
                     let \p1 = (jLtcorev), \p2 = (jLtcoreg) in [double, double distance=3pt, thick]
                     (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2); 
             \draw 
+                    % Add transformer secondary inductor with voltage arrow        
+                    (jLtsv) ++(0,-2) coordinate (jLtsg)
                     % Add transformer secondary inductor with voltage arrow
-                    (jLtsv) to [L,n=Lts,v^=$U_\text{s}$, voltage shift=0.5, voltage=straight] ++(0,-3) coordinate (jLtsg)
-                    % Add winding text
-                    (jLtsg) node[right] {$N_\mathrm{s}$};     
+                    (jLtsv) to [L,l^=$N_\mathrm{2}$,n=Lts,mirror,v^=$U_\text{s}$, voltage shift=5, voltage=straight] (jLtsg);
                     \path (Ltp.ul dot) node[circ]{};
                     \path (Lts.ul dot) node[circ]{};                    
             \draw
                     % Add arrow and Text
                     (jLtsv) ++(0.5,0) node[currarrow](IS){}  
                     (IS)  node[anchor=south,color=black]{$i_\mathrm{s}$}
-                     % Add D1
-                    (jLtsv) to  [D,l^=$D_1$] ++ (2,0) coordinate (jD1k)
-                    % Add junction point for DFsk
-                    (jD1k)  to [short,-*] ++(0,0) coordinate (jDFsk)
-                    % Add junction point for DFsa
-                    (jDFsk)  ++ (0,-3.5) coordinate (jDFsa)
-                    % Add diode DFs
-                    (jDFsa) to  [D,l^=$D_\mathrm{Fs}$]  (jDFsk)                    
+                     % Add D3
+                    (jLtsv) to  [D,l^=$D_3$] ++ (3,0) coordinate (jD3k)
+                    % Add connection and junction point for D4k
+                    (jD3k)  to [short,-*] ++(0,0) coordinate (jD4k)
+                    % Add connection point for DFsa
+                    (jD4k)  ++ (0,-2) coordinate (jD4a)
+                    % Add diode D4
+                    (jD4a) to  [D,l^=$D_\mathrm{4}$,v_<=$U_\text{D4}$, voltage shift=0.5, voltage=straight]  (jD4k)                    
                     % Add inductor L
-                    (jDFsk) to [L,l=$L$,n=L1] ++(3,0) coordinate (jU2v)
+                    (jD4k) to [L,l=$L$,n=L1] ++(3,0) coordinate (jCv)
                     % Add arrow and Text
-                    (jDFsk) ++(0.5,0) node[currarrow](IL){}  
-                    (IL)  node[anchor=south,color=black]{$i_\mathrm{L}$}
-                    % Add output voltage U2
-                    (jU2v) to [V=$U_2$] ++(0,-3.5) coordinate (jU2g)
-                    % Add connection to DFs
-                    (jU2g) to [short,-*] (jDFsa)
+                    (jD4k) ++(0.5,0) node[currarrow](IL){}  
+                    (IL)  node[anchor=south,color=black]{$i_\mathrm{2}$}
+                    % Add connection point jCg for capacitor
+                    (jCv) ++ (0,-2) coordinate (jCg)                    
+                    % Add connection point jRv for Resistor
+                    (jCv) ++ (1.5,0) coordinate (jRv)                    
+                    % Add resistor R
+                    (jRv) to [R,l=$R$] ++(0,-2) coordinate (jRg)
+                    % Add connections to capacitor
+                    (jRv)  to [short,-*] (jCv)
+                    (jRg)  to [short,-*] (jCg)
+                    % Add capacitor C
+                    (jCv) to  [C,l_=$C$,v^=$U_\text{2}$, voltage shift=0.5, voltage=straight] (jCg)
+                    % Add connection to diode D4
+                    (jCg) to [short,-*] (jD4a)
                     % Add connection to LTsgx
-                    (jDFsa) to [short,-] (jLtsgx)
-                    % Add connection to LTsgx
-                    (jLtsgx) to [short,-] (jLtsg);
+                    (jD4a) to [short,-] (jLtsg);
 
                 \end{circuitikz}
     \end{center}
