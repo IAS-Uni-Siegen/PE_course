@@ -85,10 +85,10 @@ The average inductor current is calculated as:
  \end{equation}
  The previously obtained maximum and minimum switching frequencies lead to:
  \begin{equation}
-    T_\mathrm{s}(P_\mathrm{2}=\SI{2}{\watt}) =\frac{1}{f_{\mathrm{s,2W}}} = \frac{1}{\SI{150}{\kilo \hertz}}= \SI{6.67}{\micro \s},
+    T_\mathrm{s}(P_\mathrm{2}=\SI{2}{\watt}) = \frac{1}{\SI{150}{\kilo \hertz}}= \SI{6.67}{\micro \s},
  \end{equation}
  \begin{equation}
-    T_\mathrm{s}(P_\mathrm{2}=\SI{15}{\watt}) =\frac{1}{f_{\mathrm{s,15W}}} = \frac{1}{\SI{20}{\kilo \hertz}}= \SI{50}{\micro \s}.
+    T_\mathrm{s}(P_\mathrm{2}=\SI{15}{\watt}) = \frac{1}{\SI{20}{\kilo \hertz}}= \SI{50}{\micro \s}.
  \end{equation}
  The transistor switch-on times can be determined using 
  \begin{equation}
@@ -138,9 +138,9 @@ The average inductor current is calculated as:
 
     The relationship between the voltage ripple and the capacitance is identical to the step-up converter, which is defined as:
     \begin{equation}
-        \Delta u_{\mathrm{C}} = \frac{I_2}{C} D T_{\mathrm{s}},
+        \Delta u_{\mathrm{C}} = \frac{I_2}{C} D T_{\mathrm{s}}.
     \end{equation}
-    applying for the maximum power ($P = \SI{15}{\watt}$) results into:
+    Considering the maximum power ($P_2 = \SI{15}{\watt}$) results into:
     \begin{equation}
         C_2 = \frac{I_{\mathrm{2}}(P_\mathrm{2}=\SI{15}{\watt}) D T_{\mathrm{s}}(P_\mathrm{2}=\SI{15}{\watt})}{\Delta u_{\mathrm{C}}}
         = \frac{\SI{1.25}{\ampere} \cdot 0.4 \cdot \SI{50}{\micro\second}}{\SI{0.24}{\volt}}
@@ -212,7 +212,7 @@ The average inductor current is calculated as:
         \label{eq:U2}
     \end{equation}
     where the diode voltage is assumed to be zero during the conduction phase.
-    Hence, the maximum blocking voltage of the transistor is calculated with \eqref{eq:U2} and \eqref{eq:uT}, which results in:
+    Hence, the maximum blocking voltage of the transistor is calculated with \eqref{eq:uT} and \eqref{eq:U2}, which results in:
     \begin{equation}
         u_{\mathrm{T}} = U_1 - (-U_2)
         = U_1 + U_2 = \SI{18}{\volt} + \SI{12}{\volt} = \SI{30}{\volt}.
@@ -252,7 +252,7 @@ same duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
     For the boost-buck converter the voltage transfer ratio delivers:
     \begin{equation}
         \frac{U_\mathrm{2}}{U_\mathrm{1}} = \frac{D} {1-D}
-        \hspace{1cm} \Rightarrow \hspace{1cm}
+        \quad \Leftrightarrow \quad
         D = \frac{\frac{U_\mathrm{2}}{U_\mathrm{1}}} {1+{\frac{U_\mathrm{2}}{U_\mathrm{1}}}}.
         \label{eq:DutyCycleEx03}
     \end{equation}
@@ -271,7 +271,7 @@ same duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
     of $\SI{285}{\volt}$, the intermediate circuit voltage $U_\mathrm{0}$ is calculated as
     \begin{equation}
         U_\mathrm{0}=U_\mathrm{1} \frac{1}{1-D} 
-        \hspace{1cm} \Rightarrow \hspace{1cm}  
+        =
         \SI{380}{\volt} \frac{1}{1-0.429} = \SI{665}{\volt}.
         \label{eq:DCLinkEx03}        
     \end{equation}
@@ -282,7 +282,7 @@ same duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
 
 \begin{solutionblock}
     % Solution
-    Here \eqref{eq:DutyCycleEx03} and \eqref{eq:DCLinkEx03} are used to calculate results summarized in \autoref{table:DutyCycleDCLinkVoltageAtOutputVoltage} 
+    Here, \eqref{eq:DutyCycleEx03} and \eqref{eq:DCLinkEx03} are used to calculate results summarized in \autoref{table:DutyCycleDCLinkVoltageAtOutputVoltage} 
     and displayed in \autoref{fig:DCLinkVoltageAtOutputVoltage} and \autoref{fig:DutyCycleAtOutputVoltage}.
 
     %Result table
@@ -299,7 +299,7 @@ $D_2$ have?}
 
 \begin{solutionblock}
     % Solution
-    Based on the schematic \autoref{fig:ex03_boost_buck_converter} following voltages are applied to the semiconductor components.
+    Based on the schematic from \autoref{fig:ex03_boost_buck_converter}, following voltage ratings of the semiconductor components can be derived:
     \begin{itemize}
         \item Reverse voltage across $D_1$: In case of $T_1$ is active, the potential at the T$T_1$'s drain is pulled down. 
               The diode $D_1$ hat to block $U_0$.
@@ -410,7 +410,7 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
     $U_\mathrm{C}$ corresponds to the input voltage $U_\mathrm{1}$, because the voltage transfer ratio of the SEPIC-topology
     is calculated by:
     \begin{equation}
-        \frac{U_\mathrm{2}}{U_\mathrm{1}}= \frac{D}{1-D} \Rightarrow
+        \frac{U_\mathrm{2}}{U_\mathrm{1}}= \frac{D}{1-D} \quad \Leftrightarrow \quad 
         U_\mathrm{1}=\frac{1-D}{D}U_\mathrm{2}=\left( \frac{1}{D}-1\right)U_\mathrm{2}=U_\mathrm{C}
     \end{equation}
     The result shows, that the transistor and the diode needs to block the sum of input and output voltage, 
@@ -445,11 +445,8 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
         P_\mathrm{min}=U_\mathrm{1}\frac{\Delta i_\mathrm{L1}}{2}D.
         \label{eq:PowerL1ripplesepic}
     \end{equation}
-    Entering the values in \eqref{eq:PowerL1ripplesepic} leads to \autoref{table:PowerminSepic}.
-    %Solution table Minimal Power 
-    \input{./fig/ex03/sFigTab_PowerminSepic}
-    The minimal power, which ensures continuous operation across the entire output voltage range
-    yields  $\SI{849}{\watt}$.
+    \input{./fig/ex03/sFigTab_PowerminSepic} %Solution table Minimal Power 
+    Entering the values in \eqref{eq:PowerL1ripplesepic} leads to \autoref{table:PowerminSepic}. The minimal power, which ensures continuous operation across the entire output voltage range yields $\SI{849}{\watt}$.
 
 \end{solutionblock}
 
