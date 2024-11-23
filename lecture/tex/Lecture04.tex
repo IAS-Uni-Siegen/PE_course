@@ -79,6 +79,157 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Frequency analysis: Fourier series %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Frequency analysis: Fourier series}
+    Often the rectification introduces non-fundamental frequency components, e.g., due to the output voltage rectification or by a load current feedback towards the input side. To analyze the \hl{frequency spectrum} of a periodic signal $u(t)$, the \hl{Fourier series} is used:
+    \begin{equation}
+        \begin{gathered}
+            u(t) = \frac{a_0}{2}+\sum_{n=1}^{\infty} \left( a_k \cos(k\omega t) + b_k \sin(k\omega t) \right), \quad k\in \mathbb{N},\\
+            a_k= \frac{1}{\pi} \int_{0}^{2\pi} u(t) \cos(k\omega t) \mathrm{d}\omega t,\,\, k\geq 0, \qquad b_k = \frac{1}{2\pi} \int_{0}^{2\pi} u(t) \sin(k\omega t) \mathrm{d}\omega t,\,\, k \geq 1.
+        \end{gathered}
+    \end{equation}
+
+    \begin{figure}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=0.28\textwidth,
+                height=0.425\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                ylabel={$u_1(\omega t)$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                xmin=0, xmax=2*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0,3.14,6.28},
+                xticklabels={$0$,$\pi$,$2\pi$},
+                ytick={-1,0,1},
+                yticklabels={$-\hat{u}_1$,$0$,$\hat{u}_1$},
+                grid=both,
+                ]
+                \addplot[domain=0:2*pi, samples=100, signalblue, thick]{sin(deg(x))+0.125*sin(deg(3*x))+0.05*sin(deg(6*x))};
+            \end{axis}
+        \end{tikzpicture}
+        \hspace{0.5cm}
+        \begin{circuitikz}[]
+            \ctikzset{blocks/scale=2, block lateral anchors pos=0.7}
+            \path (0,0) node[sacdcshape](acdc){} ; 
+            \draw (acdc.left up) -- ++(-1,0) coordinate (A1) 
+            (acdc.left down) to [short] ++(-1,0) coordinate (A2)
+            (A1) to [open, v_=$u_1$, voltage = straight, o-o] (A2)
+            (acdc.right up) to [short, -o]  ++(1,0) coordinate (B1)
+            (acdc.right down) to [short, -o] ++(1,0) coordinate (B2);
+            \draw (B1) to [open, v^=$u_2$, voltage = straight] (B2);
+        \end{circuitikz}
+        \hspace{0.5cm}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=0.28\textwidth,
+                height=0.425\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                ylabel={$u_2(\omega t)$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                xmin=0, xmax=2*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0,3.14,6.28},
+                xticklabels={$0$,$\pi$,$2\pi$},
+                ytick={-1,0,1},
+                yticklabels={$-\hat{u}_2$,$0$,$\hat{u}_2$},
+                grid=both,
+                ]
+                \addplot[domain=0:2*pi, samples=100, signalblue, thick]{1+0.075*sin(deg(3*x))+0.05*sin(deg(7*x))};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Rectification under distorted conditions}
+        \label{fig:rectification_task_distortion}
+    \end{figure}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Frequency analysis: Fourier series (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Frequency analysis: Fourier series (cont.)}
+
+    \begin{figure}
+        \begin{tikzpicture}
+            \begin{axis}[
+                width=0.85\textwidth,
+                height=0.7\textheight,
+                xlabel={$\omega t$},
+                ylabel={$u(\omega t)$},
+                grid=both,
+                domain=0:6*pi,
+                samples=1000,
+                xtick={0,pi,2*pi,3*pi,4*pi,5*pi,6*pi},
+                xticklabels={$0$, $\pi$, $2\pi$, $3\pi$, $4\pi$, $5\pi$, $6\pi$},
+                ytick={-1,-0.5,0,0.5,1},
+                ymin=-1.5, ymax=1.5,
+                axis lines=middle,
+                enlargelimits=false,
+                clip=false,
+                xlabel style={
+                    anchor=west,
+                    %xshift=0.5cm,
+                    %yshift=-0.3cm,
+                    %font=\normalsize,
+                },
+                ylabel style={
+                    anchor=east,
+                    %xshift=-0.5cm,
+                    %yshift=0.3cm,
+                    %font=\normalsize,
+                },
+                xticklabel style={
+                    anchor=north east,
+                    yshift=0.1cm,
+                },
+            ]
+            
+                       
+            % First component
+            \addplot[signalred, thick, domain=0:6*pi] {4/pi * sin(deg(x))};
+            \node[anchor=south, signalred] at (axis cs:3.14/2,4/3.14) {$k \leq 1$};
+            
+            % First 5 components
+            \addplot[signalblue, thick, domain=0:6*pi] {4/pi * (sin(deg(x)) + 1/3*sin(deg(3*x)) + 1/5*sin(deg(5*x)))};
+            \node[anchor=west, signalblue, fill=white, inner sep = 2pt] at (axis cs:3.14,0.5) {$k \leq 5$};
+            
+            % First 7 components
+            \addplot[signalgreen, thick, domain=0:6*pi] {4/pi * (sin(deg(x)) + 1/3*sin(deg(3*x)) + 1/5*sin(deg(5*x)) + 1/7*sin(deg(7*x)) + 1/9*sin(deg(9*x)))};
+            \node[anchor=east, signalgreen, fill=white, inner sep = 2pt] at (axis cs:3.14,-0.5) {$k \leq 7$};
+            
+            % First 13 components
+            \addplot[signalbrown, thick, domain=0:6*pi] {4/pi * (sin(deg(x)) + 1/3*sin(deg(3*x)) + 1/5*sin(deg(5*x)) + 1/7*sin(deg(7*x)) + 1/9*sin(deg(9*x)) + 1/11*sin(deg(11*x)) + 1/13*sin(deg(13*x)))};
+            \node[anchor=west, signalbrown, fill=white, inner sep = 2pt] at (axis cs:2*3.14,-0.5) {$k \leq 13$};
+
+            % Square wave signal 
+            \addplot[black, thick, domain=0:6*pi, dashed] {sign(sin(deg(x)))};
+            
+            \end{axis}
+            \end{tikzpicture}
+        
+        \caption{Fourier series example: representation of a square wave signal}
+        \label{fig:Fourier_series_square_wave}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Half-cycle rectification / M1U circuit %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Half-cycle rectification / M1U circuit} 
@@ -165,14 +316,14 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Uncontrolled rectifier circuit %%
+%% Uncontrolled rectifier circuit (cont.) %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Uncontrolled rectifier circuit}
+    \frametitle{Uncontrolled rectifier circuit (cont.)}
     From \eqref{eq:u2_M1U}, the average output voltage of the M1U rectifier is
     \begin{equation}
         \begin{split}
-            \overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{2\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}t\\
+            \overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{2\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t = \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t\\
             &= \frac{\hat{u}_1}{2\pi} \left[ - \cos(\omega t) \right]_{0}^{\pi} = \frac{\hat{u}_1}{2\pi} \left( 1+1 \right) = \frac{\hat{u}_1}{\pi} = \frac{\sqrt{2}U_1}{\pi}
         \end{split}
         \label{eq:u2_M1U_avg}
@@ -180,8 +331,101 @@
     with $U_1$ being the RMS value of the input voltage $u_1(t)$. The RMS value of the output voltage $u_2(t)$ results in
     \begin{equation}
         \begin{split}
-        U_2 &= \sqrt{\frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1^2 \sin^2(\omega t) \mathrm{d}t} = \hat{u}_1 \sqrt{\frac{1}{2\pi}\left[\frac{1}{2}\omega t - \frac{\sin(2 \omega t)}{4}\right]_0^\pi}\\&= \frac{\hat{u}_1}{2} = \frac{U_1}{\sqrt{2}}.
+        U_2 &= \sqrt{\frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1^2 \sin^2(\omega t) \mathrm{d}\omega t} = \hat{u}_1 \sqrt{\frac{1}{2\pi}\left[\frac{1}{2}\omega t - \frac{\sin(2 \omega t)}{4}\right]_0^\pi}\\&= \frac{\hat{u}_1}{2} = \frac{U_1}{\sqrt{2}}.
         \end{split}
         \label{eq:u2_M1U_rms}
     \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Uncontrolled rectifier circuit (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Uncontrolled rectifier circuit (cont.)}
+    The Fourier coefficients of the output voltage $u_2(t)$ from \eqref{eq:u2_M1U} are
+    \begin{equation}
+        \begin{split}
+            a_0 &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \mathrm{d} \omega t = 2 \overline{u}_2= 2 \frac{\hat{u}_1}{\pi},\\
+            a_k &= \frac{1}{2\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t = \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t\\  &= \frac{\hat{u}_1}{4\pi} \int_{0}^{\pi}  \sin(\omega t(1-k)) + \sin(\omega t(1+k)) \mathrm{d}\omega t = \ldots =  \frac{\hat{u}_1}{\pi}\frac{1}{1-k^2}, \quad k=2,4,6,\ldots\\
+            b_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t = \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t \\ &=\frac{\hat{u}_1}{4\pi} \int_{0}^{\pi}  \cos(\omega t(1-k)) - \cos(\omega t(k+1)) \mathrm{d}\omega t = \ldots = 0.
+        \end{split}
+        \label{eq:u2_M1U_Fourier}
+    \end{equation}
+    Above, $a_0$ represents a \hl{DC component}, while the $a_k \neq 0$ coefficients indicate even-numbered \hl{harmonics}.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Transformer input filtering %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Transformer input filtering}
+    From \eqref{eq:u2_M1U_Fourier} the Fourier series of $u_2(t)$ results in
+    \begin{equation}
+        u_2(t) = \frac{\hat{u}_1}{\pi}\left(1 + \sum_{k=2,4,6,\ldots} \frac{1}{1-k^2} \cos(k\omega t)\right).
+    \end{equation}
+    Assuming that there is a resistive load, the output current has the same harmonic spectrum and will distort the input side. To avoid this, a \hl{transformer} can be used to filter out the harmonics, in particular the \hl{DC component}. The resulting topology is shown in \figref{fig:M1U_transformer_topology}.
+    \begin{figure}
+           \begin{circuitikz}[]
+            \draw (0,0) node[transformer core](T){$N_1:N_2$}
+            (T.inner dot A1) node[circ]{}
+            (T.inner dot B1) node[circ]{}
+            (T.A1) to [short, -*, i<_=$i'_\mathrm{p}(t)$] ++(-1,0) coordinate (A1)
+            (T.A2) to [short, -*] ++(-1,0) coordinate (A2)
+            (A1) to [inductor, l=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$] (A2)
+            (A1) to [short, -o, i<_=$i_\mathrm{p}(t)$] ++(-1.5,0) coordinate (A11)
+            (A2) to [short, -o] ++(-1.5,0) coordinate (A22)
+            (T.B1) to [short, i=$i_1(t)$] ++(1,0) coordinate (B1)
+            (T.B2) to [short] ++(1,0) coordinate (B2);
+            \draw (A11) to [open, v=$u_\mathrm{p}(t)\hspace{0.5cm}$, voltage = straight] (A22)
+            (B1) to [open, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] (B2); 
+            \draw (B1) to [open] (B2 -| B1) coordinate (A)
+            (B1) to [short] ++(0.25,0)
+            to [diode, l=$D$]  ++(1.5,0)
+            to [short, -o, i=$i_2(t)$] ++(1.0,0) coordinate (C)
+            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] (A -| C) coordinate (B)
+            (A) -- (B);
+        \end{circuitikz}
+        \caption{M1U topology with input transformer}
+        \label{fig:M1U_transformer_topology}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Transformer input filtering (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Transformer input filtering (cont.)}
+    Assuming an ideal restive load $R$, the output current $i_2(t)$ is
+    \begin{equation}
+        i_1(t) = \frac{\hat{u}_1}{\pi R}\left(1 + \sum_{k=2,4,6,\ldots} \frac{1}{1-k^2} \cos(k\omega t)\right) = \overline{i}_1 + \sum_{k=2,4,6,\ldots} i_k \cos(k\omega t).
+    \end{equation}
+    Since the impedance of the magnetizing inductance $L_m$ is zero for DC components, the (transformed) DC current $\overline{i}_1$ is not present at the transformer input. Likewise, low frequency harmonics are filtered out by the transformer while the high frequency harmonic amplitudes decrease with $\sim 1/(1-k^2)$. 
+    \begin{figure}
+           \begin{circuitikz}[]
+            \draw (0,0) node[transformer core](T){$N_1:N_2$}
+            (T.inner dot A1) node[circ]{}
+            (T.inner dot B1) node[circ]{}
+            (T.A1) to [short, -*, i<_=$i'_\mathrm{p}(t)$] ++(-1,0) coordinate (A1)
+            (T.A2) to [short, -*] ++(-1,0) coordinate (A2)
+            (A1) to [inductor, l=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$] (A2)
+            (A1) to [short, -o, i<_=$i_\mathrm{p}(t)$] ++(-1.5,0) coordinate (A11)
+            (A2) to [short, -o] ++(-1.5,0) coordinate (A22)
+            (T.B1) to [short, i=$i_1(t)$] ++(1,0) coordinate (B1)
+            (T.B2) to [short] ++(1,0) coordinate (B2);
+            \draw (A11) to [open, v=$u_\mathrm{p}(t)\hspace{0.5cm}$, voltage = straight] (A22)
+            (B1) to [open, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] (B2); 
+            \draw (B1) to [open] (B2 -| B1) coordinate (A)
+            (B1) to [short] ++(0.25,0)
+            to [diode, l=$D$]  ++(1.5,0)
+            to [short, i=$i_2(t)$] ++(1.0,0) coordinate (C)
+            to [R, v^= $u_2(t)$, voltage = straight, l_=$R$] (A -| C) coordinate (B)
+            (A) -- (B);
+            %red dotted line indicating the current flow path via Lm, the transfer, the diode and R
+            \draw[signalred, dashed] (A1) -- (A2) -- (B) -- (C) -- (A1);
+            %label red dotted line with \overline{i}_1 half way between (B2) and (B)
+            \node[signalred, above] at ($(B2)!0.5!(B)$) {$\overline{i}_1$};
+        \end{circuitikz}
+        \caption{M1U topology with input transformer and DC current path (red dotted line)}
+        \label{fig:M1U_transformer_topology_DC-current}
+    \end{figure}
 \end{frame}
