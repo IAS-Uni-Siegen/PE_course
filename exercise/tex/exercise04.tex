@@ -67,10 +67,39 @@ Now $\Delta i_\mathrm{m,max}=\SI{20}{\ampere}$ can be used in \eqref{eq:Duty cyc
 \subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Calculate and sketch the following voltage and current curves for this operating case over one cycle period: $u_\mathrm{T}(t), u_\mathrm{s}(t), i_\mathrm{2}(t), i_\mathrm{1}(t)$ (Note: corresponds to the switch-on time of the transistor).}
 
 \input{./fig/ex04/Fig_voltageTransistorPeriodTask1.tex}
-    
+\input{./fig/ex04/Fig_voltageUsPeriodTask1.tex}
+\input{./fig/ex04/Fig_currentI2PeriodTask1.tex}
+\input{./fig/ex04/Fig_currentI1PeriodTask1.tex}
 
+\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Determine the mean value $\overline i_\mathrm{T}$ and the effective value of the current $i_\mathrm{T, rms}$ through the transistor. Determine the mean value $\overline i_\mathrm{D}$ and the effective value of the current $i_\mathrm{D, rms}$ through the diode. What is the maximum reverse voltage load $u_\mathrm{T, max}$ of the transistor? What is the maximum reverse voltage load $u_\mathrm{D, max}$ of the diode?}
+\begin{solutionblock}
+    \begin{equation}
+        \overline{i}_\mathrm{T} = \frac{1}{T_\mathrm{S}}\frac{1}{2}\hat I_\mathrm{1}T_\mathrm{on}=\frac{1}{\SI{20}{\micro\s}}\cdot\frac{1}{2}\SI{1.257}{\ampere}\cdot\SI{2.5}{\micro\s}=\SI{78.53}{\milli\ampere}
+    \end{equation}
+    \begin{equation}
+        i_\mathrm{T,rms}^2=\frac{1}{T_\mathrm{S}} \int_{0}^{T_\mathrm{S}} i_\mathrm{1}^2(t) \,dt \ = \frac{1}{T_\mathrm{S}}\int_{0}^{T_\mathrm{on}} \frac{\hat I_\mathrm{1}^2t^2}{T_\mathrm{on}^2} \,dt \ =  \frac{\hat I_\mathrm{1}^2T_\mathrm{on}}{3T_\mathrm{on}}
+    \end{equation}
+    \begin{equation}
+        i_\mathrm{T,rms} = \hat I_\mathrm{1} \sqrt{\frac{T_\mathrm{on}}{3T_\mathrm{S}}}= \SI{1.257}{\ampere}\cdot\sqrt{\frac{\SI{2.5}{\micro\s}}{3\cdot\SI{20}{\micro\s}}}= \SI{256.58}{\milli\ampere}
+    \end{equation}
 
-\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Determine the mean value $\overline i_\mathrm{T}$ and the effective value of the current $i_\mathrm{T, rms}$ through the transistor. Determine the mean value $\overline i_\mathrm{D}$ and the effective value of the current $i_\mathrm{D, rms}$ through the diode. What is the maximum reverse voltage load $u_\mathrm{T, max}$ of the transistor? What is the maximum reverse voltage load $u_\mathrm{D, max}$ of the diode? Calculate the fluctuation range $\Delta i_\mathrm{C, pp}$ of the current $i_\mathrm{C}$ in the output capacitor.}
+    \begin{equation}
+        \overline{i}_\mathrm{D} = \frac{1}{T_\mathrm{S}}\frac{1}{2}\hat I_\mathrm{2}T_\mathrm{off}=\frac{1}{\SI{20}{\micro\s}}\cdot\frac{1}{2}\SI{6.28}{\ampere}\cdot\SI{12.7}{\micro\s}=\SI{2}{\ampere}
+    \end{equation}
+
+    \begin{equation}
+        i_\mathrm{D,rms} = \hat I_\mathrm{2} \sqrt{\frac{T_\mathrm{off}}{3T_\mathrm{S}}}= \SI{6.28}{\ampere}\cdot\sqrt{\frac{\SI{12.7}{\micro\s}}{3\cdot\SI{20}{\micro\s}}}= \SI{2.89}{\milli\ampere}
+    \end{equation}
+
+    \begin{equation}
+        u_\mathrm{T,max} = U_\mathrm{1} + \frac{N_\mathrm{1}}{N_\mathrm{2}}U_\mathrm{2}= \SI{382}{\volt}+\frac{60}{12}\cdot\SI{15}{\volt}= \SI{457}{\volt}
+    \end{equation}
+
+    \begin{equation}
+        u_\mathrm{D,max} = U_\mathrm{2} + \frac{N_\mathrm{2}}{N_\mathrm{1}}U_\mathrm{1}= \SI{15}{\volt}+\frac{12}{60}\cdot\SI{382}{\volt}= \SI{91.4}{\volt}
+    \end{equation}
+
+\end{solutionblock}
 
 \subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load.How much energy is transferred from the input to the output per switching period $\Delta E$ and what is the resulting average power? What happens if there is no ideal voltage source on the output side but an unloaded capacitor and the circuit is operated with $D>0$?}
 
