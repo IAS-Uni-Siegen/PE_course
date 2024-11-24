@@ -7,12 +7,12 @@
         major grid style={line width=.2pt,draw=gray!50},
         minor grid style={line width=.1pt,draw=gray!20},
         xlabel={$t$ / µs},
-        ylabel={$i_\mathrm{2}(t)$ / A},
+        ylabel={$i_\mathrm{1}(t)$ / A},
        % title={$i_\mathrm{L}$ for minimum output power},
         xmin=0, xmax=40,
-        ymin=-0, ymax=8,
+        ymin=-0, ymax=2,
         xtick={0, 20, 40},
-        ytick={0, 2,4,6,8},
+        ytick={0, 1,2},
         ]
         % Einschaltverhalten graph
         \addplot[
@@ -20,11 +20,11 @@
             mark=none,
             color=black,
         ] coordinates {
-            (0,0) (2.5, 0) (2.5, 6.28) (12.7, 0) (22.5, 0)(22.5, 6.28) (32.7, 0) (40, 0)
+            (0,0) (2.5, 1.257) (2.5, 0) (20, 0)(22.5,  1.257) (22.5,  0) (40, 0)
         };
     \end{axis}
     \end{tikzpicture} 
     \hspace{1cm} % Abstand zwischen den beiden Diagrammen
-    \caption{Display of the current $i_\mathrm{2}(t)$.}
+    \caption{Display of the current $i_\mathrm{1}(t)$.}
     \label{fig:currentSecondarySideTask1}
     \end{solutionfigure}
