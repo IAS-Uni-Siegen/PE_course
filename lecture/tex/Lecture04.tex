@@ -185,15 +185,9 @@
                 clip=false,
                 xlabel style={
                     anchor=west,
-                    %xshift=0.5cm,
-                    %yshift=-0.3cm,
-                    %font=\normalsize,
                 },
                 ylabel style={
                     anchor=east,
-                    %xshift=-0.5cm,
-                    %yshift=0.3cm,
-                    %font=\normalsize,
                 },
                 xticklabel style={
                     anchor=north east,
@@ -235,10 +229,10 @@
 \subsection{Half-cycle rectification / M1U circuit} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Uncontrolled rectifier circuit %%
+%% M1U uncontrolled rectifier circuit %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Uncontrolled rectifier circuit}
+    \frametitle{M1U uncontrolled rectifier circuit}
     Based on \figref{fig:M1U_topology}, the output voltage $u_2(t)$ of the M1U rectifier is
     \begin{equation}
         u_2(t) = \begin{cases}
@@ -277,10 +271,10 @@
         \hspace{0.5cm}
         \begin{circuitikz}[] % circuit (center plot)
             \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
-            (0,0) to [short] ++(1,0)
+            (0,0) to [short] ++(0.75,0)
             to [diode, l=$D$]  ++(1.5,0)
-            to [short, -o, i=$i_2(t)$] ++(1.0,0)
-            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (B)
+            to [short, i=$i_2(t)$] ++(0.75,0)
+            to [R, v^= $u_2(t)$, voltage = straight, l_=$R$] ++(0,-2) coordinate (B)
             (A) -- (B);
         \end{circuitikz}
         \hspace{0.5cm}
@@ -310,16 +304,16 @@
                 \addplot[domain=pi:2*pi, samples=10, signalblue, thick]{0};
             \end{axis}
         \end{tikzpicture}
-        \caption{M1U topology and typical input and output voltage signals}
+        \caption{M1U topology with typical input and output voltage signals (assuming a resistive load)}
         \label{fig:M1U_topology}
     \end{figure}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Uncontrolled rectifier circuit (cont.) %%
+%% M1U uncontrolled rectifier circuit (cont.) %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Uncontrolled rectifier circuit (cont.)}
+    \frametitle{M1U uncontrolled rectifier circuit (cont.)}
     From \eqref{eq:u2_M1U}, the average output voltage of the M1U rectifier is
     \begin{equation}
         \begin{split}
@@ -338,10 +332,10 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Uncontrolled rectifier circuit (cont.) %%
+%% M1U uncontrolled rectifier circuit (cont.) %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Uncontrolled rectifier circuit (cont.)}
+    \frametitle{M1U uncontrolled rectifier circuit (cont.)}
     The Fourier coefficients of the output voltage $u_2(t)$ from \eqref{eq:u2_M1U} are
     \begin{equation}
         \begin{split}
@@ -354,39 +348,62 @@
     Above, $a_0$ represents a \hl{DC component}, while the $a_k \neq 0$ coefficients indicate even-numbered \hl{harmonics}.
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Transformer input filtering %%
+%% M1U uncontrolled rectifier circuit (cont.) %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Transformer input filtering}
+    \frametitle{M1U uncontrolled rectifier circuit (cont.)}
     From \eqref{eq:u2_M1U_Fourier} the Fourier series of $u_2(t)$ results in
     \begin{equation}
         u_2(t) = \frac{\hat{u}_1}{\pi}\left(1 + \sum_{k=2,4,6,\ldots} \frac{1}{1-k^2} \cos(k\omega t)\right).
     \end{equation}
-    Assuming that there is a resistive load, the output current has the same harmonic spectrum and will distort the input side. To avoid this, a \hl{transformer} can be used to filter out the harmonics, in particular the \hl{DC component}. The resulting topology is shown in \figref{fig:M1U_transformer_topology}.
+    For a resistive load, the output current has the same harmonic spectrum:
+    \begin{equation}
+        i_2(t) = \frac{\hat{u}_1}{\pi R}\left(1 + \sum_{k=2,4,6,\ldots} \frac{1}{1-k^2} \cos(k\omega t)\right) = \overline{i}_2 + \sum_{k=2,4,6,\ldots} \hat{i}_{2,k} \cos(k\omega t).
+    \end{equation}
+    Resulting observations are:
+    \begin{itemize}
+        \item Non-fundamental current frequency components can distort the input side.
+        \item Higher frequency harmonics decrease with $\sim 1/(1-k^2)$.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Transformer input filtering  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Transformer input filtering}
+    To reduce the input side distortion, a transformer can be used to filter out the harmonics:
+    \begin{itemize}
+        \item Impedance of magnetizing inductance $L_\mathrm{m}$ is zero for DC components, i.e., the transformer blocks the DC current path (cf. dotted red line for $\overline{i}_2$ below).
+        \item With higher frequency harmonics, the impedance of $L_\mathrm{m}$ increases, i.e., filtering out the harmonics less effectively.
+    \end{itemize}
     \begin{figure}
            \begin{circuitikz}[]
             \draw (0,0) node[transformer core](T){$N_1:N_2$}
             (T.inner dot A1) node[circ]{}
             (T.inner dot B1) node[circ]{}
-            (T.A1) to [short, -*, i<_=$i'_\mathrm{p}(t)$] ++(-1,0) coordinate (A1)
+            (T.A1) to [short, -*, i<_=$i'_1(t)$] ++(-1,0) coordinate (A1)
             (T.A2) to [short, -*] ++(-1,0) coordinate (A2)
             (A1) to [inductor, l=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$] (A2)
-            (A1) to [short, -o, i<_=$i_\mathrm{p}(t)$] ++(-1.5,0) coordinate (A11)
+            (A1) to [short, -o, i<_=$i_1(t)$] ++(-1.5,0) coordinate (A11)
             (A2) to [short, -o] ++(-1.5,0) coordinate (A22)
-            (T.B1) to [short, i=$i_1(t)$] ++(1,0) coordinate (B1)
+            (T.B1) to [short, i=$i_\mathrm{s}(t)$] ++(1,0) coordinate (B1)
             (T.B2) to [short] ++(1,0) coordinate (B2);
-            \draw (A11) to [open, v=$u_\mathrm{p}(t)\hspace{0.5cm}$, voltage = straight] (A22)
-            (B1) to [open, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] (B2); 
+            \draw (A11) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (A22)
+            (B1) to [open, v = $u_\mathrm{s}(t)\hspace{0.5cm}$, voltage = straight] (B2); 
             \draw (B1) to [open] (B2 -| B1) coordinate (A)
             (B1) to [short] ++(0.25,0)
             to [diode, l=$D$]  ++(1.5,0)
-            to [short, -o, i=$i_2(t)$] ++(1.0,0) coordinate (C)
-            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] (A -| C) coordinate (B)
+            to [short, i=$i_2(t)$] ++(1.0,0) coordinate (C)
+            to [R, v^= $u_2(t)$, voltage = straight, l_=$R$] (A -| C) coordinate (B)
             (A) -- (B);
+            \draw[signalred, dashed, thick] (A1) -- (A2) -- (B) -- (C) -- (A1);
+            \node[signalred, above] at ($(B2)!0.5!(B)$) {$\overline{i}_2$};
         \end{circuitikz}
-        \caption{M1U topology with input transformer}
-        \label{fig:M1U_transformer_topology}
+        \caption{M1U topology with input transformer and DC current path (red dotted line)}
+        \label{fig:M1U_transformer_topology_DC-current}
     \end{figure}
 \end{frame}
 
@@ -395,37 +412,349 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Transformer input filtering (cont.)}
-    Assuming an ideal restive load $R$, the output current $i_2(t)$ is
-    \begin{equation}
-        i_1(t) = \frac{\hat{u}_1}{\pi R}\left(1 + \sum_{k=2,4,6,\ldots} \frac{1}{1-k^2} \cos(k\omega t)\right) = \overline{i}_1 + \sum_{k=2,4,6,\ldots} i_k \cos(k\omega t).
-    \end{equation}
-    Since the impedance of the magnetizing inductance $L_m$ is zero for DC components, the (transformed) DC current $\overline{i}_1$ is not present at the transformer input. Likewise, low frequency harmonics are filtered out by the transformer while the high frequency harmonic amplitudes decrease with $\sim 1/(1-k^2)$. 
+    While the transformer can help out filter unwanted harmonics, the output DC current also introduces an offset magnetization to the transformer core. Issues related with this are:
+    \begin{itemize}
+        \item \textbf{Core utilization:} To prevent core saturation, the transformer must be oversized.
+        \item \textbf{Core losses:} The magnetization offset can increase the core losses.
+    \end{itemize}
     \begin{figure}
-           \begin{circuitikz}[]
+            \centering
+            \begin{tikzpicture}
+                \tikzmath{
+                    real \a, \b, \c, \d, \hn, \hc, \hm, \bc, \off;
+                    \a = 6.0;
+                    \b = 1.7;
+                    \c = 1.5;
+                    \d = 3.0;
+                    \hn = 1.5; % nominal, utilized H field value
+                    \hm = 7.0; % maximal H field value
+                    \hc = -\hn + 2*\c/\b; % hyteresis return H value for nominal H field
+                    \off = 0.4; % offset for the hysteresis curve
+                    \bcp = \a/(1 + exp(-\b*\hc+\c-\b*\off))-\d; % hyteresis return B value for nominal H field
+                    \bcn = \a/(1 + exp(-\b*\hc+\c+\b*\off))-\d; % hyteresis return B value for nominal H field
+                }
+                \begin{axis}[very thick,
+                             samples = 100,
+                             xlabel = $H$,
+                             ylabel = $B$,
+                             xmin = -\hm,
+                             xmax = \hm,
+                             ymin = -4,
+                             ymax = 4,
+                             axis x line = middle,
+                             axis y line = middle,
+                             ticks = none,
+                             height=0.7\textheight]
+                    \addplot[shadecolor, dashed, domain = -\hm:\hm] {\a/(1 + exp(-\b*x+\c))-\d};
+                    \addplot[shadecolor, dashed ,domain = -\hm:\hm] {\a/(1 + exp(-\b*x-\c))-\d};
+                    \addplot[signalred, name path=A, domain=\hc+\off:\hn+\off, samples = 100] {\a/(1 + exp(-\b*x+\c))-\d};
+                    \addplot[signalred, name path=B, domain=-\hn+\off:-\hc+\off, samples = 100] {\a/(1 + exp(-\b*x-\c))-\d};
+                    \addplot[shadecolor, opacity=0.3] fill between[of=A and B];
+                    \addplot[signalred] coordinates {(-\hc+\off, -\bcn) (\hn+\off, -\bcn)};
+                    \addplot[signalred] coordinates {(-\hn+\off, \bcp) (\hc+\off, \bcp)};
+                    % indicate DC shift via an arrow from the origin to the middle of the shaded hysteresis curve
+                    \draw[-{Latex[length=2mm]}, signalred, thick] (axis cs:0,0) -- (axis cs:\off,\bcp/2 - \bcn/2);
+                    %indicate small red dots at the beginning and end of the arrow
+                    \node[signalred, circle, fill, inner sep=1pt] at (axis cs:0,0) {};
+                    \node[signalred, circle, fill, inner sep=1pt] at (axis cs:\off,\bcp/2 - \bcn/2) {};
+                    %indicate the sift via labeling the arrow in a pin like fashion with the label being left from the arrow
+                    \node[signalred, pin={[pin edge={signalred, thin, inner sep = 2mm, anchor = east}]above left:$\sim \overline{i}_2$}] at (axis cs:\off/2,\bcp/4 - \bcn/4) {};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Shift of the hysteresis curve due to the DC magnetization}
+        \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Capacitive output filtering %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Capacitive output filtering}
+    To smooth the output voltage $u_2(t)$, a capacitor $C$ is added. The initial charging voltage is
+    \begin{equation}
+        u_2(t) = \begin{cases}
+            u_1(t)=\hat{u}_1 \sin(\omega t) , & 0\leq \omega t < \nicefrac{\pi}{2}, \\
+            \hat{u}_1, & \omega t > \nicefrac{\pi}{2}
+        \end{cases}
+    \end{equation}
+    with the capacitor current $i_2(t)$ being
+    \begin{equation}
+        i_2(t) = \begin{cases}
+            C\nicefrac{\mathrm{d}u_2(t)}{\mathrm{d}t} = \hat{i}_2 \cos(\omega t)= C \omega  \hat{u}_1 \cos(\omega t) , & 0\leq \omega t < \nicefrac{\pi}{2}, \\
+            0, & \omega t > \nicefrac{\pi}{2}.
+        \end{cases}
+    \end{equation}
+    \begin{figure}
+        \begin{circuitikz}[baseline=(current bounding box.center)] 
+            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            (0,0) to [short] ++(0.75,0)
+            to [diode, l=$D$]  ++(1.5,0)
+            to [short, i=$i_2(t)$] ++(0.75,0)
+            to [C, v^= $u_2(t)$, voltage = straight, l_=$C$] ++(0,-2) coordinate (B)
+            (A) -- (B);
+        \end{circuitikz}
+        \hspace{1cm}
+        \begin{tikzpicture}[baseline=(current bounding box.center)]
+            \begin{axis}[
+                width=0.4\textwidth,
+                height=0.45\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                yticklabel style={inner sep=2pt,
+                fill = white},
+                xmin=-0.25*pi, xmax=2*pi+0.25*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0,3.14,6.28},
+                xticklabels={$0$,$\pi$,$2\pi$},
+                ytick={-1,0,1},
+                yticklabels={$-\hat{x}$,$0$,$\hat{x}$},
+                grid=both,
+                ]
+                \addplot[domain=-0.25*pi:0, samples=10, signalbrown, thick]{0};
+                \addplot[domain=0:pi/2, samples=100, signalbrown, thick]{sin(deg(x))};
+                \addplot[domain=pi/2:2*pi+0.25, samples=10, signalbrown, thick]{1};
+                \addplot[domain=-0.25*pi:0, samples=10, signalred, thick]{0};
+                \addplot[domain=0:pi/2, samples=100, signalred, thick]{cos(deg(x))};
+                \addplot[domain=pi/2:2*+pi+0.25*pi, samples=10, signalred, thick]{0};
+                \draw[signalred, thick] (axis cs:0,0) -- (axis cs:0,1);
+                \addplot[domain=-0.25*pi:2*pi+0.25*pi, samples=100, signalblue, thick, dashed]{sin(deg(x))};
+    
+                \node[signalblue, above, yshift = 1mm] at (axis cs:3.14*3/2,-1.0) {$u_1(t)$};
+                \node[signalbrown, below] at (axis cs:3.14*3/2,1.0) {$u_2(t)$};
+                \node[signalred, below] at (axis cs:3.14/2,0) {$i_2(t)$};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{M1U topology with output capacitor (unloaded and idealized charging curve)}
+        \label{fig:M1U_topology_capacitor}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Capacitive output filtering (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Capacitive output filtering (cont.)}
+    If the rectified output is loaded, the capacitor voltage ripples:
+    \begin{itemize}
+        \item If $u_2(t) \leq u_1(t)$: diode conducts, capacitor charges (follows input voltage).
+        \item If $u_2(t) > u_1(t)$: diode blocks, capacitor discharges via $I_0$. 
+    \end{itemize}
+
+    \begin{figure}
+        \begin{circuitikz}[baseline=(current bounding box.center)] 
+            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            (0,0) to [short, i=$i_1(t)$] ++(0.75,0)
+            to [diode, l=$D$]  ++(1.5,0)
+            to [short] ++(0.75,0) coordinate (C)
+            to [C, v= $u_2(t)$, voltage = straight, l=$C$, *-*, i=${i_\mathrm{C}(t)}$] ++(0,-2)
+            (C) to [short, i=${i_2(t)}$] ++(1.5,0)
+            to [isource, l=$I_0$] ++(0,-2) coordinate (B)    
+            (A) -- (B);
+        \end{circuitikz}
+        \hspace{0.5cm}
+        \begin{tikzpicture}[baseline=(current bounding box.center)]
+            \tikzmath{
+                    real \i0, \deltaT, \a;
+                    \i0 = 0.4;
+                    \deltaT = 0.15;
+                    \a = -(sin(\deltaT*180) - cos(asin(\i0)))/(3/2*pi-asin(\i0)*pi/180+\deltaT*pi);
+                }
+            \begin{axis}[
+                width=0.55\textwidth,
+                height=0.6\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                yticklabel style={inner sep=2pt,
+                fill = white},
+                xmin=0, xmax=3*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0,3.14/2,3.14, 3.14*3/2,6.28, 2.5*3.14},
+                xticklabels={$0$, ,$\pi$, , $2\pi$, },
+                ytick={-1,0,1},
+                yticklabels={$-\hat{x}$,$0$,$\hat{x}$},
+                grid=both,
+                ]
+                
+                %input current
+                \addplot[domain=0:pi/2+asin(\i0)*pi/180, samples=100, signalred, thick]{cos(deg(x))+\i0};
+                \addplot[domain=pi/2+asin(\i0)*pi/180:2*pi+\deltaT*pi, samples=10, signalred, thick]{0};
+                \addplot[domain=2*pi+\deltaT*pi:2.5*pi+asin(\i0)*pi/180, samples=100, signalred, thick]{cos(deg(x))+\i0};
+                \draw[signalred, thick] (axis cs:2*pi+\deltaT*pi,0) -- (axis cs:2*pi+\deltaT*pi,{\i0 + cos(\deltaT*180)});
+                \addplot[domain=2.5*pi+asin(\i0)*pi/180:3*pi, samples=10, signalred, thick]{0};
+
+                %Capacitor current
+                \addplot[domain=0:pi/2+asin(\i0)*pi/180, samples=100, signalred, thick, dotted]{cos(deg(x))};
+                \addplot[domain=pi/2+asin(\i0)*pi/180:2*pi+\deltaT*pi, samples=10, signalred, thick, dotted]{-\i0};
+                \addplot[domain=2*pi+\deltaT*pi:2.5*pi+asin(\i0)*pi/180, samples=100, signalred, thick, dotted]{cos(deg(x))};
+                \draw[signalred, thick, dotted] (axis cs:2*pi+\deltaT*pi,-\i0) -- (axis cs:2*pi+\deltaT*pi,{cos(\deltaT*180)});
+                \addplot[domain=2.5*pi+asin(\i0)*pi/180:3*pi, samples=10, signalred, thick, dotted]{-\i0};
+
+                %Capacitor voltage
+                \addplot[domain=0:pi/2+asin(\i0)*pi/180, samples=100, signalbrown, thick]{sin(deg(x))};
+                \addplot[domain=pi/2+asin(\i0)*pi/180:2*pi+\deltaT*pi, samples=10, signalbrown, thick]{cos(asin(\i0))-\a*(x-pi/2-asin(\i0)*pi/180)};
+                \addplot[domain=2*pi+\deltaT*pi:2.5*pi+asin(\i0)*pi/180, samples=10, signalbrown, thick]{sin(deg(x))};
+                \addplot[domain=pi/2+asin(\i0)*pi/180+2*pi:2*pi+\deltaT*pi+2*pi, samples=10, signalbrown, thick]{cos(asin(\i0))-\a*(x-pi/2-asin(\i0)*pi/180-2*pi)};
+
+                %input voltage
+                \addplot[domain=0*pi:3*pi, samples=100, signalblue, thick, dashed]{sin(deg(x))};
+
+
+                %Blocking time of diode indication
+                \draw[dashed] (axis cs:{pi/2+asin(\i0)*pi/180},-\i0) -- (axis cs:{pi/2+asin(\i0)*pi/180},1.5);
+                \draw[<->] (axis cs:{pi/2+asin(\i0)*pi/180},1.2) -- (axis cs:{2*pi+\deltaT*pi},1.2);
+                \node[fill=white, inner sep=2pt] at (axis cs:{pi/4+asin(\i0)*pi/180/2 + pi+\deltaT*pi/2},1.2) {${u_2 \geq u_1}$};
+
+                %signal labels
+                \node[signalblue, left, fill=white, inner sep=2pt, xshift=-5mm] at (axis cs:3.14*3/2,-1.0) {$u_1(t)$};
+                \node[signalbrown, below, xshift=-3mm] at (axis cs:3.0*3/2,0.65) {$u_2(t)$};
+                \node[signalred, left] at (axis cs:3.14/2,-\i0) {${i_\mathrm{C}(t)}$};
+                \node[signalred, right, xshift=3mm, fill=white, inner sep=2pt] at (axis cs:{(2+\deltaT)*pi},1.25) {${i_1(t)}$};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{M1U topology with output capacitor and constant load current}
+        \label{fig:M1U_topology_capacitor_loaded}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Full-cycle rectification / M2U circuit %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Full-cycle rectification / M2U circuit} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2U uncontrolled rectifier circuit  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{M2U uncontrolled rectifier circuit}
+    The previous M1U topology only rectified half of a cycle resulting in a reduced output voltage utilization and increased voltage ripple. By adding another diode and utilizing a center-tapped transformer, the circuit can be extended towards a \hl{full-cycle rectifier}.
+    \begin{figure}
+           \begin{circuitikz}[baseline=(current bounding box.center)]
             \draw (0,0) node[transformer core](T){$N_1:N_2$}
             (T.inner dot A1) node[circ]{}
             (T.inner dot B1) node[circ]{}
-            (T.A1) to [short, -*, i<_=$i'_\mathrm{p}(t)$] ++(-1,0) coordinate (A1)
-            (T.A2) to [short, -*] ++(-1,0) coordinate (A2)
-            (A1) to [inductor, l=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$] (A2)
-            (A1) to [short, -o, i<_=$i_\mathrm{p}(t)$] ++(-1.5,0) coordinate (A11)
-            (A2) to [short, -o] ++(-1.5,0) coordinate (A22)
-            (T.B1) to [short, i=$i_1(t)$] ++(1,0) coordinate (B1)
-            (T.B2) to [short] ++(1,0) coordinate (B2);
-            \draw (A11) to [open, v=$u_\mathrm{p}(t)\hspace{0.5cm}$, voltage = straight] (A22)
-            (B1) to [open, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] (B2); 
-            \draw (B1) to [open] (B2 -| B1) coordinate (A)
-            (B1) to [short] ++(0.25,0)
-            to [diode, l=$D$]  ++(1.5,0)
-            to [short, i=$i_2(t)$] ++(1.0,0) coordinate (C)
-            to [R, v^= $u_2(t)$, voltage = straight, l_=$R$] (A -| C) coordinate (B)
-            (A) -- (B);
-            %red dotted line indicating the current flow path via Lm, the transfer, the diode and R
-            \draw[signalred, dashed] (A1) -- (A2) -- (B) -- (C) -- (A1);
-            %label red dotted line with \overline{i}_1 half way between (B2) and (B)
-            \node[signalred, above] at ($(B2)!0.5!(B)$) {$\overline{i}_1$};
-        \end{circuitikz}
-        \caption{M1U topology with input transformer and DC current path (red dotted line)}
-        \label{fig:M1U_transformer_topology_DC-current}
+            (T.A1) to [short] ++(0,1) to [short, -o, i<_=$i_1(t)$] ++(-1,0) coordinate (A1)
+            (T.A2) to [short] ++(0,-1) to [short, -o] ++(-1,0) coordinate (A2)
+            (T.B1) to [short] ++(0, 1) coordinate (B1)
+            (T.B2) to [short] ++(0,-1) coordinate (B2);
+            \draw (A1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (A2); 
+            \draw (B1) to [diode, l=$D_1$] ++(2.5,0) coordinate (C1)
+            (B2) to [diode, l=$D_2$] ++(2.5,0)
+            to [crossing, -*, mirror] (C1)
+            to [short, i=$i_2(t)$] ++(1.25,0) coordinate (D)
+            to [R, v^= $u_2(t)$, voltage = straight, l_=$R$] (T-L2.midtap -| D)
+            to [short] (T-L2.midtap);
+            \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=$\hspace{0.5cm}{u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+            \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=$\hspace{0.5cm}{u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+        \end{circuitikz}%
+        \begin{tikzpicture}[baseline=(current bounding box.center)]
+            \begin{axis}[
+                width=0.375\textwidth,
+                height=0.65\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                yticklabel style={inner sep=2pt,
+                fill = white},
+                xmin=0, xmax=2.5*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0,3.14,6.28},
+                xticklabels={$0$,$\pi$,$2\pi$},
+                ytick={-1,-2/5, 0,2/5, 1},
+                yticklabels={$-\hat{u}_1$,$-\frac{\hat{u}_1}{2}\frac{N_2}{N_1}$, $0$,$\frac{\hat{u}_1}{2}\frac{N_2}{N_1}$, $\hat{u}_1$},
+                grid=both,
+                ]
+                \addplot[domain=0:2.5*pi, samples=100, signalbrown, thick]{2/5*abs(sin(deg(x)))};
+                \addplot[domain=0:2.5*pi, samples=100, signalblue, thick, dashed]{sin(deg(x))};
+                \node[signalblue, above, yshift = 2mm] at (axis cs:3.14*3/2,-1.0) {$u_1(t)$};
+                \node[signalbrown, above] at (axis cs:3.14*3/2,2/5) {$u_2(t)$};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{M2U topology with center-tapped transformer}
+        \label{fig:M2U_topology}
     \end{figure}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2U uncontrolled rectifier circuit (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{M2U uncontrolled rectifier circuit (cont.)}
+    From \figref{fig:M2U_topology} we can conclude the following:
+    \begin{itemize}
+        \item During the positive half-cycle of $u_1(t)$: $D_1$ conducts, $D_2$ blocks, and $u_2(t) = u_\mathrm{s,1}(t)$.
+        \item During the negative half-cycle of $u_1(t)$: $D_2$ conducts, $D_1$ blocks, and $u_2(t) = u_\mathrm{s,2}(t)$.
+    \end{itemize}
+    The output voltages of the center-tapped transformer are
+    \begin{equation}
+        u_\mathrm{s,1}(t) = \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \sin(\omega t) \quad \text{and} \quad u_\mathrm{s,2}(t) = -\frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \sin(\omega t).
+    \end{equation}
+    Here, it should be noted that both $u_\mathrm{s,1}(t)$ and $u_\mathrm{s,2}(t)$ are utilizing only half of the secondary winding turns due to the central tapping. The output voltage results in
+    \begin{equation}
+        u_2(t) = \frac{1}{2}\frac{N_2}{N_1}\left|u_1(t)\right| = \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \left|\sin(\omega t)\right|.
+        \label{eq:u2_M2U}
+    \end{equation} 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2U uncontrolled rectifier circuit (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{M2U uncontrolled rectifier circuit (cont.)}
+    From \eqref{eq:u2_M2U}, the average output voltage of the M2U rectifier is
+    \begin{equation}
+        \begin{split}
+            \overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{2\pi} \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \left|\sin(\omega t)\right| \mathrm{d}\omega t =\frac{1}{\pi} \int_{0}^{\pi} \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \sin(\omega t) \mathrm{d}\omega t =\\
+            &= \frac{1}{2\pi}\frac{N_2}{N_1}\hat{u}_1 \left[ - \cos(\omega t) \right]_{0}^{\pi} = \frac{1}{2\pi}\frac{N_2}{N_1}\hat{u}_1 \left( 1+1 \right) = \frac{1}{\pi}\frac{N_2}{N_1}\hat{u}_1.
+        \end{split}
+        \label{eq:u2_M2U_avg}
+    \end{equation}
+    Not considering the transformer conversion via $\nicefrac{N_2}{N_1}$, this is twice as much as in the M1U case, compare \eqref{eq:u2_M1U_avg}. The RMS value of the output voltage $u_2(t)$ results in
+    \begin{equation}
+        \begin{split}
+        U_2 &= \sqrt{\frac{1}{2\pi} \frac{1}{2^2}\frac{N_2^2}{N_1^2} \hat{u}_1^2 \int_{0}^{2 \pi}  \sin^2(\omega t) \mathrm{d}\omega t} = \frac{1}{2}\frac{N_2}{N_1} \hat{u}_1 \sqrt{\frac{1}{\pi}  \int_{0}^{\pi}  \sin^2(\omega t) \mathrm{d}\omega t} \\&= \frac{1}{2}\frac{N_2}{N_1} \hat{u}_1 \sqrt{\frac{1}{2\pi}\left[\frac{1}{2}\omega t - \frac{\sin(2 \omega t)}{4}\right]_0^\pi}= \frac{N_2}{N_1} \hat{u}_1\frac{\hat{u}_1}{\sqrt{2}} = \frac{N_2}{N_1} U_1.
+        \end{split}
+        \label{eq:u2_M2U_rms}
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2U uncontrolled rectifier circuit (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{M2U uncontrolled rectifier circuit (cont.)}
+    The Fourier coefficients of the output voltage $u_2(t)$ from \eqref{eq:u2_M2U} are
+    \begin{equation}
+        \begin{split}
+            a_0 &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \mathrm{d} \omega t = 2 \overline{u}_2= \frac{2}{\pi}\frac{N_2}{N_1}\hat{u}_1,\\
+            a_k &= \frac{1}{2\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t = \frac{1}{4\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t\right) = \ldots =  \frac{N_2}{N_1}\frac{\hat{u}_1}{\pi}\frac{2}{1-k^2}, \quad k=2,4,6,\ldots\\
+            b_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t = \frac{1}{4\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t\right) = \ldots = 0.
+        \end{split}
+        \label{eq:u2_M2U_Fourier}
+    \end{equation}
+    These coefficients are structurally identical to the M1U case, but scaled due to the center-tapped transformer conversion ratios and full-cycle rectification.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Full-cycle rectification / B2U circuit %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Full-cycle rectification / B2U circuit} 
