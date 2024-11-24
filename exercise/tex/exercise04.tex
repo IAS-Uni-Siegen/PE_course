@@ -29,28 +29,29 @@ A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} 
 \subtask{The input voltage is $U_\mathrm{1}=\SI{760}{\volt}$ at rated power at the output. What is the peak value $\hat I_\mathrm{1}$ of the primary current $i_\mathrm{1}$? What is the peak value $\hat I_\mathrm{2}$ of the secundary current $i_\mathrm{2}$? Calculate the duty cycle of the transistor for this operating case.}
 
 \begin{solutionblock}
+To determine the current  $\hat I_\mathrm{1}$, the equation for determining the output power \eqref{eq:output power ex04} is primarily used. The unknown energy of the inductance of the primary winding side \eqref{eq:energy primary inductance ex04} is inserted into this equation.
 \begin{equation}
-    P_\mathrm{2} = W_\mathrm{L} f_\mathrm{p}
+    P_\mathrm{2} = W_\mathrm{L} f_\mathrm{p}, \label{eq:output power ex04}
 \end{equation}
 
 \begin{equation}
-    W_\mathrm{L} = \frac{1}{2}L_\mathrm{1}\hat I_\mathrm{1}^2 
+    W_\mathrm{L} = \frac{1}{2}L_\mathrm{1}\hat I_\mathrm{1}^2. \label{eq:energy primary inductance ex04}
 \end{equation}
-
+After substituting, you get this equation:
 \begin{equation}
-    \hat I_\mathrm{1} = \sqrt{\frac{2P_\mathrm{2}}{L_\mathrm{1}f_\mathrm{p}}}= \sqrt{\frac{2\cdot\SI{30}{\watt}}{\SI{760}{\micro\henry}\cdot\SI{50}{\kilo\hertz}}}=\SI{1.257}{\ampere}
+    P_\mathrm{2} = \frac{1}{2}L_\mathrm{1}\hat I_\mathrm{1}^2 f_\mathrm{p}.\label{eq:output power with IDach ex04}
 \end{equation}
-
+\eqref{eq:output power with IDach ex04} must be converted to $\hat I_\mathrm{1}$:
 \begin{equation}
-    \hat I_\mathrm{1} = \hat I_\mathrm{2}
+    \hat I_\mathrm{1} = \sqrt{\frac{2P_\mathrm{2}}{L_\mathrm{1}f_\mathrm{p}}}= \sqrt{\frac{2\cdot\SI{30}{\watt}}{\SI{760}{\micro\henry}\cdot\SI{50}{\kilo\hertz}}}=\SI{1.257}{\ampere}.
 \end{equation}
-
+In an ideal transformer, the energy is maintained between the primary and secondary sides (neglecting losses). To determine the peak value $\hat I_\mathrm{2}$, the known current $\hat I_\mathrm{1}$ and the number of turns of the primary and secondary side can be used. Because of this background, the following equation can be used:
 \begin{equation}
-    \hat I_\mathrm{2} = \hat I_\mathrm{1} \frac{N_\mathrm{1}}{N_\mathrm{2}} = \SI{1.257}{\ampere} \cdot \frac{60}{12} = \SI{6.28}{\ampere}
+    \hat I_\mathrm{2} = \hat I_\mathrm{1} \frac{N_\mathrm{1}}{N_\mathrm{2}} = \SI{1.257}{\ampere} \cdot \frac{60}{12} = \SI{6.28}{\ampere}.
 \end{equation}
-Because of CCM the duty cycle $D$ is expressed .....
+Because of CCM the duty cycle $D$ is expressed as
 \begin{equation}
-    \frac{U_2}{U_1} = \frac{D^2}{2} \frac{\Delta i_\mathrm{m,max}}{\overline{i}_2} \label{eq:Duty cycle ex04}
+    \frac{U_2}{U_1} = \frac{D^2}{2} \frac{\Delta i_\mathrm{m,max}}{\overline{i}_2}. \label{eq:Duty cycle ex04}
 \end{equation}
 Because of the unknown $\Delta i_\mathrm{m,max}$ this value has to be calculate first as
 \begin{equation}
@@ -101,7 +102,12 @@ Now $\Delta i_\mathrm{m,max}=\SI{20}{\ampere}$ can be used in \eqref{eq:Duty cyc
 
 \end{solutionblock}
 
-\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load.How much energy is transferred from the input to the output per switching period $\Delta E$ and what is the resulting average power? What happens if there is no ideal voltage source on the output side but an unloaded capacitor and the circuit is operated with $D>0$?}
+\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. How much energy is transferred from the input to the output per switching period $\Delta E$ and what is the resulting average power? What happens if there is no ideal voltage source on the output side but an unloaded capacitor and the circuit is operated with $D>0$?}
+
+\begin{solutionblock}
+
+At each switching interval, energy is pushed into the capacitor, the voltage of which continues to rise until a component fails due to a lack of dielectric strength.    
+\end{solutionblock}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: Forward converter with asymmetric half-bridge
