@@ -2,13 +2,13 @@
 %% Begin exercise %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ex{Flyback converter /}
+\ex{Isolated DC-DC converters}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 1: Flyback converter %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task{Flyback converter}
-A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} \, \dots \, \SI{900}{\volt}$ is used to supply the control electronics of a frequency inverter. The converter delivers a rated output power of  $P_\mathrm{2} = \SI{30}{\watt}$ at a regulated (constant) output voltage of  $U_\mathrm{2} = \SI{15}{\volt}$. The flyback converter is operated in discontinuous current mode with a constant frequency of  $f_\mathrm{p} = \SI{500}{\kilo\hertz}$. The transformation ratio of the transformer is $N_\mathrm{1}/N_\mathrm{2}=60/12$, the inductance of the primary winding is $L_\mathrm{1} = \SI{760}{\micro\henry}$. The coupling between the primary and secondary windings is ideal. You can assume stationary operation for all calculations.
+A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} \, \dots \, \SI{900}{\volt}$ is used to supply a control electronics unit. The converter delivers a rated output power of  $P_\mathrm{2} = \SI{30}{\watt}$ at a regulated (constant) output voltage of  $U_\mathrm{2} = \SI{15}{\volt}$. The flyback converter is operated in discontinuous current mode with a constant frequency of  $f_\mathrm{s} = \SI{50}{\kilo\hertz}$. The turns ratio of the transformer is $N_\mathrm{1}/N_\mathrm{2}=60/12$, the magnetizing inductance on the primary side is $L_\mathrm{m} = \SI{760}{\micro\henry}$. The coupling between the primary and secondary windings is ideal and the converter operates in steady state.
 
 \input{./fig/ex04/Fig_FlybackConverter.tex}
 
@@ -19,16 +19,16 @@ A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} 
         
         Input voltage: &  $U_{\mathrm{1}} = \SI{300}{\volt} \, \dots \, \SI{900}{\volt}$ & Output voltage: & $U_{\mathrm{2}} = \SI{15}{\volt}$ \\ 
         Output power: & $P_2 = \SI{30}{\watt}$  & Transformation ratio: & $N_\mathrm{1}/N_\mathrm{2}=60/12$ \\ 
-        Inductance of the primary winding: & $L_\mathrm{1} = \SI{760}{\micro\henry}$ & Switching frequency: & $f_{\mathrm{s}} = \SI{50}{\kilo\hertz}$ \\ 
+        Magn. inductance: & $L_\mathrm{m} = \SI{760}{\micro\henry}$ & Switching frequency: & $f_{\mathrm{s}} = \SI{50}{\kilo\hertz}$ \\ 
         \bottomrule
     \end{tabular}
-    \caption{Parameters of the boost converter.}  % Beschriftung der Tabelle
+    \caption{Parameters of the flyback converter.}  % Beschriftung der Tabelle
     \label{table:ex04_Parameters of the circuit}
 \end{table}
 
-\subtask{The input voltage is $U_\mathrm{1}=\SI{760}{\volt}$ at rated power at the output. What is the peak value $\hat I_\mathrm{1}$ of the primary current $i_\mathrm{1}$? What is the peak value $\hat I_\mathrm{2}$ of the secundary current $i_\mathrm{2}$? Calculate the duty cycle of the transistor for this operating case.}
+\subtask{The input voltage is $U_\mathrm{1}=\SI{760}{\volt}$ at rated power at the output. What is the peak value $\hat i_\mathrm{1}$ of the primary current $i_\mathrm{1}$? What is the peak value $\hat i_\mathrm{2}$ of the secondary current $i_\mathrm{2}$? Calculate the duty cycle of the transistor for this operating case.} 
 
-\begin{solutionblock}
+\begin{solutionblock}s
 To determine the current  $\hat I_\mathrm{1}$, the equation for determining the output power \eqref{eq:output power ex04} is primarily used. The unknown energy of the inductance of the primary winding side \eqref{eq:energy primary inductance ex04} is inserted into this equation.
 \begin{equation}
     P_\mathrm{2} = W_\mathrm{L} f_\mathrm{p}, \label{eq:output power ex04}
@@ -65,14 +65,14 @@ Now $\Delta i_\mathrm{m,max}=\SI{20}{\ampere}$ can be used in \eqref{eq:Duty cyc
 
 \end{solutionblock}
 
-\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Calculate and sketch the following voltage and current curves for this operating case over one cycle period: $u_\mathrm{T}(t), u_\mathrm{s}(t), i_\mathrm{2}(t), i_\mathrm{1}(t)$ (Note: corresponds to the switch-on time of the transistor).}
+\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Calculate and sketch the following voltage and current curves for this operating case over one cycle period: $u_\mathrm{T}(t), u_\mathrm{s}(t), i_\mathrm{2}(t), i_\mathrm{1}(t)$. $u_\mathrm{T}(t)$ is the voltage that drops across the transistor and $u_\mathrm{s}(t)$ is the voltage on the secondary side of the transformer.}
 
 \input{./fig/ex04/Fig_voltageTransistorPeriodTask1.tex}
 \input{./fig/ex04/Fig_voltageUsPeriodTask1.tex}
 \input{./fig/ex04/Fig_currentI2PeriodTask1.tex}
 \input{./fig/ex04/Fig_currentI1PeriodTask1.tex}
 
-\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Determine the mean value $\overline i_\mathrm{T}$ and the effective value of the current $i_\mathrm{T, rms}$ through the transistor. Determine the mean value $\overline i_\mathrm{D}$ and the effective value of the current $i_\mathrm{D, rms}$ through the diode. What is the maximum reverse voltage load $u_\mathrm{T, max}$ of the transistor? What is the maximum reverse voltage load $u_\mathrm{D, max}$ of the diode?}
+\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Determine the mean value $\overline i_\mathrm{T}$ and the RMS current $I_\mathrm{T}$ through the transistor. Also,  determine the mean value $\overline i_\mathrm{D}$ and the RMS current $I_\mathrm{D}$ through the diode. What is the maximum reverse voltage load $u_\mathrm{T, max}$ of the transistorans $u_\mathrm{D, max}$ of the diode?}
 \begin{solutionblock}
     \begin{equation}
         \overline{i}_\mathrm{T} = \frac{1}{T_\mathrm{S}}\frac{1}{2}\hat I_\mathrm{1}T_\mathrm{on}=\frac{1}{\SI{20}{\micro\s}}\cdot\frac{1}{2}\SI{1.257}{\ampere}\cdot\SI{2.5}{\micro\s}=\SI{78.53}{\milli\ampere}
@@ -102,7 +102,7 @@ Now $\Delta i_\mathrm{m,max}=\SI{20}{\ampere}$ can be used in \eqref{eq:Duty cyc
 
 \end{solutionblock}
 
-\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. How much energy is transferred from the input to the output per switching period $\Delta E$ and what is the resulting average power? What happens if there is no ideal voltage source on the output side but an unloaded capacitor and the circuit is operated with $D>0$?}
+\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. How much energy is transferred from the input to the output per switching period $\Delta E$ and what is the resulting average power $P$ considering the duty cycle value from subtask 1.2? What happens if there is no ideal voltage source on the output side but an unloaded capacitor and the circuit is operated with $D>0$?}
 
 \begin{solutionblock}
 
