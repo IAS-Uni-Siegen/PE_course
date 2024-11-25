@@ -304,7 +304,7 @@
                 \addplot[domain=pi:2*pi, samples=10, signalblue, thick]{0};
             \end{axis}
         \end{tikzpicture}
-        \caption{M1U topology with typical input and output voltage signals (assuming a resistive load)}
+        \caption{M1U topology (aka \hl{single pulse rectifier}) with typical input and output voltage signals (assuming a resistive load)}
         \label{fig:M1U_topology}
     \end{figure}
 \end{frame}
@@ -689,7 +689,7 @@
                 \node[signalbrown, above] at (axis cs:3.14*3/2,2/5) {$u_2(t)$};
             \end{axis}
         \end{tikzpicture}
-        \caption{M2U topology with center-tapped transformer}
+        \caption{M2U topology (aka \hl{two pulse mid-point rectifier}) with center-tapped transformer}
         \label{fig:M2U_topology}
     \end{figure}
 \end{frame}
@@ -758,3 +758,64 @@
 %% Full-cycle rectification / B2U circuit %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Full-cycle rectification / B2U circuit} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U uncontrolled rectifier circuit  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U uncontrolled rectifier circuit}
+    The B2U circuit also allows full-cycle rectification but without the need for a center-tapped transformer, that is, fully utilizes the input voltage without halving it on the output side.
+    \begin{figure}
+           \begin{circuitikz}[baseline=(current bounding box.center)]
+            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            (0,0) to [short, i=$i_1(t)$, -*] ++(2,0)
+            to [diode, l=$D_1$]  ++(0,1.5)
+            to [short, -*] ++(2,0) coordinate (C)
+            to [diode, l=$D_3$, invert]  ++(0,-1.5)
+            to [short] ++(0, -2) coordinate (B)
+            to [diode, l=$D_2$, invert, -*]  ++(0, -1.5) coordinate (D)
+            to [short] ++(-2,0)
+            to [diode, l=$D_4$]  ++(0, 1.5)
+            to [short] ++(0, 2)
+            (B) to [crossing, *-, mirror] ++(-4,0)
+            to [short] (A)
+            (C) to [short, i=$i_2(t)$] ++(2,0)
+            to [short] ++(0,-1.5)
+            to [R, v= $u_2(t)$, voltage = straight, l=$R$] ++(0,-2)
+            to [short] ++(0,-1.5)
+            to [short] (D);
+        \end{circuitikz}%
+        \hspace{0.5cm}
+        \begin{tikzpicture}[baseline=(current bounding box.center)]
+            \begin{axis}[
+                width=0.375\textwidth,
+                height=0.65\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                yticklabel style={inner sep=2pt,
+                fill = white},
+                xmin=0, xmax=2.5*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0,3.14,6.28},
+                xticklabels={$0$,$\pi$,$2\pi$},
+                ytick={-1,0, 1},
+                yticklabels={$-\hat{u}_1$,$0$,$\hat{u}_1$},
+                grid=both,
+                ]
+                \addplot[domain=0:2.5*pi, samples=100, signalbrown, thick]{abs(sin(deg(x)))};
+                \addplot[domain=0:2.5*pi, samples=100, signalblue, thick, dashed]{sin(deg(x))};
+                \node[signalblue, above, yshift = 3mm] at (axis cs:3.14*3/2,-1.0) {$u_1(t)$};
+                \node[signalbrown, above, yshift = -2mm] at (axis cs:3.14*3/2,2/5) {$u_2(t)$};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{B2U topology (aka \hl{two pulse bridge rectifier}) with resistive load}
+        \label{fig:B2U_topology}
+    \end{figure}
+\end{frame}
