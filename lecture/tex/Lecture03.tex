@@ -986,12 +986,12 @@
             (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-2.0);
             \draw  (3.75,0) to [inductor, n=l2, mirror] ++(0,-2) 
             to [short] ++(2,0) coordinate (A)
-            to [diode, l_=$D_\mathrm{F}$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
+            to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
             to [inductor, l=$L$] ++(2,0)
             to [short, i=$i_2(t)$] ++(0.75,0)
             to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
             to [short] (A)
-            (3.75,0) to [diode, l=$D_2$] (B);
+            (3.75,0) to [diode, l=$D_1$] (B);
             \draw (2,-0.25) to [open, v = $u_\mathrm{p}$, voltage = straight] ++(0,-1.5);
             \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T$};
             \path (l1.ul dot) node[circ]{}
@@ -1036,12 +1036,12 @@
                     (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-4.0);
                     \draw  (2.5,0) to [inductor, n=l2, mirror] ++(0,-2) 
                     to [short] ++(2,0) coordinate (A)
-                    to [diode, l_=$D_\mathrm{F}$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
+                    to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
                     to [inductor, l=$L$] ++(2,0)
                     to [short, i=$i_2(t)$] ++(0.75,0)
                     to [open, o-o, v = $u_2(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
                     to [short] (A)
-                    (2.5,0) to [diode, l=$D_2$] (B);
+                    (2.5,0) to [diode, l=$D_1$] (B);
                     \draw (0.75,-0.25) to [open, v = $u_\mathrm{p}$, voltage = straight] ++(0,-1.5);
                     \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T$};
                     \path (l1.ul dot) node[circ]{}
@@ -1170,12 +1170,12 @@
                     (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-4.0);
                     \draw  (2.5,0) to [inductor, n=l2, mirror] ++(0,-2) 
                     to [short] ++(2,0) coordinate (A)
-                    to [diode, l_=$D_\mathrm{F}$, *-*] ++(0,2) coordinate (B)
+                    to [diode, l_=$D_2$, *-*] ++(0,2) coordinate (B)
                     to [inductor, l=$L$] ++(2,0)
                     to [short, i=$i_2(t)$] ++(0.75,0)
                     to [open, o-o, v = $u_2(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
                     to [short] (A)
-                    (2.5,0) to [diode, l=$D_2$] (B)
+                    (2.5,0) to [diode, l=$D_1$] (B)
                     (A1) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-] ++(-0,-2)
                     to [short, -*] (A2);
                     \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T$};
@@ -1207,9 +1207,9 @@
                 to [short] ++(1,0) coordinate (J)
                 to [short] ++(1,0) coordinate (G)
                 (C) to [short] ++(0,-2) 
-                to [diode, l_=$D_1$, invert] ++(0,-2) coordinate (D)
+                to [diode, l_=$D_3$, invert] ++(0,-2) coordinate (D)
                 (E) to [short, *-] ++(2,0)
-                to [diode, l_=$D_2$, invert] ++(0,-2)
+                to [diode, l_=$D_4$, invert] ++(0,-2)
                 to [short] ++(0,-2) coordinate (F)
                 to [Tnpn, n=npn2, invert] ++(0,-2) 
                 to [short, -*] ++(-2,0)
@@ -1226,12 +1226,12 @@
                 to [inductor, n=l1] ++(0,-2) coordinate (B1)
                 (A1) to [open] ++(0.75,0) to [inductor, n=l2, mirror] ++(0,-2) 
                 to [short] ++(2,0) coordinate (C1)
-                to [diode, l_=$D_\mathrm{F}$, *-*, v^<= $u_\mathrm{s}(t)$, voltage = straight] ++(0,2) coordinate (D1)
+                to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}(t)$, voltage = straight] ++(0,2) coordinate (D1)
                 to [inductor, l=$L$] ++(2,0)
                 to [short, i=$i_2(t)$] ++(0.75,0)
                 to [open, o-o, v^= $\hspace{0.5cm}u_2(t)$, voltage = straight] ++(0,-2)
                 to [short] (C1)
-                (A1) to [open] ++(0.75,0) to [diode, l=$D_3$] (D1)
+                (A1) to [open] ++(0.75,0) to [diode, l=$D_1$] (D1)
                 (G) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-*] ++(-0,-2)
                 to [short] (B1);
                 \path (l1.ul dot) node[circ]{}
@@ -1350,12 +1350,12 @@
                 to [inductor, n=l1] ++(0,-2) coordinate (B1)
                 (A1) to [open] ++(0.75,0) to [inductor, n=l2, mirror] ++(0,-2) 
                 to [short] ++(2,0) coordinate (C1)
-                to [diode, l_=$D_\mathrm{F}$, *-*, v^<= $u_\mathrm{s}(t)$, voltage = straight] ++(0,2) coordinate (D1)
+                to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}(t)$, voltage = straight] ++(0,2) coordinate (D1)
                 to [inductor, l=$L$] ++(2,0)
                 to [short, i=$i_2(t)$] ++(0.75,0)
                 to [open, o-o, v^= $\hspace{0.5cm}u_2(t)$, voltage = straight] ++(0,-2)
                 to [short] (C1)
-                (A1) to [open] ++(0.75,0) to [diode, l=$D_3$] (D1)
+                (A1) to [open] ++(0.75,0) to [diode, l=$D_1$] (D1)
                 (G) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-*] ++(-0,-2)
                 to [short] (B1);
                 \path (l1.ul dot) node[circ]{}
@@ -1538,12 +1538,12 @@
             %secondary side
             \draw  (4.25,0) to [inductor, n=l2, mirror] ++(0,-2) 
             to [short] ++(2,0) coordinate (A)
-            to [diode, l_=$D_\mathrm{F}$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
+            to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
             to [inductor, l=$L$] ++(2,0)
             to [short, i=$i_2(t)$] ++(0.75,0)
             to [open, o-o, v = $u_2(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
             to [short] (A)
-            (4.25,0) to [diode, l=$D_2$] (B);
+            (4.25,0) to [diode, l=$D_1$] (B);
             %demag winding
             \draw  (3.5,0) to [inductor, n=l3, mirror] ++(0,-2) 
             to [short, i<=$i_3(t)$] ++(0,-2.0)
