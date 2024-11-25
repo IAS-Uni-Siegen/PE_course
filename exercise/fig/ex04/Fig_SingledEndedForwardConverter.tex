@@ -10,26 +10,26 @@
                     % Base point for voltage supply
                     (0,0) coordinate (jU1v)
                     % Add supply U1
-                    (jU1v) to [V=$U_1$] ++(0,-4) coordinate (jU1g)
+                    (jU1v) to [V=$U_\mathrm{1}$] ++(0,-4) coordinate (jU1g)
                      % Add junction for inductor LT
                     (jU1v) to [short,-*] ++(2,0) coordinate (jLTv)
-                    % Add junction for diode DFP
-                    (jLTv) ++ (0,-2) coordinate (jDFPk)
+                    % Add junction for diode D3
+                    (jLTv) ++ (0,-2) coordinate (jD3k)
                     % Add inductor LTv
-                    (jDFPk) to [L,l=$L_\mathrm{T}$,n=L1,v_<=$U_\text{T}$, voltage shift=0.5, voltage=straight] (jLTv)
+                    (jD3k) to [L,l=$L_\mathrm{3}$,n=L1,v_<=$U_\mathrm{3}$, voltage shift=0.5, voltage=straight] (jLTv)
                     % Add winding text
-                    (jDFPk) node[right] {$N_\mathrm{T}$};
+                    (jD3k) node[right] {$N_\mathrm{3}$};
                     \path (L1.ul dot) node[circ]{};
             \draw                    
                     % Add arrow and Text
-                    (jDFPk) ++(0,-0.5) node[currarrow,rotate=90](IT){}  
+                    (jD3k) ++(0,-0.5) node[currarrow,rotate=90](IT){}  
                     (IT)  node[anchor=east,color=black]{$i_\mathrm{T}$}
-                    % Add connection point of the diode DFP
-                    (jDFPk) ++(0,-2) coordinate (jDFPa)
-                    % Add diode DFP
-                    (jDFPa) to [D,l^=$D_\mathrm{Fp}$] (jDFPk)
+                    % Add connection point of the diode D3
+                    (jD3k) ++(0,-2) coordinate (jD3a)
+                    % Add diode D3
+                    (jD3a) to [D,l^=$D_\mathrm{3}$] (jD3k)
                     % Add connection to U1g
-                    (jDFPa) to [short,-] (jU1g)
+                    (jD3a) to [short,-] (jU1g)
                     % Add junction for transformer Ltpv
                     (jLTv) to [short,-] ++(2.5,0)  coordinate  (jLtpv)
                     % Add arrow and Text
@@ -47,12 +47,14 @@
                     (jTs) to [short,-] (Trans1.S)
                     (jTd) to [short,-] (Trans1.D)
                     (Trans1.G) to [sqV] ++(1,0)
-                    % Add connection to diode DFp
-                    (jTs) to [short,-*] (jDFPa)
+                    % Add connection to diode D3
+                    (jTs) to [short,-*] (jD3a)
                     % Assign Transistor drain junction to primary junction point
                     (jTd) coordinate  (jLtpg)
                     % Add transformer primary inductor with voltage arrow
-                    (jLtpv) to [L,l_=$N_\mathrm{1}$, n=Ltp, v_=$U_\text{p}$,voltage shift=5, voltage=straight] ++(0,-2) coordinate (jLtpg)
+                    (jLtpv) to [L,l_=$L_\mathrm{1}$, n=Ltp, v_=$U_\mathrm{p}$,voltage shift=5, voltage=straight] ++(0,-2) coordinate (jLtpg)
+                    % Add turn name of primary inductor
+                    (jLtpg) node[left] {$N_\mathrm{1}$}
                     % Add junctions for secondary inductor
                     (jLtpv) ++(0.8,0) coordinate  (jLtsv) 
                     (jLtpg) ++(0.8,0) coordinate  (jLtsg);      
@@ -65,7 +67,7 @@
                     (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2); 
             \draw 
                     % Add transformer secondary inductor with voltage arrow
-                    (jLtsv) to [L,l^=$N_\mathrm{2}$,n=Lts,mirror,v^=$U_\text{s}$, voltage shift=5, voltage=straight] (jLtsg);
+                    (jLtsv) to [L,l^=$N_\mathrm{2}$,n=Lts,mirror,v^=$U_\mathrm{s}$, voltage shift=5, voltage=straight] (jLtsg);
                     \path (Ltp.ul dot) node[circ]{};
                     \path (Lts.ul dot) node[circ]{};                    
             \draw
@@ -73,27 +75,27 @@
                     (jLtsv) ++(0.5,0) node[currarrow](IS){}  
                     (IS)  node[anchor=south,color=black]{$i_\mathrm{s}$}
                      % Add D1
-                    (jLtsv) to  [D,l^=$D_1$] ++ (3,0) coordinate (jD1k)
-                    % Add junction point for DFsk
-                    (jD1k)  to [short,-*] ++(0,0) coordinate (jDFsk)
-                    % Add junction point for DFsa
-                    (jDFsk)  ++ (0,-2) coordinate (jDFsa)
-                    % Add diode DFs
-                    (jDFsa) to  [D,l^=$D_\mathrm{Fs}$]  (jDFsk)                    
-                    % Add inductor L
-                    (jDFsk) to [L,l=$L$,n=L1] ++(3,0) coordinate (jU2v)
+                    (jLtsv) to  [D,l^=$D_\mathrm{1}$] ++ (3,0) coordinate (jD1k)
+                    % Add junction point for D2k
+                    (jD1k)  to [short,-*] ++(0,0) coordinate (jD2k)
+                    % Add junction point for D2a
+                    (jD2k)  ++ (0,-2) coordinate (jD2a)
+                    % Add diode D2
+                    (jD2a) to  [D,l^=$D_\mathrm{2}$]  (jD2k)                    
+                    % Add inductor L4
+                    (jD2k) to [L,l=$L_\mathrm{4}$,n=L1] ++(3,0) coordinate (jU2v)
                     % Add arrow and Text
-                    (jDFsk) ++(0.5,0) node[currarrow](IL){}  
+                    (jD2k) ++(0.5,0) node[currarrow](IL){}  
                     (IL)  node[anchor=south,color=black]{$i_\mathrm{L}$}
                     % Add output voltage U2
-                    (jU2v) to [V=$U_2$] ++(0,-2) coordinate (jU2g)
-                    % Add connection to DFs
-                    (jU2g) to [short,-*] (jDFsa)
+                    (jU2v) to [V=$U_\mathrm{2}$] ++(0,-2) coordinate (jU2g)
+                    % Add connection to D2
+                    (jU2g) to [short,-*] (jD2a)
                     % Add connection to secondary transformer LTsg
-                    (jDFsa) to [short,-] (jLtsg);
+                    (jD2a) to [short,-] (jLtsg);
 
                 \end{circuitikz}
     \end{center}
-    \caption{Single Ended Forward Converter circuit.}
+    \caption{Single ended forward converter circuit.}
     \label{fig:ex04_SingledEndedForwardConverter}
 \end{figure}

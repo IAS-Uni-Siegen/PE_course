@@ -64,7 +64,7 @@
                     (jLtpv) ++(-0.5,0) node[currarrow](IP){}  
                     (IP)  node[anchor=south,color=black]{$i_\mathrm{p}$}                                          
                     % Add transformer primary inductor with voltage arrow
-                    (jLtpv) to [L,l_=$N_\mathrm{1}$, n=Ltp, v_=$U_\text{p}$, voltage shift=5, voltage=straight] (jLtpg)
+                    (jLtpv) to [L,l_=$N_\mathrm{1}$, n=Ltp, v_=$u_\text{p}$, voltage shift=5, voltage=straight] (jLtpg)
                     % Add connections point for secondary inductor
                     (jLtpv) ++(0.8,0) coordinate  (jLtsv);
                     % Add iron core
@@ -78,7 +78,7 @@
                     % Add transformer secondary inductor with voltage arrow        
                     (jLtsv) ++(0,-2) coordinate (jLtsg)
                     % Add transformer secondary inductor with voltage arrow
-                    (jLtsv) to [L,l^=$N_\mathrm{2}$,n=Lts,mirror,v^=$U_\text{s}$, voltage shift=5, voltage=straight] (jLtsg);
+                    (jLtsv) to [L,l^=$N_\mathrm{2}$,n=Lts,mirror,v^=$u_\text{s}$, voltage shift=5, voltage=straight] (jLtsg);
                     \path (Ltp.ul dot) node[circ]{};
                     \path (Lts.ul dot) node[circ]{};                    
             \draw
