@@ -8,7 +8,7 @@
 %% Task 1: Flyback converter %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task{Flyback converter}
-A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} \, \dots \, \SI{900}{\volt}$ is used to supply a control electronics unit. The converter delivers a rated output power of  $P_\mathrm{2} = \SI{30}{\watt}$ at a regulated (constant) output voltage of  $U_\mathrm{2} = \SI{15}{\volt}$. The flyback converter is operated in discontinuous current mode with a constant frequency of  $f_\mathrm{s} = \SI{50}{\kilo\hertz}$. The turns ratio of the transformer is $N_\mathrm{1}/N_\mathrm{2}=60/12$, the magnetizing inductance on the primary side is $L_\mathrm{m} = \SI{760}{\micro\henry}$. The coupling between the primary and secondary windings is ideal and the converter operates in steady state.
+A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} \, \dots \, \SI{900}{\volt}$ is used to supply a control electronics unit. The converter delivers a rated output power of  $P_\mathrm{2} = \SI{30}{\watt}$ at a regulated (constant) output voltage of  $U_\mathrm{2} = \SI{15}{\volt}$. The flyback converter is operated in discontinuous conduction  mode with a constant frequency of  $f_\mathrm{s} = \SI{50}{\kilo\hertz}$. The turns ratio of the transformer is $N_\mathrm{1}/N_\mathrm{2}=60/12$, the magnetizing inductance on the primary side is $L_\mathrm{m} = \SI{760}{\micro\henry}$. The coupling between the primary and secondary windings is ideal and the converter operates in steady state.
 
 \input{./fig/ex04/Fig_FlybackConverter.tex}
 
@@ -26,7 +26,7 @@ A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} 
     \label{table:ex04_Parameters of the circuit}
 \end{table}
 
-\subtask{The input voltage is $U_\mathrm{1}=\SI{760}{\volt}$ at rated power at the output. What is the peak value $\hat i_\mathrm{1}$ of the primary current $i_\mathrm{1}$? What is the peak value $\hat i_\mathrm{2}$ of the secondary current $i_\mathrm{2}$? Calculate the duty cycle of the transistor for this operating case.} 
+\subtask{The input voltage is $U_\mathrm{1}=\SI{760}{\volt}$ at rated power at the output. What is the peak value $\hat i_\mathrm{1}$ of the primary current $i_\mathrm{1}$? What is the peak value $\hat i_\mathrm{2}$ of the secondary current $i_\mathrm{2}$? Calculate the duty cycle of the transistor for this operating point.} 
 
 \begin{solutionblock}s
 To determine the current  $\hat I_\mathrm{1}$, the equation for determining the output power \eqref{eq:output power ex04} is primarily used. The unknown energy of the inductance of the primary winding side \eqref{eq:energy primary inductance ex04} is inserted into this equation.
@@ -65,14 +65,17 @@ Now $\Delta i_\mathrm{m,max}=\SI{20}{\ampere}$ can be used in \eqref{eq:Duty cyc
 
 \end{solutionblock}
 
-\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Calculate and sketch the following voltage and current curves for this operating case over one cycle period: $u_\mathrm{T}(t), u_\mathrm{s}(t), i_\mathrm{2}(t), i_\mathrm{1}(t)$. $u_\mathrm{T}(t)$ is the voltage that drops across the transistor and $u_\mathrm{s}(t)$ is the voltage on the secondary side of the transformer.}
+\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Calculate and sketch the following voltage and current curves for this operating case over one cycle period: $u_\mathrm{T}(t), u_\mathrm{s}(t), i_\mathrm{2}(t), i_\mathrm{1}(t)$. Here, $u_\mathrm{T}(t)$ is the transistor voltage and $u_\mathrm{s}(t)$ is the voltage on the secondary side of the transformer.}
 
-\input{./fig/ex04/Fig_voltageTransistorPeriodTask1.tex}
-\input{./fig/ex04/Fig_voltageUsPeriodTask1.tex}
-\input{./fig/ex04/Fig_currentI2PeriodTask1.tex}
-\input{./fig/ex04/Fig_currentI1PeriodTask1.tex}
+\begin{solutionblock}
+    \input{./fig/ex04/Fig_voltageTransistorPeriodTask1.tex}
+    \input{./fig/ex04/Fig_voltageUsPeriodTask1.tex}
+    \input{./fig/ex04/Fig_currentI2PeriodTask1.tex}
+    \input{./fig/ex04/Fig_currentI1PeriodTask1.tex}
+\end{solutionblock}
 
-\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Determine the mean value $\overline i_\mathrm{T}$ and the RMS current $I_\mathrm{T}$ through the transistor. Also,  determine the mean value $\overline i_\mathrm{D}$ and the RMS current $I_\mathrm{D}$ through the diode. What is the maximum reverse voltage load $u_\mathrm{T, max}$ of the transistorans $u_\mathrm{D, max}$ of the diode?}
+
+\subtask{Determine the mean value $\overline i_\mathrm{T}$ and the RMS current $I_\mathrm{T}$ through the transistor. Also,  determine the mean value $\overline i_\mathrm{D}$ and the RMS current $I_\mathrm{D}$ through the diode. What is the maximum reverse voltage load $u_\mathrm{T, max}$ of the transistor and $u_\mathrm{D, max}$ of the diode? Consider the same operation conditions as in the previous subtask.}
 \begin{solutionblock}
     \begin{equation}
         \overline{i}_\mathrm{T} = \frac{1}{T_\mathrm{S}}\frac{1}{2}\hat I_\mathrm{1}T_\mathrm{on}=\frac{1}{\SI{20}{\micro\s}}\cdot\frac{1}{2}\SI{1.257}{\ampere}\cdot\SI{2.5}{\micro\s}=\SI{78.53}{\milli\ampere}
@@ -102,7 +105,7 @@ Now $\Delta i_\mathrm{m,max}=\SI{20}{\ampere}$ can be used in \eqref{eq:Duty cyc
 
 \end{solutionblock}
 
-\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. How much energy is transferred from the input to the output per switching period $\Delta E$ and what is the resulting average power $P$ considering the duty cycle value from subtask 1.2? What happens if there is no ideal voltage source on the output side but an unloaded capacitor and the circuit is operated with $D>0$?}
+\subtask{How much energy is transferred from the input to the output per switching period $\Delta E$ and what is the resulting average power $P$ (consider the same operation conditions as in the previous subtask)? What happens if there is no ideal voltage source on the output side but an unloaded capacitor and the circuit is operated with $D>0$?}
 
 \begin{solutionblock}
 
@@ -128,14 +131,13 @@ The leakage inductance, the resistive losses, and the core losses of the transfo
 The converter operates in steady-state conditions. Both transistors are controlled by the same signal.
 
 \subtask{At what duty cycle $D$ does the circuit operate?}
-\subtask{Calculate the average value of $\overline{i_\mathrm{2}}$ and $\overline{i_\mathrm{1}}$ over a switching cycle, 
-         assuming ideal filtering of $i_\mathrm{2}$.}
-\subtask{Calculate the peak value of $\hat{i}_\mathrm{m}$ the magnetizing current $i_\mathrm{m}$.}
-\subtask{Sketch the waveforms of $u_\mathrm{p}$, $i_\mathrm{m}$, $i_\mathrm{p}$ and $i_\mathrm{1}$ 
-         considering switching-induced ripples.}
-\subtask{Calculate the minimal necessary input voltage $U_\mathrm{1}$, if the output voltage $U_\mathrm{2}$ = \SI{20}{\volt} shall being constant.}
-\subtask{Calculate the inductance of $L$,such that the ripple current $\Delta i_\mathrm{2}$ is to be $\SI{10}{\percent}$ of the 
-         average output current $\overline{I_\mathrm{2}}$?}
+\subtask{Calculate the average currents $\overline{i}_\mathrm{2}$ and $\overline{i}_\mathrm{1}$ over a switching cycle assuming ideal filtering of $i_\mathrm{2}$.}
+\subtask{Calculate the peak value $\hat{i}_\mathrm{m}$ of the magnetizing current $i_\mathrm{m}$.}
+\subtask{Sketch the signals $u_\mathrm{p}$, $i_\mathrm{m}$, $i_\mathrm{p}$ and $i_\mathrm{1}$ 
+         considering the switching-induced ripples.}
+\subtask{Calculate the minimal necessary input voltage $U_\mathrm{1}$, if $U_\mathrm{2}$ = \SI{20}{\volt} shall being constant.}
+\subtask{Determine $L$ such that the ripple current $\Delta i_\mathrm{2}$ is $\SI{10}{\percent}$ of the 
+         average output current $\overline{i}_\mathrm{2}$.}
 
 
 
@@ -145,30 +147,28 @@ The converter operates in steady-state conditions. Both transistors are controll
 
 \task{Singled-ended forward converter (demagnetization winding)}
 
-The power supply of a data processing system shall be realized by a singled-ended forward converter as shown in \autoref{fig:ex04_SingledEndedForwardConverter}.
+The power supply of a data processing system shall be realized by a singled-ended forward converter.
 
 \input{./fig/ex04/Fig_SingledEndedForwardConverter}
 
 The parameters are listed in \autoref{table:Ex04_Parameters of the singled ended forward converter.}.
-The output inductance $L_\mathrm{4}$ is dimensioned so that the current $i_\mathrm{L4}$ exhibits a continuous waveform.
+The output inductance $L$ is dimensioned so that the current $i_\mathrm{L}$ exhibits a continuous waveform.
 The transformer's leakage inductance can be neglected.
 
 \input{./fig/ex04/FigTab_SingledEndedForwardConverter}
 
-\subtask{Calculate the turns ratio $N_\mathrm{3}$/$N_\mathrm{1}$ so that the maximum blocking voltage 
-         across the transistor during demagnetization is $\SI{600}{\volt}$.}
+\subtask{Calculate the turns ratio $N_\mathrm{3}$/$N_\mathrm{1}$ limiting the maximum transistor blocking voltage 
+          to $\SI{600}{\volt}$.}
 \subtask{What is the maximum permissible duty cycle of the power transistor in this case?}
 \subtask{What turns ratio $N_\mathrm{1}$/$N_\mathrm{2}$ should be chosen to achieve the required secondary voltage?}
-\subtask{Does the steady-state duty cycle of the transistor need to be adjusted when the output power changes? 
-         Over what range must the transistor's duty cycle be adjustable, considering the input voltage range?}
+\subtask{Does the duty cycle need to be adjusted when the output power changes? 
+         Over what range must the duty cycle be adjustable, considering the input voltage range?}
 \subtask{What are the resulting maximum blocking voltages of the diodes $D_\mathrm{1}$ and $D_\mathrm{2}$?}
-\subtask{What should be the value of the primary inductance $L_\mathrm{1}$ to ensure 
-        that the peak value of the magnetizing current remains below $\SI{10}{\percent}$ of the current $\overline{i_\mathrm{L4'}}$. 
-        The current $\overline{i_\mathrm{L4'}}$  corresponds to the average current $\overline{i_\mathrm{L4}}$ through the output inductance 
-        at a nominal load of $P_2=\SI{125}{\watt}$, which is translated to the primary side.}
-\subtask{Sketch the waveform of the voltage across the power transistor, the current through the demagnetization 
+\subtask{Determine the magnetizing inductance $L_\mathrm{m}$ to ensure 
+        that the peak value of the magnetizing current remains below $\SI{10}{\percent}$ of the $\overline{i}'_\mathrm{L}$, which corresponds to the average current $\overline{i}_\mathrm{L}$ through the output inductance translated to the primary side
+        at a nominal load of $P_2=\SI{125}{\watt}$.}
+\subtask{Sketch the signals of the voltage across the power transistor, the current through the demagnetization 
         winding, and the current through the freewheeling diode $D_\mathrm{2}$ 
         for $U_\mathrm{1}=\SI{240}{\volt}$ and $U_\mathrm{1}=\SI{360}{\volt}$.}
-\subtask{Calculate the peak value of the magnetizing current for each case. Consider the current in the output 
-          inductor as ideally filtered.}
+\subtask{Calculate the peak magnetizing current for each case assuming a constant output current.}
 \subtask{Could a higher power be transferred by doubling the switching frequency of the converter?}

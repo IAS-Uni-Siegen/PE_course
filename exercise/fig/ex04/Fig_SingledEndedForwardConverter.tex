@@ -16,9 +16,7 @@
                     % Add junction for diode D3
                     (jLTv) ++ (0,-2) coordinate (jD3k)
                     % Add inductor LTv
-                    (jD3k) to [L,l=$L_\mathrm{3}$,n=L1,v_<=$U_\mathrm{3}$, voltage shift=0.5, voltage=straight] (jLTv)
-                    % Add winding text
-                    (jD3k) node[right] {$N_\mathrm{3}$};
+                    (jD3k) to [L,l=$N_\mathrm{3}$,n=L1,v_<=$U_\mathrm{3}$, voltage shift=0.5, voltage=straight] (jLTv);
                     \path (L1.ul dot) node[circ]{};
             \draw                    
                     % Add arrow and Text
@@ -52,9 +50,7 @@
                     % Assign Transistor drain junction to primary junction point
                     (jTd) coordinate  (jLtpg)
                     % Add transformer primary inductor with voltage arrow
-                    (jLtpv) to [L,l_=$L_\mathrm{1}$, n=Ltp, v_=$U_\mathrm{p}$,voltage shift=5, voltage=straight] ++(0,-2) coordinate (jLtpg)
-                    % Add turn name of primary inductor
-                    (jLtpg) node[left] {$N_\mathrm{1}$}
+                    (jLtpv) to [L,l_=$N_\mathrm{1}$, n=Ltp, v_=$U_\mathrm{p}$,voltage shift=5, voltage=straight] ++(0,-2) coordinate (jLtpg)
                     % Add junctions for secondary inductor
                     (jLtpv) ++(0.8,0) coordinate  (jLtsv) 
                     (jLtpg) ++(0.8,0) coordinate  (jLtsg);      
@@ -83,7 +79,7 @@
                     % Add diode D2
                     (jD2a) to  [D,l^=$D_\mathrm{2}$]  (jD2k)                    
                     % Add inductor L4
-                    (jD2k) to [L,l=$L_\mathrm{4}$,n=L1] ++(3,0) coordinate (jU2v)
+                    (jD2k) to [L,l=$L$,n=L1] ++(3,0) coordinate (jU2v)
                     % Add arrow and Text
                     (jD2k) ++(0.5,0) node[currarrow](IL){}  
                     (IL)  node[anchor=south,color=black]{$i_\mathrm{L}$}
