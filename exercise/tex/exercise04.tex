@@ -177,13 +177,80 @@ The leakage inductance, the resistive losses, and the core losses of the transfo
 The converter operates in steady-state conditions. Both transistors are controlled by the same signal.
 
 \subtask{At what duty cycle $D$ does the circuit operate?}
+\begin{solutionblock}
+    The forward converter topology is derivated from buck-topology.Taking into account the turns ratio, the result is
+    \begin{equation}
+        \frac{U_\mathrm{2}}{U_\mathrm{1}}=D\frac{N_\mathrm{2}}{N_\mathrm{1}}.
+        \label{eq:ex04voltageratioforwardconverter}
+    \end{equation}
+    This leads to
+    \begin{equation}
+        D=\frac{N_\mathrm{1}}{N_\mathrm{2}}\frac{U_\mathrm{2}}{U_\mathrm{1}}=10\frac{\SI{15}{\volt}}{\SI{325}{\volt}}=0.4615.
+    \end{equation}
+\end{solutionblock}
+
 \subtask{Calculate the average currents $\overline{i}_\mathrm{2}$ and $\overline{i}_\mathrm{1}$ over a switching cycle assuming ideal filtering of $i_\mathrm{2}$.}
+\begin{solutionblock}
+    The current is calculated with help of the output power by
+    \begin{equation}
+        \overline{i}_\mathrm{2}=\frac{P_\mathrm{2}}{U_\mathrm{2}}=\frac{\SI{50}{\watt}}{\SI{15}{\volt}}=\SI{3.33}{\ampere}.
+        \label{eq:ex04averageoutputcurrent}
+    \end{equation}
+    Since the losses can be neglected, it follows
+    \begin{equation}
+        \overline{i}_\mathrm{1}=\frac{P_\mathrm{2}}{U_\mathrm{1}}=\frac{\SI{50}{\watt}}{\SI{325}{\volt}}=\SI{0.138}{\ampere}.
+    \end{equation}
+\end{solutionblock}
+
+
 \subtask{Calculate the peak value $\hat{i}_\mathrm{m}$ of the magnetizing current $i_\mathrm{m}$.}
+\begin{solutionblock}
+    The duty cycle is less than $0.5$. The magnetizing current $i_\mathrm{m}$ is $\SI{0.138}{\ampere}$ at the end of a period.
+    This means that
+    \begin{equation}
+        \hat{i}_\mathrm{m}=\Delta i_\mathrm{m,max}= \frac{D \cdot U_\mathrm{1}}{L_\mathrm{m} \cdot f_\mathrm{s}} =
+        \frac{0.4615 \cdot \SI{325}{\volt}}{\SI{2}{\milli\henry} \cdot \SI{50}{\kilo\hertz}} = \SI{20}{\ampere}.
+    \end{equation}    
+    \begin{equation}
+        \overline{i}_\mathrm{2}=\frac{P_\mathrm{2}}{U_\mathrm{2}}=\frac{\SI{50}{\watt}}{\SI{15}{\volt}}=\SI{1.5}{\ampere}.
+    \end{equation}
+    Since the losses can be neglected, it follows
+    \begin{equation}
+        \overline{i}_\mathrm{1}=\frac{P_\mathrm{2}}{U_\mathrm{1}}=\frac{\SI{50}{\watt}}{\SI{325}{\volt}}=\SI{0.138}{\ampere}.
+    \end{equation}
+\end{solutionblock}
+
+
 \subtask{Sketch the signals $u_\mathrm{p}$, $i_\mathrm{m}$, $i_\mathrm{p}$ and $i_\mathrm{1}$ 
          considering the switching-induced ripples.}
+\begin{solutionblock}
+    The voltage and currents are displayed in \autoref{fig:ex04_VoltageAtPrimarySide} and \autoref{fig:ex04_CurrentAtPrimarySide}
+    \input{./fig/ex04/sFigDia_Ex04SignalsForwardConverterWithAsymHalfBridge}
+\end{solutionblock}
+
 \subtask{Calculate the minimal necessary input voltage $U_\mathrm{1}$, if $U_\mathrm{2}$ = \SI{20}{\volt} shall being constant.}
+\begin{solutionblock}
+    For the forward converter the duty cycle should be less equal $0.5$. Using \eqref{eq:ex04voltageratioforwardconverter} leads to
+    \begin{equation}
+        U_\mathrm{1}=\frac{N_\mathrm{2}}{N_\mathrm{1}}\frac{U_\mathrm{1}}{D_\mathrm{max}}=
+        \frac{\SI{20}{\volt}}{0.5 \cdot 10}=\SI{400}{\volt}.
+    \end{equation}
+\end{solutionblock}
+
+
 \subtask{Determine $L$ such that the ripple current $\Delta i_\mathrm{2}$ is $\SI{10}{\percent}$ of the 
          average output current $\overline{i}_\mathrm{2}$.}
+\begin{solutionblock}
+    The ripple current $\Delta i_\mathrm{2}$ is expressed by
+    \begin{equation}
+        \Delta i_\mathrm{2}= \frac{D \cdot U_\mathrm{2}}{L_\mathrm{m} \cdot f_\mathrm{s}} = 0.1 \overline{i_\mathrm{2}}
+    \end{equation}
+    Using the result of \eqref{eq:ex04averageoutputcurrent} this leads to
+    \begin{equation}
+        L_\mathrm{m}  = \frac{D \cdot U_\mathrm{2}}{0.1 \overline{i_\mathrm{2}} \cdot f_\mathrm{s}} 
+        = \frac{0.4615 \cdot \SI{15}{\volt}}{0.1 \cdot \SI{3.33}{\ampere} \cdot \SI{50}{\kilo\hertz}}=\SI{0.485}{\milli\henry}
+    \end{equation}    
+\end{solutionblock}
 
 
 
@@ -197,6 +264,7 @@ The power supply of a data processing system shall be realized by a singled-ende
 
 \input{./fig/ex04/Fig_SingledEndedForwardConverter}
 
+\FloatBarrier
 The parameters are listed in \autoref{table:Ex04_Parameters of the singled ended forward converter.}.
 The output inductance $L$ is dimensioned so that the current $i_\mathrm{L}$ exhibits a continuous waveform.
 The transformer's leakage inductance can be neglected.
@@ -205,16 +273,185 @@ The transformer's leakage inductance can be neglected.
 \vspace{-0.5cm}
 \subtask{Calculate the turns ratio $N_\mathrm{3}$/$N_\mathrm{1}$ limiting the maximum transistor blocking voltage 
           to $\SI{600}{\volt}$.}
+\begin{solutionblock}
+    The maximum blocking voltage at the transistor is calculated by
+    \begin{equation}
+        U_\mathrm{T,max}=U_\mathrm{1}+U_\mathrm{p} \quad \text{with} \quad U_\mathrm{p}=\frac{N_\mathrm{1}}{N_\mathrm{3}} U_\mathrm{3}.
+        \label{eq:ex04transistorblockingvoltageA}
+    \end{equation} 
+    If the diode $D_\mathrm{3}$ is active the voltage $U_\mathrm{3}$ is equal $U_\mathrm{1}$.
+    Using \eqref{eq:ex04transistorblockingvoltageA} leads to
+    \begin{equation}
+        U_\mathrm{T,max}=U_\mathrm{1}+\frac{N_\mathrm{1}}{N_\mathrm{3}} U_\mathrm{1}.
+        \label{eq:ex04transistorblockingvoltageB}
+    \end{equation}
+    Solving \eqref{eq:ex04transistorblockingvoltageB} to turns ratio $N_\mathrm{3}$/$N_\mathrm{1}$ results in
+    \begin{equation}
+        \frac{N_\mathrm{3}}{N_\mathrm{1}}=\frac{1}{\frac{U_\mathrm{T,max}}{U_\mathrm{1}}-1}
+        =\frac{1}{\frac{\SI{600}{\volt}}{\SI{360}{\volt}}-1}=1.5.
+    \end{equation}
+\end{solutionblock}
+          
 \subtask{What is the maximum permissible duty cycle of the power transistor in this case?}
+\begin{solutionblock}
+    The $\Delta i_\mathrm{m}$ is related to the voltage at the primary coil. The voltages are
+    \begin{equation}
+        U_\mathrm{p,on}=U_\mathrm{1}  \quad \text{and} \quad U_\mathrm{p,off}=U_\mathrm{1}\frac{N_\mathrm{3}}{N_\mathrm{1}} U_\mathrm{3}.
+        \label{eq:ex04upmagnetizationvoltage}
+    \end{equation}     
+    The magnetization current is $\SI{0}{\ampere}$ at the end of each period. For the maximum duty cycle this leads to
+    \begin{equation}
+        U_\mathrm{p,on}T_\mathrm{p,on}=U_\mathrm{p,off}T_\mathrm{p,off}
+        \label{eq:ex04upmagnetizationtimerelation}        
+    \end{equation} 
+    The ration of $T_\mathrm{p,on}/T_\mathrm{p,off}$ is obtained by
+    \begin{equation}
+        \frac{T_\mathrm{p,on}}{T_\mathrm{p,off}}=\frac{D_\mathrm{max}}{1-D_\mathrm{max}}
+    \end{equation} 
+    Using \eqref{eq:ex04upmagnetizationvoltage} and \eqref{eq:ex04upmagnetizationtimerelation} results in
+    \begin{equation}
+        U_\mathrm{p,on} \frac{D_\mathrm{max}}{1-D_\mathrm{max}} = U_\mathrm{p,off}
+        \label{eq:ex04upmagnetizationdutycycle}
+    \end{equation}
+    The cancelation of voltages $U_\mathrm{p,on}$ and $U_\mathrm{p,off}$ results in
+    \begin{equation}
+        \frac{N_\mathrm{3}}{N_\mathrm{1}} \frac{D_\mathrm{max}}{1-D_\mathrm{max}} = 1
+        \label{eq:ex04upmagnetizationdutycycle}
+    \end{equation} 
+
+    The duty cycle is calculated by solving \eqref{eq:ex04upmagnetizationdutycycle}
+    \begin{equation}
+        D_\mathrm{max}=\frac{\frac{N_\mathrm{1}}{N_\mathrm{3}}}{1+\frac{N_\mathrm{1}}{N_\mathrm{3}}} 
+        = \frac{0.667}{1+0.667}=0.4
+        \label{eq:ex04upmagnetizationdutycycle}
+    \end{equation}  
+\end{solutionblock}
+
 \subtask{What turns ratio $N_\mathrm{1}$/$N_\mathrm{2}$ should be chosen to achieve the required secondary voltage?}
+\begin{solutionblock}
+    For the calculation of the turns ratio $N_\mathrm{1}$/$N_\mathrm{2}$ the forward voltage of $D_\mathrm{1}$ has to taken in account.
+    The voltage at the secondary coil is calculated by
+    \begin{equation}
+        U_\mathrm{2}=\left(U_\mathrm{s}-U_\mathrm{D1,f}\right)\cdot D \quad and \quad 
+        U_\mathrm{s}=\frac{N_\mathrm{2}}{N_\mathrm{1}}U_\mathrm{1}.
+        \label{eq:ex04transformationratio}        
+    \end{equation}
+    This leads to
+    \begin{equation}
+        U_\mathrm{2}=\left(\frac{N_\mathrm{2}}{N_\mathrm{1}}U_\mathrm{1}-U_\mathrm{D1,f}\right)\cdot D
+        \label{eq:ex04secondaryvoltage}  
+    \end{equation}
+    Solving to $N_\mathrm{1}$/$N_\mathrm{2}$ results in
+    \begin{equation}
+        \frac{N_\mathrm{1}}{N_\mathrm{2}}=\frac{U_\mathrm{1}D}{U_\mathrm{2}+ U_\mathrm{D1,f}D}
+        =frac{\SI{240}{\volt}\cdot 0.4}{\SI{5}{\volt}+\SI{0.4}{\volt} \cdot 0.4 }=18.6.
+    \end{equation}
+\end{solutionblock}
+
+
+
 \subtask{Does the duty cycle need to be adjusted when the output power changes? 
          Over what range must the duty cycle be adjustable, considering the input voltage range?}
+\begin{solutionblock}
+    No, \eqref{eq:ex04transformationratio} shows that the output voltage depends on the turn ratio and the duty cycle,
+    but not on the output power. The transformer does not act as energy storage. 
+    This is only valid the with the assumption of ideal components. 
+    The minimum duty cycle results in solving \eqref{eq:ex04secondaryvoltage} to D.
+    \begin{equation}
+        D=\frac{U_\mathrm{2}}{\frac{N_\mathrm{2}}{N_\mathrm{1}}U_\mathrm{1}-U_\mathrm{D1,f}}=
+        \frac{\SI{5}{\volt}}{\frac{N_\mathrm{2}}{N_\mathrm{1}}\SI{360}{\volt}-\SI{0.4}{\volt}}
+    \end{equation}
+    This leads to
+    \begin{equation}
+        U_\mathrm{2}=\left(\frac{N_\mathrm{2}}{N_\mathrm{1}}U_\mathrm{1}-U_\mathrm{D1,f}\right)*D
+    \end{equation}
+    Solving to $N_\mathrm{1}$/$N_\mathrm{2}$ results in
+    \begin{equation}
+        \frac{N_\mathrm{1}}{N_\mathrm{2}}=\frac{U_\mathrm{1}D}{U_\mathrm{2}+ U_\mathrm{D1,f}D}
+        =\frac{\SI{240}{\volt}}{\frac{1}{18.6} \SI{5}{\volt}+\SI{0.4}{\volt}}=0.264.
+    \end{equation}
+    The duty cycle needs to be adjustable between $0.264$ and $0.4$.
+\end{solutionblock}
+         
 \subtask{What are the resulting maximum blocking voltages of the diodes $D_\mathrm{1}$ and $D_\mathrm{2}$?}
+\begin{solutionblock}
+    The maximum blocking voltages of the diodes $D_\mathrm{1}$ is calculated by
+    \begin{equation}
+        U_\mathrm{D2,r}=U_\mathrm{s}-U_\mathrm{D1,f} \quad \text{with} \quad U_\mathrm{s}=U_\mathrm{1}\frac{N_\mathrm{2}}{N_\mathrm{1}}
+    \end{equation}
+    This leads to
+    \begin{equation}
+        U_\mathrm{D2,r}=U_\mathrm{1}\frac{N_\mathrm{2}}{N_\mathrm{1}}--U_\mathrm{D1,f}=
+        \SI{360}{\volt}\frac{1}{18.6}-\SI{0.4}{\volt}=18.95.
+    \end{equation}
+    The maximum blocking voltages of the diodes $D_\mathrm{1}$ corresponds to the secondary voltage at demagnetization.
+    For the calculation the demagnetization coil is use:
+    \begin{equation}
+        U_\mathrm{D1,r}=U_\mathrm{s}=U_\mathrm{1}\frac{N_\mathrm{2}}{N_\mathrm{3}} \quad \text{with} \quad
+        \frac{N_\mathrm{2}}{N_\mathrm{3}}=\frac{N_\mathrm{2}}{N_\mathrm{1}}\frac{N_\mathrm{1}}{N_\mathrm{3}}
+    \end{equation}
+    The result yields by
+    \begin{equation}
+        U_\mathrm{D1,r}=\SI{360}{\volt}\frac{1}{18.6 \cdot 1.5}=12.9
+    \end{equation}
+\end{solutionblock}
+
 \subtask{Determine the magnetizing inductance $L_\mathrm{m}$ to ensure 
         that the peak value of the magnetizing current remains below $\SI{10}{\percent}$ of the $\overline{i}'_\mathrm{L}$, which corresponds to the average current $\overline{i}_\mathrm{L}$ through the output inductance translated to the primary side
         at a nominal load of $P_2=\SI{125}{\watt}$.}
+\begin{solutionblock}
+    The current through $L$ is calculated by
+    \begin{equation}
+        I_\mathrm{2}=P_\mathrm{2}/U_\mathrm{2} \quad \text{which corresponds to} \quad 
+        I'_\mathrm{2s}=I_\mathrm{2}\frac{N_\mathrm{2}}{N_\mathrm{1}}
+    \end{equation}
+    This leads to the current $\hat{i}_\mathrm{m}$ of
+    \begin{equation}
+        \hat{i}_\mathrm{m}=I'_\mathrm{2s}\cdot 0.1=I_\mathrm{2}\frac{N_\mathrm{2}}{N_\mathrm{1}}\cdot 0.1
+        =\frac{\SI{125}{\watt}}{\SI{5}{\volt}} \cdot 0.1 =\SI{0.1344}{\ampere}
+        \label{eq:ex04magnetizationcurrent}  
+    \end{equation}
+    The maximum magnetization current maximum $\hat{i}_\mathrm{m}$ corresponds to the ripple current $\Delta{i}_\mathrm{m}$
+    because at the end of each period $i_\mathrm{m}=\SI{0}{\ampere}$.
+    \begin{equation}
+        \Delta i_\mathrm{m}= \frac{D \cdot U_\mathrm{1}}{L_\mathrm{m} \cdot f_\mathrm{s}}
+        \label{eq:ex04ripplemagnetizationcurrent}          
+    \end{equation}
+    Using \eqref{eq:ex04magnetizationcurrent} and solving \eqref{eq:ex04ripplemagnetizationcurrent} to $L_\mathrm{m}$ yields.
+    \begin{equation}
+        L_\mathrm{m}= \frac{D_\mathrm{max} \cdot U_\mathrm{1}}{\hat{i}_\mathrm{m} \cdot f_\mathrm{s}}
+                    = \frac{0.4 \cdot \SI{240}{\volt}}{\SI{0.1344}{\ampere} \cdot \SI{48}{\kilo\hertz}}=\SI{14.9}{\milli\henry}
+    \end{equation}
+\end{solutionblock}
+
 \subtask{Sketch the signals of the voltage across the power transistor, the current through the demagnetization 
         winding, and the current through the freewheeling diode $D_\mathrm{2}$ 
         for $U_\mathrm{1}=\SI{240}{\volt}$ and $U_\mathrm{1}=\SI{360}{\volt}$.}
+\begin{solutionblock}
+    The current through the demagnetization is calculated by
+    \begin{equation}
+        \hat{i}_\mathrm{T}=\frac{N_\mathrm{3}}{N_\mathrm{1}} \cdot \Delta i_\mathrm{m}=
+        =\frac{1}{1.5} \cdot \SI{0.1344}{\ampere}=\SI{89.6}{\milli\ampere}
+    \end{equation}
+    
+    \input{./fig/ex04/sFigDia_Ex04SignalsSingledEndedForwardConverter}  
+
+\end{solutionblock}
+        
 \subtask{Calculate the peak magnetizing current for each case assuming a constant output current.}
+\begin{solutionblock}
+    The current through the primary coil $N1$ is still calculated with \eqref{eq:ex04magnetizationcurrent}.
+    Using \eqref{eq:ex04ripplemagnetizationcurrent} the minimal duty cycle yields
+    \begin{equation}
+        \hat{i}_\mathrm{m,D_{min}}=\Delta i_\mathrm{m,D_{min}}= \frac{D_\mathrm{min} \cdot U_\mathrm{1}}{L_\mathrm{m} \cdot f_\mathrm{s}}
+        =\frac{0.4 \cdot \SI{360}{\volt}}{\SI{14.9}{\milli\henry} \cdot \SI{48}{\kilo\hertz}}=\SI{0.1330}{\ampere}
+    \end{equation}
+\end{solutionblock}
+
+
 \subtask{Could a higher power be transferred by doubling the switching frequency of the converter?}
+\begin{solutionblock}
+    No,  also in this case \eqref{eq:ex04transformationratio} shows, that the output voltage depends on the turn ratio and the duty cycle,
+    but not on the switching frequency of the converter. The transformer does not act as energy storage.
+    Also this is valid under the assumption of ideal components. 
+\end{solutionblock}
