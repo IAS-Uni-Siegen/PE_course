@@ -552,9 +552,9 @@
             \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [short, i=$i_1(t)$] ++(0.75,0)
             to [diode, l=$D$]  ++(1.5,0)
-            to [short] ++(0.75,0) coordinate (C)
+            to [short, i=${i_2(t)}$] ++(0.75,0) coordinate (C)
             to [C, v= $u_2(t)$, voltage = straight, l=$C$, *-*, i=${i_\mathrm{C}(t)}$] ++(0,-2)
-            (C) to [short, i=${i_2(t)}$] ++(1.5,0)
+            (C) to [short] ++(1.5,0)
             to [isource, l=$I_0$] ++(0,-2) coordinate (B)    
             (A) -- (B);
         \end{circuitikz}
@@ -817,5 +817,340 @@
         \end{tikzpicture}
         \caption{B2U topology (aka \hl{two pulse bridge rectifier}) with resistive load}
         \label{fig:B2U_topology}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U uncontrolled rectifier circuit with capacitive output filtering %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U uncontrolled rectifier circuit with capacitive output filtering}
+    \begin{figure}
+           \begin{circuitikz}
+            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            (0,0) to [short, i=$i_1(t)$, -*] ++(2,0)
+            to [diode, l=$D_1$]  ++(0,1.5)
+            to [short, -*] ++(2,0) coordinate (C)
+            to [diode, l=$D_3$, invert]  ++(0,-1.5)
+            to [short] ++(0, -2) coordinate (B)
+            to [diode, l=$D_2$, invert, -*]  ++(0, -1.5) coordinate (D)
+            to [short] ++(-2,0)
+            to [diode, l=$D_4$]  ++(0, 1.5)
+            to [short] ++(0, 2)
+            (B) to [crossing, *-, mirror] ++(-4,0)
+            to [short] (A)
+            (C) to [short, i=$i_2(t)$] ++(2,0) coordinate (E)
+            to [short] ++(0,-1.5)
+            to [C, v= $u_2(t)$, voltage = straight, l=$C$, i=${i_\mathrm{C}(t)}$] ++(0,-2)
+            to [short] ++(0,-1.5) coordinate (F)
+            to [short] (D)
+            (E) to [short, *-] ++(2,0)
+            to [short] ++(0,-1.5)
+            to [isource, l=$I_0$] ++(0,-2)
+            to [short] ++(0,-1.5)
+            to [short, -*] (F);
+        \end{circuitikz}%
+        \caption{B2U topology with output capacitor and constant load}
+        \label{fig:B2U_topology_capacitive_filter}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U uncontrolled rectifier circuit with capacitive output filtering (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U uncontrolled rectifier circuit with capacitive output filtering (cont.)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \tikzmath{
+                    real \i0, \a, \b, \c;
+                    \i0 = 0.4; % normalized load current
+                    \a = acos(-\i0)*pi/180; %Phase angle alpha until cap current hits -i0 and diodes block
+                    \b = 0.3*pi; % Phase angle beta indicating the time until the cap voltage is hit by the input voltage and diodes start conducting again
+                    \c = (sin(deg(\a)) + sin(deg(pi+\b)))/(\i0*(pi + \b - \a)); % slope of the capacitor voltage during the discharge phase
+                }
+            \begin{axis}[
+                width=0.79\textwidth,
+                height=0.85\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                yticklabel style={inner sep=2pt,
+                fill = white},
+                xmin=0, xmax=3*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0,3.14/2,3.14, 3.14*3/2,6.28, 2.5*3.14},
+                xticklabels={$0$, ,$\pi$, , $2\pi$, },
+                ytick={-1,0,1},
+                yticklabels={$-\hat{x}$,$0$,$\hat{x}$},
+                grid=both,
+                ]
+
+                % %input voltage
+                \addplot[domain=0*pi:3*pi, samples=100, signalblue, thick, dashed]{sin(deg(x))};
+                \addplot[domain=0*pi:3*pi, samples=100, signalblue, thick, dash dot]{abs(sin(deg(x)))}; %rectified input voltage
+                
+                % capacitor current
+                \addplot[domain=0:\a, samples=100, signalred, dotted, thick]{cos(deg(x))};
+                \addplot[domain=\a:pi+\b, samples=100, signalred, dotted, thick]{-\i0};
+                \draw[signalred, thick, dotted] (axis cs:pi+\b,-\i0) -- (axis cs:pi+\b,{-cos(deg(pi+\b))});
+                \addplot[domain=pi+\b:pi+\a, samples=100, signalred, dotted, thick]{-cos(deg(x))};
+                \addplot[domain=pi+\a:2*pi+\b, samples=100, signalred, dotted, thick]{-\i0};
+                \draw[signalred, thick, dotted] (axis cs:2*pi+\b,-\i0) -- (axis cs:2*pi+\b,{-cos(deg(pi+\b))});
+                \addplot[domain=2*pi+\b:2*pi+\a, samples=100, signalred, dotted, thick]{cos(deg(x))};
+                \addplot[domain=2*pi+\a:3*pi+\b, samples=100, signalred, dotted, thick]{-\i0};
+                
+                % input current
+                \addplot[domain=0:\a, samples=100, signalred, thick]{cos(deg(x))+\i0};
+                \addplot[domain=\a:pi+\b, samples=100, signalred, thick]{0};
+                \draw[signalred, thick] (axis cs:pi+\b,0) -- (axis cs:pi+\b,{-cos(deg(pi+\b))+\i0});
+                \addplot[domain=pi+\b:pi+\a, samples=100, signalred, thick]{-cos(deg(x))+\i0};
+                \addplot[domain=pi+\a:2*pi+\b, samples=100, signalred, thick]{0};
+                \draw[signalred, thick] (axis cs:2*pi+\b,0) -- (axis cs:2*pi+\b,{-cos(deg(pi+\b))+\i0});
+                \addplot[domain=2*pi+\b:2*pi+\a, samples=100, signalred, thick]{cos(deg(x))+\i0};
+                \addplot[domain=2*pi+\a:3*pi+\b, samples=100, signalred, thick]{0};
+
+                % %Capacitor voltage
+                \addplot[domain=0:\a, samples=100, signalbrown, thick]{sin(deg(x))};
+                \addplot[domain=\a:pi+\b, samples=100, signalbrown, thick]{sin(deg(\a))-\c*\i0*(x-\a)};
+                \addplot[domain=pi+\b:pi+\a, samples=100, signalbrown, thick]{abs(sin(deg(x)))};
+                \addplot[domain=pi+\a:2*pi+\b, samples=100, signalbrown, thick]{sin(deg(\a))-\c*\i0*(x-\a-pi)};
+                \addplot[domain=2*pi+\b:2*pi+\a, samples=100, signalbrown, thick]{abs(sin(deg(x)))};
+                \addplot[domain=2*pi+\a:3*pi+\b, samples=100, signalbrown, thick]{sin(deg(\a))-\c*\i0*(x-\a-2*pi)};
+                
+                % %signal labels
+                \node[signalblue, left, fill=white, inner sep=2pt, xshift=-5mm] at (axis cs:3.14*3/2,-1.0) {$u_1(t)$};
+                \node[signalblue, above, fill=white, inner sep=2pt] at (axis cs:3.14*2,1.0) {$|u_1(t)|$};
+                \draw[signalblue, thin] (axis cs:3.14*2-0.2,0.95) -- (axis cs:3.14*2-0.5,0.7);
+                \node[signalbrown, above] at (axis cs:3.0,0.9) {$u_2(t)$};
+                \node[signalred, left] at (axis cs:3.14/2,-\i0) {${i_\mathrm{C}(t)}$};
+                \node[signalred, right, fill=white, inner sep=2pt] at (axis cs:0.3*pi,1.25) {${i_1(t)}$};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Typical signal curves for B2U topology with output capacitor and constant load}
+        \label{fig:B2U_topology_capacitive_filter_signals}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier with capacitive output filtering and grid impedance %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier with capacitive output filtering and grid impedance}
+    \begin{figure}
+           \begin{circuitikz}
+            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            (0,0) to [L, i>^=$i_1(t)$, -*, l=$L$] ++(3,0)
+            to [diode, l=$D_1$]  ++(0,1.5)
+            to [short, -*] ++(2,0) coordinate (C)
+            to [diode, l=$D_3$, invert]  ++(0,-1.5)
+            to [short] ++(0, -2) coordinate (B)
+            to [diode, l=$D_2$, invert, -*]  ++(0, -1.5) coordinate (D)
+            to [short] ++(-2,0)
+            to [diode, l=$D_4$]  ++(0, 1.5)
+            to [short] ++(0, 2)
+            (B) to [crossing, *-, mirror] ++(-4,0)
+            to [short] (A)
+            (C) to [short, i=$i_2(t)$] ++(2,0) coordinate (E)
+            to [short] ++(0,-1.5)
+            to [C, v= $u_2(t)$, voltage = straight, l=$C$, i=${i_\mathrm{C}(t)}$] ++(0,-2)
+            to [short] ++(0,-1.5) coordinate (F)
+            to [short] (D)
+            (E) to [short, *-] ++(2,0)
+            to [short] ++(0,-1.5)
+            to [isource, l=$I_0$] ++(0,-2)
+            to [short] ++(0,-1.5)
+            to [short, -*] (F);
+        \end{circuitikz}%
+        \caption{B2U topology considering an output capacitor, constant load, and grid impedance}
+        \label{fig:B2U_topology_capacitive_filter_grid}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier with capacitive output filtering and grid impedance (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \tikzmath{
+                    real \a, \b, \i0, \gain;
+                    \b = 0.6*pi; % Phase angle beta indicating the time length of diode conduction
+                    \a = rad(atan((1-cos(deg(\b)))/(\b - sin(deg(\b))))); % Phase angle alpha indicating the start time of conducting diodes
+                    \gain = sin(deg(\a)); % gain of average output voltage to input voltage amplitude
+                    \i0 = 0.5*((1-cos(deg(\b)))/\gain - \gain*\b^2/2); % normalized load current
+                }
+            \begin{axis}[
+                width=0.79\textwidth,
+                height=0.85\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                yticklabel style={inner sep=2pt,
+                fill = white},
+                xmin=0, xmax=2*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0, \a, 3.14/2, pi-\a, \b+\a, 3.14, 3.14*3/2,6.28},
+                xticklabels={$0$, $\omega t_1$, $\frac{\pi}{2}$,$\omega t_2$, $\omega t_3$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                ytick={-1,0,1},
+                yticklabels={$-\hat{x}$,$0$,$\hat{x}$},
+                grid=both,
+                ]
+
+                % %input voltage
+                \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, dashed, name path = A]{sin(deg(x))};
+                \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, dash dot]{abs(sin(deg(x)))}; %rectified input voltage
+                
+                % output current (with double height for better visibility)
+                \addplot[domain=0:\a, samples=10, signalred, dotted, thick]{0};
+                \addplot[domain=\a:\a+\b, samples=100, signalred, thick]{pi*(cos(deg(\a))-cos(deg(x))-\gain*(x-\a))};
+                \addplot[domain=\a+\b:pi+\a, samples=10, signalred, thick]{0};
+                \addplot[domain=\a+pi:\a+\b+pi, samples=100, signalred, thick]{pi*(cos(deg(\a))-cos(deg(x-pi))-\gain*(x-\a-pi))};
+                \addplot[domain=\a+\b+pi:2*pi, samples=10, signalred, thick]{0};
+        
+                % dashed vertical lines for averages
+                \draw[dashed, name path = B] (axis cs:0,\gain) -- (axis cs:2*pi,\gain);
+                \draw[dashed, signalred] (axis cs:0,\i0*2) -- (axis cs:2*pi,\i0*2);
+
+                %dashed horizontal lines for alpha beta angles
+                \draw[dotted] (axis cs:\a,-1.5) -- (axis cs:\a,1.5);
+                \draw[dotted] (axis cs:\a+\b,-1.5) -- (axis cs:\a+\b,1.5);
+                \draw[dotted] (axis cs:pi-\a,-1.5) -- (axis cs:pi-\a,1.5);
+                \draw[->]  (0,-0.7) -- node[above]{$\alpha$}(\a, -0.7);
+                \draw[<->]  (\a,-0.9) -- node[above]{$\beta$}(\a+\b, -0.9);
+
+                % signal labels
+                \node[signalblue, below, fill=white, inner sep=2pt] at (axis cs:3.14*3/2,-1.0) {$u_1(t)$};
+                \node[signalblue, above, fill=white, inner sep=2pt] at (axis cs:3.14*3/2,1.0) {$|u_1(t)|$};
+                \node[signalred, left] at (axis cs:pi/2+0.1,0.4) {$i_2(t)$};
+                \node[signalred, above, yshift = 2mm] at (axis cs:pi*1.3,\i0) {$\overline{i}_2$};
+                \node[above] at (axis cs:pi,\gain) {$U_2$};
+
+                % fill area for depicting voltage balance
+                \addplot [shadecolor, opacity=0.3] fill between [of=A and B, soft clip={domain=\a:\b+\a}]; 
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Typical signal curves for B2U topology feeding a constant load from the grid and an infinite output capacitance in DCM}
+        \label{fig:B2U_topology_capacitive_filter_grid_signals_DCM}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier with capacitive output filtering and grid impedance (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \tikzmath{
+                    real \a, \i0, \gain, \w2;
+                    \a = 0.25*pi; % Phase angle alpha' indicating the start time of conducting diodes
+                    \gain = 2/pi*cos(deg(\a)); % gain of average output voltage to input voltage amplitude
+                    \i0 = sin(deg(\a)); % normalized load current
+                    \w2 = pi-rad(asin(\gain));
+                }
+            \begin{axis}[
+                width=0.79\textwidth,
+                height=0.85\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                yticklabel style={inner sep=2pt,
+                fill = white},
+                xmin=0, xmax=2*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0, \a, 3.14/2, \w2, 3.14, 3.14*3/2, 6.28},
+                xticklabels={$0$, $\omega t_1$, $\frac{\pi}{2}$, $\omega t_2$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                ytick={-1,0,1},
+                yticklabels={$-\hat{x}$,$0$,$\hat{x}$},
+                grid=both,
+                ]
+
+                % %input voltage
+                \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, dashed, name path = A]{sin(deg(x))};
+                \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, dash dot]{abs(sin(deg(x)))}; %rectified input voltage
+                
+                % output current
+                \addplot[domain=0:\a, samples=100, signalred, thick]{1/4*(cos(deg(\a))*(pi/2+\a)-(x+pi)*cos(deg(\a))-pi/2*cos(deg(x+pi)))};
+                \addplot[domain=\a:\a+pi, samples=100, signalred, thick]{1/4*(cos(deg(\a))*(pi/2+\a)-x*cos(deg(\a))-pi/2*cos(deg(x)))};
+                \addplot[domain=\a+pi:\a+2*pi, samples=100, signalred, thick]{1/4*(cos(deg(\a))*(pi/2+\a)-(x-pi)*cos(deg(\a))-pi/2*cos(deg(x-pi)))};
+     
+        
+                % dashed vertical lines for averages
+                \draw[dashed, name path = B] (axis cs:0,\gain) -- (axis cs:2*pi,\gain);
+                \draw[dashed, signalred] (axis cs:0,1/4*\i0) -- (axis cs:2*pi,1/4*\i0);
+
+                %dashed horizontal lines for alpha beta angles
+                \draw[dotted] (axis cs:\a,-1.5) -- (axis cs:\a,1.5);
+                \draw[dotted] (axis cs:pi+\a,-1.5) -- (axis cs:pi+\a,1.5);
+                \draw[->]  (0,-0.7) -- node[above]{$\alpha'$}(\a, -0.7);
+                \draw[<->]  (\a,-0.9) -- node[above]{$\alpha'+\pi$}(\a+pi, -0.9);
+
+                % signal labels
+                \node[signalblue, below, fill=white, inner sep=2pt] at (axis cs:3.14*3/2,-1.0) {$u_1(t)$};
+                \node[signalblue, above, fill=white, inner sep=2pt] at (axis cs:3.14*3/2,1.0) {$|u_1(t)|$};
+                \node[signalred, left] at (axis cs:pi/2+0.22,0.31) {$i_2(t)$};
+                \node[signalred, above, yshift=-1mm] at (axis cs:pi*1.3,\i0/4) {$\overline{i}_2$};
+                \node[above] at (axis cs:pi,\gain) {$U_2$};
+
+                % fill area for depicting voltage balance
+                \addplot [shadecolor, opacity=0.3] fill between [of=A and B, soft clip={domain=\a:pi+\a}]; 
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Typical signal curves for B2U topology feeding a constant load from the grid and an infinite output capacitance in BCM}
+        \label{fig:B2U_topology_capacitive_filter_grid_signals_CCM}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier with capacitive output filtering and grid impedance (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfplotsset{table/search path={fig/lec04}}
+            \begin{axis}[
+                     width=0.65\textwidth,
+                     height=0.85\textheight,
+                     axis lines=middle,
+                     xlabel={$\overline{i}_2$},
+                     xmin=0, xmax=1,
+                     ymin=0, ymax=1.05,
+                     grid=both,
+                     xlabel style={anchor = west},
+                     ]
+                    \addplot[signalblue, thick] table[x=I_out, y=gain, col sep=comma] {Load_curve_B2_rectifier.csv}; 
+                    \addplot[signalred, thick] table[x=I_out, y=alpha, col sep=comma] {Load_curve_B2_rectifier.csv}; 
+                    \addplot[signalbrown, thick] table[x=I_out, y=beta, col sep=comma] {Load_curve_B2_rectifier.csv}; 
+                    \draw[dashed] (axis cs:0.535,0) -- (axis cs:0.535,1);
+                    \node[signalred, above, fill=white, inner sep=2pt] at (axis cs:0.3,0.24) {$\frac{\alpha}{\pi}$};
+                    \node[signalbrown, above, fill=white, inner sep=2pt] at (axis cs:0.3,0.87) {$\frac{\beta}{\pi}$};
+                    \node[signalblue, above, fill=white, inner sep=2pt] at (axis cs:0.44,0.6) {$\frac{U_2}{\hat{u}_1}$};
+                    \draw[thin] (axis cs:0.54,0.6) -- (axis cs:0.75,0.7);
+                    \node[left, fill=white, inner sep=2pt, anchor=west] at (axis cs:0.75,0.7) {BCM limit};
+            \end{axis}                
+          \end{tikzpicture}
+        \caption{Load curve of the B2U rectifier with capacitive output filtering and grid impedance}
+        \label{fig:B2U_load_curve}
     \end{figure}
 \end{frame}
