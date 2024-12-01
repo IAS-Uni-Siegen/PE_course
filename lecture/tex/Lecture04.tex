@@ -87,7 +87,7 @@
     \begin{equation}
         \begin{gathered}
             u(t) = \frac{a_0}{2}+\sum_{n=1}^{\infty} \left( a_k \cos(k\omega t) + b_k \sin(k\omega t) \right), \quad k\in \mathbb{N},\\
-            a_k= \frac{1}{\pi} \int_{0}^{2\pi} u(t) \cos(k\omega t) \mathrm{d}\omega t,\,\, k\geq 0, \qquad b_k = \frac{1}{2\pi} \int_{0}^{2\pi} u(t) \sin(k\omega t) \mathrm{d}\omega t,\,\, k \geq 1.
+            a_k= \frac{1}{\pi} \int_{0}^{2\pi} u(t) \cos(k\omega t) \mathrm{d}\omega t,\,\, k\geq 0, \qquad b_k = \frac{1}{\pi} \int_{0}^{2\pi} u(t) \sin(k\omega t) \mathrm{d}\omega t,\,\, k \geq 1.
         \end{gathered}
     \end{equation}
 
@@ -821,6 +821,31 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U uncontrolled rectifier circuit (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U uncontrolled rectifier circuit (cont.)}
+    For a purely resistive load as in \figref{fig:B2U_topology} the output voltage $u_2(t)$ is
+    \begin{equation}
+        u_2(t) = \left|u_1(t)\right| = \hat{u}_1 \left|\sin(\omega t)\right|.
+        \label{eq:u2_B2U_resistive}
+    \end{equation}
+    Here, following diodes are conducting:
+    \begin{itemize}
+        \item Positive half-cycle: $D_1$ and $D_2$,
+        \item Negative half-cycle: $D_3$ and $D_4$.
+    \end{itemize}
+    The average output voltage $\overline{u}_2$ is
+    \begin{equation}
+        \begin{split}
+            \overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{2\pi} \hat{u}_1 \left|\sin(\omega t)\right| \mathrm{d}\omega t = \ldots = \frac{2}{\pi}\hat{u}_1.
+        \end{split}
+        \label{eq:u2_B2U_resistive_avg}
+    \end{equation}
+    The Fourier coefficients of the output voltage $u_2(t)$ are analogous to the M2U case, compare \eqref{eq:u2_M2U_Fourier} with appropriate scaling considering the lack of the center-tapped transformer.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% B2U uncontrolled rectifier circuit with capacitive output filtering %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -885,8 +910,8 @@
                 fill = white},
                 xmin=0, xmax=3*pi,
                 ymin=-1.5, ymax=1.5,
-                xtick={0,3.14/2,3.14, 3.14*3/2,6.28, 2.5*3.14},
-                xticklabels={$0$, ,$\pi$, , $2\pi$, },
+                xtick={0,3.14/2, \a, 3.14, pi+\b, 3.14*3/2,6.28, 2.5*3.14},
+                xticklabels={$0$, ,$\omega t_1$ ,$\pi$, $\omega t_2$, , $2\pi$, },
                 ytick={-1,0,1},
                 yticklabels={$-\hat{x}$,$0$,$\hat{x}$},
                 grid=both,
@@ -923,20 +948,78 @@
                 \addplot[domain=pi+\a:2*pi+\b, samples=100, signalbrown, thick]{sin(deg(\a))-\c*\i0*(x-\a-pi)};
                 \addplot[domain=2*pi+\b:2*pi+\a, samples=100, signalbrown, thick]{abs(sin(deg(x)))};
                 \addplot[domain=2*pi+\a:3*pi+\b, samples=100, signalbrown, thick]{sin(deg(\a))-\c*\i0*(x-\a-2*pi)};
+
+                %dashed horizontal lines for alpha beta angles
+                \draw[dotted] (axis cs:\a,-1.5) -- (axis cs:\a,1.5);
+                \draw[dotted] (axis cs:pi+\b,-1.5) -- (axis cs:pi+\b,1.5);
+                \draw[->]  (0,-0.9) -- node[above]{$\alpha$}(\a, -0.9);
+                \draw[<->]  (\a,-1.2) -- node[above]{$\beta$}(\b+pi, -1.2);
                 
                 % %signal labels
-                \node[signalblue, left, fill=white, inner sep=2pt, xshift=-5mm] at (axis cs:3.14*3/2,-1.0) {$u_1(t)$};
+                \node[signalblue, above, fill=white, inner sep=2pt] at (axis cs:3.14*3/2,-0.9) {$u_1(t)$};
                 \node[signalblue, above, fill=white, inner sep=2pt] at (axis cs:3.14*2,1.0) {$|u_1(t)|$};
                 \draw[signalblue, thin] (axis cs:3.14*2-0.2,0.95) -- (axis cs:3.14*2-0.5,0.7);
                 \node[signalbrown, above] at (axis cs:3.0,0.9) {$u_2(t)$};
                 \node[signalred, left] at (axis cs:3.14/2,-\i0) {${i_\mathrm{C}(t)}$};
-                \node[signalred, right, fill=white, inner sep=2pt] at (axis cs:0.3*pi,1.25) {${i_1(t)}$};
+                \node[signalred, right, fill=white, inner sep=2pt] at (axis cs:0.3*pi,1.25) {${i_2(t)}$};
             \end{axis}
         \end{tikzpicture}
         \caption{Typical signal curves for B2U topology with output capacitor and constant load}
         \label{fig:B2U_topology_capacitive_filter_signals}
     \end{figure}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U uncontrolled rectifier circuit with capacitive output filtering (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U uncontrolled rectifier circuit with capacitive output filtering (cont.)}
+    The filter capacitor current $i_\mathrm{C}(t)$ is
+    \begin{equation}
+        i_\mathrm{C}(t) = \begin{cases}
+            -I_0, & i_2(t) = 0,\\
+            C\frac{\mathrm{d}}{\mathrm{d}t}u_2(t), & i_2(t) > 0,
+        \end{cases}
+        \label{eq:iC_B2U_cap_filt}
+    \end{equation}
+    that is, if the output current $i_2(t)$ is zero, the diode bridge blocks and the capacitor discharges via the load. Contrary, if the output current is positive, the diodes conduct and the capacitor voltage is determined by the rectified input voltage. The output current is given by
+    \begin{equation}
+        i_2(t) = i_\mathrm{C}(t) + I_0.
+        \label{eq:i2_B2U_cap_filt}
+    \end{equation} 
+    Inserting \eqref{eq:iC_B2U_cap_filt} in \eqref{eq:i2_B2U_cap_filt} delivers the output current during the conduction phase:
+    \begin{equation}
+        i_2(t) = C\omega \hat{u}_1 \cos(\omega t) + I_0, \quad 0 \leq \omega t < \omega t_1.
+        \label{eq:i2_B2U_cap_filt_conduct}
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U uncontrolled rectifier circuit with capacitive output filtering (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U uncontrolled rectifier circuit with capacitive output filtering (cont.)}
+    The \hl{conduction phase} lasts until $\omega t_1 = \alpha$ which can be determined from \eqref{eq:i2_B2U_cap_filt_conduct}:
+    \begin{equation}
+            \alpha = \arccos\left(-\frac{I_0}{C\omega \hat{u}_1}\right).
+        \label{eq:omega_t1_B2U_cap_filt}
+    \end{equation}
+    For $\alpha < \omega t < \omega t_2$ the capacitor discharges via the load:
+    \begin{equation}
+        \begin{split}
+            u_2(t) &= u_2(\omega t_1) + \int_{t_1}^t -\frac{I_0}{C} \mathrm{d} \tau = u_2(\alpha) + \int_{\alpha}^{\omega t} -\frac{I_0}{\omega C} \mathrm{d} \omega \tau\\
+                   &=  u_2(\alpha) - \frac{I_0}{\omega C} (\omega t - \alpha), \quad \omega t_1 \leq \omega t < \omega t_2.
+        \end{split}
+    \end{equation}
+    The \hl{blocking phase} lasts until $\omega t_2 = \alpha + \beta$, that is, the rectified input voltage is equal to the capacitor voltage (note: not solvable for $\omega t_2$ in closed-form, requires numerical methods):
+    \begin{equation}
+        \begin{split}
+            u_2(\omega t_2) = u_2(\alpha) - \frac{I_0}{\omega C} (\omega t_2 - \alpha) \stackrel{!}{=} \hat{u}_1 |\sin(\omega t_2)| = |u_1(\omega t_2)|.
+        \end{split}
+        \label{eq:u2_B2U_cap_filt_block}
+    \end{equation}
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% B2U rectifier with capacitive output filtering and grid impedance %%
@@ -946,7 +1029,7 @@
     \begin{figure}
            \begin{circuitikz}
             \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
-            (0,0) to [L, i>^=$i_1(t)$, -*, l=$L$] ++(3,0)
+            (0,0) to [L, i>^=$i_1(t)$, -*, l=$L$, v=$u_\mathrm{L}(t)$, voltage = straight] ++(3,0)
             to [diode, l=$D_1$]  ++(0,1.5)
             to [short, -*] ++(2,0) coordinate (C)
             to [diode, l=$D_3$, invert]  ++(0,-1.5)
@@ -971,6 +1054,21 @@
         \caption{B2U topology considering an output capacitor, constant load, and grid impedance}
         \label{fig:B2U_topology_capacitive_filter_grid}
     \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier with capacitive output filtering and grid impedance (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
+    For the modified scenario form \eqref{fig:B2U_topology_capacitive_filter_grid} we assume an infinite capacitance capacitor, i.e.,
+    $$ u_2(t)\approx U_2$$
+    to keep the analysis simple. Like before, the diode bridge conduction is determined by the output current $i_2(t)$:
+    \begin{itemize}
+        \item $i_2(t)>0$: diode bridge conducts, $u_\mathrm{L}(t) = |u_1(t)|-U_2$,
+        \item $i_2(t)=0$: diode bridge blocks, $u_\mathrm{L}(t) = \max\{0, |u_1(t)|-U_2\}$.
+    \end{itemize}
+    Hence, the B2U rectifier behavior is driven by the grid impedance current and the dynamics introduced by $L$. Similar to the previous analysis on DC-DC converters, the discontinuous conduction mode (DCM) and the boundary conduction mode (BCM) will be differentiated in the following. 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1053,6 +1151,70 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
+   In \hl{steady-state DCM} the output current is zero for
+   \begin{equation}
+        i_2(\omega t) = 0, \quad 0 \leq \omega t < \omega t_1.
+   \end{equation}
+   Until then the diode bridge is in blocking mode and disconnects the input from the output. At $\omega t_1 = \alpha$ the diodes start conducting since the input voltage exceeds the output voltage:
+   \begin{equation}
+      u_1(\omega t_1 = \alpha) = \hat{u}_1 \sin(\alpha) \stackrel{!}{=} U_2 \quad \Leftrightarrow \quad \alpha = \arcsin\left(\frac{U_2}{\hat{u}_1}\right).
+   \end{equation}
+   At this point, the output current is rising due to the positive inductor voltage:
+   \begin{equation}
+    \begin{split}
+        i_2(\omega t) &= \frac{1}{L} \int_{t_1}^t u_1(t)-U_2 \mathrm{d}t= \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} u_1(\omega t)-U_2 \mathrm{d}\omega t = \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} \hat{u}_1 \sin(\omega t)-U_2 \mathrm{d}\omega t \\
+               & = \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha)-\cos(\omega t)-\frac{U_2}{\hat{u}_1}(\omega t - \alpha)\right), \quad \omega t_1 \leq \omega t < \omega t_2. 
+    \end{split}
+    \label{eq:i2_B2U_cap_filt_grid_conduct_DCM}
+   \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier with capacitive output filtering and grid impedance (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
+   At $\omega t_2 = \alpha + \beta$ the current reaches zero again and the diode bridge blocks again:
+   \begin{equation}
+    \begin{split}
+        i_2(\omega t_2) &= \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha)-\cos(\omega t_2)-\frac{U_2}{\hat{u}_1}(\omega t_2 - \alpha)\right) \stackrel{!}{=} 0\\
+        &\Leftrightarrow \cos(\alpha)-\cos(\alpha+\beta)-\beta\sin(\alpha) = 0.
+    \end{split}
+   \end{equation}
+   For a given $\alpha$, this equation is not solvable in closed-form w.r.t. $\beta$ and requires numerical methods. However, if $\beta$ is known, $\alpha$ can be determined leading to
+    \begin{equation}
+         \alpha = \arctan\left(\frac{1-\cos(\beta)}{\beta-\sin(\beta)}\right).
+    \end{equation}
+    The average output current in DCM is
+    \begin{equation}
+        \overline{i}_2 = \frac{1}{T} \int_{0}^{T} i_2(t) \mathrm{d}t = \frac{1}{\pi} \int_{\alpha}^{\alpha+\beta} i_2(\omega t) \mathrm{d}\omega t = \ldots = \frac{\hat{u}_1}{\pi \omega L} \left(\frac{\hat{u}_1}{U_2}(1-\cos(\beta))-\frac{U_2}{\hat{u}_1}\frac{\beta^2}{2}\right).
+    \end{equation}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier with capacitive output filtering and grid impedance (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
+    For a better representation in the following, the average current is normalized:
+    \begin{equation}
+        \overline{i}'_2 = \frac{\overline{i}_2}{\frac{2}{\pi}\frac{\hat{u}_1}{\omega L}} = \frac{1}{2} \left(\frac{\hat{u}_1}{U_2}(1-\cos(\beta))-\frac{U_2}{\hat{u}_1}\frac{\beta^2}{2}\right).
+        \label{eq:i2_avg_norm_B2U_cap_filt_grid_DCM}
+    \end{equation}
+    Here, the denominator $\nicefrac{2}{\pi}\cdot\nicefrac{\hat{u}_1}{\omega L}$ is the absolute average value of the inductor current in case of a grid short circuit.\\[1em]
+
+    Based on the correlations found, the operating characteristics in DCM of the rectifier can be visualized, which has been implemented in \figref{fig:B2U_load_curve} (left part):
+    \begin{itemize}
+        \item In DCM, $\beta \in [0, \pi[$ holds, i.e., the diode bridge is conducting for $0\ldots100 \,\%$ per half cycle.
+        \item At $\beta = \pi$ the diode bridge is conducting for the full half cycle.
+        \item In order to achieve a commutation of the current between the diode pairs D1/D4 and D2/D3, the current gets zero (for a short time) so that the rectifier operates in BCM. 
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier with capacitive output filtering and grid impedance (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
     \begin{figure}
         \begin{tikzpicture}
             \tikzmath{
@@ -1117,8 +1279,52 @@
             \end{axis}
         \end{tikzpicture}
         \caption{Typical signal curves for B2U topology feeding a constant load from the grid and an infinite output capacitance in BCM}
-        \label{fig:B2U_topology_capacitive_filter_grid_signals_CCM}
+        \label{fig:B2U_topology_capacitive_filter_grid_signals_BCM}
     \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier with capacitive output filtering and grid impedance (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
+    In \hl{steady-state BCM}, the output current is analogous to the DCM as from \eqref{eq:i2_B2U_cap_filt_grid_conduct_DCM} leading to
+    \begin{equation}
+            i_2(\omega t) = \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha')-\cos(\omega t)-\frac{U_2}{\hat{u}_1}(\omega t - \alpha')\right), \quad \alpha' \leq \omega t < \alpha' + \pi 
+       \end{equation}
+    with $\alpha'$ being the phase angle at which the diodes start conducting in BCM -- cf. \figref{fig:B2U_topology_capacitive_filter_grid_signals_BCM}. After a half cycle, the current reaches zero for a short moment enabling the diode bridge to commutate the current between the diode pairs:
+    \begin{equation}
+        i_2(\omega t = \alpha'+\pi) = 0 \quad \Leftrightarrow \quad \cos(\alpha')-\cos(\alpha'+\pi)-\frac{U_2}{\hat{u}_1}\pi = 0 
+    \end{equation}
+    from which 
+    \begin{equation}
+        \frac{U_2}{\hat{u}_1} = \frac{2}{\pi} \cos(\alpha')
+        \label{eq:U2_u1_relation_B2U_cap_filt_grid_BCM}
+    \end{equation}
+    follows after some intermediate calculation steps. 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier with capacitive output filtering and grid impedance (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
+    The average output current in BCM follows as
+    \begin{equation}
+        \begin{split}
+            \overline{i}_2 &= \frac{1}{T} \int_{0}^{T} i_2(t) \mathrm{d}t = \frac{1}{\pi} \int_{\alpha'}^{\alpha'+\pi} i_2(\omega t) \mathrm{d}\omega t = \ldots \\ &= \frac{2}{\pi} \frac{\hat{u}_1}{ \omega L} \sin(\alpha').
+        \end{split}
+    \end{equation}
+    Applying the same normalization as \eqref{eq:i2_avg_norm_B2U_cap_filt_grid_DCM} leads to
+    \begin{equation}
+        \overline{i}'_2 = \frac{\overline{i}_2}{\frac{2}{\pi}\frac{\hat{u}_1}{\omega L}} = \sin(\alpha').
+        \label{eq:i2_avg_norm_B2U_cap_filt_grid_BCM}
+    \end{equation}
+    Combining \eqref{eq:U2_u1_relation_B2U_cap_filt_grid_BCM} and \eqref{eq:i2_avg_norm_B2U_cap_filt_grid_BCM} reveals
+    \begin{equation}
+        \frac{U_2}{\hat{u}_1} = \frac{2}{\pi}\cos(\arcsin(\overline{i}'_2)).
+    \end{equation}
+    The resulting load curve for the BCM is also depicted in \figref{fig:B2U_load_curve} (right part).
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1133,7 +1339,7 @@
                      width=0.65\textwidth,
                      height=0.85\textheight,
                      axis lines=middle,
-                     xlabel={$\overline{i}_2$},
+                     xlabel={$\overline{i}'_2$},
                      xmin=0, xmax=1,
                      ymin=0, ymax=1.05,
                      grid=both,
@@ -1144,6 +1350,7 @@
                     \addplot[signalbrown, thick] table[x=I_out, y=beta, col sep=comma] {Load_curve_B2_rectifier.csv}; 
                     \draw[dashed] (axis cs:0.535,0) -- (axis cs:0.535,1);
                     \node[signalred, above, fill=white, inner sep=2pt] at (axis cs:0.3,0.24) {$\frac{\alpha}{\pi}$};
+                    \node[signalred, above, fill=white, inner sep=2pt] at (axis cs:0.65,0.24) {$\frac{\alpha'}{\pi}$};
                     \node[signalbrown, above, fill=white, inner sep=2pt] at (axis cs:0.3,0.87) {$\frac{\beta}{\pi}$};
                     \node[signalblue, above, fill=white, inner sep=2pt] at (axis cs:0.44,0.6) {$\frac{U_2}{\hat{u}_1}$};
                     \draw[thin] (axis cs:0.54,0.6) -- (axis cs:0.75,0.7);
