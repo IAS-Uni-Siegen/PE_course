@@ -1,4 +1,4 @@
-# Calculate B2 rectifier load curve and save it to a csv file
+# Calculate B2U rectifier load curve and save it to a csv file
 # (Required math operations resulted in mathtikz errors, so numpy was used instead)
 
 import numpy as np
@@ -23,6 +23,6 @@ beta = np.concatenate((beta, np.ones(100)*np.pi))
 
 # save the data to a csv filw with I_out being the first column, gain the second, alpha the third and beta the fourth to same folder as the script
 current_directory = os.path.dirname(os.path.abspath(__file__))
-save_path = os.path.join(current_directory, 'Load_curve_B2_rectifier.csv')
+save_path = os.path.join(current_directory, 'Load_curve_B2U_rectifier.csv')
 np.savetxt(save_path, np.column_stack((I_out, gain, alpha/np.pi, beta/np.pi)), delimiter=',', header='I_out, gain, alpha, beta', comments='')
 

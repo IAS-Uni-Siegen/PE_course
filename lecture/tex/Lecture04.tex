@@ -86,7 +86,7 @@
     Often the rectification introduces non-fundamental frequency components, e.g., due to the output voltage rectification or by a load current feedback towards the input side. To analyze the \hl{frequency spectrum} of a periodic signal $u(t)$, the \hl{Fourier series} is used:
     \begin{equation}
         \begin{gathered}
-            u(t) = \frac{a_0}{2}+\sum_{n=1}^{\infty} \left( a_k \cos(k\omega t) + b_k \sin(k\omega t) \right), \quad k\in \mathbb{N},\\
+            u(t) = \frac{a_0}{2}+\sum_{k=1}^{\infty} \left( a_k \cos(k\omega t) + b_k \sin(k\omega t) \right), \quad k\in \mathbb{N},\\
             a_k= \frac{1}{\pi} \int_{0}^{2\pi} u(t) \cos(k\omega t) \mathrm{d}\omega t,\,\, k\geq 0, \qquad b_k = \frac{1}{\pi} \int_{0}^{2\pi} u(t) \sin(k\omega t) \mathrm{d}\omega t,\,\, k \geq 1.
         \end{gathered}
     \end{equation}
@@ -888,11 +888,12 @@
     \begin{figure}
         \begin{tikzpicture}
             \tikzmath{
-                    real \i0, \a, \b, \c;
-                    \i0 = 0.4; % normalized load current
+                    real \i0, \a, \b, \c, \ihat;
+                    \i0 = 0.15; % normalized load current
                     \a = acos(-\i0)*pi/180; %Phase angle alpha until cap current hits -i0 and diodes block
                     \b = 0.3*pi; % Phase angle beta indicating the time until the cap voltage is hit by the input voltage and diodes start conducting again
                     \c = (sin(deg(\a)) + sin(deg(pi+\b)))/(\i0*(pi + \b - \a)); % slope of the capacitor voltage during the discharge phase
+                    \ihat = -\i0/cos(deg(\a));%-\i0*(pi+\b-\a)/(sin(deg(\a))+sin(deg(\b+pi))); 
                 }
             \begin{axis}[
                 width=0.79\textwidth,
@@ -922,13 +923,13 @@
                 \addplot[domain=0*pi:3*pi, samples=100, signalblue, thick, dash dot]{abs(sin(deg(x)))}; %rectified input voltage
                 
                 % capacitor current
-                \addplot[domain=0:\a, samples=100, signalred, dotted, thick]{cos(deg(x))};
+                \addplot[domain=0:\a, samples=100, signalred, dotted, thick]{\ihat*cos(deg(x))};
                 \addplot[domain=\a:pi+\b, samples=100, signalred, dotted, thick]{-\i0};
-                \draw[signalred, thick, dotted] (axis cs:pi+\b,-\i0) -- (axis cs:pi+\b,{-cos(deg(pi+\b))});
-                \addplot[domain=pi+\b:pi+\a, samples=100, signalred, dotted, thick]{-cos(deg(x))};
+                \draw[signalred, thick, dotted] (axis cs:pi+\b,-\i0) -- (axis cs:pi+\b,{\ihat*-cos(deg(pi+\b))});
+                \addplot[domain=pi+\b:pi+\a, samples=100, signalred, dotted, thick]{\ihat*-cos(deg(x))};
                 \addplot[domain=pi+\a:2*pi+\b, samples=100, signalred, dotted, thick]{-\i0};
-                \draw[signalred, thick, dotted] (axis cs:2*pi+\b,-\i0) -- (axis cs:2*pi+\b,{-cos(deg(pi+\b))});
-                \addplot[domain=2*pi+\b:2*pi+\a, samples=100, signalred, dotted, thick]{cos(deg(x))};
+                \draw[signalred, thick, dotted] (axis cs:2*pi+\b,-\i0) -- (axis cs:2*pi+\b,{\ihat*-cos(deg(pi+\b))});
+                \addplot[domain=2*pi+\b:2*pi+\a, samples=100, signalred, dotted, thick]{\ihat*cos(deg(x))};
                 \addplot[domain=2*pi+\a:3*pi+\b, samples=100, signalred, dotted, thick]{-\i0};
                 
                 % input current
@@ -961,7 +962,7 @@
                 \draw[signalblue, thin] (axis cs:3.14*2-0.2,0.95) -- (axis cs:3.14*2-0.5,0.7);
                 \node[signalbrown, above] at (axis cs:3.0,0.9) {$u_2(t)$};
                 \node[signalred, left] at (axis cs:3.14/2,-\i0) {${i_\mathrm{C}(t)}$};
-                \node[signalred, right, fill=white, inner sep=2pt] at (axis cs:0.3*pi,1.25) {${i_2(t)}$};
+                \node[signalred, right, fill=white, inner sep=2pt] at (axis cs:0.2*pi,1.25) {${i_2(t)}$};
             \end{axis}
         \end{tikzpicture}
         \caption{Typical signal curves for B2U topology with output capacitor and constant load}
@@ -1345,9 +1346,9 @@
                      grid=both,
                      xlabel style={anchor = west},
                      ]
-                    \addplot[signalblue, thick] table[x=I_out, y=gain, col sep=comma] {Load_curve_B2_rectifier.csv}; 
-                    \addplot[signalred, thick] table[x=I_out, y=alpha, col sep=comma] {Load_curve_B2_rectifier.csv}; 
-                    \addplot[signalbrown, thick] table[x=I_out, y=beta, col sep=comma] {Load_curve_B2_rectifier.csv}; 
+                    \addplot[signalblue, thick] table[x=I_out, y=gain, col sep=comma] {Load_curve_B2U_rectifier.csv}; 
+                    \addplot[signalred, thick] table[x=I_out, y=alpha, col sep=comma] {Load_curve_B2U_rectifier.csv}; 
+                    \addplot[signalbrown, thick] table[x=I_out, y=beta, col sep=comma] {Load_curve_B2U_rectifier.csv}; 
                     \draw[dashed] (axis cs:0.535,0) -- (axis cs:0.535,1);
                     \node[signalred, above, fill=white, inner sep=2pt] at (axis cs:0.3,0.24) {$\frac{\alpha}{\pi}$};
                     \node[signalred, above, fill=white, inner sep=2pt] at (axis cs:0.65,0.24) {$\frac{\alpha'}{\pi}$};
@@ -1360,4 +1361,103 @@
         \caption{Load curve of the B2U rectifier with capacitive output filtering and grid impedance}
         \label{fig:B2U_load_curve}
     \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier with capacitive output filtering and grid impedance (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
+    Assuming DCM, the \hl{input current} of the B2U rectifier is
+    \begin{equation}
+        i_1(t) = \begin{cases}
+            i_2(t), & 0 \leq \omega t < pi,\\
+            -i_2(t), & \pi \leq \omega t < 2\pi.
+        \end{cases}
+    \end{equation}
+    The minus sign during the second half-cycle results from the conducting diodes D3/D4 reversing the current direction in the inductor -- cf. \figref{fig:B2U_topology_capacitive_filter_grid}. The input current can be decomposed into a \hl{fundamental and harmonic components}:
+    \begin{equation}
+        i_1(t) = \underbrace{a_1 \cos(\omega t) + b_1 \sin(\omega t)\vphantom{\sum_{k=2}^{\infty}}}_{=i_1^{(1)}(t)} + \underbrace{\sum_{k=2}^{\infty} \left( a_k \cos(k\omega t) + b_k \sin(k\omega t) \right)}_{i_1^{(\mathrm{h})}(t)}, \quad k\in \mathbb{N}.
+    \end{equation}
+    As will be discussed in the following, the harmonic components $i_1^{(\mathrm{h})}(t)$ are considered distortions negatively impacting the grid quality.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier with capacitive output filtering and grid impedance (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfplotsset{table/search path={fig/lec04}}
+            \pgfmathsetmacro\a{0.25}
+            \begin{axis}[
+                     width=0.65\textwidth,
+                     height=0.85\textheight,
+                     axis lines=middle,
+                     xlabel={$\omega t$},
+                     xmin=0, xmax=2*pi,
+                     %ymin=-0.55, ymax=0.55,
+                     grid=both,
+                     xlabel style={anchor = west},
+                     xtick={0, 3.14/2, 3.14, 3.14*3/2, 6.28},
+                    xticklabels={$0$, $\frac{\pi}{2}$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                    ytick={\pgfkeysvalueof{/pgfplots/ymin},-\a,0,\a,\pgfkeysvalueof{/pgfplots/ymax}},
+                    yticklabels={$-\hat{i}$,$-\hat{u}$, $0$,$\hat{u}$, $\hat{i}$},
+                     ]
+                    \addplot[signalred, thick] table[x=wt, y=i_1, col sep=comma] {Grid_current_B2U_decomposition.csv}; 
+                    \addplot[signalred, thick, dashed] table[x=wt, y=i_1_fundamental, col sep=comma] {Grid_current_B2U_decomposition.csv}; 
+                    \addplot[signalred, thick, dash dot] table[x=wt, y=i_1_harmonic, col sep=comma] {Grid_current_B2U_decomposition.csv}; 
+                    \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick]{\a*sin(deg(x))};
+                    \node[signalred, above, fill=white, inner sep=2pt] at (axis cs:pi-0.06,0.29) {$i_1(t)$};
+                    \node[signalred, right, fill=white, inner sep=2pt] at (axis cs:pi,0.20) {$i_1^{(1)}(t)$};
+                    \node[signalred, above, fill=white, inner sep=2pt] at (axis cs:pi*3/2,0.10) {$i_1^{(\mathrm{h})}(t)$};
+                    \node[signalblue, left, fill=white, inner sep=2pt] at (axis cs:pi/3,0.25) {$u_1(t)$};
+            \end{axis}                
+          \end{tikzpicture}
+        \caption{Input current decomposition of the B2U rectifier with $i^{(1)}_1(t)$ being the fundamental and $i^{(\mathrm{h})}_1(t)$ harmonic components}
+        \label{fig:B2U_input_current_decomposition}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Recap: active, reactive and apparent power in sinusoidal steady-state %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Recap: active, reactive, and apparent power in sinusoidal steady-state}
+    The complex power is defined as
+    \begin{equation}
+        \underline{S} = \underline{U} \cdot \underline{I}^* = P + \mathrm{j}Q = S e^{ \mathrm{j} \varphi},
+        \label{eq:complex_power}
+    \end{equation}
+    with the active power $P$, the reactive power $Q$, and the apparent power $S$ as well as $\underline{U}$ and $\underline{I}$ being the complex voltage and current phasors. From \eqref{eq:complex_power} directly follows:
+    \begin{equation}
+        S = |\underline{S}| = \sqrt{P^2 + Q^2}.
+    \end{equation}
+    The \hl{power factor} $\cos(\varphi)$ is defined as
+    \begin{equation}
+        \cos(\varphi) = \frac{P}{S}.
+    \end{equation}
+    Typically, one tries to operate power converters with a unity power factor $|\cos(\varphi)|\approx 1$ to avoid reactive power transfer (i.e., additional reactive currents leading to more losses in the grid).
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Power factor of the B2U rectifier %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Power factor of the B2U rectifier}
+    The active power can be alternatively expressed as the average of the instantaneous power:
+    \begin{equation}
+        P = \frac{1}{T} \int_{0}^{T} p(t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{2\pi} u_1(\omega t) i_1(\omega t) \mathrm{d}\omega t.
+    \end{equation}
+    Given $u_1(\omega t) = \hat{u}_1 \sin(\omega t)$ and using the Fourier decomposition of the input current $i_1(\omega t)$, the active power can be expressed as (neglecting the offset of the input current):
+    \begin{equation}
+        P = \frac{\hat{u}_1}{2\pi} \int_{0}^{2\pi}  \sin(\omega t) \sum_{k=1}^\infty \left( a_k \cos(\omega k t) + b_k \sin(\omega k t) \right) \mathrm{d}\omega t.
+    \end{equation}
+    Hence, the integral covers terms of the form
+    \begin{equation}
+        \int_{0}^{2\pi} \sin(\omega t) \sin(\omega k t) \mathrm{d}\omega t  \quad \mbox{and} \quad \int_{0}^{2\pi} \sin(\omega t) \cos(\omega k t) \mathrm{d}\omega t.
+    \end{equation}
+
 \end{frame}
