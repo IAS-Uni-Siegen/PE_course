@@ -25,7 +25,7 @@
                 % x-Ticks
                 xtick={0,5,10,15,20},
                 xticklabels={0,,10,,20},
-                xticklabel style = {yshift=0.3cm,anchor=east},
+                xticklabel style = {anchor=north},
                 % y-Ticks
                 ytick={300,200,100,-100,-200,-300},
                 yticklabels={300,200,100,-100,-200,-300},
@@ -70,7 +70,7 @@
                 % x-Ticks
                 xtick={0,5,10,15,20},
                 xticklabels={0,,10,,20},
-                xticklabel style = {yshift=0.3cm,anchor=east},
+                xticklabel style = {anchor=north},
                 % y-Ticks
                 ytick={3,2,1,0,-1,-2},
                 yticklabels={3,2,1,0,-1,-2},
@@ -92,25 +92,25 @@
             \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:7,0.3) {$i_{\mathrm{m}}$};
             % i1
             \addplot[color=magenta,mark=none,solid] coordinates{
-                (0, 0.15)
-                (9.2, 2.02)
+                (0, 0.52)
+                (9.2, 2.42)
                 (9.2, -1.5)
                 (18.4,0)
                 (20,  0)
-                (20,  0.15)
-                (24,0.87)
+                (20,  0.52)
+                (24,1.25)
                 };                
             % Label of i1
             \node[magenta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:8,-1) {$i_{\mathrm{1}}$};
             % ip
             \addplot[color=black,mark=none,dashdotted] coordinates{
-                (0, 0.19)
-                (9.2, 2.06)
+                (0, 0.56)
+                (9.2, 2.46)
                 (9.2, 1.54)
                 (18.4,0.04)
                 (20,  0.04)
-                (20,  0.19)
-                (24,0.91)
+                (20,  0.46)
+                (24,1.25)
                 };                
             % Label of ip
             \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:3,1.5) {$i_{\mathrm{p}}$};

@@ -219,13 +219,13 @@ The converter operates in steady-state conditions. Both transistors are controll
          considering the switching-induced ripples.}
 \begin{solutionblock}
     The current $i_\mathrm{p}$ corresponds to the sum of $i_\mathrm{m}$ and the current $i_\mathrm{1,trOn}$ for the transferred energy to the load.
-    Since the losses can be neglected, this leads to
+    Since the losses can be neglected, the portion of the primary current cause by the secondary current is calculated by
     \begin{equation}
-        \overline{i}_\mathrm{1}=\frac{P_\mathrm{2}}{U_\mathrm{1}}=\frac{\SI{50}{\watt}}{\SI{325}{\volt}}=\SI{0.154}{\ampere}.
+        \overline{i}_\mathrm{1sec}=\frac{N_\mathrm{2}}{N_\mathrm{1}}I_\mathrm{2}=\frac{\SI{3.333}{\ampere}}{10}=\SI{0.333}{\ampere}.
     \end{equation}    
     The average value of the current that belongs to the transferred energy, while switch-on phase is calculated by
     \begin{equation}
-        \overline{i_\mathrm{1,trOn}}=\frac{\overline{i}_\mathrm{1}}{D}=\frac{\SI{0.154}{\ampere}}{0.4615}=\SI{0.333}{\ampere}.
+        \overline{i_\mathrm{1,trOn}}=\frac{\overline{i}_\mathrm{1sec}}{D}=\frac{\SI{0.333}{\ampere}}{0.4615}=\SI{0.722}{\ampere}.
     \end{equation}
     The voltage and currents are displayed in \autoref{fig:ex04_VoltageAtPrimarySide} and \autoref{fig:ex04_CurrentAtPrimarySide}
     \input{./fig/ex04/sFigDia_Ex04SignalsForwardConverterWithAsymHalfBridge}
