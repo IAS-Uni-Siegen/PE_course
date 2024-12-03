@@ -322,7 +322,7 @@
     From \eqref{eq:u2_M1U}, the \hl{average output} voltage of the M1U rectifier is}
     \begin{equation}
         \begin{split}
-            \onslide<1->{\overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t} \onslide<2->{ = \frac{1}{2\pi} \int_{0}^{2\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t } \onslide<3->{= \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t}\\ 
+            \onslide<1->{\overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t} \onslide<2->{ = \frac{1}{2\pi} \int_{0}^{2\pi} u_2(\omega t) \mathrm{d}\omega t } \onslide<3->{= \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t}\\ 
             \onslide<4->{&= \frac{\hat{u}_1}{2\pi} \left[ - \cos(\omega t) \right]_{0}^{\pi} }\onslide<5->{ = \frac{\hat{u}_1}{2\pi} \left( 1+1 \right) }\onslide<6->{= \frac{\hat{u}_1}{\pi}  = \frac{\sqrt{2}U_1}{\pi}}
         \end{split}
         \label{eq:u2_M1U_avg}
@@ -345,8 +345,8 @@
     \begin{equation}
         \begin{split}
             \onslide<1->{a_0 &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \mathrm{d} \omega t} \onslide<2->{= 2 \overline{u}_2= 2 \frac{\hat{u}_1}{\pi},}\\
-            \onslide<3->{a_k &= \frac{1}{2\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t }\onslide<4->{= \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t}\\  &\onslide<5->{= \frac{\hat{u}_1}{4\pi} \int_{0}^{\pi}  \sin(\omega t(1-k)) + \sin(\omega t(1+k)) \mathrm{d}\omega t} \onslide<6->{= \ldots =  \frac{\hat{u}_1}{\pi}\frac{1}{1-k^2}, \quad k=2,4,6,\ldots}\\
-            \onslide<7->{b_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t = \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t} \\ &\onslide<8->{=\frac{\hat{u}_1}{4\pi} \int_{0}^{\pi}  \cos(\omega t(1-k)) - \cos(\omega t(k+1)) \mathrm{d}\omega t}\onslide<9->{ = \ldots = 0.}
+            \onslide<3->{a_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t }\onslide<4->{= \frac{1}{\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t}\\  &\onslide<5->{= \frac{\hat{u}_1}{2\pi} \int_{0}^{\pi}  \sin(\omega t(1-k)) + \sin(\omega t(1+k)) \mathrm{d}\omega t} \onslide<6->{= \ldots =  \begin{cases}\frac{\hat{u}_1}{\pi}\frac{2}{1-k^2}, & k=2,4,6,\ldots\\ 0, & \mbox{otherwise}. \end{cases} }\\
+            \onslide<7->{b_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t = \frac{1}{\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t} \\ &\onslide<8->{=\frac{\hat{u}_1}{2\pi} \int_{0}^{\pi}  \cos(\omega t(1-k)) - \cos(\omega t(k+1)) \mathrm{d}\omega t}\onslide<9->{ = \ldots = \begin{cases} \frac{\hat{u}_1}{2}, & k =1,\\ 0, & k \geq 2. \end{cases}}
         \end{split}
         \label{eq:u2_M1U_Fourier}
     \end{equation}
@@ -361,16 +361,16 @@
     \frametitle{M1U uncontrolled rectifier circuit (cont.)}
     \onslide<1->{From \eqref{eq:u2_M1U_Fourier} the Fourier series of $u_2(t)$ results in
     \begin{equation}
-        u_2(t) = \frac{\hat{u}_1}{\pi}\left(1 + \sum_{k=2,4,6,\ldots} \frac{1}{1-k^2} \cos(k\omega t)\right).
+        u_2(t) = \hat{u}_1\left(\frac{1}{\pi} + \frac{1}{2}\sin(\omega t)+ \sum_{k=2,4,6,\ldots} \frac{2}{\pi(1-k^2)} \cos(k\omega t)\right).
     \end{equation}}
     \onslide<2->{For a resistive load, the output current has the same harmonic spectrum:}
     \begin{equation}
-        \onslide<2->{i_2(t) = \frac{\hat{u}_1}{\pi R}\left(1 + \sum_{k=2,4,6,\ldots} \frac{1}{1-k^2} \cos(k\omega t)\right)} \onslide<3->{= \overline{i}_2 + \sum_{k=2,4,6,\ldots} \hat{i}_{2,k} \cos(k\omega t).}
+        \onslide<2->{i_2(t) = \frac{\hat{u}_1}{R}\left(\frac{1}{\pi} + \frac{1}{2}\sin(\omega t)+ \sum_{k=2,4,6,\ldots} \frac{2}{\pi(1-k^2)} \cos(k\omega t)\right)}.
     \end{equation}
-    \onslide<4->{Resulting observations are:}
+    \onslide<3->{Resulting observations are:}
     \begin{itemize}
-        \item<4-> Non-fundamental current frequency components can distort the input side.
-        \item<5-> Higher frequency harmonics decrease with $\sim 1/(1-k^2)$.
+        \item<3-> Non-fundamental current frequency components can distort the input side.
+        \item<4-> Higher frequency harmonics decrease with $\sim 1/(1-k^2)$.
     \end{itemize}
 \end{frame}
 
@@ -751,12 +751,12 @@
     \begin{equation}
         \begin{split}
             \onslide<1->{a_0 &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \mathrm{d} \omega t} \onslide<2->{= 2 \overline{u}_2= \frac{2}{\pi}\frac{N_2}{N_1}\hat{u}_1,}\\
-            \onslide<3->{a_k &= \frac{1}{2\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t} \onslide<4->{= \frac{1}{4\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t\right)} \onslide<5->{= \ldots =  \frac{N_2}{N_1}\frac{\hat{u}_1}{\pi}\frac{2}{1-k^2}, \quad k=2,4,6,\ldots}\\
-            \onslide<6->{b_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t} \onslide<7->{= \frac{1}{4\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t\right)}\onslide<8->{ = \ldots = 0.}
+            \onslide<3->{a_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t} \onslide<4->{= \frac{1}{2\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t\right)} \onslide<5->{= \ldots = \begin{cases}\frac{\hat{u}_1}{\pi}\frac{N_2}{N_1}\frac{2}{1-k^2}, & k=2,4,6,\ldots\\ 0, & \mbox{otherwise}. \end{cases}}\\
+            \onslide<6->{b_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t} \onslide<7->{= \frac{1}{2\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t\right)}\onslide<8->{ = \ldots = 0.}
         \end{split}
         \label{eq:u2_M2U_Fourier}
     \end{equation}
-    \onslide<9->{These coefficients are structurally identical to the M1U case, but scaled due to the center-tapped transformer conversion ratios and full-cycle rectification.}
+    \onslide<9->{These coefficients also indicate significant harmonics, which are in particular scaled by the transformer turns ratio.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
