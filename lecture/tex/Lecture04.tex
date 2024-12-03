@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{High-level view of the rectification task}
-    Assuming that the input voltage is an \hl{ideal sinusoidal signal} $$u_1(t) = \hat{u}_1 \sin(\omega t)$$ with the angular frequency $\omega = 2\pi f$ and the amplitude $\hat{u}_1$, the task of a rectifier is to convert this signal into a \hl{unidirectional, ideally constant, signal} $u_2(t)\approx u_2$, as shown in Figure \ref{fig:rectification_task}. A typical application is the grid voltage rectification in power supplies.
+    Assuming that the input voltage is an \hl{ideal sinusoidal signal} $$u_1(t) = \hat{u}_1 \sin(\omega t)$$ with the angular frequency $\omega = 2\pi f$ and the amplitude $\hat{u}_1$, the task of a rectifier is to convert this input into a \hl{unidirectional, ideally constant, voltage} $u_2(t)\approx u_2$, as shown in Figure \ref{fig:rectification_task}. A typical application is the grid voltage rectification in power supplies.
 
     \begin{figure}
         \begin{tikzpicture}
@@ -48,7 +48,7 @@
             \draw (B1) to [open, v^=$u_2$, voltage = straight] (B2);
         \end{circuitikz}
         \hspace{0.5cm}
-        \begin{tikzpicture}
+        \begin{tikzpicture}[visible on=<2->]
             \begin{axis}[
                 width=0.28\textwidth,
                 height=0.425\textheight,
@@ -83,6 +83,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Frequency analysis: Fourier series}
+    \onslide<2->{
     Often the rectification introduces non-fundamental frequency components, e.g., due to the output voltage rectification or by a load current feedback towards the input side. To analyze the \hl{frequency spectrum} of a periodic signal $u(t)$, the \hl{Fourier series} is used:
     \begin{equation}
         \begin{gathered}
@@ -90,6 +91,7 @@
             a_k= \frac{1}{\pi} \int_{0}^{2\pi} u(t) \cos(k\omega t) \mathrm{d}\omega t,\,\, k\geq 0, \qquad b_k = \frac{1}{\pi} \int_{0}^{2\pi} u(t) \sin(k\omega t) \mathrm{d}\omega t,\,\, k \geq 1.
         \end{gathered}
     \end{equation}
+    }
 
     \begin{figure}
         \begin{tikzpicture}
@@ -197,23 +199,23 @@
             
                        
             % First component
-            \addplot[signalred, thick, domain=0:6*pi] {4/pi * sin(deg(x))};
-            \node[anchor=south, signalred] at (axis cs:3.14/2,4/3.14) {$k \leq 1$};
+            \addplot[signalred, thick, domain=0:6*pi, visible on=<2->] {4/pi * sin(deg(x))};
+            \node[anchor=south, signalred, visible on=<2->] at (axis cs:3.14/2,4/3.14) {$k \leq 1$};
             
             % First 5 components
-            \addplot[signalblue, thick, domain=0:6*pi] {4/pi * (sin(deg(x)) + 1/3*sin(deg(3*x)) + 1/5*sin(deg(5*x)))};
-            \node[anchor=west, signalblue, fill=white, inner sep = 2pt] at (axis cs:3.14,0.5) {$k \leq 5$};
+            \addplot[signalblue, thick, domain=0:6*pi, visible on=<3->] {4/pi * (sin(deg(x)) + 1/3*sin(deg(3*x)) + 1/5*sin(deg(5*x)))};
+            \node[anchor=west, signalblue, fill=white, inner sep = 2pt, visible on=<3->] at (axis cs:3.14,0.5) {$k \leq 5$};
             
             % First 7 components
-            \addplot[signalgreen, thick, domain=0:6*pi] {4/pi * (sin(deg(x)) + 1/3*sin(deg(3*x)) + 1/5*sin(deg(5*x)) + 1/7*sin(deg(7*x)) + 1/9*sin(deg(9*x)))};
-            \node[anchor=east, signalgreen, fill=white, inner sep = 2pt] at (axis cs:3.14,-0.5) {$k \leq 7$};
+            \addplot[signalgreen, thick, domain=0:6*pi, visible on=<4->] {4/pi * (sin(deg(x)) + 1/3*sin(deg(3*x)) + 1/5*sin(deg(5*x)) + 1/7*sin(deg(7*x)) + 1/9*sin(deg(9*x)))};
+            \node[anchor=east, signalgreen, fill=white, inner sep = 2pt, visible on=<4->] at (axis cs:3.14,-0.5) {$k \leq 7$};
             
             % First 13 components
-            \addplot[signalbrown, thick, domain=0:6*pi] {4/pi * (sin(deg(x)) + 1/3*sin(deg(3*x)) + 1/5*sin(deg(5*x)) + 1/7*sin(deg(7*x)) + 1/9*sin(deg(9*x)) + 1/11*sin(deg(11*x)) + 1/13*sin(deg(13*x)))};
-            \node[anchor=west, signalbrown, fill=white, inner sep = 2pt] at (axis cs:2*3.14,-0.5) {$k \leq 13$};
+            \addplot[signalbrown, thick, domain=0:6*pi, visible on=<5->] {4/pi * (sin(deg(x)) + 1/3*sin(deg(3*x)) + 1/5*sin(deg(5*x)) + 1/7*sin(deg(7*x)) + 1/9*sin(deg(9*x)) + 1/11*sin(deg(11*x)) + 1/13*sin(deg(13*x)))};
+            \node[anchor=west, signalbrown, fill=white, inner sep = 2pt, visible on=<5->] at (axis cs:2*3.14,-0.5) {$k \leq 13$};
 
             % Square wave signal 
-            \addplot[black, thick, domain=0:6*pi, dashed] {sign(sin(deg(x)))};
+            \addplot[black, thick, domain=0:6*pi, dashed, visible on=<1->] {sign(sin(deg(x)))};
             
             \end{axis}
             \end{tikzpicture}
@@ -233,6 +235,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M1U uncontrolled rectifier circuit}
+    \onslide<2->{
     Based on \figref{fig:M1U_topology}, the output voltage $u_2(t)$ of the M1U rectifier is
     \begin{equation}
         u_2(t) = \begin{cases}
@@ -241,6 +244,7 @@
         \end{cases}
         \label{eq:u2_M1U}
     \end{equation}
+    }
 
     \begin{figure}
         \begin{tikzpicture} % left plot
@@ -278,7 +282,7 @@
             (A) -- (B);
         \end{circuitikz}
         \hspace{0.5cm}
-        \begin{tikzpicture} % right plot
+        \begin{tikzpicture}[visible on=<2->] % right plot
             \begin{axis}[
                 width=0.28\textwidth,
                 height=0.425\textheight,
@@ -304,7 +308,7 @@
                 \addplot[domain=pi:2*pi, samples=10, signalblue, thick]{0};
             \end{axis}
         \end{tikzpicture}
-        \caption{M1U topology (aka \hl{single pulse rectifier}) with typical input and output voltage signals (assuming a resistive load)}
+        \caption{M1U topology (aka \hl{single pulse rectifier}) with typical input and output voltage signals feeding a resistive load}
         \label{fig:M1U_topology}
     \end{figure}
 \end{frame}
@@ -314,18 +318,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M1U uncontrolled rectifier circuit (cont.)}
-    From \eqref{eq:u2_M1U}, the average output voltage of the M1U rectifier is
+    \onslide<1->{
+    From \eqref{eq:u2_M1U}, the \hl{average output} voltage of the M1U rectifier is}
     \begin{equation}
         \begin{split}
-            \overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{2\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t = \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t\\
-            &= \frac{\hat{u}_1}{2\pi} \left[ - \cos(\omega t) \right]_{0}^{\pi} = \frac{\hat{u}_1}{2\pi} \left( 1+1 \right) = \frac{\hat{u}_1}{\pi} = \frac{\sqrt{2}U_1}{\pi}
+            \onslide<1->{\overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t} \onslide<2->{ = \frac{1}{2\pi} \int_{0}^{2\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t } \onslide<3->{= \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t}\\ 
+            \onslide<4->{&= \frac{\hat{u}_1}{2\pi} \left[ - \cos(\omega t) \right]_{0}^{\pi} }\onslide<5->{ = \frac{\hat{u}_1}{2\pi} \left( 1+1 \right) }\onslide<6->{= \frac{\hat{u}_1}{\pi}  = \frac{\sqrt{2}U_1}{\pi}}
         \end{split}
         \label{eq:u2_M1U_avg}
     \end{equation}
-    with $U_1$ being the RMS value of the input voltage $u_1(t)$. The RMS value of the output voltage $u_2(t)$ results in
+    \onslide<6->{with $U_1$ being the RMS value of the input voltage $u_1(t)$.} \onslide<7->{The \hl{RMS value} of the output voltage $u_2(t)$ results in}
     \begin{equation}
         \begin{split}
-        U_2 &= \sqrt{\frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1^2 \sin^2(\omega t) \mathrm{d}\omega t} = \hat{u}_1 \sqrt{\frac{1}{2\pi}\left[\frac{1}{2}\omega t - \frac{\sin(2 \omega t)}{4}\right]_0^\pi}\\&= \frac{\hat{u}_1}{2} = \frac{U_1}{\sqrt{2}}.
+            \onslide<7->{ U_2 &= \sqrt{\frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1^2 \sin^2(\omega t) \mathrm{d}\omega t} } \onslide<8->{= \hat{u}_1 \sqrt{\frac{1}{2\pi}\left[\frac{1}{2}\omega t - \frac{\sin(2 \omega t)}{4}\right]_0^\pi}}\\ &\onslide<9->{= \frac{\hat{u}_1}{2} = \frac{U_1}{\sqrt{2}}.}
         \end{split}
         \label{eq:u2_M1U_rms}
     \end{equation}
@@ -336,16 +341,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M1U uncontrolled rectifier circuit (cont.)}
-    The Fourier coefficients of the output voltage $u_2(t)$ from \eqref{eq:u2_M1U} are
+    \onslide<1->{The \hl{Fourier coefficients} of the output voltage $u_2(t)$ from \eqref{eq:u2_M1U} are}
     \begin{equation}
         \begin{split}
-            a_0 &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \mathrm{d} \omega t = 2 \overline{u}_2= 2 \frac{\hat{u}_1}{\pi},\\
-            a_k &= \frac{1}{2\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t = \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t\\  &= \frac{\hat{u}_1}{4\pi} \int_{0}^{\pi}  \sin(\omega t(1-k)) + \sin(\omega t(1+k)) \mathrm{d}\omega t = \ldots =  \frac{\hat{u}_1}{\pi}\frac{1}{1-k^2}, \quad k=2,4,6,\ldots\\
-            b_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t = \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t \\ &=\frac{\hat{u}_1}{4\pi} \int_{0}^{\pi}  \cos(\omega t(1-k)) - \cos(\omega t(k+1)) \mathrm{d}\omega t = \ldots = 0.
+            \onslide<1->{a_0 &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \mathrm{d} \omega t} \onslide<2->{= 2 \overline{u}_2= 2 \frac{\hat{u}_1}{\pi},}\\
+            \onslide<3->{a_k &= \frac{1}{2\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t }\onslide<4->{= \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t}\\  &\onslide<5->{= \frac{\hat{u}_1}{4\pi} \int_{0}^{\pi}  \sin(\omega t(1-k)) + \sin(\omega t(1+k)) \mathrm{d}\omega t} \onslide<6->{= \ldots =  \frac{\hat{u}_1}{\pi}\frac{1}{1-k^2}, \quad k=2,4,6,\ldots}\\
+            \onslide<7->{b_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t = \frac{1}{2\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t} \\ &\onslide<8->{=\frac{\hat{u}_1}{4\pi} \int_{0}^{\pi}  \cos(\omega t(1-k)) - \cos(\omega t(k+1)) \mathrm{d}\omega t}\onslide<9->{ = \ldots = 0.}
         \end{split}
         \label{eq:u2_M1U_Fourier}
     \end{equation}
-    Above, $a_0$ represents a \hl{DC component}, while the $a_k \neq 0$ coefficients indicate even-numbered \hl{harmonics}.
+    \onslide<10->{Above, $a_0$ represents a \hl{DC component}, while the $a_k \neq 0$ coefficients indicate even-numbered \hl{harmonics}.}
 \end{frame}
 
 
@@ -354,18 +359,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M1U uncontrolled rectifier circuit (cont.)}
-    From \eqref{eq:u2_M1U_Fourier} the Fourier series of $u_2(t)$ results in
+    \onslide<1->{From \eqref{eq:u2_M1U_Fourier} the Fourier series of $u_2(t)$ results in
     \begin{equation}
         u_2(t) = \frac{\hat{u}_1}{\pi}\left(1 + \sum_{k=2,4,6,\ldots} \frac{1}{1-k^2} \cos(k\omega t)\right).
-    \end{equation}
-    For a resistive load, the output current has the same harmonic spectrum:
+    \end{equation}}
+    \onslide<2->{For a resistive load, the output current has the same harmonic spectrum:}
     \begin{equation}
-        i_2(t) = \frac{\hat{u}_1}{\pi R}\left(1 + \sum_{k=2,4,6,\ldots} \frac{1}{1-k^2} \cos(k\omega t)\right) = \overline{i}_2 + \sum_{k=2,4,6,\ldots} \hat{i}_{2,k} \cos(k\omega t).
+        \onslide<2->{i_2(t) = \frac{\hat{u}_1}{\pi R}\left(1 + \sum_{k=2,4,6,\ldots} \frac{1}{1-k^2} \cos(k\omega t)\right)} \onslide<3->{= \overline{i}_2 + \sum_{k=2,4,6,\ldots} \hat{i}_{2,k} \cos(k\omega t).}
     \end{equation}
-    Resulting observations are:
+    \onslide<4->{Resulting observations are:}
     \begin{itemize}
-        \item Non-fundamental current frequency components can distort the input side.
-        \item Higher frequency harmonics decrease with $\sim 1/(1-k^2)$.
+        \item<4-> Non-fundamental current frequency components can distort the input side.
+        \item<5-> Higher frequency harmonics decrease with $\sim 1/(1-k^2)$.
     \end{itemize}
 \end{frame}
 
@@ -376,8 +381,8 @@
     \frametitle{Transformer input filtering}
     To reduce the input side distortion, a transformer can be used to filter out the harmonics:
     \begin{itemize}
-        \item Impedance of magnetizing inductance $L_\mathrm{m}$ is zero for DC components, i.e., the transformer blocks the DC current path (cf. dotted red line for $\overline{i}_2$ below).
-        \item With higher frequency harmonics, the impedance of $L_\mathrm{m}$ increases, i.e., filtering out the harmonics less effectively.
+        \item Impedance of magnetizing inductance $L_\mathrm{m}$ is zero for DC components, i.e., the transformer blocks the DC current from the input (cf. dotted red line for $\overline{i}_2$ below).
+        \item<2-> With higher frequency harmonics, the impedance of $L_\mathrm{m}$ increases, i.e., filtering out the harmonics less effectively.
     \end{itemize}
     \begin{figure}
            \begin{circuitikz}[]
@@ -412,10 +417,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Transformer input filtering (cont.)}
-    While the transformer can help out filter unwanted harmonics, the output DC current also introduces an offset magnetization to the transformer core. Issues related with this are:
+    \onslide<2->{While the transformer can help out filter unwanted harmonics, the output DC current also introduces an offset magnetization to the transformer's core. Issues related with this are:}
     \begin{itemize}
-        \item \textbf{Core utilization:} To prevent core saturation, the transformer must be oversized.
-        \item \textbf{Core losses:} The magnetization offset can increase the core losses.
+        \item<2-> \textbf{Core utilization:} To prevent core saturation, the transformer must be oversized.
+        \item<3-> \textbf{Core losses:} The magnetization offset can increase the core losses.
     \end{itemize}
     \begin{figure}
             \centering
@@ -470,20 +475,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Capacitive output filtering}
-    To smooth the output voltage $u_2(t)$, a capacitor $C$ is added. The initial charging voltage is
+    To smooth the output voltage $u_2(t)$, a capacitor $C$ is added. \onslide<2->{The initial charging voltage is
     \begin{equation}
         u_2(t) = \begin{cases}
             u_1(t)=\hat{u}_1 \sin(\omega t) , & 0\leq \omega t < \nicefrac{\pi}{2}, \\
             \hat{u}_1, & \omega t > \nicefrac{\pi}{2}
         \end{cases}
-    \end{equation}
-    with the capacitor current $i_2(t)$ being
+    \end{equation}}
+    \onslide<3->{with the capacitor current $i_2(t)$ being
     \begin{equation}
         i_2(t) = \begin{cases}
             C\nicefrac{\mathrm{d}u_2(t)}{\mathrm{d}t} = \hat{i}_2 \cos(\omega t)= C \omega  \hat{u}_1 \cos(\omega t) , & 0\leq \omega t < \nicefrac{\pi}{2}, \\
             0, & \omega t > \nicefrac{\pi}{2}.
         \end{cases}
-    \end{equation}
+    \end{equation}}
     \begin{figure}
         \begin{circuitikz}[baseline=(current bounding box.center)] 
             \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
@@ -494,7 +499,7 @@
             (A) -- (B);
         \end{circuitikz}
         \hspace{1cm}
-        \begin{tikzpicture}[baseline=(current bounding box.center)]
+        \begin{tikzpicture}[baseline=(current bounding box.center), visible on=<2->]
             \begin{axis}[
                 width=0.4\textwidth,
                 height=0.45\textheight,
@@ -543,8 +548,8 @@
     \frametitle{Capacitive output filtering (cont.)}
     If the rectified output is loaded, the capacitor voltage ripples:
     \begin{itemize}
-        \item If $u_2(t) \leq u_1(t)$: diode conducts, capacitor charges (follows input voltage).
-        \item If $u_2(t) > u_1(t)$: diode blocks, capacitor discharges via $I_0$. 
+        \item<2-> If $u_2(t) \leq u_1(t)$: diode conducts, capacitor charges (follows input voltage).
+        \item<3-> If $u_2(t) > u_1(t)$: diode blocks, capacitor discharges via $I_0$. 
     \end{itemize}
 
     \begin{figure}
@@ -559,7 +564,7 @@
             (A) -- (B);
         \end{circuitikz}
         \hspace{0.5cm}
-        \begin{tikzpicture}[baseline=(current bounding box.center)]
+        \begin{tikzpicture}[baseline=(current bounding box.center), visible on =<4->]
             \tikzmath{
                     real \i0, \deltaT, \a;
                     \i0 = 0.4;
@@ -660,7 +665,7 @@
             \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=$\hspace{0.5cm}{u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
             \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=$\hspace{0.5cm}{u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
         \end{circuitikz}%
-        \begin{tikzpicture}[baseline=(current bounding box.center)]
+        \begin{tikzpicture}[baseline=(current bounding box.center), , visible on =<2->]
             \begin{axis}[
                 width=0.375\textwidth,
                 height=0.65\textheight,
@@ -703,12 +708,12 @@
     \begin{itemize}
         \item During the positive half-cycle of $u_1(t)$: $D_1$ conducts, $D_2$ blocks, and $u_2(t) = u_\mathrm{s,1}(t)$.
         \item During the negative half-cycle of $u_1(t)$: $D_2$ conducts, $D_1$ blocks, and $u_2(t) = u_\mathrm{s,2}(t)$.
-    \end{itemize}
+    \end{itemize}\pause
     The output voltages of the center-tapped transformer are
     \begin{equation}
         u_\mathrm{s,1}(t) = \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \sin(\omega t) \quad \text{and} \quad u_\mathrm{s,2}(t) = -\frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \sin(\omega t).
     \end{equation}
-    Here, it should be noted that both $u_\mathrm{s,1}(t)$ and $u_\mathrm{s,2}(t)$ are utilizing only half of the secondary winding turns due to the central tapping. The output voltage results in
+    Here, it should be noted that both $u_\mathrm{s,1}(t)$ and $u_\mathrm{s,2}(t)$ are utilizing only half of the secondary winding turns due to the central tapping.\pause The output voltage results in
     \begin{equation}
         u_2(t) = \frac{1}{2}\frac{N_2}{N_1}\left|u_1(t)\right| = \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \left|\sin(\omega t)\right|.
         \label{eq:u2_M2U}
@@ -720,18 +725,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M2U uncontrolled rectifier circuit (cont.)}
-    From \eqref{eq:u2_M2U}, the average output voltage of the M2U rectifier is
+    \onslide<1->{From \eqref{eq:u2_M2U}, the \hl{average output} voltage of the M2U rectifier is}
     \begin{equation}
         \begin{split}
-            \overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{2\pi} \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \left|\sin(\omega t)\right| \mathrm{d}\omega t =\frac{1}{\pi} \int_{0}^{\pi} \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \sin(\omega t) \mathrm{d}\omega t =\\
-            &= \frac{1}{2\pi}\frac{N_2}{N_1}\hat{u}_1 \left[ - \cos(\omega t) \right]_{0}^{\pi} = \frac{1}{2\pi}\frac{N_2}{N_1}\hat{u}_1 \left( 1+1 \right) = \frac{1}{\pi}\frac{N_2}{N_1}\hat{u}_1.
+            \onslide<1->{\overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t}\onslide<2->{ = \frac{1}{2\pi} \int_{0}^{2\pi} \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \left|\sin(\omega t)\right| \mathrm{d}\omega t}\onslide<3->{ =\frac{1}{\pi} \int_{0}^{\pi} \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \sin(\omega t) \mathrm{d}\omega t}\\
+            &\onslide<4->{= \frac{1}{2\pi}\frac{N_2}{N_1}\hat{u}_1 \left[ - \cos(\omega t) \right]_{0}^{\pi}} \onslide<5->{= \frac{1}{2\pi}\frac{N_2}{N_1}\hat{u}_1 \left( 1+1 \right) = \frac{1}{\pi}\frac{N_2}{N_1}\hat{u}_1.}
         \end{split}
         \label{eq:u2_M2U_avg}
     \end{equation}
-    Not considering the transformer conversion via $\nicefrac{N_2}{N_1}$, this is twice as much as in the M1U case, compare \eqref{eq:u2_M1U_avg}. The RMS value of the output voltage $u_2(t)$ results in
+    \onslide<5->{Not considering the transformer conversion via $\nicefrac{N_2}{N_1}$, this is twice as much as in the M1U case, compare \eqref{eq:u2_M1U_avg}.} \onslide<6->{The \hl{RMS value} of the output voltage $u_2(t)$ results in}
     \begin{equation}
         \begin{split}
-        U_2 &= \sqrt{\frac{1}{2\pi} \frac{1}{2^2}\frac{N_2^2}{N_1^2} \hat{u}_1^2 \int_{0}^{2 \pi}  \sin^2(\omega t) \mathrm{d}\omega t} = \frac{1}{2}\frac{N_2}{N_1} \hat{u}_1 \sqrt{\frac{1}{\pi}  \int_{0}^{\pi}  \sin^2(\omega t) \mathrm{d}\omega t} \\&= \frac{1}{2}\frac{N_2}{N_1} \hat{u}_1 \sqrt{\frac{1}{2\pi}\left[\frac{1}{2}\omega t - \frac{\sin(2 \omega t)}{4}\right]_0^\pi}= \frac{N_2}{N_1} \hat{u}_1\frac{\hat{u}_1}{\sqrt{2}} = \frac{N_2}{N_1} U_1.
+            \onslide<6->{U_2 &= \sqrt{\frac{1}{2\pi} \frac{1}{2^2}\frac{N_2^2}{N_1^2} \hat{u}_1^2 \int_{0}^{2 \pi}  \sin^2(\omega t) \mathrm{d}\omega t}}\onslide<7->{ = \frac{1}{2}\frac{N_2}{N_1} \hat{u}_1 \sqrt{\frac{1}{\pi}  \int_{0}^{\pi}  \sin^2(\omega t) \mathrm{d}\omega t}} \\\onslide<8->{&= \frac{1}{2}\frac{N_2}{N_1} \hat{u}_1 \sqrt{\frac{1}{2\pi}\left[\frac{1}{2}\omega t - \frac{\sin(2 \omega t)}{4}\right]_0^\pi}}\onslide<9->{= \frac{N_2}{N_1} \hat{u}_1\frac{\hat{u}_1}{\sqrt{2}} = \frac{N_2}{N_1} U_1.}
         \end{split}
         \label{eq:u2_M2U_rms}
     \end{equation}
@@ -742,16 +747,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M2U uncontrolled rectifier circuit (cont.)}
-    The Fourier coefficients of the output voltage $u_2(t)$ from \eqref{eq:u2_M2U} are
+    \onslide<1->{The \hl{Fourier coefficients} of the output voltage $u_2(t)$ from \eqref{eq:u2_M2U} are}
     \begin{equation}
         \begin{split}
-            a_0 &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \mathrm{d} \omega t = 2 \overline{u}_2= \frac{2}{\pi}\frac{N_2}{N_1}\hat{u}_1,\\
-            a_k &= \frac{1}{2\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t = \frac{1}{4\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t\right) = \ldots =  \frac{N_2}{N_1}\frac{\hat{u}_1}{\pi}\frac{2}{1-k^2}, \quad k=2,4,6,\ldots\\
-            b_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t = \frac{1}{4\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t\right) = \ldots = 0.
+            \onslide<1->{a_0 &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \mathrm{d} \omega t} \onslide<2->{= 2 \overline{u}_2= \frac{2}{\pi}\frac{N_2}{N_1}\hat{u}_1,}\\
+            \onslide<3->{a_k &= \frac{1}{2\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t} \onslide<4->{= \frac{1}{4\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t\right)} \onslide<5->{= \ldots =  \frac{N_2}{N_1}\frac{\hat{u}_1}{\pi}\frac{2}{1-k^2}, \quad k=2,4,6,\ldots}\\
+            \onslide<6->{b_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t} \onslide<7->{= \frac{1}{4\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t\right)}\onslide<8->{ = \ldots = 0.}
         \end{split}
         \label{eq:u2_M2U_Fourier}
     \end{equation}
-    These coefficients are structurally identical to the M1U case, but scaled due to the center-tapped transformer conversion ratios and full-cycle rectification.
+    \onslide<9->{These coefficients are structurally identical to the M1U case, but scaled due to the center-tapped transformer conversion ratios and full-cycle rectification.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -825,24 +830,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U uncontrolled rectifier circuit (cont.)}
-    For a purely resistive load as in \figref{fig:B2U_topology} the output voltage $u_2(t)$ is
+    \onslide<1->{For a purely resistive load as in \figref{fig:B2U_topology} the output voltage $u_2(t)$ is
     \begin{equation}
         u_2(t) = \left|u_1(t)\right| = \hat{u}_1 \left|\sin(\omega t)\right|.
         \label{eq:u2_B2U_resistive}
-    \end{equation}
-    Here, following diodes are conducting:
+    \end{equation}}
+    \onslide<2->{Here, following diodes are conducting:}
     \begin{itemize}
-        \item Positive half-cycle: $D_1$ and $D_2$,
-        \item Negative half-cycle: $D_3$ and $D_4$.
+        \item<2-> Positive half-cycle: $D_1$ and $D_2$,
+        \item<3-> Negative half-cycle: $D_3$ and $D_4$.
     \end{itemize}
-    The average output voltage $\overline{u}_2$ is
+    \onslide<4->{The average output voltage $\overline{u}_2$ is}
     \begin{equation}
         \begin{split}
-            \overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{2\pi} \hat{u}_1 \left|\sin(\omega t)\right| \mathrm{d}\omega t = \ldots = \frac{2}{\pi}\hat{u}_1.
+            \onslide<4->{\overline{u}_2 &= \frac{1}{T} \int_{0}^{T} u_2(t) \mathrm{d}t} \onslide<5->{= \frac{1}{2\pi} \int_{0}^{2\pi} \hat{u}_1 \left|\sin(\omega t)\right| \mathrm{d}\omega t} \onslide<6->{= \ldots = \frac{2}{\pi}\hat{u}_1.}
         \end{split}
         \label{eq:u2_B2U_resistive_avg}
     \end{equation}
-    The Fourier coefficients of the output voltage $u_2(t)$ are analogous to the M2U case, compare \eqref{eq:u2_M2U_Fourier} with appropriate scaling considering the lack of the center-tapped transformer.
+    \onslide<7->{The Fourier coefficients of the output voltage $u_2(t)$ are analogous to the M2U case, compare \eqref{eq:u2_M2U_Fourier} with appropriate scaling considering the lack of the center-tapped transformer.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -983,11 +988,11 @@
         \end{cases}
         \label{eq:iC_B2U_cap_filt}
     \end{equation}
-    that is, if the output current $i_2(t)$ is zero, the diode bridge blocks and the capacitor discharges via the load. Contrary, if the output current is positive, the diodes conduct and the capacitor voltage is determined by the rectified input voltage. The output current is given by
+    that is, if the output current $i_2(t)$ is zero, the diode bridge blocks and the capacitor discharges via the load. Contrary, if the output current is positive, the diodes conduct and the capacitor voltage is determined by the rectified input voltage.\pause The output current is given by
     \begin{equation}
         i_2(t) = i_\mathrm{C}(t) + I_0.
         \label{eq:i2_B2U_cap_filt}
-    \end{equation} 
+    \end{equation} \pause
     Inserting \eqref{eq:iC_B2U_cap_filt} in \eqref{eq:i2_B2U_cap_filt} delivers the output current during the conduction phase:
     \begin{equation}
         i_2(t) = C\omega \hat{u}_1 \cos(\omega t) + I_0, \quad 0 \leq \omega t < \omega t_1.
@@ -1000,22 +1005,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U uncontrolled rectifier circuit with capacitive output filtering (cont.)}
-    The \hl{conduction phase} lasts until $\omega t_1 = \alpha$ which can be determined from \eqref{eq:i2_B2U_cap_filt_conduct}:
+    \onslide<1->{The \hl{conduction phase} lasts until $\omega t_1 = \alpha$ which can be determined from \eqref{eq:i2_B2U_cap_filt_conduct}:
     \begin{equation}
             \alpha = \arccos\left(-\frac{I_0}{C\omega \hat{u}_1}\right).
         \label{eq:omega_t1_B2U_cap_filt}
-    \end{equation}
-    For $\alpha < \omega t < \omega t_2$ the capacitor discharges via the load:
+    \end{equation}}
+    \onslide<2->{For $\alpha < \omega t < \omega t_2$ the capacitor discharges via the load:}
     \begin{equation}
         \begin{split}
-            u_2(t) &= u_2(\omega t_1) + \int_{t_1}^t -\frac{I_0}{C} \mathrm{d} \tau = u_2(\alpha) + \int_{\alpha}^{\omega t} -\frac{I_0}{\omega C} \mathrm{d} \omega \tau\\
-                   &=  u_2(\alpha) - \frac{I_0}{\omega C} (\omega t - \alpha), \quad \omega t_1 \leq \omega t < \omega t_2.
+            \onslide<2->{u_2(t) &= u_2(\omega t_1) + \int_{t_1}^t -\frac{I_0}{C} \mathrm{d} \tau} \onslide<3->{= u_2(\alpha) + \int_{\alpha}^{\omega t} -\frac{I_0}{\omega C} \mathrm{d} \omega \tau}\\
+                   &\onslide<4->{=  u_2(\alpha) - \frac{I_0}{\omega C} (\omega t - \alpha), \quad \omega t_1 \leq \omega t < \omega t_2.}
         \end{split}
     \end{equation}
-    The \hl{blocking phase} lasts until $\omega t_2 = \alpha + \beta$, that is, the rectified input voltage is equal to the capacitor voltage (note: not solvable for $\omega t_2$ in closed-form, requires numerical methods):
+    \onslide<5->{The \hl{blocking phase} lasts until $\omega t_2 = \alpha + \beta$, that is, the rectified input voltage is equal to the capacitor voltage (note: not solvable for $\omega t_2$ in closed-form, requires numerical methods):}
     \begin{equation}
         \begin{split}
-            u_2(\omega t_2) = u_2(\alpha) - \frac{I_0}{\omega C} (\omega t_2 - \alpha) \stackrel{!}{=} \hat{u}_1 |\sin(\omega t_2)| = |u_1(\omega t_2)|.
+            \onslide<5->{u_2(\omega t_2) = u_2(\alpha) - \frac{I_0}{\omega C} (\omega t_2 - \alpha) }\onslide<6->{\stackrel{!}{=} \hat{u}_1 |\sin(\omega t_2)| = |u_1(\omega t_2)|.}
         \end{split}
         \label{eq:u2_B2U_cap_filt_block}
     \end{equation}
@@ -1062,14 +1067,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
-    For the modified scenario form \eqref{fig:B2U_topology_capacitive_filter_grid} we assume an infinite capacitance capacitor, i.e.,
+    \onslide<1->{For the modified scenario form \eqref{fig:B2U_topology_capacitive_filter_grid} we assume an infinite capacitance capacitor, i.e.,
     $$ u_2(t)\approx U_2$$
-    to keep the analysis simple. Like before, the diode bridge conduction is determined by the output current $i_2(t)$:
+    to keep the analysis simple.} \onslide<2->{Like before, the diode bridge conduction is determined by the output current $i_2(t)$:}
     \begin{itemize}
-        \item $i_2(t)>0$: diode bridge conducts, $u_\mathrm{L}(t) = |u_1(t)|-U_2$,
-        \item $i_2(t)=0$: diode bridge blocks, $u_\mathrm{L}(t) = \max\{0, |u_1(t)|-U_2\}$.
+        \item<2-> $i_2(t)>0$: diode bridge conducts, $u_\mathrm{L}(t) = |u_1(t)|-U_2$,
+        \item<3-> $i_2(t)=0$: diode bridge blocks, $u_\mathrm{L}(t) = \max\{0, |u_1(t)|-U_2\}$.
     \end{itemize}
-    Hence, the B2U rectifier behavior is driven by the grid impedance current and the dynamics introduced by $L$. Similar to the previous analysis on DC-DC converters, the discontinuous conduction mode (DCM) and the boundary conduction mode (BCM) will be differentiated in the following. 
+    \onslide<4->{Hence, the B2U rectifier behavior is driven by the grid impedance current and the dynamics introduced by $L$.}\onslide<5->{Similar to the previous analysis on DC-DC converters, the \hl{discontinuous conduction mode (DCM)} and the \hl{boundary conduction mode (BCM)} will be differentiated in the following.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1152,19 +1157,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
-   In \hl{steady-state DCM} the output current is zero for
+    \onslide<1->{In \hl{steady-state DCM} the output current is zero for
    \begin{equation}
         i_2(\omega t) = 0, \quad 0 \leq \omega t < \omega t_1.
    \end{equation}
-   Until then the diode bridge is in blocking mode and disconnects the input from the output. At $\omega t_1 = \alpha$ the diodes start conducting since the input voltage exceeds the output voltage:
+   Until then the diode bridge is in blocking mode and disconnects the input from the output.}\onslide<2->{ At $\omega t_1 = \alpha$ the diodes start conducting since the input voltage exceeds the output voltage:}
    \begin{equation}
-      u_1(\omega t_1 = \alpha) = \hat{u}_1 \sin(\alpha) \stackrel{!}{=} U_2 \quad \Leftrightarrow \quad \alpha = \arcsin\left(\frac{U_2}{\hat{u}_1}\right).
+    \onslide<2->{u_1(\omega t_1 = \alpha) = \hat{u}_1 \sin(\alpha)} \onslide<3->{\stackrel{!}{=} U_2 \quad \Leftrightarrow \quad \alpha = \arcsin\left(\frac{U_2}{\hat{u}_1}\right).}
    \end{equation}
-   At this point, the output current is rising due to the positive inductor voltage:
+   \onslide<4->{At this point, the output current is rising due to the positive inductor voltage:}
    \begin{equation}
     \begin{split}
-        i_2(\omega t) &= \frac{1}{L} \int_{t_1}^t u_1(t)-U_2 \mathrm{d}t= \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} u_1(\omega t)-U_2 \mathrm{d}\omega t = \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} \hat{u}_1 \sin(\omega t)-U_2 \mathrm{d}\omega t \\
-               & = \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha)-\cos(\omega t)-\frac{U_2}{\hat{u}_1}(\omega t - \alpha)\right), \quad \omega t_1 \leq \omega t < \omega t_2. 
+        \onslide<4->{i_2(\omega t) &= \frac{1}{L} \int_{t_1}^t u_1(t)-U_2 \mathrm{d}t}\onslide<5->{= \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} u_1(\omega t)-U_2 \mathrm{d}\omega t} \onslide<6->{= \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} \hat{u}_1 \sin(\omega t)-U_2 \mathrm{d}\omega t }\\
+               & \onslide<7->{= \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha)-\cos(\omega t)-\frac{U_2}{\hat{u}_1}(\omega t - \alpha)\right), \quad \omega t_1 \leq \omega t < \omega t_2.} 
     \end{split}
     \label{eq:i2_B2U_cap_filt_grid_conduct_DCM}
    \end{equation}
@@ -1175,20 +1180,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
-   At $\omega t_2 = \alpha + \beta$ the current reaches zero again and the diode bridge blocks again:
+    \onslide<1->{At $\omega t_2 = \alpha + \beta$ the current reaches zero again and the diode bridge blocks again:}
    \begin{equation}
     \begin{split}
-        i_2(\omega t_2) &= \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha)-\cos(\omega t_2)-\frac{U_2}{\hat{u}_1}(\omega t_2 - \alpha)\right) \stackrel{!}{=} 0\\
-        &\Leftrightarrow \cos(\alpha)-\cos(\alpha+\beta)-\beta\sin(\alpha) = 0.
+        \onslide<1->{i_2(\omega t_2) &= \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha)-\cos(\omega t_2)-\frac{U_2}{\hat{u}_1}(\omega t_2 - \alpha)\right) \stackrel{!}{=} 0}\\
+        \onslide<2->{&\Leftrightarrow \cos(\alpha)-\cos(\alpha+\beta)-\beta\sin(\alpha) = 0.}
     \end{split}
    \end{equation}
-   For a given $\alpha$, this equation is not solvable in closed-form w.r.t. $\beta$ and requires numerical methods. However, if $\beta$ is known, $\alpha$ can be determined leading to
+   \onslide<3->{For a given $\alpha$, this equation is not solvable in closed-form w.r.t. $\beta$ and requires numerical methods.} \onslide<4->{However, if $\beta$ is known, $\alpha$ can be determined leading to
     \begin{equation}
          \alpha = \arctan\left(\frac{1-\cos(\beta)}{\beta-\sin(\beta)}\right).
-    \end{equation}
-    The average output current in DCM is
+    \end{equation}}
+    \onslide<5->{The average output current in DCM is}
     \begin{equation}
-        \overline{i}_2 = \frac{1}{T} \int_{0}^{T} i_2(t) \mathrm{d}t = \frac{1}{\pi} \int_{\alpha}^{\alpha+\beta} i_2(\omega t) \mathrm{d}\omega t = \ldots = \frac{\hat{u}_1}{\pi \omega L} \left(\frac{\hat{u}_1}{U_2}(1-\cos(\beta))-\frac{U_2}{\hat{u}_1}\frac{\beta^2}{2}\right).
+        \onslide<5->{\overline{i}_2 = \frac{1}{T} \int_{0}^{T} i_2(t) \mathrm{d}t} \onslide<6->{= \frac{1}{\pi} \int_{\alpha}^{\alpha+\beta} i_2(\omega t) \mathrm{d}\omega t}\onslide<7->{ = \ldots = \frac{\hat{u}_1}{\pi \omega L} \left(\frac{\hat{u}_1}{U_2}(1-\cos(\beta))-\frac{U_2}{\hat{u}_1}\frac{\beta^2}{2}\right).}
     \end{equation}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1196,18 +1201,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
-    For a better representation in the following, the average current is normalized:
+    \onslide<1->{For a better representation in the following, the average current is normalized:}
     \begin{equation}
-        \overline{i}'_2 = \frac{\overline{i}_2}{\frac{2}{\pi}\frac{\hat{u}_1}{\omega L}} = \frac{1}{2} \left(\frac{\hat{u}_1}{U_2}(1-\cos(\beta))-\frac{U_2}{\hat{u}_1}\frac{\beta^2}{2}\right).
+        \onslide<1->{\overline{i}'_2 = \frac{\overline{i}_2}{\frac{2}{\pi}\frac{\hat{u}_1}{\omega L}}} \onslide<2->{= \frac{1}{2} \left(\frac{\hat{u}_1}{U_2}(1-\cos(\beta))-\frac{U_2}{\hat{u}_1}\frac{\beta^2}{2}\right).}
         \label{eq:i2_avg_norm_B2U_cap_filt_grid_DCM}
     \end{equation}
-    Here, the denominator $\nicefrac{2}{\pi}\cdot\nicefrac{\hat{u}_1}{\omega L}$ is the absolute average value of the inductor current in case of a grid short circuit.\\[1em]
+    \onslide<1->{Here, the denominator $\nicefrac{2}{\pi}\cdot\nicefrac{\hat{u}_1}{\omega L}$ is the absolute average value of the inductor current in case of a grid short circuit.\\[1em]}
 
-    Based on the correlations found, the operating characteristics in DCM of the rectifier can be visualized, which has been implemented in \figref{fig:B2U_load_curve} (left part):
+    \onslide<3->{Based on the correlations found, the operating characteristics in DCM of the rectifier can be visualized, which has been implemented in \figref{fig:B2U_load_curve} (left part):}
     \begin{itemize}
-        \item In DCM, $\beta \in [0, \pi[$ holds, i.e., the diode bridge is conducting for $0\ldots100 \,\%$ per half cycle.
-        \item At $\beta = \pi$ the diode bridge is conducting for the full half cycle.
-        \item In order to achieve a commutation of the current between the diode pairs D1/D4 and D2/D3, the current gets zero (for a short time) so that the rectifier operates in BCM. 
+        \item<3-> In DCM, $\beta \in [0, \pi[$ holds, i.e., the diode bridge is conducting for $0\ldots100 \,\%$ per half cycle.
+        \item<4-> At $\beta = \pi$ the diode bridge is conducting for the full half cycle.
+        \item<5-> In order to achieve a commutation of the current between the diode pairs D1/D4 and D2/D3, the current gets zero (for a short time) so that the rectifier operates in BCM. 
     \end{itemize}
 \end{frame}
 
@@ -1289,20 +1294,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
-    In \hl{steady-state BCM}, the output current is analogous to the DCM as from \eqref{eq:i2_B2U_cap_filt_grid_conduct_DCM} leading to
+    \onslide<1->{In \hl{steady-state BCM}, the output current is analogous to the DCM as from \eqref{eq:i2_B2U_cap_filt_grid_conduct_DCM} leading to
     \begin{equation}
             i_2(\omega t) = \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha')-\cos(\omega t)-\frac{U_2}{\hat{u}_1}(\omega t - \alpha')\right), \quad \alpha' \leq \omega t < \alpha' + \pi 
        \end{equation}
-    with $\alpha'$ being the phase angle at which the diodes start conducting in BCM -- cf. \figref{fig:B2U_topology_capacitive_filter_grid_signals_BCM}. After a half cycle, the current reaches zero for a short moment enabling the diode bridge to commutate the current between the diode pairs:
+    with $\alpha'$ being the phase angle at which the diodes start conducting in BCM -- cf. \figref{fig:B2U_topology_capacitive_filter_grid_signals_BCM}.} \onslide<2->{After a half cycle, the current reaches zero for a short moment enabling the diode bridge to commutate the current between the diode pairs:}
     \begin{equation}
-        i_2(\omega t = \alpha'+\pi) = 0 \quad \Leftrightarrow \quad \cos(\alpha')-\cos(\alpha'+\pi)-\frac{U_2}{\hat{u}_1}\pi = 0 
+        \onslide<2->{i_2(\omega t = \alpha'+\pi) = 0}\onslide<3->{ \quad \Leftrightarrow \quad \cos(\alpha')-\cos(\alpha'+\pi)-\frac{U_2}{\hat{u}_1}\pi = 0} 
     \end{equation}
-    from which 
+    \onslide<4->{from which 
     \begin{equation}
         \frac{U_2}{\hat{u}_1} = \frac{2}{\pi} \cos(\alpha')
         \label{eq:U2_u1_relation_B2U_cap_filt_grid_BCM}
     \end{equation}
-    follows after some intermediate calculation steps. 
+    follows after some intermediate calculation steps.} 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1310,22 +1315,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
-    The average output current in BCM follows as
+    \onslide<1->{The average output current in BCM follows as}
     \begin{equation}
         \begin{split}
-            \overline{i}_2 &= \frac{1}{T} \int_{0}^{T} i_2(t) \mathrm{d}t = \frac{1}{\pi} \int_{\alpha'}^{\alpha'+\pi} i_2(\omega t) \mathrm{d}\omega t = \ldots \\ &= \frac{2}{\pi} \frac{\hat{u}_1}{ \omega L} \sin(\alpha').
+            \onslide<1->{\overline{i}_2 &= \frac{1}{T} \int_{0}^{T} i_2(t) \mathrm{d}t}\onslide<2->{ = \frac{1}{\pi} \int_{\alpha'}^{\alpha'+\pi} i_2(\omega t) \mathrm{d}\omega t} \onslide<3->{= \ldots \\ &= \frac{2}{\pi} \frac{\hat{u}_1}{ \omega L} \sin(\alpha').}
         \end{split}
     \end{equation}
-    Applying the same normalization as \eqref{eq:i2_avg_norm_B2U_cap_filt_grid_DCM} leads to
+    \onslide<4->{Applying the same normalization as \eqref{eq:i2_avg_norm_B2U_cap_filt_grid_DCM} leads to
     \begin{equation}
         \overline{i}'_2 = \frac{\overline{i}_2}{\frac{2}{\pi}\frac{\hat{u}_1}{\omega L}} = \sin(\alpha').
         \label{eq:i2_avg_norm_B2U_cap_filt_grid_BCM}
-    \end{equation}
-    Combining \eqref{eq:U2_u1_relation_B2U_cap_filt_grid_BCM} and \eqref{eq:i2_avg_norm_B2U_cap_filt_grid_BCM} reveals
+    \end{equation}}
+    \onslide<5->{Combining \eqref{eq:U2_u1_relation_B2U_cap_filt_grid_BCM} and \eqref{eq:i2_avg_norm_B2U_cap_filt_grid_BCM} reveals
     \begin{equation}
         \frac{U_2}{\hat{u}_1} = \frac{2}{\pi}\cos(\arcsin(\overline{i}'_2)).
     \end{equation}
-    The resulting load curve for the BCM is also depicted in \figref{fig:B2U_load_curve} (right part).
+    The resulting load curve for the BCM is also depicted in \figref{fig:B2U_load_curve} (right part).}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1459,5 +1464,5 @@
     \begin{equation}
         \int_{0}^{2\pi} \sin(\omega t) \sin(\omega k t) \mathrm{d}\omega t  \quad \mbox{and} \quad \int_{0}^{2\pi} \sin(\omega t) \cos(\omega k t) \mathrm{d}\omega t.
     \end{equation}
-
+    
 \end{frame}
