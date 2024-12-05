@@ -58,3 +58,30 @@ def i_1_harmonic(x):
 current_directory = os.path.dirname(os.path.abspath(__file__))
 save_path = os.path.join(current_directory, 'Grid_current_B2U_decomposition.csv')
 np.savetxt(save_path, np.column_stack((x, [i_1(xi) for xi in x], [i_1_fundamental(xi) for xi in x], [i_1_harmonic(xi) for xi in x])), delimiter=',', header='wt, i_1, i_1_fundamental, i_1_harmonic', comments='')
+
+# Calculate the RMS value of the input current
+i_1_rms = np.sqrt(1/(2*np.pi)*np.trapz([i_1(xi)**2 for xi in x],x)) 
+
+# calculate the phase angle of the input current fundamental component
+phi = np.arccos(fourier[1][0]/np.sqrt(fourier[1][1]**2+fourier[1][0]**2))*np.sign(fourier[1][1]) - np.pi/2
+
+# calculate the THD of the input current
+i_1_THD = np.sqrt(np.sum([fourier[k][0]**2+fourier[k][1]**2 for k in range(2,fn-1)])/(fourier[1][0]**2+fourier[1][1]**2))
+
+lamb = np.cos(phi)/(np.sqrt(1 + i_1_THD**2))
+
+lamb_alt = np.cos(phi)*np.sqrt(fourier[1][1]**2 +fourier[1][0]**2)/i_1_rms/np.sqrt(2)
+
+#print lamb results
+print('lamb:', lamb)
+print('lamb_alt:', lamb_alt)
+print('phi:', phi/np.pi*180)
+
+# print fundamental fourier coefficients
+print('Fourier coefficients of the fundamental component:')
+print('a1:', fourier[1][0])
+print('b1:', fourier[1][1])
+
+#print fundamental current amplitude and RMS
+print('i_1_fundamental:', np.sqrt(fourier[1][0]**2+fourier[1][1]**2))
+print('i_1_rms:', i_1_rms)

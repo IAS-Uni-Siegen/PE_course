@@ -84,12 +84,13 @@
 \begin{frame}
     \frametitle{Frequency analysis: Fourier series}
     \onslide<2->{
-    Often the rectification introduces non-fundamental frequency components, e.g., due to the output voltage rectification or by a load current feedback towards the input side. To analyze the \hl{frequency spectrum} of a periodic signal $u(t)$, the \hl{Fourier series} is used:
+    Often the rectification introduces non-fundamental frequency components, e.g., due to the output voltage rectification or by a load current feedback towards the input side. To analyze the \hl{frequency spectrum} of a periodic signal $x(t)$, the \hl{Fourier series} is used:
     \begin{equation}
         \begin{gathered}
-            u(t) = \frac{a_0}{2}+\sum_{k=1}^{\infty} \left( a_k \cos(k\omega t) + b_k \sin(k\omega t) \right), \quad k\in \mathbb{N},\\
-            a_k= \frac{1}{\pi} \int_{0}^{2\pi} u(t) \cos(k\omega t) \mathrm{d}\omega t,\,\, k\geq 0, \qquad b_k = \frac{1}{\pi} \int_{0}^{2\pi} u(t) \sin(k\omega t) \mathrm{d}\omega t,\,\, k \geq 1.
+            x(t) = \frac{a^{(0)}}{2}+\sum_{k=1}^{\infty} \left( a^{(k)} \cos(k\omega t) + b^{(k)} \sin(k\omega t) \right), \quad k\in \mathbb{N},\\
+            a^{(k)}= \frac{1}{\pi} \int_{0}^{2\pi} u(t) \cos(k\omega t) \mathrm{d}\omega t,\,\, k\geq 0, \qquad b^{(k)} = \frac{1}{\pi} \int_{0}^{2\pi} u(t) \sin(k\omega t) \mathrm{d}\omega t,\,\, k \geq 1.
         \end{gathered}
+        \label{eq:Fourier_series}
     \end{equation}
     }
 
@@ -344,13 +345,13 @@
     \onslide<1->{The \hl{Fourier coefficients} of the output voltage $u_2(t)$ from \eqref{eq:u2_M1U} are}
     \begin{equation}
         \begin{split}
-            \onslide<1->{a_0 &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \mathrm{d} \omega t} \onslide<2->{= 2 \overline{u}_2= 2 \frac{\hat{u}_1}{\pi},}\\
-            \onslide<3->{a_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t }\onslide<4->{= \frac{1}{\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t}\\  &\onslide<5->{= \frac{\hat{u}_1}{2\pi} \int_{0}^{\pi}  \sin(\omega t(1-k)) + \sin(\omega t(1+k)) \mathrm{d}\omega t} \onslide<6->{= \ldots =  \begin{cases}\frac{\hat{u}_1}{\pi}\frac{2}{1-k^2}, & k=2,4,6,\ldots\\ 0, & \mbox{otherwise}. \end{cases} }\\
-            \onslide<7->{b_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t = \frac{1}{\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t} \\ &\onslide<8->{=\frac{\hat{u}_1}{2\pi} \int_{0}^{\pi}  \cos(\omega t(1-k)) - \cos(\omega t(k+1)) \mathrm{d}\omega t}\onslide<9->{ = \ldots = \begin{cases} \frac{\hat{u}_1}{2}, & k =1,\\ 0, & k \geq 2. \end{cases}}
+            \onslide<1->{a^{(0)} &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \mathrm{d} \omega t} \onslide<2->{= 2 \overline{u}_2= 2 \frac{\hat{u}_1}{\pi},}\\
+            \onslide<3->{a^{(k)} &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t }\onslide<4->{= \frac{1}{\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t}\\  &\onslide<5->{= \frac{\hat{u}_1}{2\pi} \int_{0}^{\pi}  \sin(\omega t(1-k)) + \sin(\omega t(1+k)) \mathrm{d}\omega t} \onslide<6->{= \ldots =  \begin{cases}\frac{\hat{u}_1}{\pi}\frac{2}{1-k^2}, & k=2,4,6,\ldots\\ 0, & \mbox{otherwise}. \end{cases} }\\
+            \onslide<7->{b^{(k)} &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t = \frac{1}{\pi} \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t} \\ &\onslide<8->{=\frac{\hat{u}_1}{2\pi} \int_{0}^{\pi}  \cos(\omega t(1-k)) - \cos(\omega t(k+1)) \mathrm{d}\omega t}\onslide<9->{ = \ldots = \begin{cases} \frac{\hat{u}_1}{2}, & k =1,\\ 0, & k \geq 2. \end{cases}}
         \end{split}
         \label{eq:u2_M1U_Fourier}
     \end{equation}
-    \onslide<10->{Above, $a_0$ represents a \hl{DC component}, while the $a_k \neq 0$ coefficients indicate even-numbered \hl{harmonics}.}
+    \onslide<10->{Above, $a^{(0)}$ represents a \hl{DC component}, while the $a^{(k)} \neq 0$ coefficients indicate \hl{harmonics}.}
 \end{frame}
 
 
@@ -750,9 +751,9 @@
     \onslide<1->{The \hl{Fourier coefficients} of the output voltage $u_2(t)$ from \eqref{eq:u2_M2U} are}
     \begin{equation}
         \begin{split}
-            \onslide<1->{a_0 &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \mathrm{d} \omega t} \onslide<2->{= 2 \overline{u}_2= \frac{2}{\pi}\frac{N_2}{N_1}\hat{u}_1,}\\
-            \onslide<3->{a_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t} \onslide<4->{= \frac{1}{2\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t\right)} \onslide<5->{= \ldots = \begin{cases}\frac{\hat{u}_1}{\pi}\frac{N_2}{N_1}\frac{2}{1-k^2}, & k=2,4,6,\ldots\\ 0, & \mbox{otherwise}. \end{cases}}\\
-            \onslide<6->{b_k &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t} \onslide<7->{= \frac{1}{2\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t\right)}\onslide<8->{ = \ldots = 0.}
+            \onslide<1->{a^{(0)} &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \mathrm{d} \omega t} \onslide<2->{= 2 \overline{u}_2= \frac{2}{\pi}\frac{N_2}{N_1}\hat{u}_1,}\\
+            \onslide<3->{a^{(k)} &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t} \onslide<4->{= \frac{1}{2\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t\right)} \onslide<5->{= \ldots = \begin{cases}\frac{\hat{u}_1}{\pi}\frac{N_2}{N_1}\frac{2}{1-k^2}, & k=2,4,6,\ldots\\ 0, & \mbox{otherwise}. \end{cases}}\\
+            \onslide<6->{b^{(k)} &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t} \onslide<7->{= \frac{1}{2\pi}\frac{N_2}{N_1}\left( \int_{0}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t \right.\\ & \left.+ \int_{\pi}^{2\pi} (-1)\hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t\right)}\onslide<8->{ = \ldots = 0.}
         \end{split}
         \label{eq:u2_M2U_Fourier}
     \end{equation}
@@ -1382,7 +1383,8 @@
     \end{equation}
     The minus sign during the second half-cycle results from the conducting diodes D3/D4 reversing the current direction in the inductor -- cf. \figref{fig:B2U_topology_capacitive_filter_grid}. The input current can be decomposed into a \hl{fundamental and harmonic components}:
     \begin{equation}
-        i_1(t) = \underbrace{a_1 \cos(\omega t) + b_1 \sin(\omega t)\vphantom{\sum_{k=2}^{\infty}}}_{=i_1^{(1)}(t)} + \underbrace{\sum_{k=2}^{\infty} \left( a_k \cos(k\omega t) + b_k \sin(k\omega t) \right)}_{i_1^{(\mathrm{h})}(t)}, \quad k\in \mathbb{N}.
+        i_1(t) = \underbrace{a_1 \cos(\omega t) + b_1 \sin(\omega t)\vphantom{\sum_{k=2}^{\infty}}}_{=i_1^{(1)}(t)} + \underbrace{\sum_{k=2}^{\infty} \left( a^{(k)} \cos(k\omega t) + b^{(k)} \sin(k\omega t) \right)}_{i_1^{(\mathrm{h})}(t)}, \quad k\in \mathbb{N}.
+        \label{eq:input_current_decomposition_B2U}
     \end{equation}
     As will be discussed in the following, the harmonic components $i_1^{(\mathrm{h})}(t)$ are considered distortions negatively impacting the grid quality.
 \end{frame}
@@ -1440,29 +1442,113 @@
     \begin{equation}
         S = |\underline{S}| = \sqrt{P^2 + Q^2}.
     \end{equation}
-    The \hl{power factor} $\cos(\varphi)$ is defined as
+    The \hl{power factor} $\lambda$ is defined as
     \begin{equation}
-        \cos(\varphi) = \frac{P}{S}.
+        \lambda =\cos(\varphi) = \frac{P}{S}.
     \end{equation}
     Typically, one tries to operate power converters with a unity power factor $|\cos(\varphi)|\approx 1$ to avoid reactive power transfer (i.e., additional reactive currents leading to more losses in the grid).
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Power factor of the B2U rectifier %%
+%% Active power transfer considering harmonics %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Power factor of the B2U rectifier}
+    \frametitle{Active power transfer considering harmonics}
     The active power can be alternatively expressed as the average of the instantaneous power:
     \begin{equation}
-        P = \frac{1}{T} \int_{0}^{T} p(t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{2\pi} u_1(\omega t) i_1(\omega t) \mathrm{d}\omega t.
+        P = \frac{1}{T} \int_{0}^{T} p(t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{2\pi} u(\omega t) i(\omega t) \mathrm{d}\omega t.
     \end{equation}
-    Given $u_1(\omega t) = \hat{u}_1 \sin(\omega t)$ and using the Fourier decomposition of the input current $i_1(\omega t)$, the active power can be expressed as (neglecting the offset of the input current):
+    To generalize the analysis for arbitrary voltage and current harmonics, we consider both  Fourier decompositions
     \begin{equation}
-        P = \frac{\hat{u}_1}{2\pi} \int_{0}^{2\pi}  \sin(\omega t) \sum_{k=1}^\infty \left( a_k \cos(\omega k t) + b_k \sin(\omega k t) \right) \mathrm{d}\omega t.
+            u(\omega t) = \overline{u} + \sum_{k=1}^{\infty} \hat{u}^{(k)}\cos(k\omega t -\varphi_u^{(k)}),\quad 
+            i(\omega t) = \overline{i} + \sum_{k=1}^{\infty} \hat{i}^{(k)}\cos(k\omega t -\varphi_i^{(k)})
     \end{equation}
-    Hence, the integral covers terms of the form
+    with $\overline{u}$ and $\overline{i}$ being the DC components, $\hat{u}^{(k)}$ and $\hat{i}^{(k)}$ the amplitudes of the $k$-th harmonic and $\varphi_u^{(k)}$ and $\varphi_i^{(k)}$ the phase angles of the voltage and current harmonics. This amplitude-phase representation is analogous to \eqref{eq:Fourier_series} with the relations:
     \begin{equation}
-        \int_{0}^{2\pi} \sin(\omega t) \sin(\omega k t) \mathrm{d}\omega t  \quad \mbox{and} \quad \int_{0}^{2\pi} \sin(\omega t) \cos(\omega k t) \mathrm{d}\omega t.
+            \hat{x}^{(k)} = \sqrt{(a^{(k)})^2 + (b^{(k)})^2}, \quad \varphi_x^{(k)} = -\arccos\left(\frac{a^{(k)}}{\hat{x}^{(k)}}\right) \cdot \mathrm{sign}\left(b^{(k)}\right).
     \end{equation}
-    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Active power transfer considering harmonics (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Active power transfer considering harmonics (cont.)}
+Substituting the Fourier series of \(u_1(\omega t)\) and \(i_1(\omega t)\) into the instantaneous power expression delivers:
+\begin{align*}
+    p(t) &= u(\omega t) i(\omega t) \\
+    &= \left( \overline{u} + \sum_{k=1}^\infty \hat{u}^{(k)} \cos(k\omega t - \varphi_u^{(k)}) \right)
+    \left( \overline{i} + \sum_{m=1}^\infty \hat{i}^{(m)} \cos(m\omega t - \varphi_i^{(m)}) \right).
+\end{align*}
+
+Expanding this product yields:
+\begin{align*}
+    p(t) &= \overline{u} \overline{i} 
+    + \overline{u} \sum_{m=1}^\infty \hat{i}^{(m)} \cos(m\omega t - \varphi_i^{(m)}) 
+    + \overline{i} \sum_{k=1}^\infty \hat{u}^{(k)} \cos(k\omega t - \varphi_u^{(k)}) \\
+    &+ \sum_{k=1}^\infty \sum_{m=1}^\infty \hat{u}^{(k)} \hat{i}^{(m)} 
+    \cos(k\omega t - \varphi_u^{(k)}) \cos(m\omega t - \varphi_i^{(m)}).
+\end{align*}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Active power transfer considering harmonics (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Active power transfer considering harmonics (cont.)}
+
+Using the trigonometric identities the last term becomes:
+\begin{align*}
+    &\sum_{k=1}^\infty \sum_{m=1}^\infty \hat{u}^{(k)} \hat{i}^{(m)} \cos(k\omega t - \varphi_u^{(k)}) \cos(m\omega t - \varphi_i^{(m)}) \\
+    = &\sum_{k=1}^\infty \sum_{m=1}^\infty \hat{u}^{(k)} \hat{i}^{(m)} \frac{1}{2} \left[ \cos((k-m)\omega t + \varphi_i^{(k)} - \varphi_u^{(m)}) + \cos((k+m)\omega t - \varphi_u^{(k)} - \varphi_i^{(m)}) \right].
+\end{align*}
+Hence, we receive integral terms of the form
+$$
+\int_0^{2\pi} \cos(n\omega t + \varphi) \mathrm{d}t = \begin{cases} 2\pi, & n = 0, \\ 0 & n \neq 0 \end{cases}
+$$
+with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the periodicity and symmetry of the cosine function, the integral over a full period is zero for $n\neq 0$.\\[1em]
+\textbf{Conclusion:} Cross-frequency terms (\(k \neq m\)) cancel due to their oscillatory nature, leaving only contributions from voltage and current harmonics of the same order (\(k = m\)).
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Active power transfer considering harmonics (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Active power transfer considering harmonics (cont.)}
+    Summarizing the previous considerations, the active power can be expressed as:
+    \begin{equation}
+        P = \frac{1}{T} \int_0^T p(t) \, \mathrm{d}t = \sum_{k=1}^\infty \frac{\hat{u}^{(k)} \hat{i}^{(k)}}{2} \cos(\varphi_i^{(k)} - \varphi_u^{(k)}).
+    \end{equation}
+   Inserting the B2U ideal input voltage assumption $u(t)=u_1(t)=\hat{u}_1\sin(\omega t)$, this boils down to:
+    \begin{equation}
+        P = \frac{\hat{u}_1 \hat{i}_1^{(1)}}{2} \cos(\varphi_i^{(1)} - \varphi_u^{(1)}) = U_1 I_1^{(1)} \cos(\varphi_i^{(1)} - \varphi_u^{(1)})
+    \end{equation}
+    with $U_1$ and $I_1^{(1)}$ being the RMS values of the fundamental voltage and current component and $\varphi_i^{(1)}$ the phase angle between the fundamental voltage and current component. The power factor results in
+    \begin{equation}
+        \lambda = \frac{P}{S} = \frac{U_1 I_1^{(1)}}{U_1 I_1}\cos(\varphi_i^{(1)} - \varphi_u^{(1)}) = \frac{I_1^{(1)}}{I_1}\cos(\varphi_i^{(1)} - \varphi_u^{(1)}).
+        \label{eq:power_factor_B2U}
+    \end{equation}
+    i.e., the harmonics increase the apparent power $S$ but do not contribute to the active power $P$. Consequently, the B2U's power factor is typically limited to $60\,\%$ or lower.    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Total harmonic distortion (THD) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Total harmonic distortion (THD)}
+    Another important measure for the quality of the input current is the \hl{total harmonic distortion (THD)}:  
+    \begin{equation}
+        \mathrm{THD}(i_1) = \frac{\sqrt{\sum_{k=2}^{\infty} \left(I_1^{(k)}\right)^2}}{I_1^{(1)}} = \frac{I_1^{(\mathrm{h})}}{I_1^{(1)}}.
+        \label{eq:THD}
+    \end{equation}
+    The THD quantifies the ratio of the RMS value of the harmonic components to the RMS value of the fundamental component. Rewriting the decomposition \eqref{eq:input_current_decomposition_B2U} in the RMS form
+    \begin{equation}
+        I_1^2 = \left(I_1^{(1)}\right)^2 + \left(I_1^{(\mathrm{h})}\right)^2,
+    \end{equation}
+    and inserting \eqref{eq:THD} in the power factor expression \eqref{eq:power_factor_B2U} leads to
+    \begin{equation}
+        \lambda = \frac{1}{\sqrt{1+\mathrm{THD}^2(i_1)}} \cos(\varphi_i^{(1)} - \varphi_u^{(1)}).
+    \end{equation}
+    Hence, the larger the THD, the more the power factor deviates from unity.
 \end{frame}
