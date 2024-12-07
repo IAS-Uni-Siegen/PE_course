@@ -1800,3 +1800,98 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
 \end{frame}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier impact on the neutral line in three-phase grid (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier impact on the neutral line in three-phase grid (cont.)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \tikzmath{
+                    real \a, \b, \i0, \gain, \ind, \iamp;
+                    \b = 0.3*pi; % Phase angle beta indicating the time length of diode conduction
+                    \a = rad(atan((1-cos(deg(\b)))/(\b - sin(deg(\b))))); % Phase angle alpha indicating the start time of conducting diodes
+                    \gain = sin(deg(\a)); % gain of average output voltage to input voltage amplitude
+                    \iamp = 10; % current amplitude for visualization purposes
+                }
+            \begin{axis}[
+                width=0.79\textwidth,
+                height=0.85\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                yticklabel style={inner sep=2pt,
+                fill = white},
+                xmin=0, xmax=2*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0, 3.14/2, 3.14, 3.14*3/2,6.28},
+                xticklabels={$0$, $\frac{\pi}{2}$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                ytick={-1,0,1},
+                yticklabels={,$0$,},
+                grid=both,
+                ]
+
+                % input voltages
+                \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick]{sin(deg(x))};
+                \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, dashed]{sin(deg(x-pi/3*2))};
+                \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, dotted]{sin(deg(x+pi/3*2))};
+
+                % input current i1a(t)
+                \addplot[domain=0:\a, samples=10, signalred, thick]{0};
+                \addplot[domain=\a:\a+\b, samples=100, signalred, thick]{\iamp*pi*(cos(deg(\a))-cos(deg(x))-\gain*(x-\a))};
+                \addplot[domain=\a+\b:pi+\a, samples=10, signalred, thick]{0};
+                \addplot[domain=\a+pi:\a+\b+pi, samples=100, signalred, thick]{\iamp*-pi*(cos(deg(\a))-cos(deg(x-pi))-\gain*(x-\a-pi))};
+                \addplot[domain=\a+\b+pi:2*pi, samples=10, signalred, thick]{0};
+
+                % input current i1b(t)
+                \addplot[domain=\a+2/3*pi:\a+\b+2/3*pi, samples=100, signalred, thick, dashed]{\iamp*pi*(cos(deg(\a))-cos(deg(x-2/3*pi))-\gain*(x-\a-2/3*pi))};
+                \addplot[domain={mod(\a+5/3*pi, 2*pi)}:{mod(\a+\b+5/3*pi, 2*pi)}, samples=100, signalred, thick, dashed]{-\iamp*pi*(cos(deg(\a))-cos(deg(x+\a-mod(\a+5/3*pi, 2*pi)))-\gain*(x-mod(\a+5/3*pi, 2*pi)))};
+
+                % input current i1c(t)
+                \addplot[domain=\a+pi/3:\a+\b+pi/3, samples=100, signalred, dotted, thick]{\iamp*-pi*(cos(deg(\a))-cos(deg(x-pi/3))-\gain*(x-\a-pi/3))};
+                \addplot[domain=\a+4/3*pi:\a+\b+4/3*pi, samples=100, signalred, dotted, thick]{\iamp*pi*(cos(deg(\a))-cos(deg(x-4/3*pi))-\gain*(x-\a-4/3*pi))};
+                \addplot[domain=\a-2/3*pi:\a+\b-2/3*pi, samples=100, signalred, dotted, thick]{\iamp*pi*(cos(deg(\a))-cos(deg(x+2/3*pi))-\gain*(x-\a+2/3*pi))};
+        
+                % dashed vertical lines for averages
+                \draw[dashed] (axis cs:0,\gain) -- (axis cs:2*pi,\gain);
+
+                % signal labels
+                \node[signalblue, above, fill=white, inner sep=2pt] at (axis cs:3.14/2,1.0) {$u_{1\mathrm{a}}(t)$};
+                \node[signalblue, above, fill=white, inner sep=2pt] at (axis cs:3.14/6*7,1.0) {$u_{1\mathrm{b}}(t)$};
+                \node[signalblue, above, fill=white, inner sep=2pt] at (axis cs:3.14/6*11,1.0) {$u_{1\mathrm{c}}(t)$};
+                \node[signalred, left] at (axis cs:pi/2+0.05,0.35) {$i_{1\mathrm{a}}(t)$};
+                \node[signalred, left] at (axis cs:pi/6*7+0.05,0.35) {$i_{1\mathrm{b}}(t)$};
+                \node[signalred, left] at (axis cs:pi/6*11+0.05,0.35) {$i_{1\mathrm{c}}(t)$};
+                \node[above, fill=white, inner sep=2pt] at (axis cs:pi*3/2,\gain) {$U_2$};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Relevant signals of the scenario from \eqref{fig:three_phase_grid_single_phase_rectifiers} assuming identical operation conditions for all single-phase rectifiers}
+        \label{fig:B2U_three_phase_time_domain}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier impact on the neutral line in three-phase grid (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier impact on the neutral line in three-phase grid (cont.)}
+    The neutral conductor current is the sum of the phase currents:
+    \begin{equation}
+        i_{\mathrm{N}}(t) = i_{1\mathrm{a}}(t) + i_{1\mathrm{b}}(t) + i_{1\mathrm{c}}(t).
+    \end{equation}
+    In the example from \figref{fig:B2U_three_phase_time_domain} the neutral conductor current corresponds to the enveloping curve over the phase currents shown in the figure:
+    \begin{itemize}
+        \item The B2U rectifier represents a nonlinear load such that the three-phase currents do not cancel each other out.
+        \item The neutral conductor current leads to power losses in the neutral conductor and can cause overheating.
+    \end{itemize}
+    \vspace{-0.5cm}
+    \begin{varblock}{Need for grid-friendly rectification}
+        The shown analysis of the B2U rectifier highlights its negative impact on the grid, especially if multiple B2U rectifiers are connected to the same grid. Therefore, grid-friendly rectification alternatives are essential to ensure the stable operation of the grid and the connected loads.
+    \end{varblock}
+\end{frame}
