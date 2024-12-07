@@ -6,6 +6,37 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 1: B2U topology with capactive filtering %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\task{B2U topology with capactive filtering}
+An uncontrolled single-phase, two-pulse rectifier circuit with capacitive filtering 
+is shown in \autoref{fig:B2U_Topology_Cap_Filtering}.
+All components, including the diodes, are assumed to be ideal. On the input side, 
+the single-phase AC supply with voltage $u$ is connected, while on the output side, 
+a smoothing capacitor $C$ and a constant current load $I_\mathrm{L}$ are present.
+
+\input{fig/ex05/Fig_B2U_TopologyWithCapactiveFiltering.tex}
+
+The angle $\alpha_\mathrm{1}$ represents the point in time at which two of the four diodes begin to conduct, 
+i.e., when the capacitor is recharged from the mains supply. From the angle $\alpha_\mathrm{2}$
+all four diodes are blocked, meaning the capacitor discharges through the load. 
+A steady-state operation is assumed for this task.
+
+\subtask{Calculate the two angles $\alpha_1$ and $\alpha_2$.
+Note: It is more convenient to calculate $\alpha_2$ first. For the calculation of $\alpha_1$  
+you can use the following simple approximation: $sin(x) = x$. 
+(This approximation is sufficiently accurate within a range of approximately $\SI{25}{\degree}$  around the zero point of the sine function.)}
+\vspace{2em}\par
+If you were unable to solve task (a), please use $\alpha_1=\SI{19.3}{\degree}$ and $\alpha_2=\SI{112.8}{\degree}$.
+
+\subtask{Sketch the waveform of the capacitor voltage $u_\mathrm{C}$ for the angles $\alpha_\mathrm{1}$ and $\alpha_\mathrm{2}$ calculated in previous subtask.}
+
+\subtask{Sketch the time-dependent waveform of the current $i_\mathrm{1}(t)$  and $i_\mathrm{2}(t)$.}
+
+\subtask{Assume the smoothing capacitor is very large, i.e., $C\rightarrow \infty$ .What is the average active power $P_\mathrm{L}$ 
+absorbed by the current source? What will $P_\mathrm{L}$ be if $C=\SI{330}{\milli\ampere}$?}
+
+
+\subtask{What is the minimum blocking voltage ratings of the diodes to ensure that the rectifiers is not damaged?}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -36,13 +67,42 @@ Definition: Transmission ratio: $M = \frac{ U_\mathrm{d}}{\hat U_\mathrm{1}}$
 
 \subtask{Specify the voltage transformation ratio $m(t)= \frac{U_\mathrm{d}}{u'(t)}$ as a function of the duty cycle $d(t)$ is specified.}
 \begin{solutionblock}
-    
+    \begin{equation}
+        U_{\mathrm{L}} = d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{d}}).
+    \end{equation}
+The average voltage over the inductance for a stable operation is zero $U_{\mathrm{L}} = \SI{0}{\volt}$. 
+    \begin{equation}
+    0 = d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{d}}). 
+    \end{equation}   
+The ratio $m(t)= \frac{U_\mathrm{d}}{u'(t)}$ can now be determined from \eqref{eq:ex05ratio2.1}: 
+  \begin{equation}
+    0 = d(t)u'(t)+u'(t)-d(t)u'(t)-u'(t)+d(t)U_{\mathrm{d}},
+  \end{equation}
+  \begin{equation}
+    0 = u'(t)-(1-d(t))U_{\mathrm{d}}.\label{eq:ex05ratio2.1}
+  \end{equation}
+  From equation \eqref{eq:ex05ratio2.1} it can now be concluded:
+  \begin{equation}
+    m(t) = \frac{U_{\mathrm{d}}}{u'(t)}=\frac{1}{1-d(t)}
+  \end{equation}
 \end{solutionblock}
 
-\subtask{Specify the conduction time of the transistor and the diode as a function of the transformation ratio $M$ and the time $t$.} %\label{subtask:TEST}
+\subtask{Specify the conduction time of the transistor and the diode as a function of the transformation ratio $M$ and the time $t$.} 
+\begin{solutionblock}
+    \begin{equation}
+        m = \frac{U_{\mathrm{d}}}{u'}=\frac{U_{\mathrm{d}}}{\hat U_{\mathrm{1}} \sin(\omega t)} = M \frac{1}{\sin(\omega t)}
+    \end{equation}
+\begin{equation}
+    d(t) = 1-\frac{1}{m(t)} = 1- \frac{U_{\mathrm{1}}\sin(\omega t)}{U_{\mathrm{d}}} = 1 -\frac{1}{M} \sin(\omega t)
+\end{equation}
+
+\begin{equation}
+    1-d(t) = \frac{1}{M} \sin(\omega t)
+\end{equation}
+\end{solutionblock}
 
 \subtask{Calculate the maximum amplitude of the switching frequency fluctuation of the mains current $i_\mathrm{1}$ for the specified operating point.
-Note: Consider the conductive state of $T_\mathrm{H}$ and set the voltage across the inductance as a function of the phase angle $(\omega t)$and the conduction time of the transistor according} %\subtaskref{subtask:TEST}.}
+Note: Consider the conductive state of $T_\mathrm{H}$ and set the voltage across the inductance as a function of the phase angle $(\omega t)$ and the conduction time of the transistor according 2.2.} 
 
 \subtask{Complete the current curve for one switching frequency $f_\mathrm{T2} = \SI{2}{\kilo\hertz}$ and one inductance $L = \SI{5}{\milli\henry}$ in......
 Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T_\mathrm{H}$ and are summarized for the first 4 switching times in the following table...............}
@@ -59,6 +119,6 @@ Note: Take the approach using the instantaneous input power $p_{\mathrm{d}(t)}$ 
 \subtask{Calculate the RMS value of the current through the capacitor $I_{\mathrm{C_{\mathrm{d}}}}$.
 Note: The mean value of the current through the capacitor is $\overline i_{\mathrm{C_{\mathrm{d}}}}=0$!}
 
-\subtask{The current carrying capacity of the capacitor is $\frac{\SI{10}{\ampere}}{\SI{1}{\milli\farad}}$. How large must its capacitance be selected? Is the permissible output voltage fluctuation from ..... or is it the current carrying capacity that determines the capacitance?}
+\subtask{The current carrying capacity of the capacitor is $\frac{\SI{10}{\ampere}}{\SI{1}{\milli\farad}}$. How large must its capacitance be selected? Is the permissible output voltage fluctuation from 2.7 or is it the current carrying capacity that determines the capacitance?}
 
 \subtask{What is the current load (effective and average value) of the mains diodes?}
