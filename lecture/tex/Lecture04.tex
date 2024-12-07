@@ -1120,7 +1120,7 @@
                 \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, dash dot]{abs(sin(deg(x)))}; %rectified input voltage
                 
                 % output current (with double height for better visibility)
-                \addplot[domain=0:\a, samples=10, signalred, dotted, thick]{0};
+                \addplot[domain=0:\a, samples=10, signalred, thick]{0};
                 \addplot[domain=\a:\a+\b, samples=100, signalred, thick]{pi*(cos(deg(\a))-cos(deg(x))-\gain*(x-\a))};
                 \addplot[domain=\a+\b:pi+\a, samples=10, signalred, thick]{0};
                 \addplot[domain=\a+pi:\a+\b+pi, samples=100, signalred, thick]{pi*(cos(deg(\a))-cos(deg(x-pi))-\gain*(x-\a-pi))};
@@ -1529,7 +1529,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
         \lambda = \frac{P}{S} = \frac{U_1 I_1^{(1)}}{U_1 I_1}\cos(\varphi_i^{(1)} - \varphi_u^{(1)}) = \frac{I_1^{(1)}}{I_1}\cos(\varphi_i^{(1)} - \varphi_u^{(1)}).
         \label{eq:power_factor_B2U}
     \end{equation}
-    i.e., the harmonics increase the apparent power $S$ but do not contribute to the active power $P$. Consequently, the B2U's power factor is typically limited to $60\,\%$ or lower.    
+    i.e., the harmonics increase the apparent power $S$ but do not contribute to the active power $P$. Consequently, the B2U's power factor is typically limited to $70\,\%$ or lower.    
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1552,3 +1552,251 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
     \end{equation}
     Hence, the larger the THD, the more the power factor deviates from unity.
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier: THD and power factor %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier: THD and power factor}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfplotsset{table/search path={fig/lec04}}
+            \begin{axis}[
+                     width=0.65\textwidth,
+                     height=0.85\textheight,
+                     axis lines=middle,
+                     xlabel={$\overline{i}'_2$},
+                     xmin=0, xmax=1,
+                     ymin=0, ymax=1.05,
+                     grid=both,
+                     xlabel style={anchor = west},
+                     ]
+                    \addplot[signalblue, thick] table[x=I_out, y=i_1_THD, col sep=comma] {Grid_impacts_B2U_rectifier.csv}; 
+                    \addplot[signalred, thick] table[x=I_out, y=lamba, col sep=comma] {Grid_impacts_B2U_rectifier.csv}; 
+                    \draw[dashed] (axis cs:0.535,0) -- (axis cs:0.535,1);
+                    \node[signalred, above, fill=white, inner sep=2pt] at (axis cs:0.3,0.75) {$\lambda$};
+                    \node[signalblue, above, fill=white, inner sep=2pt] at (axis cs:0.3,0.35) {$\mathrm{THD}$};
+                    \draw[thin] (axis cs:0.54,0.72) -- (axis cs:0.75,0.85);
+                    \node[left, fill=white, inner sep=2pt, anchor=west] at (axis cs:0.75,0.85) {BCM limit};
+            \end{axis}                
+          \end{tikzpicture}
+        \caption{THD and power factor of the B2U rectifier with capacitive output filtering and grid impedance}
+        \label{fig:B2U_THD_power_factor}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier impact on the grid voltage %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier impact on the grid voltage}
+    \begin{figure}
+           \begin{circuitikz}[scale = 0.8, transform shape]
+            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            (0,0) to [L, i>^=$i_1(t)$, -*, l=$L$] ++(3,0) coordinate (G)  node[label={above:$\mathrm{PCC}$}] {}
+            to [L, l=$L_\mathrm{A}$, i^>=$i_{1\mathrm{A}}(t)$] ++(3,0)
+            to [short] ++(0.5,0) coordinate (K)
+            to [short, -*] ++(0.5,0) coordinate (H)
+            to [diode, l=$D_1$] ++(0,1.5)
+            to [short, -*] ++(2,0) coordinate (C)
+            to [diode, l=$D_3$, invert]  ++(0,-1.5)
+            to [short] ++(0, -2) coordinate (B)
+            to [diode, l=$D_2$, invert, -*]  ++(0, -1.5) coordinate (D)
+            to [short] ++(-2,0)
+            to [diode, l=$D_4$]  ++(0, 1.5)
+            to [short] ++(0, 2)
+            (B) to [crossing, *-, mirror] ++(-4,0)
+            to [short] (A)
+            (C) to [short, i=$i_2(t)$] ++(2,0) coordinate (E)
+            to [short] ++(0,-1.5)
+            to [C, v= $u_2(t)$, voltage = straight, l=$C$, i=${i_\mathrm{C}(t)}$] ++(0,-2)
+            to [short] ++(0,-1.5) coordinate (F)
+            to [short] (D)
+            (E) to [short, *-] ++(2,0)
+            to [short] ++(0,-1.5)
+            to [isource, l=$I_0$] ++(0,-2)
+            to [short] ++(0,-1.5)
+            to [short, -*] (F)
+            (G) to [crossing] ++(0,-4)
+            to [short] ++(0,-1.0) coordinate (J)
+            to [L, l=$L_\mathrm{B}$, i^>=$i_{1\mathrm{B}}(t)$] ++(3,0)
+            to [short] ++(0.5,0) coordinate (I)
+            to ++ (0.5,0) node[fourport, anchor = port4, name=load]{Load B} 
+            (A) to [short] (load.port1 -| A)
+            to [short] (load.port1)
+            (I) to [open, v = $u_{1\mathrm{B}}(t)\hspace{0.5cm}$, voltage = straight] ++(0,-0.9)
+            (J) to [open, v = $u_{1\mathrm{PCC}}(t)\hspace{1cm}$, voltage = straight] ++(0,-0.9)
+            (K) to [open, v = $u_{1\mathrm{A}}(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2);
+        \end{circuitikz}%
+        \caption{B2U rectifier and a second load connected to the grid}
+        \label{fig:B2U_grid_with_second_load}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier impact on the grid voltage (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier impact on the grid voltage (cont.)}
+    In \figref{fig:B2U_grid_with_second_load} the B2U rectifier and a second load are connected to the grid $u_1(t)$ with
+    \begin{itemize}
+        \item $L$ being the grid inductance (at the point of common coupling -- PCC),
+        \item $L_\mathrm{A}$ being the inductance of the cable connecting the B2U rectifier to the PCC,
+        \item $L_\mathrm{B}$ being the inductance of the cable connecting the second load to the PCC.
+    \end{itemize}
+    Assuming $i_{1\mathrm{B}}(t)=0$ for the sake of simplicity, the inductive voltage divider rule yields
+    \begin{equation}
+        \frac{u_1(t)-u_{1\mathrm{PCC}}(t)}{u_1(t)-u_{1\mathrm{A}}(t)} = \frac{L}{L+L_\mathrm{A}} 
+    \end{equation}
+    and, therefore, the voltage at the second load's PCC $u_{1\mathrm{PCC}}(t)$ is
+    \begin{equation}
+        u_{1\mathrm{PCC}}(t) = u_1(t) - \frac{L}{L+L_\mathrm{A}}(u_1(t)-u_{1\mathrm{A}}(t)).
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier impact on the grid voltage (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier impact on the grid voltage (cont.)}
+    Assuming again a constant output voltage $u_2(t)=U_2$ (due to an infinite filter capacitance), the B2U's input voltage is
+    \begin{equation}
+        u_{1\mathrm{A}}(t) = \begin{cases} u_{1\mathrm{A}}(t), &i_{1\mathrm{A}}(t)=0\\ \mathrm{sign}(i_2(t))\cdot U_2, &i_{1\mathrm{A}}(t) \neq 0.
+        \end{cases}
+    \end{equation}
+    Hence, the voltage at the second load's PCC is
+    \begin{equation}
+        u_{1\mathrm{PCC}}(t) = \begin{cases} u_1(t), & i_{1\mathrm{A}}(t)=0\\  u_1(t)\left(1-\frac{L}{L+L_\mathrm{A}}\right) + \frac{L}{L+L_\mathrm{A}}\mathrm{sign}(i_2(t))\cdot U_2, & i_{1\mathrm{A}}(t) \neq 0. \end{cases}
+    \end{equation}
+    As on can see on the next slide, the B2U rectifier operation leads to a distorted grid voltage $u_{1\mathrm{PCC}}(t)$ which might impair the operation of the second load. Increasing the input inductance $L_\mathrm{A}$ by an explicit filter inductor can mitigate this issue, however, at the expense of volume, weight and cost as well as voltage drop associated with the input filter inductor.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier impact on the grid voltage (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B2U rectifier impact on the grid voltage (cont.)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \tikzmath{
+                    real \a, \b, \i0, \gain, \ind;
+                    \b = 0.6*pi; % Phase angle beta indicating the time length of diode conduction
+                    \a = rad(atan((1-cos(deg(\b)))/(\b - sin(deg(\b))))); % Phase angle alpha indicating the start time of conducting diodes
+                    \gain = sin(deg(\a)); % gain of average output voltage to input voltage amplitude
+                    \i0 = 0.5*((1-cos(deg(\b)))/\gain - \gain*\b^2/2); % normalized load current
+                    \ind = 0.6; % inductance ratio L/(L+L_A)
+                }
+            \begin{axis}[
+                width=0.79\textwidth,
+                height=0.85\textheight,
+                axis lines=middle,
+                xlabel={$\omega t$},
+                xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=west,
+                inner xsep=0pt,
+                xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+                ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+                anchor=north west,
+                inner ysep=0pt},
+                yticklabel style={inner sep=2pt,
+                fill = white},
+                xmin=0, xmax=2*pi,
+                ymin=-1.5, ymax=1.5,
+                xtick={0, \a, 3.14/2, pi-\a, \b+\a, 3.14, 3.14*3/2,6.28},
+                xticklabels={$0$, $\omega t_1$, $\frac{\pi}{2}$,$\omega t_2$, $\omega t_3$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                ytick={-1,0,1},
+                yticklabels={$-\hat{x}$,$0$,$\hat{x}$},
+                grid=both,
+                ]
+
+                % %input voltage
+                \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick]{sin(deg(x))};
+
+                % u_1N voltage
+                \draw[signalgreen, thick] (axis cs:\a,0) -- (axis cs:\a,\gain);
+                \addplot[domain=\a:\a+\b, samples=10, signalgreen, thick]{\gain};
+                \draw[signalgreen, thick] (axis cs:\a+\b,0) -- (axis cs:\a+\b,\gain);
+                \draw[signalgreen, thick] (axis cs:\a+pi,0) -- (axis cs:\a+pi,-\gain);
+                \addplot[domain=\a+pi:\a+\b+pi, samples=10, signalgreen, thick]{-\gain};
+                \draw[signalgreen, thick] (axis cs:\a+\b+pi,0) -- (axis cs:\a+\b+pi,-\gain);
+                
+                % input current (with double height for better visibility)
+                \addplot[domain=0:\a, samples=10, signalred, thick]{0};
+                \addplot[domain=\a:\a+\b, samples=100, signalred, thick]{pi*(cos(deg(\a))-cos(deg(x))-\gain*(x-\a))};
+                \addplot[domain=\a+\b:pi+\a, samples=10, signalred, thick]{0};
+                \addplot[domain=\a+pi:\a+\b+pi, samples=100, signalred, thick]{-pi*(cos(deg(\a))-cos(deg(x-pi))-\gain*(x-\a-pi))};
+                \addplot[domain=\a+\b+pi:2*pi, samples=10, signalred, thick]{0};
+        
+                % dashed vertical lines for averages
+                \draw[dashed] (axis cs:0,\gain) -- (axis cs:2*pi,\gain);
+
+
+                %dashed horizontal lines for alpha beta angles
+                \draw[dotted] (axis cs:\a,-1.5) -- (axis cs:\a,1.5);
+                \draw[dotted] (axis cs:\a+\b,-1.5) -- (axis cs:\a+\b,1.5);
+                \draw[dotted] (axis cs:pi-\a,-1.5) -- (axis cs:pi-\a,1.5);
+                \draw[->]  (0,-0.7) -- node[above]{$\alpha$}(\a, -0.7);
+                \draw[<->]  (\a,-0.9) -- node[above]{$\beta$}(\a+\b, -0.9);
+
+                % u_1K voltage
+                \addplot[domain=0:\a, samples=25, signalbrown, thick, dashed]{sin(deg(x))};
+                \addplot[domain=\a:\a+\b, samples=25, signalbrown, thick, dashed]{sin(deg(x))*(1- \ind)+\ind*\gain};
+                \draw[signalbrown, thick, dashed] (axis cs:\a+\b,{sin(deg(\a+\b))*(1- \ind)+\ind*\gain}) -- (axis cs:\a+\b,{sin(deg(\a+\b))});
+                \addplot[domain=\a+\b:\a+pi, samples=25, signalbrown, thick, dashed]{sin(deg(x))};
+                \addplot[domain=\a+pi:\a+\b+pi, samples=25, signalbrown, thick, dashed]{sin(deg(x))*(1- \ind)-\ind*\gain};
+                \draw[signalbrown, thick, dashed] (axis cs:\a+\b+pi,{sin(deg(\a+\b+pi))*(1- \ind)-\ind*\gain}) -- (axis cs:\a+\b+pi,{sin(deg(\a+\b+pi))});
+                \addplot[domain=\a+\b+pi:2*pi, samples=25, signalbrown, thick, dashed]{sin(deg(x))};
+
+                % signal labels
+                \node[signalblue, below, fill=white, inner sep=2pt] at (axis cs:3.14*3/2,-1.0) {$u_1(t)$};
+                \node[signalred, left] at (axis cs:pi/2+0.05,0.35) {$i_1(t)$};
+                \node[above, fill=white, inner sep=2pt] at (axis cs:pi*3/2,\gain) {$U_2$};
+                \draw[thin, signalbrown] (axis cs:\a+\b+0.1,0.5) -- (axis cs:{\a+\b+pi/6},0.6);
+                \node[signalbrown, left, fill=white, inner sep=2pt, anchor=west] at (axis cs:{\a+\b+pi/6},0.6) {$u_{1\mathrm{PCC}}(t)$};
+                \draw[thin, signalgreen] (axis cs:\a+pi-0.1,-0.3) -- (axis cs:pi+0.4,-0.65);
+                \node[signalgreen, left, fill=white, inner sep=2pt, anchor=west] at (axis cs:pi,-0.8) {$u_{1\mathrm{a}}(t)$};
+
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Relevant signals of the scenario from \eqref{fig:B2U_grid_with_second_load} with B2U in DCM}
+        \label{fig:B2U_grid_with_second_load_time_domain}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B2U rectifier impact on the neutral line in three-phase grid %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{B2U rectifier impact on the neutral line in three-phase grid}
+    \begin{figure}
+            \begin{circuitikz}
+                % Voltage sources and neutral connection
+                \draw (0,0) to[sinusoidal voltage source, v^<=$u_{1\mathrm{a}}$, i=$i_{1\mathrm{a}}(t)$, *-] ++(2, 2) coordinate (A);
+                \draw (0,0) to[sinusoidal voltage source, v^<=$u_{1\mathrm{b}}$, i=$i_{1\mathrm{b}}(t)$, *-] ++(-2, 2)
+                to [short] ++(0,2) coordinate (B);
+                \draw (0,0) to[sinusoidal voltage source, v^<=$u_{1\mathrm{c}}$, i=$i_{1\mathrm{c}}(t)$, *-] ++(0,-2) coordinate (C);
+                \draw (0,0) to [short, *-*, i^<=$i_{\mathrm{N}}(t)$] ++(2,0) node[ground, label={above:$\mathrm{N}$}] {}
+                to [short] ++(6,0) coordinate (D)
+                (A) to [short] (A -| D)
+                (C) to [short] (C -| D)
+                (B) to [short] (B -| D);
+            
+                % % Rectifier blocks
+                \node[draw, fill=shadecolor, minimum width=1.2cm, minimum height=0.8cm] (R1) at (3.5,1) {B2U};
+                \node[draw, fill=shadecolor, minimum width=1.2cm, minimum height=0.8cm] (R2) at (4.5,-1) {B2U};
+                \node[draw, fill=shadecolor, minimum width=1.2cm, minimum height=0.8cm] (R3) at (5.5,3) {B2U};
+                
+                % Connections to the rectifiers
+                \draw (R1.south) to [short, -*] (R1.south |- D)
+                (R1.north) to [short, -*] (R1.north |- A)
+                (R2.south) to [short, -*] (R2.south |- C)
+                (R2.north) to [short, -*] (R2.north |- D)
+                (R3.south) to [crossing] ++(0,-1.2) to [short, -*] (R3.south |- D) 
+                (R3.north) to [short, -*] (R3.north |- B);            
+            \end{circuitikz}
+        \caption{Three-phase grid with single-phase rectifiers connected to neutral}
+        \label{fig:three_phase_grid_single_phase_rectifiers}
+    \end{figure}
+\end{frame}
+
+
