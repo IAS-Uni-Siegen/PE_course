@@ -25,6 +25,7 @@
 .pdf
 exercise/main.pdf
 lecture/main.pdf
+lecture/tex/temp.tex
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl

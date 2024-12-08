@@ -1895,3 +1895,243 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
         The shown analysis of the B2U rectifier highlights its negative impact on the grid, especially if multiple B2U rectifiers are connected to the same grid. Therefore, grid-friendly rectification alternatives are essential to ensure the stable operation of the grid and the connected loads.
     \end{varblock}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Power factor correction (PFC) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Power factor correction (PFC)} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% General PFC circuit structure %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{General PFC circuit structure}
+    \begin{figure}
+           \begin{circuitikz}
+            % Input rectifier
+            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            (0,0) to [short, i>^=$i_1(t)$] ++(0.75,0) to [short, -*] ++(0.75,0)
+            to [diode, l=$D_1$]  ++(0,1.5)
+            to [short, -*] ++(1.5,0) coordinate (C)
+            to [diode, l=$D_3$, invert]  ++(0,-1.5)
+            to [short] ++(0, -2) coordinate (B)
+            to [diode, l=$D_2$, invert, -*]  ++(0, -1.5) coordinate (D)
+            to [short] ++(-1.5,0)
+            to [diode, l=$D_4$]  ++(0, 1.5)
+            to [short] ++(0, 2)
+            (B) to [short, *-]++(-0.5,0) to [crossing, mirror] ++(-2,0)
+            to [short] (A);
+
+            % DC/DC converter
+            \draw node[fourport, circuitikz/quadpoles/fourport/width=2.25, circuitikz/quadpoles/fourport/height=2.8, t=${\begin{aligned}
+                \frac{u_2}{u'} &= m(d(t))\\
+                \frac{i_2}{i'} &= m(d(t))^{-1}
+             \end{aligned}}$] (DCDC) at (7.75,-1) {DC/DC}; 
+            \draw (C) to [short] ++(1.5,0) coordinate (G)
+            to [short] (DCDC.port4 -| G) 
+            to [short,-*] ++(0.5,0) coordinate (voltin)
+            to [short, i=$i'(t)$] (DCDC.port4)
+            (D) to [short] ++(1.5,0) coordinate (H)
+            to [short] (DCDC.port1 -| H) -- ++(0.5,0)
+            to [currtap, name=ct1] (DCDC.port1)
+            (DCDC.port4 -| G) to [open,v = $u'(t)\hspace{0.5cm}$, voltage = straight] (DCDC.port1 -| G);
+
+            % Output filter and load
+            \draw (DCDC.port3) to [short, i=$i_2(t)$] ++(0.9,0) coordinate (I)
+            to [short] (C -| I)
+            to [short] ++(1,0) coordinate (E)
+            to [short] ++(0,-1.5)
+            to [C, v= $u_2(t)$, voltage = straight, l=$C$, i=${i_\mathrm{C}(t)}$] ++(0,-2)
+            to [short] ++(0,-1.5) coordinate (F)
+            to [short] (D -| I)
+            to [short] (DCDC.port2 -| I) -- (DCDC.port2)
+            (E) to [short, *-*] ++(1.25,0) coordinate (currout) -- ++(0.75,0)
+            to [short] ++(0,-1.5)
+            to [isource, l=$I_0$] ++(0,-2)
+            to [short] ++(0,-1.5)
+             to [short, -*] (F);
+
+            % Controller
+            \draw let \p1 = (DCDC.south) in node[draw, minimum width=1.2cm, minimum height=0.9cm] (ctrl) at (\x1,-4.1) {Controller};
+            \coordinate (ctrl1) at ($(ctrl.north west)!.5!(ctrl.west)$);
+            \coordinate (ctrl2) at ($(ctrl.south west)!.5!(ctrl.west)$);
+            \draw[->, dashed] (ctrl.north) -- (DCDC.south) node[midway, right] {$d(t)$};
+            \draw[->, dashed] (ct1.tap) -- (ctrl1 -| ct1.tap) -- (ctrl1) node[right, above, anchor = south east] {$i'(t)$};
+            \draw[->, dashed] (voltin) -- (ctrl2 -| voltin) -- (ctrl2) node[right, below, anchor = north east] {$u'(t)$};
+            \draw[->, dashed] (currout) -- (ctrl.east -| currout) -- (ctrl.east) node[left, above, anchor = south west] {$u_2(t)$};
+        \end{circuitikz}%
+        \caption{Rectifier with power factor correction (PFC) realized as a combination of a single-phase diode bridge and a cascaded DC/DC converter with voltage / current transfer ratio $m(t)$}%
+        \label{fig:PFC_general_circuit_structure}%
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Characteristic PFC signals in the time domain (quasi steady state) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Characteristic PFC rectifer signals in the time domain (quasi steady state)} 
+    \begin{figure}
+        \begin{tikzpicture}
+            \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.375\textheight, width=0.875\textwidth, xmin=0, xmax=4*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi, 2.5*pi, 3*pi, 3.5*pi, 4*pi}, xticklabels = {0, ,$\pi$, ,$2\pi$, ,$3\pi$, ,$4\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, }]
+
+                % Top plot: input voltage and current 
+                \nextgroupplot[ylabel = {$u_\mathrm{1}(t)/i_\mathrm{1}(t)$}]
+                \addplot[domain=0:4*pi, samples=100, signalblue, thick]{sin(deg(x))};
+                \addplot[domain=0:4*pi, samples=100, signalred, thick]{0.8*sin(deg(x))};
+                \legend{$u_\mathrm{1}(t)$, $i_\mathrm{1}(t)$}
+
+
+                % middle plot: rectified voltage and current (before DCDC) 
+                \nextgroupplot[ylabel = {$u'(t)/i'(t)$}] 
+                \addplot[domain=0:4*pi, samples=100, signalblue, thick]{abs(sin(deg(x)))};
+                \addplot[domain=0:4*pi, samples=100, signalred, thick]{abs(0.8*sin(deg(x)))};
+                \legend{$u'(t)$, $i'(t)$}
+    
+                
+                % Bottom plot: voltage transfer ratio
+                \nextgroupplot[ylabel = {$m(t)$}, ytick = {0, 0.25, 1}, yticklabels = {0, $M$, }, xlabel={$\omega t$}, clip = true, ymin = 0]
+                \addplot[domain=0:4*pi, samples=100, signalblue, thick]{0.25/max(abs(sin(deg(x))), 0.1)};
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Operation concept and assumptions for the PFC rectifier %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Operation concept and assumptions for the PFC rectifier} 
+    \hl{Main idea}: utilize a DC/DC converter to control the input current $i_1(t)$ such that it follows the input voltage $u_1(t)$ in a way that the input current is in phase with the input voltage:
+    \begin{equation}
+        i_1(t) = \hat{i}_1 \sin(\omega t) \sim  \hat{u}_1 \sin(\omega t) = u_1(t).
+        \label{eq:PFC_current_voltage_proportionality}
+    \end{equation}
+    \hl{Assumptions} for the following PFC rectifier analysis:
+    \begin{itemize}
+        \item The input voltage $u_1(t)$ is an ideal sinusoidal signal with amplitude $\hat{u}_1$ and frequency $\omega$.
+        \item The output voltage is considered constant: $u_2(t)\approx U_2$.
+        \item The grid impedance is neglected for the sake of simplicity.
+        \begin{itemize}
+            \item The grid impedance as in \figref{fig:B2U_topology_capacitive_filter_grid} would (mainly) introduce a phase shift between $|u_1(t)|$ and $u'(t)$ which can be compensated by the control setup. 
+        \end{itemize}
+    \end{itemize}
+    Based on these assumptions and the objective \eqref{eq:PFC_current_voltage_proportionality}, the voltages and currents in front of the DC/DC converter must be proportional to each other (to achieve unity power factor):
+    \begin{equation}
+        \frac{u_1(t)}{i_1(t)} = \frac{u'(t)}{i'(t)}.
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Voltage transfer ratio %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Voltage transfer ratio} 
+    Considering an ideal DC/DC converter with a \hl{voltage transfer ratio} $m(t)$, the converter must deliver a rectified-sinusoidal $u'(t)$ given some constant $U_2$:
+    \begin{equation}
+        u'(t) = \frac{U_2}{m(t)} \quad \Leftrightarrow \quad \hat{u}_1|\sin(\omega t)| = \frac{U_2}{m(t)}
+    \end{equation}
+    Hence, the voltage transfer ratio $m(t)$ is given by
+    \begin{equation}
+        m(t) = \frac{U_2}{u'(t)}=\frac{U_2}{\hat{u}_1|\sin(\omega t)|} 
+    \end{equation}
+    which varies between
+    \begin{equation}
+        \begin{alignedat}{2}
+            \max_{u'}\{m(t)\} &= \infty, \quad &&\argmax_{u'}\{m(t)\} = 0,\\
+            \min_{u'}\{m(t)\} &= \frac{U_2}{\hat{u}_1}=M, \quad &&\argmin_{u'}\{m(t)\} = \hat{u}_1.
+        \end{alignedat}
+    \end{equation}
+    One can conclude that the DC/DC converter must be able to deliver a voltage transfer ratio of 
+    $$
+     m(t)\in[M,\ldots,\infty].
+    $$
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Voltage transfer ratio (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Voltage transfer ratio (cont.)} 
+    The above voltage transfer ratio range restricts the possible topologies accordingly, e.g.:
+    \begin{itemize}
+        \item Standard boost converter: $m(t)=\nicefrac{1}{(1-d(t))}$,
+        \item Buck-boost converter or SEPIC: $m(t)=\nicefrac{d(t)}{(1-d(t))}$.
+    \end{itemize}
+    Due to its simplicity and low component count, the \hl{boost converter is the most common choice for PFC} applications leading to the reference duty cycle:
+    \begin{equation}
+        d(t) = \frac{U_2-\hat{u}_1|\sin(\omega t)|}{U_2} = 1 - \frac{1}{M}|\sin(\omega t)|.
+        \label{eq:PFC_duty_cycle_feed_forward}
+    \end{equation} 
+    \begin{varblock}{Remark on nomenclature and steady state}
+        In contrast to the previous DC/DC converter section, the duty cycle $d(t)$ is now a function of time and not a constant (small $d$ instead of capital $D$). However, the voltage transfer to duty cycle ratio was derived in steady state, i.e., \eqref{eq:PFC_duty_cycle_feed_forward} only holds approximately for $f_\mathrm{s}>> f=\nicefrac{\omega}{2\pi}$ (quasi steady state). 
+    \end{varblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PFC rectifier with boost converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PFC rectifier with boost converter}
+    \begin{figure}
+           \begin{circuitikz}
+            % Input rectifier
+            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            (0,0) to [short, i>^=$i_1(t)$] ++(0.75,0) to [short, -*] ++(0.75,0)
+            to [diode, l=$D_1$]  ++(0,1.5)
+            to [short, -*] ++(1.5,0) coordinate (C)
+            to [diode, l=$D_3$, invert]  ++(0,-1.5)
+            to [short] ++(0, -2) coordinate (B)
+            to [diode, l=$D_2$, invert, -*]  ++(0, -1.5) coordinate (D)
+            to [short] ++(-1.5,0)
+            to [diode, l=$D_4$]  ++(0, 1.5)
+            to [short] ++(0, 2)
+            (B) to [short, *-]++(-0.5,0) to [crossing, mirror] ++(-2,0)
+            to [short] (A);
+
+            % DC/DC converter
+            \draw node[fourport, circuitikz/quadpoles/fourport/width=2.25, circuitikz/quadpoles/fourport/height=2.8] (DCDC) at (7.75,-1) {DC/DC}; 
+            \draw (C) to [short] ++(1.5,0) coordinate (G)
+            to [short] (DCDC.port4 -| G) 
+            to [short,-*] ++(0.5,0) coordinate (voltin)
+            to [short, i=$i'(t)$] (DCDC.port4)
+            (D) to [short] ++(1.5,0) coordinate (H)
+            to [short] (DCDC.port1 -| H) -- ++(0.5,0)
+            to [currtap, name=ct1] (DCDC.port1)
+            (DCDC.port4 -| G) to [open,v = $u'(t)\hspace{0.5cm}$, voltage = straight] (DCDC.port1 -| G);
+
+            % Inner part
+            \draw (DCDC.port4) to [L, l=$L$] ++(1.75,0) coordinate (boostup)
+            to [diode, l=$D_5$] (DCDC.port3)
+            (boostup) to [Tnpn, n=npn, invert,*-*, l=$\hspace{0.5cm}T$] (DCDC.port2 -| boostup)
+            (DCDC.port2) -- (DCDC.port1); 
+
+
+            % Output filter and load
+            \draw (DCDC.port3) to [short, i=$i_2(t)$] ++(0.9,0) coordinate (I)
+            to [short] (C -| I)
+            to [short] ++(1,0) coordinate (E)
+            to [short] ++(0,-1.5)
+            to [C, v= $u_2(t)$, voltage = straight, l=$C$, i=${i_\mathrm{C}(t)}$] ++(0,-2)
+            to [short] ++(0,-1.5) coordinate (F)
+            to [short] (D -| I)
+            to [short] (DCDC.port2 -| I) -- (DCDC.port2)
+            (E) to [short, *-*] ++(1.25,0) coordinate (currout) -- ++(0.75,0)
+            to [short] ++(0,-1.5)
+            to [isource, l=$I_0$] ++(0,-2)
+            to [short] ++(0,-1.5)
+             to [short, -*] (F);
+
+            % Controller
+            \draw let \p1 = (DCDC.south) in node[draw, minimum width=1.2cm, minimum height=0.9cm] (ctrl) at (\x1,-4.1) {Controller};
+            \coordinate (ctrl1) at ($(ctrl.north west)!.5!(ctrl.west)$);
+            \coordinate (ctrl2) at ($(ctrl.south west)!.5!(ctrl.west)$);
+            \draw[dashed] (ctrl.north) -- (DCDC.south) node[midway, right] {$d(t)$} -- ++(0,0.5) coordinate (ctrl3)
+            to [short] (ctrl3 -| npn.B) -- (npn.B);
+            \draw[->, dashed] (ct1.tap) -- (ctrl1 -| ct1.tap) -- (ctrl1) node[right, above, anchor = south east] {$i'(t)$};
+            \draw[->, dashed] (voltin) -- (ctrl2 -| voltin) -- (ctrl2) node[right, below, anchor = north east] {$u'(t)$};
+            \draw[->, dashed] (currout) -- (ctrl.east -| currout) -- (ctrl.east) node[left, above, anchor = south west] {$u_2(t)$};
+        \end{circuitikz}%
+        \caption{PFC rectifier realized as a combination of a single-phase diode bridge and a cascaded DC/DC boost converter}%
+        \label{fig:PFC_with_boost_converter}%
+    \end{figure}
+\end{frame}
