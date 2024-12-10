@@ -104,9 +104,20 @@ The ratio $m(t)= \frac{U_\mathrm{d}}{u'(t)}$ can now be determined from \eqref{e
 \subtask{Calculate the maximum amplitude of the switching frequency fluctuation of the mains current $i_\mathrm{1}$ for the specified operating point.
 Note: Consider the conductive state of $T_\mathrm{H}$ and set the voltage across the inductance as a function of the phase angle $(\omega t)$ and the conduction time of the transistor according 2.2.} 
 \input{fig/ex05/Fig_courses_i'}
+\begin{solutionblock}
+    \begin{equation}
+        \frac{\mathrm{d}i'}{\mathrm{d}}  = \frac{1}{L} \hat U_\mathrm{1} \sin(\omega t)
+    \end{equation}
+   % \begin{equation}
+    %    i' = \frac{1}{L \omega} \hat U_\mathrm{1} \[ \int_{0}^{T_\mathrm{p1_off}} \sin (\omega t) \,dt \]
+   % \end{equation}
+    
+\end{solutionblock}
 
 \subtask{Complete the current curve for one switching frequency $f_\mathrm{T2} = \SI{2}{\kilo\hertz}$ and one inductance $L = \SI{5}{\milli\henry}$ in......
 Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T_\mathrm{H}$ and are summarized for the first 4 switching times in the following table...............}
+\input{fig/ex05/Fig_VoltageCourses_UL_No2}
+
 
 \subtask{Approximately sketch the envelope of the current ripple in Fig. 2.
 of the voltage across the inductor in Supplement 3, Fig. 3 and enter the local mean value of the voltage as an approximation. How would the switch-on/switch-off ratio of the transistor have to be changed before and after the

@@ -1,0 +1,52 @@
+\begin{figure}[htb]
+    \centering
+    % First TikZ picture
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={$t / \mathrm{ms}$},
+            ylabel={$u_\mathrm{1}(t) / u_\mathrm{1}(t)-400 / 400-u_\mathrm{1}(t) / \mathrm{V}$},
+            axis lines=left,
+            ymin=-400, ymax=400,
+            xmin=0, xmax=10,
+            xtick={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10},
+            ytick={-400, -300, -200, -100, 0, 100, 200, 300, 400},
+            thick,
+            smooth,
+            no markers,
+            height=7cm,
+            width=0.99\textwidth,
+            grid
+            ]
+            
+            \addplot[domain=0:10, samples=200, thick, signalblue] 
+            {-13.2 * (x - 5)^2 + 330};
+            \addplot[domain=0:10, samples=200, thick, signalblue] 
+            {-12.6 * (x - 5)^2 - 85};
+            \addplot[domain=0:10, samples=200, thick, signalblue] 
+            {12.8 * (x - 5)^2 + 80};
+                      
+            
+            
+
+
+
+            \draw[opacity=0.2] 
+            (axis cs:0, 400) -- (axis cs:0.48, 400) -- (axis cs:0.48, -400) -- (axis cs:0, -400) -- cycle;
+
+            \draw[opacity=0.2] 
+                (axis cs:0.5, 400) -- (axis cs:0.935, 400) -- (axis cs:0.935, -400) -- (axis cs:0.5, -400) -- cycle;
+    
+            
+            \draw[opacity=0.2] 
+                (axis cs:1.008, 400) -- (axis cs:1.388, 400) -- (axis cs:1.388, -400) -- (axis cs:1.008, -400) -- cycle;
+    
+            
+            \draw[opacity=0.2] 
+                (axis cs:1.52, 400) -- (axis cs:1.852, 400) -- (axis cs:1.852, -400) -- (axis cs:1.52, -400) -- cycle;
+
+        \end{axis}
+    \end{tikzpicture} 
+
+    \caption{Current curve $i'$ and $i'*$ and drive signal for the power transistor $T$}
+    \label{fig:drive signal for the power transistor TH}
+\end{figure}
