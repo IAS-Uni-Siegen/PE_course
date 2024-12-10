@@ -1075,7 +1075,7 @@
         \item<2-> $i_2(t)>0$: diode bridge conducts, $u_\mathrm{L}(t) = |u_1(t)|-U_2$,
         \item<3-> $i_2(t)=0$: diode bridge blocks, $u_\mathrm{L}(t) = \max\{0, |u_1(t)|-U_2\}$.
     \end{itemize}
-    \onslide<4->{Hence, the B2U rectifier behavior is driven by the grid impedance current and the dynamics introduced by $L$.}\onslide<5->{Similar to the previous analysis on DC-DC converters, the \hl{discontinuous conduction mode (DCM)} and the \hl{boundary conduction mode (BCM)} will be differentiated in the following.}
+    \onslide<4->{Hence, the B2U rectifier behavior is driven by the grid impedance current and the dynamics introduced by $L$.} \onslide<5->{Similar to the previous analysis on DC-DC converters, the \hl{discontinuous conduction mode (DCM)} and the \hl{boundary conduction mode (BCM)} will be differentiated in the following.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1169,8 +1169,8 @@
    \onslide<4->{At this point, the output current is rising due to the positive inductor voltage:}
    \begin{equation}
     \begin{split}
-        \onslide<4->{i_2(\omega t) &= \frac{1}{L} \int_{t_1}^t u_1(t)-U_2 \mathrm{d}t}\onslide<5->{= \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} u_1(\omega t)-U_2 \mathrm{d}\omega t} \onslide<6->{= \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} \hat{u}_1 \sin(\omega t)-U_2 \mathrm{d}\omega t }\\
-               & \onslide<7->{= \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha)-\cos(\omega t)-\frac{U_2}{\hat{u}_1}(\omega t - \alpha)\right), \quad \omega t_1 \leq \omega t < \omega t_2.} 
+        \onslide<4->{i_2(\omega t) &= \frac{1}{L} \int_{t_1}^t u_1(t)-U_2 \mathrm{d}\tau}\onslide<5->{= \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} u_1(\omega \tau)-U_2 \mathrm{d}\omega \tau} \onslide<6->{= \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} \hat{u}_1 \sin(\omega \tau)-U_2 \mathrm{d}\omega \tau }\\
+               & \onslide<7->{= \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha)-\cos(\omega t)-\frac{U_2}{\hat{u}_1}(\omega t - \alpha)\right), \quad \omega t_1 \leq \omega t < \omega t_3.} 
     \end{split}
     \label{eq:i2_B2U_cap_filt_grid_conduct_DCM}
    \end{equation}
@@ -1202,7 +1202,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
-    \onslide<1->{For a better representation in the following, the average current is normalized:}
+    \onslide<1->{For a better representation in the following, the average current is \hl{normalized}:}
     \begin{equation}
         \onslide<1->{\overline{i}'_2 = \frac{\overline{i}_2}{\frac{2}{\pi}\frac{\hat{u}_1}{\omega L}}} \onslide<2->{= \frac{1}{2} \left(\frac{\hat{u}_1}{U_2}(1-\cos(\beta))-\frac{U_2}{\hat{u}_1}\frac{\beta^2}{2}\right).}
         \label{eq:i2_avg_norm_B2U_cap_filt_grid_DCM}
@@ -1212,7 +1212,7 @@
     \onslide<3->{Based on the correlations found, the operating characteristics in DCM of the rectifier can be visualized, which has been implemented in \figref{fig:B2U_load_curve} (left part):}
     \begin{itemize}
         \item<3-> In DCM, $\beta \in [0, \pi[$ holds, i.e., the diode bridge is conducting for $0\ldots100 \,\%$ per half cycle.
-        \item<4-> At $\beta = \pi$ the diode bridge is conducting for the full half cycle.
+        \item<4-> At $\beta = \pi$ the diode bridge is conducting for the full half cycle (i.e., entering BCM).
         \item<5-> In order to achieve a commutation of the current between the diode pairs D1/D4 and D2/D3, the current gets zero (for a short time) so that the rectifier operates in BCM. 
     \end{itemize}
 \end{frame}
@@ -1374,19 +1374,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
-    Assuming DCM, the \hl{input current} of the B2U rectifier is
+    \onslide<1->{Assuming DCM, the \hl{input current} of the B2U rectifier is
     \begin{equation}
         i_1(t) = \begin{cases}
-            i_2(t), & 0 \leq \omega t < pi,\\
-            -i_2(t), & \pi \leq \omega t < 2\pi.
+            i_2(t), & \alpha \leq \omega t < \alpha+\beta,\\
+            -i_2(t), & \pi+\alpha \leq \omega t < \pi+\alpha+\beta.
         \end{cases}
-    \end{equation}
-    The minus sign during the second half-cycle results from the conducting diodes D3/D4 reversing the current direction in the inductor -- cf. \figref{fig:B2U_topology_capacitive_filter_grid}. The input current can be decomposed into a \hl{fundamental and harmonic components}:
+    \end{equation}}
+    \onslide<2->{The minus sign during the second half-cycle results from the conducting diodes D3/D4 reversing the current direction in the inductor -- cf. \figref{fig:B2U_topology_capacitive_filter_grid}.}\onslide<3->{ The input current can be decomposed into its \hl{fundamental and harmonic components}:
     \begin{equation}
         i_1(t) = \underbrace{a_1 \cos(\omega t) + b_1 \sin(\omega t)\vphantom{\sum_{k=2}^{\infty}}}_{=i_1^{(1)}(t)} + \underbrace{\sum_{k=2}^{\infty} \left( a^{(k)} \cos(k\omega t) + b^{(k)} \sin(k\omega t) \right)}_{i_1^{(\mathrm{h})}(t)}, \quad k\in \mathbb{N}.
         \label{eq:input_current_decomposition_B2U}
-    \end{equation}
-    As will be discussed in the following, the harmonic components $i_1^{(\mathrm{h})}(t)$ are considered distortions negatively impacting the grid quality.
+    \end{equation}}
+    \onslide<4->{As will be discussed in the following, the harmonic components $i_1^{(\mathrm{h})}(t)$ are considered distortions negatively impacting the grid quality.}
 \end{frame}
 
 
@@ -1433,20 +1433,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Recap: active, reactive, and apparent power in sinusoidal steady-state}
-    The complex power is defined as
+    The \hl{complex power} is defined as
     \begin{equation}
         \underline{S} = \underline{U} \cdot \underline{I}^* = P + \mathrm{j}Q = S e^{ \mathrm{j} \varphi},
         \label{eq:complex_power}
     \end{equation}
-    with the active power $P$, the reactive power $Q$, and the apparent power $S$ as well as $\underline{U}$ and $\underline{I}$ being the complex voltage and current phasors. From \eqref{eq:complex_power} directly follows:
+    with the active power $P$, the reactive power $Q$, and the apparent power $S$ as well as $\underline{U}$ and $\underline{I}$ being the complex voltage and current phasors.\pause From \eqref{eq:complex_power} directly follows:
     \begin{equation}
         S = |\underline{S}| = \sqrt{P^2 + Q^2}.
-    \end{equation}
+    \end{equation}\pause
     The \hl{power factor} $\lambda$ is defined as
     \begin{equation}
         \lambda =\cos(\varphi) = \frac{P}{S}.
-    \end{equation}
-    Typically, one tries to operate power converters with a unity power factor $|\cos(\varphi)|\approx 1$ to avoid reactive power transfer (i.e., additional reactive currents leading to more losses in the grid).
+    \end{equation}\pause
+    Typically, one tries to operate power converters with a \hl{unity power factor $\lambda \approx 1$} to avoid reactive power transfer (i.e., additional reactive currents leading to more losses in the grid).
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1457,13 +1457,13 @@
     The active power can be alternatively expressed as the average of the instantaneous power:
     \begin{equation}
         P = \frac{1}{T} \int_{0}^{T} p(t) \mathrm{d}t = \frac{1}{2\pi} \int_{0}^{2\pi} u(\omega t) i(\omega t) \mathrm{d}\omega t.
-    \end{equation}
+    \end{equation}\pause
     To generalize the analysis for arbitrary voltage and current harmonics, we consider both  Fourier decompositions
     \begin{equation}
             u(\omega t) = \overline{u} + \sum_{k=1}^{\infty} \hat{u}^{(k)}\cos(k\omega t -\varphi_u^{(k)}),\quad 
             i(\omega t) = \overline{i} + \sum_{k=1}^{\infty} \hat{i}^{(k)}\cos(k\omega t -\varphi_i^{(k)})
     \end{equation}
-    with $\overline{u}$ and $\overline{i}$ being the DC components, $\hat{u}^{(k)}$ and $\hat{i}^{(k)}$ the amplitudes of the $k$-th harmonic and $\varphi_u^{(k)}$ and $\varphi_i^{(k)}$ the phase angles of the voltage and current harmonics. This amplitude-phase representation is analogous to \eqref{eq:Fourier_series} with the relations:
+    with $\overline{u}$ and $\overline{i}$ being the DC components, $\hat{u}^{(k)}$ and $\hat{i}^{(k)}$ the amplitudes of the $k$-th harmonic and $\varphi_u^{(k)}$ and $\varphi_i^{(k)}$ the phase angles of the voltage and current harmonics.\pause This amplitude-phase representation is analogous to \eqref{eq:Fourier_series} with the relations:
     \begin{equation}
             \hat{x}^{(k)} = \sqrt{(a^{(k)})^2 + (b^{(k)})^2}, \quad \varphi_x^{(k)} = -\arccos\left(\frac{a^{(k)}}{\hat{x}^{(k)}}\right) \cdot \mathrm{sign}\left(b^{(k)}\right).
     \end{equation}
@@ -1479,7 +1479,7 @@ Substituting the Fourier series of \(u_1(\omega t)\) and \(i_1(\omega t)\) into 
     p(t) &= u(\omega t) i(\omega t) \\
     &= \left( \overline{u} + \sum_{k=1}^\infty \hat{u}^{(k)} \cos(k\omega t - \varphi_u^{(k)}) \right)
     \left( \overline{i} + \sum_{m=1}^\infty \hat{i}^{(m)} \cos(m\omega t - \varphi_i^{(m)}) \right).
-\end{align*}
+\end{align*}\pause
 
 Expanding this product yields:
 \begin{align*}
@@ -1498,17 +1498,17 @@ Expanding this product yields:
 \begin{frame}
 \frametitle{Active power transfer considering harmonics (cont.)}
 
-Using the trigonometric identities the last term becomes:
+\onslide<1->{Using the trigonometric identities the last term becomes:}
 \begin{align*}
-    &\sum_{k=1}^\infty \sum_{m=1}^\infty \hat{u}^{(k)} \hat{i}^{(m)} \cos(k\omega t - \varphi_u^{(k)}) \cos(m\omega t - \varphi_i^{(m)}) \\
-    = &\sum_{k=1}^\infty \sum_{m=1}^\infty \hat{u}^{(k)} \hat{i}^{(m)} \frac{1}{2} \left[ \cos((k-m)\omega t + \varphi_i^{(k)} - \varphi_u^{(m)}) + \cos((k+m)\omega t - \varphi_u^{(k)} - \varphi_i^{(m)}) \right].
+    \onslide<1->{&\sum_{k=1}^\infty \sum_{m=1}^\infty \hat{u}^{(k)} \hat{i}^{(m)} \cos(k\omega t - \varphi_u^{(k)}) \cos(m\omega t - \varphi_i^{(m)})} \\
+    \onslide<2->{= &\sum_{k=1}^\infty \sum_{m=1}^\infty \hat{u}^{(k)} \hat{i}^{(m)} \frac{1}{2} \left[ \cos((k-m)\omega t + \varphi_i^{(k)} - \varphi_u^{(m)}) + \cos((k+m)\omega t - \varphi_u^{(k)} - \varphi_i^{(m)}) \right].}
 \end{align*}
-Hence, we receive integral terms of the form
+\onslide<3->{Hence, we receive integral terms of the form
 $$
-\int_0^{2\pi} \cos(n\omega t + \varphi) \mathrm{d}t = \begin{cases} 2\pi, & n = 0, \\ 0 & n \neq 0 \end{cases}
+\int_0^{2\pi} \cos(n\omega t + \varphi) \mathrm{d}\omega t = \begin{cases} 2\pi \cos(\varphi), & n = 0, \\ 0 & n \neq 0 \end{cases}
 $$
-with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the periodicity and symmetry of the cosine function, the integral over a full period is zero for $n\neq 0$.\\[1em]
-\textbf{Conclusion:} Cross-frequency terms (\(k \neq m\)) cancel due to their oscillatory nature, leaving only contributions from voltage and current harmonics of the same order (\(k = m\)).
+with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{Due to the periodicity and symmetry of the cosine function, the integral over a full period is zero for $n\neq 0$.}\\[1em]
+\onslide<5->{\hl{Conclusion:} Cross-frequency terms (\(k \neq m\)) cancel due to their oscillatory nature, leaving only contributions from voltage and current harmonics of the same order (\(k = m\)).}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1516,20 +1516,20 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Active power transfer considering harmonics (cont.)}
-    Summarizing the previous considerations, the active power can be expressed as:
+    \onslide<1->{Summarizing the previous considerations, the active power can be expressed as:
     \begin{equation}
         P = \frac{1}{T} \int_0^T p(t) \, \mathrm{d}t = \sum_{k=1}^\infty \frac{\hat{u}^{(k)} \hat{i}^{(k)}}{2} \cos(\varphi_i^{(k)} - \varphi_u^{(k)}).
-    \end{equation}
-   Inserting the B2U ideal input voltage assumption $u(t)=u_1(t)=\hat{u}_1\sin(\omega t)$, this boils down to:
+    \end{equation}}%
+    \onslide<2->{Inserting the B2U ideal input voltage assumption $u(t)=u_1(t)=\hat{u}_1\sin(\omega t)$, this boils down to:}
     \begin{equation}
-        P = \frac{\hat{u}_1 \hat{i}_1^{(1)}}{2} \cos(\varphi_i^{(1)} - \varphi_u^{(1)}) = U_1 I_1^{(1)} \cos(\varphi_i^{(1)} - \varphi_u^{(1)})
+        \onslide<2->{P = \frac{\hat{u}_1 \hat{i}_1^{(1)}}{2} \cos(\varphi_i^{(1)} - \varphi_u^{(1)})}\onslide<3->{ = U_1 I_1^{(1)} \cos(\varphi_i^{(1)} - \varphi_u^{(1)})}
     \end{equation}
-    with $U_1$ and $I_1^{(1)}$ being the RMS values of the fundamental voltage and current component and $\varphi_i^{(1)}$ the phase angle between the fundamental voltage and current component. The power factor results in
+    \onslide<3->{with $U_1$ and $I_1^{(1)}$ being the RMS values of the fundamental voltage and current component and $\varphi_i^{(1)}$ the phase angle between the fundamental voltage and current component.}\onslide<4->{ The power factor results in}
     \begin{equation}
-        \lambda = \frac{P}{S} = \frac{U_1 I_1^{(1)}}{U_1 I_1}\cos(\varphi_i^{(1)} - \varphi_u^{(1)}) = \frac{I_1^{(1)}}{I_1}\cos(\varphi_i^{(1)} - \varphi_u^{(1)}).
+        \onslide<4->{\lambda = \frac{P}{S}}\onslide<5->{ = \frac{U_1 I_1^{(1)}}{U_1 I_1}\cos(\varphi_i^{(1)} - \varphi_u^{(1)})}\onslide<6->{ = \frac{I_1^{(1)}}{I_1}\cos(\varphi_i^{(1)} - \varphi_u^{(1)}).}
         \label{eq:power_factor_B2U}
     \end{equation}
-    i.e., the harmonics increase the apparent power $S$ but do not contribute to the active power $P$. Consequently, the B2U's power factor is typically limited to $70\,\%$ or lower.    
+    \onslide<6->{i.e., the harmonics increase the apparent power $S$ but do not contribute to the active power $P$. Consequently, the B2U's power factor is typically limited to $70\,\%$ or lower.}    
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1542,10 +1542,10 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
         \mathrm{THD}(i_1) = \frac{\sqrt{\sum_{k=2}^{\infty} \left(I_1^{(k)}\right)^2}}{I_1^{(1)}} = \frac{I_1^{(\mathrm{h})}}{I_1^{(1)}}.
         \label{eq:THD}
     \end{equation}
-    The THD quantifies the ratio of the RMS value of the harmonic components to the RMS value of the fundamental component. Rewriting the decomposition \eqref{eq:input_current_decomposition_B2U} in the RMS form
+    The THD quantifies the ratio of the RMS value of the harmonic components to the RMS value of the fundamental component.\pause Rewriting the decomposition \eqref{eq:input_current_decomposition_B2U} in the RMS form
     \begin{equation}
         I_1^2 = \left(I_1^{(1)}\right)^2 + \left(I_1^{(\mathrm{h})}\right)^2,
-    \end{equation}
+    \end{equation}\pause
     and inserting \eqref{eq:THD} in the power factor expression \eqref{eq:power_factor_B2U} leads to
     \begin{equation}
         \lambda = \frac{1}{\sqrt{1+\mathrm{THD}^2(i_1)}} \cos(\varphi_i^{(1)} - \varphi_u^{(1)}).
@@ -1640,14 +1640,14 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
     \frametitle{B2U rectifier impact on the grid voltage (cont.)}
     In \figref{fig:B2U_grid_with_second_load} the B2U rectifier and a second load are connected to the grid $u_1(t)$ with
     \begin{itemize}
-        \item $L$ being the grid inductance (at the point of common coupling -- PCC),
-        \item $L_\mathrm{A}$ being the inductance of the cable connecting the B2U rectifier to the PCC,
-        \item $L_\mathrm{B}$ being the inductance of the cable connecting the second load to the PCC.
+        \item $L$ being the grid inductance (at the point of common coupling -- PCC),\pause
+        \item $L_\mathrm{A}$ being the inductance of the cable connecting the B2U rectifier to the PCC,\pause
+        \item $L_\mathrm{B}$ being the inductance of the cable connecting the second load to the PCC.\pause
     \end{itemize}
     Assuming $i_{1\mathrm{B}}(t)=0$ for the sake of simplicity, the inductive voltage divider rule yields
     \begin{equation}
         \frac{u_1(t)-u_{1\mathrm{PCC}}(t)}{u_1(t)-u_{1\mathrm{A}}(t)} = \frac{L}{L+L_\mathrm{A}} 
-    \end{equation}
+    \end{equation}\pause
     and, therefore, the voltage at the second load's PCC $u_{1\mathrm{PCC}}(t)$ is
     \begin{equation}
         u_{1\mathrm{PCC}}(t) = u_1(t) - \frac{L}{L+L_\mathrm{A}}(u_1(t)-u_{1\mathrm{A}}(t)).
@@ -1663,12 +1663,12 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
     \begin{equation}
         u_{1\mathrm{A}}(t) = \begin{cases} u_{1\mathrm{A}}(t), &i_{1\mathrm{A}}(t)=0\\ \mathrm{sign}(i_2(t))\cdot U_2, &i_{1\mathrm{A}}(t) \neq 0.
         \end{cases}
-    \end{equation}
+    \end{equation}\pause
     Hence, the voltage at the second load's PCC is
     \begin{equation}
         u_{1\mathrm{PCC}}(t) = \begin{cases} u_1(t), & i_{1\mathrm{A}}(t)=0\\  u_1(t)\left(1-\frac{L}{L+L_\mathrm{A}}\right) + \frac{L}{L+L_\mathrm{A}}\mathrm{sign}(i_2(t))\cdot U_2, & i_{1\mathrm{A}}(t) \neq 0. \end{cases}
-    \end{equation}
-    As on can see on the next slide, the B2U rectifier operation leads to a distorted grid voltage $u_{1\mathrm{PCC}}(t)$ which might impair the operation of the second load. Increasing the input inductance $L_\mathrm{A}$ by an explicit filter inductor can mitigate this issue, however, at the expense of volume, weight and cost as well as voltage drop associated with the input filter inductor.
+    \end{equation}\pause
+    As on can see on the next slide, the B2U rectifier operation leads to a \hl{distorted grid voltage} $u_{1\mathrm{PCC}}(t)$ which might impair the operation of the second load. Increasing the input inductance $L_\mathrm{A}$ by an \hl{explicit filter inductor} can mitigate this issue, however, at the expense of volume, weight and cost as well as voltage drop associated with the input filter inductor.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1884,11 +1884,11 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
     The neutral conductor current is the sum of the phase currents:
     \begin{equation}
         i_{\mathrm{N}}(t) = i_{1\mathrm{a}}(t) + i_{1\mathrm{b}}(t) + i_{1\mathrm{c}}(t).
-    \end{equation}
+    \end{equation}\pause
     In the example from \figref{fig:B2U_three_phase_time_domain} the neutral conductor current corresponds to the enveloping curve over the phase currents shown in the figure:
     \begin{itemize}
-        \item The B2U rectifier represents a nonlinear load such that the three-phase currents do not cancel each other out.
-        \item The neutral conductor current leads to power losses in the neutral conductor and can cause overheating.
+        \item The B2U rectifier represents a nonlinear load such that the three-phase currents do not cancel each other out.\pause
+        \item The neutral conductor current leads to power losses in the neutral conductor and can cause overheating.\pause
     \end{itemize}
     \vspace{-0.5cm}
     \begin{varblock}{Need for grid-friendly rectification}
@@ -1966,10 +1966,10 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Characteristic PFC signals in the time domain (quasi steady state) %%
+%% Idealized PFC signals in the time domain (quasi steady state) %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Characteristic PFC rectifer signals in the time domain (quasi steady state)} 
+    \frametitle{Idealized PFC rectifier signals in the time domain (quasi steady state)} 
     \begin{figure}
         \begin{tikzpicture}
             \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.375\textheight, width=0.875\textwidth, xmin=0, xmax=4*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi, 2.5*pi, 3*pi, 3.5*pi, 4*pi}, xticklabels = {0, ,$\pi$, ,$2\pi$, ,$3\pi$, ,$4\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, }]
@@ -2057,7 +2057,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
         \item Standard boost converter: $m(t)=\nicefrac{1}{(1-d(t))}$,
         \item Buck-boost converter or SEPIC: $m(t)=\nicefrac{d(t)}{(1-d(t))}$.
     \end{itemize}
-    Due to its simplicity and low component count, the \hl{boost converter is the most common choice for PFC} applications leading to the reference duty cycle:
+    Due to its simplicity and low component count, the \hl{boost converter is the most common choice for PFC} applications leading to the reference duty cycle (assuming CCM operation):
     \begin{equation}
         d(t) = \frac{U_2-\hat{u}_1|\sin(\omega t)|}{U_2} = 1 - \frac{1}{M}|\sin(\omega t)|.
         \label{eq:PFC_duty_cycle_feed_forward}
@@ -2125,7 +2125,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
             \draw let \p1 = (DCDC.south) in node[draw, minimum width=1.2cm, minimum height=0.9cm] (ctrl) at (\x1,-4.1) {Controller};
             \coordinate (ctrl1) at ($(ctrl.north west)!.5!(ctrl.west)$);
             \coordinate (ctrl2) at ($(ctrl.south west)!.5!(ctrl.west)$);
-            \draw[dashed] (ctrl.north) -- (DCDC.south) node[midway, right] {$d(t)$} -- ++(0,0.5) coordinate (ctrl3)
+            \draw[dashed, ->] (ctrl.north) -- (DCDC.south) -- ++(0,0.5) coordinate (ctrl3)
             to [short] (ctrl3 -| npn.B) -- (npn.B);
             \draw[->, dashed] (ct1.tap) -- (ctrl1 -| ct1.tap) -- (ctrl1) node[right, above, anchor = south east] {$i'(t)$};
             \draw[->, dashed] (voltin) -- (ctrl2 -| voltin) -- (ctrl2) node[right, below, anchor = north east] {$u'(t)$};
@@ -2134,4 +2134,290 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively. Due to the peri
         \caption{PFC rectifier realized as a combination of a single-phase diode bridge and a cascaded DC/DC boost converter}%
         \label{fig:PFC_with_boost_converter}%
     \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PFC rectifier with boost converter (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PFC rectifier with boost converter (cont.)}
+    The duty cycle from \eqref{eq:PFC_duty_cycle_feed_forward} does not consider the inner voltage demand of the boost converter, in particular of its filter inductor $L$: 
+    \begin{equation}
+    \begin{split}
+        u_\mathrm{L}(t) &= L \frac{\mathrm{d}}{\mathrm{d}t}i'(t) = L \frac{\mathrm{d}}{\mathrm{d}t} \left(\hat{i}_1 |\sin(\omega t)|\right)\\
+                        & = \hat{i}_1\omega L\cos(\omega t) \mathrm{sgn}(\sin(\omega t)).
+    \end{split}
+    \end{equation}
+    Within one switching period of the boost converter the voltage balance must hold:
+    \begin{equation}
+        \begin{split}
+            u'(t) &= u_\mathrm{L}(t)+ U_2(1-d(t))\\
+            \Leftrightarrow \quad \hat{u}_1 |\sin(\omega t)| &= \hat{i}_1\omega L \cos(\omega t) \mathrm{sgn}(\sin(\omega t)) + M\hat{u}_1 (1-d(t)).
+        \end{split}
+        \end{equation}
+    Rearranging towards the duty cycle $d(t)$ yields
+    \begin{equation}
+        d(t) = 1 - \frac{1}{M}|\sin(\omega t)| + \frac{\hat{i}_1\omega L}{M\hat{u}_1} \cos(\omega t) \mathrm{sgn}(\sin(\omega t)).
+        \label{eq:PFC_duty_cycle_feed_forward_with_inductor}
+    \end{equation}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PFC rectifier with boost converter (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PFC rectifier with boost converter (cont.)}
+    Evaluating \eqref{eq:PFC_duty_cycle_feed_forward_with_inductor} for $\omega t = \varepsilon$ with $\varepsilon\in\mathbb{R}>0$ being an infinitesimally small value, one obtains 
+    $$
+    d(\varepsilon/\omega) = 1 -\sin(\varepsilon) + \frac{\hat{i}_1\omega L}{M\hat{u}_1} \cos(\varepsilon)\mathrm{sgn}(\sin(\varepsilon)) \approx 1 +  \frac{\hat{i}_1\omega L}{M\hat{u}_1} > 1. 
+    $$
+    Hence, the additional voltage demand of the boost converter inductor $L$ leads to a \hl{duty cycle exceeding unity}, that is, exceeding the feasible range and, therefore, the boost converter is not able to deliver the required voltage transfer ratio $m(t)$:
+    \begin{itemize}
+        \item The boost converter is not able to exactly track the input current reference $i_1(t)=\hat{i}_1\sin(\omega t)$ (especially at the beginning and end of a half period).
+        \item The lower $L$ the less the negative impact of the inductor voltage demand.
+        \item Consequently, one wants to keep the inductance $L$ as low as possible which on the other hand requires a \hl{high switching frequency} $f_\mathrm{s}$ to keep the current ripple within acceptable bounds.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Pulse width modulation (PWM) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Pulse width modulation (PWM)}
+    As seen on the previous slides, the duty cycle $d(t)$ is a function of time. To generate a switching signal $s(t)$ for the boost converter, a \hl{pulse width modulation (PWM)} scheme is used:
+    \begin{equation}
+        s(t) = \begin{cases}
+            1 \quad (\mbox{transistor $T$ on}), & \text{if } d(t) > c(t),\\
+            0 \quad (\mbox{transistor $T$ off}), & \text{otherwise}
+        \end{cases}
+    \end{equation}
+    with a (high frequency) \hl{carrier signal} $c(t)$, e.g., a triangular or sawtooth signal. 
+    \begin{figure}
+        \begin{circuitikz}
+            \def\cwidth{1.5}
+            \def\cheight{1}
+            \draw[->] (0,0) to node[above]{$d(t)$} ++(2,0) node[adder, anchor = west, name=add1]{};
+            \draw node[ctrlblock, anchor = west, minimum width = \cwidth cm, minimum height = \cheight cm](carrier) at (0,-2) {}; 
+            \path (carrier.south west) coordinate (blockBottomLeft);
+            
+            % Triangular signal pattern within block
+            \begin{scope}
+                % Define the number of signal steps
+                \def\signalsteps{6}
+                
+                % Compute step width and height of the triangular pattern
+                \pgfmathsetmacro{\stepwidth}{\cwidth/\signalsteps}
+                \pgfmathsetmacro{\signalheight}{\cheight/(1.3)}
+
+                % Start drawing the triangular signal
+                \draw[signalblue, thick] 
+            ($(blockBottomLeft) + (0.025, 0.1*\cheight)$) % Starting point with a margin
+            \foreach \x in {1,...,\signalsteps} {
+                -- ($
+                    (blockBottomLeft) + 
+                    (\x*\stepwidth - 0*\stepwidth, {0.1*\cheight + mod(\x, 2)*\signalheight})
+                   $)
+            };
+            \end{scope}
+            \draw[->] (carrier.east) -- (carrier.east -| add1.south) -- node[left]{$c(t)$} (add1.south) node[anchor = north west] {$-$};
+            \draw[->] (add1.east) -- ++(1,0) node[ctrlblock, anchor = west, minimum width = \cwidth cm, minimum height = \cheight cm](comp){};
+            
+            % Comperator block 
+            \begin{axis}[at={(comp)}, scale only axis, width = 0.8*\cwidth cm, height = 0.8*\cheight cm, anchor = center, xtick=\empty, ytick={0,1}, axis lines=middle,  enlargelimits=upper, ymax=1.25, font = \footnotesize]
+                \addplot[thick, signalblue] coordinates {(-1,0) (0,0) (0,1) (1,1)};
+              \end{axis}
+            
+            % Transistor
+            \draw[->, dashed] (comp.east) -- node[above]{$s(t)$} ++(1.5,0)node[npn, anchor = B, solid](npn1) {};
+            \draw let \p1 = (npn1.B) in node[anchor=west] at (\x1,\y1) {\hspace{1cm}$T$};
+        \end{circuitikz}
+        \caption{Pulse width modulation with triangular carrier to actuate a transistor}
+        \label{fig:PWM_simple_single_phase}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PWM-based switching signals %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PWM-based switching signals} 
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfplotsset{table/search path={fig/lec04}}
+            \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
+
+                % Top plot: input voltage and current 
+                \nextgroupplot[ylabel = {$d(t)/c(t)$}, legend pos=south east, legend columns=2]
+                \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_triangular_example.csv}; 
+                \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_triangular_example.csv}; 
+                \legend{$d(t)$, $c(t)$}
+
+
+                % middle plot: rectified voltage and current (before DCDC) 
+                \nextgroupplot[ylabel = {$s(t)$}, xlabel={$\omega t$}] 
+                \addplot[signalblue, thick] table[x=wt, y=s, col sep=comma] {PWM_triangular_example.csv}; 
+            \end{groupplot}
+        \end{tikzpicture}
+        \caption{Qualitative illustration of a PWM-based switching signal with a triangular carrier signal}
+        \label{fig:PWM_triangular_example}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PWM-based switching signals (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PWM-based switching signals (cont.)} 
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfplotsset{table/search path={fig/lec04}}
+            \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
+
+                % Top plot: input voltage and current 
+                \nextgroupplot[ylabel = {$d(t)/c(t)$}, legend pos=south east, legend columns=2]
+                \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_sawtooth_example.csv}; 
+                \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_sawtooth_example.csv}; 
+                \legend{$d(t)$, $c(t)$}
+
+
+                % middle plot: rectified voltage and current (before DCDC) 
+                \nextgroupplot[ylabel = {$s(t)$}, xlabel={$\omega t$}] 
+                \addplot[signalblue, thick] table[x=wt, y=s, col sep=comma] {PWM_sawtooth_example.csv}; 
+            \end{groupplot}
+        \end{tikzpicture}
+        \caption{Qualitative illustration of a PWM-based switching signal with a sawtooth carrier signal}
+        \label{fig:PWM_sawtooth_example}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PWM-based open-loop control of the boost converter-based PFC rectifier %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PWM-based open-loop control of the boost converter-based PFC rectifier} 
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfplotsset{table/search path={fig/lec04}}
+            \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.375\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
+
+                % Top plot: input voltage and current 
+                \nextgroupplot[ylabel = {$d(t)/c(t)$}, legend pos=south east, legend columns=2]
+                \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_PFC_example.csv}; 
+                \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_PFC_example.csv}; 
+                \legend{$d(t)$, $c(t)$}
+
+
+                % middle plot: rectified voltage and current (before DCDC) 
+                \nextgroupplot[ylabel = {$s(t)$}] 
+                \addplot[signalblue, thick] table[x=wt, y=s, col sep=comma] {PWM_PFC_example.csv}; 
+
+                % middle plot: rectified voltage and current (before DCDC) 
+                \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$\omega t$}, ytick = {-1, 0, 0.5, 1}, yticklabels = {}, legend columns=2] 
+                \addplot[signalred, thick] table[x=wt, y=i1, col sep=comma] {PWM_PFC_example.csv}; 
+                \addplot[thick, dashed] table[x=wt, y=i1ref, col sep=comma] {PWM_PFC_example.csv};
+                \legend{$i_1(t)$, $i_1^{(1)}(t)$} 
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PFC rectifier with boost converter: control structure %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PFC rectifier with boost converter: closed-loop control structure}
+    \begin{figure}
+           \begin{circuitikz}[scale = 0.8, transform shape]
+            
+            % Input rectifier
+            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            (0,0) to [short, i>^=$i_1(t)$] ++(0.75,0) to [short, -*] ++(0.75,0)
+            to [diode, l=$D_1$]  ++(0,1.5)
+            to [short, -*] ++(1.5,0) coordinate (C)
+            to [diode, l=$D_3$, invert]  ++(0,-1.5)
+            to [short] ++(0, -2) coordinate (B)
+            to [diode, l=$D_2$, invert, -*]  ++(0, -1.5) coordinate (D)
+            to [short] ++(-1.5,0)
+            to [diode, l=$D_4$]  ++(0, 1.5)
+            to [short] ++(0, 2)
+            (B) to [short, *-]++(-0.5,0) to [crossing, mirror] ++(-2,0)
+            to [short] (A);
+
+            % DC/DC converter
+            \draw node[fourport, circuitikz/quadpoles/fourport/width=2.25, circuitikz/quadpoles/fourport/height=2.8] (DCDC) at (8.5,-1) {DC/DC}; 
+            \draw (C) to [short] ++(1.5,0) coordinate (G)
+            to [short] (DCDC.port4 -| G) 
+            to [short,-*] ++(0.5,0) coordinate (voltin) to [short, i=$i'(t)$] ++(1.75,0) to [short] (DCDC.port4)
+            (D) to [short] ++(1.5,0) coordinate (H)
+            to [short] (DCDC.port1 -| H) -- ++(0.5,0)
+            to [currtap, name=ct1] (DCDC.port1)
+            (DCDC.port4 -| G) to [open,v = $u'(t)\hspace{0.5cm}$, voltage = straight] (DCDC.port1 -| G);
+
+            % Inner part
+            \draw (DCDC.port4) to [L, l=$L$] ++(1.75,0) coordinate (boostup)
+            to [diode, l=$D_5$] (DCDC.port3)
+            (boostup) to [Tnpn, n=npn, invert,*-*, l=$\hspace{0.5cm}T$] (DCDC.port2 -| boostup)
+            (DCDC.port2) -- (DCDC.port1); 
+
+
+            % Output filter and load
+            \draw (DCDC.port3) to [short, i=$i_2(t)$] ++(0.9,0) coordinate (I)
+            to [short] (C -| I)
+            to [short] ++(1,0) coordinate (E)
+            to [short] ++(0,-1.5)
+            to [C, v= $u_2(t)$, voltage = straight, l=$C$, i=${i_\mathrm{C}(t)}$] ++(0,-2)
+            to [short] ++(0,-1.5) coordinate (F)
+            to [short] (D -| I)
+            to [short] (DCDC.port2 -| I) -- (DCDC.port2)
+            (E) to [short, *-*] ++(1.25,0) coordinate (currout) -- ++(0.75,0)
+            to [short] ++(0,-1.5)
+            to [isource, l=$I_0$] ++(0,-2)
+            to [short] ++(0,-1.5)
+            to [currtap, name=ct2, -*, mirror] (F);
+
+            % Controller
+            \draw[->, dashed] (ct2.tap) -- node[midway, right] {$I_0$} ++(0,-3) node[adder, anchor = north, solid, name=add1]{};
+            \draw[->, dashed](currout) -- (DCDC.port3 -|currout) -- ++(3.5,0) coordinate (Z) -- node[left, above, anchor = south west] {$u_2$} (add1.north -| Z) node[adder, anchor = north, solid, name=add2]{} node[left, above, anchor = south east] {$-$};
+            \draw[<-, dashed] (add2.east) -- node[midway, above] {$u_2^*$} ++(1,0);
+            \draw node[ctrlblock, fill=white, solid](vctrl1) at ($(add1.east)!.5!(add2.west)$) {$u_2$ ctrl}; 
+            \draw[->, dashed](add2.west) -- (vctrl1.east) node[midway, above]{$\Delta u_2$};
+            \draw[->, dashed] (vctrl1.west) -- node[midway, above] {$i_\mathrm{C}^*$}(add1.east); 
+            \draw let \p1 = (DCDC.south) in node[ctrlblock, solid] (pwm) at (\x1,-3.6) {PWM};
+            \draw[<-, dashed] (pwm.south) -- node[ctrlblock, name=ictrl1, fill=white, solid, anchor=north]{$i'$ ctrl} ++(0,-1.2) node[midway, right, anchor = south west ]{$d(t)$};
+            \draw[dashed, ->] (pwm.north) -- (DCDC.south) -- ++(0,0.5) node[midway, right] {$s(t)$} coordinate (ctrl3)
+            to [short] (ctrl3 -| npn.B) -- (npn.B);
+            \draw node[adder](add3) at (ictrl1.center -| ct1.tap){};
+            \draw node[lowpass2shape](lp) at ($(ct1.tap)!.5!(add3.center)$) {};
+            \draw[->, dashed] (ct1.tap) -- (lp.north) node[right, midway]{$i'$};
+            \draw[->, dashed](lp.south) -- (add3.north) node[left, above, anchor = south west]{$\overline{i}'$} node[left, above, anchor = south east] {$-$};
+            \draw[->, dashed](add3.east) -- (ictrl1.west) node[midway, above]{$\Delta i'$};
+            \draw node[mixer, anchor = center](mult3) at (add1.center -| lp.center){};
+            \draw[->, dashed] (voltin) -- (mult3.center -| voltin) -- (mult3.w) node[right, above, anchor = south east]{$u'$};
+            \draw[->, dashed] (mult3.n) -- (add3.south) node[midway, right, anchor = south west]{$i'*$};
+            \draw node[mixer, anchor = center, solid](mult2) at ($(mult3.center)!.33!(add1.center)$) {};
+            \draw node[mixer, anchor = center, solid](mult1) at ($(mult3.center)!.66!(add1.center)$) {};
+            \draw[->, dashed] (add1.west) -- (mult1.east);
+            \draw[->, dashed] (mult1.west) -- (mult2.east) node[above, anchor = south west]{$p_2*$};
+            \draw[->, dashed] (mult2.west) -- (mult3.east) node[above, anchor = south west]{$G*$};
+            \draw[<-, dashed] (mult1.north) -- ++(0,0.75) node[left, midway]{$u_2*$};
+            \draw[<-, dashed] (mult2.north) -- ++(0,0.75) node[left, midway]{$\nicefrac{2}{\hat{u}_1^2}$};
+        \end{circuitikz}%
+        \caption{Control structure of PFC rectifier with boost DC/DC converter}%
+        \label{fig:PFC_with_boost_converter_control_structure}%
+    \end{figure}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PFC rectifier with boost converter: control structure (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PFC rectifier with boost converter: closed-loop control structure (cont.)}
+    Reasons for closed-loop control:
+    \begin{itemize}
+        \item Mismatches between the actual system and the plant model behavior result in (steady-state) control errors.
+        \item Faster transient response to load changes.
+        \item Robustness against further disturbances (e.g., input voltage variations).
+    \end{itemize}
 \end{frame}
