@@ -2247,14 +2247,14 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
             \pgfplotsset{table/search path={fig/lec04}}
             \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
 
-                % Top plot: input voltage and current 
+                % Top plot: duty cycle and carrier signal
                 \nextgroupplot[ylabel = {$d(t)/c(t)$}, legend pos=south east, legend columns=2]
                 \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_triangular_example.csv}; 
                 \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_triangular_example.csv}; 
                 \legend{$d(t)$, $c(t)$}
 
 
-                % middle plot: rectified voltage and current (before DCDC) 
+                % bottom plot: switching signal 
                 \nextgroupplot[ylabel = {$s(t)$}, xlabel={$\omega t$}] 
                 \addplot[signalblue, thick] table[x=wt, y=s, col sep=comma] {PWM_triangular_example.csv}; 
             \end{groupplot}
@@ -2274,14 +2274,14 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
             \pgfplotsset{table/search path={fig/lec04}}
             \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
 
-                % Top plot: input voltage and current 
+                 % Top plot: duty cycle and carrier signal 
                 \nextgroupplot[ylabel = {$d(t)/c(t)$}, legend pos=south east, legend columns=2]
                 \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_sawtooth_example.csv}; 
                 \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_sawtooth_example.csv}; 
                 \legend{$d(t)$, $c(t)$}
 
 
-                % middle plot: rectified voltage and current (before DCDC) 
+                % bottom plot: switching signal
                 \nextgroupplot[ylabel = {$s(t)$}, xlabel={$\omega t$}] 
                 \addplot[signalblue, thick] table[x=wt, y=s, col sep=comma] {PWM_sawtooth_example.csv}; 
             \end{groupplot}
@@ -2292,31 +2292,97 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% PWM-based open-loop control of the boost converter-based PFC rectifier %%
+%% PWM-based open-loop control of the boost converter PFC rectifier %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{PWM-based open-loop control of the boost converter-based PFC rectifier} 
+    \frametitle{PWM-based open-loop control of the boost converter PFC rectifier} 
     \begin{figure}
         \begin{tikzpicture}
             \pgfplotsset{table/search path={fig/lec04}}
             \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.375\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
 
-                % Top plot: input voltage and current 
+                 % Top plot: duty cycle and carrier signal
                 \nextgroupplot[ylabel = {$d(t)/c(t)$}, legend pos=south east, legend columns=2]
                 \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_PFC_example.csv}; 
                 \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_PFC_example.csv}; 
                 \legend{$d(t)$, $c(t)$}
 
-
-                % middle plot: rectified voltage and current (before DCDC) 
+                % middle plot: switching signal
                 \nextgroupplot[ylabel = {$s(t)$}] 
                 \addplot[signalblue, thick] table[x=wt, y=s, col sep=comma] {PWM_PFC_example.csv}; 
 
-                % middle plot: rectified voltage and current (before DCDC) 
+                % bottom plot: current response 
                 \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$\omega t$}, ytick = {-1, 0, 0.5, 1}, yticklabels = {}, legend columns=2] 
                 \addplot[signalred, thick] table[x=wt, y=i1, col sep=comma] {PWM_PFC_example.csv}; 
                 \addplot[thick, dashed] table[x=wt, y=i1ref, col sep=comma] {PWM_PFC_example.csv};
                 \legend{$i_1(t)$, $i_1^{(1)}(t)$} 
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PWM-based PFC rectifier current ripple %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PWM-based PFC rectifier current ripple} 
+    Due to the switching behavior of the boost converter, the input current $i_1(t)$ exhibits a current ripple. The boost inductor voltage during a switching period is:
+    \begin{equation}
+        u_\mathrm{L}(t) = \begin{cases} \hat{u}_1 \sin(\omega t), & 0 < t \leq d T_\mathrm{s}\\
+        \hat{u}_1 \sin(\omega t) - U_2, & d T_\mathrm{s} < t \leq T_\mathrm{s}. 
+        \end{cases}
+    \end{equation} 
+    We assume that $$ T_\mathrm{s} << \nicefrac{2\pi}{\omega}$$ such that the input voltage and duty cycle are approximately constant within one switching period. The \hl{ripple  current envelope} $\Delta i_1(t)$ is then defined as the moving difference between the actual input current $i_1(t)$ and its fundamental component $i^{(1)}_1(t)$: 
+    \begin{equation}
+            \Delta i_1(t) = \pm \frac{1}{2} \max_{\tau\in[t \pm \frac{T_\mathrm{s}}{2}]}|i_1(\tau) - i^{(1)}_1(\tau)|.
+    \end{equation}
+    One should note that this ripple definition is different from the one used in the previous DC/DC converter section.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PWM-based PFC rectifier current ripple (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PWM-based PFC rectifier current ripple (cont.)} 
+    Assuming CCM operation and a sufficiently small switching time interval $T_\mathrm{s}$, the ripple current can be approximated by the current rise during the on-time of the boost converter:
+    \begin{equation}
+        \begin{split}
+            \Delta i_1(t) &=  \pm\frac{1}{2L}\int_{0}^{d T_\mathrm{s}} u_\mathrm{L}(\tau) \mathrm{d}\tau= \pm \frac{1}{2L}\int_{0}^{d T_\mathrm{s}} \hat{u}_1 \sin(\omega t) \mathrm{d}\tau\\
+            &\approx \pm \frac{\hat{u}_1 \sin(\omega t)}{2L}\int_{0}^{d T_\mathrm{s}} 1 \mathrm{d}\tau = \pm \frac{\hat{u}_1 \sin(\omega t)}{2L}d T_\mathrm{s}.
+        \end{split}
+    \end{equation}
+    Inserting $d(t)$ from \eqref{eq:PFC_duty_cycle_feed_forward_with_inductor} in a quasi steady-state fashion yields
+    \begin{equation}
+        \Delta i_1(t) = \pm \frac{\hat{u}_1 T_\mathrm{s} \sin(\omega t)}{2L}\left(1 - \frac{1}{M}|\sin(\omega t)| + \frac{\hat{i}_1\omega L}{M\hat{u}_1} \cos(\omega t) \mathrm{sgn}(\sin(\omega t))\right).
+    \end{equation}
+    Due to the varying input voltage and duty cycle, the ripple current is not constant but also varies with time (cf. next slide). 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PWM-based PFC rectifier current ripple (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{PWM-based PFC rectifier current ripple (cont.)} 
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfplotsset{table/search path={fig/lec04}}
+            \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
+
+                
+                % top plot: input current
+                \nextgroupplot[ylabel = {$i_1(t)$}, ytick = {-1, 0, 0.5, 1}, yticklabels = {}, legend columns=2] 
+                \addplot[signalred, thick] table[x=wt, y=i1, col sep=comma] {PWM_PFC_example.csv}; 
+                \addplot[thick, dashed] table[x=wt, y=i1ref, col sep=comma] {PWM_PFC_example.csv};
+                \addplot[domain=0:pi, samples=100, signalgreen, dashed, thick]{0.81*sin(deg(x))+0.9*sin(deg(x))*(1-sin(deg(x))/1.3)};
+                \addplot[domain=0:pi, samples=100, signalgreen, dashed, thick]{0.81*sin(deg(x))-0.9*sin(deg(x))*(1-sin(deg(x))/1.3)};
+                \legend{$i_1(t)$, $i_1^{(1)}(t)$} 
+                
+                % bottom plot: ripple current
+                \nextgroupplot[ylabel = {$\Delta i_1(t)$}, ytick = {-1, -0.5, 0, 0.5, 1}, yticklabels = {}, ymin = -0.6, ymax =0.6, xlabel={$\omega t$}] 
+                \addplot[signalred, thick, dashed] table[x=wt, y=i1delta, col sep=comma] {PWM_PFC_example.csv}; 
+                \addplot[domain=0:pi, samples=100, signalgreen, thick]{0.9*sin(deg(x))*(1-sin(deg(x))/1.3)};
+                \addplot[domain=0:pi, samples=100, signalgreen, thick]{-0.9*sin(deg(x))*(1-sin(deg(x))/1.3)};
+
             \end{groupplot}
         \end{tikzpicture}
     \end{figure}
@@ -2420,4 +2486,110 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
         \item Faster transient response to load changes.
         \item Robustness against further disturbances (e.g., input voltage variations).
     \end{itemize}
+    Central idea of the closed-loop control: given some required load power 
+    $$
+    p_2(t) = u_2(t)i_2(t) = u_2(t)\left(I_0 + i_\mathrm{C}(t)\right) 
+    $$
+    operate the boost converter such that the load power is represented by a \hl{(virtual) conductance} at the input of the boost converter:
+    $$
+    g(t) = \frac{p_1(t)}{\hat{u}_1^2} = \frac{p_2(t)}{\hat{u}_1^2} = \frac{U_2\left(I_0 + i_\mathrm{C}(t)\right)}{\hat{u}_1^2}.
+    $$ 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PFC rectifier with boost converter: control structure (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PFC rectifier with boost converter: closed-loop control structure (cont.)}
+    The required conductance $g(t)$ is calculated by the outer voltage controller:
+    \begin{itemize}
+        \item If $u_2(t)< U_2^*$: increase $p_2(t)$ by increasing the conductance $g(t)$.
+        \item If $u_2(t)> U_2^*$: decrease $p_2(t)$ by decreasing the conductance $g(t)$.
+    \end{itemize}
+    With 
+    $$
+    \hat{i}'(t) = \hat{u}_1 g(t)
+    $$
+    the required reference input current for the inner current controller can be calculated. 
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw (-3,0) to [short, i=$i_1(t)$] ++(1.5,0)
+            to [R, l=$g(t)$, name = g] ++(0,-2)
+            to [short] ++(-1.5,0);
+            \draw (-3,0) to [sinusoidal voltage source, v_= $u_1(t)$, voltage = straight] ++(0,-2);
+            \draw (3,0) to [short, i=$i_2(t)$] ++(1.5,0)
+            to [isource] ++(0,-2)
+            to [short] ++(-1.5,0);
+            \draw (3,0) to [vsource, v_= $U_2$, voltage = straight, name = u2] ++(0,-2);
+            \draw[-{Latex[length=4mm, width=8mm]}, line width=4mm] ($(g)!.33!(u2)$) -- node[above, midway, name = work, yshift=2.5mm] {$\overline{p}_1 = \overline{p}_2$} ($(g)!.66!(u2)$);
+        \end{circuitikz}
+        \caption{Interpretation of the closed-loop control of a PFC rectifier as a variable conductance tuning}
+    \end{figure}%
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PFC rectifier with boost converter: component sizing %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PFC rectifier with boost converter: capacitor sizing}
+    Based on the previous assumption $u_2(t)\approx U_2$ the question is raised how the output capacitor $C$ of the boost converter must be sized to keep the output voltage ripple within acceptable bounds justifying the assumption. For a lossless converter, the instantaneous power is:
+    \begin{equation*}
+        p_2(t) =p_1(t) = u_1(t)i_1(t).
+    \end{equation*}
+    Assuming that the input voltage and  current are both ideally sinusoidal and in phase (i.e., the PFC rectifier operates perfectly), the instantaneous power is:
+    \begin{equation}
+        p_2(t) = \hat{u}_1\hat{i}_1\sin(\omega t)\sin(\omega t) = \frac{\hat{u}_1\hat{i}_1}{2}\left(1-\cos(2\omega t)\right).
+    \end{equation}
+    Hence, we can decompose the instantaneous power into a constant term and a harmonic term with twice the frequency of the input voltage/current:
+    \begin{equation}
+        p_2(t) = \underbrace{\frac{\hat{u}_1\hat{i}_1}{2}}_{\overline{p}_2} \underbrace{- \frac{\hat{u}_1\hat{i}_1}{2}\cos(2\omega t)}_{p_2^{(\mathrm{h})(t)}}.
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PFC rectifier with boost converter: component sizing %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PFC rectifier with boost converter: capacitor sizing}
+    The resulting harmonic output current component is (approximately)
+    \begin{equation}
+        i_2^{(\mathrm{h})}(t) \approx \frac{p_2^{(\mathrm{h})}(t)}{\overline{u}_2} = -\frac{\hat{u}_1\hat{i}_1}{2\overline{u}_2}\cos(2\omega t) = -\frac{\overline{p}_2}{\overline{u}_2}\cos(2\omega t).
+    \end{equation}
+    If the load current $I_0$ is (approximately) constant, the harmonic current is flowing into the output capacitor $i_2^{(\mathrm{h})}(t)=i_\mathrm{C}(t)$ leading to the voltage ripple:
+    \begin{equation}
+        \Delta u_2(t) = \frac{1}{C} \int  i_\mathrm{C}(t) \mathrm{d} t = -\underbrace{\frac{\overline{p}_2}{\overline{u}_2} \frac{1}{2\omega C}}_{\hat{u}_2} \sin(2\omega t).
+    \end{equation}
+    To limit the output voltage ripple to a certain amplitude value $\Delta \hat{u}_2$, the output capacitor $C$ must exhibit a minimal capacitance value:
+    \begin{equation}
+        C > \frac{\overline{p}_2}{\overline{u}_2} \frac{1}{2\omega \Delta \hat{u}_2}.
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Idealized PFC signals in the time domain (quasi steady state) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Idealized PFC rectifier signals in the time domain (quasi steady state)} 
+    \begin{figure}
+        \begin{tikzpicture}
+            \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi, 2.5*pi, 3*pi, 3.5*pi, 4*pi}, xticklabels = {0, $\frac{1}{2}\pi$,$\pi$, $\frac{3}{2}\pi$,$2\pi$, ,$3\pi$, ,$4\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, }]
+
+                % Top plot: power
+                \nextgroupplot[ylabel = {$p_1(t)$}, ytick = {-1, -0.5, 0, 0.5, 1}, yticklabels = {$-2\overline{p}_1$, $-\overline{p}_1$, 0, $\overline{p}_1$, $2\overline{p}_1$}]
+                \addplot[domain=0:2*pi, samples=100, signalblue, thick]{0.5 - 0.5*cos(deg(2*x))};
+                \addplot[domain=0:2*pi, samples=100, signalblue, thick, dashed]{0.5};
+                \draw node[signalblue, anchor = center, fill = white] at (axis cs: 5*pi/4+0.1, -0.5) {$p_1^{(\mathrm{h})}(t)$};
+                \addplot[domain=0:2*pi, samples=100, signalblue, thick, dotted]{- 0.5*cos(deg(2*x))};
+
+                % bottom plot: voltage
+                \nextgroupplot[ylabel = {$u_2(t)$}, ymin = 0, ymax =1.1, xlabel = {$\omega t$}, ytick = {0, 0.25, 0.5, 0.75, 1}, yticklabels = {0, , , $\overline{u}_2$, }] 
+                \addplot[domain=0:2*pi, samples=100, signalblue, thick]{0.75 - 0.2*sin(deg(2*x))};
+                \addplot[domain=0:2*pi, samples=100, signalblue, thick, dashed]{0.75}; 
+                \draw [thin, <->]  (axis cs: pi, 0.95) -- (axis cs: pi, 0.55) node[below,fill=white, anchor = north,inner sep = 1pt]{$2\Delta \hat{u}_2$};   
+                
+            \end{groupplot}
+        \end{tikzpicture}
+        \caption{Power and voltage oscillations in the PFC rectifier in quasi steady-state operation}
+        \label{fig:PFC_rectifier_power_voltage_oscillations}
+    \end{figure}
 \end{frame}
