@@ -4,7 +4,7 @@
 \ex{Rectifiers}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Task 1: B2U topology with capactive filtering %%
+%% Task 1: B2U topology with capacitive filtering %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task{B2U topology with capactive filtering}
 An uncontrolled single-phase, two-pulse rectifier circuit with capacitive filtering 
@@ -15,6 +15,19 @@ a smoothing capacitor $C$ and a constant current load $I_\mathrm{L}$ are present
 
 \input{fig/ex05/Fig_B2U_TopologyWithCapactiveFiltering.tex}
 
+\begin{table}[ht]
+    \centering  % Zentriert die Tabelle
+    \begin{tabular}{llll}
+        \toprule
+        
+        Input voltage: &  $u_{\mathrm{1}}(t) = \SI{156}{\volt} \cos(\omega t)$ & Load current: & $I_{\mathrm{0}} = \SI{7.5}{\ampere}$ \\ 
+        Filter capacity: & $C = \SI{330}{\micro\farad}$  & frequency: & $f= \SI{60}{\hertz}$ \\ 
+        \bottomrule
+    \end{tabular}
+    \caption{Parameters of the PFC rectifier.}  
+    \label{table:ex05_Parameters of the circuit}
+\end{table}
+
 The angle $\alpha_\mathrm{1}$ represents the point in time at which two of the four diodes begin to conduct, 
 i.e., when the capacitor is recharged from the mains supply. From the angle $\alpha_\mathrm{2}$
 all four diodes are blocked, meaning the capacitor discharges through the load. 
@@ -24,6 +37,16 @@ A steady-state operation is assumed for this task.
 Note: It is more convenient to calculate $\alpha_2$ first. For the calculation of $\alpha_1$  
 you can use the following simple approximation: $sin(x) = x$. 
 (This approximation is sufficiently accurate within a range of approximately $\SI{25}{\degree}$  around the zero point of the sine function.)}
+\begin{solutionblock}
+    if the voltage $\left| u_\mathrm{1}(t) \right|$ is higher than the $u_\mathrm{c}(t)$ the capacitor follows the voltage
+    $\left|u_\mathrm{1}(t)\right|$.
+    If $\left| u_\mathrm{1}(t)\right|$ is less than $u_\mathrm{c}(t)$ the capacitor is discharged with the constant current $I_\mathrm{0}$.
+    The voltage decrease linear with
+    \begin{equation} 
+    \frac{d(u(t))}{dt} = \frac{I_\mathrm{0}}{C}.
+    \end{equation}   
+\end{solutionblock}
+
 \vspace{2em}\par
 If you were unable to solve task (a), please use $\alpha_1=\SI{19.3}{\degree}$ and $\alpha_2=\SI{112.8}{\degree}$.
 
