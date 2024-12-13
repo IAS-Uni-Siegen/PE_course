@@ -20,7 +20,7 @@ a smoothing capacitor $C$ and a constant current load $I_\mathrm{L}$ are present
     \begin{tabular}{llll}
         \toprule
         
-        Input voltage: &  $u_{\mathrm{1}}(t) = \SI{156}{\volt} \cos(\omega t)$ & Load current: & $I_{\mathrm{0}} = \SI{7.5}{\ampere}$ \\ 
+        Input voltage: &  $u_{\mathrm{1}}(t) = \SI{156}{\volt} \sin(\omega t)$ & Load current: & $I_{\mathrm{0}} = \SI{7.5}{\ampere}$ \\ 
         Filter capacity: & $C = \SI{330}{\micro\farad}$  & frequency: & $f= \SI{60}{\hertz}$ \\ 
         \bottomrule
     \end{tabular}
@@ -28,23 +28,50 @@ a smoothing capacitor $C$ and a constant current load $I_\mathrm{L}$ are present
     \label{table:ex05_Parameters of the circuit}
 \end{table}
 
-The angle $\alpha_\mathrm{1}$ represents the point in time at which two of the four diodes begin to conduct, 
-i.e., when the capacitor is recharged from the mains supply. From the angle $\alpha_\mathrm{2}$
-all four diodes are blocked, meaning the capacitor discharges through the load. 
+The angle $\alpha$ represent the time range between zero crossing of the supply voltage and the point in time
+at which all four diodes are blocked, meaning the capacitor discharges through the load. The angle $\beta$ 
+represents the time range between $\alpha$ and the point in time at which two of the four diodes begin to 
+conduct, i.e., when the capacitor is recharged from the mains supply.
 A steady-state operation is assumed for this task.
 
-\subtask{Calculate the two angles $\alpha_1$ and $\alpha_2$.
-Note: It is more convenient to calculate $\alpha_2$ first. For the calculation of $\alpha_1$  
-you can use the following simple approximation: $sin(x) = x$. 
+\subtask{Calculate the two angles $\alpha$ and $\beta$.
+Note: For the calculation of $\beta$ you can use the following simple approximation: $sin(x) = x$. 
 (This approximation is sufficiently accurate within a range of approximately $\SI{25}{\degree}$  around the zero point of the sine function.)}
 \begin{solutionblock}
-    if the voltage $\left| u_\mathrm{1}(t) \right|$ is higher than the $u_\mathrm{c}(t)$ the capacitor follows the voltage
-    $\left|u_\mathrm{1}(t)\right|$.
-    If $\left| u_\mathrm{1}(t)\right|$ is less than $u_\mathrm{c}(t)$ the capacitor is discharged with the constant current $I_\mathrm{0}$.
-    The voltage decrease linear with
+    As long as the voltage $\left| u_\mathrm{1}(t) \right|$ increase the voltage $u_\mathrm{c}(t)$ of the capacitor follows:
     \begin{equation} 
-    \frac{d(u(t))}{dt} = \frac{I_\mathrm{0}}{C}.
+        u_\mathrm{C}(t) = \left| \hat{u_{\mathrm{1}}}\sin(\omega t)\right|.
+    \end{equation}
+    If the capacitor supplies the load current $I_\mathrm{0}$ the voltage $u_\mathrm{c}(t)$ at the capacitor 
+    decreases linear with:
+    \begin{equation} 
+        \frac{d(u_\mathrm{C}(t))}{dt} = -\frac{I_\mathrm{0}}{C}.
+    \end{equation} 
+    If the voltage $\left| u_\mathrm{1}(t) \right|$ decreases faster than $d(u_\mathrm{C}(t))/dt$
+    then all diodes blocks and the capacitor supplies the current load $I_\mathrm{0}$. This leads to:
+    \begin{equation} 
+        \frac{d(u_\mathrm{1}(t))}{dt} = \frac{d(\left| \hat{u_{\mathrm{1}}}\sin(\omega t)\right|)}{dt} 
+        = \omega\left| \hat{u_{\mathrm{1}}}\cos(\omega t)\right| = -\frac{I_\mathrm{0}}{C}.
+        \label{eq:deltaVoltageAtCapacitor_ex05}
+    \end{equation} 
+    Solving \eqref{eq:deltaVoltageAtCapacitor_ex05} with respect to $\omega \cdot t = \alpha$ yields
+    \begin{equation}
+        \alpha = \arccos(-\frac{I_\mathrm{0}}{\omega C \cdot \hat{u_{\mathrm{1}}}})
+        = \arccos(-\frac{\SI{7.5}{\ampere}}{2 \pi \cdot \SI{60}{\hertz} \cdot \SI{330}{\micro\farad} \cdot \SI{156}{\volt}}) = \SI{112.8}{\degree}
     \end{equation}   
+    In that moment when the voltage $\left| u_\mathrm{1}(t) \right|$ becomes equal to $u_\mathrm{C}(t)$ 
+    the discharge of the capacitor stops and $u_\mathrm{C}(t)$ follows again $\left| u_\mathrm{1}(t) \right|$.
+    The voltage $\left| u_\mathrm{1}(t) \right|$ increases again at $\pi$ with:
+    \begin{equation}
+        \left| u_\mathrm{1}sin(\omega t + \pi ) \right| = u_\mathrm{1}sin(\omega t) \quad \text{for} \quad t \leq \pi
+    \end{equation}   
+    The capacitor is discharging by the load  $I_\mathrm{0}$ at $\alpha$, which corresponds to a 
+    voltage of: 
+    \begin{equation}
+        \left| u_\mathrm{1}sin(\omega t) \right| = u_\mathrm{1}sin(\alpha) 
+        = \SI{156}{\volt} \cdot sin(\SI{112.8}{\degree})=\SI{143.4}{\volt}
+    \end{equation}   
+
 \end{solutionblock}
 
 \vspace{2em}\par
