@@ -42,11 +42,9 @@ absorbed by the current source? What will $P_\mathrm{L}$ be if $C=\SI{330}{\mill
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: PFC rectifier %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\task{Current control with constant clock frequency}
-Due to the constantly increasing load on the grid with harmonics as a result of the use of power converters, the regulations regarding the permissible harmonic content of the current consumption of electrical consumers are being tightened. It is therefore necessary, e.g. for the rectification of single-phase AC mains voltage, for example, it is necessary to design power converters with a high power factor or a largely sinusoidal input current. The system consists of a diode bridge $(D_{\mathrm{1}} \, \dots \, D_{\mathrm{4}})$, an inductor $L$, a power transistor $T_\mathrm{H}$ (usually a power MOSFET), a freewheeling diode $D_\mathrm{H}$ and an output capacitor $C_\mathrm{d}$. The prerequisite for the use of the boost converter is: $u_\mathrm{d} = U_\mathrm{d}>U_\mathrm{1}$. The boost converter is operated with a modified current control method ('Average Current Mode Control') for which the switching frequency $f_\mathrm{T}$ has a constant value $f_\mathrm{T} = \SI{20}{\kilo\hertz}$. This is realized
-by comparing the current controller output variable with a triangular oscillation with switching frequency $f_\mathrm{T} = \SI{20}{\kilo\hertz}$ and suitable amplitude is compared.
-Let $L = \SI{570}{\micro\henry}$ and the inductance carry a continuous current.
-Definition: Transmission ratio: $M = \frac{ U_\mathrm{d}}{\hat U_\mathrm{1}}$
+\task{PFC rectifier}
+Due to the constantly increasing load on the grid with harmonics as a result of the use of power converters, the regulations regarding the permissible harmonic content of the current consumption of electrical consumers are being tightened. It is therefore necessary, e.g. for the rectification of single-phase AC mains voltage, for example, it is necessary to design power converters with a high power factor or a largely sinusoidal input current. 
+A variant of a PFC rectifier circuit is shown in \autoref{fig:Boost converter with single-phase diode bridge_topology}. The system consists of a diode bridge $(D_{\mathrm{1}} \, \dots \, D_{\mathrm{4}})$, an inductor $L$, a power transistor $T$ (usually a power MOSFET), a freewheeling diode $D_\mathrm{5}$ and an output capacitor $C$. The prerequisite for the use of the boost converter is: $u_\mathrm{d} = U_\mathrm{d}>U_\mathrm{1}$. The boost converter is operated with a modified current control method ('Average Current Mode Control') for which the switching frequency $f_\mathrm{T}$ has a constant value $f_\mathrm{T} = \SI{20}{\kilo\hertz}$. This is realized by comparing the current controller output variable with a triangular oscillation with switching frequency $f_\mathrm{T} = \SI{20}{\kilo\hertz}$ and suitable amplitude is compared. Let $L = \SI{570}{\micro\henry}$ and the inductance carry a continuous current. Definition: Transmission ratio: $M = \frac{ U_\mathrm{d}}{\hat U_\mathrm{1}}$
 \input{fig/ex05/Fig_BoostConverter_with_Rectifiers.tex}
 
 \begin{table}[ht]
@@ -54,21 +52,21 @@ Definition: Transmission ratio: $M = \frac{ U_\mathrm{d}}{\hat U_\mathrm{1}}$
     \begin{tabular}{llll}
         \toprule
         
-        Input voltage: &  $u_{\mathrm{1}} = \hat U_{\mathrm{1}} \sin(\omega t) = \sqrt{2} \cdot \SI{230}{\volt} \sin(\omega t)$ & Output voltage: & $U_{\mathrm{d}} = \SI{400}{\volt}$ \\ 
-        Output power: & $P_d = \SI{4}{\kilo\watt}$  & Circular frequency: & $\omega = 2 \pi \SI{50}{\hertz}$ \\ 
+        Input voltage: &  $u_{\mathrm{1}}(t) = \hat U_{\mathrm{1}} \sin(\omega t) = \sqrt{2} \cdot \SI{230}{\volt} \sin(\omega t)$ & Output voltage: & $u_{\mathrm{2}}(t) = \SI{400}{\volt}$ \\ 
+        Output power: & $P_\mathrm{2} = \SI{4}{\kilo\watt}$  & Circular frequency: & $\omega = 2 \pi \SI{50}{\hertz}$ \\ 
         Inductance: & $L = \SI{570}{\micro\henry}$
-         &Power factor: & $k = 0.08$ \\ 
-         switching frequency: & $f_\mathrm{T} = \SI{20}{\kilo\hertz}$\\
+         & switching frequency: & $f_\mathrm{T} = \SI{20}{\kilo\hertz}$\\
         \bottomrule
     \end{tabular}
     \caption{Parameters of the PFC rectifier.}  
     \label{table:ex05_Parameters of the circuit}
 \end{table}
 
-\subtask{Specify the voltage transformation ratio $m(t)= \frac{U_\mathrm{d}}{u'(t)}$ as a function of the duty cycle $d(t)$ is specified.}
+\subtask{Specify the voltage transformation ratio $m(t)= \frac{u_{\mathrm{2}}(t)}{u'(t)}$ as a function of the duty cycle $D(t)$ is specified.}
 \begin{solutionblock}
+    
     \begin{equation}
-        U_{\mathrm{L}} = d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{d}}).
+        U_{\mathrm{L}} = d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{d}}). 
     \end{equation}
 The average voltage over the inductance for a stable operation is zero $U_{\mathrm{L}} = \SI{0}{\volt}$. 
     \begin{equation}
@@ -102,7 +100,7 @@ The ratio $m(t)= \frac{U_\mathrm{d}}{u'(t)}$ can now be determined from \eqref{e
 \end{solutionblock}
 
 \subtask{Calculate the maximum amplitude of the switching frequency fluctuation of the mains current $i_\mathrm{1}$ for the specified operating point.
-Note: Consider the conductive state of $T_\mathrm{H}$ and set the voltage across the inductance as a function of the phase angle $(\omega t)$ and the conduction time of the transistor according 2.2.} 
+Note: Consider the conductive state of $T$ and set the voltage across the inductance as a function of the phase angle $(\omega t)$ and the conduction time of the transistor according 2.2.} 
 \input{fig/ex05/Fig_courses_i'}
 \begin{solutionblock}
     \begin{equation}
@@ -114,22 +112,34 @@ Note: Consider the conductive state of $T_\mathrm{H}$ and set the voltage across
     
 \end{solutionblock}
 
-\subtask{Complete the current curve for one switching frequency $f_\mathrm{T2} = \SI{2}{\kilo\hertz}$ and one inductance $L = \SI{5}{\milli\henry}$ in......
-Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T_\mathrm{H}$ and are summarized for the first 4 switching times in the following table...............}
+\subtask{Complete the current curve for a switching frequency $f_\mathrm{T2} = \SI{2}{\kilo\hertz}$ and a inductance $L = \SI{5}{\milli\henry}$ in \autoref{fig:Current i' control signal ex05}. Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T$ and are summarized for the first 4 switching times in \autoref{tab:switching_times}.}
+
+\begin{table}[ht]
+    \centering
+    
+    \begin{tabular}{lcccc}
+        \toprule
+        & $i = 1$ & $2$ & $3$ & $4$ \\
+        \midrule
+        $T_{pi,OFF}$ & \SI{480}{\micro\second} & \SI{935}{\micro\second} & \SI{1388}{\micro\second} & \SI{1852}{\micro\second} \\
+        $T_{pi,ON}$  & \SI{500}{\micro\second} & \SI{1008}{\micro\second} & \SI{1520}{\micro\second} & \SI{2044}{\micro\second} \\
+        \bottomrule
+    \end{tabular}
+    \caption{Switching times $T_{pi,OFF}$ and $T_{pi,ON}$ for different $i$-Values.}
+    \label{tab:switching_times}
+\end{table}
+
 \input{fig/ex05/Fig_VoltageCourses_UL_No2}
 
+\subtask{Approximately sketch the envelope of the current ripple in \autoref{fig:Current i' control signal ex05}. Sketch the voltage across the inductor in \autoref{fig:Voltage curve ul signal Transistor ex05} and enter the local average value of the voltage as an approximation. How would the switch-on/switch-off ratio of the transistor have to be changed before and after the current peak in order to bring the average actual current value closer to the current setpoint?}
 
-\subtask{Approximately sketch the envelope of the current ripple in Fig. 2.
-of the voltage across the inductor in Supplement 3, Fig. 3 and enter the local mean value of the voltage as an approximation. How would the switch-on/switch-off ratio of the transistor have to be changed before and after the
-current peak in order to bring the mean actual current value closer to the current setpoint?}
+\subtask{Calculate the losses in the diode $D_\mathrm{5}$.}
 
-\subtask{Calculate the losses in the diode $D_\mathrm{H}$.}
+\subtask{Dimension the output capacitance $C$ in a way that the amplitude of the output voltage ripple is at twice the mains frequency $\Delta u_{\mathrm{2}}<0.05U_{\mathrm{2}}$.
+Note: Take the approach using the instantaneous input power $p_{\mathrm{1}(t)}$ and assume that this power is fed directly to the output.}
 
-\subtask{Dimension the output capacitance $C_\mathrm{d}$ in a way that the amplitude of the output voltage ripple is at twice the mains frequency $\Delta u_{\mathrm{d}}<0.05U_{\mathrm{1}}$.
-Note: Take the approach using the instantaneous input power $p_{\mathrm{d}(t)}$ and assume that this power is fed directly to the output.}
-
-\subtask{Calculate the RMS value of the current through the capacitor $I_{\mathrm{C_{\mathrm{d}}}}$.
-Note: The mean value of the current through the capacitor is $\overline i_{\mathrm{C_{\mathrm{d}}}}=0$!}
+\subtask{Calculate the RMS value of the current through the capacitor $I_{\mathrm{C}}$.
+Note: The mean value of the current through the capacitor is $\overline i_{\mathrm{C}}=0$!}
 
 \subtask{The current carrying capacity of the capacitor is $\frac{\SI{10}{\ampere}}{\SI{1}{\milli\farad}}$. How large must its capacitance be selected? Is the permissible output voltage fluctuation from 2.7 or is it the current carrying capacity that determines the capacitance?}
 
