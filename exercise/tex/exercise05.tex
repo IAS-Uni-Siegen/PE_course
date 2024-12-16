@@ -114,38 +114,40 @@ A variant of a PFC rectifier circuit is shown in \autoref{fig:Boost converter wi
 
 \subtask{Specify the voltage transformation ratio $m(t)= \frac{u_{\mathrm{2}}(t)}{u'(t)}$ as a function of the duty cycle $d(t)$.}
 \begin{solutionblock}
-    
+    The equation for the voltage $U_{\mathrm{L}}$ is given with:
     \begin{equation}
-        U_{\mathrm{L}} = d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{d}}). 
+        U_{\mathrm{L}} = (d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{2}}))f_\mathrm{T}. 
     \end{equation}
 The average voltage over the inductance for a stable operation is zero $U_{\mathrm{L}} = \SI{0}{\volt}$. 
     \begin{equation}
-    0 = d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{d}}). 
+    0 = (d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{2}}))f_\mathrm{T}. \label{eq:ex05ratio2.2}
     \end{equation}   
-The ratio $m(t)= \frac{U_\mathrm{d}}{u'(t)}$ can now be determined from \eqref{eq:ex05ratio2.1}: 
+The ratio $m(t)= \frac{U_\mathrm{2}}{u'(t)}$ can now be determined from \eqref{eq:ex05ratio2.2}: 
   \begin{equation}
-    0 = d(t)u'(t)+u'(t)-d(t)u'(t)-u'(t)+d(t)U_{\mathrm{d}},
+    0 = f_\mathrm{T}d(t)u'(t)+f_\mathrm{T}(u'(t)-d(t)u'(t)-U_{\mathrm{2}}+d(t)U_{\mathrm{2}}),
   \end{equation}
   \begin{equation}
-    0 = u'(t)-(1-d(t))U_{\mathrm{d}}.\label{eq:ex05ratio2.1}
+    0 = f_\mathrm{T}(u'(t)-(1-d(t))U_{\mathrm{2}}).\label{eq:ex05ratio2.1}
   \end{equation}
   From equation \eqref{eq:ex05ratio2.1} it can now be concluded:
   \begin{equation}
-    m(t) = \frac{U_{\mathrm{d}}}{u'(t)}=\frac{1}{1-d(t)}
+    m(t) = \frac{U_{\mathrm{2}}}{u'(t)}=\frac{1}{1-d(t)}. \label{eq:ex05ratio_m(t)}
   \end{equation}
 \end{solutionblock}
 
 \subtask{Specify the conduction time of the transistor and the diode as a function of the transformation ratio $M$ and the time $t$.} 
 \begin{solutionblock}
+    Using $M = \frac{U_{\mathrm{2}}}{\hat U_{\mathrm{1}}}$, the transformation ratio is given with:
     \begin{equation}
-        m = \frac{U_{\mathrm{d}}}{u'}=\frac{U_{\mathrm{d}}}{\hat U_{\mathrm{1}} \sin(\omega t)} = M \frac{1}{\sin(\omega t)}
+        m(t) = \frac{U_{\mathrm{2}}}{u'(t)}=\frac{U_{\mathrm{2}}}{\hat U_{\mathrm{1}} \sin(\omega t)} = M \frac{1}{\sin(\omega t)}.
     \end{equation}
+    For the condition transistor $T$ is conducting, the duty cycle $d(t)$ is derived from \eqref{eq:ex05ratio_m(t)} as:
 \begin{equation}
-    d(t) = 1-\frac{1}{m(t)} = 1- \frac{U_{\mathrm{1}}\sin(\omega t)}{U_{\mathrm{d}}} = 1 -\frac{1}{M} \sin(\omega t)
-\end{equation}
-
+    d(t) = 1-\frac{1}{m(t)} = 1- \frac{u'(t)}{U_{\mathrm{2}}}=1- \frac{U_{\mathrm{1}}\sin(\omega t)}{U_{\mathrm{2}}} = 1 -\frac{1}{M} \sin(\omega t)
+\end{equation}.
+For the condition diode $D_{\mathrm{5}}$ is conducting, the duty cycle $1-d(t)$ is derived from \eqref{eq:ex05ratio_m(t)} as:
 \begin{equation}
-    1-d(t) = \frac{1}{M} \sin(\omega t)
+    1-d(t) = \frac{1}{m(t)}=\frac{1}{M} \sin(\omega t)
 \end{equation}
 \end{solutionblock}
 
@@ -153,6 +155,29 @@ The ratio $m(t)= \frac{U_\mathrm{d}}{u'(t)}$ can now be determined from \eqref{e
 Note: Consider the conductive state of $T$ and set the voltage across the inductance as a function of the phase angle $(\omega t)$ and the conduction time of the transistor according to the previous subtask.} 
 \input{fig/ex05/Fig_courses_i'}
 \begin{solutionblock}
+    To solve this task the inductance equation is used:
+    \begin{equation}
+        U_{\mathrm{L}} = L \frac{\mathrm{d}i'(t)}{\mathrm{d}t}.
+    \end{equation}
+    As a simplification, it is assumed that the $\Delta$ is an approximation of the total differential by a difference equation with the differences $\Delta$. This leads to the component differential equations becoming mean value equations such as:
+    \begin{equation}
+        \frac{\Delta i'(t)}{\Delta t} = \frac{U_{\mathrm{L}}}{L}.
+    \end{equation}
+    When transistor $T$ is conducting it applies $U_{\mathrm{L}} = u'(t) = \hat U_{\mathrm{1}} \sin(\omega t)$.
+    This means for $\Delta i'(t)$:
+\begin{equation}
+    \Delta i'(t) = \frac{ U_{\mathrm{L}} \Delta t}{L} = \frac{\hat U_{\mathrm{1}} \sin(\omega t) d(t) T_{\mathrm{on}}}{L} = \Delta i'_{\mathrm{1}}(t).
+\end{equation}
+
+
+ \begin{equation}
+     \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}\hat U_{\mathrm{1}}\sin (\omega t)}{U_{\mathrm{2}}L}(1-\frac{1}{M}\sin(\omega t)) T_{\mathrm{on}}.%\label{eq:ex05\Delta i'}
+ \end{equation}
+ Using $\frac{\hat U_{\mathrm{1}}}{U_{\mathrm{2}}} = \frac{1}{M}$ %\eqref{eq:ex05\Delta i'} becomes:
+ \begin{equation}
+     \Delta i'_{\mathrm{1}}(t) = 44
+ \end{equation}
+
     \begin{equation}
         \frac{\mathrm{d}i'}{\mathrm{d}}  = \frac{1}{L} \hat U_\mathrm{1} \sin(\omega t)
     \end{equation}
