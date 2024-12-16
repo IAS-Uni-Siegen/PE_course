@@ -11,7 +11,7 @@ An uncontrolled single-phase, two-pulse rectifier circuit with capacitive filter
 is shown in \autoref{fig:B2U_Topology_Cap_Filtering}.
 All components, including the diodes, are assumed to be ideal. On the input side, 
 the single-phase AC supply with voltage $u$ is connected, while on the output side, 
-a smoothing capacitor $C$ and a constant current load $I_\mathrm{L}$ are present.
+a smoothing capacitor $C$ and a constant current load $I_\mathrm{0}$ are present.
 
 \input{fig/ex05/Fig_B2U_TopologyWithCapactiveFiltering.tex}
 
@@ -20,69 +20,123 @@ a smoothing capacitor $C$ and a constant current load $I_\mathrm{L}$ are present
     \begin{tabular}{llll}
         \toprule
         
-        Input voltage: &  $u_{\mathrm{1}}(t) = \SI{156}{\volt} \sin(\omega t)$ & Load current: & $I_{\mathrm{0}} = \SI{7.5}{\ampere}$ \\ 
-        Filter capacity: & $C = \SI{330}{\micro\farad}$  & frequency: & $f= \SI{60}{\hertz}$ \\ 
+        Input voltage: &  $u_\mathrm{1}(t) = \SI{156}{\volt}\cdot \sin(\omega t)$ & Load current: & $I_{\mathrm{0}} = \SI{7.5}{\ampere}$ \\ 
+        Filter capacitance: & $C = \SI{330}{\micro\farad}$  & Frequency: & $f= \SI{60}{\hertz}$ \\ 
         \bottomrule
     \end{tabular}
-    \caption{Parameters of the PFC rectifier.}  
+    \caption{Parameters of the B2U rectifier.}  
     \label{table:ex05_Parameters of the circuit}
 \end{table}
 
-The angle $\alpha$ represent the time range between zero crossing of the supply voltage and the point in time
+The angle $\alpha$ represents the phase angle range between zero crossing of the supply voltage and the point in time
 at which all four diodes are blocked, meaning the capacitor discharges through the load. The angle $\beta$ 
-represents the time range between $\alpha$ and the point in time at which two of the four diodes begin to 
+represents the phase angle range between $\alpha$ and the phase angle at which two of the four diodes begin to 
 conduct, i.e., when the capacitor is recharged from the mains supply.
 A steady-state operation is assumed for this task.
 
 \subtask{Calculate the two angles $\alpha$ and $\beta$.
-Note: For the calculation of $\beta$ you can use the following simple approximation: $sin(x) = x$. 
-(This approximation is sufficiently accurate within a range of approximately $\SI{25}{\degree}$  around the zero point of the sine function.)}
+Note: For the calculation of $\beta$ you can use the following simple approximation: $\text{sin(x) = x}$.
+(This approximation is sufficiently accurate within a range of approximately $x=\pm \SI{25}{\degree}$.)}
 \begin{solutionblock}
-    As long as the voltage $\left| u_\mathrm{1}(t) \right|$ increase the voltage $u_\mathrm{c}(t)$ of the capacitor follows:
+    As long as the voltage $\left| u_\mathrm{1}(t) \right|$ increase the voltage $u_\mathrm{2}(t)$ of the capacitor follows:
     \begin{equation} 
-        u_\mathrm{C}(t) = \left| \hat{u_{\mathrm{1}}}\sin(\omega t)\right|.
+        u_\mathrm{2}(t) = \left| \hat{u}_\mathrm{1}\sin(\omega t)\right|.
     \end{equation}
-    If the capacitor supplies the load current $I_\mathrm{0}$ the voltage $u_\mathrm{c}(t)$ at the capacitor 
+    If the capacitor supplies the load current $I_\mathrm{0}$ the voltage $u_\mathrm{2}(t)$ at the capacitor 
     decreases linear with:
     \begin{equation} 
-        \frac{d(u_\mathrm{C}(t))}{dt} = -\frac{I_\mathrm{0}}{C}.
+        dU_\mathrm{C}(t)=\frac{d(u_\mathrm{2}(t))}{dt} = -\frac{I_\mathrm{0}}{C}=-\frac{\SI{7.5}{\ampere}}{\SI{330}{\micro\farad}}
+        =-\SI{22.7}{\kilo\volt/\second}.
     \end{equation} 
-    If the voltage $\left| u_\mathrm{1}(t) \right|$ decreases faster than $d(u_\mathrm{C}(t))/dt$
+    If the voltage $u_\mathrm{2}(t)$ decreases faster than $d(u_\mathrm{2}(t))/dt$
     then all diodes blocks and the capacitor supplies the current load $I_\mathrm{0}$. This leads to:
     \begin{equation} 
-        \frac{d(u_\mathrm{1}(t))}{dt} = \frac{d(\left| \hat{u_{\mathrm{1}}}\sin(\omega t)\right|)}{dt} 
-        = \omega\left| \hat{u_{\mathrm{1}}}\cos(\omega t)\right| = -\frac{I_\mathrm{0}}{C}.
+        \frac{d(u_\mathrm{2}(t))}{dt} = \frac{d(\left| \hat{u}_\mathrm{1}\sin(\omega t)\right|)}{dt} 
+        = \omega\left| \hat{u}_\mathrm{1}\cos(\omega t)\right| = -\frac{I_\mathrm{0}}{C}.
         \label{eq:deltaVoltageAtCapacitor_ex05}
     \end{equation} 
     Solving \eqref{eq:deltaVoltageAtCapacitor_ex05} with respect to $\omega \cdot t = \alpha$ yields
     \begin{equation}
-        \alpha = \arccos(-\frac{I_\mathrm{0}}{\omega C \cdot \hat{u_{\mathrm{1}}}})
-        = \arccos(-\frac{\SI{7.5}{\ampere}}{2 \pi \cdot \SI{60}{\hertz} \cdot \SI{330}{\micro\farad} \cdot \SI{156}{\volt}}) = \SI{112.8}{\degree}
-    \end{equation}   
-    In that moment when the voltage $\left| u_\mathrm{1}(t) \right|$ becomes equal to $u_\mathrm{C}(t)$ 
-    the discharge of the capacitor stops and $u_\mathrm{C}(t)$ follows again $\left| u_\mathrm{1}(t) \right|$.
-    The voltage $\left| u_\mathrm{1}(t) \right|$ increases again at $\pi$ with:
-    \begin{equation}
-        \left| u_\mathrm{1}sin(\omega t + \pi ) \right| = u_\mathrm{1}sin(\omega t) \quad \text{for} \quad t \leq \pi
-    \end{equation}   
+        \alpha = \arccos(-\frac{I_\mathrm{0}}{\omega C \cdot \hat{u}_\mathrm{1}})
+        = \arccos(-\frac{\SI{7.5}{\ampere}}{2 \pi \cdot \SI{60}{\hertz} \cdot \SI{330}{\micro\farad} \cdot \SI{156}{\volt}}) = \SI{112.8}{\degree}.
+    \end{equation}
     The capacitor is discharging by the load  $I_\mathrm{0}$ at $\alpha$, which corresponds to a 
     voltage of: 
     \begin{equation}
-        \left| u_\mathrm{1}sin(\omega t) \right| = u_\mathrm{1}sin(\alpha) 
-        = \SI{156}{\volt} \cdot sin(\SI{112.8}{\degree})=\SI{143.4}{\volt}
+        \hat{u}_\mathrm{1}sin(\omega t) = \hat{u}_\mathrm{1}sin(\alpha) 
+        = \SI{156}{\volt} \cdot sin(\SI{112.8}{\degree})=\SI{143.4}{\volt}.
+    \end{equation}    
+    In that moment when the voltage $\left| u_\mathrm{1}(t) \right|$ becomes equal to $u_\mathrm{2}(t)$ 
+    the discharge of the capacitor stops and $u_\mathrm{2}(t)$ follows again $\left| u_\mathrm{1}(t) \right|$.
+    The voltage $\left| \hat{u}_\mathrm{1}(t) \right|$ increases again at $\pi$ with:
+    \begin{equation}
+        \left| \hat{u}_\mathrm{1}sin(\omega t + \pi ) \right| = \hat{u}_\mathrm{1}sin(\omega t) \quad \text{for} \quad t \leq \pi.
+    \end{equation}
+    If we consider $t=0$ as the point in time at which the voltage $u_\mathrm{2}(t)$ begins to rise, the following 
+    results compared to the previous point in time at which the capacitor begins to discharge:      
+    \begin{equation}
+        t_\mathrm{\alpha}=\frac{\pi - \alpha_\mathrm{rad}}{\omega} = 
+        \frac{\pi - \SI{1.969}{\radian}}{\SI{377}{\hertz}} = \SI{-3.111}{\milli\second}
     \end{equation}   
-
+    With the approximation $sin(x) = x$ we get
+    \begin{equation}
+        \hat{u}_\mathrm{1}sin(\alpha) + dU_\mathrm{C}(t) \cdot (t-t_\mathrm{\alpha}) = \hat{u}_\mathrm{1}\cdot \omega t.
+        \label{eq:stopCapacitordischarge_ex05}
+    \end{equation}   
+    Solving \eqref{eq:stopCapacitordischarge_ex05} with respect to $\omega t$ leads to
+    \begin{equation}
+        \omega t = \frac{\hat{u}_\mathrm{1}sin(\alpha) - dU_\mathrm{C}(t) \cdot t_\mathrm{\alpha}}
+                   {\hat{u}_\mathrm{1}-\frac{dU_\mathrm{C}(t)}{\omega}}=
+                   \frac{\SI{143.4}{\volt} - \SI{22.7}{\kilo\volt/\second} \cdot ()\SI{3.111}{\milli\second}}
+                   {\SI{156}{\volt}-\frac{dU_\mathrm{C}(t)}{\SI{377}{\hertz}}}=\SI{0.337}{\radian}.
+    \end{equation}
+    $\beta$ is to calculate by distance between $alpha$ and the calculated $\omega t$:
+    \begin{equation}
+        \beta=\omega t + \pi - \alpha = \SI{0.337}{\radian} + \pi - \SI{1.969}{\radian}
+        = \SI{1.51}{\radian} = \SI{86.5}{\degree}.
+    \end{equation}
 \end{solutionblock}
 
 \vspace{2em}\par
 If you were unable to solve task (a), please use $\alpha=\SI{112.8}{\degree}$ and $\beta=\SI{86.5}{\degree}$.
 
-\subtask{Sketch the waveform of the capacitor voltage $u_\mathrm{C}$ for the angles $\alpha$ and $\beta$ calculated in previous subtask.}
+\subtask{Sketch the capacitor voltage $u_\mathrm{2}(\omega t)$ considering $\omega t \in [0,...,2\pi]$ taking 
+into account the previously calculated angles $\alpha$ and $\beta$.}
+\subtask{Calculate the currents $i_\mathrm{1}(\omega t)$  and $i_\mathrm{C}(\omega t)$ and sketch it considering $\omega t \in [0,...,2\pi]$.}
+\begin{solutionblock}
+    For current of $i_\mathrm{1}(\omega t)$ and  $i_\mathrm{C}(\omega t)$ two cases are to consider. If $\alpha<\omega t<\alpha+\beta$
+    and $\pi+\alpha<\omega t<\pi+\alpha+\beta$,the capacitor supplies the load current $I_{\mathrm{0}}$.
+    The remaining phase angle range the input voltage supplies the current load $I_{\mathrm{0}}$ and charge the capacitor.
+    For $\alpha<\omega t<(\alpha+\beta)$ and $(\pi+\alpha)<\omega t<(\pi+\alpha+\beta)$ the current $i_\mathrm{C}(\omega t)$ 
+    corresponds to the current $-I_{\mathrm{0}}$ while all diodes are inactive.
+    \begin{equation} 
+        i_\mathrm{C}(\omega t)=-I_{\mathrm{0}} \quad \text{and} \quad i_\mathrm{1}(\omega t)= i_\mathrm{2}(\omega t)= \SI{0}{\ampere}
+    \end{equation}
+    For $(\alpha+\beta-\pi)\leq\omega t\leq\alpha$ and $(\alpha+\beta)\leq\omega t\leq(\pi+\alpha)$ the current $i_\mathrm{C}(\omega t)$ results in:
+    \begin{equation} 
+        i_\mathrm{C}(\omega t)=C\frac{d(u_\mathrm{2}(t))}{dt}=C\frac{d(\left| \hat{u}_\mathrm{1}\sin(\omega t)\right|)}{dt}
+        = \omega C \left|\hat{u}_\mathrm{1}\cos(\omega t)\right|
+        = \SI{377}{\hertz} \SI{330}{\micro\farad} \left|\SI{156}{\volt}\cos(\omega t)\right|=\SI{19.4}{\ampere}\left|\cos(\omega t)\right| 
+    \end{equation}
+    Entering numbers leads to
+    \begin{equation} 
+        i_\mathrm{C}(\omega t)= \SI{377}{\hertz} \SI{330}{\micro\farad} \left|\SI{156}{\volt}\cos(\omega t)\right|=\SI{19.4}{\ampere}\left|\cos(\omega t)\right| 
+    \end{equation}
+    The current $i_\mathrm{2}(\omega t)$ is the sum of $I_{\mathrm{0}}$ and $i_\mathrm{C}(\omega t)$.
+    \begin{equation} 
+        i_\mathrm{2}(\omega t)=i_\mathrm{C}(\omega t) + I_{\mathrm{0}}=\SI{19.4}{\ampere}\left|\cos(\omega t)\right| + \SI{7.5}{\ampere}
+    \end{equation}
+    The current $i_\mathrm{1}(\omega t)$ depends on the diodes, which are active.
+    \begin{align}
+        \begin{split}
+            i_\mathrm{1}(\omega t)=i_\mathrm{2}(\omega t) \quad \text{for} \quad (\alpha+\beta-\pi)\leq\omega t\leq\alpha \\
+            i_\mathrm{1}(\omega t)=-i_\mathrm{2}(\omega t) \quad \text{for} \quad (\alpha+\beta)\leq\omega t\leq\pi+\alpha
+        \end{split}
+    \end{align}
+\end{solutionblock}
 
-\subtask{Sketch the time-dependent waveform of the current $i_\mathrm{1}(t)$  and $i_\mathrm{2}(t)$.}
-
-\subtask{Assume the smoothing capacitor is very large, i.e., $C\rightarrow \infty$ .What is the average active power $P_\mathrm{L}$ 
-absorbed by the current source? What will $P_\mathrm{L}$ be if $C=\SI{330}{\milli\ampere}$?}
+\subtask{Assume the smoothing capacitor is very large, i.e., $C\rightarrow \infty$. What is the average active power $P_\mathrm{0}$ 
+absorbed by the current source? What will $P_\mathrm{0}$ be if $C=\SI{330}{\micro\farad}$?}
 
 
 \subtask{What is the minimum blocking voltage ratings of the diodes to ensure that the rectifiers is not damaged?}
