@@ -72,6 +72,8 @@ i1_PFC_sample = i_1(s_PFC_sample, 0.001, M, x)
 #normalize the current w.r.t to its maximum value
 i1_ref = iamp*np.sin(x)/np.max(i1_PFC_sample)
 i1_PFC_sample = i1_PFC_sample/np.max(i1_PFC_sample)
+i1_delta = i1_PFC_sample - i1_ref
+i1_delta = i1_delta - np.mean(i1_delta)
 
 # Compute the derivative of the signal
 s_diff = np.diff(s_PFC_sample)
@@ -96,7 +98,7 @@ idx_sum = np.unique(np.concatenate((nearest_samples, upper_peaks, lower_peaks, [
 # save the reduced data to a csv file
 current_directory = os.path.dirname(os.path.abspath(__file__))
 save_path = os.path.join(current_directory, 'PWM_PFC_example.csv')
-np.savetxt(save_path, np.column_stack((x[idx_sum], s_PFC_sample[idx_sum], d_PFC_sample[idx_sum], c_PFC_sample[idx_sum], i1_PFC_sample[idx_sum], i1_ref[idx_sum])), delimiter=',', header='wt, s, d, c, i1, i1ref', comments='')
+np.savetxt(save_path, np.column_stack((x[idx_sum], s_PFC_sample[idx_sum], d_PFC_sample[idx_sum], c_PFC_sample[idx_sum], i1_PFC_sample[idx_sum], i1_ref[idx_sum], i1_delta[idx_sum])), delimiter=',', header='wt, s, d, c, i1, i1ref, i1delta', comments='')
 
 
 

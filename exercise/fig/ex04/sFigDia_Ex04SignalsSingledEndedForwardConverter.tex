@@ -25,11 +25,11 @@
                 % x-Ticks
                 xtick={0,0.2,0.4,0.6,0.8,1},
                 xticklabels={0,0.2,0.4,0.6,0.8,1},
-                xticklabel style = {yshift=0.3cm,anchor=east},
+                xticklabel style = {anchor=north},
                 % y-Ticks
                 ytick={600,500,400,300,200,100,0},
                 yticklabels={600,,400,,200,,0},
-                yticklabel style = {yshift=0.2cm,anchor=east},
+                yticklabel style = {anchor=east},
                 % Grid layout
                 grid=both,
                 grid style={line width=.1pt, draw=gray!10},
@@ -46,7 +46,7 @@
                 (1,0)
                 (1.05,0)
                 };            
-                \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.15,400) {$U_{\mathrm{1}=\SI{360}{\volt}}$};                    
+                \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,500) {$U_{\mathrm{1}}=\SI{360}{\volt}$};                    
             %UT at U1=240V
             \addplot[color=black,mark=none,solid] coordinates{
                 (0, 0)
@@ -56,7 +56,7 @@
                 (1,0)
                 (1.05,0)
                 };                
-                \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.51,200) {$U_{\mathrm{1}=\SI{240}{\volt}}$};                    
+                \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.55,200) {$U_{\mathrm{1}}=\SI{240}{\volt}$};                    
             \end{axis}     
     \end{tikzpicture}
     \caption{Voltage at transistor.}
@@ -82,11 +82,11 @@
                 % x-Ticks
                 xtick={0,0.2,0.4,0.6,0.8,1},
                 xticklabels={0,0.2,0.4,0.6,0.8,1},
-                xticklabel style = {yshift=0.3cm,anchor=east},
+                xticklabel style = {anchor=north},
                 % y-Ticks
                 ytick={1000,800,600,400,200,0},
                 yticklabels={1000,800,600,400,200,0},
-                yticklabel style = {yshift=0.2cm,anchor=east},
+                yticklabel style = {anchor=east},
                 % Grid layout
                 grid=both,
                 grid style={line width=.1pt, draw=gray!10},
@@ -100,7 +100,7 @@
                 (0.65, 0)
                 (1.05,0)
                 };                
-            \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.15,400) {$U_{\mathrm{1}=\SI{360}{\volt}}$};                    
+            \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.2,900) {$U_{\mathrm{1}}=\SI{360}{\volt}$};                    
             %im at U1=240V
             \addplot[color=magenta,mark=none,solid] coordinates{
                 (0, 0)
@@ -110,7 +110,7 @@
                 (1,0)
                 (1.05,0)
                 };                
-            \node[magenta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.6,800) {$U_{\mathrm{1}=\SI{240}{\volt}}$};                    
+            \node[magenta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.6,800) {$U_{\mathrm{1}}=\SI{240}{\volt}$};                    
             \end{axis}     
     \end{tikzpicture}
     \caption{Demagnetization current of  $N_3$.}
@@ -136,11 +136,11 @@
                 % x-Ticks
                 xtick={0,0.2,0.4,0.6,0.8,1},
                 xticklabels={0,0.2,0.4,0.6,0.8,1},
-                xticklabel style = {yshift=0.3cm,anchor=east},
+                xticklabel style = {anchor=north},
                 % y-Ticks
                 ytick={0,5,10,15,20,25},
                 yticklabels={0,,10,,20,},
-                yticklabel style = {yshift=0.2cm,anchor=east},
+                yticklabel style = {anchor=east},
                 % Grid layout
                 grid=both,
                 grid style={line width=.1pt, draw=gray!10},
@@ -155,7 +155,7 @@
                 (1,0.2)
                 (1.05,0)
                 };                
-            \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.15,10) {$U_{\mathrm{1}=\SI{360}{\volt}}$};                    
+            \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.15,25) {$U_{\mathrm{1}}=\SI{360}{\volt}$};                    
             %im at U1=240V
             \addplot[color=black,mark=none,dashdotted] coordinates{
                 (0, 0)
@@ -165,7 +165,7 @@
                 (1,0)
                 (1.05,0)
                 };                
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,10) {$U_{\mathrm{1}=\SI{240}{\volt}}$};                    
+            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.55,10) {$U_{\mathrm{1}}=\SI{240}{\volt}$};                    
             \end{axis}     
     \end{tikzpicture}
     \caption{Current through $D_2$.}
