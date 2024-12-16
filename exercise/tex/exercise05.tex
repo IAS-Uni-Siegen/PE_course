@@ -94,7 +94,7 @@ absorbed by the current source? What will $P_\mathrm{L}$ be if $C=\SI{330}{\mill
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task{PFC rectifier}
 Due to the constantly increasing load on the grid with harmonics as a result of the use of power converters, the regulations regarding the permissible harmonic content of the current consumption of electrical consumers are being tightened. It is therefore necessary, e.g. for the rectification of single-phase AC mains voltage, for example, it is necessary to design power converters with a high power factor or a largely sinusoidal input current. 
-A variant of a PFC rectifier circuit is shown in \autoref{fig:Boost converter with single-phase diode bridge_topology}. The system consists of a diode bridge $(D_{\mathrm{1}} \, \dots \, D_{\mathrm{4}})$, an inductor $L$, a power transistor $T$ (usually a power MOSFET), a freewheeling diode $D_\mathrm{5}$ and an output capacitor $C$. The prerequisite for the use of the boost converter is: $u_\mathrm{d} = U_\mathrm{d}>U_\mathrm{1}$. The boost converter is operated with a modified current control method ('Average Current Mode Control') for which the switching frequency $f_\mathrm{T}$ has a constant value $f_\mathrm{T} = \SI{20}{\kilo\hertz}$. This is realized by comparing the current controller output variable with a triangular oscillation with switching frequency $f_\mathrm{T} = \SI{20}{\kilo\hertz}$ and suitable amplitude is compared. Let $L = \SI{570}{\micro\henry}$ and the inductance carry a continuous current. Definition: Transmission ratio: $M = \frac{ U_\mathrm{d}}{\hat U_\mathrm{1}}$
+A variant of a PFC rectifier circuit is shown in \autoref{fig:Boost converter with single-phase diode bridge_topology}. The system consists of a diode bridge $(D_{\mathrm{1}} \, \dots \, D_{\mathrm{4}})$, an inductor $L$, a power transistor $T$ (usually a power MOSFET), a freewheeling diode $D_\mathrm{5}$ and an output capacitor $C$. The prerequisite for the use of the boost converter is: $u_\mathrm{2} = U_\mathrm{2}>U_\mathrm{1}$. The boost converter is operated with a modified current control method ('Average Current Mode Control') for which the switching frequency $f_\mathrm{T}$ has a constant value $f_\mathrm{T} = \SI{20}{\kilo\hertz}$. This is realized by comparing the current controller output variable with a triangular oscillation with switching frequency $f_\mathrm{T} = \SI{20}{\kilo\hertz}$ and suitable amplitude is compared. Let $L = \SI{570}{\micro\henry}$ and the inductance carry a continuous current. Definition: Transmission ratio: $M = \frac{u_\mathrm{2}}{\hat U_\mathrm{1}}$
 \input{fig/ex05/Fig_BoostConverter_with_Rectifiers.tex}
 
 \begin{table}[ht]
@@ -112,7 +112,7 @@ A variant of a PFC rectifier circuit is shown in \autoref{fig:Boost converter wi
     \label{table:ex05_Parameters of the circuit}
 \end{table}
 
-\subtask{Specify the voltage transformation ratio $m(t)= \frac{u_{\mathrm{2}}(t)}{u'(t)}$ as a function of the duty cycle $D(t)$ is specified.}
+\subtask{Specify the voltage transformation ratio $m(t)= \frac{u_{\mathrm{2}}(t)}{u'(t)}$ as a function of the duty cycle $d(t)$ is specified.}
 \begin{solutionblock}
     
     \begin{equation}
