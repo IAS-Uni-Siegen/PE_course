@@ -4,7 +4,7 @@
     \begin{tikzpicture}
         \begin{axis}[
             xlabel={$t / \mathrm{ms}$},
-            ylabel={$u_\mathrm{1}(t) / u_\mathrm{L}(t) / \overline u_\mathrm{L}(t) / \mathrm{V}$},
+            ylabel={$u_\mathrm{1}(t) / \mathrm{V}$},
             axis lines=left,
             ymin=-400, ymax=400,
             xmin=0, xmax=10,
@@ -18,78 +18,79 @@
             grid
             ]
             
-            \addplot[domain=0:10, samples=200, thick, signalblue] 
+            \addplot[domain=0:10, samples=200, thick, signalred] 
             {-13.2 * (x - 5)^2 + 325.269};
-            \addplot[domain=0:10, samples=200, thick, signalblue] 
+            \addplot[domain=0:10, samples=200, thick, signalgreen] 
             {-12.6 * (x - 5)^2 - 74.731};
-            \addplot[domain=0:10, samples=200, thick, signalblue] 
+            \addplot[domain=0:10, samples=200, thick, signalorange] 
             {12.8 * (x - 5)^2 + 74.731};
                       
-            \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2]  
             (axis cs:0, 400) -- (axis cs:0.48, 400) -- (axis cs:0.48, -400) -- (axis cs:0, -400) -- cycle;
         
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:0.5, 400) -- (axis cs:0.935, 400) -- (axis cs:0.935, -400) -- (axis cs:0.5, -400) -- cycle;
 
         
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:1.008, 400) -- (axis cs:1.388, 400) -- (axis cs:1.388, -400) -- (axis cs:1.008, -400) -- cycle;
 
         
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:1.52, 400) -- (axis cs:1.852, 400) -- (axis cs:1.852, -400) -- (axis cs:1.52, -400) -- cycle;
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:2.044, 400) -- (axis cs:2.35, 400) -- (axis cs:2.35, -400) -- (axis cs:2.044, -400) -- cycle;
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:2.58, 400) -- (axis cs:2.82, 400) -- (axis cs:2.82, -400) -- (axis cs:2.58, -400) -- cycle;
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2]  
             (axis cs:3.1, 400) -- (axis cs:3.3, 400) -- (axis cs:3.3, -400) -- (axis cs:3.1, -400) -- cycle;
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:3.6, 400) -- (axis cs:3.8, 400) -- (axis cs:3.8, -400) -- (axis cs:3.6, -400) -- cycle;    
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2]  
             (axis cs:4.1, 400) -- (axis cs:4.2, 400) -- (axis cs:4.2, -400) -- (axis cs:4.1, -400) -- cycle;   
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:4.6, 400) -- (axis cs:4.7, 400) -- (axis cs:4.7, -400) -- (axis cs:4.6, -400) -- cycle; 
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:5.15, 400) -- (axis cs:5.2, 400) -- (axis cs:5.2, -400) -- (axis cs:5.15, -400) -- cycle;
             
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:5.6, 400) -- (axis cs:5.7, 400) -- (axis cs:5.7, -400) -- (axis cs:5.6, -400) -- cycle;
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:6.1, 400) -- (axis cs:6.2, 400) -- (axis cs:6.2, -400) -- (axis cs:6.1, -400) -- cycle;
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:6.6, 400) -- (axis cs:6.8, 400) -- (axis cs:6.8, -400) -- (axis cs:6.6, -400) -- cycle;
             
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:7.1, 400) -- (axis cs:7.3, 400) -- (axis cs:7.3, -400) -- (axis cs:7.1, -400) -- cycle;
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:7.62, 400) -- (axis cs:7.84, 400) -- (axis cs:7.84, -400) -- (axis cs:7.62, -400) -- cycle;
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:8.156, 400) -- (axis cs:8.462, 400) -- (axis cs:8.462, -400) -- (axis cs:8.156, -400) -- cycle;
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:8.68, 400) -- (axis cs:8.942, 400) -- (axis cs:8.942, -400) -- (axis cs:8.68, -400) -- cycle;
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:9.084, 400) -- (axis cs:9.319, 400) -- (axis cs:9.319, -400) -- (axis cs:9.084, -400) -- cycle;
 
-        \draw[opacity=0.2] 
+            \draw[signalblue, opacity=0.2] 
             (axis cs:9.58, 400) -- (axis cs:9.9, 400) -- (axis cs:9.9, -400) -- (axis cs:9.58, -400) -- cycle;
-
+            \legend{$u_\mathrm{1}(t)$, $400-u_\mathrm{1}(t)$, $u_\mathrm{1}(t)-400$}
         \end{axis}
+        
     \end{tikzpicture} 
 
-    \caption{Voltage curve $u_\mathrm{L}$ and local average of $\overline u_\mathrm{L}$ with signal for power transistor T.}
+    \caption{Voltage curve $u_\mathrm{1}(t)$ with signal for power transistor T.}
     \label{fig:Voltage curve ul signal Transistor ex05}
 \end{figure}
