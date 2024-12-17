@@ -231,11 +231,11 @@ The ratio $m(t)= \frac{U_\mathrm{2}}{u'(t)}$ can now be determined from \eqref{e
     \end{equation}
     For the condition transistor $T$ is conducting, the duty cycle $d(t)$ is derived from \eqref{eq:ex05ratio_m(t)} as:
 \begin{equation}
-    d(t) = 1-\frac{1}{m(t)} = 1- \frac{u'(t)}{U_{\mathrm{2}}}=1- \frac{U_{\mathrm{1}}\sin(\omega t)}{U_{\mathrm{2}}} = 1 -\frac{1}{M} \sin(\omega t)
-\end{equation}.
+    d(t) = 1-\frac{1}{m(t)} = 1- \frac{u'(t)}{U_{\mathrm{2}}}=1- \frac{U_{\mathrm{1}}\sin(\omega t)}{U_{\mathrm{2}}} = 1 -\frac{1}{M} \sin(\omega t).
+\end{equation}
 For the condition diode $D_{\mathrm{5}}$ is conducting, the duty cycle $1-d(t)$ is derived from \eqref{eq:ex05ratio_m(t)} as:
 \begin{equation}
-    1-d(t) = \frac{1}{m(t)}=\frac{1}{M} \sin(\omega t)
+    1-d(t) = \frac{1}{m(t)}=\frac{1}{M} \sin(\omega t).
 \end{equation}
 \end{solutionblock}
 
@@ -263,16 +263,26 @@ Note: Consider the conductive state of $T$ and set the voltage across the induct
  \end{equation}
  Using $\frac{\hat U_{\mathrm{1}}}{U_{\mathrm{2}}} = \frac{1}{M}$, \eqref{eq:ex05Deltai'} becomes:
  \begin{equation}
-     \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}T_{\mathrm{T}}}{LM}\sin (\omega t)(1-\frac{\sin(\omega t)}{M}).
+     \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}T_{\mathrm{T}}}{LM}\sin (\omega t)(1-\frac{\sin(\omega t)}{M}). \label{eq:ex05Deltai1'}
  \end{equation}
+   To be able to calculate the maximum value of the mains current
+    $i_\mathrm{1}$, the following equation has to be set up from \eqref{eq:ex05Deltai1'} as:
+    \begin{equation}
+        \frac{U_{\mathrm{2}}T_{\mathrm{T}}}{L} \frac{\mathrm{d}}{\mathrm{d}t}\left[\frac{1}{M}\sin(\omega t)\left(1-\frac{1}{M}\right)\sin(\omega t)\right] =0.
+    \end{equation}
+    The first derivation is as follows:
+    \begin{equation}
+        \frac{-\omega \cos(\omega t)(2\sin(\omega t)-M)}{M^2}=0.\label{eq:ex05derivationi1'}
+    \end{equation}
+    If the term $\frac{M}{2}=\sin(\omega t)$ is applied to \eqref{eq:ex05derivationi1'} this becomes zero:
 
     \begin{equation}
-        \frac{\mathrm{d}i'}{\mathrm{d}}  = \frac{1}{L} \hat U_\mathrm{1} \sin(\omega t)
+        \frac{-\omega \cos(\omega t)(2 \frac{M}{2}-M)}{M^2}=0.
     \end{equation}
-   % \begin{equation}
-    %    i' = \frac{1}{L \omega} \hat U_\mathrm{1} \[ \int_{0}^{T_\mathrm{p1_off}} \sin (\omega t) \,dt \]
-   % \end{equation}
-    
+    The ratio $\frac{M}{2}=\sin(\omega t)$ can now be used in \eqref{eq:ex05Deltai1'} to calculate the maximum $\Delta i'_{\mathrm{1}}(t)$ as follows:
+    \begin{equation}
+        \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}T_{\mathrm{T}}M}{2LM}\left(1-\frac{M}{2M}\right) = \frac{U_{\mathrm{2}}T_{\mathrm{T}}}{4L}=\frac{\SI{400}{\volt}\cdot \SI{50}{\micro\s}}{4\cdot\SI{570}{\micro\henry}} = \SI{8.77}{\ampere}.
+    \end{equation}
 \end{solutionblock}
 
 \subtask{Complete the current curve for a switching frequency $f_\mathrm{T2} = \SI{2}{\kilo\hertz}$ and a inductance $L = \SI{5}{\milli\henry}$ in \autoref{fig:Current i' control signal ex05}. Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T$ and are summarized for the first 4 switching times in \autoref{tab:switching_times}.}
@@ -293,12 +303,93 @@ Note: Consider the conductive state of $T$ and set the voltage across the induct
 \end{table}
 
 \input{fig/ex05/Fig_VoltageCourses_UL_No2}
+\begin{solutionblock}
+    The inductance equation is used to determine the current values $i'(t)$ as:
+    \begin{equation}
+        \frac{\mathrm{d}}{\mathrm{d}t}i'(t) = \frac{1}{L}\hat U_\mathrm{1} \sin(\omega t).\label{eq:ex054Deltai'}
+    \end{equation}
+    \eqref{eq:ex054Deltai'} must now be converted to i'. To do this, the right-hand side of the equation must be integrate to:
+    \begin{equation}
+        i'(t)=\frac{\hat U_\mathrm{1} \cos(\omega t)}{\omega L}.\label{eq:ex054currenti'1}
+    \end{equation}
+    The first interval is from $0 < t < T_\mathrm{1,off} = \SI{480}{\micro\s}$ for conducting transistor $T$. Insert into \eqref{eq:ex054currenti'1} used with the upper and lower limit leads to:
+    \begin{equation}
+        i'(T_\mathrm{1,off}) = \frac{\hat U_\mathrm{1}}{L \omega}(1- \cos(\omega T_\mathrm{1,off})) = \frac{\SI{400}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (1-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{480}{\micro\s})) = \SI{2.35}{\ampere}.
+    \end{equation}
+    For the interval $T_\mathrm{1,off} < t < T_\mathrm{1,on} = \SI{500}{\micro\s}$ in which the diode $D_\mathrm{5}$ conducts, the voltage $U_\mathrm{L,1}$ is first determined as:
+    \begin{equation}
+        U_\mathrm{L,1} = u'(t) - U_\mathrm{2}= \hat U_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{20}{\micro\s}) - \SI{400}{\volt} = -\SI{350}{\volt}.
+    \end{equation}
+    This voltage value  $U_\mathrm{L,1}$ is used to calculate the current  $i'(T_\mathrm{1,on})$ as:
+    \begin{equation}
+        i'(T_\mathrm{1,on}) = i'(T_\mathrm{1,off}) -\frac{ U_\mathrm{L,1}}{L}(T_\mathrm{1,on}-T_\mathrm{1,off}) = \SI{2.35}{\ampere} -\frac{\SI{350}{\volt}}{\SI{5}{\milli\henry}}\cdot (\SI{500}{\micro\s}-\SI{480}{\micro\s}) = \SI{0.95}{\ampere}.
+    \end{equation}
+     The second interval  $T_\mathrm{2,on} < t < T_\mathrm{2,off}  = \SI{935}{\micro\s}$ in which the transistor $T$ conducts, have to be inserted  into \eqref{eq:ex054currenti'1} with the upper and lower limit. This leads to:
+     \begin{equation}
+        i'(T_\mathrm{2,off}) = \frac{\hat U_\mathrm{1}}{L \omega}(\cos (\omega T_\mathrm{2,on})- \cos(\omega T_\mathrm{2,off}))+ i'(T_\mathrm{1,on}).
+    \end{equation}
+    With values:
+    \begin{equation}
+        i'(T_\mathrm{2,off}) = \frac{\SI{400}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (\cos(2\pi \cdot \SI{50}{\hertz}\cdot \SI{1008}{\micro\s})-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{935}{\micro\s})) + \SI{0.95}{\ampere}= \SI{7.27}{\ampere}.
+     \end{equation}
+
+     For the second interval $T_\mathrm{2,off} < t < T_\mathrm{2,on} = \SI{1008}{\micro\s}$ in which the diode $D_\mathrm{5}$ conducts, the voltage $U_\mathrm{L.2}$ is first determined as:
+     \begin{equation}
+        U_\mathrm{L,2} = u'(t) - U_\mathrm{2}= \hat U_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{73}{\micro\s}) - \SI{400}{\volt} = \SI{306}{\volt}.
+    \end{equation}
+    This voltage value  $U_\mathrm{L,2}$ is used to calculate the current  $i'(T_\mathrm{2,on})$ as:
+    \begin{equation}
+        i'(T_\mathrm{2,on}) = i'(T_\mathrm{2,off}) -\frac{ U_\mathrm{L,2}}{L}(T_\mathrm{2,on}-T_\mathrm{2,off}) = \SI{7.27}{\ampere} -\frac{\SI{306}{\volt}}{\SI{5}{\milli\henry}}\cdot (\SI{1008}{\micro\s}-\SI{935}{\micro\s}) = \SI{2.8}{\ampere}.
+    \end{equation}
+    The values determined in this task for mains current
+    $i'(t)$ must be entered in \autoref{fig:Current i' control signal ex05}, just like the envelope. This results in the following diagram:
+\end{solutionblock}
+
+\input{fig/ex05/Fig_courses_i'_results}
+
+
 
 \subtask{Approximately sketch the envelope of the current ripple in \autoref{fig:Current i' control signal ex05}. Sketch the voltage across the inductor in \autoref{fig:Voltage curve ul signal Transistor ex05} and enter the local average value of the voltage as an approximation. How would the switch-on/switch-off ratio of the transistor have to be changed before and after the current peak in order to bring the average actual current value closer to the current setpoint?}
 
 \subtask{Dimension the output capacitance $C$ in a way that the amplitude of the output voltage ripple is $\Delta u_{\mathrm{2}}<0.05  u_{\mathrm{2}}(t)$.
 Note: assume an idealized lossless converter.}
+\begin{solutionblock}
+    \begin{equation}
+        p_\mathrm{1}(t) = \hat U_\mathrm{1} \sin(\omega t) \hat I_\mathrm{1} \sin(\omega t) = \hat U_\mathrm{1} \hat I_\mathrm{1} \sin^2(\omega t).
+    \end{equation}
+    The power delivered across the load $R$ is equal to the output power $P_\mathrm{2}$ which is given as follows:
+    \begin{equation}
+        P_\mathrm{2} = \frac{\hat U_\mathrm{1}\hat I_\mathrm{1}}{2} = U_\mathrm{2} I_\mathrm{2}.
+    \end{equation}
+    The pulsating power across capacitor $C$ must be calculated as follows:
+    \begin{equation}
+        \Delta p_\mathrm{2} = \frac{\hat U_\mathrm{1}\hat I_\mathrm{1}}{2} \cos(2\omega t).
+    \end{equation}
+    The current through the capacitor is given by the following equation, using $P = UI$:
+    \begin{equation}
+        i_\mathrm{c}(t)=C \frac{\mathrm{d}u_\mathrm{c}}{\mathrm{d}t} = \frac{\Delta p_\mathrm{2}}{U_\mathrm{2}} = \frac{P_\mathrm{2}\cos(2\omega t)}{U_\mathrm{2}}.\label{eq:ex056currentic}.
+    \end{equation}
+    The following follows from \eqref{eq:ex056currentic} for $U_\mathrm{C}$:
+    \begin{equation}
+        \frac{\mathrm{d}u_\mathrm{C}}{\mathrm{d}t} = \frac{P_\mathrm{2}\cos (2\omega t)}{C U_\mathrm{2}},
+    \end{equation}
 
+    \begin{equation}
+        u_\mathrm{C} = \frac{1}{C} \int \frac{P_\mathrm{2}\cos(2\omega t)}{U_\mathrm{2}} \, dt = \frac{P_\mathrm{2}\sin(2\omega t)}{2\omega C U_\mathrm{2}}.\label{eq:ex056voltageuc}.
+    \end{equation}
+    $u_\mathrm{C}$ is equal to $ \hat U_\mathrm{C} sin(2wt)$ from this follows for \eqref{eq:ex056voltageuc}:
+    \begin{equation}
+        \hat U_\mathrm{C} = \frac{P_\mathrm{2}}{2\omega C U_\mathrm{2}}.
+    \end{equation}
+    And now the capacitance can be calculate with $\Delta u_{\mathrm{2}}<0.05  u_{\mathrm{2}}(t)$ as:
+    \begin{equation}
+        C = \frac{P_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2} }  \hat U_\mathrm{C} = \frac{P_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}\  0.05 U_\mathrm{2}}.  
+    \end{equation}
+    With inserted values:
+    \begin{equation}
+        C = \frac{p_\mathrm{2}}{4 \pi \cdot\SI{50}{\hertz}\cdot\SI{400}{\volt}\cdot 0.05 \cdot \SI{400}{\volt}} = \SI{796}{\micro\henry}.
+    \end{equation}
+\end{solutionblock}
 \subtask{Calculate the RMS value of the current through the capacitor $I_{\mathrm{C}}$.
 Note: the mean value of the current through the capacitor is $\overline i_{\mathrm{C}}=0$!}
 
