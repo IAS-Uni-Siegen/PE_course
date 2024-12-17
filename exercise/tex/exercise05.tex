@@ -94,7 +94,7 @@ absorbed by the current source? What will $P_\mathrm{L}$ be if $C=\SI{330}{\mill
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task{PFC rectifier}
 Due to the constantly increasing load on the grid with harmonics as a result of the use of power converters, the regulations regarding the permissible harmonic content of the current consumption of electrical consumers are being tightened. It is therefore necessary, e.g. for the rectification of single-phase AC mains voltage, to design power converters with a high power factor. 
-A variant of a PFC rectifier circuit is shown in \autoref{fig:Boost converter with single-phase diode bridge_topology}. The prerequisite for the use of the boost converter is: $u_\mathrm{2} = U_\mathrm{2}>U_\mathrm{1}$. The boost converter is operated with a pulse width modulated (PWM)-based controller for which the switching frequency $f_\mathrm{T}$ has a constant value $f_\mathrm{T} = \SI{20}{\kilo\hertz}$. CCM is assumed as the operating mode.
+A variant of a PFC rectifier circuit is shown in \autoref{fig:Boost converter with single-phase diode bridge_topology}. The prerequisite for the use of the boost converter is: $u_\mathrm{2} = U_\mathrm{2}>u'(t)$. The boost converter is operated with a pulse width modulated (PWM)-based controller for which the switching frequency $f_\mathrm{T}$ has a constant value $f_\mathrm{T} = \SI{20}{\kilo\hertz}$. CCM is assumed as the operating mode.
 \input{fig/ex05/Fig_BoostConverter_with_Rectifiers.tex}
 
 \begin{table}[ht]
@@ -171,11 +171,11 @@ Note: Consider the conductive state of $T$ and set the voltage across the induct
 
 
  \begin{equation}
-     \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}\hat U_{\mathrm{1}}\sin (\omega t)}{U_{\mathrm{2}}L}(1-\frac{1}{M}\sin(\omega t)) T_{\mathrm{on}}.%\label{eq:ex05\Delta i'}
+     \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}\hat U_{\mathrm{1}}\sin (\omega t)}{U_{\mathrm{2}}L}(1-\frac{1}{M}\sin(\omega t)) T_{\mathrm{T}}.\label{eq:ex05Deltai'}
  \end{equation}
- Using $\frac{\hat U_{\mathrm{1}}}{U_{\mathrm{2}}} = \frac{1}{M}$ %\eqref{eq:ex05\Delta i'} becomes:
+ Using $\frac{\hat U_{\mathrm{1}}}{U_{\mathrm{2}}} = \frac{1}{M}$, \eqref{eq:ex05Deltai'} becomes:
  \begin{equation}
-     \Delta i'_{\mathrm{1}}(t) = 44
+     \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}T_{\mathrm{T}}}{LM}\sin (\omega t)(1-\frac{\sin(\omega t)}{M}).
  \end{equation}
 
     \begin{equation}
@@ -208,7 +208,7 @@ Note: Consider the conductive state of $T$ and set the voltage across the induct
 
 \subtask{Approximately sketch the envelope of the current ripple in \autoref{fig:Current i' control signal ex05}. Sketch the voltage across the inductor in \autoref{fig:Voltage curve ul signal Transistor ex05} and enter the local average value of the voltage as an approximation. How would the switch-on/switch-off ratio of the transistor have to be changed before and after the current peak in order to bring the average actual current value closer to the current setpoint?}
 
-\subtask{Dimension the output capacitance $C$ in a way that the amplitude of the output voltage ripple is $\hat U_{\mathrm{2}}<0.05  u_{\mathrm{2}}(t)$.
+\subtask{Dimension the output capacitance $C$ in a way that the amplitude of the output voltage ripple is $\Delta u_{\mathrm{2}}<0.05  u_{\mathrm{2}}(t)$.
 Note: assume an idealized lossless converter.}
 
 \subtask{Calculate the RMS value of the current through the capacitor $I_{\mathrm{C}}$.
