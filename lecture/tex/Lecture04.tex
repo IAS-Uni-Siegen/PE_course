@@ -1661,7 +1661,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \frametitle{B2U rectifier impact on the grid voltage (cont.)}
     Assuming again a constant output voltage $u_2(t)=U_2$ (due to an infinite filter capacitance), the B2U's input voltage is
     \begin{equation}
-        u_{1\mathrm{A}}(t) = \begin{cases} u_{1\mathrm{A}}(t), &i_{1\mathrm{A}}(t)=0\\ \mathrm{sign}(i_2(t))\cdot U_2, &i_{1\mathrm{A}}(t) \neq 0.
+        u_{1\mathrm{A}}(t) = \begin{cases} u_{1}(t), &i_{1\mathrm{A}}(t)=0\\ \mathrm{sign}(i_2(t))\cdot U_2, &i_{1\mathrm{A}}(t) \neq 0.
         \end{cases}
     \end{equation}\pause
     Hence, the voltage at the second load's PCC is
@@ -2001,20 +2001,20 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Operation concept and assumptions for the PFC rectifier} 
-    \hl{Main idea}: utilize a DC/DC converter to control the input current $i_1(t)$ such that it follows the input voltage $u_1(t)$ in a way that the input current is in phase with the input voltage:
+    \hl{Main idea}: utilize a DC/DC converter to control the input current $i_1(t)$ such that it follows the input voltage $u_1(t)$ in phase:
     \begin{equation}
         i_1(t) = \hat{i}_1 \sin(\omega t) \sim  \hat{u}_1 \sin(\omega t) = u_1(t).
         \label{eq:PFC_current_voltage_proportionality}
-    \end{equation}
+    \end{equation}\pause
     \hl{Assumptions} for the following PFC rectifier analysis:
     \begin{itemize}
-        \item The input voltage $u_1(t)$ is an ideal sinusoidal signal with amplitude $\hat{u}_1$ and frequency $\omega$.
-        \item The output voltage is considered constant: $u_2(t)\approx U_2$.
+        \item The input voltage $u_1(t)$ is an ideal sinusoidal signal with amplitude $\hat{u}_1$ and frequency $\omega$.\pause
+        \item The output voltage is considered constant: $u_2(t)\approx U_2$.\pause
         \item The grid impedance is neglected for the sake of simplicity.
         \begin{itemize}
             \item The grid impedance as in \figref{fig:B2U_topology_capacitive_filter_grid} would (mainly) introduce a phase shift between $|u_1(t)|$ and $u'(t)$ which can be compensated by the control setup. 
         \end{itemize}
-    \end{itemize}
+    \end{itemize}\pause
     Based on these assumptions and the objective \eqref{eq:PFC_current_voltage_proportionality}, the voltages and currents in front of the DC/DC converter must be proportional to each other (to achieve unity power factor):
     \begin{equation}
         \frac{u_1(t)}{i_1(t)} = \frac{u'(t)}{i'(t)}.
@@ -2028,19 +2028,19 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \frametitle{Voltage transfer ratio} 
     Considering an ideal DC/DC converter with a \hl{voltage transfer ratio} $m(t)$, the converter must deliver a rectified-sinusoidal $u'(t)$ given some constant $U_2$:
     \begin{equation}
-        u'(t) = \frac{U_2}{m(t)} \quad \Leftrightarrow \quad \hat{u}_1|\sin(\omega t)| = \frac{U_2}{m(t)}
-    \end{equation}
+        u'(t) = \frac{U_2}{m(t)} \quad \Leftrightarrow \quad \hat{u}_1|\sin(\omega t)| = \frac{U_2}{m(t)}.
+    \end{equation}\pause
     Hence, the voltage transfer ratio $m(t)$ is given by
     \begin{equation}
         m(t) = \frac{U_2}{u'(t)}=\frac{U_2}{\hat{u}_1|\sin(\omega t)|} 
-    \end{equation}
+    \end{equation}\pause
     which varies between
     \begin{equation}
         \begin{alignedat}{2}
             \max_{u'}\{m(t)\} &= \infty, \quad &&\argmax_{u'}\{m(t)\} = 0,\\
             \min_{u'}\{m(t)\} &= \frac{U_2}{\hat{u}_1}=M, \quad &&\argmin_{u'}\{m(t)\} = \hat{u}_1.
         \end{alignedat}
-    \end{equation}
+    \end{equation}\pause
     One can conclude that the DC/DC converter must be able to deliver a voltage transfer ratio of 
     $$
      m(t)\in[M,\ldots,\infty].
@@ -2056,14 +2056,14 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \begin{itemize}
         \item Standard boost converter: $m(t)=\nicefrac{1}{(1-d(t))}$,
         \item Buck-boost converter or SEPIC: $m(t)=\nicefrac{d(t)}{(1-d(t))}$.
-    \end{itemize}
+    \end{itemize}\pause
     Due to its simplicity and low component count, the \hl{boost converter is the most common choice for PFC} applications leading to the reference duty cycle (assuming CCM operation):
     \begin{equation}
         d(t) = \frac{U_2-\hat{u}_1|\sin(\omega t)|}{U_2} = 1 - \frac{1}{M}|\sin(\omega t)|.
         \label{eq:PFC_duty_cycle_feed_forward}
-    \end{equation} 
+    \end{equation}\pause 
     \begin{varblock}{Remark on nomenclature and steady state}
-        In contrast to the previous DC/DC converter section, the duty cycle $d(t)$ is now a function of time and not a constant (small $d$ instead of capital $D$). However, the voltage transfer to duty cycle ratio was derived in steady state, i.e., \eqref{eq:PFC_duty_cycle_feed_forward} only holds approximately for $f_\mathrm{s}>> f=\nicefrac{\omega}{2\pi}$ (quasi steady state). 
+        In contrast to the previous DC/DC converter section, the duty cycle $d(t)$ is now a function of time and not a constant (small $d$ instead of capital $D$). However, the voltage transfer to duty cycle ratio was derived in steady state, i.e., \eqref{eq:PFC_duty_cycle_feed_forward} only holds approximately for $f_\mathrm{s}>> f=\nicefrac{\omega}{2\pi}$ (so-called \hl{quasi steady state}). 
     \end{varblock}
 \end{frame}
 
@@ -2141,25 +2141,25 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{PFC rectifier with boost converter (cont.)}
-    The duty cycle from \eqref{eq:PFC_duty_cycle_feed_forward} does not consider the inner voltage demand of the boost converter, in particular of its filter inductor $L$: 
+    \onslide<1->{The duty cycle from \eqref{eq:PFC_duty_cycle_feed_forward} does not consider the inner voltage demand of the boost converter, in particular of its filter inductor $L$:} 
     \begin{equation}
     \begin{split}
-        u_\mathrm{L}(t) &= L \frac{\mathrm{d}}{\mathrm{d}t}i'(t) = L \frac{\mathrm{d}}{\mathrm{d}t} \left(\hat{i}_1 |\sin(\omega t)|\right)\\
-                        & = \hat{i}_1\omega L\cos(\omega t) \mathrm{sgn}(\sin(\omega t)).
+        \onslide<1->{u_\mathrm{L}(t) &= L \frac{\mathrm{d}}{\mathrm{d}t}i'(t)}\onslide<2->{ = L \frac{\mathrm{d}}{\mathrm{d}t} \left(\hat{i}_1 |\sin(\omega t)|\right)}\\
+                        & \onslide<3->{= \hat{i}_1\omega L\cos(\omega t) \mathrm{sgn}(\sin(\omega t)).}
     \end{split}
     \end{equation}
-    Within one switching period of the boost converter the voltage balance must hold:
+    \onslide<4->{Within one switching period of the boost converter the voltage balance must hold:}
     \begin{equation}
         \begin{split}
-            u'(t) &= u_\mathrm{L}(t)+ U_2(1-d(t))\\
-            \Leftrightarrow \quad \hat{u}_1 |\sin(\omega t)| &= \hat{i}_1\omega L \cos(\omega t) \mathrm{sgn}(\sin(\omega t)) + M\hat{u}_1 (1-d(t)).
+            \onslide<4->{u'(t) &= u_\mathrm{L}(t)+ U_2(1-d(t))}\\
+            \onslide<5->{\Leftrightarrow \quad \hat{u}_1 |\sin(\omega t)| &= \hat{i}_1\omega L \cos(\omega t) \mathrm{sgn}(\sin(\omega t)) + M\hat{u}_1 (1-d(t)).}
         \end{split}
         \end{equation}
-    Rearranging towards the duty cycle $d(t)$ yields
+    \onslide<6->{Rearranging towards the duty cycle $d(t)$ yields
     \begin{equation}
         d(t) = 1 - \frac{1}{M}|\sin(\omega t)| + \frac{\hat{i}_1\omega L}{M\hat{u}_1} \cos(\omega t) \mathrm{sgn}(\sin(\omega t)).
         \label{eq:PFC_duty_cycle_feed_forward_with_inductor}
-    \end{equation}
+    \end{equation}}
 \end{frame}
 
 
@@ -2171,11 +2171,11 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     Evaluating \eqref{eq:PFC_duty_cycle_feed_forward_with_inductor} for $\omega t = \varepsilon$ with $\varepsilon\in\mathbb{R}>0$ being an infinitesimally small value, one obtains 
     $$
     d(\varepsilon/\omega) = 1 -\sin(\varepsilon) + \frac{\hat{i}_1\omega L}{M\hat{u}_1} \cos(\varepsilon)\mathrm{sgn}(\sin(\varepsilon)) \approx 1 +  \frac{\hat{i}_1\omega L}{M\hat{u}_1} > 1. 
-    $$
+    $$\pause
     Hence, the additional voltage demand of the boost converter inductor $L$ leads to a \hl{duty cycle exceeding unity}, that is, exceeding the feasible range and, therefore, the boost converter is not able to deliver the required voltage transfer ratio $m(t)$:
     \begin{itemize}
-        \item The boost converter is not able to exactly track the input current reference $i_1(t)=\hat{i}_1\sin(\omega t)$ (especially at the beginning and end of a half period).
-        \item The lower $L$ the less the negative impact of the inductor voltage demand.
+        \item The boost converter is not able to exactly track the input current reference $i_1(t)=\hat{i}_1\sin(\omega t)$ (especially at the beginning and end of a half period).\pause
+        \item The lower $L$ the less the negative impact of the inductor voltage demand.\pause
         \item Consequently, one wants to keep the inductance $L$ as low as possible which on the other hand requires a \hl{high switching frequency} $f_\mathrm{s}$ to keep the current ripple within acceptable bounds.
     \end{itemize}
 \end{frame}
@@ -2331,11 +2331,11 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
         u_\mathrm{L}(t) = \begin{cases} \hat{u}_1 \sin(\omega t), & 0 < t \leq d T_\mathrm{s}\\
         \hat{u}_1 \sin(\omega t) - U_2, & d T_\mathrm{s} < t \leq T_\mathrm{s}. 
         \end{cases}
-    \end{equation} 
-    We assume that $$ T_\mathrm{s} << \nicefrac{2\pi}{\omega}$$ such that the input voltage and duty cycle are approximately constant within one switching period. The \hl{ripple  current envelope} $\Delta i_1(t)$ is then defined as the moving difference between the actual input current $i_1(t)$ and its fundamental component $i^{(1)}_1(t)$: 
+    \end{equation}\pause 
+    We assume that $$ T_\mathrm{s} << \nicefrac{2\pi}{\omega}$$ such that the input voltage and duty cycle are approximately constant within one switching period.\pause The \hl{ripple  current envelope} $\Delta i_1(t)$ is then defined as the moving difference between the actual input current $i_1(t)$ and its fundamental component $i^{(1)}_1(t)$: 
     \begin{equation}
             \Delta i_1(t) = \pm \frac{1}{2} \max_{\tau\in[t \pm \frac{T_\mathrm{s}}{2}]}|i_1(\tau) - i^{(1)}_1(\tau)|.
-    \end{equation}
+    \end{equation}\pause
     One should note that this ripple definition is different from the one used in the previous DC/DC converter section.
 \end{frame}
 
@@ -2344,18 +2344,18 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{PWM-based PFC rectifier current ripple (cont.)} 
-    Assuming CCM operation and a sufficiently small switching time interval $T_\mathrm{s}$, the ripple current can be approximated by the current rise during the on-time of the boost converter:
+    \onslide<1->{Assuming CCM operation and a sufficiently small switching time interval $T_\mathrm{s}$, the ripple current can be approximated by the current rise during the on-time of the boost converter:}
     \begin{equation}
         \begin{split}
-            \Delta i_1(t) &=  \pm\frac{1}{2L}\int_{0}^{d T_\mathrm{s}} u_\mathrm{L}(\tau) \mathrm{d}\tau= \pm \frac{1}{2L}\int_{0}^{d T_\mathrm{s}} \hat{u}_1 \sin(\omega t) \mathrm{d}\tau\\
-            &\approx \pm \frac{\hat{u}_1 \sin(\omega t)}{2L}\int_{0}^{d T_\mathrm{s}} 1 \mathrm{d}\tau = \pm \frac{\hat{u}_1 \sin(\omega t)}{2L}d T_\mathrm{s}.
+            \onslide<1->{\Delta i_1(t) &=  \pm\frac{1}{2L}\int_{0}^{d T_\mathrm{s}} u_\mathrm{L}(\tau) \mathrm{d}\tau}\onslide<2->{= \pm \frac{1}{2L}\int_{0}^{d T_\mathrm{s}} \hat{u}_1 \sin(\omega t) \mathrm{d}\tau}\\
+            \onslide<3->{&\approx \pm \frac{\hat{u}_1 \sin(\omega t)}{2L}\int_{0}^{d T_\mathrm{s}} 1 \mathrm{d}\tau}\onslide<4->{ = \pm \frac{\hat{u}_1 \sin(\omega t)}{2L}d T_\mathrm{s}.}
         \end{split}
     \end{equation}
-    Inserting $d(t)$ from \eqref{eq:PFC_duty_cycle_feed_forward_with_inductor} in a quasi steady-state fashion yields
+    \onslide<5->{Inserting $d(t)$ from \eqref{eq:PFC_duty_cycle_feed_forward_with_inductor} in a quasi steady-state fashion yields
     \begin{equation}
         \Delta i_1(t) = \pm \frac{\hat{u}_1 T_\mathrm{s} \sin(\omega t)}{2L}\left(1 - \frac{1}{M}|\sin(\omega t)| + \frac{\hat{i}_1\omega L}{M\hat{u}_1} \cos(\omega t) \mathrm{sgn}(\sin(\omega t))\right).
-    \end{equation}
-    Due to the varying input voltage and duty cycle, the ripple current is not constant but also varies with time (cf. next slide). 
+    \end{equation}}
+    \onslide<6->{Due to the varying input voltage and duty cycle, the ripple current is not constant but also varies with time (cf. next slide).} 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2482,14 +2482,14 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \frametitle{PFC rectifier with boost converter: closed-loop control structure (cont.)}
     Reasons for closed-loop control:
     \begin{itemize}
-        \item Mismatches between the actual system and the plant model behavior result in (steady-state) control errors.
-        \item Faster transient response to load changes.
+        \item Mismatches between the actual system and the plant model behavior result in (steady-state) control errors.\pause
+        \item Faster transient response to load changes.\pause
         \item Robustness against further disturbances (e.g., input voltage variations).
-    \end{itemize}
+    \end{itemize}\pause
     Central idea of the closed-loop control: given some required load power 
     $$
     p_2(t) = u_2(t)i_2(t) = u_2(t)\left(I_0 + i_\mathrm{C}(t)\right) 
-    $$
+    $$\pause
     operate the boost converter such that the load power is represented by a \hl{(virtual) conductance} at the input of the boost converter:
     $$
     g(t) = \frac{p_1(t)}{\hat{u}_1^2} = \frac{p_2(t)}{\hat{u}_1^2} = \frac{U_2\left(I_0 + i_\mathrm{C}(t)\right)}{\hat{u}_1^2}.
@@ -2503,14 +2503,14 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \frametitle{PFC rectifier with boost converter: closed-loop control structure (cont.)}
     The required conductance $g(t)$ is calculated by the outer voltage controller:
     \begin{itemize}
-        \item If $u_2(t)< U_2^*$: increase $p_2(t)$ by increasing the conductance $g(t)$.
+        \item If $u_2(t)< U_2^*$: increase $p_2(t)$ by increasing the conductance $g(t)$.\pause
         \item If $u_2(t)> U_2^*$: decrease $p_2(t)$ by decreasing the conductance $g(t)$.
-    \end{itemize}
+    \end{itemize}\pause
     With 
     $$
     \hat{i}'(t) = \hat{u}_1 g(t)
     $$
-    the required reference input current for the inner current controller can be calculated. 
+    the required reference input current for the inner current controller can be calculated.\pause
     \begin{figure}
         \begin{circuitikz}[]
             \draw (-3,0) to [short, i=$i_1(t)$] ++(1.5,0)
@@ -2535,12 +2535,12 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     Based on the previous assumption $u_2(t)\approx U_2$ the question is raised how the output capacitor $C$ of the boost converter must be sized to keep the output voltage ripple within acceptable bounds justifying the assumption. For a lossless converter, the instantaneous power is:
     \begin{equation*}
         p_2(t) =p_1(t) = u_1(t)i_1(t).
-    \end{equation*}
+    \end{equation*}\pause
     Assuming that the input voltage and  current are both ideally sinusoidal and in phase (i.e., the PFC rectifier operates perfectly), the instantaneous power is:
     \begin{equation}
         p_2(t) = \hat{u}_1\hat{i}_1\sin(\omega t)\sin(\omega t) = \frac{\hat{u}_1\hat{i}_1}{2}\left(1-\cos(2\omega t)\right).
-    \end{equation}
-    Hence, we can decompose the instantaneous power into a constant term and a harmonic term with twice the frequency of the input voltage/current:
+    \end{equation}\pause
+    Hence, we can \hl{decompose the instantaneous power into a constant term and a harmonic term with twice the frequency} of the input voltage/current:
     \begin{equation}
         p_2(t) = \underbrace{\frac{\hat{u}_1\hat{i}_1}{2}}_{\overline{p}_2} \underbrace{- \frac{\hat{u}_1\hat{i}_1}{2}\cos(2\omega t)}_{p_2^{(\mathrm{h})(t)}}.
     \end{equation}
@@ -2551,18 +2551,18 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{PFC rectifier with boost converter: capacitor sizing (cont.)}
-    The resulting harmonic output current component is (approximately)
+    \onslide<1->{The resulting harmonic output current component is (approximately)}
     \begin{equation}
-        i_2^{(\mathrm{h})}(t) \approx \frac{p_2^{(\mathrm{h})}(t)}{\overline{u}_2} = -\frac{\hat{u}_1\hat{i}_1}{2\overline{u}_2}\cos(2\omega t) = -\frac{\overline{p}_2}{\overline{u}_2}\cos(2\omega t).
+        \onslide<1->{i_2^{(\mathrm{h})}(t) \approx \frac{p_2^{(\mathrm{h})}(t)}{\overline{u}_2}}\onslide<2->{ = -\frac{\hat{u}_1\hat{i}_1}{2\overline{u}_2}\cos(2\omega t)}\onslide<3->{ = -\frac{\overline{p}_2}{\overline{u}_2}\cos(2\omega t).}
     \end{equation}
-    If the load current $I_0$ is (approximately) constant, the harmonic current is flowing into the output capacitor $i_2^{(\mathrm{h})}(t)=i_\mathrm{C}(t)$ leading to the voltage ripple:
+    \onslide<4->{If the load current $I_0$ is (approximately) constant, the harmonic current is entirely flowing into the output capacitor $i_2^{(\mathrm{h})}(t)=i_\mathrm{C}(t)$}\onslide<5->{ leading to the voltage ripple:
     \begin{equation}
         \Delta u_2(t) = \frac{1}{C} \int  i_\mathrm{C}(t) \mathrm{d} t = -\underbrace{\frac{\overline{p}_2}{\overline{u}_2} \frac{1}{2\omega C}}_{\hat{u}_2} \sin(2\omega t).
-    \end{equation}
-    To limit the output voltage ripple to a certain amplitude value $\Delta \hat{u}_2$, the output capacitor $C$ must exhibit a minimal capacitance value:
+    \end{equation}}
+    \onslide<6->{To limit the output voltage ripple to a certain amplitude value $\Delta \hat{u}_2$, the output capacitor $C$ must exhibit a minimal capacitance value:
     \begin{equation}
         C > \frac{\overline{p}_2}{\overline{u}_2} \frac{1}{2\omega \Delta \hat{u}_2}.
-    \end{equation}
+    \end{equation}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
