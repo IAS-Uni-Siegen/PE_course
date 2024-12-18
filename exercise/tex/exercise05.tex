@@ -354,9 +354,15 @@ Note: Consider the conductive state of $T$ and set the voltage across the induct
 \subtask{Dimension the output capacitance $C$ in a way that the amplitude of the output voltage ripple is $\Delta u_{\mathrm{2}}<0.05  u_{\mathrm{2}}(t)$.
 Note: assume an idealized lossless converter.}
 \begin{solutionblock}
+    For the input power $P_\mathrm{1}(t)$ follows $P_\mathrm{1}(t)= P_\mathrm{2} -\Delta p_\mathrm{2}$. The part $\Delta p_\mathrm{2}$ is zero on average. From this consideration it can be concluded for $p_\mathrm{1}(t)$:
     \begin{equation}
         p_\mathrm{1}(t) = \hat U_\mathrm{1} \sin(\omega t) \hat I_\mathrm{1} \sin(\omega t) = \hat U_\mathrm{1} \hat I_\mathrm{1} \sin^2(\omega t).
     \end{equation}
+    By using the addition theorem $\sin^2(\omega t) = \frac{1}{2}(1-\cos(2\omega t))$ follows:
+    \begin{equation}
+        p_\mathrm{1}(t) = \frac{\hat U_\mathrm{1} \hat I_\mathrm{1}}{2}(1-\cos(2\omega t)).
+    \end{equation}
+
     The power delivered across the load $R$ is equal to the output power $P_\mathrm{2}$ which is given as follows:
     \begin{equation}
         P_\mathrm{2} = \frac{\hat U_\mathrm{1}\hat I_\mathrm{1}}{2} = U_\mathrm{2} I_\mathrm{2}.
@@ -383,16 +389,43 @@ Note: assume an idealized lossless converter.}
     \end{equation}
     And now the capacitance can be calculate with $\Delta u_{\mathrm{2}}<0.05  u_{\mathrm{2}}(t)$ as:
     \begin{equation}
-        C = \frac{P_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2} }  \hat U_\mathrm{C} = \frac{P_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}\  0.05 U_\mathrm{2}}.  
+        C = \frac{P_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}  \hat U_\mathrm{C} }= \frac{U_\mathrm{2}I_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}\  0.05 U_\mathrm{2}}.  
     \end{equation}
     With inserted values:
     \begin{equation}
-        C = \frac{p_\mathrm{2}}{4 \pi \cdot\SI{50}{\hertz}\cdot\SI{400}{\volt}\cdot 0.05 \cdot \SI{400}{\volt}} = \SI{796}{\micro\henry}.
+        C = \frac{\SI{400}{\volt}\cdot \SI{10}{\ampere}}{4 \pi \cdot\SI{50}{\hertz}\cdot\SI{400}{\volt}\cdot 0.05 \cdot \SI{400}{\volt}} = \SI{796}{\micro\henry}.
     \end{equation}
 \end{solutionblock}
 \subtask{Calculate the RMS value of the current through the capacitor $I_{\mathrm{C}}$.
 Note: the mean value of the current through the capacitor is $\overline i_{\mathrm{C}}=0$!}
-
+\begin{solutionblock}
+    
+\begin{equation}
+    i_\mathrm{2}(t) = i_\mathrm{C}(t)+i_\mathrm{R}(t).
+\end{equation}
+\begin{equation}
+    i^2_\mathrm{2}(t)=
+\end{equation}
+\end{solutionblock}
 \subtask{The current carrying capacity of the capacitor is $\frac{\SI{10}{\ampere}}{\SI{1}{\milli\farad}}$. How large must its capacitance be selected to stay below this threshold? Is the permissible output voltage fluctuation or is it the current carrying capacity that determines the capacitance?}
-
+\begin{solutionblock}
+    Calculation of the capacitance $C$:
+    \begin{equation}
+        C = \frac{I_\mathrm{C}}{\SI{10}{\frac{\ampere}{\milli\farad}}} = \frac{\SI{10.44}{\ampere}}{\SI{10}{\frac{\ampere}{\milli\farad}}}=\SI{1.04}{\milli\farad}.
+    \end{equation}
+    The current carrying capacity determines the capacitance. The required current-carrying capacity of $\SI{1.04}{\milli\farad}$ is met by two capacitors with $\SI{500}{\milli\farad}$ each. 
+\end{solutionblock}
 \subtask{What is the current load (effective and average value) of the mains diodes?}
+\begin{solutionblock}
+    The rectification ensures that the current $\overline i_\mathrm{D,1-4}$ is calculated as the mean value over a half-wave. So the average value is given with:
+    \begin{equation}
+        \overline{i}_{\mathrm{D,1-4}} = \frac{1}{2\pi} \int_{0}^{\pi} \hat{I}_{\mathrm{1}} \sin(\omega t) \, dt\ = \frac{\hat{I}_{\mathrm{1}}}{2\pi} [-\cos(\pi)-[-\cos(0)]] = \frac{\hat{I}_{\mathrm{1}}}{\pi}.
+    \end{equation}
+    The effective value is given with:
+    \begin{equation}
+        I^2_{\mathrm{D,1-4}} = \frac{1}{2\pi} \int_{0}^{\pi} \hat{I}^2_{\mathrm{1}} \sin^2(\omega t) \, dt\ = \frac{\hat{I}^2_{\mathrm{1}}}{2\pi}\left[\frac{\pi-\frac{\sin(2\pi)}{2}}{2}-\frac{\frac{-\sin(0)}{2}}{2}\right], 
+    \end{equation}
+    \begin{equation}
+        I_{\mathrm{D,1-4}} = \sqrt{\frac{\hat{I}^2_{\mathrm{1}}}{2\pi}\frac{\pi}{2}} = \frac{\hat{I}^2_{\mathrm{1}}}{2}.
+    \end{equation}
+\end{solutionblock}
