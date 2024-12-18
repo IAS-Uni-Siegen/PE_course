@@ -187,6 +187,21 @@ absorbed by the current source? What will $P_\mathrm{0}$ be if $C=\SI{330}{\micr
 \end{solutionblock}
 
 \subtask{What is the minimum blocking voltage ratings of the diodes to ensure that the rectifiers is not damaged?}
+\subtask{What is the minimum blocking voltage ratings of the diodes to ensure that the rectifiers is not damaged?}
+\begin{solutionblock}
+    The voltage supply causes a voltage  potential shift of $u_\mathrm{1}(t)$ at it's two connection points. 
+    The maximal potential difference occurs at $\hat{u}_\mathrm{1,pm}=\pm \SI{156}{\volt}$.
+    The sum of the voltage drop across $D_\mathrm{1}$ and $D_\mathrm{4}$ at the first branch and $D_\mathrm{3}$ and $D_\mathrm{2}$
+    at the second branch corresponds to $u_\mathrm{2}(t)$ with a maximal value of $\hat{u}_\mathrm{2}=\SI{156}{\volt}$. 
+    This leads to a maximal blocking voltage for $D_\mathrm{3}$ and $D_\mathrm{4}$ if $u_\mathrm{2}(t)=\hat{u}_\mathrm{2}=\SI{156}{\volt}$ 
+    and $u_\mathrm{1}(t)=\hat{u}_\mathrm{1,p}=\SI{156}{\volt}$. The voltage potential at the cathode of $D_\mathrm{4}$ is equal to 
+    $\hat{u}_\mathrm{2}$ (i.e. $D_\mathrm{1}$ and $D_\mathrm{2}$ are active) while the voltage potential
+    at the anode of $D_\mathrm{4}$ is equal to $\SI{0}{\volt}$. The voltage potential at the cathode of $D_\mathrm{3}$ is equal to $\hat{u}_\mathrm{2}$
+    while the voltage potential at the anode of $D_\mathrm{3}$ is $\hat{u}_\mathrm{2}-\hat{u}_\mathrm{1,p}=\SI{0}{\volt}$. 
+    The voltage potential difference between cathode and anode for $D_\mathrm{3}$ and $D_\mathrm{4}$ yields $\SI{156}{\volt}$.
+    In case $u_\mathrm{2}(t)=\hat{u}_\mathrm{1,m}=\SI{-156}{\volt}$ the same situation occurs for $D_\mathrm{1}$ and $D_\mathrm{2}$.
+    This leads to the result, that the minimum blocking voltage ratings of all diodes yields $\SI{156}{\volt}$.
+\end{solutionblock}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: PFC rectifier %%
