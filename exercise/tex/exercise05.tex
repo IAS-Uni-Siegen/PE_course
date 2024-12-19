@@ -1,4 +1,4 @@
-sin%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Begin exercise %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ex{Rectifiers}
@@ -88,10 +88,10 @@ Note: For the calculation of $\beta$ you can use the following simple approximat
     \begin{equation}
         \omega t = \frac{\hat{u}_\mathrm{1}\sin(\alpha) - dU_\mathrm{C}(t) \cdot t_\mathrm{\alpha}}
                    {\hat{u}_\mathrm{1}-\frac{dU_\mathrm{C}(t)}{\omega}}=
-                   \frac{\SI{143.4}{\volt} - \SI{22.7}{\kilo\volt/\second} \cdot ()\SI{3.111}{\milli\second}}
-                   {\SI{156}{\volt}-\frac{dU_\mathrm{C}(t)}{\SI{377}{\hertz}}}=\SI{0.337}{\radian}.
+                   \frac{\SI{143.4}{\volt} - \SI{22.7}{\kilo\volt/\second} \cdot \SI{3.111}{\milli\second}}
+                   {\SI{156}{\volt}-\frac{\SI{22.7}{\kilo\volt/\second}}{\SI{377}{\hertz}}}=\SI{0.337}{\radian}.
     \end{equation}
-    $\beta$ is to calculate by distance between $alpha$ and the calculated $\omega t$:
+    $\beta$ is to calculate by distance between $\alpha$ and the calculated $\omega t$:
     \begin{equation}
         \beta=\omega t + \pi - \alpha = \SI{0.337}{\radian} + \pi - \SI{1.969}{\radian}
         = \SI{1.51}{\radian} = \SI{86.5}{\degree}.
@@ -103,6 +103,11 @@ If you were unable to solve task (a), please use $\alpha=\SI{112.8}{\degree}$ an
 
 \subtask{Sketch the capacitor voltage $u_\mathrm{2}(\omega t)$ considering $\omega t \in [0,...,2\pi]$ taking 
 into account the previously calculated angles $\alpha$ and $\beta$.}
+\begin{solutionblock}
+    \autoref{sfig:ex05_Voltage_u2_andCurrent_i1_ic} displays the voltage at the capacitor.
+    \input{fig/ex05/sFig_VoltageU2AndCurrenti1_ic}  
+\end{solutionblock}
+
 \subtask{Calculate the currents $i_\mathrm{1}(\omega t)$  and $i_\mathrm{C}(\omega t)$ and and add them to the previous plot.}
 \begin{solutionblock}
     For current of $i_\mathrm{1}(\omega t)$ and  $i_\mathrm{C}(\omega t)$ two cases are to consider. If $\alpha<\omega t<\alpha+\beta$
@@ -134,6 +139,9 @@ into account the previously calculated angles $\alpha$ and $\beta$.}
             i_\mathrm{1}(\omega t)=-i_\mathrm{2}(\omega t) \quad \text{for} \quad (\alpha+\beta)\leq\omega t\leq\pi+\alpha
         \end{split}
     \end{align}
+
+    The currents $i_\mathrm{C}(\omega t)$ and $i_\mathrm{1}(\omega t)$ are entered in \autoref{sfig:ex05_Voltage_u2_andCurrent_i1_ic}.
+
 \end{solutionblock}
 
 \subtask{Assume the smoothing capacitor is very large, i.e., $C\rightarrow \infty$. What is the average active power $P_\mathrm{0}$ 
@@ -170,12 +178,29 @@ absorbed by the current source? What will $P_\mathrm{0}$ be if $C=\SI{330}{\micr
         \SI{156}{\volt} \cdot \SI{7.5}{\ampere} \cdot \frac{\sin(\SI{112.8}{\degree}) + \sin(\SI{19.3}{\degree})}{2}=
         \SI{733}{\watt}
     \end{equation}
-
+    The total absorbed average power of the current load results from the weighted sum of $P_\mathrm{0,1}$ and $P_\mathrm{0,2}$:
+    \begin{equation} 
+        P_\mathrm{0}=\frac{(\SI{180}{\degree}-\beta) \cdot P_\mathrm{0,1}+ \beta \cdot P_\mathrm{0,2}}{\SI{180}{\degree}}
+        =\frac{(\SI{180}{\degree}-\SI{86.5}{\degree}) \cdot \SI{952}{\watt}+\SI{86.5}{\degree} \cdot \SI{733}{\watt}}{\SI{180}{\degree}}=\SI{847}{\watt}
+    \end{equation}
+    
 \end{solutionblock}
 
 \subtask{What is the minimum blocking voltage ratings of the diodes to ensure that the rectifiers is not damaged?}
-
-
+\begin{solutionblock}
+    The voltage supply causes a voltage  potential shift of $u_\mathrm{1}(t)$ at it's two connection points. 
+    The maximal potential difference occurs at $\hat{u}_\mathrm{1,pm}=\pm \SI{156}{\volt}$.
+    The sum of the voltage drop across $D_\mathrm{1}$ and $D_\mathrm{4}$ at the first branch and $D_\mathrm{3}$ and $D_\mathrm{2}$
+    at the second branch corresponds to $u_\mathrm{2}(t)$ with a maximal value of $\hat{u}_\mathrm{2}=\SI{156}{\volt}$. 
+    This leads to a maximal blocking voltage for $D_\mathrm{3}$ and $D_\mathrm{4}$ if $u_\mathrm{2}(t)=\hat{u}_\mathrm{2}=\SI{156}{\volt}$ 
+    and $u_\mathrm{1}(t)=\hat{u}_\mathrm{1,p}=\SI{156}{\volt}$. The voltage potential at the cathode of $D_\mathrm{4}$ is equal to 
+    $\hat{u}_\mathrm{2}$ (i.e. $D_\mathrm{1}$ and $D_\mathrm{2}$ are active) while the voltage potential
+    at the anode of $D_\mathrm{4}$ is equal to $\SI{0}{\volt}$. The voltage potential at the cathode of $D_\mathrm{3}$ is equal to $\hat{u}_\mathrm{2}$
+    while the voltage potential at the anode of $D_\mathrm{3}$ is $\hat{u}_\mathrm{2}-\hat{u}_\mathrm{1,p}=\SI{0}{\volt}$. 
+    The voltage potential difference between cathode and anode for $D_\mathrm{3}$ and $D_\mathrm{4}$ yields $\SI{156}{\volt}$.
+    In case $u_\mathrm{2}(t)=\hat{u}_\mathrm{1,m}=\SI{-156}{\volt}$ the same situation occurs for $D_\mathrm{1}$ and $D_\mathrm{2}$.
+    This leads to the result, that the minimum blocking voltage ratings of all diodes yields $\SI{156}{\volt}$.
+\end{solutionblock}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: PFC rectifier %%
@@ -298,7 +323,7 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
         $T_\mathrm{i,ON}$  & \SI{500}{\micro\second} & \SI{1008}{\micro\second} & \SI{1520}{\micro\second} & \SI{2044}{\micro\second} \\
         \bottomrule
     \end{tabular}
-    \caption{Switching times $T_\mathrm{i,OFF}$ and $T_\mathrm{i,ON}$ for different $i$-Values.}
+    \caption{Switching times $T_\mathrm{i,OFF}$ and $T_\mathrm{i,ON}$ for different $i$-values.}
     \label{tab:switching_times}
 \end{table}
 
