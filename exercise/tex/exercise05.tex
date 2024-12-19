@@ -212,7 +212,7 @@ The average voltage over the inductance for a stable operation is zero $U_{\math
     \end{equation}   
 The ratio $m(t)= \frac{U_\mathrm{2}}{u'(t)}$ can now be determined from \eqref{eq:ex05ratio2.2}: 
   \begin{equation}
-    0 = f_\mathrm{T}d(t)u'(t)+f_\mathrm{T}(u'(t)-d(t)u'(t)-U_{\mathrm{2}}+d(t)U_{\mathrm{2}}),
+    0 = f_\mathrm{T}d(t)u'(t)+f_\mathrm{T}u'(t)- f_\mathrm{T}d(t)u'(t)- f_\mathrm{T}U_{\mathrm{2}}+ f_\mathrm{T}d(t)U_{\mathrm{2}},
   \end{equation}
   \begin{equation}
     0 = f_\mathrm{T}(u'(t)-(1-d(t))U_{\mathrm{2}}).\label{eq:ex05ratio2.1}
@@ -254,12 +254,12 @@ Note: Consider the conductive state of $T$ and set the voltage across the induct
     When transistor $T$ is conducting it applies $U_{\mathrm{L}} = u'(t) = \hat U_{\mathrm{1}} \sin(\omega t)$.
     This means for $\Delta i'(t)$:
 \begin{equation}
-    \Delta i'(t) = \frac{ U_{\mathrm{L}} \Delta t}{L} = \frac{\hat U_{\mathrm{1}} \sin(\omega t) d(t) T_{\mathrm{on}}}{L} = \Delta i'_{\mathrm{1}}(t).
+    \Delta i'(t) = \frac{ U_{\mathrm{L}} \Delta t}{L} = \frac{\hat U_{\mathrm{1}} \sin(\omega t) d(t) T_{\mathrm{T}}}{L} = \Delta i'_{\mathrm{1}}(t).
 \end{equation}
 
-
+Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
  \begin{equation}
-     \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}\hat U_{\mathrm{1}}\sin (\omega t)}{U_{\mathrm{2}}L}(1-\frac{1}{M}\sin(\omega t)) T_{\mathrm{T}}.\label{eq:ex05Deltai'}
+     \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}\hat U_{\mathrm{1}}\sin (\omega t)}{U_{\mathrm{2}}L}(1-\frac{1}{M}\sin(\omega t)) T_{\mathrm{T}}.\label{eq:ex05Deltai'}.
  \end{equation}
  Using $\frac{\hat U_{\mathrm{1}}}{U_{\mathrm{2}}} = \frac{1}{M}$, \eqref{eq:ex05Deltai'} becomes:
  \begin{equation}
@@ -281,7 +281,7 @@ Note: Consider the conductive state of $T$ and set the voltage across the induct
     \end{equation}
     The ratio $\frac{M}{2}=\sin(\omega t)$ can now be used in \eqref{eq:ex05Deltai1'} to calculate the maximum $\Delta i'_{\mathrm{1}}(t)$ as follows:
     \begin{equation}
-        \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}T_{\mathrm{T}}M}{2LM}\left(1-\frac{M}{2M}\right) = \frac{U_{\mathrm{2}}T_{\mathrm{T}}}{4L}=\frac{\SI{400}{\volt}\cdot \SI{50}{\micro\s}}{4\cdot\SI{570}{\micro\henry}} = \SI{8.77}{\ampere}.
+        \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}T_{\mathrm{T}}M}{2LM}\left(1-\frac{M}{2M}\right) = \frac{U_{\mathrm{2}}\frac{1}{f_\mathrm{T}}}{4L}=\frac{\SI{400}{\volt}\cdot \SI{50}{\micro\s}}{4\cdot\SI{570}{\micro\henry}} = \SI{8.77}{\ampere}.
     \end{equation}
 \end{solutionblock}
 
@@ -399,13 +399,26 @@ Note: assume an idealized lossless converter.}
 \subtask{Calculate the RMS value of the current through the capacitor $I_{\mathrm{C}}$.
 Note: the mean value of the current through the capacitor is $\overline i_{\mathrm{C}}=0$!}
 \begin{solutionblock}
-    
-\begin{equation}
+    \begin{equation}
     i_\mathrm{2}(t) = i_\mathrm{C}(t)+i_\mathrm{R}(t).
 \end{equation}
+Using first biome:
 \begin{equation}
-    i^2_\mathrm{2}(t)=
+    i^2_\mathrm{2}(t)= (i_\mathrm{C}(t)+i_\mathrm{R}(t))^2 = i^2_\mathrm{C}(t)+2i_\mathrm{R}(t) i_\mathrm{C}(t)+ i^2_\mathrm{2}(t).
 \end{equation}
+Calculate RMS value:
+\begin{equation}
+    I^2_\mathrm{2}(t)= \frac{1}{T}\int_{0}^{T}  i^2_\mathrm{2}(t) \, dt\ = \frac{1}{T}\int_{0}^{T}  i^2_\mathrm{C}(t) \, dt\ +\frac{1}{T}\int_{0}^{T}  2i_\mathrm{C}(t) i_\mathrm{R}(t)\, dt\ +\frac{1}{T}\int_{0}^{T}  i^2_\mathrm{R}(t) \, dt\
+\end{equation}
+Solving the equation, the term $\frac{1}{T}\int_{0}^{T} 2i_\mathrm{C}(t) i_\mathrm{R}(t)\, dt$ is zero due to the periodicity of $i_\mathrm{C}(t)$:
+\begin{equation}
+    I^2_\mathrm{2}(t)=\frac{TI^2_\mathrm{C}(t)}{T}+\frac{TI^2_\mathrm{R}(t)}{T} =I^2_\mathrm{C}(t) +I^2_\mathrm{R}(t).
+\end{equation}
+Solved for $I^2_\mathrm{C}(t)$:
+\begin{equation}
+    I^2_\mathrm{C}(t) = I^2_\mathrm{2}(t)-I^2_\mathrm{R}(t)%=\sqrt{\SI{209}{\ampere}-\SI{100}{\ampere}} = \SI{10.44}{\ampere}.
+\end{equation}
+
 \end{solutionblock}
 \subtask{The current carrying capacity of the capacitor is $\frac{\SI{10}{\ampere}}{\SI{1}{\milli\farad}}$. How large must its capacitance be selected to stay below this threshold? Is the permissible output voltage fluctuation or is it the current carrying capacity that determines the capacitance?}
 \begin{solutionblock}
