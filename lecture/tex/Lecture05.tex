@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Thyristor-based rectifiers %%
+%% Thyristor-based converters %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Thyristor-based rectifiers}
+\section{Thyristor-based converters}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Thyristor: an externally switchable power electronic component %%
@@ -98,5 +98,418 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M1 rectifier comparison}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \centering
+            \begin{circuitikz}[] % M1U diode circuit
+                \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-1.5) coordinate (A)
+                (0,0) to [short] ++(0.75,0)
+                to [diode, l=$D$, v= $u_\mathrm{D}(t)$, voltage = straight]  ++(1.5,0)
+                to [short, i=$i_2(t)$] ++(0.75,0)
+                to [R, v^= $u_2(t)$, voltage = straight, l_=$R$] ++(0,-1.5) coordinate (B)
+                (A) -- (B);
+            \end{circuitikz}\\[1em]    
+            \begin{tikzpicture}[] % M1U output voltage
+                \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=1em}, 
+                    width=0.85\textwidth,
+                    height=0.31\textheight,
+                    axis x line=bottom,
+	                axis y line=left,
+                    xmin=0, xmax=4*pi,
+                    ymin=-0.01, ymax=1.15,
+                    xtick={0,pi,2*pi, 3*pi, 4*pi},
+                    xticklabels={$0$,$\pi$,$2\pi$,$3\pi$,$4\pi$},
+                    ytick={-1,0,1},
+                    yticklabels={$-\hat{u}_1$,$0$,$\hat{u}_1$},
+                    grid=both,
+                    ]
+                \nextgroupplot[ylabel = {$u_2(\omega t)$}]
+                    \addplot[domain=0:pi, samples=50, signalblue, thick]{sin(deg(x))};
+                    \addplot[domain=pi:2*pi, samples=10, signalblue, thick]{0};
+                    \addplot[domain=2*pi:3*pi, samples=50, signalblue, thick]{sin(deg(x))};
+                    \addplot[domain=3*pi:4*pi, samples=10, signalblue, thick]{0};
+                    \addplot[domain=0:4*pi, samples=10, signalblue, thick,dashed]{1/pi};
+                    \node at (axis cs:3*pi/2,1/pi) [anchor=south] {$\overline{u}_2$};
+
+                \nextgroupplot[ylabel = {$u_\mathrm{D}(t)$}, ymin=-1.15, ymax=1.15, height=0.4\textheight, xlabel = {$\omega t$}]
+                    \addplot[domain=0:4*pi, samples=50, signalblue, dashed]{sin(deg(x))};
+                    \addplot[domain=0:pi, samples=10, signalblue, thick]{0};
+                    \addplot[domain=pi:2*pi, samples=50, signalblue, thick]{sin(deg(x))};
+                    \addplot[domain=2*pi:3*pi, samples=10, signalblue, thick]{0};
+                    \addplot[domain=3*pi:4*pi, samples=50, signalblue, thick]{sin(deg(x))};
+                    \node at (axis cs:pi*3/4,1/pi) [anchor=south west] {${u}_1(\omega t)$};
+                \end{groupplot}
+            \end{tikzpicture}    
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \centering
+            \begin{circuitikz}[] % M1C thyristor circuit
+                \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-1.5) coordinate (A)
+                (0,0) to [short] ++(0.75,0)
+                to [thyristor, voltage = straight, v= $u_\mathrm{T}(t)$, name = T]  ++(1.5,0)
+                to [short, i=$i_2(t)$] ++(0.75,0)
+                to [R, v^= $u_2(t)$, voltage = straight, l_=$R$] ++(0,-1.5) coordinate (B)
+                (A) -- (B);
+                \node at (T.gate) [above, xshift=-5mm, yshift=-2mm]{$T$};
+            \end{circuitikz}\\[1em]    
+            \begin{tikzpicture}[] % M1C output voltage
+                \def\a{0.4*pi}
+                \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=1em}, 
+                    width=0.85\textwidth,
+                    height=0.31\textheight,
+                    axis x line=bottom,
+	                axis y line=left,
+                    xmin=0, xmax=4*pi,
+                    ymin=-0.01, ymax=1.15,
+                    xtick={0,pi,2*pi, 3*pi, 4*pi},
+                    xticklabels={$0$,$\pi$,$2\pi$,$3\pi$,$4\pi$},
+                    ytick={-1,0,1},
+                    yticklabels={$-\hat{u}_1$,$0$,$\hat{u}_1$},
+                    grid=both,
+                    ]
+                \nextgroupplot[ylabel = {$u_2(\omega t)$}]
+                    \addplot[domain=0:2*pi, samples=150, signalblue, thick]{max(sin(deg(x))*max(sign(x-\a),0),0)};
+                    \addplot[domain=2*pi:4*pi, samples=150, signalblue, thick]{max(sin(deg(x))*max(sign(x-\a-2*pi),0),0)};
+                    \addplot[domain=0:4*pi, samples=10, signalblue, thick,dashed]{1/(2*pi)*(1+cos(deg(\a)))};
+                    \node at (axis cs:3*pi/2,{1/(2*pi)*(1+cos(deg(\a)))}) [anchor=south] {$\overline{u}_2$};
+                    \draw[->] (axis cs:0,0.5) -- node[above]{$\alpha$} (axis cs:\a,0.5) ;
+                    \draw[->] (axis cs:2*pi,0.5) -- node[above]{$\alpha$} (axis cs:2*pi+\a,0.5) ;
+                    \draw[dashed, thick] (axis cs:2*pi,0) -- (axis cs:2*pi,1);
+
+                \nextgroupplot[ylabel = {$u_\mathrm{T}(t)$}, ymin=-1.15, ymax=1.15, height=0.4\textheight, xlabel = {$\omega t$}]
+                    \addplot[domain=0:4*pi, samples=50, signalblue, dashed]{sin(deg(x))};
+                    \addplot[domain=0:2*pi, samples=150, signalblue, thick]{max(sin(deg(x))*max(-sign(x-\a),0),0) + sin(deg(x))*max(sign(x-pi),0)};
+                    \addplot[domain=2*pi:4*pi, samples=150, signalblue, thick]{max(sin(deg(x))*max(-sign(x-\a-2*pi),0),0) + sin(deg(x))*max(sign(x-3*pi),0)};
+                    \node at (axis cs:pi*3/4,1/pi) [anchor=south west] {${u}_1(\omega t)$};
+                \end{groupplot}
+            \end{tikzpicture}          
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M1C rectifier %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{M1C rectifier}
+    The \hl{average output voltage} of the M1C circuit, i.e., the M1 rectifier with a thyristor, for a resistive load is given by
+    \begin{equation}
+        \overline{u}_2 = \frac{1}{2\pi} \int_{\alpha}^{\pi} \hat{u}_1 \sin(\omega t) \mathrm{d} \omega t = \frac{\hat{u}_1}{2\pi} \left[ -\cos(\omega t) \right]_{\alpha}^{\pi} = \frac{\hat{u}_1}{2\pi} \left( 1 + \cos(\alpha) \right). 
+    \end{equation}
+    Here, $\alpha$ denotes the phase angle at which the thyristor is triggered (aka \hl{firing angle}). In the M1C case, the feasible range for $\alpha$ is $[0,\nicefrac{\pi}{2}]$ applies as the thyristor requires a positive forward voltage to start conducting, that is, if $u_\mathrm{T}<0$ a firing impulse would not change its conduction state. The \hl{RMS value} of the output voltage is given by
+    The \hl{RMS value} of the output voltage is given by
+    \begin{equation}
+        U_2 = \sqrt{\frac{1}{2\pi} \int_{\alpha}^{\pi} \hat{u}_1^2 \sin^2(\omega t) \mathrm{d} \omega t} =   \ldots = \frac{\hat{u}_1}{2} \sqrt{\frac{\pi - \alpha + \sin(\alpha)\cos(\alpha)}{\pi}}.
+    \end{equation}
+    In contrast to the M1U rectifier from \eqref{eq:u2_M1U_avg}, the \hl{M1C rectifier allows for controlling the output voltage} by adjusting the firing angle $\alpha$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M1C rectifier: Fourier series %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{M1C rectifier: Fourier series}
+    \onslide<1->{The \hl{Fourier coefficients} of the output voltage $u_2(t)$ for the M1C converter are}
+    \begin{equation}
+        \begin{split}
+            \onslide<1->{a^{(0)} &= \frac{1}{\pi} \int_0^{2\pi} u_2(t) \mathrm{d} \omega t = \frac{1}{\pi} \int_{\alpha}^{\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t} \onslide<2->{= 2 \overline{u}_2= \frac{\hat{u}_1}{\pi}(1+\cos(\alpha)),}\\
+            \onslide<3->{a^{(k)} &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \cos(k\omega t) \mathrm{d}\omega t  = \frac{1}{\pi} \int_{\alpha}^{\pi} \hat{u}_1 \sin(\omega t) \cos(k\omega t) \mathrm{d}\omega t}=\ldots \\ & \onslide<4->{=  \begin{cases}\frac{\hat{u}_1}{\pi}\frac{2}{1-k^2}, & k=1\\ \frac{1}{2\pi} \left( \frac{\cos(\alpha(k-1)) + \cos(k\pi)}{k-1} - \frac{\cos(\alpha(k+1)) + \cos(k\pi)}{k+1} \right), & k \geq 2. \end{cases} }\\
+            \onslide<7->{b^{(k)} &= \frac{1}{\pi} \int_{0}^{2\pi} u_2(t) \sin(k\omega t) \mathrm{d}\omega t = \frac{1}{\pi} \int_{\alpha}^{\pi} \hat{u}_1 \sin(\omega t) \sin(k\omega t) \mathrm{d}\omega t}=\ldots \\ &\onslide<8->{= \begin{cases} \frac{-\alpha + \pi + \cos(\alpha)\sin(\alpha)}{2\pi}, & k =1,\\ \frac{1}{2\pi} \left( \frac{\sin(\alpha(k-1)) + \sin(k\pi)}{k-1} - \frac{\sin(\alpha(k+1)) + \sin(k\pi)}{k+1} \right), & k \geq 2. \end{cases}}
+        \end{split}
+        \label{eq:u2_M1C_Fourier}
+    \end{equation}
+    \onslide<10->{In contrast to the M1U rectifier, one can observe additional harmonic components due to additional distortion of the output voltage caused by the thyristor switching.}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C controllable rectifier circuit  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{M2C converter}
+    \begin{figure}
+           \begin{circuitikz}[baseline=(current bounding box.center)]
+            \draw (0,0) node[transformer core](T){$N_1:N_2$}
+            (T.inner dot A1) node[circ]{}
+            (T.inner dot B1) node[circ]{}
+            (T.A1) to [short] ++(0,1) to [short, -o, i<_=$i_1(t)$] ++(-1,0) coordinate (A1)
+            (T.A2) to [short] ++(0,-1) to [short, -o] ++(-1,0) coordinate (A2)
+            (T.B1) to [short] ++(0, 1) coordinate (B1)
+            (T.B2) to [short] ++(0,-1) coordinate (B2);
+            \draw (A1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (A2); 
+            \draw (B1) to [thyristor, name=T1] ++(2.0,0) coordinate (C1)
+            (B2) to [thyristor, name=T2] ++(2.0,0)
+            to [crossing, -*, mirror] (C1)
+            to [short, i=$i_2(t)$] ++(1.0,0) coordinate (D)
+            to [R, v^= $u_2(t)$, voltage = straight, l_=$R$] (T-L2.midtap -| D)
+            to [short] (T-L2.midtap);
+            \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=$\hspace{0.5cm}{u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+            \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=$\hspace{0.5cm}{u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+            \node at (T1.gate) [above, xshift=-5mm, yshift=-2mm]{$T_1$};
+            \node at (T2.gate) [below, xshift=-5mm, yshift=-7mm]{$T_2$};
+        \end{circuitikz}%
+        \hspace{0.25cm}
+        \begin{tikzpicture}[baseline=(current bounding box.center)] % M1C output voltage
+            \def\a{0.4*pi}
+            \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=1em}, 
+                width=0.38\textwidth,
+                height=0.4\textheight,
+                axis x line=bottom,
+                axis y line=left,
+                xmin=0, xmax=4*pi,
+                ymin=-1.15, ymax=1.15,
+                xtick={0,pi,2*pi, 3*pi, 4*pi},
+                xticklabels={$0$,$\pi$,$2\pi$,$3\pi$,$4\pi$},
+                ytick={-1,0,1},
+                yticklabels={$-\hat{u}_\mathrm{s}$,$0$,$\hat{u}_\mathrm{s}$},
+                grid=both,
+                clip=false
+                ]
+            \nextgroupplot[ylabel = {$u_2(\omega t)$}]
+                \addplot[domain=0:pi, samples=50, signalblue, thick]{(x < \a) * 0 + (x > \a) * sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=50, signalblue, thick]{(x - pi < \a) * 0 + (x - pi > \a) * -sin(deg(x))};
+                \addplot[domain=2*pi:3*pi, samples=50, signalblue, thick]{(x - 2*pi < \a) * 0 + (x - 2*pi > \a) * sin(deg(x))};
+                \addplot[domain=3*pi:4*pi, samples=50, signalblue, thick]{(x - 3*pi < \a) * 0 + (x - 3*pi > \a) * -sin(deg(x))};
+                \addplot[domain=0:4*pi, samples=10, signalblue, thick,dashed]{1/(pi)*(1+cos(deg(\a)))};
+                \node at (axis cs:3*pi/2+0.4,{1/(pi)*(1+cos(deg(\a)))}) [anchor=north] {$\overline{u}_2$};
+                \draw[->] (axis cs:0,1) -- node[above]{$\alpha$} (axis cs:\a,1) ;
+                \draw[->] (axis cs:2*pi,1) -- node[above]{$\alpha$} (axis cs:2*pi+\a,1) ;
+                \draw[dashed, thick] (axis cs:2*pi,0) -- (axis cs:2*pi,1);
+                \addplot[domain=0:4*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
+                \addplot[domain=0:4*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*2.5,-0.75) [anchor=south, signalbrown] {$u_{s,2}$};
+                \node at (axis cs:pi*3.5,-0.75) [anchor=south, signalgreen] {$u_{s,1}$};
+
+
+            \nextgroupplot[ylabel = {$u_\mathrm{T}(\omega t)$}, xlabel = {$\omega t$}, ymin=-2.15, ytick={-2, -1,0,1}, yticklabels={$-2\hat{u}_\mathrm{s}$, $-\hat{u}_\mathrm{s}$,$0$,$\hat{u}_\mathrm{s}$}, height=0.5\textheight]
+                \node at (axis cs:\a,0.5) [signalgreen, right, inner sep=1pt] {${u}_{T_1}$};
+                \node at (axis cs:\a+pi,0.5) [signalbrown, right, inner sep=1pt] {${u}_{T_2}$};
+                \addplot[domain=0:pi, samples=50, signalgreen, thick]{(x < \a) * sin(deg(x)) + (x > \a) * 0};
+                \addplot[domain=0:pi, samples=50, signalbrown, thick]{-sin(deg(x)) + (x > \a) * -sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=50, signalbrown, thick]{(x -pi < \a) * -sin(deg(x)) + (x-pi > \a) * 0};
+                \addplot[domain=pi:2*pi, samples=50, signalgreen, thick]{sin(deg(x)) + (x -pi > \a) * sin(deg(x))};
+                \addplot[domain=2*pi:3*pi, samples=50, signalgreen, thick]{(x -2*pi < \a) * sin(deg(x)) + (x  -2*pi > \a) * 0};
+                \addplot[domain=2*pi:3*pi, samples=50, signalbrown, thick]{-sin(deg(x)) + (x  -2*pi > \a) * -sin(deg(x))};
+                \addplot[domain=3*pi:4*pi, samples=50, signalbrown, thick]{(x - 3*pi < \a) * -sin(deg(x)) + (x - 3*pi > \a) * 0};
+                \addplot[domain=3*pi:4*pi, samples=50, signalgreen, thick]{sin(deg(x)) + (x - 3*pi > \a) * sin(deg(x))};
+            \end{groupplot}
+        \end{tikzpicture}   
+        \caption{M2C topology (aka \hl{two-pulse mid-point converter}) with center-tapped transformer and a resistive load}
+        \label{fig:M2C_topology}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C converter: resistive load  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{M2C converter: resistive load}
+    The \hl{average output voltage} of the M2C converter for a resistive load is given by
+    \begin{equation}
+        \overline{u}_2 = \frac{1}{\pi} \int_{\alpha}^{\pi} \hat{u}_\mathrm{s} \sin(\omega t) \mathrm{d} \omega t = \frac{\hat{u}_\mathrm{s}}{\pi} \left[ -\cos(\omega t) \right]_{\alpha}^{\pi} = \frac{\hat{u}_\mathrm{s}}{\pi} \left( 1 + \cos(\alpha) \right).
+    \end{equation}
+    The \hl{RMS value} of the output voltage results in
+    \begin{equation}
+        U_2 = \sqrt{\frac{1}{\pi} \int_{\alpha}^{\pi} \hat{u}_\mathrm{s}^2 \sin^2(\omega t) \mathrm{d} \omega t} =   \ldots = \frac{\hat{u}_\mathrm{s}}{\sqrt{2}} \sqrt{\frac{\pi - \alpha + \sin(\alpha)\cos(\alpha)}{\pi}}.
+    \end{equation}
+    The primary to secondary voltage ratio of the center-tapped transformer yields
+    \begin{equation*}
+        \frac{\hat{u}_\mathrm{s}}{\hat{u}_1} = \frac{1}{2}\frac{N_2}{N_1}.
+    \end{equation*}
+    It should be noted that in the case of a resistive load, the M2C's output voltage is always positive for the M2C's feasible firing angle range $\alpha \in [0,\pi]$.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C converter with an output filter  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{M2C converter with an output filter}
+    \begin{figure}
+           \begin{circuitikz}[baseline=(current bounding box.center)]
+            \draw (0,0) node[transformer core](T){$N_1:N_2$}
+            (T.inner dot A1) node[circ]{}
+            (T.inner dot B1) node[circ]{}
+            (T.A1) to [short] ++(0,1) to [short, -o, i<_=$i_1(t)$] ++(-1,0) coordinate (A1)
+            (T.A2) to [short] ++(0,-1) to [short, -o] ++(-1,0) coordinate (A2)
+            (T.B1) to [short] ++(0, 1) coordinate (B1)
+            (T.B2) to [short] ++(0,-1) coordinate (B2);
+            \draw (A1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (A2); 
+            \draw (B1) to [thyristor, name=T1] ++(2.0,0) coordinate (C1)
+            (B2) to [thyristor, name=T2] ++(2.0,0)
+            to [crossing, -*, mirror] (C1)
+            to [short] ++(0.5,0) coordinate (us)
+            to [L, l=$L$] ++(2,0) 
+            to [short] ++(0.5,0) coordinate (D)
+            to [short, i=$i_2(t)$] ++(1.5,0)
+            to [open, v^= $\hspace{0.5cm}u_2(t)$, voltage = straight, o-o] (T-L2.midtap -| \tikztostart)
+            to [short] (\tikztostart -| D)
+            (D) to [C, voltage = straight, l=$C$, *-*] (T-L2.midtap -| D)
+            to [short] (T-L2.midtap);
+            \draw (us) to [open, v^=$\hspace{0.5cm}u_\mathrm{s}(t)$, voltage = straight] (T-L2.midtap -| us);
+            \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=$\hspace{0.5cm}{u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+            \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=$\hspace{0.5cm}{u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+            \node at (T1.gate) [above, xshift=-5mm, yshift=-2mm]{$T_1$};
+            \node at (T2.gate) [below, xshift=-5mm, yshift=-7mm]{$T_2$};
+        \end{circuitikz}%
+        \caption{M2C converter with an output filter assuming $u_2(t)=U_2=\mbox{const.}$}
+        \label{fig:M2C_output_filter}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C converter with an output filter  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{M2C converter with an output filter (cont.)}
+    \begin{figure}
+        \begin{tikzpicture} % M1C output voltage
+            \tikzmath{
+                    real \a, \iLavg1, \iLavg1, \Lw, \u1, \uc1, \iLs1, \iLs2, \b, \adcm;
+                    \a = 0.3*pi; %firing angle
+                    \Lw = 2; %angular frequency times inductance
+                    \u1 = 1; %Input voltage amplitude
+                    \uc1 = 2*\u1/pi*cos(deg(\a)); %output voltage for CCM
+                    \iLs1 = 0.6; %current initial value for CCM
+                    \iLs2 = -1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1)); %current initial value for BCM
+                    \iLavg1 = \iLs1 + 1/(\Lw*pi)*(-\uc1*(pi^2/2) + \u1*(2*sin(deg(\a)) - \a + (2*cos(deg(\a))-1)*(pi-\a))); %current average value for CCM
+                    \iLavg2 = \iLs2 + 1/(\Lw*pi)*(-\uc1*(pi^2/2) + \u1*(2*sin(deg(\a)) - \a + (2*cos(deg(\a))-1)*(pi-\a))); %current average value for BCM
+                    \b = 0.8*pi; %conduction interval for DCM
+                    \adcm = 0.4*pi; %firing angle for DCM (\b + \adcm must be greater than pi for corret visualization)
+                    \ucdcm = -1/\b*(\u1*(cos(deg(\adcm+\b))-cos(deg(\adcm)))); %output voltage for DCM
+                    \iLavg3 = 1/(\Lw*pi)*(-\u1*(sin(deg(\adcm+\b))-sin(deg(\adcm))-cos(deg(\adcm))*\b) - \ucdcm*(\b^2/2)); %current average value for DCM
+                }
+            \begin{groupplot}[group style={group size=3 by 2, xticklabels at = edge bottom, vertical sep=1em, yticklabels at = edge left, horizontal sep = 1em}, 
+                width=0.38\textwidth,
+                height=0.34\textheight,
+                axis x line=bottom,
+                axis y line=left,
+                xmin=0, xmax=2*pi,
+                ymin=-1.15, ymax=1.15,
+                xtick={0, pi/2, pi, 3*pi/2, 2*pi},
+                xticklabels={$0$,$\frac{1}{2}\pi$, $\pi$,$\frac{3}{2}\pi$, $2\pi$},
+                ytick={0,1/2, 1},
+                yticklabels={$0$,,},
+                grid=both,
+                clip=false
+                ]
+            \nextgroupplot[ylabel = {$u_\mathrm{s}(\omega t)$}, title=CCM, height=0.475\textheight] % voltage CCM
+                \addplot[domain=0:pi, samples=50, signalblue, thick]{(x < \a) * -sin(deg(x)) + (x > \a) * sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=50, signalblue, thick]{(x - pi < \a) * sin(deg(x)) + (x - pi > \a) * -sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=10, signalblue, thick,dashed]{2/(pi)*(cos(deg(\a)))};
+                \node at (axis cs:3*pi/2+0.4,{2/(pi)*(cos(deg(\a)))}) [anchor=north] {$\overline{u}_2$};
+                \draw[->] (axis cs:0,1) -- node[above]{$\alpha$} (axis cs:\a,1) ;
+                \draw[->] (axis cs:pi,1) -- node[above]{$\alpha$} (axis cs:pi+\a,1) ;
+                \draw[dashed, thick] (axis cs:pi,0) -- (axis cs:pi,1);
+                \addplot[domain=0:2*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*3/4,-0.75) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
+                \node at (axis cs:pi*7/4,-0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
+
+            \nextgroupplot[title=BCM, height=0.475\textheight] % voltage BCM
+                \addplot[domain=0:pi, samples=50, signalblue, thick]{(x < \a) * -sin(deg(x)) + (x > \a) * sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=50, signalblue, thick]{(x - pi < \a) * sin(deg(x)) + (x - pi > \a) * -sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=10, signalblue, thick,dashed]{2/(pi)*(cos(deg(\a)))};
+                \node at (axis cs:3*pi/2+0.4,{2/(pi)*(cos(deg(\a)))}) [anchor=north] {$\overline{u}_2$};
+                \draw[->] (axis cs:0,1) -- node[above]{$\alpha$} (axis cs:\a,1) ;
+                \draw[->] (axis cs:pi,1) -- node[above]{$\alpha$} (axis cs:pi+\a,1) ;
+                \draw[dashed, thick] (axis cs:pi,0) -- (axis cs:pi,1);
+                \addplot[domain=0:2*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*3/4,-0.75) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
+                \node at (axis cs:pi*7/4,-0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
+
+            \nextgroupplot[title=DCM, height=0.475\textheight] % voltage DCM
+                \addplot[domain=0:2*pi, samples=200, signalblue, thick]{(x < \adcm +\b - pi) * sin(deg(x+pi)) + (x > \adcm + \b -pi) * (x < \adcm) * \ucdcm + (x > \adcm)* (x < \adcm + \b) * sin(deg(x)) + (x > \adcm + \b) * (x < \adcm + pi) * \ucdcm + (x > \adcm + pi) * sin(deg(x-pi))};
+                \addplot[domain=0:2*pi, samples=10, signalblue, thick,dashed]{\ucdcm};
+                \node at (axis cs:3*pi/2+0.4,\ucdcm) [anchor=north] {$\overline{u}_2$};
+                \addplot[domain=0:2*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*3/4,-0.75) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
+                \node at (axis cs:pi*7/4,-0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
+                \draw[->] (axis cs:0,1) -- node[above]{$\alpha$} (axis cs:\adcm,1) ;
+                \draw[->] (axis cs:pi,1) -- node[above]{$\alpha$} (axis cs:pi+\adcm,1) ;
+                
+
+
+            \nextgroupplot[ylabel = {$i_\mathrm{L}(\omega t)$}, xlabel = {$\omega t$}, ymin=-0.01] %current CCM
+                \addplot[domain=0:\a, samples=50, signalred, thick]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs1};
+                \addplot[domain=\a:pi, samples=50, signalred, thick]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
+                \addplot[domain=pi:pi+\a, samples=50, signalred, thick]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs1};
+                \addplot[domain=pi+\a:2*pi, samples=50, signalred, thick]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x-pi))+cos(deg(\a))) - \uc1*(x-\a-pi))};
+                \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed]{\iLavg1};
+                \draw[<->] (axis cs:\a,0.75) -- node[above, fill = white]{$\beta=\pi$} (axis cs:\a+pi,0.75) ;
+
+            \nextgroupplot[xlabel = {$\omega t$}, ymin=-0.01] %current BCM
+                \addplot[domain=0:\a, samples=50, signalred, thick]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs2};
+                \addplot[domain=\a:pi, samples=50, signalred, thick]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
+                \addplot[domain=pi:pi+\a, samples=50, signalred, thick]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs2};
+                \addplot[domain=pi+\a:2*pi, samples=50, signalred, thick]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x-pi))+cos(deg(\a))) - \uc1*(x-\a-pi))};
+                \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed]{\iLavg2};
+                \draw[<->] (axis cs:\a,0.6) -- node[above, fill = white]{$\beta=\pi$} (axis cs:\a+pi,0.6) ;
+
+            \nextgroupplot[xlabel = {$\omega t$}, ymin=-0.01] %current DCM
+                \addplot[domain=\adcm:\adcm+\b, samples=50, signalred, thick]{1/\Lw*(-\ucdcm*(x-\adcm) - \u1*(cos(deg(x))-cos(deg(\adcm))))};
+                \addplot[domain=0:\adcm+\b-pi, samples=50, signalred, thick]{1/\Lw*(-\ucdcm*(x-\adcm+pi) - \u1*(cos(deg(x+pi))-cos(deg(\adcm))))};
+                \addplot[domain=\adcm+pi:2*pi, samples=50, signalred, thick]{1/\Lw*(-\ucdcm*(x-\adcm-pi) - \u1*(cos(deg(x-pi))-cos(deg(\adcm))))};
+                \addplot[domain=\adcm+\b:\adcm+pi, samples=50, signalred, thick]{0};
+                \addplot[domain=\adcm+\b-pi:\adcm, samples=50, signalred, thick]{0};
+                \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed]{\iLavg3};
+                \draw[<->] (axis cs:\adcm,0.5) -- node[above, fill = white]{$\beta<\pi$} (axis cs:\adcm+\b,0.5) ;
+
+            \end{groupplot}
+        \end{tikzpicture}   
+        \caption{M2C topology with an output filter and different average load currents}
+        \label{fig:M2C_different_loads}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C converter with an output filter  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{M2C converter with an output filter (cont.)}
+    Due to the output filter, the secondary voltage $u_\mathrm{s}(t)$ can become negative since the current flow is maintained by the inductor and, therefore, a thyristor is remaining in the conducting state (until the other thyristor is triggered). The \hl{average output voltage in CCM (and BCM)} is given by
+    \begin{equation}
+        \begin{split}
+            \overline{u}_2 &= \frac{1}{\pi} \int_{\alpha}^{\alpha+\pi} \hat{u}_\mathrm{s} \sin(\omega t) \mathrm{d} \omega t = \frac{\hat{u}_\mathrm{s}}{\pi} \left[ -\cos(\omega t) \right]_{\alpha}^{\alpha+\pi} = \frac{\hat{u}_\mathrm{s}}{\pi} \left(-\cos(\alpha+\pi) +\cos(\alpha)\right)\\
+             &= \hat{u}_\mathrm{s}\frac{2}{\pi} \cos(\alpha).
+        \end{split}
+        \label{eq:u2_avg_M2C_CCM}
+    \end{equation}
+    In DCM the \hl{conduction interval} $\beta$ is less than $\pi$ and the \hl{average output voltage} is given by
+    \begin{equation}
+        \begin{split}
+        \overline{u}_2 &= \frac{1}{\pi} \int_{\alpha}^{\alpha+\beta} \hat{u}_\mathrm{s} \sin(\omega t) \mathrm{d} \omega t = \frac{\hat{u}_\mathrm{s}}{\pi} \left[ -\cos(\omega t) \right]_{\alpha}^{\alpha+\beta} = \frac{\hat{u}_\mathrm{s}}{\pi} \left(\cos(\alpha)-\cos(\alpha+\beta)\right)\\
+                       &= \hat{u}_\mathrm{s}\frac{2}{\pi}\sin\left(\frac{\beta}{2}\right)\sin\left(\alpha + \frac{\beta}{2}\right).
+    \end{split}
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C converter with an active load  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{M2C converter with an active load}
+    Analyzing \eqref{eq:u2_avg_M2C_CCM} for the feasible firing angle range $\alpha \in [0,\pi]$ reveals
+    \begin{equation}
+        \overline{u}_2 \begin{cases}
+            \geq 0, & \alpha \in [0,\pi/2],\\
+            < 0, & \alpha \in (\pi/2,\pi],
+        \end{cases}
+    \end{equation}
+    that is, the \hl{output voltage can become negative} for $\alpha > \pi/2$ in CCM and BCM (analogous observation can be also made for DCM). Assuming an average output current $\overline{i}_{2} > 0$, which can be only positive due to the thyristor unipolar current capability, the \hl{average output power} is in the range of (for CCM and BCM) 
+    \begin{equation}
+        \overline{p}_2 \begin{cases}
+            \geq 0, & \alpha \in [0,\pi/2],\\
+            < 0, & \alpha \in (\pi/2,\pi].
+        \end{cases}
+    \end{equation}
+    Hence, the M2C can transfer energy from the load to the source which requires an active load (e.g., battery or generator) to maintain this reversed energy flow. Consequently, the M2C can be used as a \hl{bidirectional energy transfer system} operating both as a \hl{rectifier} and an \hl{inverter}.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C converter with an active load (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{M2C converter with an active load (cont.)}
 
 \end{frame}
