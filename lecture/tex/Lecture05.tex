@@ -386,8 +386,8 @@
                 ymin=-1.15, ymax=1.15,
                 xtick={0, pi/2, pi, 3*pi/2, 2*pi},
                 xticklabels={$0$,$\frac{1}{2}\pi$, $\pi$,$\frac{3}{2}\pi$, $2\pi$},
-                ytick={0,1/2, 1},
-                yticklabels={$0$,,},
+                ytick={-1, -1/2, 0,1/2, 1},
+                yticklabels={$-\hat{u}_\mathrm{s}$, ,$0$, ,$\hat{u}_\mathrm{s}$},
                 grid=both,
                 clip=false
                 ]
@@ -427,10 +427,11 @@
                 \node at (axis cs:pi*7/4,-0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
                 \draw[->] (axis cs:0,1) -- node[above]{$\alpha$} (axis cs:\adcm,1) ;
                 \draw[->] (axis cs:pi,1) -- node[above]{$\alpha$} (axis cs:pi+\adcm,1) ;
+                \draw[dashed, thick] (axis cs:pi,0) -- (axis cs:pi,1);
                 
 
 
-            \nextgroupplot[ylabel = {$i_\mathrm{L}(\omega t)$}, xlabel = {$\omega t$}, ymin=-0.01] %current CCM
+            \nextgroupplot[ylabel = {$i_\mathrm{L}(\omega t)$}, xlabel = {$\omega t$}, ymin=-0.01, ytick={0, 1/2, 1}, yticklabels={$0$, } ] %current CCM
                 \addplot[domain=0:\a, samples=50, signalred, thick]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs1};
                 \addplot[domain=\a:pi, samples=50, signalred, thick]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
                 \addplot[domain=pi:pi+\a, samples=50, signalred, thick]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs1};
@@ -438,7 +439,7 @@
                 \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed]{\iLavg1};
                 \draw[<->] (axis cs:\a,0.75) -- node[above, fill = white]{$\beta=\pi$} (axis cs:\a+pi,0.75) ;
 
-            \nextgroupplot[xlabel = {$\omega t$}, ymin=-0.01] %current BCM
+            \nextgroupplot[xlabel = {$\omega t$}, ymin=-0.01, ytick={0, 1/2, 1}, yticklabels={ } ] %current BCM
                 \addplot[domain=0:\a, samples=50, signalred, thick]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs2};
                 \addplot[domain=\a:pi, samples=50, signalred, thick]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
                 \addplot[domain=pi:pi+\a, samples=50, signalred, thick]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs2};
@@ -446,7 +447,7 @@
                 \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed]{\iLavg2};
                 \draw[<->] (axis cs:\a,0.6) -- node[above, fill = white]{$\beta=\pi$} (axis cs:\a+pi,0.6) ;
 
-            \nextgroupplot[xlabel = {$\omega t$}, ymin=-0.01] %current DCM
+            \nextgroupplot[xlabel = {$\omega t$}, ymin=-0.01, ytick={0, 1/2, 1}, yticklabels={} ] %current DCM
                 \addplot[domain=\adcm:\adcm+\b, samples=50, signalred, thick]{1/\Lw*(-\ucdcm*(x-\adcm) - \u1*(cos(deg(x))-cos(deg(\adcm))))};
                 \addplot[domain=0:\adcm+\b-pi, samples=50, signalred, thick]{1/\Lw*(-\ucdcm*(x-\adcm+pi) - \u1*(cos(deg(x+pi))-cos(deg(\adcm))))};
                 \addplot[domain=\adcm+pi:2*pi, samples=50, signalred, thick]{1/\Lw*(-\ucdcm*(x-\adcm-pi) - \u1*(cos(deg(x-pi))-cos(deg(\adcm))))};
@@ -511,5 +512,155 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[c]
     \frametitle{M2C converter with an active load (cont.)}
+    \begin{figure}
+        \begin{tikzpicture} % M1C output voltage
+            \tikzmath{
+                    real \a, \iLavg1, \iLavg1, \Lw, \u1, \uc1, \iLs1, \iLs2, \b, \adcm;
+                    \a = 0.8*pi; %firing angle
+                    \Lw = 2; %angular frequency times inductance
+                    \u1 = 1; %Input voltage amplitude
+                    \uc1 = 2*\u1/pi*cos(deg(\a)); %output voltage for CCM
+                    \iLs1 = 0.6; %current initial value for CCM
+                    \iLs2 = -1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1)); %current initial value for BCM
+                    \iLavg1 = \iLs1 + 1/(\Lw*pi)*(-\uc1*(pi^2/2) + \u1*(2*sin(deg(\a)) - \a + (2*cos(deg(\a))-1)*(pi-\a))); %current average value for CCM
+                    \iLavg2 = \iLs2 + 1/(\Lw*pi)*(-\uc1*(pi^2/2) + \u1*(2*sin(deg(\a)) - \a + (2*cos(deg(\a))-1)*(pi-\a))); %current average value for BCM
+                    \b = 0.8*pi; %conduction interval for DCM
+                    \adcm = 0.8*pi; %firing angle for DCM (\b + \adcm must be greater than pi for corret visualization)
+                    \ucdcm = -1/\b*(\u1*(cos(deg(\adcm+\b))-cos(deg(\adcm)))); %output voltage for DCM
+                    \iLavg3 = 1/(\Lw*pi)*(-\u1*(sin(deg(\adcm+\b))-sin(deg(\adcm))-cos(deg(\adcm))*\b) - \ucdcm*(\b^2/2)); %current average value for DCM
+                }
+            \begin{groupplot}[group style={group size=3 by 2, xticklabels at = edge bottom, vertical sep=1em, yticklabels at = edge left, horizontal sep = 1em}, 
+                width=0.38\textwidth,
+                height=0.34\textheight,
+                axis x line=bottom,
+                axis y line=left,
+                xmin=0, xmax=2*pi,
+                ymin=-1.15, ymax=1.15,
+                xtick={0, pi/2, pi, 3*pi/2, 2*pi},
+                xticklabels={$0$,$\frac{1}{2}\pi$, $\pi$,$\frac{3}{2}\pi$, $2\pi$},
+                ytick={-1, -1/2, 0,1/2, 1},
+                yticklabels={$-\hat{u}_\mathrm{s}$, ,$0$, ,$\hat{u}_\mathrm{s}$},
+                grid=both,
+                clip=false
+                ]
+            \nextgroupplot[ylabel = {$u_\mathrm{s}(\omega t)$}, title=CCM, height=0.475\textheight] % voltage CCM
+                \addplot[domain=0:pi, samples=50, signalblue, thick]{(x < \a) * -sin(deg(x)) + (x > \a) * sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=50, signalblue, thick]{(x - pi < \a) * sin(deg(x)) + (x - pi > \a) * -sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=10, signalblue, thick,dashed]{2/(pi)*(cos(deg(\a)))};
+                \node at (axis cs:pi,\uc1) [anchor=north, fill = white, inner sep = 2pt] {$\overline{u}_2$};
+                \draw[->] (axis cs:0,0) -- node[above]{$\alpha$} (axis cs:\a,0);
+                \draw[->] (axis cs:pi,0) -- node[above]{$\alpha$} (axis cs:pi+\a,0);
+                \addplot[domain=0:2*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*1/4,0.75) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
+                \node at (axis cs:pi*5/4,0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
 
+            \nextgroupplot[title=BCM, height=0.475\textheight] % voltage BCM
+                \addplot[domain=0:pi, samples=50, signalblue, thick]{(x < \a) * -sin(deg(x)) + (x > \a) * sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=50, signalblue, thick]{(x - pi < \a) * sin(deg(x)) + (x - pi > \a) * -sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=10, signalblue, thick,dashed]{2/(pi)*(cos(deg(\a)))};
+                \node at (axis cs:pi,\uc1) [anchor=north, fill = white, inner sep = 2pt] {$\overline{u}_2$};
+                \draw[->] (axis cs:0,0) -- node[above]{$\alpha$} (axis cs:\a,0);
+                \draw[->] (axis cs:pi,0) -- node[above]{$\alpha$} (axis cs:pi+\a,0);
+                \addplot[domain=0:2*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*1/4,0.75) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
+                \node at (axis cs:pi*5/4,0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
+
+            \nextgroupplot[title=DCM, height=0.475\textheight] % voltage DCM
+                \addplot[domain=0:2*pi, samples=200, signalblue, thick]{(x < \adcm +\b - pi) * sin(deg(x+pi)) + (x > \adcm + \b -pi) * (x < \adcm) * \ucdcm + (x > \adcm)* (x < \adcm + \b) * sin(deg(x)) + (x > \adcm + \b) * (x < \adcm + pi) * \ucdcm + (x > \adcm + pi) * sin(deg(x-pi))};
+                \addplot[domain=0:2*pi, samples=10, signalblue, thick,dashed]{\ucdcm};
+                \node at (axis cs:pi,\ucdcm) [anchor=north, fill = white, inner sep = 2pt] {$\overline{u}_2$};
+                \addplot[domain=0:2*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*1/4,0.75) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
+                \node at (axis cs:pi*5/4,0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
+                \draw[->] (axis cs:0,0) -- node[above]{$\alpha$} (axis cs:\a,0);
+                \draw[->] (axis cs:pi,0) -- node[above]{$\alpha$} (axis cs:pi+\a,0);
+                
+
+
+            \nextgroupplot[ylabel = {$i_\mathrm{L}(\omega t)$}, xlabel = {$\omega t$}, ymin=-0.01, ytick={0, 1/2, 1}, yticklabels={$0$, } ] %current CCM
+                \addplot[domain=0:\a, samples=50, signalred, thick]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs1};
+                \addplot[domain=\a:pi, samples=50, signalred, thick]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
+                \addplot[domain=pi:pi+\a, samples=50, signalred, thick]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs1};
+                \addplot[domain=pi+\a:2*pi, samples=50, signalred, thick]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x-pi))+cos(deg(\a))) - \uc1*(x-\a-pi))};
+                \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed]{\iLavg1};
+                \draw[<->] (axis cs:\a,0.75) -- node[above, fill = white]{$\beta=\pi$} (axis cs:\a+pi,0.75) ;
+
+            \nextgroupplot[xlabel = {$\omega t$}, ymin=-0.01, ytick={0, 1/2, 1}, yticklabels={} ] %current BCM
+                \addplot[domain=0:\a, samples=50, signalred, thick]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs2};
+                \addplot[domain=\a:pi, samples=50, signalred, thick]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
+                \addplot[domain=pi:pi+\a, samples=50, signalred, thick]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs2};
+                \addplot[domain=pi+\a:2*pi, samples=50, signalred, thick]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x-pi))+cos(deg(\a))) - \uc1*(x-\a-pi))};
+                \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed]{\iLavg2};
+                \draw[<->] (axis cs:\a,0.6) -- node[above, fill = white]{$\beta=\pi$} (axis cs:\a+pi,0.6) ;
+
+            \nextgroupplot[xlabel = {$\omega t$}, ymin=-0.01, ytick={0, 1/2, 1}, yticklabels={} ] %current DCM
+                \addplot[domain=\adcm:\adcm+\b, samples=50, signalred, thick]{1/\Lw*(-\ucdcm*(x-\adcm) - \u1*(cos(deg(x))-cos(deg(\adcm))))};
+                \addplot[domain=0:\adcm+\b-pi, samples=50, signalred, thick]{1/\Lw*(-\ucdcm*(x-\adcm+pi) - \u1*(cos(deg(x+pi))-cos(deg(\adcm))))};
+                \addplot[domain=\adcm+pi:2*pi, samples=50, signalred, thick]{1/\Lw*(-\ucdcm*(x-\adcm-pi) - \u1*(cos(deg(x-pi))-cos(deg(\adcm))))};
+                \addplot[domain=\adcm+\b:\adcm+pi, samples=50, signalred, thick]{0};
+                \addplot[domain=\adcm+\b-pi:\adcm, samples=50, signalred, thick]{0};
+                \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed]{\iLavg3};
+                \draw[<->] (axis cs:\adcm,0.5) -- node[above, fill = white]{$\beta<\pi$} (axis cs:\adcm+\b,0.5) ;
+
+            \end{groupplot}
+        \end{tikzpicture}   
+        \caption{M2C topology with a negative output voltage delivering energy to the source side}
+        \label{fig:M2C_different_loads_generator}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C output voltage overview %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{M2C output voltage overview}
+    \begin{figure}
+        \begin{tikzpicture} 
+            \begin{axis}[
+                width=0.55\textwidth,
+                height=0.8\textheight,
+                axis x line=bottom,
+                axis y line=left,
+                xmin=0, xmax=pi,
+                ymin=-1.0005, ymax=1.05,
+                xtick={0, pi/4, pi/2, 3*pi/4, pi},
+                xticklabels={$0$,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$, $\frac{3}{4}\pi$, $\pi$},
+                ytick={-1, -3/4, -1/2, -1/4, 0, 1/4, 1/2, 3/4, 1},
+                grid=both,
+                xlabel = {$\alpha$},
+                ylabel = {$\frac{\overline{u}_2}{\frac{2}{\pi}\hat{u}_\mathrm{s}}$},
+            ]
+                \node at (axis cs:pi*0.65,{sin(deg(pi/2))*sin(deg(pi*0.65+pi/2))}) [anchor=east, font=\tiny, fill=white, inner sep=1pt, xshift=-1pt, yshift=-1pt] {$\beta = \pi$};
+                \foreach \b [count=\n] in {0,pi/5,pi/5*2,pi/5*3,pi/5*4, pi} 
+                    \addplot[domain=0:pi, samples=50, thick]{sin(deg(\b/2))*sin(deg(x+\b/2))};
+                \addplot[domain=0:pi, samples=50, thick, name path = u0]{sin(deg(0/2))*sin(deg(x+0/2))};
+                \addplot[domain=0:pi, samples=50, thick, name path = upi]{sin(deg(pi/2))*sin(deg(x+pi/2))};
+                \addplot[domain=0:pi, samples=50, thick, signalred, name path = uR]{(1+cos(deg(x)))/2};
+                \addplot[shadecolor, opacity=0.3] fill between[of=uR and u0];
+                \addplot[shadecolor, opacity=0.3] fill between[of=upi and u0, soft clip={domain=pi/2:pi}];
+                \node at (axis cs:pi*1/4,0) [anchor=south, font=\tiny, fill=shadecolor!30, inner sep=1pt, yshift=1pt] {$\beta = 0$}; 
+                \node at (axis cs:pi*1/4,{sin(deg(pi/10))*sin(deg(pi*1/4+pi/10))}) [font=\tiny, fill=shadecolor!30, inner sep=1pt] {$\beta = \frac{1}{5}\pi$};
+                \node at (axis cs:pi*1/6,{sin(deg(pi/5))*sin(deg(pi*1/6+pi/5))}) [font=\tiny, fill=shadecolor!30, inner sep=1pt] {$\beta = \frac{2}{5}\pi$};
+                \node at (axis cs:pi*1/10,{sin(deg(pi/10*3))*sin(deg(pi*1/10+pi/10*3))}) [font=\tiny, fill=shadecolor!30, inner sep=1pt] {$\beta = \frac{3}{5}\pi$};
+                \draw[-, thin] (axis cs:pi/20,{sin(deg(pi/10*4))*sin(deg(pi*1/20+pi/10*4))}) -- (axis cs:pi/3-0.15,0.9) node[anchor = west, font=\tiny, fill=white, inner sep=1pt] {$\beta = \frac{4}{5}\pi$};
+                \draw[signalred, thin] (axis cs:pi/2,0.5) -- (axis cs:pi/1.7,0.6) node[signalred, anchor = west, font=\small, fill=white, inner sep=1pt] {Ohmic load};
+                \draw[thin] (axis cs:pi/2.7,0.5) -- (axis cs:pi/1.7,0.9) node[anchor = west, font=\small, fill=white, inner sep=1pt, align = center] {Filtered load \\($u_2= \mbox{const.}$)};
+                \draw[decorate,decoration={brace,amplitude=3pt,raise=2pt},yshift=0pt] (axis cs:pi/2,-0.95) -- (axis cs:pi/2,-0.05);
+                \node at (axis cs:pi*1/2-0.1,-0.5) [font=\small, fill=white, inner sep=1pt, anchor = east, align = left] {$\overline{p}_2 < 0$\\(active load)};
+            \end{axis}
+        \end{tikzpicture}   
+        \caption{M2C output voltage overview}
+        \label{fig:M2C_output_voltage_overview}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Commutation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{Commutation}
+    
 \end{frame}
