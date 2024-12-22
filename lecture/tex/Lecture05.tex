@@ -632,6 +632,7 @@
                 grid=both,
                 xlabel = {$\alpha$},
                 ylabel = {$\frac{\overline{u}_2}{\frac{2}{\pi}\hat{u}_\mathrm{s}}$},
+                ylabel style = {rotate=-90}
             ]
                 \node at (axis cs:pi*0.65,{sin(deg(pi/2))*sin(deg(pi*0.65+pi/2))}) [anchor=east, font=\tiny, fill=white, inner sep=1pt, xshift=-1pt, yshift=-1pt] {$\beta = \pi$};
                 \foreach \b [count=\n] in {0,pi/5,pi/5*2,pi/5*3,pi/5*4, pi} 
@@ -662,5 +663,302 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[c]
     \frametitle{Commutation}
-    
+    \begin{columns}
+        \begin{column}{0.45\textwidth}
+           \centering
+                Idealized, instantaneous commutation 
+                \begin{circuitikz}
+                    \draw (0,0) to [short, -*] ++(1,0) coordinate (A)
+                    to [short] ++(0,1)
+                    to [short] ++(0.5,0)
+                    to [vsource, v^<=$u_{s,1}(t)$] ++(1,0)
+                    to [short] ++(1.5,0)
+                    to [thyristor, l=$T_1$] ++(0.75,0)
+                    to [short, i=$i_{T_1}(t)$] ++(1.25,0)
+                    to [short, -*] ++(0,-1) coordinate (B)
+                    to [short, i=$i_2$] ++(1,0)
+                    (A) to [short] ++(0,-1)
+                    to [short] ++(0.5,0)
+                    to [vsource, v_<=$u_{s,2}(t)$] ++(1,0)
+                    to [short] ++(1.5,0)
+                    to [thyristor, l_=$T_2$] ++(0.75,0)
+                    to [short, i_=$i_{T_2}(t)$] ++(1.25,0)
+                    to [short] (B);
+                \end{circuitikz}
+                \begin{tikzpicture}
+                    \tikzmath{
+                        real \a;
+                        \a = pi/8;
+                    }
+                    \begin{axis}[
+                        width=0.9\textwidth,
+                        height=0.35\textheight,
+                        axis x line=bottom,
+                        axis y line=left,
+                        xmin=0, xmax=pi/4,
+                        ymin=-0.01, ymax=1.1,
+                        xtick={0, pi/16, pi/8, 3*pi/16, pi/4},
+                        xticklabels={$0$,$\frac{1}{16}\pi$, $\frac{1}{8}\pi$, $\frac{3}{16}\pi$, $\frac{1}{4}\pi$},
+                        ytick={0, 1},
+                        yticklabels={$0$, $i_2$},
+                        xlabel={$ \omega t$},
+                        ylabel={$i(t)$},
+                        xlabel style = {at={(axis description cs:1,0)},anchor=west},
+                        grid=both
+                    ]
+                        \addplot[domain=0:pi/4, samples=75, signalorange, thick]{(x < \a) * 1 + (x > \a) * 0};
+                        \addplot[domain=0:pi/4, samples=75, signalred, thick]{(x < \a) * 0 + (x > \a) * 1};
+                        \node at (axis cs:pi/8,0.25) [anchor=west, signalorange] {$i_{T_2}(t)$};
+                        \node at (axis cs:pi/8,0.75) [anchor=west, signalred] {$i_{T_1}(t)$};
+                        \draw[->] (axis cs:0,0.5) -- node[above]{$\alpha$} (axis cs:\a,0.5);
+                    \end{axis}              
+                \end{tikzpicture}
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \centering
+                Actual commutation (with overlap)
+                \begin{circuitikz}
+                    \draw (0,0) to [short, -*] ++(1,0) coordinate (A)
+                    to [short] ++(0,1)
+                    to [short] ++(0.5,0)
+                    to [vsource, v^<=$u_{s,1}(t)$] ++(1,0)
+                    to [L, l=$L_\mathrm{c}$] ++(1.5,0)
+                    to [thyristor, l=$T_1$] ++(0.75,0)
+                    to [short, i=$i_{T_1}(t)$] ++(1.25,0)
+                    to [short, -*] ++(0,-1) coordinate (B)
+                    to [short, i=$i_2$] ++(1,0)
+                    (A) to [short] ++(0,-1)
+                    to [short] ++(0.5,0)
+                    to [vsource, v_<=$u_{s,2}(t)$] ++(1,0)
+                    to [L, l_=$L_\mathrm{c}$] ++(1.5,0)
+                    to [thyristor, l_=$T_2$] ++(0.75,0)
+                    to [short, i_=$i_{T_2}(t)$] ++(1.25,0)
+                    to [short] (B);
+                \end{circuitikz}
+                \begin{tikzpicture}
+                    \tikzmath{
+                        real \a, \ic, \i2, \k;
+                        \a = pi/13;
+                        \ic = 10;
+                        \i2 = 1;
+                        \k = rad(acos(cos(deg(\a)) - \i2/\ic))-\a; %overlap angle
+                    }
+                    \begin{axis}[
+                        width=0.9\textwidth,
+                        height=0.35\textheight,
+                        axis x line=bottom,
+                        axis y line=left,
+                        xmin=0, xmax=pi/4,
+                        ymin=-0.01, ymax=1.1,
+                        xtick={0, pi/16, pi/8, 3*pi/16, pi/4},
+                        xticklabels={$0$,$\frac{1}{16}\pi$, $\frac{1}{8}\pi$, $\frac{3}{16}\pi$, $\frac{1}{4}\pi$},
+                        ytick={0, 1},
+                        yticklabels={$0$, $i_2$},
+                        xlabel={$ \omega t$},
+                        ylabel={$i(t)$},
+                        xlabel style = {at={(axis description cs:1,0)},anchor=west},
+                        grid=both
+                    ]
+                        \addplot[domain=0:pi/4, samples=75, signalorange, thick]{(x < \a) * \i2 + (x > \a) * (x < \a + \k)* (\i2 - \ic*(cos(deg(\a))-cos(deg(x)))) + (x > \a + \k)*0};
+                        \addplot[domain=0:pi/4, samples=75, signalred, thick]{(x < \a) * 0 + (x > \a) * (x < \a + \k)* (\ic*(cos(deg(\a))-cos(deg(x)))) + (x > \a + \k)*1};
+                        \node at (axis cs:pi/16*3.5,0.01) [anchor=south, signalorange] {$i_{T_2}(t)$};
+                        \node at (axis cs:pi/16*3.5,0.99) [anchor=north, signalred] {$i_{T_1}(t)$};
+                        \draw[->] (axis cs:0,0.5) -- node[above]{$\alpha$} (axis cs:\a,0.5);
+                        \draw[dashed, thin] (axis cs:\a,0) -- (axis cs:\a,1);
+                    \end{axis}              
+                \end{tikzpicture}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Commutation (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{Commutation (cont.)}
+    So far we have considered an idealized, instantaneous commutation of the thyristors. In practice, the commutation process is not instantaneous and the \hl{thyristors overlap} for a certain period due to the \hl{commutation inductance} $L_\mathrm{c}$, which can originate from:
+    \begin{itemize}
+        \item Stray inductance of the feeding transformer,
+        \item Parasitic inductance of the thyristor package,
+        \item Parasitic inductance of the circuit layout. 
+    \end{itemize}
+    Kirchhoff's voltage law for the commutation loop yields
+    \begin{equation}
+        u_{\mathrm{c}}(t) = u_{\mathrm{s},1}(t) - u_{\mathrm{s},2}(t) = 2L_\mathrm{c}\frac{\mathrm{d}}{\mathrm{d}t}i_{T_2}(t) = -2L_\mathrm{c}\frac{\mathrm{d}}{\mathrm{d}t}i_{T_1}(t)
+        \label{eq:commutation_voltage_M2C}
+    \end{equation}
+    with the commutation voltage $u_{\mathrm{c}}(t)$ and the thyristor currents $i_{T_1}(t)$ and $i_{T_2}(t)$. 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Commutation (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{Commutation (cont.)}
+    From \eqref{eq:commutation_voltage_M2C} the thyristor currents can be expressed as
+    \begin{equation*}
+        \begin{split}
+            i_{T_1}(t) &= i_{T_1}(k\pi+\alpha) - \frac{1}{2L_\mathrm{c}\omega}\int_{k\pi+\alpha}^{\omega t} u_{\mathrm{c}}(\tau) \mathrm{d}\tau = i_{T_1}(k\pi+\alpha) + \frac{u_\mathrm{s}}{L_\mathrm{c}\omega}\left(\cos(k\pi+ \alpha)-\cos(\omega t)\right),\\
+            i_{T_2}(t) &= i_{T_2}(k\pi+\alpha) + \frac{1}{2L_\mathrm{c}\omega}\int_{k\pi+\alpha}^{\omega t} u_{\mathrm{c}}(\tau) \mathrm{d}\tau = i_{T_2}(k\pi+\alpha) - \frac{u_\mathrm{s}}{L_\mathrm{c}\omega}\left(\cos(k\pi+ \alpha)-\cos(\omega t)\right).
+        \end{split}
+    \end{equation*} 
+    Here, $i_{T_1}(k\pi+\alpha)$ and $i_{T_2}(k\pi+\alpha)$ are the thyristor currents at the beginning of the commutation process during the $k$-th half cycle. One can distinguish two cases:
+    \begin{equation*}
+        \begin{alignedat}{3}
+        i_{T_1}(k\pi+\alpha) &= 0, \quad i_{T_2}(k\pi+\alpha) &=i_2, \quad &\mbox{commutation from $T_1$ to $T_2$},\\
+        i_{T_1}(k\pi+\alpha) &= i_2, \quad i_{T_2}(k\pi+\alpha) &= 0, \quad &\mbox{commutation from $T_2$ to $T_1$}.
+        \end{alignedat}
+    \end{equation*}
+    The commutation process ends when the thyristor currents reach $i_2$ and zero, respectively.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Commutation: overlap angle and feasible firing angle range %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{Commutation: overlap angle and feasible firing angle range}
+    To determine the \hl{commutation overlap angle} $\kappa$, we consider $k=0$ and the commutation from $T_2$ to $T_1$, that is, $i_{T_1}(\alpha) = 0$. The commutation ends when $i_{T_1}(\alpha+\kappa) = i_2$, which yields
+    \begin{equation}
+        i_{T_1}(\alpha+\kappa) = i_2 \stackrel{!}{=} \frac{u_\mathrm{s}}{L_\mathrm{c}\omega}\left(\cos(\alpha)-\cos(\alpha+\kappa)\right).
+    \end{equation}
+    The overlap angle $\kappa$ can be determined as
+    \begin{equation}
+        \kappa = \arccos\left(\cos(\alpha) - \frac{i_2L_\mathrm{c}\omega}{u_\mathrm{s}}\right) - \alpha.
+        \label{eq:overlap_angle_M2C}
+    \end{equation}
+    To ensure a successful commutation $\alpha+\kappa < \pi$ must hold: Otherwise the commutation voltage changes its sign and the commutation fails. Hence, the \hl{achievable firing angle} is limited
+    \begin{equation}
+        \alpha + \kappa  < \pi \quad \Leftrightarrow \quad \arccos\left(\cos(\alpha) - \frac{i_2L_\mathrm{c}\omega}{u_\mathrm{s}}\right) < \pi 
+    \end{equation}
+    leading to 
+    \begin{equation}
+        \alpha < \arccos\left( \frac{i_2L_\mathrm{c}\omega}{u_\mathrm{s}} - 1\right).
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Commutation: successful and unsuccessful examples %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{Commutation: successful and unsuccessful examples}
+    \begin{figure}
+        \begin{tikzpicture}
+            \tikzmath{
+                real \a1,\a2,\a3,\a4, \i2, \ic,\k1, \k2, \k3, \k4, \da;
+                \a1 = pi*0.1; % first firing angle
+                \a2 = pi*0.225*2; % secoond firing angle
+                \a3 = pi*0.225*3; % third firing angle
+                \a4 = pi*0.225*4; % fourht firing angle
+                \i2 = 1; % load current
+                \ic = 6; % commutation current
+                \k1 = rad(acos(cos(deg(\a1)) - \i2/\ic)) - \a1; % overlap angle for first commutation
+                \k2 = rad(acos(cos(deg(\a2)) - \i2/\ic )) - \a2; % overlap angle for second commutation
+                \k3 = rad(acos(cos(deg(\a3)) - \i2/\ic )) - \a3; % overlap angle for third commutation
+                \k4 = pi - \a4; % overlap angle for unsuccessful commutation
+                \da = 0.12; % angle offset for plotting
+            }
+            \begin{groupplot}[group style={group size=1 by 2, vertical sep=1em, xticklabels at = edge bottom}, 
+                width=0.85\textwidth,
+                height=0.375\textheight,
+                axis x line=bottom,
+                axis y line=left,
+                xmin=0, xmax=5*pi/4,
+                xtick={0, pi/4, pi/2, 3*pi/4, pi, 5*pi/4},
+                xticklabels={$0$,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$, $\frac{3}{4}\pi$, $\pi$, $\frac{5}{4}\pi$},
+                grid=both,
+                clip = false
+                ]
+                % Voltages
+                \nextgroupplot[ylabel = {$u(t)$}, ymin=-1.15, ymax=1.15, height=0.5\textheight, ytick={-1, -1/2, 0,1/2, 1}, yticklabels={$-\hat{u}_\mathrm{s}$, ,$0$, ,$\hat{u}_\mathrm{s}$}]
+                    % Phase voltages
+                    \addplot[domain=0:5*pi/4, samples=50, signalgreen, dashed]{sin(deg(x))};
+                    \addplot[domain=0:5*pi/4, samples=50, signalbrown, dashed]{-sin(deg(x))};
+                    \node at (axis cs:pi*1.2,{-sin(deg(pi*1.2))}) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
+                    \node at (axis cs:pi*1.2,{sin(deg(pi*1.2))}) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
+                    \node at (axis cs:\a2,-0.5) [signalblue, fill=white,inner sep=2pt, anchor = east] {$u_2(t)$};
+                    % 1st commutation
+                    \addplot[domain=\a1-\da:\a1+\k1+\da, samples=50, signalblue, thick]{(x < \a1) * -sin(deg(x)) + (x > \a1+\k1)  * sin(deg(x))};
+                    % 2nd commutation
+                    \addplot[domain=\a2-\da:\a2+\k2+\da, samples=50, signalblue, thick]{(x < \a2) * -sin(deg(x)) + (x > \a2+\k2)  * sin(deg(x))};
+                    % 3rd commutation
+                    \addplot[domain=\a3-\da:\a3+\k3+\da, samples=50, signalblue, thick]{(x < \a3) * -sin(deg(x)) + (x > \a3+\k3)  * sin(deg(x))};
+                    % 4th commutation
+                    \addplot[domain=\a4-\da:pi+\k4+\da, samples=50, signalblue, thick]{(x < \a4) * -sin(deg(x)) + (x > pi+\k4)  * -sin(deg(x))};
+                    % Coordinates for vertical lines
+                    \coordinate (a1) at (axis cs:\a1,1);
+                    \coordinate (b1) at (axis cs:\a1+\k1,1);
+                    \coordinate (c1) at (axis cs:\a2,1);
+                    \coordinate (d1) at (axis cs:\a2+\k2,1);
+                    \coordinate (e1) at (axis cs:\a3,1);
+                    \coordinate (f1) at (axis cs:\a3+\k3,1);
+                % Currents
+                \nextgroupplot[ylabel = {$i(t)$}, xlabel = {$\omega t$}, ymin=-0.01, ymax=1.1, ytick={0, 0.5, 1},  yticklabels={$0$, $i_2/2$, $i_2$},]
+                    % 1st commutation
+                    \addplot[domain=\a1-\da:\a1+\k1+\da, samples=50, signalorange, thick]{(x < \a1) * \i2 + (x > \a1) * (x < \a1 + \k1)* (\i2 - \ic*(cos(deg(\a1))-cos(deg(x)))) + (x > \a1 + \k1)*0};
+                    \addplot[domain=\a1-\da:\a1+\k1+\da, samples=50, signalred, thick]{(x < \a1) * 0 + (x > \a1) * (x < \a1 + \k1)* (\ic*(cos(deg(\a1))-cos(deg(x)))) + (x > \a1 + \k1)*1};
+                    % 2nd commutation
+                    \addplot[domain=\a2-\da:\a2+\k2+\da, samples=50, signalorange, thick]{(x < \a2) * \i2 + (x > \a2) * (x < \a2 + \k2)* (\i2 - \ic*(cos(deg(\a2))-cos(deg(x)))) + (x > \a2 + \k2)*0};
+                    \addplot[domain=\a2-\da:\a2+\k2+\da, samples=50, signalred, thick]{(x < \a2) * 0 + (x > \a2) * (x < \a2 + \k2)* (\ic*(cos(deg(\a2))-cos(deg(x)))) + (x > \a2 + \k2)*1};
+                    % 3rd commutation
+                    \addplot[domain=\a3-\da:\a3+\k3+\da, samples=50, signalorange, thick]{(x < \a3) * \i2 + (x > \a3) * (x < \a3 + \k3)* (\i2 - \ic*(cos(deg(\a3))-cos(deg(x)))) + (x > \a3 + \k3)*0};
+                    \addplot[domain=\a3-\da:\a3+\k3+\da, samples=50, signalred, thick]{(x < \a3) * 0 + (x > \a3) * (x < \a3 + \k3)* (\ic*(cos(deg(\a3))-cos(deg(x)))) + (x > \a3 + \k3)*1};
+                    % 4th commutation
+                    \addplot[domain=\a4-\da:pi+\k4+\da, samples=50, signalorange, thick]{(x < \a4) * \i2 + (x > \a4) * (x < pi + \k4)* (\i2 - \ic*(cos(deg(\a4))-cos(deg(x)))) + (x > pi + \k4)*\i2};
+                    \addplot[domain=\a4-\da:pi+\k4+\da, samples=50, signalred, thick]{(x < \a4) * 0 + (x > \a4) * (x < pi + \k4)* (\ic*(cos(deg(\a4))-cos(deg(x)))) + (x > pi + \k4)*0};
+                    \node at (axis cs:pi,0.5) [fill = white, inner sep = 1pt] {Failed commutation};
+                    \node at (axis cs:pi*1.125,0.85) [anchor=west, signalorange] {$i_{T_2}(t)$};
+                    \node at (axis cs:pi*1.125,0.15) [anchor=west, signalred] {$i_{T_1}(t)$};
+                    % Coordinates for vertical lines
+                    \coordinate (a2) at (axis cs:\a1,0);
+                    \coordinate (b2) at (axis cs:\a1+\k1,0);
+                    \coordinate (c2) at (axis cs:\a2,0);
+                    \coordinate (d2) at (axis cs:\a2+\k2,0);
+                    \coordinate (e2) at (axis cs:\a3,0);
+                    \coordinate (f2) at (axis cs:\a3+\k3,0);
+                    % kappa indications
+                    \draw[<->, thin] (\a1,1.1) -- node[above, inner sep = 1pt, yshift = 3pt ]{$\kappa$} (\a1+\k1,1.1); 
+                    \draw[<->, thin] (\a2,1.1) -- node[above, inner sep = 1pt, yshift = 3pt ]{$\kappa$} (\a2+\k2,1.1);
+                    \draw[<->, thin] (\a3,1.1) -- node[above, inner sep = 1pt, yshift = 3pt]{$\kappa$} (\a3+\k3,1.1);
+            \end{groupplot}
+            % Vertical lines
+            \draw[dashed, thin] (a1) -- (a2);
+            \draw[dashed, thin] (b1) -- (b2);
+            \draw[dashed, thin] (c1) -- (c2);
+            \draw[dashed, thin] (d1) -- (d2);
+            \draw[dashed, thin] (e1) -- (e2);
+            \draw[dashed, thin] (f1) -- (f2);
+        \end{tikzpicture}
+        \caption{Commutation process for different firing angles $\alpha$}
+        \label{fig:commutation_process}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Commutation: output voltage deviation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{Commutation: output voltage deviation}
+    As seen in \figref{fig:commutation_process}, the output voltage of the thyristor stage is zero during the commutation process as the transformer's secondary side is temporarily short-circuited during the overlap period (since both thyristors are conducting):
+    \begin{equation}
+        u_\mathrm{s}(\omega t) = 0, \qquad \omega t \in [k\pi+\alpha, k\pi+\alpha + \kappa].
+    \end{equation}
+    The output voltage lost in the process corresponds to
+    \begin{equation}
+        \Delta u = \frac{1}{\pi}\int_{\alpha}^{\alpha + \kappa} u_\mathrm{s}\sin(\omega t) \mathrm{d}(\omega t) = \frac{u_\mathrm{s}}{\pi}\left[-cos(\omega t)\right]_{\alpha}^{\alpha + \kappa} = \frac{u_\mathrm{s}}{\pi}\left[\cos(\alpha) - \cos(\alpha + \kappa)\right].
+    \end{equation}
+    Inserting \eqref{eq:overlap_angle_M2C} for $\kappa$ yields
+    \begin{equation}
+        \begin{split}
+            \Delta u &= \frac{u_\mathrm{s}}{\pi}\left[\cos(\alpha) - \cos\left(\alpha + \arccos\left(\cos(\alpha) - \frac{i_2L_\mathrm{c}\omega}{u_\mathrm{s}}\right) - \alpha\right)\right]\\
+                     &=\frac{i_2L_\mathrm{c}\omega}{\pi}.
+        \end{split}
+    \end{equation}
+    Hence, the average output voltage is deviating by $\Delta u$ due to the commutation process.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C: complex power analysis %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{M2C: complex power analysis}
 \end{frame}
