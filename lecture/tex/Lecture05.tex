@@ -961,4 +961,177 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[c]
     \frametitle{M2C: complex power analysis}
+    \begin{figure}
+        \begin{circuitikz}[baseline=(current bounding box.center)]
+         \draw (0,0) node[transformer core](T){$N_1:N_2$}
+         (T.inner dot A1) node[circ]{}
+         (T.inner dot B1) node[circ]{}
+         (T.A1) to [short] ++(0,1) to [short, -o, i<_=$i_1(t)$] ++(-1,0) coordinate (A1)
+         (T.A2) to [short] ++(0,-1) to [short, -o] ++(-1,0) coordinate (A2)
+         (T.B1) to [short] ++(0, 1) coordinate (B1)
+         (T.B2) to [short] ++(0,-1) coordinate (B2);
+         \draw (A1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (A2); 
+         \draw (B1) to [thyristor, name=T1] ++(2.0,0) coordinate (C1)
+         (B2) to [thyristor, name=T2] ++(2.0,0)
+         to [crossing, -*, mirror] (C1)
+         to [short, i=$i_2(t)$] ++(0.75,0) coordinate (D)
+         to [isource, v^>=$u_2(t)$, voltage = straight] (T-L2.midtap -| D)
+         to [short] (T-L2.midtap);
+         \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=$\hspace{0.5cm}{u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+         \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=$\hspace{0.5cm}{u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+         \node at (T1.gate) [above, xshift=-5mm, yshift=-2mm]{$T_1$};
+         \node at (T2.gate) [below, xshift=-5mm, yshift=-7mm]{$T_2$};
+     \end{circuitikz}%
+     \hspace{0.1cm}
+     \begin{tikzpicture}[baseline=(current bounding box.center)] % M1C output voltage
+         \def\a{0.7*pi}
+         \def\ia{pi/4} % current amplitude square signal (assuming fundamental ampl. = 1)
+         \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=1em}, 
+             width=0.38\textwidth,
+             height=0.4\textheight,
+             axis x line=bottom,
+             axis y line=left,
+             xmin=0, xmax=2*pi,
+             ymin=-1.15, ymax=1.15,
+             xtick={0,pi/2,pi, 3/2*pi, 2*pi},
+             xticklabels={$0$,$\frac{1}{2}\pi$, $\pi$,$\frac{3}{2}\pi$, $2\pi$},
+             ytick={-1,0,1},
+             yticklabels={$-\hat{u}_\mathrm{1}$,$0$,$\hat{u}_\mathrm{1}$},
+             grid=both,
+             clip=false
+             ]
+         \nextgroupplot[ylabel = {$u_1(\omega t)$}]
+             \addplot[domain=0:2*pi, samples=50, signalblue, thick]{sin(deg(x))};
+             \coordinate (a1) at (axis cs:\a,1.15);
+             \draw[->] (0,-0.75) -- node[above, inner sep = 1pt, yshift = 2pt, fill = white, font=\small]{$\alpha=\varphi^{(1)}$} (\a,-0.75); 
+
+
+         \nextgroupplot[ylabel = {$i_1(\omega t)$}, xlabel = {$\omega t$}, yticklabels={$-\hat{i}^{(1)}_1$,$0$,$\hat{i}^{(1)}_\mathrm{1}$}]
+            \addplot[domain=0:2*pi, samples=50, signalred, thick, dashed]{sin(deg(x-\a))};
+            \addplot[domain=0:2*pi, samples=150, signalred, thick]{(x  < \a) * -\ia + (x > \a) * (x < \a + pi) * \ia +  (x > \a + pi) * -\ia};
+            \coordinate (a2) at (axis cs:\a,-1.15);
+            \draw[thin] (axis cs:pi/1.8,-0.3) -- (axis cs:pi/4,0.25) node[anchor = south, font=\small, fill=white, inner sep=1pt] {$i^{(1)}_1$};
+
+         \end{groupplot}
+         \draw[dashed, thin] (a1) -- (a2);
+     \end{tikzpicture}   
+     \caption{Input voltage and current of the M2C converter with idealized filtered, constant output current (represented by a current source) and an idealized transformer}
+     \label{fig:M2C_inputs}
+ \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C: complex power analysis (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{M2C: complex power analysis (cont.)}
+    Based on the setup form \figref{fig:M2C_inputs} one can observe that the phase angle $\varphi^{(1)}$ between the input voltage $u_1(t)$ and the fundamental input current $i^{(1)}_1(t)$ is given by the firing angle $\alpha$:
+    $$
+    \varphi^{(1)} = \alpha.
+    $$
+    Considering the center-tapped transformer, the \hl{input current fundamental amplitude} is
+    \begin{equation}
+        i^{(1)}_1 = \frac{4}{\pi} \frac{1}{2}\frac{N_2}{N_1} I_2 = \frac{2}{\pi} \frac{N_2}{N_1} I_2.
+    \end{equation}
+    where $I_2$ is constant output current and $\nicefrac{4}{\pi}$ represents the first Fourier coefficient of the square-shaped input current $i_1(t)$. The latter is formed by the thyristors applying the positive and negative output current to the transformer's secondary side. The RMS value of the fundamental component $I^{(1)}_1$ and the RMS value of the input current $I_1$ are
+    \begin{equation}
+        I^{(1)}_1 = \frac{\sqrt{2}}{\pi} \frac{N_2}{N_1} I_2, \qquad I_1 = \frac{1}{2}\frac{N_2}{N_1} I_2.
+    \end{equation}
+    The latter can be found by considering that the RMS value of a symmetrical block-shaped signal is its amplitude.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C: complex power analysis (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{M2C: complex power analysis (cont.)}
+    Assuming an ideal sinusoidal input voltage, the \hl{active power} is only transferred based on its fundamental component
+    \begin{equation}
+        P_1 = P_1^{(1)} = I_1^{(1)}U_1\cos(\varphi^{(1)})  
+        \label{eq:active_power_M2C_fundamental}
+    \end{equation}
+    with $U_1$ being the RMS value of the input voltage -- compare \eqref{eq:active_power_B2U_fundamental}. Assuming idealized, lossless components the active input power must be equal to the average output power
+    \begin{equation}
+        P_1 = \overline{p}_2 = I_2 \overline{u}_2 = I_2 \hat{u}_\mathrm{s} \frac{2}{\pi} \cos(\alpha) = I_2 \hat{u}_\mathrm{s0} \cos(\alpha)
+        \label{eq:active_power_M2C_output}
+    \end{equation} 
+    with $\hat{u}_\mathrm{s0} = \hat{u}_\mathrm{s} \nicefrac{2}{\pi}$ being the \hl{maximum reachable output voltage} (for $\alpha=0$).  From \eqref{eq:active_power_M2C_fundamental} the \hl{fundamental reactive power} can be determined as
+    \begin{equation}
+        Q_1^{(1)} = I_1^{(1)}U_1\sin(\varphi^{(1)}) = I_2 \hat{u}_\mathrm{s0} \sin(\alpha).
+    \end{equation}
+    since the \hl{fundamental apparent power} is given by
+    \begin{equation}
+        S_1^{(1)} = I_1^{(1)}U_1 = I_2 \hat{u}_\mathrm{s0} = \mbox{const}.
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C: complex power analysis (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{M2C: complex power analysis (cont.)}
+    Rewriting the fundamental apparent power in terms of the active and reactive power yields:
+    \begin{equation}
+        \left(S_1^{(1)}\right)^2 = P_1^2 + \left(Q_1^{(1)}\right)^2 = I_2^2 \hat{u}^2_\mathrm{s0}  \quad \Leftrightarrow \left(\frac{Q_1^{(1)}}{I_2 \hat{u}_\mathrm{s0}}\right)^2 + \left(\frac{P_1^2}{I_2 \hat{u}_\mathrm{s0}}\vphantom{\frac{Q_1^{(1)}}{I_2 \hat{u}_\mathrm{s0}}}\right)^2 = 1.
+    \end{equation}
+    Inserting $P_1 = I_2 \hat{u}_\mathrm{s0} \cos(\alpha)$ from \eqref{eq:active_power_M2C_output} finally yields the following circular equation
+    \begin{equation}
+        \left(\frac{Q_1^{(1)}}{I_2 \hat{u}_\mathrm{s0}}\right)^2 + \left(\cos(\alpha)\vphantom{\frac{Q_1^{(1)}}{I_2 \hat{u}_\mathrm{s0}}}\right)^2 = 1 \quad \Leftrightarrow \quad \left(\frac{Q_1^{(1)}}{S_1^{(1)}}\right)^2 + \left(\frac{\overline{u}_2}{\hat{u}_\mathrm{s0}}\vphantom{\frac{Q_1^{(1)}}{S_1^{(1)}}}\right)^2 = 1 
+    \end{equation}
+    which can be visualized as a \hl{reactive power diagram} of the M2C converter -- compare \figref{fig:M2C_reactive_power_demand}.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C: complex power analysis (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[c]
+    \frametitle{M2C: complex power analysis (cont.)}
+    \begin{figure}
+        \begin{tikzpicture}
+            \tikzmath{
+                real \ac, \i2, \ic;
+                \i2 = 1; % load current
+                \ic = 9; % commutation current
+                \ac = 180 - acos(\i2/\ic -1); % firing angle margin for commutation
+            }
+            \begin{axis}[
+                width=0.7\textwidth,
+                height=0.9\textheight,
+                axis x line=middle,
+                axis y line=middle,
+                xmin=-1.1, xmax=1.1,
+                ymin=0, ymax=1.1,
+                xtick={-1, -0.75, -0.5, -0.25, 0, 0.25, 0.5, 0.75, 1},
+                ytick={0, 0.25, 0.5, 0.75, 1},
+                yticklabels={$0$, $0.25$, $0.5$, $0.75$, },
+                xlabel={$\frac{\overline{u}_2}{\hat{u}_\mathrm{s0}}=\cos(\alpha)$},
+                ylabel={$\frac{Q_1^{(1)}}{S_1^{(1)}}$},
+                xlabel style={anchor=west},
+                ylabel style={anchor=south},
+                grid=both,
+                axis equal image,
+                clip = false,
+            ]
+                \addplot[domain=0:180, samples=100, smooth, thick, name path = A] ({cos(x)}, {sin(x)});
+                \draw[dashed] (axis cs:0,0) -- (axis cs:{1.1*cos(\ac)},{1.1*sin(\ac)});
+                \draw[dashed] (axis cs:0,0) -- (axis cs:{-1.1*cos(\ac)},{1.1*sin(\ac)});
+                \fill[fill opacity=0.3,fill=shadecolor] (axis cs:0,0) -- (axis cs:{cos(\ac)}, {sin(\ac)}) arc (\ac:{180-\ac}:1) -- cycle;
+                \draw [<->] (axis cs:0.6,0) arc [radius=0.6,start angle=0,end angle=\ac];
+                \draw [<->] (axis cs:-0.6,0) arc [radius=0.6,start angle=180,end angle=180-\ac];
+                \draw (axis cs:0.6,0.125) node[anchor=west]{$\kappa$};
+                \draw (axis cs:-0.6,0.125) node[anchor=east]{$\kappa$};
+                \draw[thin] (axis cs:0.6,0.6) -- (axis cs:1.15,0.75) node[anchor = west, align=left, font=\small] {Achievable operation\\range};
+                \draw[thin] (axis cs:-0.88,0.125) -- (axis cs:-1.15,0.25) node[anchor = east, align=right, font=\small] {Commutation\\ margin};
+                \draw[thin] (axis cs:0.88,0.125) -- (axis cs:1.15,0.25) node[anchor = west, align=right, font=\small] {Overlap voltage loss};
+                \draw[->, dashed, thick] (axis cs:{cos(65)},{sin(65)}) -- (axis cs:{cos(65)},0);
+                \draw[->, dashed, thick] (axis cs:{cos(65)},{sin(65)}) -- (axis cs:0,{sin(65)});
+                \draw[thick] (axis cs:0,0) -- (axis cs:{cos(65)},{sin(65)});
+                \draw [<->] (axis cs:0.25,0) arc [radius=0.25,start angle=0,end angle=65];
+                \node at (axis cs:0.21,0.21) {$\alpha$};
+                \node[anchor = east, xshift=-1.5pt] at (axis cs:0,1.05) {$1$};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Fundamental reactive power demand at some constant output current}
+        \label{fig:M2C_reactive_power_demand}
+    \end{figure}
 \end{frame}
