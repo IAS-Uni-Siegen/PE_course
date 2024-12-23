@@ -1,2 +1,3 @@
 galvanically
 thyristor
+line-commutated
