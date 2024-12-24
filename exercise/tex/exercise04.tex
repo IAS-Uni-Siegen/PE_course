@@ -8,7 +8,7 @@
 %% Task 1: Flyback converter %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task{Flyback converter}
-A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} \, \dots \, \SI{900}{\volt}$ is used to supply a control electronics unit. The converter delivers a rated output power of  $P_\mathrm{2} = \SI{30}{\watt}$ at a regulated (constant) output voltage of  $U_\mathrm{2} = \SI{15}{\volt}$. The flyback converter is operated in discontinuous conduction  mode with a constant frequency of  $f_\mathrm{s} = \SI{50}{\kilo\hertz}$. The turns ratio of the transformer is $N_\mathrm{1}/N_\mathrm{2}=60/12$, the magnetizing inductance on the primary side is $L_\mathrm{m} = \SI{760}{\micro\henry}$. The coupling between the primary and secondary windings is ideal and the converter operates in steady state.
+A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} \, \dots \, \SI{900}{\volt}$ is used to supply a control electronics unit. The converter delivers a rated output power of  $P_\mathrm{2} = \SI{30}{\watt}$ at a regulated (constant) output voltage of  $U_\mathrm{2} = \SI{15}{\volt}$. The flyback converter is operated in discontinuous conduction  mode with a constant switching frequency of  $f_\mathrm{s} = \SI{50}{\kilo\hertz}$. The turns ratio of the transformer is $N_\mathrm{1}/N_\mathrm{2}=60/12$, the magnetizing inductance on the primary side is $L_\mathrm{m} = \SI{760}{\micro\henry}$. The coupling between the primary and secondary windings is ideal and the converter operates in steady state.
 
 \input{./fig/ex04/Fig_FlybackConverter.tex}
 
@@ -26,10 +26,10 @@ A flyback converter with an input voltage range $U_\mathrm{1} = \SI{300}{\volt} 
     \label{table:ex04_Parameters of the circuit}
 \end{table}
 
-\subtask{The input voltage is $U_\mathrm{1}=\SI{760}{\volt}$ at rated power at the output. What is the peak value $\hat i_\mathrm{1}$ of the primary current $i_\mathrm{1}$? What is the peak value $\hat i_\mathrm{2}$ of the secondary current $i_\mathrm{2}$? Calculate the duty cycle of the transistor for this operating point.} 
+\subtask{The input voltage is $U_\mathrm{1}=\SI{760}{\volt}$ at rated output power. What is the peak value $\hat i_\mathrm{1}$ of the primary current $i_\mathrm{1}$? What is the peak value $\hat i_\mathrm{2}$ of the secondary current $i_\mathrm{2}$? Calculate the duty cycle of the transistor for this operating point.} 
 
 \begin{solutionblock}
-To determine the peak current  $\hat i_\mathrm{1}$ we consider the average power transfer
+To determine the peak current  $\hat i_\mathrm{1}$, we consider the average power transfer
 \begin{equation}
     P_\mathrm{2} = W_\mathrm{L} f_\mathrm{s}, \label{eq:output power ex04}
 \end{equation}
@@ -45,11 +45,11 @@ Solving for $\hat i_\mathrm{1}$ yields the peak current
 \begin{equation}
     \hat i_\mathrm{1} = \sqrt{\frac{2P_\mathrm{2}}{L_\mathrm{m}f_\mathrm{s}}}= \sqrt{\frac{2\cdot\SI{30}{\watt}}{\SI{760}{\micro\henry}\cdot\SI{50}{\kilo\hertz}}}=\SI{1.257}{\ampere}.
 \end{equation}
-Since an in ideal transformer is assumed, the secondary peak current directly follows from the primary peak current and the turns ratio:
+Since an ideal transformer is assumed, the secondary peak current directly follows from the primary peak current and the turns ratio:
 \begin{equation}
     \hat i_\mathrm{2} = \hat i_\mathrm{1} \frac{N_\mathrm{1}}{N_\mathrm{2}} = \SI{1.257}{\ampere} \cdot \frac{60}{12} = \SI{6.28}{\ampere}.
 \end{equation}
-Because of DCM the the voltage transfer ratio is
+Because of DCM the voltage transfer ratio is
 \begin{equation}
     \frac{U_2}{U_1} = \frac{D^2}{2} \frac{\Delta i_\mathrm{m,max}}{\overline{i}_2}. \label{eq:Duty cycle ex04}
 \end{equation}
@@ -57,7 +57,7 @@ The yet unknown current ripple can be determined via the switch-on interval
 \begin{equation}
     \Delta i_\mathrm{m,max}= \frac{T_\mathrm{s} \cdot U_1}{L_\mathrm{m}} = \frac{\frac{1}{\SI{50}{\kilo\hertz}}\cdot \SI{760}{\volt}}{\SI{760}{\micro\henry}}=\SI{20}{\ampere}.
 \end{equation}
-Inserting in \eqref{eq:Duty cycle ex04} and solving for D yields:
+Inserting in \eqref{eq:Duty cycle ex04} and solving for D with $\overline{i}_2 = \frac{P_\mathrm{2}}{U_\mathrm{2}}$ yields to:
 
 \begin{equation}
     D = \sqrt{\frac{2U_2\overline{i}_2}{U_1\Delta i_\mathrm{m,max}}} = \sqrt{\frac{2\cdot \SI{15}{\volt}\cdot\SI{30}{\watt}}{\SI{760}{\volt}\cdot\SI{15}{\volt}\cdot\SI{20}{\ampere}}} = 0.063.
@@ -65,10 +65,10 @@ Inserting in \eqref{eq:Duty cycle ex04} and solving for D yields:
 
 \end{solutionblock}
 
-\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Calculate and sketch the following voltage and current curves for this operating case over one cycle period: $u_\mathrm{T}(t), u_\mathrm{s}(t), i_\mathrm{2}(t), i_\mathrm{1}(t)$. Here, $u_\mathrm{T}(t)$ is the transistor voltage and $u_\mathrm{s}(t)$ is the voltage on the secondary side of the transformer.}
+\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Calculate and sketch the following voltage and current curves for this operating points over two cycle periods: $u_\mathrm{T}(t), u_\mathrm{s}(t), i_\mathrm{2}(t), i_\mathrm{1}(t)$. Here, $u_\mathrm{T}(t)$ is the transistor voltage and $u_\mathrm{s}(t)$ is the voltage on the secondary side of the transformer.}
 
 \begin{solutionblock}
-    Because of a different voltage value the duty cycle $D$ has changed:
+    Because of a different input voltage, the duty cycle $D$ has changed:
     \begin{equation}
         \Delta i_\mathrm{m,max}= \frac{T_\mathrm{s} \cdot U_1}{L_\mathrm{m}} = \frac{\frac{1}{\SI{50}{\kilo\hertz}}\cdot \SI{382}{\volt}}{\SI{760}{\micro\henry}}=\SI{10.05}{\ampere}.
     \end{equation}
@@ -89,48 +89,48 @@ Inserting in \eqref{eq:Duty cycle ex04} and solving for D yields:
     \begin{equation}
         T''_\mathrm{off}= T_\mathrm{s} -T_\mathrm{on}-T'_\mathrm{off} = \frac{1}{\SI{50}{\kilo\hertz}} - \SI {2.5}{\micro\s} - \SI {12.7}{\micro\s} = \SI {4.8}{\micro\s}.
     \end{equation}
-    The intervals are determined. In the following the voltage values in the three intervals are calculated:
-    The first interval is 0 < t < $T_\mathrm{on}$. In this interval the transistor conducts and therefore the voltage $U_\mathrm{T}=0$
-    The following applies to the voltage on the secondary side:
+    In the following the voltage values in the three intervals are calculated:
+    The first interval is $0 < t < T_\mathrm{on}$. In this interval the transistor conducts and, therefore, the voltage $U_\mathrm{T}=0$ results.
+    The following applies to the voltage on the primary side:
     \begin{equation}
         u_\mathrm{T} = U_1 + \frac{N_1}{N_2}U_\mathrm{2}.\label{eq:voltageTransistorTask1 ex04}
     \end{equation}
-    In this interval the $U_\mathrm{2} = u_\mathrm{s}$. As $u_\mathrm{T}=0$ = 0 follows:
+    In this interval the voltage $U_\mathrm{2}$ is equal to $u_\mathrm{s}$. With the voltage $u_\mathrm{T}=0$ follows:
     \begin{equation}
         u_\mathrm{s} = -U_1 \frac{N_2}{N_1} = -\SI{382}{\volt}\cdot\frac{12}{60} = \SI{-76.4}{\volt}.
     \end{equation}
-    The second interval is $T_\mathrm{on}$ < t < $T'_\mathrm{off}$. In this interval the transistor blocks. For this calculaion \eqref{eq:voltageTransistorTask1 ex04} can be used again as:
+    The second interval is $T_\mathrm{on} < t < T'_\mathrm{off}$. In this interval the transistor blocks. For this calculaion \eqref{eq:voltageTransistorTask1 ex04} can be used again as:
     \begin{equation}
         u_\mathrm{T} = \SI{382}{\volt} + \frac{60}{12}\cdot\SI{15}{\volt} = \SI{457}{\volt}.
     \end{equation}
-    Because of the conducting diode $U_\mathrm{2} = u_\mathrm{s} = \SI{15}{\volt}$.
-    The third interval is $T_\mathrm{on}+T'_\mathrm{off}$ < t < $T_\mathrm{s}$. In this interval the diode is not conducting and der transistor blocks. From this follows $u_\mathrm{T} = U_1$ and $u_\mathrm{s}=0$
-    Current $i_\mathrm{1}(t)$ can only be present when the transistor is switched on. When the transistor is switched on, the current value rises to the peak value $\hat i_\mathrm{1}= \SI{1.257}{\ampere}$. Current $i_\mathrm{2}(t)$ is the discharge current of the secondary winding when the diode is conducting. The discharge current starts at the peak value of the secondary side $\hat i_\mathrm{2}= \SI{6.28}{\ampere}$.
+    Because of the conducting diode, for the voltage $U_\mathrm{2}$ is following $U_\mathrm{2} = u_\mathrm{s} = \SI{15}{\volt}$.
+    The third interval is $T_\mathrm{on}+T'_\mathrm{off}$ < t < $T_\mathrm{s}$. In this interval the diode is not conducting and the transistor blocks. From this follows $u_\mathrm{T} = U_1$ and $u_\mathrm{s}=0$.
+    Looking at the current $i_\mathrm{1}(t)$ over the entire course, the current can only be present when the transistor is switched on. When the transistor is switched on, the current value rises to the peak value $\hat i_\mathrm{1}= \SI{1.257}{\ampere}$. Current $i_\mathrm{2}(t)$ is the discharge current of the secondary winding when the diode is conducting and the transistor blocks. The discharge current starts at the peak value of the secondary side $\hat i_\mathrm{2}= \SI{6.28}{\ampere}$.
     \input{./fig/ex04/Fig_voltageTransistorUsPeriodTask1.tex}
     \input{./fig/ex04/Fig_currentI1I2PeriodTask1.tex}
 \end{solutionblock}
 
 
-\subtask{Determine the mean value $\overline i_\mathrm{T}$ and the RMS current $I_\mathrm{T}$ through the transistor. Also,  determine the mean value $\overline i_\mathrm{D}$ and the RMS current $I_\mathrm{D}$ through the diode. What is the maximum reverse voltage load $u_\mathrm{T, max}$ of the transistor and $u_\mathrm{D, max}$ of the diode? Consider the same operation conditions as in the previous subtask.}
+\subtask{Determine the mean value $\overline i_\mathrm{T}$ and the RMS current $I_\mathrm{T}$ through the transistor. Also,  determine the mean value $\overline i_\mathrm{D}$ and the RMS current $I_\mathrm{D}$ through the diode. What is the maximum reverse voltage $u_\mathrm{T, max}$ of the transistor and $u_\mathrm{D, max}$ of the diode? Consider the same operation conditions as in the previous subtask.}
 \begin{solutionblock}
-    The current is in the form of a triangle. Therefore, the average value must first be determined over the $T_\mathrm{on}$. This value corresponds to the area of the triangle. The value is divided by $T_\mathrm{S}$ to obtain the average value over the entire period. This gives:
+    The current signal is in the form of a triangle. Therefore, the average value must first be determined over the $T_\mathrm{on}$ interval only. The value is divided by $T_\mathrm{s}$ to obtain the average value over the entire period. This gives:
     \begin{equation}
-        \overline{i}_\mathrm{T} = \frac{1}{T_\mathrm{S}}\frac{1}{2}\hat i_\mathrm{1}T_\mathrm{on}=\frac{1}{\SI{20}{\micro\s}}\cdot\frac{1}{2}\cdot\SI{1.257}{\ampere}\cdot\SI{2.5}{\micro\s}=\SI{78.53}{\milli\ampere}.
+        \overline{i}_\mathrm{T} = \frac{1}{T_\mathrm{s}}\frac{1}{2}\hat i_\mathrm{1}T_\mathrm{on}=\frac{1}{\SI{20}{\micro\s}}\cdot\frac{1}{2}\cdot\SI{1.257}{\ampere}\cdot\SI{2.5}{\micro\s}=\SI{78.53}{\milli\ampere}.
     \end{equation}
-    To determine the RMS value of the transistor current, the straight line equation of the applied current must be created and inserted, which leads to
+    To determine the RMS value of the transistor current, the function of the transistor current must be set up and used, which leads to
     \begin{equation}
-        I_\mathrm{T}^2=\frac{1}{T_\mathrm{S}} \int_{0}^{T_\mathrm{S}} i_\mathrm{1}^2(t) \,\mathrm{d}t \ = \frac{1}{T_\mathrm{S}}\int_{0}^{T_\mathrm{on}} \frac{\hat i_\mathrm{1}^2t^2}{T_\mathrm{on}^2} \,\mathrm{d}t \ =  \frac{\hat i_\mathrm{1}^2T_\mathrm{on}}{3T_\mathrm{on}},
+        I_\mathrm{T}^2=\frac{1}{T_\mathrm{s}} \int_{0}^{T_\mathrm{s}} i_\mathrm{1}^2(t) \,\mathrm{d}t \ = \frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{on}} \frac{\hat i_\mathrm{1}^2t^2}{T_\mathrm{on}^2} \,\mathrm{d}t \ =  \frac{\hat i_\mathrm{1}^2T_\mathrm{on}}{3T_\mathrm{on}},
     \end{equation}
     \begin{equation}
-        I_\mathrm{T} = \hat i_\mathrm{1} \sqrt{\frac{T_\mathrm{on}}{3T_\mathrm{S}}}= \SI{1.257}{\ampere}\cdot\sqrt{\frac{\SI{2.5}{\micro\s}}{3\cdot\SI{20}{\micro\s}}}= \SI{256.58}{\milli\ampere}.
+        I_\mathrm{T} = \hat i_\mathrm{1} \sqrt{\frac{T_\mathrm{on}}{3T_\mathrm{s}}}= \SI{1.257}{\ampere}\cdot\sqrt{\frac{\SI{2.5}{\micro\s}}{3\cdot\SI{20}{\micro\s}}}= \SI{256.58}{\milli\ampere}.
     \end{equation}
-    The mean value for the current $i_\mathrm{D}$ and the RMS value for  $i_\mathrm{D}$ are determined as already explained:
+    The mean value for the current $i_\mathrm{D}$ and the RMS value for  $i_\mathrm{D}$ are determined analogously:
     \begin{equation}
-        \overline{i}_\mathrm{D} = \frac{1}{T_\mathrm{S}}\frac{1}{2}\hat i_\mathrm{2}T_\mathrm{off}'=\frac{1}{\SI{20}{\micro\s}}\cdot\frac{1}{2}\cdot\SI{6.28}{\ampere}\cdot\SI{12.7}{\micro\s}=\SI{2}{\ampere},
+        \overline{i}_\mathrm{D} = \frac{1}{T_\mathrm{s}}\frac{1}{2}\hat i_\mathrm{2}T_\mathrm{off}'=\frac{1}{\SI{20}{\micro\s}}\cdot\frac{1}{2}\cdot\SI{6.28}{\ampere}\cdot\SI{12.7}{\micro\s}=\SI{2}{\ampere},
     \end{equation}
 
     \begin{equation}
-        I_\mathrm{D} = \hat i_\mathrm{2} \sqrt{\frac{T_\mathrm{off}'}{3T_\mathrm{S}}}= \SI{6.28}{\ampere}\cdot\sqrt{\frac{\SI{12.7}{\micro\s}}{3\cdot\SI{20}{\micro\s}}}= \SI{2.89}{\ampere}.
+        I_\mathrm{D} = \hat i_\mathrm{2} \sqrt{\frac{T_\mathrm{off}'}{3T_\mathrm{s}}}= \SI{6.28}{\ampere}\cdot\sqrt{\frac{\SI{12.7}{\micro\s}}{3\cdot\SI{20}{\micro\s}}}= \SI{2.89}{\ampere}.
     \end{equation}
     The voltage  $u_\mathrm{T,max}$ is calculated as in \eqref{eq:voltageTransistorTask1 ex04} as:
     \begin{equation}
@@ -155,7 +155,7 @@ Inserting in \eqref{eq:Duty cycle ex04} and solving for D yields:
     \begin{equation}
         {P} = \frac{W_\mathrm{L}}{T_\mathrm{s}} = \frac{\SI{600}{\micro\joule}}{\SI{20}{\micro\s}}=\SI{30}{\watt}.
     \end{equation}
-At each switching interval, energy is pushed into the capacitor, the voltage of which continues to rise until a component fails due to over voltage.
+At each switching interval, energy is pushed into the capacitor, the voltage of which continues to rise until a component fails due to over voltage if no load is connected.
 \end{solutionblock}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
