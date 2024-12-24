@@ -79,13 +79,13 @@
         \begin{subfigure}{0.45\textwidth}
             \centering
 			\includegraphics[height=0.45\textheight]{fig/lec05/Thyristor_example_01.jpg}
-			\caption{top left: \SI{1000}{\volt}/\SI{200}{\ampere}; bottom left: \SI{1500}{\volt}/\SI{20}{\ampere}; right: \SI{1500}{\volt}/\SI{120}{\ampere}; 1N4007 diode for comparison (source: \href{https://de.wikipedia.org/wiki/Datei:SCR_power_rectifiers.jpg}{Wikimedia Commons}, \href{https://creativecommons.org/publicdomain/zero/1.0/}{CC0~1.0})}
+			\caption{Top left: \SI{1000}{\volt}/\SI{200}{\ampere}; bottom left: \SI{1500}{\volt}/\SI{20}{\ampere}; right: \SI{1500}{\volt}/\SI{120}{\ampere}; 1N4007 diode for comparison (source: \href{https://de.wikipedia.org/wiki/Datei:SCR_power_rectifiers.jpg}{Wikimedia Commons}, \href{https://creativecommons.org/publicdomain/zero/1.0/}{CC0~1.0})}
         \end{subfigure}
         \hspace{1cm}
         \begin{subfigure}{0.45\textwidth}
             \centering
             \includegraphics[height=0.45\textheight]{fig/lec05/Thyristor_example_02.jpg}
-			\caption{left: \SI{800}{\volt}/\SI{100}{\ampere}; right: \SI{800}{\volt}/\SI{13}{\ampere} (source: \href{https://de.wikipedia.org/wiki/Datei:Thyristors_thyristoren.jpg}{Wikimedia Commons}, Julo, \href{https://creativecommons.org/licenses/by-sa/3.0/deed.de}{CC0~BY-SA~3.0})}
+			\caption{Left: \SI{800}{\volt}/\SI{100}{\ampere}; right: \SI{800}{\volt}/\SI{13}{\ampere} (source: \href{https://de.wikipedia.org/wiki/Datei:Thyristors_thyristoren.jpg}{Wikimedia Commons}, Julo, \href{https://creativecommons.org/licenses/by-sa/3.0/deed.de}{CC0~BY-SA~3.0})}
             \vspace{2em}
         \end{subfigure}
         \caption{Thyristor examples with different voltage and current ratings}
@@ -208,8 +208,7 @@
     \begin{equation}
         \overline{u}_2 = \frac{1}{2\pi} \int_{\alpha}^{\pi} \hat{u}_1 \sin(\omega t) \mathrm{d} \omega t = \frac{\hat{u}_1}{2\pi} \left[ -\cos(\omega t) \right]_{\alpha}^{\pi} = \frac{\hat{u}_1}{2\pi} \left( 1 + \cos(\alpha) \right). 
     \end{equation}
-    Here, $\alpha$ denotes the phase angle at which the thyristor is triggered (aka \hl{firing angle}). In the M1C case, the feasible range for $\alpha$ is $[0,\nicefrac{\pi}{2}]$ applies as the thyristor requires a positive forward voltage to start conducting, that is, if $u_\mathrm{T}<0$ a firing impulse would not change its conduction state. The \hl{RMS value} of the output voltage is given by
-    The \hl{RMS value} of the output voltage is given by
+    Here, $\alpha$ denotes the phase angle at which the thyristor is triggered (aka \hl{firing angle}). In the M1C case, the feasible range for $\alpha$ is $[0,\nicefrac{\pi}{2}]$ as the thyristor requires a positive forward voltage to start conducting, that is, if $u_\mathrm{T}<0$ a firing impulse would not change its conduction state. The \hl{RMS value} of the output voltage is given by
     \begin{equation}
         U_2 = \sqrt{\frac{1}{2\pi} \int_{\alpha}^{\pi} \hat{u}_1^2 \sin^2(\omega t) \mathrm{d} \omega t} =   \ldots = \frac{\hat{u}_1}{2} \sqrt{\frac{\pi - \alpha + \sin(\alpha)\cos(\alpha)}{\pi}}.
     \end{equation}
@@ -232,6 +231,12 @@
     \end{equation}
     \onslide<10->{In contrast to the M1U rectifier, one can observe additional harmonic components due to additional distortion of the output voltage caused by the thyristor switching.}
 \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M2C circuit %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{M2C circuit} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% M2C controllable rectifier circuit  %%
@@ -313,11 +318,6 @@
         \label{fig:M2C_topology}
     \end{figure}
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% M2C circuit %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{M2C circuit} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% M2C converter: resistive load  %%
@@ -868,8 +868,8 @@
     Here, $i_{T_1}(k\pi+\alpha)$ and $i_{T_2}(k\pi+\alpha)$ are the thyristor currents at the beginning of the commutation process during the $k$-th half cycle. One can distinguish two cases:
     \begin{equation*}
         \begin{alignedat}{3}
-        i_{T_1}(k\pi+\alpha) &= 0, \quad i_{T_2}(k\pi+\alpha) &=i_2, \quad &\mbox{commutation from $T_1$ to $T_2$},\\
-        i_{T_1}(k\pi+\alpha) &= i_2, \quad i_{T_2}(k\pi+\alpha) &= 0, \quad &\mbox{commutation from $T_2$ to $T_1$}.
+        i_{T_1}(k\pi+\alpha) &= 0, \quad i_{T_2}(k\pi+\alpha) &=i_2, \quad &\mbox{commutation from $T_2$ to $T_1$},\\
+        i_{T_1}(k\pi+\alpha) &= i_2, \quad i_{T_2}(k\pi+\alpha) &= 0, \quad &\mbox{commutation from $T_1$ to $T_2$}.
         \end{alignedat}
     \end{equation*}
     The commutation process ends when the thyristor currents reach $i_2$ and zero, respectively.
@@ -884,7 +884,7 @@
     \begin{equation}
         i_{T_1}(\alpha+\kappa) = i_2 \stackrel{!}{=} \frac{u_\mathrm{s}}{L_\mathrm{c}\omega}\left(\cos(\alpha)-\cos(\alpha+\kappa)\right).
     \end{equation}
-    The overlap angle $\kappa$ can be determined as
+    Solving for the overlap angle $\kappa$ results in
     \begin{equation}
         \kappa = \arccos\left(\cos(\alpha) - \frac{i_2L_\mathrm{c}\omega}{u_\mathrm{s}}\right) - \alpha.
         \label{eq:overlap_angle_M2C}
@@ -1005,14 +1005,14 @@
     \begin{equation}
         u_\mathrm{s}(\omega t) = 0, \qquad \omega t \in [k\pi+\alpha, k\pi+\alpha + \kappa].
     \end{equation}
-    The output voltage lost in the process corresponds to
+    The output voltage loss in the process corresponds to
     \begin{equation}
-        \Delta u = \frac{1}{\pi}\int_{\alpha}^{\alpha + \kappa} u_\mathrm{s}\sin(\omega t) \mathrm{d}(\omega t) = \frac{u_\mathrm{s}}{\pi}\left[-\cos(\omega t)\right]_{\alpha}^{\alpha + \kappa} = \frac{u_\mathrm{s}}{\pi}\left[\cos(\alpha) - \cos(\alpha + \kappa)\right].
+        \Delta u = \frac{1}{\pi}\int_{\alpha}^{\alpha + \kappa} \hat{u}_\mathrm{s}\sin(\omega t) \mathrm{d}(\omega t) = \frac{\hat{u}_\mathrm{s}}{\pi}\left[-\cos(\omega t)\right]_{\alpha}^{\alpha + \kappa} = \frac{\hat{u}_\mathrm{s}}{\pi}\left[\cos(\alpha) - \cos(\alpha + \kappa)\right].
     \end{equation}
     Inserting \eqref{eq:overlap_angle_M2C} for $\kappa$ yields
     \begin{equation}
         \begin{split}
-            \Delta u &= \frac{u_\mathrm{s}}{\pi}\left[\cos(\alpha) - \cos\left(\alpha + \arccos\left(\cos(\alpha) - \frac{i_2L_\mathrm{c}\omega}{u_\mathrm{s}}\right) - \alpha\right)\right]\\
+            \Delta u &= \frac{\hat{u}_\mathrm{s}}{\pi}\left[\cos(\alpha) - \cos\left(\alpha + \arccos\left(\cos(\alpha) - \frac{i_2L_\mathrm{c}\omega}{\hat{u}_\mathrm{s}}\right) - \alpha\right)\right]\\
                      &=\frac{i_2L_\mathrm{c}\omega}{\pi}.
         \end{split}
     \end{equation}
@@ -1123,7 +1123,7 @@
         P_1 = \overline{p}_2 = I_2 \overline{u}_2 = I_2 \hat{u}_\mathrm{s} \frac{2}{\pi} \cos(\alpha) = I_2 \hat{u}_\mathrm{s0} \cos(\alpha)
         \label{eq:active_power_M2C_output}
     \end{equation} 
-    with $\hat{u}_\mathrm{s0} = \hat{u}_\mathrm{s} \nicefrac{2}{\pi}$ being the \hl{maximum reachable output voltage} (for $\alpha=0$).  From \eqref{eq:active_power_M2C_fundamental} the \hl{fundamental reactive power} can be determined as
+    with $\hat{u}_\mathrm{s0} = \hat{u}_\mathrm{s} \cdot \nicefrac{2}{\pi}$ being the \hl{maximum reachable output voltage} (for $\alpha=0$).  From \eqref{eq:active_power_M2C_fundamental} the \hl{fundamental reactive power} can be determined as
     \begin{equation}
         Q_1^{(1)} = I_1^{(1)}U_1\sin(\varphi^{(1)}) = I_2 \hat{u}_\mathrm{s0} \sin(\alpha).
     \end{equation}
@@ -1140,13 +1140,13 @@
     \frametitle{M2C: reactive power diagram}
     Rewriting the fundamental apparent power in terms of the active and reactive power yields:
     \begin{equation}
-        \left(S_1^{(1)}\right)^2 = P_1^2 + \left(Q_1^{(1)}\right)^2 = I_2^2 \hat{u}^2_\mathrm{s0}  \quad \Leftrightarrow \left(\frac{Q_1^{(1)}}{I_2 \hat{u}_\mathrm{s0}}\right)^2 + \left(\frac{P_1^2}{I_2 \hat{u}_\mathrm{s0}}\vphantom{\frac{Q_1^{(1)}}{I_2 \hat{u}_\mathrm{s0}}}\right)^2 = 1.
+        \left(S_1^{(1)}\right)^2 = \left(P_1\vphantom{Q_1^{(1)}}\right)^2 + \left(Q_1^{(1)}\right)^2 = I_2^2 \hat{u}^2_\mathrm{s0}  \quad \Leftrightarrow \left(\frac{Q_1^{(1)}}{I_2 \hat{u}_\mathrm{s0}}\right)^2 + \left(\frac{P_1^2}{I_2 \hat{u}_\mathrm{s0}}\vphantom{\frac{Q_1^{(1)}}{I_2 \hat{u}_\mathrm{s0}}}\right)^2 = 1.
     \end{equation}
     Inserting $P_1 = I_2 \hat{u}_\mathrm{s0} \cos(\alpha)$ from \eqref{eq:active_power_M2C_output} finally yields the following circular equation
     \begin{equation}
         \left(\frac{Q_1^{(1)}}{I_2 \hat{u}_\mathrm{s0}}\right)^2 + \left(\cos(\alpha)\vphantom{\frac{Q_1^{(1)}}{I_2 \hat{u}_\mathrm{s0}}}\right)^2 = 1 \quad \Leftrightarrow \quad \left(\frac{Q_1^{(1)}}{S_1^{(1)}}\right)^2 + \left(\frac{\overline{u}_2}{\hat{u}_\mathrm{s0}}\vphantom{\frac{Q_1^{(1)}}{S_1^{(1)}}}\right)^2 = 1 
     \end{equation}
-    which can be visualized as a \hl{reactive power diagram} of the M2C converter -- compare \figref{fig:M2C_reactive_power_demand}.
+    which can be visualized as a \hl{reactive power diagram} of the M2C converter -- compare the upcoming \figref{fig:M2C_reactive_power_demand}.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1428,14 +1428,14 @@
     \begin{itemize}
         \item In contrast to diode-based rectifiers:
         \begin{itemize}
-            \item Can be controlled by varying the firing angle $\alpha$ (within its feasible range).
+            \item Are \hl{controllable by varying the firing angle} $\alpha$ (within its feasible range).
             \item Can transfer power in both directions (rectifier and inverter operation).
         \end{itemize}
         \item Likewise diode-based rectifiers:
         \begin{itemize}
             \item Introduce harmonics in the output voltage and input current (i.e., require filters).
             \item Typically do not operate at unity power factor (require reactive power).
-            \item Are line-commutated, as the external grid voltage is required to achieve the commutation.
+            \item Are \hl{line-commutated}, as the external grid voltage is required to achieve the commutation.
         \end{itemize}
     \end{itemize}
    Previous analyses based on diodes or thyristor-based converters were dealt with in varying detail level, but as they can be transferred analogously they are not explicitly shown due to time constraints. In addition, there are further interesting thyristor-based applications such as
