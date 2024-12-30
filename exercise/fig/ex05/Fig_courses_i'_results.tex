@@ -18,11 +18,11 @@
             grid
             ]
             
-            \addplot[signalred, domain=0:10, samples=200] {24.5 * (1 - ((x-5)/5)^2)};
+            \addplot[dashed, black, domain=0:10, samples=200] {24.5 * (1 - ((x-5)/5)^2)};
             
        %     \addplot [signalgreen, domain=0:3.5, draw=none] {24.5 * (1 - ((x-5)/5)^2)};
 %\addlegendentry{first plot}
-        \addplot[thick, domain=0:10,signalgreen]
+        \addplot[thick, domain=0:10,signalred]
             (0,0) -- (0.48,2.35)
             -- (0.5, 0.95) -- (0.935, 7.27)
             -- (1.008, 2.5) --
@@ -45,8 +45,8 @@
             -- (9.319,10.2) -- (9.58,1.8)  
             --  (9.9,4.2) -- (10,0);
           %  \addplot[signalred, domain=0:10, samples=200] {15.5 * (1 - ((x-5)/5)^2)};
-          \addplot[thick,blue, domain=0:10, samples=200] {27.9 * (1 - ((x - 5)/5)^2)};
-            \legend{$i'^*(t)$, $i'(t)$, $enveloping$}
+          \addplot[signalgreen, dashed, domain=0:10, samples=200] {27.9 * (1 - ((x - 5)/5)^2)};
+            \legend{$i'^*(t)$, $i'(t)$}%, $enveloping$}
             \end{axis}
     \end{tikzpicture}
 
@@ -138,6 +138,6 @@
     \end{tikzpicture}
     
 
-    \caption{Current $i'$ and control signal for power transistor $T$ with results.}
+    \caption{Current $i'$ and control signal for transistor $T$.}
     \label{fig:Current i' control signal ex05 result}
 \end{solutionfigure}

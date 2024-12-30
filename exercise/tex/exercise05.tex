@@ -242,7 +242,7 @@ The average voltage over the inductance for a (quasi) steady-state operation is 
   \end{equation}
 \end{solutionblock}
 
-\subtask{Specify the conduction time of the transistor and the diode as a function of the transformation ratio $M$ and the time $t$.} 
+\subtask{Specify the conduction time of the transistor and the diode as a function of the transformation ratio $M$ and the time $t$, with the assumption $u_2(t)\approx U_2$.} 
 \begin{solutionblock}
     Using $M = \frac{U_{\mathrm{2}}}{\hat u_{\mathrm{1}}}$, the transformation ratio is given with:
     \begin{equation}
@@ -262,7 +262,7 @@ If the diode $D_{\mathrm{5}}$ is conducting, the duty cycle $1-d(t)$ is derived 
 Note: Consider the conductive state of $T$ and set the voltage across the inductance as a function of the phase angle $(\omega t)$ and the conduction time of the transistor according to the previous subtask.} 
 \input{fig/ex05/Fig_courses_i'}
 \begin{solutionblock}
-    To solve this task the component equation of inductance is used:
+    To solve this task, the component equation of inductance is used:
     \begin{equation}
         u_{\mathrm{L}}(t) = L \frac{\mathrm{d}i'(t)}{\mathrm{d}t}.
     \end{equation}
@@ -325,19 +325,19 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
 \begin{solutionblock}
     The component equation of inductance is used to determine the current values $i'(t)$ as:
     \begin{equation}
-        \frac{\mathrm{d}}{\mathrm{d}t}i'(t) = \frac{1}{L}\hat U_\mathrm{1} \sin(\omega t).\label{eq:ex054Deltai'}
+        \frac{\mathrm{d}}{\mathrm{d}t}i'(t) = \frac{1}{L}\hat u_\mathrm{1} \sin(\omega t).\label{eq:ex054Deltai'}
     \end{equation}
-    \eqref{eq:ex054Deltai'} must now be converted to i'. To do this, the right-hand side of the equation must be integrate to:
+    \eqref{eq:ex054Deltai'} must now be converted to $i'$. To do this, the right-hand side of the equation must be integrated, with the initial state of the current $i'= 0$, to:
     \begin{equation}
-        i'(t)=\frac{\hat U_\mathrm{1} \cos(\omega t)}{\omega L}.\label{eq:ex054currenti'1}
+        i'(t)=\frac{\hat u_\mathrm{1} \cos(\omega t)}{\omega L}.\label{eq:ex054currenti'1}
     \end{equation}
-    The first interval is from $0 < t < T_\mathrm{1,off} = \SI{480}{\micro\s}$ for conducting transistor $T$. Insert into \eqref{eq:ex054currenti'1} used with the upper and lower limit leads to:
+    The first interval is from $0 < t < T_\mathrm{1,off} = \SI{480}{\micro\s}$ for conducting transistor $T$. Inserting into \eqref{eq:ex054currenti'1} used with the upper and lower limit leads to:
     \begin{equation}
-        i'(T_\mathrm{1,off}) = \frac{\hat U_\mathrm{1}}{L \omega}(1- \cos(\omega T_\mathrm{1,off})) = \frac{\SI{400}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (1-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{480}{\micro\s})) = \SI{2.35}{\ampere}.
+        i'(T_\mathrm{1,off}) = \frac{\hat u_\mathrm{1}}{L \omega}(1- \cos(\omega T_\mathrm{1,off})) = \frac{\SI{400}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (1-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{480}{\micro\s})) = \SI{2.35}{\ampere}.
     \end{equation}
     For the interval $T_\mathrm{1,off} < t < T_\mathrm{1,on} = \SI{500}{\micro\s}$ in which the diode $D_\mathrm{5}$ conducts, the voltage $U_\mathrm{L,1}$ is first determined as:
     \begin{equation}
-        U_\mathrm{L,1} = u'(t) - U_\mathrm{2}= \hat U_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{20}{\micro\s}) - \SI{400}{\volt} = -\SI{350}{\volt}.
+        U_\mathrm{L,1} = u'(t) - U_\mathrm{2}= \hat u_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{20}{\micro\s}) - \SI{400}{\volt} = -\SI{350}{\volt}.
     \end{equation}
     This voltage value  $U_\mathrm{L,1}$ is used to calculate the current  $i'(T_\mathrm{1,on})$ as:
     \begin{equation}
@@ -345,7 +345,7 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
     \end{equation}
      The second interval  $T_\mathrm{2,on} < t < T_\mathrm{2,off}  = \SI{935}{\micro\s}$ in which the transistor $T$ conducts, have to be inserted  into \eqref{eq:ex054currenti'1} with the upper and lower limit. This leads to:
      \begin{equation}
-        i'(T_\mathrm{2,off}) = \frac{\hat U_\mathrm{1}}{L \omega}(\cos (\omega T_\mathrm{2,on})- \cos(\omega T_\mathrm{2,off}))+ i'(T_\mathrm{1,on}).
+        i'(T_\mathrm{2,off}) = \frac{\hat u_\mathrm{1}}{L \omega}(\cos (\omega T_\mathrm{2,on})- \cos(\omega T_\mathrm{2,off}))+ i'(T_\mathrm{1,on}).
     \end{equation}
     With values:
     \begin{equation}
@@ -354,7 +354,7 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
 
      For the second interval $T_\mathrm{2,off} < t < T_\mathrm{2,on} = \SI{1008}{\micro\s}$ in which the diode $D_\mathrm{5}$ conducts, the voltage $U_\mathrm{L.2}$ is first determined as:
      \begin{equation}
-        U_\mathrm{L,2} = u'(t) - U_\mathrm{2}= \hat U_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{73}{\micro\s}) - \SI{400}{\volt} = \SI{306}{\volt}.
+        U_\mathrm{L,2} = u'(t) - U_\mathrm{2}= \hat u_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{73}{\micro\s}) - \SI{400}{\volt} = \SI{306}{\volt}.
     \end{equation}
     This voltage value  $U_\mathrm{L,2}$ is used to calculate the current  $i'(T_\mathrm{2,on})$ as:
     \begin{equation}
@@ -368,31 +368,34 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
 
 
 
-\subtask{Approximately sketch the envelope of the current ripple in \autoref{fig:Current i' control signal ex05}. Sketch the voltage across the inductor in \autoref{fig:Voltage curve ul signal Transistor ex05} and enter the local average value of the voltage as an approximation. How would the switch-on/switch-off ratio of the transistor have to be changed before and after the current peak in order to bring the average actual current value closer to the current setpoint?}
-
-\subtask{Dimension the output capacitance $C$ in a way that the amplitude of the output voltage ripple is $\Delta u_{\mathrm{2}}<0.05  u_{\mathrm{2}}(t)$.
-Note: assume an idealized lossless converter.}
+\subtask{Approximately sketch the envelope of the current ripple in \autoref{fig:Current i' control signal ex05}. Sketch the voltage across the inductor in \autoref{fig:Voltage curve ul signal Transistor ex05} and enter the average value of the voltage as an approximation. How would the switch-on/switch-off ratio of the transistor have to be changed before and after the current peak in order to bring the average actual current value closer to the current setpoint?}
 \begin{solutionblock}
-    For the input power $P_\mathrm{1}(t)$ follows $P_\mathrm{1}(t)= P_\mathrm{2} -\Delta p_\mathrm{2}$. The part $\Delta p_\mathrm{2}$ is zero on average. From this consideration it can be concluded for $p_\mathrm{1}(t)$:
+    The envelope of the current ripple is scetched in \autoref{fig:Current i' control signal ex05 result}. Moreover the voltage across the inductor is scetched in \autoref{fig:Voltage curve ul signal Transistor ex05 res}. The average value of the voltage at the inductor is zero. Before the current peak in \autoref{fig:Current i' control signal ex05 result}, the transistor should be switched on for longer and then the switch-on phase should be reduced. This allows the current to be controlled better.
+    \input{fig/ex05/Fig_VoltageCourses_UL_res.tex}
+\end{solutionblock}
+\subtask{Dimension the output capacitance $C$ in a way that the amplitude of the output voltage ripple is $\Delta u_{\mathrm{2}}<0.05  \hat u_{\mathrm{2}}$.
+Note: assume an idealized lossless converter, with the assumption $u_2(t)\approx U_2$.}
+\begin{solutionblock}
+    For the input power $p_\mathrm{1}(t)$ follows $p_\mathrm{1}(t)= P_\mathrm{2} -\Delta p_\mathrm{2}$. The power at the load minus the power at the capacitor. The part $\Delta p_\mathrm{2}$ is zero on average, because it is the pulsating power across capacitor $C$. From this consideration it can be concluded for $p_\mathrm{1}(t)$:
     \begin{equation}
-        p_\mathrm{1}(t) = \hat U_\mathrm{1} \sin(\omega t) \hat I_\mathrm{1} \sin(\omega t) = \hat U_\mathrm{1} \hat I_\mathrm{1} \sin^2(\omega t).
+        p_\mathrm{1}(t) = \hat u_\mathrm{1} \sin(\omega t) \hat i_\mathrm{1} \sin(\omega t) = \hat u_\mathrm{1} \hat i_\mathrm{1} \sin^2(\omega t).
     \end{equation}
     By using the addition theorem $\sin^2(\omega t) = \frac{1}{2}(1-\cos(2\omega t))$ follows:
     \begin{equation}
-        p_\mathrm{1}(t) = \frac{\hat U_\mathrm{1} \hat I_\mathrm{1}}{2}(1-\cos(2\omega t)).
+        p_\mathrm{1}(t) = \frac{\hat u_\mathrm{1} \hat i_\mathrm{1}}{2}(1-\cos(2\omega t)).
     \end{equation}
 
     The power delivered across the load $R$ is equal to the output power $P_\mathrm{2}$ which is given as follows:
     \begin{equation}
-        P_\mathrm{2} = \frac{\hat U_\mathrm{1}\hat I_\mathrm{1}}{2} = U_\mathrm{2} I_\mathrm{2}.
+        P_\mathrm{2} = \frac{\hat u_\mathrm{1}\hat i_\mathrm{1}}{2} = U_\mathrm{2} I_\mathrm{2}.
     \end{equation}
     The pulsating power across capacitor $C$ must be calculated as follows:
     \begin{equation}
-        \Delta p_\mathrm{2} = \frac{\hat U_\mathrm{1}\hat I_\mathrm{1}}{2} \cos(2\omega t).
+        \Delta p_\mathrm{2} = \frac{\hat u_\mathrm{1}\hat i_\mathrm{1}}{2} \cos(2\omega t).
     \end{equation}
     The current through the capacitor is given by the following equation, using $P = UI$:
     \begin{equation}
-        i_\mathrm{c}(t)=C \frac{\mathrm{d}u_\mathrm{c}}{\mathrm{d}t} = \frac{\Delta p_\mathrm{2}}{U_\mathrm{2}} = \frac{P_\mathrm{2}\cos(2\omega t)}{U_\mathrm{2}}.\label{eq:ex056currentic}.
+        i_\mathrm{C}(t)=C \frac{\mathrm{d}u_\mathrm{c}}{\mathrm{d}t} = \frac{\Delta p_\mathrm{2}}{U_\mathrm{2}} = \frac{P_\mathrm{2}\cos(2\omega t)}{U_\mathrm{2}}.\label{eq:ex056currentic}
     \end{equation}
     The following follows from \eqref{eq:ex056currentic} for $U_\mathrm{C}$:
     \begin{equation}
@@ -400,21 +403,17 @@ Note: assume an idealized lossless converter.}
     \end{equation}
 
     \begin{equation}
-        u_\mathrm{C} = \frac{1}{C} \int \frac{P_\mathrm{2}\cos(2\omega t)}{U_\mathrm{2}} \, dt = \frac{P_\mathrm{2}\sin(2\omega t)}{2\omega C U_\mathrm{2}}.\label{eq:ex056voltageuc}.
+        u_\mathrm{C} = \frac{1}{C} \int \frac{P_\mathrm{2}\cos(2\omega t)}{U_\mathrm{2}} \, \mathrm{d}t = \frac{P_\mathrm{2}\sin(2\omega t)}{2\omega C U_\mathrm{2}}.\label{eq:ex056voltageuc}
     \end{equation}
-    $u_\mathrm{C}$ is equal to $ \hat U_\mathrm{C} sin(2wt)$ from this follows for \eqref{eq:ex056voltageuc}:
+    $u_\mathrm{C}$ is equal to $ \hat u_\mathrm{C} \sin(2\omega t)$ from this follows for \eqref{eq:ex056voltageuc}:
     \begin{equation}
-        \hat U_\mathrm{C} = \frac{P_\mathrm{2}}{2\omega C U_\mathrm{2}}.
+        \hat u_\mathrm{C} = \frac{P_\mathrm{2}}{2\omega C U_\mathrm{2}}.
     \end{equation}
-    And now the capacitance can be calculate with $\Delta u_{\mathrm{2}}<0.05  u_{\mathrm{2}}(t)$ as:
+    And now the capacitance can be calculate with $\Delta u_{\mathrm{2}}<0.05  \hat u_{\mathrm{2}}$ as:
     \begin{equation}
-        C = \frac{P_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}  \hat U_\mathrm{C} }= \frac{U_\mathrm{2}I_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}\  0.05 U_\mathrm{2}}.  
+        C = \frac{P_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}  \hat u_\mathrm{C} }= \frac{U_\mathrm{2}I_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}\  0.05 U_\mathrm{2}} = \frac{\SI{400}{\volt}\cdot \SI{10}{\ampere}}{4 \pi \cdot\SI{50}{\hertz}\cdot\SI{400}{\volt}\cdot 0.05 \cdot \SI{400}{\volt}} = \SI{796}{\micro\henry}.  
     \end{equation}
-    With inserted values:
-    \begin{equation}
-        C = \frac{\SI{400}{\volt}\cdot \SI{10}{\ampere}}{4 \pi \cdot\SI{50}{\hertz}\cdot\SI{400}{\volt}\cdot 0.05 \cdot \SI{400}{\volt}} = \SI{796}{\micro\henry}.
-    \end{equation}
-\end{solutionblock}
+    \end{solutionblock}
 \subtask{Calculate the RMS value of the current through the capacitor $I_{\mathrm{C}}$.
 Note: the mean value of the current through the capacitor is $\overline i_{\mathrm{C}}=0$!}
 \begin{solutionblock}
@@ -427,15 +426,15 @@ Using first biome:
 \end{equation}
 Calculate RMS value:
 \begin{equation}
-    I^2_\mathrm{2}(t)= \frac{1}{T}\int_{0}^{T}  i^2_\mathrm{2}(t) \, dt\ = \frac{1}{T}\int_{0}^{T}  i^2_\mathrm{C}(t) \, dt\ +\frac{1}{T}\int_{0}^{T}  2i_\mathrm{C}(t) i_\mathrm{R}(t)\, dt\ +\frac{1}{T}\int_{0}^{T}  i^2_\mathrm{R}(t) \, dt\
+    I^2_\mathrm{2}(t)= \frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{s}}  i^2_\mathrm{2}(t) \, \mathrm{d}t\ = \frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{s}}  i^2_\mathrm{C}(t) \, \mathrm{d}t\ +\frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{s}}  2i_\mathrm{C}(t) i_\mathrm{R}(t)\, \mathrm{d}t\ +\frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{s}}  i^2_\mathrm{R}(t) \, \mathrm{d}t\
 \end{equation}
-Solving the equation, the term $\frac{1}{T}\int_{0}^{T} 2i_\mathrm{C}(t) i_\mathrm{R}(t)\, dt$ is zero due to the periodicity of $i_\mathrm{C}(t)$:
+Solving the equation, the term $\frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{s}} 2i_\mathrm{C}(t) i_\mathrm{R}(t)\, \mathrm{d}t$ is zero due to the periodicity of $i_\mathrm{C}(t)$:
 \begin{equation}
-    I^2_\mathrm{2}(t)=\frac{TI^2_\mathrm{C}(t)}{T}+\frac{TI^2_\mathrm{R}(t)}{T} =I^2_\mathrm{C}(t) +I^2_\mathrm{R}(t).
+    I^2_\mathrm{2}(t)=\frac{T_\mathrm{s}I^2_\mathrm{C}(t)}{T_\mathrm{s}}+\frac{T_\mathrm{s}I^2_\mathrm{R}(t)}{T_\mathrm{s}} =I^2_\mathrm{C}(t) +I^2_\mathrm{R}(t). \label{eq:ex056RMSIc}
 \end{equation}
-Solved for $I^2_\mathrm{C}(t)$:
+Finally, \eqref{eq:ex056RMSIc} must be converted to $I^2_\mathrm{C}(t)$:
 \begin{equation}
-    I^2_\mathrm{C}(t) = I^2_\mathrm{2}(t)-I^2_\mathrm{R}(t)%=\sqrt{\SI{209}{\ampere}-\SI{100}{\ampere}} = \SI{10.44}{\ampere}.
+    I^2_\mathrm{C}(t) = I^2_\mathrm{2}(t)-I^2_\mathrm{R}(t).%=\sqrt{\SI{209}{\ampere}-\SI{100}{\ampere}} = \SI{10.44}{\ampere}.
 \end{equation}
 
 \end{solutionblock}
@@ -445,19 +444,20 @@ Solved for $I^2_\mathrm{C}(t)$:
     \begin{equation}
         C = \frac{I_\mathrm{C}}{\SI{10}{\frac{\ampere}{\milli\farad}}} = \frac{\SI{10.44}{\ampere}}{\SI{10}{\frac{\ampere}{\milli\farad}}}=\SI{1.04}{\milli\farad}.
     \end{equation}
-    The current carrying capacity determines the capacitance. The required current-carrying capacity of $\SI{1.04}{\milli\farad}$ is met by two capacitors with $\SI{500}{\milli\farad}$ each. 
+    The dimensioned capacitance for an output voltage ripple $\Delta u_{\mathrm{2}}<0.05  \hat u_{\mathrm{2}}$ was determined as $\SI{796}{\micro\henry}$.
+    If these two capacitor values are compared, it becomes clear that the current carrying capacity of the capacitor is the determining factor. For the circuit, this means that two capacitors with $\SI{500}{\micro\henry}$ must be selected.
 \end{solutionblock}
 \subtask{What is the current load (effective and average value) of the mains diodes?}
 \begin{solutionblock}
-    The rectification ensures that the current $\overline i_\mathrm{D,1-4}$ is calculated as the mean value over a half-wave. So the average value is given with:
+    The rectification ensures that the current $\overline i_\mathrm{D,1-4}$ is calculated as the mean value over a half-period. So the average value is given with:
     \begin{equation}
-        \overline{i}_{\mathrm{D,1-4}} = \frac{1}{2\pi} \int_{0}^{\pi} \hat{I}_{\mathrm{1}} \sin(\omega t) \, dt\ = \frac{\hat{I}_{\mathrm{1}}}{2\pi} [-\cos(\pi)-[-\cos(0)]] = \frac{\hat{I}_{\mathrm{1}}}{\pi}.
+        \overline{i}_{\mathrm{D,1-4}} = \frac{1}{2\pi} \int_{0}^{\pi} \hat{i}_{\mathrm{1}} \sin(\omega t) \, \mathrm{d}t\ = \frac{\hat{i}_{\mathrm{1}}}{2\pi} [-\cos(\pi)-[-\cos(0)]] = \frac{\hat{i}_{\mathrm{1}}}{\pi}.
     \end{equation}
     The effective value is given with:
     \begin{equation}
-        I^2_{\mathrm{D,1-4}} = \frac{1}{2\pi} \int_{0}^{\pi} \hat{I}^2_{\mathrm{1}} \sin^2(\omega t) \, dt\ = \frac{\hat{I}^2_{\mathrm{1}}}{2\pi}\left[\frac{\pi-\frac{\sin(2\pi)}{2}}{2}-\frac{\frac{-\sin(0)}{2}}{2}\right], 
+        I^2_{\mathrm{D,1-4}} = \frac{1}{2\pi} \int_{0}^{\pi} \hat{i}^2_{\mathrm{1}} \sin^2(\omega t) \, \mathrm{d}t\ = \frac{\hat{i}^2_{\mathrm{1}}}{2\pi}\left[\frac{\pi-\frac{\sin(2\pi)}{2}}{2}-\frac{\frac{-\sin(0)}{2}}{2}\right], 
     \end{equation}
     \begin{equation}
-        I_{\mathrm{D,1-4}} = \sqrt{\frac{\hat{I}^2_{\mathrm{1}}}{2\pi}\frac{\pi}{2}} = \frac{\hat{I}^2_{\mathrm{1}}}{2}.
+        I_{\mathrm{D,1-4}} = \sqrt{\frac{\hat{i}^2_{\mathrm{1}}}{2\pi}\frac{\pi}{2}} = \frac{\hat{i}^2_{\mathrm{1}}}{2}.
     \end{equation}
 \end{solutionblock}
