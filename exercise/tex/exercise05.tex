@@ -218,7 +218,7 @@ A variant of a PFC rectifier circuit is shown in \autoref{fig:Boost converter wi
         Input voltage: &  $u_{\mathrm{1}}(t) = \hat U_{\mathrm{1}} \sin(\omega t) = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(\omega t)$ & Output voltage: & $u_{\mathrm{2}}(t) = \SI{400}{\volt}$ \\ 
         Output power: & $P_\mathrm{2} = \SI{4}{\kilo\watt}$  & Grid frequency: & $ f =  \SI{50}{\hertz}$ \\ 
         Inductance: & $L = \SI{570}{\micro\henry}$
-         & Switching frequency: & $f_\mathrm{T} = \SI{20}{\kilo\hertz}$\\
+         & Switching frequency: & $f_\mathrm{s} = \SI{20}{\kilo\hertz}$\\
         \bottomrule
     \end{tabular}
     \caption{Parameters of the PFC rectifier.}  
@@ -227,22 +227,16 @@ A variant of a PFC rectifier circuit is shown in \autoref{fig:Boost converter wi
 
 \subtask{Specify the voltage transformation ratio $m(t)= \frac{u_{\mathrm{2}}(t)}{u'(t)}$ as a function of the duty cycle $d(t)$.}
 \begin{solutionblock}
-    The equation for the voltage $U_{\mathrm{L}}$ is given with:
+    The equation for the average voltage $U_{\mathrm{L}}$ during a pulse period is given with:
     \begin{equation}
-        U_{\mathrm{L}} = (d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{2}}))f_\mathrm{T}. 
+        U_{\mathrm{L}} = (d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{2}})). 
     \end{equation}
-The average voltage over the inductance for a stable operation is zero $U_{\mathrm{L}} = \SI{0}{\volt}$. 
+The average voltage over the inductance for a (quasi) steady-state operation is zero $U_{\mathrm{L}} = \SI{0}{\volt}$: 
     \begin{equation}
     0 = (d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{2}}))f_\mathrm{T}. \label{eq:ex05ratio2.2}
     \end{equation}   
-The ratio $m(t)= \frac{U_\mathrm{2}}{u'(t)}$ can now be determined from \eqref{eq:ex05ratio2.2}: 
-  \begin{equation}
-    0 = f_\mathrm{T}d(t)u'(t)+f_\mathrm{T}u'(t)- f_\mathrm{T}d(t)u'(t)- f_\mathrm{T}U_{\mathrm{2}}+ f_\mathrm{T}d(t)U_{\mathrm{2}},
-  \end{equation}
-  \begin{equation}
-    0 = f_\mathrm{T}(u'(t)-(1-d(t))U_{\mathrm{2}}).\label{eq:ex05ratio2.1}
-  \end{equation}
-  From equation \eqref{eq:ex05ratio2.1} it can now be concluded:
+
+    Rewriting \eqref{eq:ex05ratio2.2} delivers  the voltage transformation ratio:
   \begin{equation}
     m(t) = \frac{U_{\mathrm{2}}}{u'(t)}=\frac{1}{1-d(t)}. \label{eq:ex05ratio_m(t)}
   \end{equation}
@@ -250,50 +244,50 @@ The ratio $m(t)= \frac{U_\mathrm{2}}{u'(t)}$ can now be determined from \eqref{e
 
 \subtask{Specify the conduction time of the transistor and the diode as a function of the transformation ratio $M$ and the time $t$.} 
 \begin{solutionblock}
-    Using $M = \frac{U_{\mathrm{2}}}{\hat U_{\mathrm{1}}}$, the transformation ratio is given with:
+    Using $M = \frac{U_{\mathrm{2}}}{\hat u_{\mathrm{1}}}$, the transformation ratio is given with:
     \begin{equation}
-        m(t) = \frac{U_{\mathrm{2}}}{u'(t)}=\frac{U_{\mathrm{2}}}{\hat U_{\mathrm{1}} \sin(\omega t)} = M \frac{1}{\sin(\omega t)}.
+        m(t) = \frac{U_{\mathrm{2}}}{u'(t)}=\frac{U_{\mathrm{2}}}{\hat u_{\mathrm{1}} \sin(\omega t)} = M \frac{1}{\sin(\omega t)}.
     \end{equation}
-    For the condition transistor $T$ is conducting, the duty cycle $d(t)$ is derived from \eqref{eq:ex05ratio_m(t)} as:
+   If the transistor $T$ is conducting, the duty cycle $d(t)$ is derived from \eqref{eq:ex05ratio_m(t)} as:
 \begin{equation}
-    d(t) = 1-\frac{1}{m(t)} = 1- \frac{u'(t)}{U_{\mathrm{2}}}=1- \frac{U_{\mathrm{1}}\sin(\omega t)}{U_{\mathrm{2}}} = 1 -\frac{1}{M} \sin(\omega t).
+    d(t) = 1-\frac{1}{m(t)} = 1- \frac{u'(t)}{U_{\mathrm{2}}}=1- \frac{\hat u_{\mathrm{1}}\sin(\omega t)}{U_{\mathrm{2}}} = 1 -\frac{1}{M} \sin(\omega t).
 \end{equation}
-For the condition diode $D_{\mathrm{5}}$ is conducting, the duty cycle $1-d(t)$ is derived from \eqref{eq:ex05ratio_m(t)} as:
+If the diode $D_{\mathrm{5}}$ is conducting, the duty cycle $1-d(t)$ is derived from \eqref{eq:ex05ratio_m(t)} as:
 \begin{equation}
     1-d(t) = \frac{1}{m(t)}=\frac{1}{M} \sin(\omega t).
 \end{equation}
 \end{solutionblock}
 
-\subtask{Calculate the maximum amplitude of the switching frequency fluctuation of the mains current $i_\mathrm{1}$ for the specified operating point.
+\subtask{Calculate the maximum amplitude of the switching-induced ripple of the mains current $i_\mathrm{1}$ for the specified operating point.
 Note: Consider the conductive state of $T$ and set the voltage across the inductance as a function of the phase angle $(\omega t)$ and the conduction time of the transistor according to the previous subtask.} 
 \input{fig/ex05/Fig_courses_i'}
 \begin{solutionblock}
-    To solve this task the inductance equation is used:
+    To solve this task the component equation of inductance is used:
     \begin{equation}
-        U_{\mathrm{L}} = L \frac{\mathrm{d}i'(t)}{\mathrm{d}t}.
+        u_{\mathrm{L}}(t) = L \frac{\mathrm{d}i'(t)}{\mathrm{d}t}.
     \end{equation}
     As a simplification, it is assumed that the $\Delta$ is an approximation of the total differential by a difference equation with the differences $\Delta$. This leads to the component differential equations becoming mean value equations such as:
     \begin{equation}
         \frac{\Delta i'(t)}{\Delta t} = \frac{U_{\mathrm{L}}}{L}.
     \end{equation}
-    When transistor $T$ is conducting it applies $U_{\mathrm{L}} = u'(t) = \hat U_{\mathrm{1}} \sin(\omega t)$.
+    When transistor $T$ is conducting it applies $U_{\mathrm{L}} = u'(t) = \hat u_{\mathrm{1}} \sin(\omega t)$.
     This means for $\Delta i'(t)$:
 \begin{equation}
-    \Delta i'(t) = \frac{ U_{\mathrm{L}} \Delta t}{L} = \frac{\hat U_{\mathrm{1}} \sin(\omega t) d(t) T_{\mathrm{T}}}{L} = \Delta i'_{\mathrm{1}}(t).
+    \Delta i'(t) = \frac{ U_{\mathrm{L}} \Delta t}{L} = \frac{\hat u_{\mathrm{1}} \sin(\omega t) d(t) T_{\mathrm{s}}}{L} = \Delta i'_{\mathrm{1}}(t).
 \end{equation}
 
 Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
  \begin{equation}
-     \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}\hat U_{\mathrm{1}}\sin (\omega t)}{U_{\mathrm{2}}L}(1-\frac{1}{M}\sin(\omega t)) T_{\mathrm{T}}.\label{eq:ex05Deltai'}.
+     \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}\hat u_{\mathrm{1}}\sin (\omega t)}{U_{\mathrm{2}}L}(1-\frac{1}{M}\sin(\omega t)) T_{\mathrm{s}}\label{eq:ex05Deltai'}.
  \end{equation}
- Using $\frac{\hat U_{\mathrm{1}}}{U_{\mathrm{2}}} = \frac{1}{M}$, \eqref{eq:ex05Deltai'} becomes:
+ Using $\frac{\hat u_{\mathrm{1}}}{U_{\mathrm{2}}} = \frac{1}{M}$, \eqref{eq:ex05Deltai'} becomes:
  \begin{equation}
-     \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}T_{\mathrm{T}}}{LM}\sin (\omega t)(1-\frac{\sin(\omega t)}{M}). \label{eq:ex05Deltai1'}
+     \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}T_{\mathrm{s}}}{LM}\sin (\omega t)(1-\frac{\sin(\omega t)}{M}). \label{eq:ex05Deltai1'}
  \end{equation}
    To be able to calculate the maximum value of the mains current
     $i_\mathrm{1}$, the following equation has to be set up from \eqref{eq:ex05Deltai1'} as:
     \begin{equation}
-        \frac{U_{\mathrm{2}}T_{\mathrm{T}}}{L} \frac{\mathrm{d}}{\mathrm{d}t}\left[\frac{1}{M}\sin(\omega t)\left(1-\frac{1}{M}\right)\sin(\omega t)\right] =0.
+        \frac{U_{\mathrm{2}}T_{\mathrm{s}}}{L} \frac{\mathrm{d}}{\mathrm{d}t}\left[\frac{1}{M}\sin(\omega t)\left(1-\frac{1}{M}\right)\sin(\omega t)\right] =0.
     \end{equation}
     The first derivation is as follows:
     \begin{equation}
@@ -306,11 +300,11 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
     \end{equation}
     The ratio $\frac{M}{2}=\sin(\omega t)$ can now be used in \eqref{eq:ex05Deltai1'} to calculate the maximum $\Delta i'_{\mathrm{1}}(t)$ as follows:
     \begin{equation}
-        \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}T_{\mathrm{T}}M}{2LM}\left(1-\frac{M}{2M}\right) = \frac{U_{\mathrm{2}}\frac{1}{f_\mathrm{T}}}{4L}=\frac{\SI{400}{\volt}\cdot \SI{50}{\micro\s}}{4\cdot\SI{570}{\micro\henry}} = \SI{8.77}{\ampere}.
+        \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}T_{\mathrm{s}}M}{2LM}\left(1-\frac{M}{2M}\right) = \frac{U_{\mathrm{2}}\frac{1}{f_\mathrm{s}}}{4L}=\frac{\SI{400}{\volt}\cdot \SI{50}{\micro\s}}{4\cdot\SI{570}{\micro\henry}} = \SI{8.77}{\ampere}.
     \end{equation}
 \end{solutionblock}
 
-\subtask{Complete the current curve for a switching frequency $f_\mathrm{T2} = \SI{2}{\kilo\hertz}$ and a inductance $L = \SI{5}{\milli\henry}$ in \autoref{fig:Current i' control signal ex05}. Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T$ and are summarized for the first 4 switching times in \autoref{tab:switching_times}.}
+\subtask{Complete the current curve for a switching frequency $f_\mathrm{s2} = \SI{2}{\kilo\hertz}$ and a inductance $L = \SI{5}{\milli\henry}$ in \autoref{fig:Current i' control signal ex05}. Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T$ and are summarized for the first 4 switching times in \autoref{tab:switching_times}.}
 
 \begin{table}[ht]
     \centering
@@ -329,7 +323,7 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
 
 \input{fig/ex05/Fig_VoltageCourses_UL_No2}
 \begin{solutionblock}
-    The inductance equation is used to determine the current values $i'(t)$ as:
+    The component equation of inductance is used to determine the current values $i'(t)$ as:
     \begin{equation}
         \frac{\mathrm{d}}{\mathrm{d}t}i'(t) = \frac{1}{L}\hat U_\mathrm{1} \sin(\omega t).\label{eq:ex054Deltai'}
     \end{equation}
