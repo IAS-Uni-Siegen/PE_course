@@ -27,7 +27,7 @@
                     % x-Ticks
                     xtick={0,90,180,270,360},
                     xticklabels={,90,180,270,360},
-                    xticklabel style = {anchor=north,yshift=-0.4cm},
+                    xticklabel style = {anchor=north,yshift=-0.5cm},
                     % y-Ticks
                     ytick={150,100,50,-50,-100,-150},
                     yticklabels={150,100,50,-50,-100,-150},
@@ -43,9 +43,21 @@
                 % Voltage u2(wt) if supplied by uc(wt)
                 \addplot[blue, domain=-5:19.3] {143.8-(x+67.2)*1.06};                
                 \addplot[blue, domain=112.8:199.3] {143.8-(x-112.8)*1.06};                
-                \addplot[blue, domain=292.8:375] {143.8-(x-292.8)*1.06};                
-                % Label of u1
+                \addplot[blue, domain=292.8:375] {143.8-(x-292.8)*1.06};
+                % Label of u2
                 \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:145,140) {$u_{\mathrm{2}}(\omega t)$};
+                % Voltage u1(wt)
+                \addplot[black, domain= -20:375,dotted] {abs(156*sin(x))};                
+                % Label of u2
+                \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:290,50) {$\left|u_{\mathrm{1}}(\omega t)\right|$};
+                % Label of alpha
+                \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,40) {$\alpha$};
+                % Line to axes for alpha
+                \draw[thin, black] (120,35) -- (113,10);
+                % Label of alpha + beta
+                \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:240,-50) {$\alpha+\beta$};
+                % Line to axes for beta
+                \draw[thin, black] (215,-20) -- (202,-5);
 
             \end{axis}     
             \begin{axis}[
@@ -66,7 +78,7 @@
                 % x-Ticks
                 xtick={0,90,180,270,360},
                 xticklabels={,90,180,270,360},
-                xticklabel style = {anchor=north,yshift=-0.4cm},
+                xticklabel style = {anchor=north,yshift=-0.5cm},
             % y-Ticks
                 ytick={30,20,10,-10,-20,-30},
                 yticklabels={30,20,10,-10,-20,-30},
