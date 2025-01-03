@@ -79,14 +79,14 @@
         \begin{subfigure}{0.45\textwidth}
             \centering
 			\includegraphics[height=0.45\textheight]{fig/lec05/Thyristor_example_01.jpg}
-			\caption{Top left: \SI{1000}{\volt}/\SI{200}{\ampere}; bottom left: \SI{1500}{\volt}/\SI{20}{\ampere}; right: \SI{1500}{\volt}/\SI{120}{\ampere}; 1N4007 diode for comparison (source: \href{https://de.wikipedia.org/wiki/Datei:SCR_power_rectifiers.jpg}{Wikimedia Commons}, \href{https://creativecommons.org/publicdomain/zero/1.0/}{CC0~1.0})}
+			\caption{Top left: \SI{1000}{\volt}/\SI{200}{\ampere} (diode); bottom left: \SI{1500}{\volt}/\SI{20}{\ampere}; right: \SI{1500}{\volt}/\SI{120}{\ampere}; 1N4007 (diode) (source: \href{https://de.wikipedia.org/wiki/Datei:SCR_power_rectifiers.jpg}{Wikimedia Commons}, \href{https://creativecommons.org/publicdomain/zero/1.0/}{CC0~1.0})}
         \end{subfigure}
         \hspace{1cm}
         \begin{subfigure}{0.45\textwidth}
             \centering
             \includegraphics[height=0.45\textheight]{fig/lec05/Thyristor_example_02.jpg}
 			\caption{Left: \SI{800}{\volt}/\SI{100}{\ampere}; right: \SI{800}{\volt}/\SI{13}{\ampere} (source: \href{https://de.wikipedia.org/wiki/Datei:Thyristors_thyristoren.jpg}{Wikimedia Commons}, Julo, \href{https://creativecommons.org/licenses/by-sa/3.0/deed.de}{CC0~BY-SA~3.0})}
-            \vspace{2em}
+            \vspace{1em}
         \end{subfigure}
         \caption{Thyristor examples with different voltage and current ratings}
         \label{fig:thyristor_examples}
@@ -208,7 +208,7 @@
     \begin{equation}
         \overline{u}_2 = \frac{1}{2\pi} \int_{\alpha}^{\pi} \hat{u}_1 \sin(\omega t) \mathrm{d} \omega t = \frac{\hat{u}_1}{2\pi} \left[ -\cos(\omega t) \right]_{\alpha}^{\pi} = \frac{\hat{u}_1}{2\pi} \left( 1 + \cos(\alpha) \right). 
     \end{equation}
-    Here, $\alpha$ denotes the phase angle at which the thyristor is triggered (aka \hl{firing angle}). In the M1C case, the feasible range for $\alpha$ is $[0,\nicefrac{\pi}{2}]$ as the thyristor requires a positive forward voltage to start conducting, that is, if $u_\mathrm{T}<0$ a firing impulse would not change its conduction state. The \hl{RMS value} of the output voltage is given by
+    Here, $\alpha$ denotes the phase angle at which the thyristor is triggered (aka \hl{firing angle}). In the M1C case, the feasible range for $\alpha$ is $[0,\pi]$ as the thyristor requires a positive forward voltage to start conducting, that is, if $u_\mathrm{T}<0$ a firing impulse would not change its conduction state. The \hl{RMS value} of the output voltage is given by
     \begin{equation}
         U_2 = \sqrt{\frac{1}{2\pi} \int_{\alpha}^{\pi} \hat{u}_1^2 \sin^2(\omega t) \mathrm{d} \omega t} =   \ldots = \frac{\hat{u}_1}{2} \sqrt{\frac{\pi - \alpha + \sin(\alpha)\cos(\alpha)}{\pi}}.
     \end{equation}
