@@ -1,0 +1,61 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Begin exercise %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ex{Rectifiers}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Task 1: M3C converter at an RL-load                     %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\task{M3C converter at an RL-load}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Task 2: B6C converter at a motor load                   %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\task{B6C converter at a motor load}
+
+In a lifting drive, a permanent magnet DC motor is supplied by a B6C converter circuit. The B6C-topology is connected to the three-phase network.
+When lifting as well as lowering the load, the motor is operated with nominal current and nominal voltage. 
+This corresponds to a terminal voltage of $\overline{u}_\mathrm{2}$ when lifting the load and $-\overline{u}_\mathrm{2}$ when lowering it.
+In order to generate the necessary torque $M$, the motor absorbs the current $\overline{i}_\mathrm{2}$.
+
+\input{fig/ex06/Fig_B6C_ConverterWithMotorLoad}
+
+\begin{table}[ht]
+    \centering  % Zentriert die Tabelle
+    \begin{tabular}{ll}
+        \toprule
+        Input voltages: &  $u_\mathrm{a}(t) = \SI{230}{\volt}\cdot \sin(\omega t) \quad u_\mathrm{b}(t) = \SI{230}{\volt}\cdot \sin(\frac{2\pi}{3}\omega t) 
+        \quad  u_\mathrm{c}(t) = \SI{230}{\volt}\cdot \sin(\frac{4\pi}{3}\omega t)$  \\
+        Nom. motor current: & $\overline{i}_{\mathrm{mot}} = \SI{20}{\ampere}$ \\
+        Nom. motor voltage: & $\overline{u}_\mathrm{mot} = \SI{466}{\volt}$ \\ 
+        Frequency: & $f= \SI{50}{\hertz}$ \\ 
+        \bottomrule
+    \end{tabular}
+    \caption{Parameters of the lifting drive with B6C converter.}  
+    \label{table:ex06_Task2_ParametersOfTheCircuit}
+\end{table}
+
+
+% Subtask1
+\subtask{Calculate the firing angle $\alpha_\mathrm{up}$ required for raising and the firing angle $\alpha_\mathrm{down}$ for lowering the load 
+to operate the motor at rated voltage. The average voltage $\overline{u}_\mathrm{2}$  as a function of the firing angle $\alpha$ shall be determined 
+by integrating the instantaneous output voltage $u_\mathrm{2}(t)$.}
+% Subtask2
+\subtask{Sketch following waveformes fpr tje two calculated firing angles $\alpha_\mathrm{up}$ and $\alpha_\mathrm{down}$:
+\begin{itemize}
+    \item The output voltage $u_\mathrm{2,p}(t)$ and $u_\mathrm{2,m}(t)$ the two partial converters (reference point is neutral)
+          and shade the effective voltage-time area.
+    \item The output voltage $u_\mathrm{2}(t)$ and the mean voltage $\overline{u}_\mathrm{2}(t)$.
+    \item The current $i_\mathrm{1a}(t)$ and it's fundamental amplitude.
+    \item The voltage of thyristor $u_\mathrm{T1}(t)$.
+    \item Mark the conduction intervals of $T_\mathrm{1}$...$T_\mathrm{6}$.
+\end{itemize}  
+}
+% Subtask3
+\subtask{Calculate the mean value $P$ of the instantaneous active power $p(t)$, the fundamental reactive power $q_\mathrm{1a}(t)$
+and the fundamental apparent power $s_\mathrm{1a}(t)$. Represent $p_\mathrm{1a}$, $q_\mathrm{1a}$ and $s_\mathrm{1a}$ in the complex plane.
+}
+% Subtask4
+\subtask{Calculate the $s_\mathrm{1a}$, $p_\mathrm{1a}$ and $q_\mathrm{1a}$ and the fundamental component $g_\mathrm{1a}=\frac{i_\mathrm{1a,eff}}{i_\mathrm{1a}}$
+         and the power factor $\lambda$ as a function of the effective values $u_\mathrm{1a}$, $i_\mathrm{1a}$, $i_\mathrm{1a,eff}$ and $\alpha$.}
