@@ -4,7 +4,8 @@
 
         \begin{figure}
         \begin{tikzpicture}
-            \pgfplotsset{table/search path={C:/Users/Silas Elter/Desktop/GitHub/PE_course/lecture/fig/lec04}}
+          %  \pgfplotsset{table/search path={"/Users/Silas Elter/Desktop/GitHub/PE_course/lecture/fig/lec04"}}
+          plotsset{table/search path={"/lecture/fig/lec04"}}
             \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
 
                 
