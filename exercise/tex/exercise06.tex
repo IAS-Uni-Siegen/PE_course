@@ -4,10 +4,25 @@
 \ex{Rectifiers}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Task 1: M3C converter at an RL-load                     %%
+%% Task 1: M3C converter at a RL-load                     %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \task{M3C converter at an RL-load}
+A controlled three-pulse midpoint circuit feeds an ohmic-inductive load. The load inductance $L$ is large, such that a pure direct current $I_\mathrm{2}$ is taken from the converter. The load resistance is $R = \SI{5}{\Omega}$. The converter transformer 
+is connected to the symmetrical three-phase network with $U_\mathrm{N} = \SI{\nicefrac{230}{400}}{\volt} $ (effective value of phase voltage / line-to-line voltage). The secondary side phase voltages point an effective value of 
+$U_\mathrm{1i} = \SI{230}{\volt}, \forall i=a,b,c$. The thyristors and commutation can be assumed to be ideal.
+\nicefrac{a}{b}
+\input{fig/ex06/Fig_M3C_Converter_With_RL_Load.tex}
+
+
+% Subtask1
+\subtask{Calculate the firing angle $\alpha$, so that an active power of $P = \SI{6}{\kilo\watt}$ is delivered to the load. How big is the load current $i_\mathrm{2} = I_\mathrm{2}$?}
+% Subtask2
+\subtask{Draw the normalized control characteristic curve $\nicefrac{U_\mathrm{2}(\alpha)}{U_\mathrm{2}(\alpha=0)}$ and enter the  operating point $P = \SI{6}{\kilo\watt}$ to $R = \SI{5}{\Omega}$.}
+% Subtask3
+\subtask{Draw the curve of the converters' output voltage $u_\mathrm{2}(t)$ for the calculated control angle $\alpha$ from subtask 6.1.1.}
+\subtask{Calculate the effective value $I^\mathrm{(1)}_\mathrm{1a}$ of the fundamental current wave $i^\mathrm{(1)}_\mathrm{1a}(t)$ and draw the fundamental wave. How big is the phase shift $\varphi_\mathrm{1a}$ between $u_\mathrm{1a}(t)$ and $i^\mathrm{(1)}_\mathrm{1a}(t)$.}
+\subtask{Calculate the fundamental reactive power $Q^\mathrm{(1)}_\mathrm{1}$.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: B6C converter at a motor load                   %%
