@@ -2558,7 +2558,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \end{equation}
     \onslide<4->{If the load current $I_0$ is (approximately) constant, the harmonic current is entirely flowing into the output capacitor $i_2^{(\mathrm{h})}(t)=i_\mathrm{C}(t)$}\onslide<5->{ leading to the voltage ripple:
     \begin{equation}
-        \Delta u_2(t) = \frac{1}{C} \int  i_\mathrm{C}(t) \mathrm{d} t = -\underbrace{\frac{\overline{p}_2}{\overline{u}_2} \frac{1}{2\omega C}}_{\hat{u}_2} \sin(2\omega t).
+        \Delta u_2(t) = \frac{1}{C} \int  i_\mathrm{C}(t) \mathrm{d} t = -\underbrace{\frac{\overline{p}_2}{\overline{u}_2} \frac{1}{2\omega C}}_{\Delta \hat{u}_2} \sin(2\omega t).
     \end{equation}}
     \onslide<6->{To limit the output voltage ripple to a certain amplitude value $\Delta \hat{u}_2$, the output capacitor $C$ must exhibit a minimal capacitance value:
     \begin{equation}
@@ -2605,10 +2605,10 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M3U uncontrolled rectifier circuit}
-    The M3U rectifier addresses \hl{three-phase systems} and typically utilizes an input transformer to mitigate offset phase currents and further harmonics (compare \figref{fig:M1U_transformer_topology_DC-current}). To simplify things, we assume that the input transformer delivers an \hl{ideal three-phase voltage source}:
+    The M3U rectifier addresses \hl{three-phase systems} and typically utilizes an input transformer to mitigate offset phase currents and further harmonics (compare \figref{fig:M1U_transformer_topology_DC-current}). \onslide<2->{To simplify things, we assume that the input transformer delivers an \hl{ideal three-phase voltage source}:
     $$
     u_{1\mathrm{a}}(t) = \hat{u}_{1}\sin(\omega t), \quad u_{1\mathrm{b}}(t) = \hat{u}_{1}\sin(\omega t - 2\pi/3), \quad u_{1\mathrm{c}}(t) = \hat{u}_{1}\sin(\omega t + 2\pi/3).
-    $$
+    $$}
     \begin{figure}
           \begin{circuitikz}
             \def\vd{1cm} % vertical distance inductors
@@ -2685,19 +2685,19 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M3U rectifier resistive load operation: average output voltage}
-    With a resistive load, the M3U rectifier's output is always determined by the transformer phase with the highest voltage: 
+    \onslide<1->{With a resistive load, the M3U rectifier's output is always determined by the transformer phase with the highest voltage: 
     \begin{equation}
         u_2(t) = \max\left\{u_{1\mathrm{a}}(t), u_{1\mathrm{b}}(t), u_{1\mathrm{c}}(t) \right\}.
-    \end{equation}
+    \end{equation}} \onslide<2->{
     \begin{itemize}
-        \item Assume $u_1(t)$ has the highest voltage for some time $t$.
-        \item Hence, there is a negative voltage difference between the phases $a$-$b$ and $a$-$c$.
+        \item Assume $u_{1\mathrm{a}}(t)$ has the highest voltage for some time $t$.
+        \item Hence, there is a negative voltage difference between the phases $b$-$a$ and $c$-$a$.
         \item These can be only compensated by the diodes $D_2$ and $D_3$, which are in blocking mode while $D_1$ is conducting.
-    \end{itemize}
-    The average output voltage can be found by evaluating the conduction interval of one phase, e.g., $u_{1\mathrm{a}}(t)$:
+    \end{itemize}}
+    \onslide<3->{The average output voltage can be found by evaluating the conduction interval of one phase, e.g., $u_{1\mathrm{a}}(t)$:}
     \begin{equation}
         \begin{split}
-            \bar{u}_2 = \frac{3}{2\pi} \int^{\frac{5}{6}\pi}_{\frac{1}{6}\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t = \frac{3}{2\pi} \left[-\hat{u}_1 \cos(\omega t) \right]^{\frac{5}{6}\pi}_{\frac{1}{6}\pi} = \frac{3}{2\pi}\hat{u}_1 2\frac{\sqrt{3}}{2} = \frac{3\sqrt{3}}{2\pi}\hat{u}_1.
+            \onslide<3->{\bar{u}_2 = \frac{3}{2\pi} \int^{\frac{5}{6}\pi}_{\frac{1}{6}\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t } \onslide<4->{ = \frac{3}{2\pi} \left[-\hat{u}_1 \cos(\omega t) \right]^{\frac{5}{6}\pi}_{\frac{1}{6}\pi} } \onslide<5->{= \frac{3}{2\pi}\hat{u}_1 2\frac{\sqrt{3}}{2} = \frac{3\sqrt{3}}{2\pi}\hat{u}_1.}
         \end{split}
         \label{eq:M3U_average_output_voltage}
     \end{equation}
@@ -2708,11 +2708,11 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M3U rectifier with output filter}
-    To filter both the output voltage and current, an output filter can be added to the M3U rectifier circuit (\figref{fig:M3U_topology_filter}). The filter consists of a series inductor $L$ and a capacitor $C$ in parallel. In steady state
+    To filter both the output voltage and current, an output filter can be added to the M3U rectifier circuit (\figref{fig:M3U_topology_filter}). The filter consists of a series inductor $L$ and a capacitor $C$ in parallel. \onslide<2->{In \hl{steady state}
     \begin{equation}
         \overline{u}_\mathrm{C} = \overline{u}_2 = \frac{3\sqrt{3}}{2\pi}\hat{u}_1 
     \end{equation}
-    holds as the average inductor voltage must be zero to prevent a current run away.    
+    holds as the average inductor voltage must be zero to prevent a current run away.}    
     \begin{figure}
           \begin{circuitikz}
             \def\vd{1cm} % vertical distance inductors
@@ -2802,22 +2802,22 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M3U rectifier with output filter (cont.)}
-    From \figref{fig:M3U_characteristic_curves_filtered} one can observe that
+    \onslide<1->{From \figref{fig:M3U_characteristic_curves_filtered} one can observe that
     \begin{equation}
         u_2(t) = u_{1\mathrm{a}}(t) = \hat{u}_1\sin(\omega t), \quad \omega t \in \left[\frac{1}{6}\pi, \frac{5}{6}\pi\right]
     \end{equation}
-    holds. At $\omega t = \omega t_1$ the phase voltage $u_{1\mathrm{a}}(t)$ is equal to the average output voltage $\overline{u}_2$:
+    holds.}\onslide<2->{ At $\omega t = \omega t_1$ the phase voltage $u_{1\mathrm{a}}(t)$ is equal to the average output voltage $\overline{u}_2$:}
     \begin{equation}
-            \overline{u}_2 = \frac{3\sqrt{3}}{2\pi}\hat{u}_1 = \hat{u}_1\sin(\omega t_1) \quad \Leftrightarrow \quad \omega t_1 = \arcsin\left(\frac{3\sqrt{3}}{2\pi}\right).
+        \onslide<2->{\overline{u}_2 = \frac{3\sqrt{3}}{2\pi}\hat{u}_1 = \hat{u}_1\sin(\omega t_1)}\onslide<3->{ \quad \Leftrightarrow \quad \omega t_1 = \arcsin\left(\frac{3\sqrt{3}}{2\pi}\right).}
     \end{equation}
-    Based on this, the current $i_2(t)$ can be calculated as
+    \onslide<4->{Based on this, the current $i_2(t)$ can be calculated as}
     \begin{equation}
         \begin{split}
-            i_2(t) &= i_2(\omega t_1) + \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} \left(u_2(\omega \tau) - \overline{u}_2\right) \mathrm{d} \omega \tau  \\  &= i_2(\omega t_1) + \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} \left(\hat{u}_1\sin(\omega \tau) -  \hat{u}_1\sin(\omega t_1)\right) \mathrm{d} \omega \tau \quad \omega t \in \left[\frac{1}{6}\pi, \frac{5}{6}\pi\right]
+            \onslide<4->{i_2(t) &= i_2(\omega t_1) + \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} \left(u_2(\omega \tau) - \overline{u}_2\right) \mathrm{d} \omega \tau}  \\ \onslide<5->{ &= i_2(\omega t_1) + \frac{1}{\omega L} \int_{\omega t_1}^{\omega t} \left(\hat{u}_1\sin(\omega \tau) -  \hat{u}_1\sin(\omega t_1)\right) \mathrm{d} \omega \tau, \quad \omega t \in \left[\frac{1}{6}\pi, \frac{5}{6}\pi\right]}
         \end{split}
         \label{eq:M3U_current_integral_def}
     \end{equation}
-    with $i_2(\omega t_1)$ being the initial (yet unknown) current at $\omega t_1$.
+    \onslide<5->{with $i_2(\omega t_1)$ being the initial (yet unknown) current at $\omega t_1$.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2832,6 +2832,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
         \end{split}
          \label{eq:M3U_current_integral}
     \end{equation}
+    \pause
     To determine the initial current $i_2(\omega t_1)$, one can utilize the fact that the average inductor current must be identical to the average load current since otherwise the output capacitor would be charged or discharged indefinitely:
     \begin{equation}
         \overline{i}_2 \stackrel{!}{=} \overline{i}_\mathrm{R} = \frac{\overline{u}_2}{R} = \frac{\hat{u}_1\sin(\omega t_1)}{R}. 
@@ -2844,19 +2845,19 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M3U rectifier with output filter (cont.)}
-    The average inductor current can be calculated as
+    \onslide<1->{The average inductor current can be calculated as}
     \begin{equation}
         \begin{split}
-            \overline{i}_2 &= \frac{3}{2\pi} \int_{\frac{1}{6}\pi}^{\frac{5}{6}\pi} i_2(\omega \tau) \mathrm{d} \omega \tau = \frac{3}{2\pi} \int_{\frac{1}{6}\pi}^{\frac{5}{6}\pi} i_2(\omega t_1) \mathrm{d} \omega \tau \\ &+ \frac{3}{2\pi} \int_{\frac{1}{6}\pi}^{\frac{5}{6}\pi} \frac{\hat{u}_1}{\omega L} \left[-\cos(\omega \tau) + \cos(\omega t_1) -\sin(\omega t_1)\left(\omega \tau - \omega t_1\right)\right] \mathrm{d} \omega \tau\\
-            &=\ldots \\
-            & = i_2(\omega t_1) + \frac{\hat{u}_1}{\omega L}\left[\cos(\omega t_1) + \sin(\omega t_1)(\omega t_1 - \frac{\pi}{2})\right].
+            \onslide<1->{\overline{i}_2 &= \frac{3}{2\pi} \int_{\frac{1}{6}\pi}^{\frac{5}{6}\pi} i_2(\omega \tau) \mathrm{d} \omega \tau} \onslide<2->{= \frac{3}{2\pi} \int_{\frac{1}{6}\pi}^{\frac{5}{6}\pi} i_2(\omega t_1) \mathrm{d} \omega \tau} \\ \onslide<2->{&+ \frac{3}{2\pi} \int_{\frac{1}{6}\pi}^{\frac{5}{6}\pi} \frac{\hat{u}_1}{\omega L} \left[-\cos(\omega \tau) + \cos(\omega t_1) -\sin(\omega t_1)\left(\omega \tau - \omega t_1\right)\right] \mathrm{d} \omega \tau\\}
+            \onslide<3->{&=\ldots \\
+            & = i_2(\omega t_1) + \frac{\hat{u}_1}{\omega L}\left[\cos(\omega t_1) + \sin(\omega t_1)(\omega t_1 - \frac{\pi}{2})\right].}
         \end{split}
     \end{equation}
-    Inserting into \eqref{eq:M3U_current_average} and solving for $i_2(\omega t_1)$ yields
+    \onslide<4->{Inserting into \eqref{eq:M3U_current_average} and solving for $i_2(\omega t_1)$ yields
     \begin{equation}
         i_2(\omega t_1) = \frac{\hat{u}_1}{R}\sin(\omega t_1) - \frac{\hat{u}_1}{\omega L}\left[\cos(\omega t_1) + \sin(\omega t_1)(\omega t_1 - \frac{\pi}{2})\right].
     \end{equation}
-    With this result, the current $i_2(t)$ can be calculated using \eqref{eq:M3U_current_integral}.
+    With this result, the current $i_2(t)$ can be calculated using \eqref{eq:M3U_current_integral}.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2864,21 +2865,21 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M3U rectifier with output filter: CCM vs. DCM}
-    The \hl{previous analysis only holds for CCM} as otherwise all diodes would be blocking simultaneously. From \eqref{eq:M3U_current_integral} one can find that the minimum current $i_2(t)$ is reached when $\omega t = \omega t_1$, i.e., 
+    The \hl{previous analysis only holds for CCM} as otherwise all diodes would be blocking simultaneously. \onslide<2->{From \eqref{eq:M3U_current_integral} one can find that the minimum current $i_2(t)$ is reached when $\omega t = \omega t_1$, i.e.,} 
     \begin{equation}
-        \min \{i_2(t)\} = i_2(\omega t_1) = \frac{\hat{u}_1}{R}\sin(\omega t_1) - \frac{\hat{u}_1}{\omega L}\left[\cos(\omega t_1) + \sin(\omega t_1)(\omega t_1 - \frac{\pi}{2})\right].
+        \onslide<2->{ \min \{i_2(t)\} = i_2(\omega t_1)}  \onslide<3->{= \frac{\hat{u}_1}{R}\sin(\omega t_1) - \frac{\hat{u}_1}{\omega L}\left[\cos(\omega t_1) + \sin(\omega t_1)(\omega t_1 - \frac{\pi}{2})\right].}
     \end{equation}
-    The boundary between CCM and DCM can be found by setting $\min \{i_2(t)\} = 0$ leading to $i_2(\omega t_1)=0$. In this boundary case, the average output current is 
+    \onslide<4->{The boundary between CCM and DCM can be found by setting $\min \{i_2(t)\} = 0$ leading to $i_2(\omega t_1)=0$. In this boundary case, the average output current is} 
     \begin{equation}
         \begin{split}
-            \overline{i}_2 &= \frac{\hat{u}_1}{\omega L}\left[\cos(\omega t_1) + \sin(\omega t_1)(\omega t_1 - \frac{\pi}{2})\right]\\
-                           & =  \frac{\overline{u}_2}{\omega L}\left[\tan(\omega t_1) + \omega t_1 - \frac{\pi}{2}\right].
+            \onslide<4->{\overline{i}_2 &= \frac{\hat{u}_1}{\omega L}\left[\cos(\omega t_1) + \sin(\omega t_1)(\omega t_1 - \frac{\pi}{2})\right]\\} \onslide<5->{
+                           & =  \frac{\overline{u}_2}{\omega L}\left[\tan(\omega t_1) + \omega t_1 - \frac{\pi}{2}\right].}
         \end{split}
     \end{equation}
-    One can also reinterpret this result for designing the filter inductor $L$ to ensure CCM operation:
+    \onslide<6->{One can also reinterpret this result for designing the filter inductor $L$ to ensure CCM operation:
     \begin{equation}
         L \geq \frac{\overline{u}_2}{\omega \overline{i}_2}\left[\tan(\omega t_1) + \omega t_1 - \frac{\pi}{2}\right].
-    \end{equation}
+    \end{equation}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2997,13 +2998,14 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \begin{equation}
         u_2(t) = \max\left\{u_{1\mathrm{a}}(t), u_{1\mathrm{b}}(t), u_{1\mathrm{c}}(t)\right\} - \min\left\{u_{1\mathrm{a}}(t), u_{1\mathrm{b}}(t), u_{1\mathrm{c}}(t)\right\}.
     \end{equation}
-    Alternatively, we can evaluate the line-to-line voltages
+    \pause
+    Alternatively, we can evaluate the \hl{line-to-line voltages}
     \begin{equation*}
         \begin{alignedat}{3}
         u_{1\mathrm{ab}}(t) &= u_{1\mathrm{a}}(t) - u_{1\mathrm{b}}(t) \qquad u_{1\mathrm{bc}}(t) &&= u_{1\mathrm{b}}(t) - u_{1\mathrm{c}}(t) \qquad u_{1\mathrm{ca}}(t) &&= u_{1\mathrm{c}}(t) - u_{1\mathrm{a}}(t)\\
                             &=\sqrt{3}\hat{u}_1\sin(\omega t + \frac{1}{6}\pi), &&= \sqrt{3}\hat{u}_1\sin(\omega t - \frac{1}{2}\pi), &&= \sqrt{3}\hat{u}_1\sin(\omega t + \frac{5}{6}\pi)
         \end{alignedat}
-    \end{equation*}
+    \end{equation*}\pause
     and find that the B6U output voltage is given by
     \begin{equation}
         u_2(t) = \max\left\{u_{1\mathrm{ab}}(t), u_{1\mathrm{bc}}(t), u_{1\mathrm{ca}}(t)\right\}.
@@ -3015,17 +3017,17 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B6U rectifier resistive load operation (cont.)}
-    The average output voltage $\overline{u}_2$ is given by
+    \onslide<1->{The average output voltage $\overline{u}_2$ is given by}
     \begin{equation}
         \begin{split}
-            \overline{u}_2 =& \frac{3}{\pi} \int_{\frac{1}{6}\pi}^{\frac{1}{2}\pi} u_{1\mathrm{ab}}(\omega t) \mathrm{d} \omega t = \frac{3}{\pi} \int_{\frac{1}{6}\pi}^{\frac{1}{2}\pi} \sqrt{3}\hat{u}_1\sin(\omega t + \frac{1}{6}\pi) \mathrm{d} \omega t\\
-            =& \frac{3\sqrt{3}}{\pi}\hat{u}_1 \left[-\cos(\omega t + \frac{1}{6}\pi)\right]_{\frac{1}{6}\pi}^{\frac{1}{2}\pi} = \frac{3\sqrt{3}}{\pi}\hat{u}_1.
+            \onslide<1->{\overline{u}_2 =& \frac{3}{\pi} \int_{\frac{1}{6}\pi}^{\frac{1}{2}\pi} u_{1\mathrm{ab}}(\omega t) \mathrm{d} \omega t} \onslide<2->{ = \frac{3}{\pi} \int_{\frac{1}{6}\pi}^{\frac{1}{2}\pi} \sqrt{3}\hat{u}_1\sin(\omega t + \frac{1}{6}\pi) \mathrm{d} \omega t\\}
+            \onslide<3->{=& \frac{3\sqrt{3}}{\pi}\hat{u}_1 \left[-\cos(\omega t + \frac{1}{6}\pi)\right]_{\frac{1}{6}\pi}^{\frac{1}{2}\pi} = \frac{3\sqrt{3}}{\pi}\hat{u}_1.}
         \end{split}
     \end{equation}
-    Compared to the M3U rectifier average voltage from \eqref{eq:M3U_average_output_voltage}, the B6U average output voltage is doubled -- this is an analogous finding to the single phase case where the B2U rectifier has a doubled average output voltage compared to the M2U rectifier.
+    \onslide<4->{Compared to the M3U rectifier average voltage from \eqref{eq:M3U_average_output_voltage}, the B6U average \hl{output voltage is doubled} -- this is an analogous finding to the single phase case where the B2U rectifier has a doubled average output voltage compared to the M2U rectifier.} \onslide<5->{
     \begin{varblock}{Impact of further filter elements}
         The impact of filters elements, e.g., the line impedance from \figref{fig:B2U_topology_capacitive_filter_grid} or an $LC$ output filter as in \figref{fig:M3U_topology_filter}, can be analyzed in a similar manner for the B6U rectifier. While such filter elements are common in practice, they are not explicitly treated for the B6U rectifier in the following due to time constraints.
-    \end{varblock}
+    \end{varblock}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3292,29 +3294,29 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Comparison of output voltage ripple characteristics}
-    From the previous analyses of the considered three-phase rectifiers one can find
+    \onslide<1->{From the previous analyses of the considered three-phase rectifiers one can find
     \begin{equation}
         \Delta u_2 = \max\{u_2(t)\} -\min\{u_2(t)\} = \left(1-\cos\left(\frac{\pi}{p}\right)\right)\hat{u}_2
     \end{equation}
-    with $p$ being the number of pulses. For the considered rectifiers, the output voltage is given by
+    with $p$ being the number of pulses.} \onslide<2->{ For the considered rectifiers, the output voltage is given by}
     $$
-    \hat{u}_2 = \begin{cases}
+    \onslide<2->{\hat{u}_2 = \begin{cases}
         \hat{u}_1, & \text{for M3U},\\
         \sqrt{3}\hat{u}_1, & \text{for B6U and B6U-2P},
-    \end{cases} \qquad \mbox{and} \qquad \overline{u}_2 = \begin{cases}
+    \end{cases}}  \onslide<3->{\qquad \mbox{and} \qquad \overline{u}_2 = \begin{cases}
         \frac{3\sqrt{3}}{2\pi}\hat{u}_1, & \text{for M3U},\\
         \frac{3\sqrt{3}}{\pi}\hat{u}_1, & \text{for B6U and B6U-2P}
-    \end{cases}
+    \end{cases}}
     $$
-    leading to the \hl{normalized output voltage ripple} being defined as
+    \onslide<4->{leading to the \hl{normalized output voltage ripple} being defined as
     \begin{equation}
             \frac{\Delta u_2}{\overline{u}_2} = \begin{cases}
                 \frac{2\pi}{3\sqrt{3}}\left(1-\cos\left(\frac{\pi}{3}\right)\right)=60.46\,\%, & \text{for M3U},\\
                 \hfill\frac{\pi}{3}\left(1-\cos\left(\frac{\pi}{6}\right)\right)=14.03\,\%, & \text{for B6U},\\
                 \hfill\frac{\pi}{3}\left(1-\cos\left(\frac{\pi}{12}\right)\right)=\hphantom{0}3.57\,\%, & \text{for B6U-2P}. 
             \end{cases}
-    \end{equation}
-    Takeaway: the higher the recitifier's pulse number, the lower the output voltage ripple, that is, there is a \hl{trade-off between the number of semiconductors and the filter effort}. 
+    \end{equation}}
+    \onslide<5->{Takeaway: the higher the recitifier's pulse number, the lower the output voltage ripple, that is, there is a \hl{trade-off between the number of semiconductors and the filter effort}.} 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3328,7 +3330,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
         \item There is a complex interaction between semiconductor effort and filter effort to provide a DC voltage with a certain signal quality.\pause
         \item Without active PFC, any diode-based rectifier will introduce significant distortions at the primary side due to harmonics and phase shifts between input voltage and current.\pause
         \item Active PFC can be used to provide a near-unity power factor, which is required in many applications due to industrial / legal regulations.\pause
-    \end{itemize}\pause
+    \end{itemize}
     In addition, there are further topologies that are not covered in this course, such as
     \begin{itemize}
         \item M6U rectifier,
