@@ -10,7 +10,7 @@
         \begin{tikzpicture}
             \begin{axis}[
                 % x/y range adjustment
-                xmin=0, xmax=365,
+                xmin=0, xmax=368,
                 ymin=-450, ymax=450,
                 samples=500,
                 axis y line=center,
@@ -84,19 +84,19 @@
             % Label of u1a
             \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,-400) {$u_{\mathrm{1a}}(\omega t)$};
             % Line to u1a
-            \draw[thin, black] (130,-300) -- (135,-260);            
+            \draw[thin, black] (115,-300) -- (110,-260);            
             % Label of u1b
             \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:180,300) {$u_{\mathrm{1b}}(\omega t)$};
             % Line to u1b
-            \draw[thin, black] (180,300) -- (190,260);
-            % Label of u2,p
-            \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:50,310) {$u_{\mathrm{2,p}}(\omega t)$};
-            % Line to u2,p
-            \draw[thin, blue] (60,300) -- (50,250);
+            \draw[thin, black] (180,300) -- (170,260);
             % Label of u2,m
-            \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:240,-410) {$u_{\mathrm{2,m}}(\omega t)$};
+            \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:50,310) {$u_{\mathrm{2,m}}(\omega t)$};
             % Line to u2,m
-            \draw[thin, blue] (240,-300) -- (230,-230);
+            \draw[thin, blue] (60,300) -- (70,250);
+            % Label of u2,p
+            \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:240,-410) {$u_{\mathrm{2,p}}(\omega t)$};
+            % Line to u2,p
+            \draw[thin, blue] (240,-300) -- (250,-230);
         \end{axis}     
         \end{tikzpicture}
         \caption{Output voltage $u_\mathrm{2,p}(t)$ and $u_\mathrm{2,m}(t)$ for lowing load.}
