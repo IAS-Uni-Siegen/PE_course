@@ -84,47 +84,41 @@ to operate the motor at rated voltage.}
     \item The output voltage $u_\mathrm{2,p}(t)$ and $u_\mathrm{2,m}(t)$ of the two partial converters (reference point is neutral)
           and shade the effective voltage-time area for the two cases (raising and lowering load).
     \item The output voltage $u_\mathrm{2}(t)$ and the mean voltage $\overline{u}_\mathrm{2}$.
-    \item The current $i_\mathrm{1a}(t)$ and it's fundamental $i_mathrm{1a}^{(1)}(t)$.
+    \item The current $i_\mathrm{1a}(t)$ and it's fundamental $i_\mathrm{1a}^{(1)}(t)$.
     \item The voltage of thyristor $u_\mathrm{T1}(t)$.
     \item Indicate which thyristors are conducting during a pulse interval within the sketches (raising and lowering load).
 \end{itemize}  
 }
 \begin{solutionblock}
-% \input{fig/ex06/sFig_VoltageU2pmUp}
 
-% \input{fig/ex06/sFig_VoltageU2pmDown}
+    \input{fig/ex06/sFig_VoltageU2pmUp}
 
-% \input{fig/ex06/sFig_VoltageU2pUpDown}
-    The Fourier coefficient for the Cosinus terms are used to calculate the amplitude of the fundamental $i_{1a}^{(1)}(t)$.
-    To simplify the calculation the the current signal $i_{1a}(t)$ is shift \SI{270}{\degree} to the left, so that to the left so that it is axisymmetric.
-    The integration is performed from \SI{-180}{\degree} to \SI{180}{\degree}:
+    \input{fig/ex06/sFig_VoltageU2pmDown}
+
+    \input{fig/ex06/sFig_VoltageU2pUpDown}
     
-    T is calculated by
-    \begin{equation} 
-        \hat{u}_\mathrm{1,LL}=\sqrt{3} \sqrt{2} \cdot U_\mathrm{1}= \sqrt{2} \sqrt{2} \cdot \SI{230}{\volt}=\SI{563}{\volt}.
-        \label{eq:ex06t2_u1n_max}
+    The amplitude of the fundamental $i_\mathrm{1a}^\mathrm{(1)}(t)$ is determined by calculating the Fourier coefficient.
+    To simplify the calculation the the current signal $i_\mathrm{1a}(t)$ is shift $\frac{2 \cdot \pi}{3}\SI{}{\radian}$ to the left, 
+    so that it is axisymmetric. Cause by the symmetry the integration is performed only from \SI{0}{\degree} to \SI{180}{\degree}:
+    \begin{equation}
+        \begin{split}
+            \hat{i}_\mathrm{1a}^\mathrm{(1)} &= \frac{2}{\pi} \int_{0}^{\pi} i_\mathrm{1a}(\omega t) \cos(\omega t) \mathrm{d}\omega t=
+            \frac{2}{\pi} \left( \int_{0}^{\frac{\pi}{3}} I\mathrm{mot} \cos(\omega t) \mathrm{d}\omega t 
+            - \int_{\frac{2\pi}{3}}^{\pi} I_\mathrm{mot} \cos(\omega t) \mathrm{d}\omega t \right)  \\
+            &= \frac{2 I_\mathrm{mot}}{\pi} \left( \sin(\frac{\pi}{3}) + \sin(\frac{2\pi}{3}) \right) 
+            = \frac{2\cdot \SI{20}{\ampere}}{\pi} \sqrt{3}= \SI{22}{\ampere}.
+        \end{split}
     \end{equation}
-    The voltage $u_\mathrm{2}(t)$ is calculated by
-    \begin{equation} 
-        u_\mathrm{2}(t) = \hat{u}_\mathrm{1,LL} \frac{\pi}{p}\sin(\frac{p}{\pi}) \cos(\alpha).
-        \label{eq:ex06t2_u2_gen}
-    \end{equation}
-    Solving \eqref{eq:ex06t2_u2_gen} with respect to $\alpha$ results in
-    \begin{equation} 
-        \alpha = \arccos( \frac{u_\mathrm{2}(t) \cdot p}{\hat{u}_\mathrm{1,LL}\pi \sin(\frac{p}{\pi})}) =
-        \begin{cases}
-            \alpha_\mathrm{up} = \arccos( \frac{\SI{466}{\volt} \cdot p}{\SI{563}{\volt}\pi \sin(\frac{6}{\pi})})=\SI{30}{\degree}     \\
-            \alpha_\mathrm{down} = \arccos( \frac{\SI{-466}{\volt} \cdot p}{\SI{563}{\volt}\pi \sin(\frac{6}{\pi})})=\SI{150}{\degree}    \\
-        \end{cases}.
-        \label{eq:ex06t2_alpha_gen}
-    \end{equation}
-% \input{fig/ex06/sFig_CurrentI1up}
+    The result is valid for raising and lowering load, because in both cases the rectangle width and relative positions are the same.
+    The difference belongs only to the phase position relative to $U_\mathrm{1}(t)$ and only shifted.
 
-% \input{fig/ex06/sFig_CurrentI1down}
+    \input{fig/ex06/sFig_CurrentI1up}
 
-% \input{fig/ex06/sFig_VoltageUT1Up}
+    \input{fig/ex06/sFig_CurrentI1down}
 
-% \input{fig/ex06/sFig_VoltageUT1Down}
+    \input{fig/ex06/sFig_VoltageUT1Up}
+
+    \input{fig/ex06/sFig_VoltageUT1Down}
 
 \end{solutionblock}
 
