@@ -55,31 +55,56 @@ In order to generate the necessary torque, the motor absorbs the current $i_\mat
 % Subtask1
 \subtask{Calculate the firing angle $\alpha_\mathrm{up}$ required for raising and the firing angle $\alpha_\mathrm{down}$ for lowering the load 
 to operate the motor at rated voltage.}
+%solution
+\begin{solutionblock}
+    The maximum value of $u_\mathrm{1}(t)$ is calculated by of The voltage $u_\mathrm{2,p}(t)$ results from
+    \begin{equation} 
+        \hat{u}_\mathrm{1}=\sqrt{2} \cdot U_\mathrm{1}= \sqrt{2} \cdot \SI{230}{\volt}=\SI{325}{\volt}.
+        \label{eq:ex06t2_u1n_max}
+    \end{equation}
+    The voltage $u_\mathrm{2}(t)$ is calculated by
+    \begin{equation} 
+        u_\mathrm{2}(t) = \hat{u}_\mathrm{1} \frac{\pi}{p}\sin(\frac{p}{\pi}) \cos(\alpha).
+        \label{eq:ex06t2_u2_gen}
+    \end{equation}
+    Solving \eqref{eq:ex06t2_u2_gen} with respect to $\alpha$ results in
+    \begin{equation} 
+        \alpha = \arccos( \frac{u_\mathrm{2}(t) \cdot p}{\hat{u}_\mathrm{1}\pi \sin(\frac{p}{\pi})}) =
+        \begin{cases}
+            \alpha_\mathrm{up} = \arccos( \frac{\SI{466}{\volt} \cdot p}{\SI{563}{\volt}\pi \sin(\frac{6}{\pi})})=\SI{30}{\degree}     \\
+            \alpha_\mathrm{down} = \arccos( \frac{\SI{-466}{\volt} \cdot p}{\SI{563}{\volt}\pi \sin(\frac{6}{\pi})})=\SI{150}{\degree}    \\
+        \end{cases}.
+        \label{eq:ex06t2_alpha_gen}
+    \end{equation}
+
+\end{solutionblock}
 % Subtask2
 \subtask{Sketch following signals for the two calculated firing angles $\alpha_\mathrm{up}$ and $\alpha_\mathrm{down}$:
 \begin{itemize}
     \item The output voltage $u_\mathrm{2,p}(t)$ and $u_\mathrm{2,m}(t)$ of the two partial converters (reference point is neutral)
           and shade the effective voltage-time area for the two cases (raising and lowering load).
     \item The output voltage $u_\mathrm{2}(t)$ and the mean voltage $\overline{u}_\mathrm{2}$.
-    \item The current $i_\mathrm{1a}(t)$ and it's fundamental $i_{1a}^(1)(t)$.
+    \item The current $i_\mathrm{1a}(t)$ and it's fundamental $i_{1a}^{(1)}(t)$.
     \item The voltage of thyristor $u_\mathrm{T1}(t)$.
     \item Indicate which thyristors are conducting during a pulse interval within the sketches (raising and lowering load).
 \end{itemize}  
 }
 \begin{solutionblock}
-\input{fig/ex06/sFig_VoltageU2pmUp}
+% \input{fig/ex06/sFig_VoltageU2pmUp}
 
-\input{fig/ex06/sFig_VoltageU2pmDown}
+% \input{fig/ex06/sFig_VoltageU2pmDown}
 
-\input{fig/ex06/sFig_VoltageU2pUpDown}
+% \input{fig/ex06/sFig_VoltageU2pUpDown}
 
-\input{fig/ex06/sFig_CurrentI1up}
+The fundamental component  
 
-\input{fig/ex06/sFig_CurrentI1down}
+% \input{fig/ex06/sFig_CurrentI1up}
 
-\input{fig/ex06/sFig_VoltageUT1Up}
+% \input{fig/ex06/sFig_CurrentI1down}
 
-\input{fig/ex06/sFig_VoltageUT1Down}
+% \input{fig/ex06/sFig_VoltageUT1Up}
+
+% \input{fig/ex06/sFig_VoltageUT1Down}
 
 \end{solutionblock}
 
