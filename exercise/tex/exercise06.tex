@@ -29,7 +29,7 @@ $U_\mathrm{1i} = \SI{230}{\volt}, \forall i=a,b,c$. The thyristors and commutati
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task{B6C converter at a motor load}
 
-In a lifting drive, a permanent magnet DC motor is supplied by a B6C converter circuit. The B6C-topology is connected to the three-phase network.
+In a lifting drive, a permanent magnet DC motor is supplied by a B6C converter circuit. The B6C-topology is connected to the three-phase grid.
 With the assumption of $L\rightarrow\infty$ the motor operates with constant nominal current and constant nominal voltage when lifting as well as lowering the load.
 This corresponds to a terminal voltage of $u_\mathrm{mot,up}(t)=U_\mathrm{mot}$ when lifting the load and $u_\mathrm{mot,down}(t)=-U_\mathrm{mot}$ when lowering it.
 In order to generate the necessary torque, the motor absorbs the current $i_\mathrm{mot}(t)=I_\mathrm{mot}$.
@@ -40,10 +40,11 @@ In order to generate the necessary torque, the motor absorbs the current $i_\mat
     \centering  % Zentriert die Tabelle
     \begin{tabular}{ll}
         \toprule
-        Input voltages: & three-phase system with $\hat{u}_\mathrm{1} = $ \\ %\square{2}\SI{230}{\volt}$  \\
+        Input voltages: & three-phase grid $U_\mathrm{1}=\SI{230}{\volt}$ (phase voltage) \\
+                        & $U_\mathrm{1,LL} = \SI{400}{\volt}$ (line-to-line voltage)\\
         Nom. motor current: & $I_{\mathrm{mot}} = \SI{20}{\ampere}$ \\
         Nom. motor voltage: & $U_\mathrm{mot} = \SI{466}{\volt}$ \\ 
-        Frequency: & $f= \SI{50}{\hertz}$ \\ 
+        Grid frequency: & $f= \SI{50}{\hertz}$ \\ 
         \bottomrule
     \end{tabular}
     \caption{Parameters of the lifting drive with B6C converter.}  
@@ -53,16 +54,16 @@ In order to generate the necessary torque, the motor absorbs the current $i_\mat
 
 % Subtask1
 \subtask{Calculate the firing angle $\alpha_\mathrm{up}$ required for raising and the firing angle $\alpha_\mathrm{down}$ for lowering the load 
-to operate the motor at rated voltage. The average voltage $\overline{u}_\mathrm{2}$  as a function of the firing angle $\alpha$ shall be determined 
-by integrating the instantaneous output voltage $u_\mathrm{2}(t)$.}
+to operate the motor at rated voltage.}
 % Subtask2
-\subtask{Sketch following waveformes for the two calculated firing angles $\alpha_\mathrm{up}$ and $\alpha_\mathrm{down}$:
+\subtask{Sketch following signals for the two calculated firing angles $\alpha_\mathrm{up}$ and $\alpha_\mathrm{down}$:
 \begin{itemize}
     \item The output voltage $u_\mathrm{2,p}(t)$ and $u_\mathrm{2,m}(t)$ of the two partial converters (reference point is neutral)
-          and shade the effective voltage-time area for the two cases (raising and lowing load).
-    \item The output voltage $u_\mathrm{2}(t)$ and the mean voltage $\overline{u}_\mathrm{2}(t)$.
-    \item The current $i_\mathrm{1a}(t)$ and it's fundamental amplitude.
+          and shade the effective voltage-time area for the two cases (raising and lowering load).
+    \item The output voltage $u_\mathrm{2}(t)$ and the mean voltage $\overline{u}_\mathrm{2}$.
+    \item The current $i_\mathrm{1a}(t)$ and it's fundamental $i_{1a}^(1)(t)$.
     \item The voltage of thyristor $u_\mathrm{T1}(t)$.
+    \item Indicate which thyristors are conducting during a pulse interval within the sketches (raising and lowering load).
 \end{itemize}  
 }
 \begin{solutionblock}
@@ -83,13 +84,9 @@ by integrating the instantaneous output voltage $u_\mathrm{2}(t)$.}
 \end{solutionblock}
 
 % Subtask3
-\subtask{List the conduction intervals of $T_\mathrm{1}$...$T_\mathrm{6}$ in a table.}
+\subtask{Calculate the active power $P$, the fundamental reactive power $Q^\mathrm{(1)}$
+and the fundamental apparent power $S^\mathrm{(1)}$ for the two considered operating points. Represent $P$, $Q^\mathrm{(1)}$ and $S^\mathrm{(1)}$ in the complex plane.}
 
 % Subtask4
-\subtask{Calculate the active power $P$, the fundamental reactive power $Q^\mathrm{(1)}$
-and the fundamental apparent power $S^\mathrm{(1)}$. Represent $P$, $Q^\mathrm{(1)}$ and $S^\mathrm{(1)}$ in the complex plane.}
-
-% Subtask5
-\subtask{Calculate $S$, $P$ and $Q^\mathrm{(1)}$ and the fundamental component $g_=\frac{I^\mathrm{(1)}}{I}$ and the power factor $\lambda$ 
-as a function of the effective values $U$, $I$, $I^\mathrm{(1)}$ and the phase shift $\Phi$ between $\hat{u}_\mathrm{(1)}^\mathrm{(1)}$ and 
-$\hat{i}^\mathrm{(1)}$. Calculate the values for raising and lowing load.}
+\subtask{Calculate the fundamental current ratio $g_=\frac{I^\mathrm{(1)}}{I}$ and the power factor $\lambda$ 
+as a function for the two considered operating points.}
