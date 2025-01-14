@@ -11,7 +11,7 @@
             \begin{axis}[
                 % x/y range adjustment
                 xmin=0, xmax=368,
-                ymin=-450, ymax=450,
+                ymin=-500, ymax=500,
                 samples=500,
                 axis y line=center,
                 axis x line=middle,
@@ -38,13 +38,13 @@
                 %major grid style={line width=.2pt,draw=gray!90},
             ]
             % Voltage u1a(wt), u1b(wt) u1c(wt)
-            \addplot[black, domain= 0:360,dashed] {325*cos(x)};                
-            \addplot[black, domain= 0:360,dashed] {325*cos(x+120)};                
-            \addplot[black, domain= 0:360,dashed] {325*cos(x+240)}; 
+            \addplot[black, domain= 0:360,dashed,name path = u1a] {325*cos(x)};                
+            \addplot[black, domain= 0:360,dashed,name path = u1b] {325*cos(x-120)};                
+            \addplot[black, domain= 0:360,dashed,name path = u1c] {325*cos(x-240)}; 
             % Voltage u2p(wt)
             \addplot[blue, domain= 0:90] {325*cos(x)};                
-            \addplot[blue, domain= 90:210] {325*cos(x+240)};                
-            \addplot[blue, domain= 210:330] {325*cos(x+120)};
+            \addplot[blue, domain= 90:210] {325*cos(x-120)};                
+            \addplot[blue, domain= 210:330] {325*cos(x-240)};
             \addplot[blue, domain= 330:360] {325*cos(x)};                
             \addplot[color=blue,solid] coordinates{
                 (90,0)
@@ -59,11 +59,14 @@
                 (330, 281.4)
             };     
          
+           % Average u1p 
+           \addplot[blue,domain= 0:360,dashed, name path = u2pavg] {233}; 
+
             % Voltage u2m(wt)
-            \addplot[blue, domain= 0:30] {325*cos(x+240)};                
-            \addplot[blue, domain= 30:150] {325*cos(x+120)};                
+            \addplot[blue, domain= 0:30] {325*cos(x-120)};                
+            \addplot[blue, domain= 30:150] {325*cos(x-240)};                
             \addplot[blue, domain= 150:270] {325*cos(x)};                
-            \addplot[blue, domain= 270:360] {325*cos(x+240)};
+            \addplot[blue, domain= 270:360] {325*cos(x-120)};
             \addplot[color=blue,solid] coordinates{
                 (30,0)
                 (30, -281.4)
@@ -76,18 +79,34 @@
                 (270,0)
                 (270, -281.4)
             };     
-        
-            % Label of u1c
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:245,50) {$u_{\mathrm{1c}}(\omega t)$};
-            % Line to u1a
-            \draw[thin, black] (272,100) -- (280,80); 
+
+            % Average u1m 
+            \addplot[blue,domain= 0:360,dashed, name path = u2mavg] {-233}; 
+
+            % Shade areas of T1,T3,T5
+            \addplot[shadecolor, opacity=0.3] fill between[of=u1a and u2pavg, soft clip={domain=0:90}];
+            \addplot[shadecolor, opacity=0.3] fill between[of=u1b and u2pavg, soft clip={domain=90:210}];
+            \addplot[shadecolor, opacity=0.3] fill between[of=u1c and u2pavg, soft clip={domain=210:330}];
+            \addplot[shadecolor, opacity=0.3] fill between[of=u1a and u2pavg, soft clip={domain=330:360}];
+
+            % Shade areas of T2,T4,T5
+            \addplot[shadecolor, opacity=0.3] fill between[of=u1b and u2mavg, soft clip={domain=0:30}];
+            \addplot[shadecolor, opacity=0.3] fill between[of=u1c and u2mavg, soft clip={domain=30:150}];
+            \addplot[shadecolor, opacity=0.3] fill between[of=u1a and u2mavg, soft clip={domain=150:270}];
+            \addplot[shadecolor, opacity=0.3] fill between[of=u1b and u2mavg, soft clip={domain=270:360}];
+
+
             % Label of u1a
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,-400) {$u_{\mathrm{1a}}(\omega t)$};
+            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:60,-200) {$u_{\mathrm{1a}}(\omega t)$};
             % Line to u1a
-            \draw[thin, black] (130,-300) -- (135,-260);            
+            \draw[thin, black] (90,-150) -- (100,-100);            
             % Label of u1b
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:180,300) {$u_{\mathrm{1b}}(\omega t)$};
+            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:245,50) {$u_{\mathrm{1b}}(\omega t)$};
             % Line to u1b
+            \draw[thin, black] (245,20) -- (230,-50); 
+            % Label of u1c
+            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:180,300) {$u_{\mathrm{1c}}(\omega t)$};
+            % Line to u1c
             \draw[thin, black] (180,300) -- (190,260);
             % Label of u2,p
             \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:50,310) {$u_{\mathrm{2,p}}(\omega t)$};
@@ -97,8 +116,33 @@
             \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:240,-410) {$u_{\mathrm{2,m}}(\omega t)$};
             % Line to u2,m
             \draw[thin, blue] (240,-300) -- (230,-230);
+
+            % Thyristor phases u2p
+            % Label of T1
+            \draw[<-,black, solid, thin] (axis cs:330,460) -- (axis cs:360,460);
+            \draw[->,black, solid, thin] (axis cs:0,460) -- (axis cs:90,460);
+            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:12,400) {$\mathrm{T_1}$};
+            % Label of T3
+            \draw[<->,black, solid, thin] (axis cs:90,460) -- (axis cs:210,460);
+            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:140,400) {$\mathrm{T_3}$};
+            % Label of T5
+            \draw[<->,black, solid, thin] (axis cs:210,460) -- (axis cs:330,460);
+            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:280,400) {$\mathrm{T5}$};
+
+            % Thyristor phases u2m
+            % Label of T2
+            \draw[<->,black, solid, thin] (axis cs:30,-440) -- (axis cs:150,-440);
+            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:90,-500) {$\mathrm{T_2}$};
+            % Label of T4
+            \draw[<->,black, solid, thin] (axis cs:150,-440) -- (axis cs:270,-440);
+            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:200,-500) {$\mathrm{T_4}$};
+            % Label of T6
+            \draw[<-,black, solid, thin] (axis cs:270,-440) -- (axis cs:360,-440);
+            \draw[->,black, solid, thin] (axis cs:0,-440) -- (axis cs:30,-440);
+            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:330,-500) {$\mathrm{T_6}$};
+
         \end{axis}     
         \end{tikzpicture}
         \caption{Output voltage $u_\mathrm{2,p}(t)$ and $u_\mathrm{2,m}(t)$ for raising load.}
-        \label{sfig:ex06_Voltage_u2pmn_Raise}
+        \label{sfig:ex06_Voltage_u2pm_Up}
 \end{solutionfigure}
