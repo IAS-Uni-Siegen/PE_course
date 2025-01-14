@@ -37,7 +37,7 @@ with the stored magnetic energy
 \begin{equation}
     W_\mathrm{L} = \frac{1}{2}L_\mathrm{m}\hat i_\mathrm{1}^2. \label{eq:energy primary inductance ex04}
 \end{equation}
-Insertig delivers
+Inserting delivers
 \begin{equation}
     P_\mathrm{2} = \frac{1}{2}L_\mathrm{1}\hat i_\mathrm{1}^2 f_\mathrm{s}.\label{eq:output power with IDach ex04}
 \end{equation}
@@ -99,7 +99,7 @@ Inserting in \eqref{eq:Duty cycle ex04} and solving for D with $\overline{i}_2 =
     \begin{equation}
         u_\mathrm{s} = -U_1 \frac{N_2}{N_1} = -\SI{382}{\volt}\cdot\frac{12}{60} = \SI{-76.4}{\volt}.
     \end{equation}
-    The second interval is $T_\mathrm{on} < t < T'_\mathrm{off}$. In this interval the transistor blocks. For this calculaion \eqref{eq:voltageTransistorTask1 ex04} can be used again as:
+    The second interval is $T_\mathrm{on} < t < T'_\mathrm{off}$. In this interval the transistor blocks. For this calculation \eqref{eq:voltageTransistorTask1 ex04} can be used again as:
     \begin{equation}
         u_\mathrm{T} = \SI{382}{\volt} + \frac{60}{12}\cdot\SI{15}{\volt} = \SI{457}{\volt}.
     \end{equation}
@@ -178,7 +178,7 @@ The converter operates in steady-state conditions. Both transistors are controll
 
 \subtask{At what duty cycle $D$ does the circuit operate?}
 \begin{solutionblock}
-    The forward converter topology is derivated from buck-topology. Taking into account the turns ratio, the result is
+    The forward converter topology is derived from the buck-topology. Taking into account the turns ratio, the result is
     \begin{equation}
         \frac{U_\mathrm{2}}{U_\mathrm{1}}=D\frac{N_\mathrm{2}}{N_\mathrm{1}}.
         \label{eq:ex04voltageratioforwardconverter}
@@ -319,10 +319,10 @@ The transformer's leakage inductance can be neglected.
     The cancelation of voltages $U_\mathrm{p,on}$ and $U_\mathrm{p,off}$ results in
     \begin{equation}
         \frac{N_\mathrm{3}}{N_\mathrm{1}} \frac{D_\mathrm{max}}{1-D_\mathrm{max}} = 1.
-        \label{eq:ex04upmagnetizationdutycycle}
+        \label{eq:ex04upmagnetizationdutycycle_sol}
     \end{equation} 
 
-    The duty cycle is calculated by solving \eqref{eq:ex04upmagnetizationdutycycle}
+    The duty cycle is calculated by solving \eqref{eq:ex04upmagnetizationdutycycle_sol}:
     \begin{equation}
         D_\mathrm{max}=\frac{\frac{N_\mathrm{1}}{N_\mathrm{3}}}{1+\frac{N_\mathrm{1}}{N_\mathrm{3}}} 
         = \frac{0.667}{1+0.667}=0.4.
@@ -331,7 +331,7 @@ The transformer's leakage inductance can be neglected.
 
 \subtask{What turns ratio $N_\mathrm{1}$/$N_\mathrm{2}$ should be chosen to achieve the required secondary voltage?}
 \begin{solutionblock}
-    The maximal duty cycle is applied at minimum input voltage. Moreover for the calculation of the 
+    The maximal duty cycle is applied at minimum input voltage. Moreover, for the calculation of the 
     turns ratio $N_\mathrm{1}$/$N_\mathrm{2}$ the forward voltage of $D_\mathrm{1}$ has to taken in account.
     The voltage at the secondary coil is calculated by
     \begin{equation}
@@ -379,7 +379,7 @@ The transformer's leakage inductance can be neglected.
         \SI{360}{\volt}\frac{1}{18.6}-\SI{0.4}{\volt}=\SI{18.95}{\volt}.
     \end{equation}
     The maximum blocking voltages of the diodes $D_\mathrm{1}$ corresponds to the secondary voltage at demagnetization.
-    Therefore the turn ratio of $N_\mathrm{2}/N_\mathrm{3}$ is used:
+    Therefore, the turn ratio of $N_\mathrm{2}/N_\mathrm{3}$ is used:
     \begin{equation}
         U_\mathrm{D1,r}=U_\mathrm{s}=U_\mathrm{1}\frac{N_\mathrm{2}}{N_\mathrm{3}} \quad \text{with} \quad
         \frac{N_\mathrm{2}}{N_\mathrm{3}}=\frac{N_\mathrm{2}}{N_\mathrm{1}}\frac{N_\mathrm{1}}{N_\mathrm{3}}.
@@ -454,5 +454,5 @@ The transformer's leakage inductance can be neglected.
 \begin{solutionblock}
     No,  also in this case \eqref{eq:ex04transformationratio} shows, that the output voltage depends on the turn ratio and the duty cycle,
     but not on the switching frequency of the converter. The transformer does not act as energy storage.
-    Also this answer is valid under the assumption of ideal components. 
+    Also, this answer is valid under the assumption of ideal components. 
 \end{solutionblock}
