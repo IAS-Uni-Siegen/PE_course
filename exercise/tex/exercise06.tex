@@ -1,16 +1,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Begin exercise %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ex{Rectifiers}
+\ex{Controlled Rectifiers}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 1: M3C converter at a RL-load                     %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \task{M3C converter at a RL-load}
-A controlled three-pulse midpoint circuit feeds an ohmic-inductive load. The load inductance $L$ is large, such that a pure direct current $I_\mathrm{2}$ is taken from the converter. The load resistance is $R = \SI{5}{\Omega}$. The converter transformer 
-is connected to the symmetrical three-phase network with $U_\mathrm{N} = \SI{\nicefrac{230}{400}}{\volt} $ (effective value of phase voltage / line-to-line voltage). The secondary side phase voltages point an effective value of 
-$U_\mathrm{1i} = \SI{230}{\volt}, \forall i=a,b,c$. The thyristors and commutation can be assumed to be ideal.
+A controlled three-pulse midpoint circuit feeds an ohmic-inductive load. The load inductance $L$ is infinitely large, such that a pure direct current $I_\mathrm{2}$ is taken from the converter. The load resistance is $R = \SI{5}{\Omega}$. The converter's transformer 
+is connected to the symmetrical three-phase grid with $U_\mathrm{N} = \SI{230}{\volt} $ (effective value of phase voltage) and  $U_\mathrm{N,LL} = \SI{400}{\volt} $ (line-to-line voltage). The secondary side phase voltages point an effective value of 
+$U_\mathrm{1i} = \SI{230}{\volt}, \forall i=\mathrm{a,b,c}$. The thyristors and commutation can be assumed to be ideal.
 
 \input{fig/ex06/Fig_M3C_Converter_With_RL_Load.tex}
 
@@ -18,11 +18,11 @@ $U_\mathrm{1i} = \SI{230}{\volt}, \forall i=a,b,c$. The thyristors and commutati
 % Subtask1
 \subtask{Calculate the firing angle $\alpha$, such that an active power of $P = \SI{6}{\kilo\watt}$ is delivered to the load. How big is the load current $i_\mathrm{2} = I_\mathrm{2}$?}
 % Subtask2
-\subtask{Draw the normalized control characteristic curve $\nicefrac{U_\mathrm{2}(\alpha)}{U_\mathrm{2}(\alpha=0)}$ and plot the  operating point $P = \SI{6}{\kilo\watt}$ at $R = \SI{5}{\Omega}$.}
+\subtask{Draw the normalized control characteristic curve $\nicefrac{U_\mathrm{2}(\alpha)}{U_\mathrm{2}(\alpha=0)}$ and mark the  operating point $P = \SI{6}{\kilo\watt}$ at $R = \SI{5}{\Omega}$.}
 % Subtask3
-\subtask{Draw the curve of the converters' output voltage $u_\mathrm{2}(t)$ for the calculated control angle $\alpha$ from subtask 6.1.1.}
-\subtask{Calculate the effective value $I^\mathrm{(1)}_\mathrm{1a}$ of the fundamental current component $i^\mathrm{(1)}_\mathrm{1a}(t)$ and draw that fundamental component. How big is the phase shift $\varphi_\mathrm{1a}$ between $u_\mathrm{1a}(t)$ and $i^\mathrm{(1)}_\mathrm{1a}(t)$.}
-\subtask{Calculate the fundamental reactive power $Q^\mathrm{(1)}$.}
+\subtask{Draw the curve of the converter's output voltage $u_\mathrm{2}(t)$ for the calculated control angle $\alpha$, from subtask 6.1.1, within a plot of the three-phase transformer's secondary voltages.}
+\subtask{Calculate the effective value $I^\mathrm{(1)}_\mathrm{1a}$ of the fundamental current component $i^\mathrm{(1)}_\mathrm{1a}(t)$ and draw that fundamental component. How big is the phase shift $\varphi_\mathrm{1a}$ between $u_\mathrm{1a}(t)$ and $i^\mathrm{(1)}_\mathrm{1a}(t)$?}
+\subtask{Calculate the fundamental reactive power $Q^\mathrm{(1)}$ drawn by the converter from the grid.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: B6C converter at a motor load                   %%
