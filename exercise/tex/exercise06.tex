@@ -119,13 +119,56 @@ to operate the motor at rated voltage.}
     \input{fig/ex06/sFig_VoltageUT1Up}
 
     \input{fig/ex06/sFig_VoltageUT1Down}
-
+    
 \end{solutionblock}
 
 % Subtask3
 \subtask{Calculate the active power $P$, the fundamental reactive power $Q^\mathrm{(1)}$
 and the fundamental apparent power $S^\mathrm{(1)}$ for the two considered operating points. Represent $P$, $Q^\mathrm{(1)}$ and $S^\mathrm{(1)}$ in the complex plane.}
+\begin{solutionblock}
+    \begin{equation}
+        \begin{split}
+            P_\mathrm{up}&=U_\mathrm{mot} I_\mathrm{mot}=\SI{466}{\volt} \cdot \SI{20}{\ampere}= \SI{9320}{\watt}. \\
+            P_\mathrm{down}&=-U_\mathrm{mot} I_\mathrm{mot}=\SI{-466}{\volt} \cdot \SI{20}{\ampere}= \SI{9320}{\watt}.
+        \end{split}
+    \end{equation}
+    The input voltage $U_\mathrm{1}^\mathrm{(1)}$ corresponds to $U_\mathrm{1}$, so that the apparent power results to
+    \begin{equation}
+        \begin{split}
+            S_\mathrm{up}^\mathrm{(1)}&=3 U_\mathrm{1} \frac{\hat{i}_\mathrm{1a}^\mathrm{(1)}}{\sqrt{2}}=\SI{230}{\volt} \cdot \frac{\SI{22}{\ampere}}{\sqrt{2}}= \SI{10760}{\watt}. \\
+            S_\mathrm{down}^\mathrm{(1)}&=3 U_\mathrm{1} \frac{\hat{i}_\mathrm{1a}^\mathrm{(1)}}{\sqrt{2}}=\SI{230}{\volt} \cdot \frac{\SI{22}{\ampere}}{\sqrt{2}}= \SI{10760}{\watt}.
+        \end{split}
+    \end{equation}
+    The reactive power is calculated by
+    \begin{equation}
+        \begin{split}
+            Q_\mathrm{up}^\mathrm{(1)}&=3 U_\mathrm{1} \frac{\hat{i}_\mathrm{1a}^\mathrm{(1)}}{\sqrt{2}} \sin{(\alpha_\mathrm{up})}
+            =\SI{230}{\volt} \cdot \frac{\SI{22}{\ampere}}{\sqrt{2}}\sin{(\frac{\pi}{6})}= \SI{5380}{\watt}. \\
+            Q_\mathrm{down}^\mathrm{(1)}&=3 U_\mathrm{1} \frac{-\hat{i}_\mathrm{1a}^\mathrm{(1)}}{\sqrt{2}} \sin{(\alpha_\mathrm{down})}
+            =\SI{230}{\volt} \cdot \frac{\SI{22}{\ampere}}{\sqrt{2}}\sin{(\frac{5\pi}{6})}= \SI{5380}{\watt}.
+        \end{split}
+    \end{equation}
+    \autoref{fig:ex06_Complex_Plane_Power} shows the power in the complex plane.
 
+    \input{fig/ex06/sFig_Complex_Plane_Power}
+
+\end{solutionblock}
 % Subtask4
-\subtask{Calculate the fundamental current ratio $g_=\frac{I^\mathrm{(1)}}{I}$ and the power factor $\lambda$ 
+\subtask{Calculate the fundamental current ratio $g=\frac{I^\mathrm{(1)}}{I}$ and the power factor $\lambda$ 
 as a function for the two considered operating points.}
+\begin{solutionblock}
+    The fundamental current ratio results to
+    \begin{equation}
+        g=\frac{\frac{\hat{i}_\mathrm{1a}^\mathrm{(1)}}{\sqrt{2}}}{I_\mathrm{mot}}=\frac{\frac{\SI{22}{\ampere}}{\sqrt{2}}}{\SI{20}{\ampere}}=0.78.
+    \end{equation}
+    The power factor $\lambda$ is calculated by
+    \begin{equation}
+        \begin{split}
+            \lambda_\mathrm{up}&=g \cdot \cos{(\alpha_\mathrm{up})}=0.78  \cdot cos(\frac{\pi}{6})= 0.68. \\
+            \lambda_\mathrm{down}&=g \cdot \cos{(\alpha_\mathrm{down})}=0.78  \cdot cos(\frac{5\pi}{6})= -0.68.
+        \end{split}
+    \end{equation}
+\end{solutionblock}
+
+
+

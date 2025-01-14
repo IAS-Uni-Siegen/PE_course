@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Signal of uT1 for raising load
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{solutionfigure}[htb]
+
+ %   \documentclass{standalone}
+ %   \usepackage{pgfplots}
+ %   \pgfplotsset{compat=1.18} % Kompatibilität für neuere Versionen
+        \centering
+        \begin{tikzpicture}
+            \tikzmath{
+                real \ac, \i2, \ic;
+                \i2 = 1; % load current
+                \ic = 9; % commutation current
+                \ac = 180 - acos(\i2/\ic -1); % firing angle margin for commutation
+            }
+            \begin{axis}[
+                % x/y range adjustment
+                xmin=-6200, xmax=6200,
+                ymin=-1000, ymax=12300,
+                samples=500,
+                axis y line=center,
+                axis x line=middle,
+                extra y ticks=0,
+                % Label text
+                xlabel={$active power/ \SI{}{\kilo\watt}$},,
+                ylabel={$reactive power/ \SI{}{\kilo\watt}$},
+                % Label adjustment
+                x label style={at={(axis description cs:1,0.5)},anchor=west},
+                y label style={at={(axis description cs:-.05,.97)},anchor=south,yshift=0.2cm},
+                width=0.6\textwidth,
+                height=0.3\textwidth,
+                % x-Ticks
+                xtick={6000,4000,2000,0,-2000,-4000,-6000},
+                xticklabels={6,4,2,0,-2,-4,-6},
+                xticklabel style = {anchor=north},
+                % y-Ticks
+                ytick={0,3000,6000,9000,12000},
+                yticklabels={,3,6,9,12},
+                yticklabel style = {anchor=east},
+                % Grid layout
+                grid,
+                %grid style={line width=.1pt, draw=gray!10},
+                %major grid style={line width=.2pt,draw=gray!90},
+                ]
+            \end{axis}
+        \end{tikzpicture}
+        \caption{Power within the complex plane}
+        \label{fig:ex06_Complex_Plane_Power}
+
+\end{solutionfigure}
