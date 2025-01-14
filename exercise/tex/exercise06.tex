@@ -1,27 +1,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Begin exercise %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ex{Controlled Rectifiers}
+\ex{Controlled rectifiers}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 1: M3C converter at a RL-load                     %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \task{M3C converter at a RL-load}
-A controlled three-pulse midpoint circuit feeds an ohmic-inductive load. The load inductance $L$ is infinitely large, such that a pure direct current $I_\mathrm{2}$ is taken from the converter. The load resistance is $R = \SI{5}{\Omega}$. The converter's transformer 
-is connected to the symmetrical three-phase grid with $U_\mathrm{N} = \SI{230}{\volt} $ (effective value of phase voltage) and  $U_\mathrm{N,LL} = \SI{400}{\volt} $ (line-to-line voltage). The secondary side phase voltages point an effective value of 
-$U_\mathrm{1i} = \SI{230}{\volt}, \forall i=\mathrm{a,b,c}$. The thyristors and commutation can be assumed to be ideal.
+A controlled three-pulse midpoint circuit feeds an ohmic-inductive load. The load inductance $L$ is infinitely large such that a pure direct current $I_\mathrm{2}$ is taken from the converter. The load resistance is $R = \SI{5}{\Omega}$. The converter's ideal transformer is connected to the symmetrical three-phase grid with $U_\mathrm{N} = \SI{230}{\volt} $ (effective value of phase voltage) and  $U_\mathrm{N,LL} = \SI{400}{\volt} $ (line-to-line voltage). The secondary side phase voltages point an effective value of 
+$U_{\mathrm{1},i} = \SI{230}{\volt}, \forall i=\mathrm{a,b,c}$. The thyristors and commutation can be assumed to be ideal.
 
 \input{fig/ex06/Fig_M3C_Converter_With_RL_Load.tex}
 
 
 % Subtask1
-\subtask{Calculate the firing angle $\alpha$, such that an active power of $P = \SI{6}{\kilo\watt}$ is delivered to the load. How big is the load current $i_\mathrm{2} = I_\mathrm{2}$?}
+\subtask{Calculate the firing angle $\alpha$ such that an active power of $P = \SI{6}{\kilo\watt}$ is delivered to the load. How big is the resulting load current $i_\mathrm{2}(t) = I_\mathrm{2}$?}
 % Subtask2
 \subtask{Draw the normalized control characteristic curve $\nicefrac{U_\mathrm{2}(\alpha)}{U_\mathrm{2}(\alpha=0)}$ and mark the  operating point $P = \SI{6}{\kilo\watt}$ at $R = \SI{5}{\Omega}$.}
 % Subtask3
 \subtask{Draw the curve of the converter's output voltage $u_\mathrm{2}(t)$ for the calculated control angle $\alpha$, from subtask 6.1.1, within a plot of the three-phase transformer's secondary voltages.}
-\subtask{Calculate the effective value $I^\mathrm{(1)}_\mathrm{1a}$ of the fundamental current component $i^\mathrm{(1)}_\mathrm{1a}(t)$ and draw that fundamental component. How big is the phase shift $\varphi_\mathrm{1a}$ between $u_\mathrm{1a}(t)$ and $i^\mathrm{(1)}_\mathrm{1a}(t)$?}
+\subtask{Calculate the effective value $I^\mathrm{(1)}_\mathrm{1a}$ of the fundamental current component $i^\mathrm{(1)}_\mathrm{1a}(t)$ and add the latter to the previous plot. How big is the phase shift $\varphi_\mathrm{1a}$ between $u_\mathrm{1a}(t)$ and $i^\mathrm{(1)}_\mathrm{1a}(t)$?}
 \subtask{Calculate the fundamental reactive power $Q^\mathrm{(1)}$ drawn by the converter from the grid.}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -40,8 +39,8 @@ In order to generate the necessary torque, the motor absorbs the current $i_\mat
     \centering  % Zentriert die Tabelle
     \begin{tabular}{ll}
         \toprule
-        Input voltages: & three-phase grid $U_\mathrm{1}=\SI{230}{\volt}$ (phase voltage) \\
-                        & $U_\mathrm{1,LL} = \SI{400}{\volt}$ (line-to-line voltage)\\
+        Input voltages ($i=\mathrm{a,b,c}$): & $U_{\mathrm{1},i}=\SI{230}{\volt}$ (phase voltage) \\
+                        & $U_{\mathrm{1,LL},i} = \SI{400}{\volt}$ (line-to-line voltage)\\
         Nom. motor current: & $I_{\mathrm{mot}} = \SI{20}{\ampere}$ \\
         Nom. motor voltage: & $U_\mathrm{mot} = \SI{466}{\volt}$ \\ 
         Grid frequency: & $f= \SI{50}{\hertz}$ \\ 
@@ -53,7 +52,7 @@ In order to generate the necessary torque, the motor absorbs the current $i_\mat
 
 
 % Subtask1
-\subtask{Calculate the firing angle $\alpha_\mathrm{up}$ required for raising and the firing angle $\alpha_\mathrm{down}$ for lowering the load 
+\subtask{Calculate the firing angle $\alpha_\mathrm{up}$ required for lifting and the firing angle $\alpha_\mathrm{down}$ for lowering the load 
 to operate the motor at rated voltage.}
 %solution
 \begin{solutionblock}
@@ -82,11 +81,11 @@ to operate the motor at rated voltage.}
 \subtask{Sketch following signals for the two calculated firing angles $\alpha_\mathrm{up}$ and $\alpha_\mathrm{down}$:
 \begin{itemize}
     \item The output voltage $u_\mathrm{2,p}(t)$ and $u_\mathrm{2,m}(t)$ of the two partial converters (reference point is neutral)
-          and shade the effective voltage-time area for the two cases (raising and lowering load).
-    \item The output voltage $u_\mathrm{2}(t)$ and the mean voltage $\overline{u}_\mathrm{2}$.
-    \item The current $i_\mathrm{1a}(t)$ and it's fundamental $i_\mathrm{1a}^{(1)}(t)$.
-    \item The voltage of thyristor $u_\mathrm{T1}(t)$.
-    \item Indicate which thyristors are conducting during a pulse interval within the sketches (raising and lowering load).
+          and shade the effective voltage-time area for the two cases,
+    \item The output voltage $u_\mathrm{2}(t)$ and the mean voltage $\overline{u}_\mathrm{2}$,
+    \item The current $i_\mathrm{1a}(t)$ and it's fundamental $i_\mathrm{1a}^{(1)}(t)$,
+    \item The voltage of thyristor $u_\mathrm{T1}(t)$,
+    \item Indicate which thyristors are conducting during a pulse interval.
 \end{itemize}  
 }
 \begin{solutionblock}
@@ -171,8 +170,7 @@ and the fundamental apparent power $S^\mathrm{(1)}$ for the two considered opera
 
 \end{solutionblock}
 % Subtask4
-\subtask{Calculate the fundamental current ratio $g=\frac{I^\mathrm{(1)}}{I}$ and the power factor $\lambda$ 
-as a function for the two considered operating points.}
+\subtask{Calculate the fundamental current ratio $g=\frac{I^\mathrm{(1)}}{I}$ and the power factor $\lambda$ for the two considered operating points.}
 \begin{solutionblock}
     The fundamental current ratio results to
     \begin{equation}
