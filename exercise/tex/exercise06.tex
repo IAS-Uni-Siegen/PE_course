@@ -16,13 +16,94 @@ $U_{\mathrm{1},i} = \SI{230}{\volt}, \forall i=\mathrm{a,b,c}$. The thyristors a
 
 % Subtask1
 \subtask{Calculate the firing angle $\alpha$ such that an active power of $P = \SI{6}{\kilo\watt}$ is delivered to the load. How big is the resulting load current $i_\mathrm{2}(t) = I_\mathrm{2}$?}
+    \begin{solutionblock}
+        We can calculate $\bar{u}_\mathrm{2}(\alpha)$ and $I_\mathrm{2}$ from the given active power delivered, $P$, using
+        \begin{equation} 
+            P = \frac{\bar{u}^2_\mathrm{2}(\alpha)}{R} = \bar{u}_\mathrm{2}(\alpha) I_\mathrm{2}.
+            \label{sub6.1.1:eq:Active_power_formula}
+        \end{equation}
+    which would result in 
+        \begin{equation}
+            \bar{u}_\mathrm{2}(\alpha) \approx \SI{173.2}{\volt},\\
+            I_\mathrm{2} \approx \SI{34.6}{\ampere}
+        \end{equation}
+        The average output voltage for an arbitrary $\alpha$ is calculated by
+        \begin{equation}
+            \bar{u}_\mathrm{2}(\alpha) = \frac{3\sqrt{3}}{2\pi}\hat{u}_\mathrm{1}\cos(\alpha)
+            \label{sub6.1.1:eq:avg_voltage_alpha}
+        \end{equation}
+        Where
+        \begin{equation}
+            \hat{u}_\mathrm{1} = \sqrt{2}U_\mathrm{1} = \sqrt{2} * 230 \approx \SI{325.27}{\volt}
+            \label{sub6.1.1:eq:voltage_amplitude}
+    \end{equation}
+    Hence, 
+    Solving \eqref{sub6.1.1:eq:avg_voltage_alpha} with respect to $\alpha$ results in
+        \begin{equation}
+            \alpha = \arccos\left(\frac{ 2\pi\bar{u}_\mathrm{2}(\alpha)}{3\sqrt{3}\hat{u}_\mathrm{1}}\right) \approx \SI{0.871}{\radian}
+            \label{sub6.1.1:eq:calculate_alpha}
+        \end{equation}    
+    
+    \end{solutionblock}
 % Subtask2
 \subtask{Draw the normalized control characteristic curve $\nicefrac{U_\mathrm{2}(\alpha)}{U_\mathrm{2}(\alpha=0)}$ and mark the  operating point $P = \SI{6}{\kilo\watt}$ at $R = \SI{5}{\Omega}$.}
+    \begin{solutionblock}
+        Substituting $\alpha = 0$ in \eqref{sub6.1.1:eq:avg_voltage_alpha} results in
+        \begin{equation}
+            \bar{u}_\mathrm{2}(\alpha=0) = \frac{3\sqrt{3}}{2\pi}\hat{u}_\mathrm{1}
+            \label{sub6.1.1:eq:avg_voltage_zero_alpha}
+        \end{equation}
+        Dividing \eqref{sub6.1.1:eq:avg_voltage_alpha} by \eqref{sub6.1.1:eq:avg_voltage_zero_alpha} leads to  
+        \begin{equation}
+            \frac{ \bar{u}_\mathrm{2}(\alpha)}{\bar{u}_\mathrm{2}(\alpha=0)} = \cos(\alpha)
+            \label{sub6.1.1:eq:voltages_relation}
+        \end{equation}    
+        \input{fig/ex06/Solution_subtask_6_1_2.tex}
+    \end{solutionblock}
 % Subtask3
 \subtask{Draw the curve of the converter's output voltage $u_\mathrm{2}(t)$ for the calculated control angle $\alpha$, from subtask 6.1.1, within a plot of the three-phase transformer's secondary voltages.}
+    \begin{solutionblock}
+        \input{fig/ex06/Solution_subtask_6_1_3.tex}
+    \end{solutionblock}
+% Subtask4
 \subtask{Calculate the effective value $I^\mathrm{(1)}_\mathrm{1a}$ of the fundamental current component $i^\mathrm{(1)}_\mathrm{1a}(t)$ and add the latter to the previous plot. How big is the phase shift $\varphi_\mathrm{1a}$ between $u_\mathrm{1a}(t)$ and $i^\mathrm{(1)}_\mathrm{1a}(t)$?}
-\subtask{Calculate the fundamental reactive power $Q^\mathrm{(1)}$ drawn by the converter from the grid.}
+    \begin{solutionblock}
+        Observing the $i_\mathrm{1a}(\omega t)$ signal in Fig. \ref{sfig:ex06_current_signals_6_1_4a}, one can see that it is an even signal. Hence, we expect that the fundamental component of the Fourier Series
+        would contain only cosine component ($a_1 \neq 0$) and no sine component ($b_1 = 0$). 
+        \input{fig/ex06/Solution_subtask_6_1_4a}\\
+        For simplification, we can position the y-xis in the middle of the conducting period and make use of the period's symmetry. This would simplify the calculations
+        by integrating over one half of the period and then multiply by 2. In this case the integration would be from 0 to $\frac{\pi}{3}$, as one conducting
+        period is equal to $\frac{2\pi}{3}$. Thus, $a_1$ ($\hat{i}^\mathrm{(1)}_\mathrm{1a}$) can be calculated as:
 
+        \begin{equation}
+            a_1 = \hat{i}^\mathrm{(1)}_\mathrm{1a} = \frac{2}{\pi}\int_{0}^{\frac{\pi}{3}}I_\mathrm{2}\cos(\omega t) d\omega t = \left[\frac{2}{\pi} \sin(\omega t)\right]^{\frac{\pi}{3}}_{0} = \frac{1}{\pi}I_\mathrm{2}\sqrt{3}
+            \label{sub6.1.4:eq:calculate_a1}
+        \end{equation}  
+        
+        Then the effective value $I^\mathrm{(1)}_\mathrm{1a}$ is
+            \begin{equation}
+                I^\mathrm{(1)}_\mathrm{1a} = \frac{\hat{i}^\mathrm{(1)}_\mathrm{1a}}{\sqrt{2}} \approx \SI{13.5}{\ampere}
+                \label{sub6.1.4:eq:calculate_I_rms}
+            \end{equation}   
+        
+        Fig. \ref{sfig:ex06_current_signals_6_1_4b}, shows the fundamental component $i^\mathrm{(1)}_\mathrm{1a}(\omega t)$ compared to the input voltage $u_\mathrm{1a}(\omega t)$.
+        \input{fig/ex06/Solution_subtask_6_1_4b.tex}\\
+        The phase shift of $i^\mathrm{(1)}_\mathrm{1a}(\omega t)$ can be calculated by calculating the phase of the peak of the signal, which can be calculated as: 
+        \begin{equation}
+            \varphi_\mathrm{1a} = (\frac{-\pi}{3} + \alpha) + (\frac{2\pi}{3} \div 2) = \frac{-\pi}{3} + \alpha + \frac{\pi}{3} = \alpha   
+        \end{equation}
+        where $\frac{-\pi}{3} + \alpha$ is the start of the conducting period, while $\frac{2\pi}{3} \div 2$ is half of the period of conduction.
+        
+
+    \end{solutionblock}
+% Subtask5
+\subtask{Calculate the fundamental reactive power $Q^\mathrm{(1)}$ drawn by the converter from the grid.}
+    \begin{solutionblock}
+        The fundamental reactive power drawn for one full period $(2\pi)$ can be calculated using
+        \begin{equation}
+            Q^\mathrm{(1)} = 3 U_1 I^\mathrm{(1)}_1 \sin(\alpha)  = 3*230*13.5*\sin(0.871) \approx \SI{7.12}{\kilo \watt} 
+        \end{equation}
+    \end{solutionblock}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: B6C converter at a motor load                   %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
