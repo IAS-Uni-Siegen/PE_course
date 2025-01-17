@@ -3722,21 +3722,23 @@
                 \begin{circuitikz}[]
                     \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-5) coordinate (B)
                     (A) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (E)
-                    to [Tnpn, n=npn1, invert] ++(0,-2) coordinate (C)
-                    to [short,*-] ++(2,0)  
-                    to [short, i=$i_2(t)$, -o] ++(2,0) coordinate (G)
+                    to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
+                    to [short, *-] ++(1,0) to [crossing] ++(2,0)   
+                    to [short, i=$i_2(t)$, -o] ++(1,0) coordinate (G)
                     (C) to [short] ++(0,-1) 
-                    to [diode, l_=$D_1$, invert] ++(0,-2) coordinate (D)
+                    to [Tnpn, n=npn2, invert, bodydiode] ++(0,-2) coordinate (D)
                     (E) to [short, *-] ++(2,0)
-                    to [diode, l_=$D_2$, invert] ++(0,-2)
+                    to [Tnpn, n=npn3, invert, bodydiode] ++(0,-2)
                     to [short] ++(0,-1) coordinate (F)
-                    to [Tnpn, n=npn2, invert] ++(0,-2) 
+                    to [Tnpn, n=npn4, invert, bodydiode] ++(0,-2) 
                     to [short, -*] ++(-2,0)
                     to [short, -o] (B)
                     (F) to [short,*-o] ++(2,0) coordinate (H)
                     (G) to [open, o-o, v = $\hspace{1.9cm}u_2(t)$, voltage = straight] (H);
                     \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
                     \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+                    \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
+                    \draw let \p1 = (npn4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
                 \end{circuitikz}
                 \caption{DC-DC converter realization for both voltage polarities (w/o filter components, aka \hl{asymmetrical half-bridge})}
                 \label{fig:DCDC-switch-two-voltage-polarities}
