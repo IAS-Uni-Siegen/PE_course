@@ -14,11 +14,11 @@
                 % draw the neutral connection
                 (0,0) to [short, -*] ++(0,-1.5) to [short] ++(0,-1.5)
                 % draw first phase ua
-                (0,0) to [sinusoidal voltage source, v^<=$u_{1\mathrm{a}}$] ++(1.5, 0) to [short, i=$i_{1\mathrm{a}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (A)
+                (0,0) to [sinusoidal voltage source, v^<=$u_{1\mathrm{a}}(t)$] ++(1.5, 0) to [short, i=$i_{1\mathrm{a}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (A)
                 % draw second phase ub
-                (0,-1*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{b}}$] ++(1.5, 0) to [short, i=$i_{1\mathrm{b}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (B)
+                (0,-1*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{b}}(t)$] ++(1.5, 0) to [short, i=$i_{1\mathrm{b}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (B)
                 % draw third phase uc
-                (0,-2*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{c}}$] ++(1.5,0) to [short, i=$i_{1\mathrm{c}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (C)
+                (0,-2*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{c}}(t)$] ++(1.5,0) to [short, i=$i_{1\mathrm{c}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (C)
                 %thyristor bridge
                 % Add thyristor T1
                 (\h1d,0) to [thyristor, l=$T_1$, name=D1] ++(0,1.25) coordinate (D1top)
@@ -43,7 +43,11 @@
                 % Add inductor L and motor current
                 (jL1) to [L, l=$L$, name = L] ++(2,0) to [short,i=$\overline{i}_\mathrm{mot}$] ++(0.5,0)  coordinate (jL2)
                 % Add DC-motor and motor voltage
-                (jL2) to [R, l=$R$, name = R, v_>=$\overline{u}_\mathrm{mot}$, voltage = straight]  (D6bot -| \tikztostart) to (D6bot)
+                (jL2) ++ (0,-3) node[elmech](motor){M}
+                (jL2) to (motor.north)
+                (motor.bottom) to (D6bot -| \tikztostart) to (D6bot)
+                % (jL2) to [R, l=$R$, name = R, v_>=$\overline{u}_\mathrm{mot}$, voltage = straight]  (D6bot -| \tikztostart) to (D6bot)
+
                 % Add wire T2-T3-T6
                 (D2bot) to [short, -*] (D4bot) to [short, -*] (D6bot)
                 % Add voltage arrow u2(t) between Dtop and Dbot
@@ -60,7 +64,7 @@
                 (-0.5,-2*\vd) to [open, v^>=$u_{1\mathrm{ca}}(t)\hspace{0.75cm}$, voltage = straight] (-0.5,0);
             \end{circuitikz}
         \end{center}
-        \caption{B6C converter at a motor load}
+        \caption{B6C converter at a motor load.}
         \label{fig:B6C_topology_WithMotor}
     \end{figure}
 

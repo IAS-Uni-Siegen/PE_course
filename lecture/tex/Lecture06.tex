@@ -1,0 +1,114 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Transistor-based AC/DC converters %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Transistor-based AC/DC converters}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Extending AC/DC converter to four quadrant operation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Extending AC/DC converters to four quadrant operation}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			
+			\hl{Up to now}:
+            \begin{itemize}
+                \item Diode-based converters
+                \begin{itemize}
+                    \item Rectification only
+                    \item Single quadrant operation
+                \end{itemize}
+                \item Thyristor-based converters
+                \begin{itemize}
+                    \item Rectification and inversion
+                    \item Two quadrant operation
+                \end{itemize}
+            \end{itemize}
+            \vspace{1em}
+            \hl{Extension in this section:}
+            \begin{itemize}
+                \item Transistor-based converters
+                \begin{itemize}
+                    \item Rectification and inversion
+                    \item Four quadrant operation
+                \end{itemize}
+            \end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\centering
+				\begin{tikzpicture}
+                    \begin{scope}[]
+                        \fill[signalgreen, opacity=0.3] (0,0) -- (2,0) -- (2,2) -- (0,2) -- cycle;
+                        \fill[signalgreen, opacity=0.3] (0,0) -- (2,0) -- (2,-2) -- (0,-2) -- cycle;
+                    \end{scope}
+                    \begin{scope}[]
+                        \fill[shadecolor, opacity=0.3] (0,0) -- (-2,0) -- (-2,2) -- (0,2) -- cycle;
+                        \fill[shadecolor, opacity=0.3] (0,0) -- (-2,0) -- (-2,-2) -- (0,-2) -- cycle;
+                    \end{scope}
+                    \draw[<->] (-2,0) -- (2,0) node[anchor=west] {$i$};
+                    \draw[<->] (0,-2) -- (0,2) node[anchor=south] {$u$};
+                    \node[anchor=center, align = center] at (1.0,1.0) {$\mathrm{I}$\\$P \geq 0$};
+                    \node[anchor=center, align = center] at (-1.0,1.0) {$\mathrm{II}$\\$P \leq 0$};
+                    \node[anchor=center, align = center] at (-1.0,-1.0) {$\mathrm{III}$\\$P \geq 0$};
+                    \node[anchor=center, align = center] at (1.0,-1.0) {$\mathrm{IV}$\\$P \leq 0$};
+                    \draw[thin] (1.75,0.75) to (2.4,0.25) node[anchor=north west] {Thyristors};
+                    \draw[thin] (1.75,-0.75) to (2.4,-0.25) node[anchor=south west] {};
+                    \draw[thin] (1.75,1.75) to (2.4,2.25) node[anchor=west] {Diodes};
+					\node[anchor = center, xshift = 1mm] at (0, 3.5) {
+						\begin{circuitikz}
+							\node[twoportsplitshape, scale = 1.5](tp){};
+							\draw (tp.left up) to [short, -o, i_<= $i_1$] ++(-0.75,0) coordinate(tpin1)
+							(tp.left down) to [short, -o] ++(-0.75,0) coordinate(tpin2);
+							\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{$u_1$} ([xshift=-0.9cm]tp.left down);
+							\draw (tp.right up) to [short, -o, i= $i_2$] ++(0.75,0) coordinate(tpout1)
+							(tp.right down) to [short, -o] ++(+0.75,0) coordinate(tpout2);
+							\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_2$} ([xshift=1cm]tp.right down);
+						\end{circuitikz}	
+					} ;
+				\end{tikzpicture}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Single-phase bridge converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Single-phase AC/DC bridge converter} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M1C rectifier %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Idealized switch representation}
+    \begin{columns}
+        \begin{column}{0.4\textwidth}
+            
+        \end{column}
+        \begin{column}{0.6\textwidth}
+            \begin{figure}
+                \begin{circuitikz}
+                    \draw (0,0) node[cute spdt mid arrow, xscale=-1] (Sw1) {};
+                    \draw (2,-1.5) node[cute spdt mid arrow, xscale=-1] (Sw2) {};
+                    \draw (Sw2.in) to [short, -o] ++(1,0) coordinate (out2);
+                    \draw (Sw1.in) to [short] ++(1.75,0) to [short, -o, i=$i_2(t)$] (Sw1.in -| out2) coordinate (out1);
+                    \draw (out1) to [open, v^=$\hspace{0.5cm}u_2(t)$, voltage = straight] (out2);
+                    \draw (Sw1-out 1.n) to [short, -*] ++(0,0.5) coordinate (int1);
+                    \draw (Sw2-out 2.s) to [short] ++(0,-0.5) coordinate (int2);
+                    \draw (int2) to [short] (int2 -| Sw1-out 2.s) coordinate (int3) to [short, *-] (Sw1-out 2.s);
+                    \draw node[crossingshape, name=x1, rotate=-90] at (out1 -| Sw2-out 1.n) {};
+                    \draw (x1.west) to [short] (int1 -| x1.west) to [short] (int1);
+                    \draw (x1.east) to [short] (Sw2-out 1.n);
+                    \draw (int1) to [short] ++(-1,0) to [short, i_<=$i_1(t)$, -o] ++(-1,0) coordinate (in1);
+                    \draw (int3) to [short, -o] ++(-2,0) coordinate (in2);
+                    \draw (in1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (in2);
+                    \draw node[anchor = east, xshift=-0.3cm] at (Sw1) {$s_1(t)$};
+                    \draw node[anchor = east, xshift=-0.3cm] at (Sw2) {$s_2(t)$};
+                \end{circuitikz}
+                \caption{Idealized switch representation of a single-phase AC/DC bridge converter}
+                \label{fig:idealized_switch_single_phase_bridge_converter}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
