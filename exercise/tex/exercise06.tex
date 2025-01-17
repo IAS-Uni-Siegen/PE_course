@@ -137,15 +137,15 @@ In order to generate the necessary torque, the motor absorbs the current $i_\mat
 to operate the motor at rated voltage.}
 %solution
 \begin{solutionblock}
-    The maximum value of $u_\mathrm{1,LL}(t)$ is calculated by
-    \begin{equation} 
-        \hat{u}_\mathrm{1,LL}=\sqrt{2} \sqrt{3} \cdot U_\mathrm{1}= \sqrt{2} \sqrt{3} \cdot \SI{230}{\volt}=\SI{563}{\volt}.
-        \label{eq:ex06t2_u1n_max}
-    \end{equation}
     The voltage $\overline{u}_\mathrm{2}$ is calculated by
     \begin{equation} 
         \overline{u}_\mathrm{2} = \hat{u}_\mathrm{1,LL} \frac{\pi}{p}\sin(\frac{p}{\pi}) \cos(\alpha).
         \label{eq:ex06t2_u2_gen}
+    \end{equation}
+    $p=6$ for the B6C-topology. The maximum value of $u_\mathrm{1,LL}(t)$ is calculated by
+    \begin{equation} 
+        \hat{u}_\mathrm{1,LL}=\sqrt{2} \sqrt{3} \cdot U_\mathrm{1}= \sqrt{2} \sqrt{3} \cdot \SI{230}{\volt}=\SI{563}{\volt}.
+        \label{eq:ex06t2_u1n_max}
     \end{equation}
     The voltage $\overline{u}_\mathrm{2}$ corresponds to $U_\mathrm{mot}$. Solving \eqref{eq:ex06t2_u2_gen} with respect to $\alpha$ results in
     \begin{equation} 
@@ -171,12 +171,11 @@ to operate the motor at rated voltage.}
 }
 \begin{solutionblock}
     In \autoref{sfig:ex06_Voltage_u2pm_Up} the output voltages $\overline{u}_\mathrm{2,p}=\SI{233}{\volt}$ and $\overline{u}_\mathrm{2,m}=\SI{-233}{\volt}$
-    are entered as dashed blue lines. The conducting state of the thyristors are entered.
+    are entered as dashed blue lines. The ranges in which the respective thyristor conducts are marked with $\mathrm{T_x}$.
     
     \input{fig/ex06/sFig_VoltageU2pmUp}
 
     In \autoref{sfig:ex06_Voltage_u2pm_Down} the output voltages are $\overline{u}_\mathrm{2,p}=\SI{-233}{\volt}$ and $\overline{u}_\mathrm{2,m}=\SI{233}{\volt}$.
-    Also here the conducting state of the thyristors are entered.
     
     \input{fig/ex06/sFig_VoltageU2pmDown}
 
@@ -260,8 +259,8 @@ and the fundamental apparent power $S^\mathrm{(1)}$ for the two considered opera
     The power factor $\lambda$ is calculated by
     \begin{equation}
         \begin{split}
-            \lambda_\mathrm{up}&=g \cdot \cos{(\alpha_\mathrm{up})}=0.78  \cdot cos(\frac{\pi}{6})= 0.68. \\
-            \lambda_\mathrm{down}&=g \cdot \cos{(\alpha_\mathrm{down})}=0.78  \cdot cos(\frac{5\pi}{6})= -0.68.
+            \lambda_\mathrm{up}&=g \cdot \cos{(\alpha_\mathrm{up})}=0.78  \cdot \cos(\frac{\pi}{6})= 0.68. \\
+            \lambda_\mathrm{down}&=g \cdot \cos{(\alpha_\mathrm{down})}=0.78  \cdot \cos(\frac{5\pi}{6})= -0.68.
         \end{split}
     \end{equation}
 \end{solutionblock}
