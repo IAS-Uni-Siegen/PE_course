@@ -226,7 +226,7 @@ A variant of a PFC rectifier circuit is shown in \autoref{fig:Boost converter wi
     \begin{tabular}{llll}
         \toprule
         
-        Input voltage: &  $u_{\mathrm{1}}(t) = \hat U_{\mathrm{1}} \sin(\omega t) = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(\omega t)$ & Output voltage: & $u_{\mathrm{2}}(t) = \SI{400}{\volt}$ \\ 
+        Input voltage: &  $u_{\mathrm{1}}(t) = \hat u_{\mathrm{1}} \sin(\omega t) = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(\omega t)$ & Output voltage: & $u_{\mathrm{2}}(t) = \SI{400}{\volt}$ \\ 
         Output power: & $P_\mathrm{2} = \SI{4}{\kilo\watt}$  & Grid frequency: & $ f =  \SI{50}{\hertz}$ \\ 
         Inductance: & $L = \SI{570}{\micro\henry}$
          & Switching frequency: & $f_\mathrm{s} = \SI{20}{\kilo\hertz}$\\
@@ -244,7 +244,7 @@ A variant of a PFC rectifier circuit is shown in \autoref{fig:Boost converter wi
     \end{equation}
 The average voltage over the inductance for a (quasi) steady-state operation is zero $U_{\mathrm{L}} = \SI{0}{\volt}$: 
     \begin{equation}
-    0 = (d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{2}}))f_\mathrm{T}. \label{eq:ex05ratio2.2}
+    0 = (d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{2}}))f_\mathrm{s}. \label{eq:ex05ratio2.2}
     \end{equation}   
 
     Rewriting \eqref{eq:ex05ratio2.2} delivers  the voltage transformation ratio:
@@ -257,11 +257,11 @@ The average voltage over the inductance for a (quasi) steady-state operation is 
 \begin{solutionblock}
     Using $M = \frac{U_{\mathrm{2}}}{\hat u_{\mathrm{1}}}$, the transformation ratio is given with:
     \begin{equation}
-        m(t) = \frac{U_{\mathrm{2}}}{u'(t)}=\frac{U_{\mathrm{2}}}{\hat u_{\mathrm{1}} \sin(\omega t)} = M \frac{1}{\sin(\omega t)}.
+        m(t) = \frac{U_{\mathrm{2}}}{ u_{\mathrm{1}}(t)}=\frac{U_{\mathrm{2}}}{\hat u_{\mathrm{1}} \sin(\omega t)} = M \frac{1}{\sin(\omega t)}.
     \end{equation}
    If the transistor $T$ is conducting, the duty cycle $d(t)$ is derived from \eqref{eq:ex05ratio_m(t)} as:
 \begin{equation}
-    d(t) = 1-\frac{1}{m(t)} = 1- \frac{u'(t)}{U_{\mathrm{2}}}=1- \frac{\hat u_{\mathrm{1}}\sin(\omega t)}{U_{\mathrm{2}}} = 1 -\frac{1}{M} \sin(\omega t).
+    d(t) = 1-\frac{1}{m(t)} = 1- \frac{u_{\mathrm{1}}(t)}{U_{\mathrm{2}}}=1- \frac{\hat u_{\mathrm{1}}\sin(\omega t)}{U_{\mathrm{2}}} = 1 -\frac{1}{M} \sin(\omega t).
 \end{equation}
 If the diode $D_{\mathrm{5}}$ is conducting, the duty cycle $1-d(t)$ is derived from \eqref{eq:ex05ratio_m(t)} as:
 \begin{equation}
@@ -281,7 +281,7 @@ Note: Consider the conductive state of $T$ and set the voltage across the induct
     \begin{equation}
         \frac{\Delta i'(t)}{\Delta t} = \frac{U_{\mathrm{L}}}{L}.
     \end{equation}
-    When transistor $T$ is conducting it applies $U_{\mathrm{L}} = u'(t) = \hat u_{\mathrm{1}} \sin(\omega t)$.
+    When transistor $T$ is conducting it applies $U_{\mathrm{L}} = u_{\mathrm{1}}(t) = \hat u_{\mathrm{1}} \sin(\omega t)$.
     This means for $\Delta i'(t)$:
 \begin{equation}
     \Delta i'(t) = \frac{ U_{\mathrm{L}} \Delta t}{L} = \frac{\hat u_{\mathrm{1}} \sin(\omega t) d(t) T_{\mathrm{s}}}{L} = \Delta i'_{\mathrm{1}}(t).
@@ -344,28 +344,28 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
     \end{equation}
     The first interval is from $0 < t < T_\mathrm{1,off} = \SI{480}{\micro\s}$ for conducting transistor $T$. Inserting into \eqref{eq:ex054currenti'1} used with the upper and lower limit leads to:
     \begin{equation}
-        i'(T_\mathrm{1,off}) = \frac{\hat u_\mathrm{1}}{L \omega}(1- \cos(\omega T_\mathrm{1,off})) = \frac{\SI{400}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (1-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{480}{\micro\s})) = \SI{2.35}{\ampere}.
+        i'(T_\mathrm{1,off}) = \frac{\hat u_\mathrm{1}}{L \omega}(1- \cos(\omega T_\mathrm{1,off})) = \frac{\sqrt{2}\cdot\SI{230}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (1-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{480}{\micro\s})) = \SI{2.35}{\ampere}.
     \end{equation}
     For the interval $T_\mathrm{1,off} < t < T_\mathrm{1,on} = \SI{500}{\micro\s}$ in which the diode $D_\mathrm{5}$ conducts, the voltage $U_\mathrm{L,1}$ is first determined as:
     \begin{equation}
-        U_\mathrm{L,1} = u'(t) - U_\mathrm{2}= \hat u_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{20}{\micro\s}) - \SI{400}{\volt} = -\SI{350}{\volt}.
+        U_\mathrm{L,1} = u_\mathrm{1}(t) - U_\mathrm{2}= \hat u_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{20}{\micro\s}) - \SI{400}{\volt} = -\SI{350}{\volt}.
     \end{equation}
     This voltage value  $U_\mathrm{L,1}$ is used to calculate the current  $i'(T_\mathrm{1,on})$ as:
     \begin{equation}
         i'(T_\mathrm{1,on}) = i'(T_\mathrm{1,off}) -\frac{ U_\mathrm{L,1}}{L}(T_\mathrm{1,on}-T_\mathrm{1,off}) = \SI{2.35}{\ampere} -\frac{\SI{350}{\volt}}{\SI{5}{\milli\henry}}\cdot (\SI{500}{\micro\s}-\SI{480}{\micro\s}) = \SI{0.95}{\ampere}.
     \end{equation}
-     The second interval  $T_\mathrm{2,on} < t < T_\mathrm{2,off}  = \SI{935}{\micro\s}$ in which the transistor $T$ conducts, have to be inserted  into \eqref{eq:ex054currenti'1} with the upper and lower limit. This leads to:
+     The second interval  $T_\mathrm{1,on} < t < T_\mathrm{2,off}  = \SI{935}{\micro\s}$ in which the transistor $T$ conducts, have to be inserted  into \eqref{eq:ex054currenti'1} with the upper and lower limit. This leads to:
      \begin{equation}
-        i'(T_\mathrm{2,off}) = \frac{\hat u_\mathrm{1}}{L \omega}(\cos (\omega T_\mathrm{2,on})- \cos(\omega T_\mathrm{2,off}))+ i'(T_\mathrm{1,on}).
+        i'(T_\mathrm{2,off}) = \frac{\hat u_\mathrm{1}}{L \omega}(\cos (\omega T_\mathrm{1,on})- \cos(\omega T_\mathrm{2,off}))+ i'(T_\mathrm{1,on}).
     \end{equation}
     With values:
     \begin{equation}
-        i'(T_\mathrm{2,off}) = \frac{\SI{400}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (\cos(2\pi \cdot \SI{50}{\hertz}\cdot \SI{1008}{\micro\s})-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{935}{\micro\s})) + \SI{0.95}{\ampere}= \SI{7.27}{\ampere}.
+        i'(T_\mathrm{2,off}) = \frac{\sqrt{2}\cdot\SI{230}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (\cos(2\pi \cdot \SI{50}{\hertz}\cdot \SI{500}{\micro\s})-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{935}{\micro\s})) + \SI{0.95}{\ampere}= \SI{7.27}{\ampere}.
      \end{equation}
 
      For the second interval $T_\mathrm{2,off} < t < T_\mathrm{2,on} = \SI{1008}{\micro\s}$ in which the diode $D_\mathrm{5}$ conducts, the voltage $U_\mathrm{L.2}$ is first determined as:
      \begin{equation}
-        U_\mathrm{L,2} = u'(t) - U_\mathrm{2}= \hat u_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{73}{\micro\s}) - \SI{400}{\volt} = \SI{306}{\volt}.
+        U_\mathrm{L,2} = u_\mathrm{1}(t) - U_\mathrm{2}= \hat u_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{73}{\micro\s}) - \SI{400}{\volt} = \SI{306}{\volt}.
     \end{equation}
     This voltage value  $U_\mathrm{L,2}$ is used to calculate the current  $i'(T_\mathrm{2,on})$ as:
     \begin{equation}
@@ -418,11 +418,11 @@ Note: assume an idealized lossless converter, with the assumption $u_2(t)\approx
     \end{equation}
     $u_\mathrm{C}$ is equal to $ \hat u_\mathrm{C} \sin(2\omega t)$ from this follows for \eqref{eq:ex056voltageuc}:
     \begin{equation}
-        \hat u_\mathrm{C} = \frac{P_\mathrm{2}}{2\omega C U_\mathrm{2}}.
+       \Delta u_\mathrm{2}= \hat u_\mathrm{C} = \frac{P_\mathrm{2}}{2\omega C U_\mathrm{2}}.
     \end{equation}
     And now the capacitance can be calculate with $\Delta u_{\mathrm{2}}<0.05  \hat u_{\mathrm{2}}$ as:
     \begin{equation}
-        C = \frac{P_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}  \hat u_\mathrm{C} }= \frac{U_\mathrm{2}I_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}\  0.05 U_\mathrm{2}} = \frac{\SI{400}{\volt}\cdot \SI{10}{\ampere}}{4 \pi \cdot\SI{50}{\hertz}\cdot\SI{400}{\volt}\cdot 0.05 \cdot \SI{400}{\volt}} = \SI{796}{\micro\farad}.  
+        C = \frac{P_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}  \Delta u_\mathrm{2} }= \frac{U_\mathrm{2}I_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}\  0.05 U_\mathrm{2}} = \frac{\SI{400}{\volt}\cdot \SI{10}{\ampere}}{4 \pi \cdot\SI{50}{\hertz}\cdot\SI{400}{\volt}\cdot 0.05 \cdot \SI{400}{\volt}} = \SI{796}{\micro\farad}.  
     \end{equation}
     \end{solutionblock}
 \subtask{Calculate the RMS value of the current through the capacitor $I_{\mathrm{C}}$.
@@ -433,7 +433,7 @@ Note: the mean value of the current through the capacitor is $\overline i_{\math
 \end{equation}
 Using first biome:
 \begin{equation}
-    i^2_\mathrm{2}(t)= (i_\mathrm{C}(t)+i_\mathrm{R}(t))^2 = i^2_\mathrm{C}(t)+2i_\mathrm{R}(t) i_\mathrm{C}(t)+ i^2_\mathrm{2}(t).
+    i^2_\mathrm{2}(t)= (i_\mathrm{C}(t)+i_\mathrm{R}(t))^2 = i^2_\mathrm{C}(t)+2i_\mathrm{R}(t) i_\mathrm{C}(t)+ i^2_\mathrm{R}(t).
 \end{equation}
 Calculate RMS value:
 \begin{equation}
@@ -449,7 +449,7 @@ Finally, \eqref{eq:ex056RMSIc} must be converted to $I^2_\mathrm{C}(t)$:
 \end{equation}
 
 \end{solutionblock}
-\subtask{The current carrying capacity of the capacitor is $\frac{\SI{10}{\ampere}}{\SI{1}{\milli\farad}}$. How large must its capacitance be selected to stay below this threshold? Is the permissible output voltage fluctuation or is it the current carrying capacity that determines the capacitance?}
+\subtask{The current carrying capacity of the capacitor is $\frac{\SI{10}{\ampere}}{\SI{1}{\milli\farad}}$. How large must its capacitance be selected to stay below this threshold with $I_\mathrm{C}=\SI{10.44}{\ampere}$? Is the permissible output voltage fluctuation or is it the current carrying capacity that determines the capacitance?}
 \begin{solutionblock}
     Calculation of the capacitance $C$:
     \begin{equation}
@@ -471,5 +471,5 @@ Finally, \eqref{eq:ex056RMSIc} must be converted to $I^2_\mathrm{C}(t)$:
     \begin{equation}
         I_{\mathrm{D,1-4}} = \sqrt{\frac{\hat{i}^2_{\mathrm{1}}}{2\pi}\frac{\pi}{2}} = \frac{\hat{i}^2_{\mathrm{1}}}{2}.
     \end{equation}
-\end{solutionblock}
-%\input{fig/ex05/Fig_Current_Courses.tex}
+ \end{solutionblock}
+% \input{fig/ex05/Fig_Current_Courses.tex}
