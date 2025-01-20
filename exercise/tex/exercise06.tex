@@ -7,7 +7,7 @@
 %% Task 1: M3C converter at a RL-load                     %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\task{M3C converter at a RL-load}
+\task{M3C converter at an RL-load}
 A controlled three-pulse midpoint circuit feeds an ohmic-inductive load. The load inductance $L$ is infinitely large such that a pure direct current $I_\mathrm{2}$ is taken from the converter. The load resistance is $R = \SI{5}{\Omega}$. The converter's ideal transformer is connected to the symmetrical three-phase grid with $U_\mathrm{N} = \SI{230}{\volt} $ (effective value of phase voltage) and  $U_\mathrm{N,LL} = \SI{400}{\volt} $ (line-to-line voltage). The secondary side phase voltages point an effective value of 
 $U_{\mathrm{1},i} = \SI{230}{\volt}, \forall i=\mathrm{a,b,c}$. The thyristors and commutation can be assumed to be ideal.
 
@@ -19,28 +19,28 @@ $U_{\mathrm{1},i} = \SI{230}{\volt}, \forall i=\mathrm{a,b,c}$. The thyristors a
     \begin{solutionblock}
         We can calculate $\bar{u}_\mathrm{2}(\alpha)$ and $I_\mathrm{2}$ from the given active power delivered, $P$, using
         \begin{equation} 
-            P = \frac{\bar{u}^2_\mathrm{2}(\alpha)}{R} = \bar{u}_\mathrm{2}(\alpha) I_\mathrm{2}.
+            P = \frac{\bar{u}^2_\mathrm{2}(\alpha)}{R} = \bar{u}_\mathrm{2}(\alpha) I_\mathrm{2},
             \label{sub6.1.1:eq:Active_power_formula}
         \end{equation}
     which would result in 
         \begin{equation}
             \bar{u}_\mathrm{2}(\alpha) \approx \SI{173.2}{\volt},\\
-            I_\mathrm{2} \approx \SI{34.6}{\ampere}
+            I_\mathrm{2} \approx \SI{34.6}{\ampere}.
         \end{equation}
         The average output voltage for an arbitrary $\alpha$ is calculated by
         \begin{equation}
-            \bar{u}_\mathrm{2}(\alpha) = \frac{3\sqrt{3}}{2\pi}\hat{u}_\mathrm{1}\cos(\alpha)
+            \bar{u}_\mathrm{2}(\alpha) = \frac{3\sqrt{3}}{2\pi}\hat{u}_\mathrm{1}\cos(\alpha),
             \label{sub6.1.1:eq:avg_voltage_alpha}
         \end{equation}
-        Where
+        where
         \begin{equation}
-            \hat{u}_\mathrm{1} = \sqrt{2}U_\mathrm{1} = \sqrt{2} * 230 \approx \SI{325.27}{\volt}
+            \hat{u}_\mathrm{1} = \sqrt{2}U_\mathrm{1} = \sqrt{2} 230 \approx \SI{325.27}{\volt}.
             \label{sub6.1.1:eq:voltage_amplitude}
     \end{equation}
     Hence, 
-    Solving \eqref{sub6.1.1:eq:avg_voltage_alpha} with respect to $\alpha$ results in
+    solving \eqref{sub6.1.1:eq:avg_voltage_alpha} with respect to $\alpha$ results in
         \begin{equation}
-            \alpha = \arccos\left(\frac{ 2\pi\bar{u}_\mathrm{2}(\alpha)}{3\sqrt{3}\hat{u}_\mathrm{1}}\right) \approx \SI{0.871}{\radian}
+            \alpha = \arccos\left(\frac{ 2\pi\bar{u}_\mathrm{2}(\alpha)}{3\sqrt{3}\hat{u}_\mathrm{1}}\right) \approx \SI{0.871}{\radian}.
             \label{sub6.1.1:eq:calculate_alpha}
         \end{equation}    
     
@@ -50,12 +50,12 @@ $U_{\mathrm{1},i} = \SI{230}{\volt}, \forall i=\mathrm{a,b,c}$. The thyristors a
     \begin{solutionblock}
         Substituting $\alpha = 0$ in \eqref{sub6.1.1:eq:avg_voltage_alpha} results in
         \begin{equation}
-            \bar{u}_\mathrm{2}(\alpha=0) = \frac{3\sqrt{3}}{2\pi}\hat{u}_\mathrm{1}
+            \bar{u}_\mathrm{2}(\alpha=0) = \frac{3\sqrt{3}}{2\pi}\hat{u}_\mathrm{1}.
             \label{sub6.1.1:eq:avg_voltage_zero_alpha}
         \end{equation}
         Dividing \eqref{sub6.1.1:eq:avg_voltage_alpha} by \eqref{sub6.1.1:eq:avg_voltage_zero_alpha} leads to  
         \begin{equation}
-            \frac{ \bar{u}_\mathrm{2}(\alpha)}{\bar{u}_\mathrm{2}(\alpha=0)} = \cos(\alpha)
+            \frac{ \bar{u}_\mathrm{2}(\alpha)}{\bar{u}_\mathrm{2}(\alpha=0)} = \cos(\alpha).
             \label{sub6.1.1:eq:voltages_relation}
         \end{equation}    
         \input{fig/ex06/Solution_subtask_6_1_2.tex}
@@ -76,23 +76,23 @@ $U_{\mathrm{1},i} = \SI{230}{\volt}, \forall i=\mathrm{a,b,c}$. The thyristors a
         period is equal to $\frac{2\pi}{3}$. Thus, $a_1$ ($\hat{i}^\mathrm{(1)}_\mathrm{1a}$) can be calculated as:
 
         \begin{equation}
-            a_1 = \hat{i}^\mathrm{(1)}_\mathrm{1a} = \frac{2}{\pi}\int_{0}^{\frac{\pi}{3}}I_\mathrm{2}\cos(\omega t) d\omega t = \left[\frac{2}{\pi} \sin(\omega t)\right]^{\frac{\pi}{3}}_{0} = \frac{1}{\pi}I_\mathrm{2}\sqrt{3}
+            a_1 = \hat{i}^\mathrm{(1)}_\mathrm{1a} = \frac{2}{\pi}\int_{0}^{\frac{\pi}{3}}I_\mathrm{2}\cos(\omega t) d\omega t = \left[\frac{2}{\pi} \sin(\omega t)\right]^{\frac{\pi}{3}}_{0} = \frac{1}{\pi}I_\mathrm{2}\sqrt{3}.
             \label{sub6.1.4:eq:calculate_a1}
         \end{equation}  
         
         Then the effective value $I^\mathrm{(1)}_\mathrm{1a}$ is
             \begin{equation}
-                I^\mathrm{(1)}_\mathrm{1a} = \frac{\hat{i}^\mathrm{(1)}_\mathrm{1a}}{\sqrt{2}} \approx \SI{13.5}{\ampere}
+                I^\mathrm{(1)}_\mathrm{1a} = \frac{\hat{i}^\mathrm{(1)}_\mathrm{1a}}{\sqrt{2}} \approx \SI{13.5}{\ampere}.
                 \label{sub6.1.4:eq:calculate_I_rms}
             \end{equation}   
         
-        Fig. \ref{sfig:ex06_current_signals_6_1_4b}, shows the fundamental component $i^\mathrm{(1)}_\mathrm{1a}(\omega t)$ compared to the input voltage $u_\mathrm{1a}(\omega t)$.
+        Fig. \ref{sfig:ex06_current_signals_6_1_4b} shows the fundamental component $i^\mathrm{(1)}_\mathrm{1a}(\omega t)$ compared to the input voltage $u_\mathrm{1a}(\omega t)$.
         \input{fig/ex06/Solution_subtask_6_1_4b.tex}\\
         The phase shift of $i^\mathrm{(1)}_\mathrm{1a}(\omega t)$ can be calculated by calculating the phase of the peak of the signal, which can be calculated as: 
         \begin{equation}
-            \varphi_\mathrm{1a} = (\frac{-\pi}{3} + \alpha) + (\frac{2\pi}{3} \div 2) = \frac{-\pi}{3} + \alpha + \frac{\pi}{3} = \alpha   
+            \varphi_\mathrm{1a} = (-\frac{\pi}{3} + \alpha) + (\frac{2\pi}{3} \cdot \frac{1}{2}) = -\frac{\pi}{3} + \alpha + \frac{\pi}{3} = \alpha,   
         \end{equation}
-        where $\frac{-\pi}{3} + \alpha$ is the start of the conducting period, while $\frac{2\pi}{3} \div 2$ is half of the period of conduction.
+        where -$\frac{\pi}{3} + \alpha$ is the start of the conducting period, while $\frac{2\pi}{3} \cdot \frac{1}{2}$ is half of the period of conduction.
         
 
     \end{solutionblock}
@@ -101,7 +101,7 @@ $U_{\mathrm{1},i} = \SI{230}{\volt}, \forall i=\mathrm{a,b,c}$. The thyristors a
     \begin{solutionblock}
         The fundamental reactive power drawn for one full period $(2\pi)$ can be calculated using
         \begin{equation}
-            Q^\mathrm{(1)} = 3 U_1 I^\mathrm{(1)}_1 \sin(\alpha)  = 3*230*13.5*\sin(0.871) \approx \SI{7.12}{\kilo \watt} 
+            Q^\mathrm{(1)} = 3 U_1 I^\mathrm{(1)}_1 \sin(\alpha)  = 3 \cdot 230 \cdot 13.5 \cdot \sin(0.871) \approx \SI{7.12}{\kilo \volt \ampere}. 
         \end{equation}
     \end{solutionblock}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -137,23 +137,26 @@ In order to generate the necessary torque, the motor absorbs the current $i_\mat
 to operate the motor at rated voltage.}
 %solution
 \begin{solutionblock}
-    The voltage $\overline{u}_\mathrm{2}$ is calculated by
+    The average voltage $\overline{u}_\mathrm{2}$ is calculated by
     \begin{equation} 
         \overline{u}_\mathrm{2} = \hat{u}_\mathrm{1,LL} \frac{\pi}{p}\sin(\frac{p}{\pi}) \cos(\alpha).
         \label{eq:ex06t2_u2_gen}
     \end{equation}
-    $p=6$ for the B6C-topology. The maximum value of $u_\mathrm{1,LL}(t)$ is calculated by
+    In case of B6C-topology $p$ is equal to 6. The maximum value of $u_\mathrm{1,LL}(t)$ is calculated by
     \begin{equation} 
         \hat{u}_\mathrm{1,LL}=\sqrt{2} \sqrt{3} \cdot U_\mathrm{1}= \sqrt{2} \sqrt{3} \cdot \SI{230}{\volt}=\SI{563}{\volt}.
         \label{eq:ex06t2_u1n_max}
     \end{equation}
     The voltage $\overline{u}_\mathrm{2}$ corresponds to $U_\mathrm{mot}$. Solving \eqref{eq:ex06t2_u2_gen} with respect to $\alpha$ results in
     \begin{equation} 
-        \alpha = \arccos( \frac{\overline{u}_\mathrm{2} \cdot p}{\hat{u}_\mathrm{1,LL}\pi \sin(\frac{p}{\pi})}) =
-        \begin{cases}
-            \alpha_\mathrm{up} = \arccos( \frac{\SI{466}{\volt} \cdot 6}{\SI{563}{\volt}\pi \sin(\frac{6}{\pi})})=\SI{30}{\degree}     \\
-            \alpha_\mathrm{down} = \arccos( \frac{\SI{-466}{\volt} \cdot 6}{\SI{563}{\volt}\pi \sin(\frac{6}{\pi})})=\SI{150}{\degree}    \\
-        \end{cases}.
+        \alpha = \arccos( \frac{\overline{u}_\mathrm{2} \cdot p}{\hat{u}_\mathrm{1,LL}\pi \sin(\frac{p}{\pi})})
+    \end{equation}
+    The following applies to the relevant cases:
+    \begin{equation}     
+        \begin{split}
+            \alpha_\mathrm{up} &= \arccos( \frac{\SI{466}{\volt} \cdot 6}{\SI{563}{\volt}\pi \sin(\frac{6}{\pi})})=\SI{30}{\degree}     \\
+            \alpha_\mathrm{down} &= \arccos( \frac{\SI{-466}{\volt} \cdot 6}{\SI{563}{\volt}\pi \sin(\frac{6}{\pi})})=\SI{150}{\degree}    \\
+        \end{split}.
         \label{eq:ex06t2_alpha_gen}
     \end{equation}
 \end{solutionblock}
@@ -171,7 +174,7 @@ to operate the motor at rated voltage.}
 }
 \begin{solutionblock}
     In \autoref{sfig:ex06_Voltage_u2pm_Up} the output voltages $\overline{u}_\mathrm{2,p}=\SI{233}{\volt}$ and $\overline{u}_\mathrm{2,m}=\SI{-233}{\volt}$
-    are entered as dashed blue lines. The ranges in which the respective thyristor conducts are marked with $\mathrm{T_x}$.
+    are entered as dashed blue lines. The ranges in which the respective thyristor conducts are marked with $\mathrm{T_i}$.
     
     \input{fig/ex06/sFig_VoltageU2pmUp}
 
@@ -183,26 +186,26 @@ to operate the motor at rated voltage.}
 
     \FloatBarrier
 
-    In \autoref{sfig:ex06_Voltage_u2up_down} the output voltages are $\overline{u}_\mathrm{2}$ are entered for both cases.
+    In \autoref{sfig:ex06_Voltage_u2up_down} the output voltage $\overline{u}_\mathrm{2}$ is depicted for both cases.
 
     \input{fig/ex06/sFig_VoltageU2pUpDown}
 
     \FloatBarrier
 
     The amplitude of the fundamental $i_\mathrm{1a}^\mathrm{(1)}(t)$ is determined by calculating the Fourier coefficient.
-    To simplify the calculation the current signal $i_\mathrm{1a}(t)$ is shift $\frac{2 \pi}{3}\SI{}{\radian}$ to the left, 
-    so that it is axially symmetric. Cause by the symmetry the integration is performed only from \SI{0}{\radian} to \SI{\pi}{\radian}:
+    To simplify the calculation the current signal $i_\mathrm{1a}(t)$ is shift by $\frac{2 \pi}{3}\SI{}{\radian}$ to the left, 
+    so that it is axially symmetric. Due to the symmetry the integration is performed only from \SI{0}{\radian} to \SI{\pi}{\radian}:
     \begin{equation}
         \begin{split}
             \hat{i}_\mathrm{1a}^\mathrm{(1)} &= \frac{2}{\pi} \int_{0}^{\pi} i_\mathrm{1a}(\omega t) \cos(\omega t) \mathrm{d}\omega t=
-            \frac{2}{\pi} \left( \int_{0}^{\frac{\pi}{3}} I\mathrm{mot} \cos(\omega t) \mathrm{d}\omega t 
+            \frac{2}{\pi} \left( \int_{0}^{\frac{\pi}{3}} I_\mathrm{mot} \cos(\omega t) \mathrm{d}\omega t 
             - \int_{\frac{2\pi}{3}}^{\pi} I_\mathrm{mot} \cos(\omega t) \mathrm{d}\omega t \right)  \\
             &= \frac{2 I_\mathrm{mot}}{\pi} \left( \sin(\frac{\pi}{3}) + \sin(\frac{2\pi}{3}) \right) 
             = \frac{2\cdot \SI{20}{\ampere}}{\pi} \sqrt{3}= \SI{22}{\ampere}.
         \end{split}
     \end{equation}
-    The result is valid for raising and lowering load, because in both cases the rectangle width and relative positions are the same.
-    The difference belongs only to the phase position relative to $U_\mathrm{1}(t)$.
+    The result is valid for raising and lowering the load, because in both cases the current signal 
+    forms are identical (except for some phase shift which does not change the fundamental amplitude).
 
     \input{fig/ex06/sFig_CurrentI1up}
 
@@ -210,7 +213,7 @@ to operate the motor at rated voltage.}
     
     \FloatBarrier
 
-    The voltage $u_\mathrm{T1}(t)$ is displayed for raising load in \autoref{sfig:ex06_Voltage_u1T_up}  and for lowering load in \autoref{sfig:ex06_Voltage_u1T_down}.
+    The voltage $u_\mathrm{T1}(t)$ is displayed for raising the load in \autoref{sfig:ex06_Voltage_u1T_up}  and for lowering the load in \autoref{sfig:ex06_Voltage_u1T_down}.
 
     \input{fig/ex06/sFig_VoltageUT1Up}
 
@@ -225,30 +228,32 @@ and the fundamental apparent power $S^\mathrm{(1)}$ for the two considered opera
     \begin{equation}
         \begin{split}
             P_\mathrm{up}&=U_\mathrm{mot} I_\mathrm{mot}=\SI{466}{\volt} \cdot \SI{20}{\ampere}= \SI{9320}{\watt}. \\
-            P_\mathrm{down}&=-U_\mathrm{mot} I_\mathrm{mot}=\SI{-466}{\volt} \cdot \SI{20}{\ampere}= \SI{9320}{\watt}.
+            P_\mathrm{down}&=-U_\mathrm{mot} I_\mathrm{mot}=\SI{-466}{\volt} \cdot \SI{20}{\ampere}= \SI{-9320}{\watt}.
         \end{split}
     \end{equation}
     The input voltage $U_\mathrm{1}^\mathrm{(1)}$ corresponds to $U_\mathrm{1}$, so that the apparent power results to
     \begin{equation}
         \begin{split}
-            S_\mathrm{up}^\mathrm{(1)}&=3 U_\mathrm{1} \frac{\hat{i}_\mathrm{1a}^\mathrm{(1)}}{\sqrt{2}}=\SI{230}{\volt} \cdot \frac{\SI{22}{\ampere}}{\sqrt{2}}= \SI{10760}{\watt}. \\
-            S_\mathrm{down}^\mathrm{(1)}&=3 U_\mathrm{1} \frac{\hat{i}_\mathrm{1a}^\mathrm{(1)}}{\sqrt{2}}=\SI{230}{\volt} \cdot \frac{\SI{22}{\ampere}}{\sqrt{2}}= \SI{10760}{\watt}.
+            S_\mathrm{up}^\mathrm{(1)}&=3 U_\mathrm{1} \frac{\hat{i}_\mathrm{1a}^\mathrm{(1)}}{\sqrt{2}}=\SI{230}{\volt} \cdot \frac{\SI{22}{\ampere}}{\sqrt{2}}= \SI{10760}{\volt\ampere}. \\
+            S_\mathrm{down}^\mathrm{(1)}&=3 U_\mathrm{1} \frac{\hat{i}_\mathrm{1a}^\mathrm{(1)}}{\sqrt{2}}=\SI{230}{\volt} \cdot \frac{\SI{22}{\ampere}}{\sqrt{2}}= \SI{10760}{\volt\ampere}.
         \end{split}
     \end{equation}
     The reactive power is calculated by
     \begin{equation}
         \begin{split}
             Q_\mathrm{up}^\mathrm{(1)}&=3 U_\mathrm{1} \frac{\hat{i}_\mathrm{1a}^\mathrm{(1)}}{\sqrt{2}} \sin{(\alpha_\mathrm{up})}
-            =\SI{230}{\volt} \cdot \frac{\SI{22}{\ampere}}{\sqrt{2}}\sin{(\frac{\pi}{6})}= \SI{5380}{\watt}. \\
-            Q_\mathrm{down}^\mathrm{(1)}&=3 U_\mathrm{1} \frac{-\hat{i}_\mathrm{1a}^\mathrm{(1)}}{\sqrt{2}} \sin{(\alpha_\mathrm{down})}
-            =\SI{230}{\volt} \cdot \frac{\SI{22}{\ampere}}{\sqrt{2}}\sin{(\frac{5\pi}{6})}= \SI{5380}{\watt}.
+            =\SI{230}{\volt} \cdot \frac{\SI{22}{\ampere}}{\sqrt{2}}\sin{(\frac{\pi}{6})}= \SI{5380}{\volt\ampere}. \\
+            Q_\mathrm{down}^\mathrm{(1)}&=3 U_\mathrm{1} \frac{\hat{i}_\mathrm{1a}^\mathrm{(1)}}{\sqrt{2}} \sin{(\alpha_\mathrm{down})}
+            =\SI{230}{\volt} \cdot \frac{\SI{22}{\ampere}}{\sqrt{2}}\sin{(\frac{5\pi}{6})}= \SI{5380}{\volt\ampere}.
         \end{split}
     \end{equation}
-    \autoref{fig:ex06_Complex_Plane_Power} shows the power in the complex plane.
+    
+    \autoref{sfig:ex06_Complex_Plane_Power} shows the power in the complex plane.
 
     \input{fig/ex06/sFig_Complex_Plane_Power}
 
 \end{solutionblock}
+
 % Subtask4
 \subtask{Calculate the fundamental current ratio $g=\frac{I^\mathrm{(1)}}{I}$ and the power factor $\lambda$ for the two considered operating points.}
 \begin{solutionblock}

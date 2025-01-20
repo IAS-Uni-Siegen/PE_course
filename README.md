@@ -20,6 +20,8 @@ The covered topics are:
 - DC-DC converters
 - Isolated DC-DC converters
 - Diode-based rectifiers
+- Thyristor-based AC/DC converters
+- Transistor-based AC/DC converters
 
 
 ## Exercise tasks (click on preview picture)
