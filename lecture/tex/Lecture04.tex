@@ -2249,7 +2249,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
             \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
 
                 % Top plot: duty cycle and carrier signal
-                \nextgroupplot[ylabel = {$d(t)/c(t)$}, legend pos=south east, legend columns=2]
+                \nextgroupplot[ylabel = {$d(t), c(t)$}, legend pos=south east, legend columns=2]
                 \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_triangular_example.csv}; 
                 \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_triangular_example.csv}; 
                 \legend{$d(t)$, $c(t)$}
@@ -2276,7 +2276,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
             \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
 
                  % Top plot: duty cycle and carrier signal 
-                \nextgroupplot[ylabel = {$d(t)/c(t)$}, legend pos=south east, legend columns=2]
+                \nextgroupplot[ylabel = {$d(t), c(t)$}, legend pos=south east, legend columns=2]
                 \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_sawtooth_example.csv}; 
                 \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_sawtooth_example.csv}; 
                 \legend{$d(t)$, $c(t)$}
@@ -2303,7 +2303,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
             \begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.375\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
 
                  % Top plot: duty cycle and carrier signal
-                \nextgroupplot[ylabel = {$d(t)/c(t)$}, legend pos=south east, legend columns=2]
+                \nextgroupplot[ylabel = {$d(t), c(t)$}, legend pos=south east, legend columns=2]
                 \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_PFC_example.csv}; 
                 \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_PFC_example.csv}; 
                 \legend{$d(t)$, $c(t)$}

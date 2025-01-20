@@ -194,7 +194,7 @@
                 \begin{circuitikz}
                     \def\cwidth{1.5}
                     \def\cheight{1}
-                    \draw[->] (0,0) to node[above]{$d(t)$} ++(1.5,0) node[adder, anchor = west, name=add1]{};
+                    \draw[->] (0,0) to node[above]{$s^*(t)$} ++(1.5,0) node[adder, anchor = west, name=add1]{};
                     \draw node[ctrlblock, anchor = west, minimum width = \cwidth cm, minimum height = \cheight cm](carrier) at (0,-2.25) {}; 
                     \path (carrier.south west) coordinate (blockBottomLeft);
                     
@@ -238,7 +238,7 @@
                 \begin{circuitikz}
                     \def\cwidth{1.5}
                     \def\cheight{1}
-                    \draw[->] (0,0) to node[above]{$d(t)$} ++(1.5,0) node[adder, anchor = west, name=add1]{};
+                    \draw[->] (0,0) to node[above]{$s^*(t)$} ++(1.5,0) node[adder, anchor = west, name=add1]{};
                     \draw node[ctrlblock, anchor = west, minimum width = \cwidth cm, minimum height = \cheight cm](carrier) at (0,-2.25) {}; 
                     \path (carrier.south west) coordinate (blockBottomLeft);
                     
@@ -294,16 +294,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{PWM example with complementary switching} 
+    \vspace{-0.1cm}
     \begin{figure}
         \begin{tikzpicture}
             \pgfplotsset{table/search path={fig/lec06}}
             \begin{groupplot}[group style={group size=1 by 5, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.31\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi}, xticklabels = {0,$\nicefrac{1}{2}\pi$,$\pi$, $\nicefrac{3}{2}\pi$, $2\pi$}, ytick = {-1, 0, 1}, yticklabels = {$-1$, $0$, $1$}]
 
                  % Top plot: duty cycle reference and carrier signal
-                \nextgroupplot[ylabel = {$d(t)/c(t)$}, legend pos=north east, legend columns=2]
+                \nextgroupplot[ylabel = {$s^*(t), c(t)$}, legend pos=north east, legend columns=2]
                 \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_comp_example.csv}; 
                 \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_comp_example.csv}; 
-                \legend{$d(t)$, $c(t)$}
+                \legend{$s^*(t)$, $c(t)$}
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_1(t)$}] 
@@ -330,17 +331,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{PWM example with interleaved switching} 
+    \vspace{-0.1cm}
     \begin{figure}
         \begin{tikzpicture}
             \pgfplotsset{table/search path={fig/lec06}}
             \begin{groupplot}[group style={group size=1 by 5, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.31\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi}, xticklabels = {0,$\nicefrac{1}{2}\pi$,$\pi$, $\nicefrac{3}{2}\pi$, $2\pi$}, ytick = {-1, 0, 1}, yticklabels = {$-1$, $0$, $1$}]
 
                  % Top plot: duty cycle reference and carrier signal
-                \nextgroupplot[ylabel = {$d(t)/c(t)$}, legend pos=north east, legend columns=2]
+                \nextgroupplot[ylabel = {$s^*(t), c(t)$}, legend pos=north east, legend columns=2, ymin = -1.1, ymax =1.1]
                 \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_int_example.csv}; 
                 \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_int_example.csv}; 
                 \addplot[signalred, thick, dashed] table[x=wt, y expr=-\thisrow{d}, col sep=comma] {PWM_single_phase_int_example.csv};
-                \legend{$d(t)$, $c(t)$}
+                \legend{$s^*(t)$, $c(t)$}
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_1(t)$}] 
@@ -392,13 +394,13 @@
                          xlabel={$t$},
                          xlabel style={anchor=west}
                          ]
-                     \nextgroupplot[ylabel = {$d(t)/c(t)$}, height=0.36\textheight]
+                     \nextgroupplot[ylabel = {$s^*(t), c(t)$}, height=0.36\textheight]
                          \addplot[signalblue, thick] coordinates {(-0.1,-0.6) (0,-1) (0.5,1) (1,-1)(1.1,-0.6)};
                          \addplot[domain = -0.1:1.1, samples = 10, signalred, thick] {\d};   
-                         \node[anchor=west] at (axis cs:1.1,\d) {$d$};
-                         \draw[<->] (axis cs:\t1,-1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(2-d)}{2}$} (axis cs:1-\t1,-1);
-                         \draw[<->] (axis cs:0,1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1+d)}{4}$} (axis cs:\t1,1);
-                         \draw[<->] (axis cs:1-\t1,1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1+d)}{4}$} (axis cs:1,1);
+                         \node[anchor=west] at (axis cs:1.1,\d) {$s^*$};
+                         \draw[<->] (axis cs:\t1,-1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1-s^*)}{2}$} (axis cs:1-\t1,-1);
+                         \draw[<->] (axis cs:0,1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1+s^*)}{4}$} (axis cs:\t1,1);
+                         \draw[<->] (axis cs:1-\t1,1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1+s^*)}{4}$} (axis cs:1,1);
                          \coordinate (a1) at (axis cs:\t1,1);
                          \coordinate (b1) at (axis cs:1-\t1,1);
                         
@@ -408,13 +410,15 @@
                         \nextgroupplot[ylabel = {$s_2(t)$}];
                         \addplot[signallavender, thick] coordinates {(-0.1,-1) (\t1,-1) (\t1,1) (1-\t1,1) (1-\t1,-1) (1.1,-1)};
             
-                        \nextgroupplot[ylabel = {$u_2(t)$}, , height=0.36\textheight, xticklabel style={below, yshift=-0.75cm}];
+                        \nextgroupplot[ylabel = {$u_2(t)/U_1$}, , height=0.36\textheight, xticklabel style={below, yshift=-0.75cm}];
                             \addplot[domain = -0.1:1.1, samples = 10, signalblue, thick, dashed, name path = A] {\d}; 
                             \node[anchor=west] at (axis cs:1.1,\d) {$\overline{u}_2$};
                             \addplot[signalblue, thick, name path = B] coordinates {(-0.1,1) (\t1,1) (\t1,-1) (1-\t1,-1) (1-\t1,1) (1.1,1)};
                             \coordinate (a2) at (axis cs:\t1,0);
                             \coordinate (b2) at (axis cs:1-\t1,0);
                             \draw[thin] (axis cs:0.55,-0.4) -- (axis cs:0.7,-0.6) node[right, anchor=west]{\footnotesize$e(t)$};
+                            \draw[thin] (axis cs:\t1,-1.1) -- (axis cs:\t1-0.05,-1.3) node[left, anchor=north east, inner sep = 1pt]{\footnotesize$t_1$};
+                            \draw[thin] (axis cs:1-\t1,-1.1) -- (axis cs:1-\t1+0.05,-1.3) node[right, anchor=north west, inner sep = 1pt]{\footnotesize$t_2$};
                             \tikzfillbetween[of=A and B, soft clip={domain=0:1}]{shadecolor, opacity=0.3};
                      \end{groupplot}
                      \begin{scope}[on background layer]
@@ -424,6 +428,7 @@
              \end{tikzpicture}
              \vspace{-0.25cm}
              \caption{Pulse pattern for complementary PWM}
+             \label{fig:complementary_PWM_single_phase_error}
             \end{figure}
         \end{column}
         \begin{column}{0.5\textwidth}
@@ -451,15 +456,15 @@
                          xlabel={$t$},
                          xlabel style={anchor=west}
                          ]
-                     \nextgroupplot[ylabel = {$d(t)/c(t)$}, height=0.36\textheight]
+                     \nextgroupplot[ylabel = {$s^*(t), c(t)$}, height=0.36\textheight]
                          \addplot[signalblue, thick] coordinates {(-0.1,-0.6) (0,-1) (0.5,1) (1,-1)(1.1,-0.6)};
                          \addplot[domain = -0.1:1.1, samples = 10, signalred, thick] {\d};   
                          \addplot[domain = -0.1:1.1, samples = 10, signalred, thick, dashed] {-\d};   
-                         \node[anchor=west] at (axis cs:1.1,\d) {$d$};
-                         \node[anchor=west] at (axis cs:1.1,-\d) {$-d$};
-                         \draw[<->] (axis cs:\t1,-1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(2-d)}{2}$} (axis cs:1-\t1,-1);
-                         \draw[<->] (axis cs:0,1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1+d)}{4}$} (axis cs:\t1,1);
-                         \draw[<->] (axis cs:1-\t1,1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1+d)}{4}$} (axis cs:1,1);
+                         \node[anchor=west] at (axis cs:1.1,\d) {$s^*$};
+                         \node[anchor=west, overlay] at (axis cs:1.1,-\d) {$-s^*$};
+                         \draw[<->] (axis cs:\t1,-1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1-|s^*|)}{2}$} (axis cs:1-\t1,-1);
+                         \draw[<->] (axis cs:0,1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1+|s^*|)}{4}$} (axis cs:\t1,1);
+                         \draw[<->] (axis cs:1-\t1,1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1+|s^*|)}{4}$} (axis cs:1,1);
                          \coordinate (a1) at (axis cs:\t1,1);
                          \coordinate (b1) at (axis cs:1-\t1,1);
                         
@@ -469,14 +474,16 @@
                         \nextgroupplot[ylabel = {$s_2(t)$}];
                         \addplot[signallavender, thick] coordinates {(-0.1,1) (\t2,1) (\t2,-1) (1-\t2,-1) (1-\t2,1) (1.1,1)};
             
-                        \nextgroupplot[ylabel = {$u_2(t)$}, , height=0.36\textheight, xticklabel style={below, yshift=-0.75cm}];
+                        \nextgroupplot[ylabel = {$u_2(t)/U_1$}, , height=0.36\textheight, xticklabel style={below, yshift=-0.75cm}];
                             \addplot[domain = -0.1:1.1, samples = 10, signalblue, thick, dashed, name path = A] {\d}; 
                             \node[anchor=west] at (axis cs:1.1,\d) {$\overline{u}_2$};
                             \addplot[signalblue, thick, name path = B] coordinates {(-0.1,0) (\t2,0) (\t2,1) (\t1,1) (\t1,0) (1-\t1,0) (1-\t1,1) (1-\t2,1) (1-\t2,0) (1.1,0)};
                             \coordinate (a2) at (axis cs:\t1,0);
                             \coordinate (b2) at (axis cs:1-\t1,0);
+                            \draw node[inner sep = 1pt, anchor=north] at (\t1, -0.1) {\footnotesize$t_1$};
+                            \draw node[inner sep = 1pt, anchor=north] at (1-\t1, -0.1) {\footnotesize$t_2$};
                             \tikzfillbetween[of=A and B, soft clip={domain=0:1}]{shadecolor, opacity=0.3};
-                            \draw[thin] (axis cs:0.55,0.25) -- (axis cs:0.7,-0.6) node[right, anchor=west]{\footnotesize$e(t)$};
+                            \draw[thin] (axis cs:0.565,0.25) -- (axis cs:0.75,-0.5) node[right, anchor=west]{\footnotesize$e(t)$};
                      \end{groupplot}
                      \begin{scope}[on background layer]
                         \draw [dashed] (a1) -- (a2);
@@ -485,6 +492,7 @@
              \end{tikzpicture}
              \vspace{-0.25cm}
              \caption{Pulse pattern for interleaved PWM}
+             \label{fig:interleaved_PWM_single_phase_error}
             \end{figure}
         \end{column}
     \end{columns}  
@@ -495,12 +503,268 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{PWM approximation error analysis (cont.)} 
-    To evaluate the error between the reference duty cycle $d(t)$ and the switched output voltage $u_2(t)$, we introduce the following normalized integral difference:
+    To evaluate the error between the reference $s^*(t)$ and the switched output voltage $u_2(t)$, we introduce the following normalized integral difference:
     \begin{equation}
-        e(t) = \frac{1}{T_\mathrm{s}}\int_{0}^{t}\left(d(\tau)-s(\tau)\right)\mathrm{d}\tau.
+        e(t) = \frac{1}{T_\mathrm{s}}\int_{t_0}^{t}\left(s^*(\tau)-s(\tau)\right)\mathrm{d}\tau.
     \end{equation}
     This error can be interpreted as the resulting current ripple assuming a pure inductive load $L$ and constant input voltage $u_1(t)=U_1$:
     \begin{equation}
-        \Delta i_2(t) = \frac{T_\mathrm{s}U_1}{2 L } e(t).
+        \Delta i_2(t) = \frac{T_\mathrm{s}U_1}{2 L } \left|e(t)\right|.
+        \label{eq:current_ripple_PWM_single_phase_ACDC}
     \end{equation}
+    For a constant reference $s^*(t)=s^*$, the biggest error corresponds to the integral over the time interval $[t_1, t_2]$ as can be seen in \figref{fig:complementary_PWM_single_phase_error} and \figref{fig:interleaved_PWM_single_phase_error}:
+    \begin{equation}
+        \begin{alignedat}{3}
+        &\mbox{complimentary switching (cs):}\quad &&\max_t e_{\mathrm{cs}}(t) &&= \frac{1}{T_s}\left(s^* + 1\right)\left(t_2-t_1\right) = \frac{1}{2}\left(s^* + 1\right)\left(1-s^*\right),\\
+        &\mbox{interleaved switching (is):}\quad &&\max_t e_{\mathrm{is}}(t) &&= \frac{1}{T_s}\left|s^*\right|\left(t_2-t_1\right) = \frac{1}{2}\left|s^*\right|\left(1-\left|s^*\right|\right).
+        \end{alignedat}
+        \label{eq:max_errors_comp_int_PWM_signle_phase}
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PWM approximation error analysis (cont.)%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PWM approximation error analysis (cont.)} 
+    Further analyzing \eqref{eq:max_errors_comp_int_PWM_signle_phase}
+    \begin{equation}
+            \frac{\mathrm{d}}{\mathrm{d}s^*}\left(\max_t e_{\mathrm{cs}}(t)\right) = -2s^*,\qquad
+            \frac{\mathrm{d}}{\mathrm{d}s^*}\left(\max_t e_{\mathrm{is}}(t)\right) = \mathrm{sgn}(s^*) -2s^*
+    \end{equation}
+    reveals the worst case deviation at a switching reference of:
+    \begin{equation}
+            \argmax_{s^*}\left\{\max_t e_{\mathrm{cs}}(t)\right\} = 0,\qquad
+             \argmax_{s^*}\left\{\max_t e_{\mathrm{is}}(t)\right\} = \pm \frac{1}{2}.
+    \end{equation}
+    Inserting this finding into \eqref{eq:current_ripple_PWM_single_phase_ACDC} delivers
+    \begin{equation}
+        \begin{alignedat}{4}
+        &\Delta i_{2,\mathrm{cs}} &&= (1-s^*)(1+s^*) \Delta i_{2,\mathrm{cs}, \mathrm{max}} \quad &&\mbox{with} \quad &&\Delta i_{2,\mathrm{cs}, \mathrm{max}} = \frac{T_\mathrm{s}U_1}{2L},\\ 
+        &\Delta i_{2,\mathrm{is}} &&= 4\left|s^*\right|(1-\left|s^*\right|) \Delta i_{2,\mathrm{is}, \mathrm{max}} \quad &&\mbox{with} \quad &&\Delta i_{2,\mathrm{is}, \mathrm{max}} = \frac{T_\mathrm{s}U_1}{8L}.
+        \end{alignedat}
+    \end{equation}
+    Hence, the current ripple of the interleaved PWM is only $\nicefrac{1}{4}$ of the complementary PWM.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PWM approximation error analysis (cont.)%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PWM approximation error analysis (cont.)} 
+    \begin{columns}
+        \begin{column}{0.45\textwidth}
+            Reasons for current ripple reduction of interleaved vs. complimentary PWM:
+            \begin{itemize}
+                \item Effective pulse number doubled:
+                \begin{itemize} 
+                    \item CS: $f_\mathrm{p} = f_\mathrm{s}$
+                    \item IS: $f_\mathrm{p} = 2f_\mathrm{s}$
+                \end{itemize}\vspace{1em}
+                \item Output voltage steps halved: 
+                \begin{itemize} 
+                    \item CS: $\Delta u_2 = \pm 2 U_1$
+                    \item IS: $\Delta u_2 = \pm  U_1$
+                \end{itemize}
+            \end{itemize}
+            \vspace{-0.2cm}
+            \begin{varblock}{Note on applicability}
+                This analysis only holds for $s^*=\mathrm{const.}$ and can be transferred only approximately for $s^*(t)=f(\omega)$ if $T_s<<\frac{2\pi}{\omega}$. 
+            \end{varblock}
+        \end{column}
+        \begin{column}{0.55\textwidth}
+            \begin{figure}
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        xlabel={$s^*$},
+                        ylabel={$\Delta i_2 / \Delta i_{2,\mathrm{cs}, \mathrm{max}}$},
+                        ymin=0, ymax=1.1,
+                        xmin=-1, xmax=1,
+                        width = 0.99\textwidth,
+                        height = 0.65\textheight,
+                        grid,
+                        thick,
+                        clip = true,
+                        xtick = {-1, -0.5, 0, 0.5,1.0}, 
+                        ytick = {0, 0.25, 0.5, 0.75, 1.0}, 
+                        ]
+                        \addplot[signalblue, domain=-1:1, samples=50] {(1-x)*(1+x)};
+                        \addplot[signalred, domain=-1:1, samples=50] {(1-abs(x))*abs(x)};
+                        \legend{cs, is};
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Current ripple as a function of the single-phase AC/DC normalized reference output voltage $s^*$}
+                \label{fig:current_ripple_single_phase_ACDC}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Overmodulation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Overmodulation} 
+    \vspace{-0.1cm}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfplotsset{table/search path={fig/lec06}}
+            \begin{groupplot}[group style={group size=1 by 5, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.31\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi}, xticklabels = {0,$\nicefrac{1}{2}\pi$,$\pi$, $\nicefrac{3}{2}\pi$, $2\pi$}, ytick = {-1, 0, 1}, yticklabels = {$-1$, $0$, $1$}]
+
+                 % Top plot: duty cycle reference and carrier signal
+                \nextgroupplot[ylabel = {$s^*(t), c(t)$}, ymin = -1.25, ymax =1.25, legend pos=north east, legend columns=2 ]
+                \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+                \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+                \addplot[signalred, thick, dashed] table[x=wt, y expr=-\thisrow{d}, col sep=comma] {PWM_single_phase_overmod_example.csv};
+                \legend{$s^*(t)$, $c(t)$}
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_1(t)$}] 
+                \addplot[signalgreen, thick] table[x=wt, y=s1, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_2(t)$}] 
+                \addplot[signallavender, thick] table[x=wt, y=s2, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+
+                % bottom middle plot: combined switching signal
+                \nextgroupplot[ylabel = {$s(t)$}] 
+                \addplot[signalblue, thick] table[x=wt, y=s, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+
+                % bottom plot: approximation error 
+                \nextgroupplot[ylabel = {$e(t)$}, xlabel={$\omega t$}, ymax = 0.2, ymin = -0.2, ytick = {-0.15, 0, 0.15}, yticklabels = {$-0.15$, $0$, $0.15$}] 
+                \addplot[signalblue, thick] table[x=wt, y=e, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PWM approximation error analysis (cont.)%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{PWM approximation error analysis (cont.)} 
+    \begin{columns}
+        \begin{column}{0.45\textwidth}
+            Considering a normalized input reference
+        $$ s^*(t) = A\sin(\omega t)$$
+        one can distinguish two PWM operation areas:
+        \begin{itemize}
+            \item $A \leq 1$: linear modulation, 
+            \item $A > 1$: overmodulation.
+        \end{itemize}
+        \vspace{-0.25cm}
+            \begin{varblock}{Harmonics}
+                While the normalized output voltage fundamental can be increased beyond unity via overmodulation, increased voltage harmonics must be accepted.   
+            \end{varblock}
+        \end{column}
+        \begin{column}{0.55\textwidth}
+            \begin{figure}
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        xlabel={$A$},
+                        ylabel={$U_2^{(1)}/U_1$},
+                        ymin=0, ymax=4/pi*1.2,
+                        xmin=0, xmax=3,
+                        width = 0.99\textwidth,
+                        height = 0.7\textheight,
+                        grid,
+                        thick,
+                        clip = true,
+                        ytick = {0, 0.25, 0.5, 0.75, 1.0, 4/pi}, 
+                        yticklabels = {$0$, $0.25$, $0.5$, $0.75$, $1$, $\nicefrac{4}{\pi}$}, 
+                        ]
+                        \addplot[signalblue, domain=0:1, samples=10] {x};
+                        \addplot[signalblue, domain=1:3, samples=40, smooth] {4/pi + rad(asin(1/x))*(2/pi -8/pi^2)};
+                        \draw[dashed] (axis cs:0, 4/pi) -- (axis cs:3, 4/pi);
+                        \draw[dash dot] (axis cs:1, 0) -- (axis cs:1, 4/pi);
+                        \draw node[fill=white, inner sep = 1pt] at (axis cs:0.5,1) {linear mod.};
+                        \draw node[fill=white, inner sep = 1pt] at (axis cs:2,1) {overmodulation};
+                        \draw node[fill=white, inner sep = 1pt, above] at (axis cs:1.5,4/pi) {Square-shaped mod. ($f_\mathrm{s}=2\cdot\nicefrac{\omega}{2 \pi}$)};
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Reference amplitude to output voltage fundamental amplitude}
+                \label{fig:Overmodulation_single_phase_gain}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Rectifier operation for single-phase grids %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Rectifier operation for single-phase grids} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Rectifier application setup %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Rectifier application setup} 
+        \begin{figure}
+            \begin{circuitikz}
+                \draw (0,0) node[cute spdt up arrow] (Sw1) {};
+                \draw (-2,-1.5) node[cute spdt down arrow] (Sw2) {};
+                \draw (Sw2.in) to [short, -o] ++(-1,0) coordinate (out2);
+                \draw (Sw1.in) to [short] ++(-1.75,0) to [short, -o, i_<=$i_2(t)$] (Sw1.in -| out2) coordinate (out1);
+                \draw (out1) to [open, v=$u_2(t)\hspace{0.5cm}$, voltage = straight] (out2);
+                \draw (Sw1-out 1.n) to [short, -*] ++(0,0.5) coordinate (int1);
+                \draw (Sw2-out 2.s) to [short] ++(0,-0.5) coordinate (int2);
+                \draw (int2) to [short] (int2 -| Sw1-out 2.s) coordinate (int3) to [short, *-] (Sw1-out 2.s);
+                \draw node[crossingshape, name=x1, rotate=-90] at (out1 -| Sw2-out 1.n) {};
+                \draw (x1.west) to [short] (int1 -| x1.west) to [short] (int1);
+                \draw (x1.east) to [short] (Sw2-out 1.n);
+                \draw (int1) to [short,i=$i_1(t)$] ++(1.5,0) coordinate (c1) to [short, i={$I_0$}, -o] ++(1,0) coordinate (in1);
+                \draw (int3) to [short, -o] ++(2.5,0) coordinate (in2);
+                \draw (in1) to [open, v^=$\hspace{0.5cm}u_1(t)$, voltage = straight] (in2);
+                \draw node[anchor = west, xshift=0.3cm] at (Sw1) {$s_1(t)$};
+                \draw node[anchor = west, xshift=0.3cm] at (Sw2) {$s_2(t)$};
+                \draw (c1) to [capacitor, *-*, l=$C$] (c1 |- int2);
+                \draw (out1) to [inductor, v<=$u_{\mathrm{L}}(t)$, voltage = straight, l=$L$, mirror, o-] ++(-2.5,0) to [sinusoidal voltage source, v_=$u_{\mathrm{g}}(t)$] (\tikztostart |- out2) to [short,-o] (out2);
+            \end{circuitikz}
+            \caption{Single-phase grid rectification: full bidirectional operation possible (e.g., for electrical rail vehicles with a \SI{15}{\kilo\volt}, \SI[parse-numbers = false]{16\frac{2}{3}}{\hertz} grid)}
+            \label{fig:recitifier_single_phase_transistor_bridge_converter}
+        \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state operation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state operation} 
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            Assuming steady state, the grid side input loop from \figref{fig:recitifier_single_phase_transistor_bridge_converter} can be described with \hl{complex phasors}:
+            \begin{equation}
+                \underline{\hat{u}}_2 = \underline{\hat{u}}_\mathrm{g} - \mathrm{j}\omega L \underline{\hat{i}}_2.
+            \end{equation} 
+            The converter's input voltage amplitude is
+            \begin{equation}
+                \hat{u}_2 = \sqrt{\hat{u}^2_\mathrm{g} + \omega^2 L^2 \hat{i}^2_2}.
+            \end{equation}
+            As the converter boosts the grid voltage towards the DC-link, the following condition applies:
+            \begin{equation}
+                u_1(t)\approx U_\mathrm{dc} \geq \hat{u}_2 = \sqrt{\hat{u}^2_\mathrm{g} + \omega^2 L^2 \hat{i}^2_2}.
+            \end{equation}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \begin{tikzpicture}
+                    \draw[->] (-0.5,0) to (3.5,0) node[right]{$\mathrm{Re}$};
+                    \draw[->] (0,-2) to (0,2) node[above]{$\mathrm{Im}$};
+                    \draw[->, thick, signalblue] (0,0) to (3,0) node[above]{$\underline{\hat{u}}_{\mathrm{g}}$} coordinate (ug);
+                    \draw[->, thick, signalred] (0,0) to (1.5,0) node[above]{$\underline{\hat{i}}_{\mathrm{g}}$};
+                    \draw[<-, thick, signalblue] (ug) to node[right]{$\underline{\hat{u}}_{\mathrm{L}}$}  ++(0,-1.5) coordinate (ul);
+                    \draw[->, thick, signalblue] (0,0) to (ul) node[below]{$\underline{\hat{u}}_2$};
+                    \draw[->] let \p1 = (ul) in (1,0) arc(0:atan(\y1/\x1):1);
+                    \draw node[right] at (1.1, -0.4) {$\varphi_2$};
+                \end{tikzpicture}
+                \caption{Steady-state phasor diagram
+                assuming $\cos(\varphi)=1$ operation (enforced via some supervisory control)}
+                \label{fig:recitifier_single_phase_transistor_phasors}
+            \end{figure}
+        \end{column}
+        
+    \end{columns}
+    
+        
 \end{frame}
