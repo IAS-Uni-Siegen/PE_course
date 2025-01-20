@@ -26,7 +26,7 @@
                    height=0.3\textwidth,
                    % x-Ticks
                    xtick={-60,0,60,90,180,270,360},
-                   xticklabels={$\frac{-\pi}{3}$,,$\frac{\pi}{3}$,,$\pi$,,$2\pi$},
+                   xticklabels={$-\frac{\pi}{3}$,,$\frac{\pi}{3}$,,$\pi$,,$2\pi$},
                    xticklabel style = {anchor=north},
                    % y-Ticks
                    ytick={400,200,0,-200,-400},
@@ -71,12 +71,13 @@
                % Label of u1b
                \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:250,350) {$u_{\mathrm{1b}}(\omega t)$};
                % Label of u2
-               \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:50,310) {$u_{\mathrm{2}}(\omega t)$};
+               \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:180,310) {$u_{\mathrm{2}}(\omega t)$};
                %Label Firing angle 
-               \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:-40,310){$\alpha$};
+               \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:80,275){$\alpha$};
                % Line to u2
-               \draw[thin, blue] (60,300) -- (50,250);
-               \draw[->](-60,300) -- (-25,300); 
+               \draw[thin, blue] (185,305) -- (170,230);
+               % Line for alpha
+               \draw[->](60,270) -- (109.9,270); 
            \end{axis}     
            \end{tikzpicture}
            \caption{Output voltage $u_\mathrm{2}(t)$ for $\alpha = 0.871$.}
