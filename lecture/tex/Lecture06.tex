@@ -61,10 +61,10 @@
 							\node[twoportsplitshape, scale = 1.5](tp){};
 							\draw (tp.left up) to [short, -o, i_<= $i_1$] ++(-0.75,0) coordinate(tpin1)
 							(tp.left down) to [short, -o] ++(-0.75,0) coordinate(tpin2);
-							\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{AC $u_1$} ([xshift=-0.9cm]tp.left down);
+							\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{DC $u_1$} ([xshift=-0.9cm]tp.left down);
 							\draw (tp.right up) to [short, -o, i= $i_2$] ++(0.75,0) coordinate(tpout1)
 							(tp.right down) to [short, -o] ++(+0.75,0) coordinate(tpout2);
-							\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_2$ DC} ([xshift=1cm]tp.right down);
+							\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_2$ AC} ([xshift=1cm]tp.right down);
 						\end{circuitikz}	
 					} ;
 				\end{tikzpicture}
