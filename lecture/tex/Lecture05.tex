@@ -1249,7 +1249,7 @@
         \item<3-> Parasitic inductance of the thyristor package,
         \item<4-> Parasitic inductance of the circuit layout. 
     \end{itemize}
-    \onslide<5->{Kirchhoff's voltage law for the commutation loop yields}
+    \onslide<5->{Kirchhoff's voltage law for the \hl{commutation loop} yields}
     \begin{equation}
         \onslide<5->{u_{\mathrm{c}}(t) = u_{\mathrm{s},1}(t) - u_{\mathrm{s},2}(t)}\onslide<6->{ = 2L_\mathrm{c}\frac{\mathrm{d}}{\mathrm{d}t}i_{T_2}(t) = -2L_\mathrm{c}\frac{\mathrm{d}}{\mathrm{d}t}i_{T_1}(t)}
         \label{eq:commutation_voltage_M2C}
@@ -1287,16 +1287,16 @@
     \onslide<1->{To determine the \hl{commutation overlap angle} $\kappa$, we consider $k=0$ and the commutation from $T_2$ to $T_1$, that is, $i_{T_1}(\alpha) = 0$.} \onslide<2->{The commutation ends when $i_{T_1}(\alpha+\kappa) = i_2$, which yields
     \begin{equation}
         i_{T_1}(\alpha+\kappa) = i_2 \stackrel{!}{=} \frac{u_\mathrm{s}}{L_\mathrm{c}\omega}\left(\cos(\alpha)-\cos(\alpha+\kappa)\right).
-    \end{equation}}
+    \end{equation}}%
     \onslide<3->{ Solving for the overlap angle $\kappa$ results in
     \begin{equation}
         \kappa = \arccos\left(\cos(\alpha) - \frac{i_2L_\mathrm{c}\omega}{u_\mathrm{s}}\right) - \alpha.
         \label{eq:overlap_angle_M2C}
-    \end{equation}}
-    \onslide<4->{To ensure a successful commutation $\alpha+\kappa < \pi$ must hold: Otherwise the commutation voltage changes its sign and the commutation fails. Hence, the \hl{achievable firing angle} is limited
+    \end{equation}}%
+    \onslide<4->{To ensure a successful commutation $\alpha+\kappa < \pi$ must hold: Otherwise the commutation voltage changes its sign and the commutation fails. Hence, the \hl{achievable firing angle} is determined by
     \begin{equation}
         \alpha + \kappa  < \pi \quad \Leftrightarrow \quad \arccos\left(\cos(\alpha) - \frac{i_2L_\mathrm{c}\omega}{u_\mathrm{s}}\right) < \pi 
-    \end{equation}}
+    \end{equation}}%
     \onslide<5->{leading to 
     \begin{equation}
         \alpha < \arccos\left( \frac{i_2L_\mathrm{c}\omega}{u_\mathrm{s}} - 1\right).
@@ -1408,11 +1408,11 @@
     \onslide<1->{As seen in \figref{fig:commutation_process}, the output voltage of the thyristor stage is zero during the commutation process as the transformer's secondary side is temporarily short-circuited during the overlap period (since both thyristors are conducting):
     \begin{equation}
         u_\mathrm{s}(\omega t) = 0, \qquad \omega t \in [k\pi+\alpha, k\pi+\alpha + \kappa].
-    \end{equation}}
-    \onslide<2->{The \hl{output voltage loss} in due to commutation corresponds to}
+    \end{equation}}%
+    \onslide<2->{The \hl{output voltage loss} due to commutation corresponds to}
     \begin{equation}
         \onslide<2->{\Delta u = \frac{1}{\pi}\int_{\alpha}^{\alpha + \kappa} \hat{u}_\mathrm{s}\sin(\omega t) \mathrm{d}(\omega t)} \onslide<3->{= \frac{\hat{u}_\mathrm{s}}{\pi}\left[-\cos(\omega t)\right]_{\alpha}^{\alpha + \kappa} = \frac{\hat{u}_\mathrm{s}}{\pi}\left[\cos(\alpha) - \cos(\alpha + \kappa)\right].}
-    \end{equation}
+    \end{equation}%
     \onslide<4->{Inserting \eqref{eq:overlap_angle_M2C} for $\kappa$ yields}
     \begin{equation}
         \begin{split}

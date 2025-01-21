@@ -11,20 +11,21 @@
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			
-			\hl{Up to now}:
+			\onslide<1->{\hl{Up to now}:}
             \begin{itemize}
-                \item Diode-based converters
+                \item<1-> Diode-based converters
                 \begin{itemize}
-                    \item Rectification only
-                    \item Single quadrant operation
+                    \item<1-> Rectification only
+                    \item<1-> Single quadrant operation
                 \end{itemize}
-                \item Thyristor-based converters
+                \item<2-> Thyristor-based converters
                 \begin{itemize}
-                    \item Rectification and inversion
-                    \item Two quadrant operation
+                    \item<2-> Rectification and inversion
+                    \item<2-> Two quadrant operation
                 \end{itemize}
             \end{itemize}
             \vspace{1em}
+            \onslide<3->{
             \hl{Extension in this section:}
             \begin{itemize}
                 \item Transistor-based converters
@@ -32,7 +33,7 @@
                     \item Rectification and inversion
                     \item Four quadrant operation
                 \end{itemize}
-            \end{itemize}
+            \end{itemize}}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{figure}
@@ -52,8 +53,8 @@
                     \node[anchor=center, align = center] at (-1.0,1.0) {$\mathrm{II}$\\$P \leq 0$\\(inverter)};
                     \node[anchor=center, align = center] at (-1.0,-1.0) {$\mathrm{III}$\\$P \geq 0$\\(recitifier)};
                     \node[anchor=center, align = center] at (1.0,-1.0) {$\mathrm{IV}$\\$P \leq 0$\\(inverter)};
-                    \draw[thin] (1.75,0.75) to (2.4,0.25) node[anchor=north west] {Thyristors};
-                    \draw[thin] (1.75,-0.75) to (2.4,-0.25) node[anchor=south west] {};
+                    \draw[thin, visible on=<2->] (1.75,0.75) to (2.4,0.25) node[anchor=north west] {Thyristors};
+                    \draw[thin, visible on=<2->] (1.75,-0.75) to (2.4,-0.25) node[anchor=south west] {};
                     \draw[thin] (1.75,1.75) to (2.4,2.25) node[anchor=west] {Diodes};
 					\node[anchor = center, xshift = 1mm] at (0, 3.5) {
 						\begin{circuitikz}
@@ -84,21 +85,22 @@
     \frametitle{Idealized switch representation of a single-phase AC/DC bridge converter}
     \begin{columns}
         \begin{column}{0.4\textwidth}
+            \onslide<2->{%
             Define \hl{switching function}:
             \begin{equation}
                 s_i(t)=\begin{cases}
                     +1 & \text{upper position,}\\
                     -1 & \text{lower position.}
                 \end{cases}
-            \end{equation}
-            Output voltage considering a voltage source at the input:
+            \end{equation}}%
+            \onslide<3->{Output voltage considering a voltage source at the input is:
             \begin{equation}
                 u_2(t)=\underbrace{\frac{1}{2}\left(s_1(t)-s_2(t)\right)}_{s(t)}u_1(t).
-            \end{equation}
-            Input current assuming a current source at the output:
+            \end{equation}}%
+            \onslide<4->{Input current assuming a current source at the output results in:
             \begin{equation}
                 i_1(t)=s(t)i_2(t).
-            \end{equation}
+            \end{equation}}
         \end{column}
         \begin{column}{0.6\textwidth}
             \begin{figure}
@@ -135,10 +137,11 @@
     \begin{columns}
         \begin{column}{0.45\textwidth}
             \begin{itemize}
-                \item Remember: complementary switching of $\{T_1, T_2\}$ and $\{T_3, T_4\}$ to prevent a DC-link short-circuit. 
-                \item Possible (allowed) switching states:
+                \item<2-> Remember: complementary switching of $\{T_1, T_2\}$ and $\{T_3, T_4\}$ to prevent a DC-link short-circuit. 
+                \item<3-> Possible (allowed) switching states:
             \end{itemize} 
-            \vspace{-0.25cm}     
+            \vspace{-0.25cm}
+            \onslide<3->{     
             \begin{center}
                 \begin{tabular}{c c c c c c c}
                     \toprule
@@ -150,7 +153,7 @@
                     off & on & off & on & $-1$ & $-1$ & $0$\\
                     \bottomrule
                 \end{tabular}
-            \end{center}  
+            \end{center}}% 
         \end{column}
         \hfill
         \begin{column}{0.55\textwidth}
@@ -234,6 +237,7 @@
                 \end{figure}
         \end{column}
         \begin{column}{0.5\textwidth}
+            \onslide<2->{%
             \begin{figure}
                 \begin{circuitikz}
                     \def\cwidth{1.5}
@@ -284,7 +288,7 @@
                 \end{circuitikz}
                 \caption{PWM with \hl{interleaved} switching}
                 \label{fig:PWM_interleaved}
-                \end{figure}
+                \end{figure}}%
         \end{column}
     \end{columns}
 \end{frame}
@@ -432,6 +436,7 @@
             \end{figure}
         \end{column}
         \begin{column}{0.5\textwidth}
+            \onslide<2->{%
             \begin{figure}
                 \begin{tikzpicture}[baseline=(current bounding box.center)] % interleaved switching
                     \tikzmath{
@@ -493,7 +498,7 @@
              \vspace{-0.25cm}
              \caption{Pulse pattern for interleaved PWM}
              \label{fig:interleaved_PWM_single_phase_error}
-            \end{figure}
+            \end{figure}}%
         \end{column}
     \end{columns}  
 \end{frame}
@@ -503,15 +508,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{PWM approximation error analysis (cont.)} 
-    To evaluate the error between the reference $s^*(t)$ and the switched output voltage $u_2(t)$, we introduce the following normalized integral difference:
+    To evaluate the error between the reference $s^*(t)$ and the switched output voltage $u_2(t)$, we introduce the following \hl{normalized integral difference}:
     \begin{equation}
         e(t) = \frac{1}{T_\mathrm{s}}\int_{t_0}^{t}\left(s^*(\tau)-s(\tau)\right)\mathrm{d}\tau.
-    \end{equation}
-    This error can be interpreted as the resulting current ripple assuming a pure inductive load $L$ and constant input voltage $u_1(t)=U_1$:
+    \end{equation}\pause
+    This error can be interpreted as the resulting \hl{current ripple} assuming a pure inductive load $L$ at a constant input voltage $u_1(t)=U_1$:
     \begin{equation}
         \Delta i_2(t) = \frac{T_\mathrm{s}U_1}{2 L } \left|e(t)\right|.
         \label{eq:current_ripple_PWM_single_phase_ACDC}
-    \end{equation}
+    \end{equation}\pause
     For a constant reference $s^*(t)=s^*$, the biggest error corresponds to the integral over the time interval $[t_1, t_2]$ as can be seen in \figref{fig:complementary_PWM_single_phase_error} and \figref{fig:interleaved_PWM_single_phase_error}:
     \begin{equation}
         \begin{alignedat}{3}
@@ -527,16 +532,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{PWM approximation error analysis (cont.)} 
-    Further analyzing \eqref{eq:max_errors_comp_int_PWM_signle_phase}
+    Further, analyzing \eqref{eq:max_errors_comp_int_PWM_signle_phase}
     \begin{equation}
             \frac{\mathrm{d}}{\mathrm{d}s^*}\left(\max_t e_{\mathrm{cs}}(t)\right) = -2s^*,\qquad
             \frac{\mathrm{d}}{\mathrm{d}s^*}\left(\max_t e_{\mathrm{is}}(t)\right) = \mathrm{sgn}(s^*) -2s^*
-    \end{equation}
+    \end{equation}\pause
     reveals the worst case deviation at a switching reference of:
     \begin{equation}
             \argmax_{s^*}\left\{\max_t e_{\mathrm{cs}}(t)\right\} = 0,\qquad
              \argmax_{s^*}\left\{\max_t e_{\mathrm{is}}(t)\right\} = \pm \frac{1}{2}.
-    \end{equation}
+    \end{equation}\pause
     Inserting this finding into \eqref{eq:current_ripple_PWM_single_phase_ACDC} delivers
     \begin{equation}
         \begin{alignedat}{4}
@@ -554,23 +559,24 @@
     \frametitle{PWM approximation error analysis (cont.)} 
     \begin{columns}
         \begin{column}{0.45\textwidth}
-            Reasons for current ripple reduction of interleaved vs. complimentary PWM:
+            \onslide<2->{Reasons for current ripple reduction of interleaved vs. complimentary PWM:}%
             \begin{itemize}
-                \item Effective pulse number doubled:
+                \item<2-> Effective pulse number doubled:
                 \begin{itemize} 
-                    \item CS: $f_\mathrm{p} = f_\mathrm{s}$
-                    \item IS: $f_\mathrm{p} = 2f_\mathrm{s}$
+                    \item<2-> CS: $f_\mathrm{p} = f_\mathrm{s}$
+                    \item<2-> IS: $f_\mathrm{p} = 2f_\mathrm{s}$
                 \end{itemize}\vspace{1em}
-                \item Output voltage steps halved: 
+                \item<3-> Output voltage steps halved: 
                 \begin{itemize} 
-                    \item CS: $\Delta u_2 = \pm 2 U_1$
-                    \item IS: $\Delta u_2 = \pm  U_1$
+                    \item<3-> CS: $\Delta u_2 = \pm 2 U_1$
+                    \item<4-> IS: $\Delta u_2 = \pm  U_1$
                 \end{itemize}
             \end{itemize}
             \vspace{-0.2cm}
+            \onslide<4->{%
             \begin{varblock}{Note on applicability}
                 This analysis only holds for $s^*=\mathrm{const.}$ and can be transferred only approximately for $s^*(t)=f(\omega)$ if $T_s<<\frac{2\pi}{\omega}$. 
-            \end{varblock}
+            \end{varblock}}
         \end{column}
         \begin{column}{0.55\textwidth}
             \begin{figure}
@@ -653,9 +659,10 @@
             \item $A > 1$: overmodulation.
         \end{itemize}
         \vspace{-0.25cm}
+        \onslide<2->{%
             \begin{varblock}{Harmonics}
                 While the normalized output voltage fundamental can be increased beyond unity via overmodulation, increased voltage harmonics must be accepted.   
-            \end{varblock}
+            \end{varblock}}
         \end{column}
         \begin{column}{0.55\textwidth}
             \begin{figure}
@@ -730,16 +737,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Fundamental frequency modulation (cont.)} 
-    The fundamental frequency modulation leads to a pulse pattern synchronized with the fundamental output voltage $\hat{u}_2^{(1)}(t)$, i.e., there are exactly two switching actions per fundamental period $$ f_\mathrm{s} = 2\frac{\omega}{2\pi} = \frac{\omega}{\pi}.$$ 
-    The fundamental output voltage amplitude can be derived from the corresponding Fourier coefficient
+    \onslide<1->{The fundamental frequency modulation leads to a pulse pattern synchronized with the fundamental output voltage $\hat{u}_2^{(1)}(t)$, i.e., there are exactly \hl{two switching actions per fundamental} period $$ f_\mathrm{s} = 2\frac{\omega}{2\pi} = \frac{\omega}{\pi}.$$}% 
+    \onslide<2->{The fundamental output voltage amplitude can be derived from the corresponding \hl{Fourier coefficient}}
     \begin{equation}
         \begin{split}
-            \hat{u}_2^{(k)} &= \frac{1}{\pi} \int_{\alpha}^{\alpha + \pi} u_2(t)\sin(k (\omega t-\alpha)) \mathrm{d}\omega t = \frac{2}{\pi} \int_{}^{\pi/2} U_1 \sin(k \omega t) \mathrm{d}\omega t \\
-                & = \frac{2}{\pi} \left[-\frac{U_1}{k} \cos(k \omega t)\right]_{0}^{\pi/2} = \frac{2}{\pi} \left[\frac{U_1}{k} \left(\cos(0) - \cos(k(\pi/2))\right)\right] \\
-                &= \frac{4}{\pi} U_1 \frac{1}{k}, \quad k=1,3,5,7,\ldots
+            \onslide<2->{\hat{u}_2^{(k)} &= \frac{1}{\pi} \int_{\alpha}^{\alpha + \pi} u_2(t)\sin(k (\omega t-\alpha)) \mathrm{d}\omega t}\onslide<3->{ = \frac{2}{\pi} \int_{}^{\pi/2} U_1 \sin(k \omega t) \mathrm{d}\omega t} \\
+                & \onslide<4->{= \frac{2}{\pi} \left[-\frac{U_1}{k} \cos(k \omega t)\right]_{0}^{\pi/2}} \onslide<5->{= \frac{2}{\pi} \left[\frac{U_1}{k} \left(\cos(0) - \cos(k(\pi/2))\right)\right]} \\
+                &\onslide<6->{= \frac{4}{\pi} U_1 \frac{1}{k}, \quad k=1,3,5,7,\ldots}
             \end{split}
     \end{equation}
-    The fundamental output voltage amplitude is thus given by $ \hat{u}_2^{(1)} = \nicefrac{4}{\pi} \cdot U_1$ which is fixed due to fundamental frequency modulation while only the phase angle $\alpha$ can be adjusted.
+    \onslide<7->{The fundamental output voltage amplitude is thus given by $ \hat{u}_2^{(1)} = \nicefrac{4}{\pi} \cdot U_1$ which is fixed due to fundamental frequency modulation while only the phase angle $\alpha$ can be adjusted.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -786,18 +793,18 @@
     \frametitle{Steady-state operation} 
     \begin{columns}
         \begin{column}{0.5\textwidth}
-            Assuming steady state, the grid side input loop from \figref{fig:recitifier_single_phase_transistor_bridge_converter} can be described with \hl{complex phasors}:
+            \onslide<1->{Assuming steady state, the grid side input loop from \figref{fig:recitifier_single_phase_transistor_bridge_converter} can be described with \hl{complex phasors}:
             \begin{equation}
                 \underline{\hat{u}}_2 = \underline{\hat{u}}_\mathrm{g} - \mathrm{j}\omega L \underline{\hat{i}}_2.
-            \end{equation} 
-            The converter's input voltage amplitude is
+            \end{equation}} 
+            \onslide<2->{The converter's input voltage amplitude is
             \begin{equation}
                 \hat{u}_2 = \sqrt{\hat{u}^2_\mathrm{g} + \left(\omega L \hat{i}_2\right)^2}.
-            \end{equation}
-            As the converter boosts the grid voltage towards the DC-link, the following condition must apply:
+            \end{equation}}
+            \onslide<3->{As the converter boosts the grid voltage towards the DC-link, the following condition must apply:
             \begin{equation}
                 u_1(t)\approx U_\mathrm{dc} \geq \hat{u}_2 = \sqrt{\hat{u}^2_\mathrm{g} + \left(\omega L \hat{i}_2\right)^2}.
-            \end{equation}
+            \end{equation}}
         \end{column}
         \begin{column}{0.5\textwidth}
             \begin{figure}
@@ -824,17 +831,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Steady-state operation (cont.)} 
-    With the assumption of $\cos(\varphi)=1$ operation and a lossless converter, the following relations hold:
+    \onslide<1->{With the assumption of $\cos(\varphi)=1$ operation and a lossless converter, the following relations hold:}
     \begin{equation}
-        P = P_1 = P_2 = P_\mathrm{g} =  U_\mathrm{g}I_\mathrm{g} = \frac{1}{2}  \hat{u}_\mathrm{g}\hat{i}_\mathrm{g}.
+        \onslide<1->{P = P_1} \onslide<2->{= P_2 = P_\mathrm{g}} \onslide<3->{=  U_\mathrm{g}I_\mathrm{g}} \onslide<4->{= \frac{1}{2}  \hat{u}_\mathrm{g}\hat{i}_\mathrm{g}.}
     \end{equation}
-    While there is no reactive power exchange with the grid, the converter needs to supply the reactive power $Q_2$ to compensate for the line inductance demand:
+    \onslide<5->{While there is no reactive power exchange with the grid, the converter needs to supply the reactive power $Q_2$ to compensate for the line inductance demand:
     \begin{equation}
-        Q_2 = \omega L I_\mathrm{g}^2.
+        Q_2 = \omega L I_\mathrm{g}^2.}
     \end{equation}
-    The resulting apparent power $S_2$ is
+    \onslide<6->{The resulting apparent power $S_2$ is}
     \begin{equation}
-        S_2 = \sqrt{P^2 + Q_2^2} = \sqrt{P^2 + \left(\omega L I_\mathrm{g}\right)^2} = \sqrt{P^2 + \left(\frac{\omega L}{U_\mathrm{g}^2}P^2\right)^2} = P\sqrt{1 + \left(\frac{\omega L}{U_\mathrm{g}^2}P\right)^2}.
+        \onslide<6->{S_2 = \sqrt{P^2 + Q_2^2}} \onslide<7->{= \sqrt{P^2 + \left(\omega L I_\mathrm{g}\right)^2}} \onslide<8->{= \sqrt{P^2 + \left(\frac{\omega L}{U_\mathrm{g}^2}P^2\right)^2}}\onslide<9->{ = P\sqrt{1 + \left(\frac{\omega L}{U_\mathrm{g}^2}P\right)^2}.}
     \end{equation}
 \end{frame}
 
@@ -843,19 +850,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Steady-state operation (cont.)} 
-    Neglecting the switching-induced current and voltage ripples, the instantaneous grid power is
+    \onslide<1->{Neglecting the switching-induced current and voltage ripples, the instantaneous grid power is}
     \begin{equation}
-        p_\mathrm{g}(t) = u_\mathrm{g}(t)i_\mathrm{g}(t) = \hat{u}_\mathrm{g}\hat{i}_\mathrm{g}\cos^2(\omega t) = P + P \cos(2\omega t).
+        \onslide<1->{p_\mathrm{g}(t) = u_\mathrm{g}(t)i_\mathrm{g}(t) = \hat{u}_\mathrm{g}\hat{i}_\mathrm{g}\cos^2(\omega t)} \onslide<2->{= P + P \cos(2\omega t).}
     \end{equation}
-    The instantaneous converter power is
+    \onslide<3->{The instantaneous converter power at its AC input is}
     \begin{equation}
         \begin{split}
-        p_2(t) &= u_2(t)i_2(t) = \left(u_\mathrm{g}(t) + u_\mathrm{L}(t)\right)i_\mathrm{g}(t) = \left(u_\mathrm{g}(t) + L\frac{\mathrm{d}}{\mathrm{d}t}i_\mathrm{g}(t)\right)i_\mathrm{g}(t)\\
-               & = \hat{u}_\mathrm{g}\hat{i}_\mathrm{g}\cos^2(\omega t) + \omega L \hat{i}_\mathrm{g}^2\sin(\omega t)\cos(\omega t)\\
-                & = P\left(1 + \cos(2\omega t)\right) + Q_2 \sin(2\omega t) = P + S_2\cos(2\omega t- 2\varphi_2)
+            \onslide<3->{p_2(t) &= u_2(t)i_2(t)} \onslide<4->{= \left(u_\mathrm{g}(t) + u_\mathrm{L}(t)\right)i_\mathrm{g}(t)} \onslide<5->{= \left(u_\mathrm{g}(t) + L\frac{\mathrm{d}}{\mathrm{d}t}i_\mathrm{g}(t)\right)i_\mathrm{g}(t)}\\
+               & \onslide<6->{= \hat{u}_\mathrm{g}\hat{i}_\mathrm{g}\cos^2(\omega t) + \omega L \hat{i}_\mathrm{g}^2\sin(\omega t)\cos(\omega t)}\\
+                & \onslide<7->{= P\left(1 + \cos(2\omega t)\right) + Q_2 \sin(2\omega t)} \onslide<8->{= P + S_2\cos(2\omega t- 2\varphi_2)}
         \end{split}
     \end{equation}
-    with $\varphi_2$ being the phase angle between $i_2(t)$ and $u_2(t)$. Hence, the converter power oscillates at twice the grid frequency with an amplitude of $S_2$. As $S_2>P$ applies, the instantaneous output power gets temporarily negative as a result of the reactive power compensation on the grid side. 
+    \onslide<8->{with $\varphi_2$ being the phase angle between $i_2(t)$ and $u_2(t)$.}\onslide<9->{ Hence, the converter power oscillates at twice the grid frequency with an amplitude of $S_2$. As $S_2>P$ applies, the instantaneous output power gets temporarily negative as a result of the reactive power compensation on the grid input side. }
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -863,19 +870,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Steady-state operation (cont.)} 
-    Assuming a nearly constant DC-link voltage $u_1(t)\approx U_\mathrm{dc}$, the converter DC-side current $i_1(t)$ oscillates as well:
+    \onslide<1->{Assuming a nearly constant DC-link voltage $u_1(t)\approx U_\mathrm{dc}$, the converter DC-side current $i_1(t)$ oscillates as well:}
     \begin{equation}
-        i_1(t) = \frac{p_1(t)}{U_\mathrm{dc}}= \frac{p_2(t)}{U_\mathrm{dc}} = \frac{P}{U_\mathrm{dc}}+ \frac{S_2}{U_\mathrm{dc}}\cos(2\omega t - 2\varphi_2).
+        \onslide<1->{i_1(t) = \frac{p_1(t)}{U_\mathrm{dc}}}\onslide<2->{= \frac{p_2(t)}{U_\mathrm{dc}} = \frac{P}{U_\mathrm{dc}}+ \frac{S_2}{U_\mathrm{dc}}\cos(2\omega t - 2\varphi_2).}
     \end{equation}
-    For a constant load current $$I_0 = \frac{P}{U_\mathrm{dc}},$$ the converter's output current can be rewritten as
+    \onslide<3->{For a constant load current $$I_0 = \frac{P}{U_\mathrm{dc}},$$ the converter's output current can be rewritten as
     \begin{equation}
         i_1(t) = I_0 \left(1 + \sqrt{1+\left(\frac{\omega L U_\mathrm{dc}}{U_\mathrm{g}^2}\right)^2}\cos(2\omega t - 2\varphi_2)\right).
-    \end{equation}
-    Consequently, the DC-link capacitor current carries the harmonic content:
+    \end{equation}}%
+    \onslide<4->{Consequently, the DC-link capacitor current carries the harmonic content:
     \begin{equation}
         i_\mathrm{C}(t) =  i_1(t) - I_0 = I_0 \sqrt{1+\left(\frac{\omega L U_\mathrm{dc}}{U_\mathrm{g}^2}\right)^2}\cos(2\omega t - 2\varphi_2).
         \label{eq:DC_link_current_single_phase_ACDC}
-    \end{equation}
+    \end{equation}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -883,15 +890,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Steady-state operation (cont.)} 
-    Assuming that the voltage ripple of  the DC-link capacitor does not significantly affect the output current, the voltage ripple amplitude can be approximated as:
+    \onslide<1->{Assuming that the voltage ripple of  the DC-link capacitor does not significantly affect the output current, the voltage ripple amplitude can be approximated as:
     \begin{equation}
         \hat{u}_\mathrm{C} = \hat{u}_1 \approx \frac{\hat{i}_1}{2\omega C} = \frac{I_0}{2C} \sqrt{1+\left(\frac{\omega L U_\mathrm{dc}}{U_\mathrm{g}^2}I_0\right)^2}.
-        \label{eq:DC_link_voltage_single_phase_ACDC}
+        \label{eq:DC_link_voltage_single_phase_ACDC}}%
     \end{equation}
-    This relation results from the complex phasor analysis of the capacitor's impedance given the current ripple \eqref{eq:DC_link_current_single_phase_ACDC}. From \eqref{eq:DC_link_voltage_single_phase_ACDC} one can 
+    \onslide<2->{This relation results from the complex phasor analysis of the capacitor's impedance given the current ripple \eqref{eq:DC_link_current_single_phase_ACDC}.} \onslide<3->{From \eqref{eq:DC_link_voltage_single_phase_ACDC} one can }
     \begin{itemize}
-        \item derive the required DC-link capacitance for a given voltage ripple,
-        \item estimate the voltage ripple for a given DC-link capacitance.
+        \item<3-> derive the required DC-link capacitance for a given voltage ripple,
+        \item<4-> estimate the voltage ripple for a given DC-link capacitance.
     \end{itemize}
 \end{frame}
 
@@ -907,7 +914,7 @@
 
 
                 % top middle plot: individual switching signals
-                \nextgroupplot[ylabel = {$x(t)$}, legend pos=north east, legend columns=3, ytick = {0}] 
+                \nextgroupplot[ylabel = {$x(t)$}, legend pos=north east, legend columns=3, ytick = {0}, yticklabels = {$0$}] 
                 \addplot[signalblue, thick, domain=0:2*pi, samples = 100] {cos(deg(x))};
                 \addplot[signalred, thick, domain=0:2*pi, samples = 100] {0.6*cos(deg(x))};
                 \addplot[signalblue, thick, domain=0:2*pi, samples = 100, dashed] {cos(deg(x-\p))};
@@ -916,7 +923,7 @@
 
 
                 % top middle plot: individual switching signals
-                \nextgroupplot[ylabel = {$p(t)/P$}, legend pos=north east, legend columns=2, ymin= -0.2, ymax = 2.2] 
+                \nextgroupplot[ylabel = {$p(t)/P$}, legend pos=north east, legend columns=2, ymin= -0.2, ymax = 2.2, ytick = {0, 1, 2}, yticklabels = {$0$, $1$, $2$}, xlabel={$\omega t$}] 
                 \addplot[signalblue, thick, domain=0:2*pi, samples = 100] {1+cos(deg(2*x))}; 
                 \addplot[signalblue, thick, domain=0:2*pi, samples = 100, dashed] {1+1.15*cos(deg(2*x-2*\p))};  
                 \draw[<->] (axis cs:pi/2+\p,-0.15) -- node[left, fill=white, inner sep=1pt]{$S_2$} (axis cs:pi/2+\p,1);      
