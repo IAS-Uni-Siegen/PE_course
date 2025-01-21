@@ -48,10 +48,10 @@
                     \end{scope}
                     \draw[<->] (-2,0) -- (2,0) node[anchor=west] {$i$};
                     \draw[<->] (0,-2) -- (0,2) node[anchor=south] {$u$};
-                    \node[anchor=center, align = center] at (1.0,1.0) {$\mathrm{I}$\\$P \geq 0$};
-                    \node[anchor=center, align = center] at (-1.0,1.0) {$\mathrm{II}$\\$P \leq 0$};
-                    \node[anchor=center, align = center] at (-1.0,-1.0) {$\mathrm{III}$\\$P \geq 0$};
-                    \node[anchor=center, align = center] at (1.0,-1.0) {$\mathrm{IV}$\\$P \leq 0$};
+                    \node[anchor=center, align = center] at (1.0,1.0) {$\mathrm{I}$\\$P \geq 0$\\(recitifier)};
+                    \node[anchor=center, align = center] at (-1.0,1.0) {$\mathrm{II}$\\$P \leq 0$\\(inverter)};
+                    \node[anchor=center, align = center] at (-1.0,-1.0) {$\mathrm{III}$\\$P \geq 0$\\(recitifier)};
+                    \node[anchor=center, align = center] at (1.0,-1.0) {$\mathrm{IV}$\\$P \leq 0$\\(inverter)};
                     \draw[thin] (1.75,0.75) to (2.4,0.25) node[anchor=north west] {Thyristors};
                     \draw[thin] (1.75,-0.75) to (2.4,-0.25) node[anchor=south west] {};
                     \draw[thin] (1.75,1.75) to (2.4,2.25) node[anchor=west] {Diodes};
@@ -60,10 +60,10 @@
 							\node[twoportsplitshape, scale = 1.5](tp){};
 							\draw (tp.left up) to [short, -o, i_<= $i_1$] ++(-0.75,0) coordinate(tpin1)
 							(tp.left down) to [short, -o] ++(-0.75,0) coordinate(tpin2);
-							\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{$u_1$} ([xshift=-0.9cm]tp.left down);
+							\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{AC $u_1$} ([xshift=-0.9cm]tp.left down);
 							\draw (tp.right up) to [short, -o, i= $i_2$] ++(0.75,0) coordinate(tpout1)
 							(tp.right down) to [short, -o] ++(+0.75,0) coordinate(tpout2);
-							\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_2$} ([xshift=1cm]tp.right down);
+							\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_2$ DC} ([xshift=1cm]tp.right down);
 						\end{circuitikz}	
 					} ;
 				\end{tikzpicture}
@@ -639,10 +639,10 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% PWM approximation error analysis (cont.)%%
+%% Overmodulation (cont.) %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{PWM approximation error analysis (cont.)} 
+    \frametitle{Overmodulation (cont.)} 
     \begin{columns}
         \begin{column}{0.45\textwidth}
             Considering a normalized input reference
@@ -662,10 +662,10 @@
                 \begin{tikzpicture}
                     \begin{axis}[
                         xlabel={$A$},
-                        ylabel={$U_2^{(1)}/U_1$},
+                        ylabel={$\hat{u}_2^{(1)}/U_1$},
                         ymin=0, ymax=4/pi*1.2,
                         xmin=0, xmax=3,
-                        width = 0.99\textwidth,
+                        width = 0.95\textwidth,
                         height = 0.7\textheight,
                         grid,
                         thick,
@@ -677,9 +677,9 @@
                         \addplot[signalblue, domain=1:3, samples=40, smooth] {4/pi + rad(asin(1/x))*(2/pi -8/pi^2)};
                         \draw[dashed] (axis cs:0, 4/pi) -- (axis cs:3, 4/pi);
                         \draw[dash dot] (axis cs:1, 0) -- (axis cs:1, 4/pi);
-                        \draw node[fill=white, inner sep = 1pt] at (axis cs:0.5,1) {linear mod.};
-                        \draw node[fill=white, inner sep = 1pt] at (axis cs:2,1) {overmodulation};
-                        \draw node[fill=white, inner sep = 1pt, above] at (axis cs:1.5,4/pi) {Square-shaped mod. ($f_\mathrm{s}=2\cdot\nicefrac{\omega}{2 \pi}$)};
+                        \draw node[fill=white, inner sep = 1pt] at (axis cs:0.5,1) {\small linear mod.};
+                        \draw node[fill=white, inner sep = 1pt] at (axis cs:2,1) {\small overmodulation};
+                        \draw node[fill=white, inner sep = 1pt, above] at (axis cs:1.5,4/pi) {\small Fundamental freq. mod. ($f_\mathrm{s}=2\cdot\nicefrac{\omega}{2 \pi}$)};
                     \end{axis}
                 \end{tikzpicture}
                 \caption{Reference amplitude to output voltage fundamental amplitude}
@@ -687,6 +687,59 @@
             \end{figure}
         \end{column}
     \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Fundamental frequency modulation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Fundamental frequency modulation (aka square wave modulation)} 
+    \begin{figure}
+        \begin{tikzpicture}
+            \def\a{0.6*pi}
+            \begin{groupplot}[group style={group size=1 by 4, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.34\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi}, xticklabels = {0,$\nicefrac{1}{2}\pi$,$\pi$, $\nicefrac{3}{2}\pi$, $2\pi$}, ytick = {-1, 0, 1}, yticklabels = {$-1$, $0$, $1$}]
+
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_1(t)$}] 
+                \addplot[signalgreen, thick] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_2(t)$}] 
+                \addplot[signallavender, thick, domain = 0:2*pi, samples = 100] coordinates {(0,1) (\a,1) (\a,-1) (\a+pi,-1) (\a+pi,1) (2*pi,1)}; 
+
+                % bottom middle plot: combined switching signal
+                \nextgroupplot[ylabel = {$s(t)$}, ymin = -1.1*4/pi, ymax =1.1*4/pi] 
+                \addplot[signalblue, thick, domain = 0:2*pi, samples = 100] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
+                \addplot[signalblue, thick, domain=0:2*pi, samples=50, dashed] {4/pi*sin(deg(x-\a))};
+                \draw[->] (axis cs:0,0) -- node[above, fill=white, inner sep=1pt]{\small$\alpha$} (axis cs:\a,0); 
+                \draw[thin] (axis cs:\a+pi+0.2, -0.1) -- node[right, fill=white, inner sep=1pt]{\small $\frac{\hat{u}_2^{(1)}}{U_1}=s^*$} (axis cs:\a+pi+0.5, 0.6);
+
+                % bottom plot: approximation error 
+                \nextgroupplot[ylabel = {$e(t)$}, xlabel={$\omega t$}, ymin=-0.5, ymax=0.5, ytick = {-0.5, 0, 0.5}, yticklabels = {$-0.5$, $0$, $0.5$}] 
+                \addplot[signalblue, thick, domain=0:\a, samples=25] {-4/pi*(cos(deg(x-\a))-cos(deg(-\a)))+x}; 
+                \addplot[signalblue, thick, domain=\a:\a+pi, samples=25] {-4/pi*(cos(deg(x-\a))-cos(deg(\a)))-(x-2*\a)}; 
+                \addplot[signalblue, thick, domain=\a+pi:2*pi, samples=25] {-4/pi*(cos(deg(x-\a))-cos(deg(\a)))+(x-2*pi)}; 
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Fundamental frequency modulation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Fundamental frequency modulation (cont.)} 
+    The fundamental frequency modulation leads to a pulse pattern synchronized with the fundamental output voltage $\hat{u}_2^{(1)}(t)$, i.e., there are exactly two switching actions per fundamental period $$ f_\mathrm{s} = 2\frac{\omega}{2\pi} = \frac{\omega}{\pi}.$$ 
+    The fundamental output voltage amplitude can be derived from the corresponding Fourier coefficient
+    \begin{equation}
+        \begin{split}
+            \hat{u}_2^{(k)} &= \frac{1}{\pi} \int_{\alpha}^{\alpha + \pi} u_2(t)\sin(k (\omega t-\alpha)) \mathrm{d}\omega t = \frac{2}{\pi} \int_{}^{\pi/2} U_1 \sin(k \omega t) \mathrm{d}\omega t \\
+                & = \frac{2}{\pi} \left[-\frac{U_1}{k} \cos(k \omega t)\right]_{0}^{\pi/2} = \frac{2}{\pi} \left[\frac{U_1}{k} \left(\cos(0) - \cos(k(\pi/2))\right)\right] \\
+                &= \frac{4}{\pi} U_1 \frac{1}{k}, \quad k=1,3,5,7,\ldots
+            \end{split}
+    \end{equation}
+    The fundamental output voltage amplitude is thus given by $ \hat{u}_2^{(1)} = \nicefrac{4}{\pi} \cdot U_1$ which is fixed due to fundamental frequency modulation while only the phase angle $\alpha$ can be adjusted.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -718,10 +771,10 @@
                 \draw (in1) to [open, v^=$\hspace{0.5cm}u_1(t)$, voltage = straight] (in2);
                 \draw node[anchor = west, xshift=0.3cm] at (Sw1) {$s_1(t)$};
                 \draw node[anchor = west, xshift=0.3cm] at (Sw2) {$s_2(t)$};
-                \draw (c1) to [capacitor, *-*, l=$C$] (c1 |- int2);
+                \draw (c1) to [capacitor, *-*, l=$C$, i_=$i_\mathrm{C}(t)$] (c1 |- int2);
                 \draw (out1) to [inductor, v<=$u_{\mathrm{L}}(t)$, voltage = straight, l=$L$, mirror, o-] ++(-2.5,0) to [sinusoidal voltage source, v_=$u_{\mathrm{g}}(t)$] (\tikztostart |- out2) to [short,-o] (out2);
             \end{circuitikz}
-            \caption{Single-phase grid rectification: full bidirectional operation possible (e.g., for electrical rail vehicles with a \SI{15}{\kilo\volt}, \SI[parse-numbers = false]{16\frac{2}{3}}{\hertz} grid)}
+            \caption{Single-phase grid rectification: full bidirectional operation possible (e.g., for electrical rail vehicles with a \SI{15}{\kilo\volt}, \SI[parse-numbers = false]{16\frac{2}{3}}{\hertz} grid). Note: converter topology is flipped to align $u_2$ with the AC grid side while $u_1$ is the DC output.}
             \label{fig:recitifier_single_phase_transistor_bridge_converter}
         \end{figure}
 \end{frame}
@@ -739,11 +792,11 @@
             \end{equation} 
             The converter's input voltage amplitude is
             \begin{equation}
-                \hat{u}_2 = \sqrt{\hat{u}^2_\mathrm{g} + \omega^2 L^2 \hat{i}^2_2}.
+                \hat{u}_2 = \sqrt{\hat{u}^2_\mathrm{g} + \left(\omega L \hat{i}_2\right)^2}.
             \end{equation}
-            As the converter boosts the grid voltage towards the DC-link, the following condition applies:
+            As the converter boosts the grid voltage towards the DC-link, the following condition must apply:
             \begin{equation}
-                u_1(t)\approx U_\mathrm{dc} \geq \hat{u}_2 = \sqrt{\hat{u}^2_\mathrm{g} + \omega^2 L^2 \hat{i}^2_2}.
+                u_1(t)\approx U_\mathrm{dc} \geq \hat{u}_2 = \sqrt{\hat{u}^2_\mathrm{g} + \left(\omega L \hat{i}_2\right)^2}.
             \end{equation}
         \end{column}
         \begin{column}{0.5\textwidth}
@@ -763,8 +816,113 @@
                 \label{fig:recitifier_single_phase_transistor_phasors}
             \end{figure}
         \end{column}
-        
-    \end{columns}
-    
-        
+    \end{columns}  
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state operation (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state operation (cont.)} 
+    With the assumption of $\cos(\varphi)=1$ operation and a lossless converter, the following relations hold:
+    \begin{equation}
+        P = P_1 = P_2 = P_\mathrm{g} =  U_\mathrm{g}I_\mathrm{g} = \frac{1}{2}  \hat{u}_\mathrm{g}\hat{i}_\mathrm{g}.
+    \end{equation}
+    While there is no reactive power exchange with the grid, the converter needs to supply the reactive power $Q_2$ to compensate for the line inductance demand:
+    \begin{equation}
+        Q_2 = \omega L I_\mathrm{g}^2.
+    \end{equation}
+    The resulting apparent power $S_2$ is
+    \begin{equation}
+        S_2 = \sqrt{P^2 + Q_2^2} = \sqrt{P^2 + \left(\omega L I_\mathrm{g}\right)^2} = \sqrt{P^2 + \left(\frac{\omega L}{U_\mathrm{g}^2}P^2\right)^2} = P\sqrt{1 + \left(\frac{\omega L}{U_\mathrm{g}^2}P\right)^2}.
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state operation (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state operation (cont.)} 
+    Neglecting the switching-induced current and voltage ripples, the instantaneous grid power is
+    \begin{equation}
+        p_\mathrm{g}(t) = u_\mathrm{g}(t)i_\mathrm{g}(t) = \hat{u}_\mathrm{g}\hat{i}_\mathrm{g}\cos^2(\omega t) = P + P \cos(2\omega t).
+    \end{equation}
+    The instantaneous converter power is
+    \begin{equation}
+        \begin{split}
+        p_2(t) &= u_2(t)i_2(t) = \left(u_\mathrm{g}(t) + u_\mathrm{L}(t)\right)i_\mathrm{g}(t) = \left(u_\mathrm{g}(t) + L\frac{\mathrm{d}}{\mathrm{d}t}i_\mathrm{g}(t)\right)i_\mathrm{g}(t)\\
+               & = \hat{u}_\mathrm{g}\hat{i}_\mathrm{g}\cos^2(\omega t) + \omega L \hat{i}_\mathrm{g}^2\sin(\omega t)\cos(\omega t)\\
+                & = P\left(1 + \cos(2\omega t)\right) + Q_2 \sin(2\omega t) = P + S_2\cos(2\omega t- 2\varphi_2)
+        \end{split}
+    \end{equation}
+    with $\varphi_2$ being the phase angle between $i_2(t)$ and $u_2(t)$. Hence, the converter power oscillates at twice the grid frequency with an amplitude of $S_2$. As $S_2>P$ applies, the instantaneous output power gets temporarily negative as a result of the reactive power compensation on the grid side. 
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state operation (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state operation (cont.)} 
+    Assuming a nearly constant DC-link voltage $u_1(t)\approx U_\mathrm{dc}$, the converter DC-side current $i_1(t)$ oscillates as well:
+    \begin{equation}
+        i_1(t) = \frac{p_1(t)}{U_\mathrm{dc}}= \frac{p_2(t)}{U_\mathrm{dc}} = \frac{P}{U_\mathrm{dc}}+ \frac{S_2}{U_\mathrm{dc}}\cos(2\omega t - 2\varphi_2).
+    \end{equation}
+    For a constant load current $$I_0 = \frac{P}{U_\mathrm{dc}},$$ the converter's output current can be rewritten as
+    \begin{equation}
+        i_1(t) = I_0 \left(1 + \sqrt{1+\left(\frac{\omega L U_\mathrm{dc}}{U_\mathrm{g}^2}\right)^2}\cos(2\omega t - 2\varphi_2)\right).
+    \end{equation}
+    Consequently, the DC-link capacitor current carries the harmonic content:
+    \begin{equation}
+        i_\mathrm{C}(t) =  i_1(t) - I_0 = I_0 \sqrt{1+\left(\frac{\omega L U_\mathrm{dc}}{U_\mathrm{g}^2}\right)^2}\cos(2\omega t - 2\varphi_2).
+        \label{eq:DC_link_current_single_phase_ACDC}
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state operation (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state operation (cont.)} 
+    Assuming that the voltage ripple of  the DC-link capacitor does not significantly affect the output current, the voltage ripple amplitude can be approximated as:
+    \begin{equation}
+        \hat{u}_\mathrm{C} = \hat{u}_1 \approx \frac{\hat{i}_1}{2\omega C} = \frac{I_0}{2C} \sqrt{1+\left(\frac{\omega L U_\mathrm{dc}}{U_\mathrm{g}^2}I_0\right)^2}.
+        \label{eq:DC_link_voltage_single_phase_ACDC}
+    \end{equation}
+    This relation results from the complex phasor analysis of the capacitor's impedance given the current ripple \eqref{eq:DC_link_current_single_phase_ACDC}. From \eqref{eq:DC_link_voltage_single_phase_ACDC} one can 
+    \begin{itemize}
+        \item derive the required DC-link capacitance for a given voltage ripple,
+        \item estimate the voltage ripple for a given DC-link capacitance.
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Steady-state operation (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Steady-state operation (cont.)} 
+    \begin{figure}
+        \begin{tikzpicture}
+            \def\p{0.2*pi}
+            \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi}, xticklabels = {0,$\nicefrac{1}{2}\pi$,$\pi$, $\nicefrac{3}{2}\pi$, $2\pi$}, ytick = {-1, 0, 1}, yticklabels = {$-1$, $0$, $1$}]
+
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$x(t)$}, legend pos=north east, legend columns=3, ytick = {0}] 
+                \addplot[signalblue, thick, domain=0:2*pi, samples = 100] {cos(deg(x))};
+                \addplot[signalred, thick, domain=0:2*pi, samples = 100] {0.6*cos(deg(x))};
+                \addplot[signalblue, thick, domain=0:2*pi, samples = 100, dashed] {cos(deg(x-\p))};
+                \draw[->] (axis cs:pi/2,0) -- node[above, fill=white, inner sep=1pt]{$\varphi_2$} (axis cs:pi/2+\p,0);
+                \legend{$u_\mathrm{g}(t)$, $i_\mathrm{g}(t)$, $u_2(t)$};
+
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$p(t)/P$}, legend pos=north east, legend columns=2, ymin= -0.2, ymax = 2.2] 
+                \addplot[signalblue, thick, domain=0:2*pi, samples = 100] {1+cos(deg(2*x))}; 
+                \addplot[signalblue, thick, domain=0:2*pi, samples = 100, dashed] {1+1.15*cos(deg(2*x-2*\p))};  
+                \draw[<->] (axis cs:pi/2+\p,-0.15) -- node[left, fill=white, inner sep=1pt]{$S_2$} (axis cs:pi/2+\p,1);      
+                \draw[<->] (axis cs:pi/2+\p,1) -- node[left, fill=white, inner sep=1pt]{$S_2$} (axis cs:pi/2+\p,2.15);         
+                \legend{$p_\mathrm{g}(t)$, $p_2(t)$};
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
 \end{frame}
