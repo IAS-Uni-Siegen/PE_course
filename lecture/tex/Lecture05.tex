@@ -928,198 +928,6 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Higher-pulse number converters %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Higher-pulse number converters} 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% M3C converter %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{M3C converter}
-    The previous diode-based rectifiers with higher-pulse numbers can be directly transferred to their controlled counterparts using thyristors, such as the 3-pulse converter shown in \figref{fig:M3C_topology_filter}.  
-    \begin{figure}
-          \begin{circuitikz}
-            \def\vd{1cm} % vertical distance inductors
-            \def\htraf{0.75cm} % horizontal distance transformer coils
-            \draw (0,0) to [short, o-] ++(0.5,0) coordinate (L1astart) to [short] ++(0.5,0) to [L] ++(2,0) coordinate (L1aend)
-            (0,-1*\vd) to [short, o-] ++(1,0) coordinate (L1bstart) to [L] ++(2,0) coordinate (L1bend)
-            (0,-2*\vd) to [short, o-] ++(1,0) coordinate (L1cstart) to [L] ++(2,0) coordinate (L1cend) -- ++(0,-0.5*\vd) to (\tikztostart -| L1astart) 
-            to [crossing] ++(0, 1*\vd) to [crossing] ++(0, 1*\vd) to [short, -*] (L1astart)
-            (L1aend) -- ++(0,-0.5*\vd) to (\tikztostart -| L1bstart) to [short, -*] (L1bstart)
-            (L1bend) -- ++(0,-0.5*\vd) to (\tikztostart -| L1cstart) to [short, -*] (L1cstart);
-            \draw let \p1=(L1aend) in (\x1 + \htraf, \y1) coordinate (L2astart) to [L, v^<=$u_{1\mathrm{a}}(t)$, voltage = straight] ++(2,0) to [short, i=$i_{1\mathrm{a}}(t)$] ++(0.5,0) coordinate (L2aend);
-            \draw let \p1=(L1bend) in (\x1 + \htraf, \y1) coordinate (L2bstart) to [L, v^<=$u_{1\mathrm{b}}(t)$, voltage = straight] ++(2,0) to [short, i=$i_{1\mathrm{b}}(t)$] ++(0.5,0) coordinate (L2bend);
-            \draw let \p1=(L1cend) in (\x1 + \htraf, \y1) coordinate (L2cstart) to [L, v^<=$u_{1\mathrm{c}}(t)$, voltage = straight] ++(2,0) to [short, i=$i_{1\mathrm{c}}(t)$] ++(0.5,0)  coordinate (L2cend);
-            \draw (L2astart) to [short, -*] (L2bstart) to [short, -*] (L2cstart) -- ++(0, -1*\vd) -- ++(5,0) coordinate (Rend);
-            \draw[double, double distance=3pt, thick] let \p1=(L1aend), \p2=(L2cstart) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
-            \draw (L2aend) to [thyristor] ++(1.25,0) coordinate (D1end);
-            \draw (L2bend) to [thyristor] ++(1.25,0) coordinate (D2end);
-            \draw (L2cend) to [thyristor] ++(1.25,0) coordinate (D3end) to [short, -*] (D2end) to [short, -*] (D1end);
-            \draw (D1end) to [short] ++(0.5,0) coordinate (u2) to [short, i=$i_2(t)$] ++(0.75,0) to [L, l=$L$] ++(2,0) coordinate (Ctop) to [short, i = $i_\mathrm{R}(t)$] ++(1.5,0) to [R, l=$R$] (Rend -| \tikztostart) to (Rend); 
-            \draw (u2) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] (Rend -| \tikztostart);
-            \draw (Ctop) to [C, l=$C$, i = $i_\mathrm{C}(t)$, v = $u_\mathrm{C}(t)$, voltage = straight, *-*]  (Rend -| Ctop);
-        \end{circuitikz}%
-        \caption{M3C topology with an input three-phase transformer, a resistive load and output filter}
-        \label{fig:M3C_topology_filter}
-    \end{figure}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% M3C converter (cont.) %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{M3C converter (cont.)}
-    \begin{columns}
-        \begin{column}{0.5\textwidth}
-            \onslide<1->{The M3C converter's firing angle $\alpha$ starts at the crossing of two adjacent input voltages, that is, where the voltage over the next thyristor becomes positive.} \onslide<2->{For CCM and neglecting commutation and other parasitic effects, the M3C's \hl{average output voltage} is}
-            \begin{equation}
-                \begin{split}
-                    \onslide<2->{\overline{u}_2 &= \frac{3}{2\pi} \int_{\frac{1}{6}\pi+\alpha}^{\frac{5}{6}\pi+\alpha} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t\\}
-                    \onslide<3->{&= \frac{3}{2\pi} \hat{u}_1 \left[-\cos(\omega t)\right]_{\frac{1}{6}\pi+\alpha}^{\frac{5}{6}\pi+\alpha}=\ldots\\
-                                    &= \frac{3\sqrt{3}}{2\pi}\hat{u}_1\cos(\alpha).}
-                \end{split}
-            \end{equation}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \begin{figure}
-                \begin{tikzpicture}
-                    \tikzmath{
-                            real \uavg, \omegat1, \u1, \a;
-                            \u1 = 1;
-                            \a = 0.25*pi;
-                            \uavg = \u1*3*sqrt(3)/(2*pi)*cos(deg(\a));
-                        }
-        
-                    \begin{axis}[height=0.5\textheight, width=0.95\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/3, pi/6*4, pi, 8/6*pi, 10/6*pi,  2*pi}, xticklabels = {}, ytick = {-1, 0, 1}, yticklabels = {, 0, }, ylabel = {$u(t)$}, yticklabels = { $-\hat{u}_1$, $0$, $\hat{u}_1$}, xticklabels = {0, $\frac{1}{3}\pi$, $\frac{2}{3}\pi$, $\vphantom{\frac{1}{1}}\pi$, $\frac{4}{3}\pi$, $\frac{5}{3}\pi$,$\vphantom{\frac{1}{1}}2\pi$},xlabel = {$\omega t$}]
-        
-                        \draw[thin, signallavender] (axis cs:pi/6+\a+0.2,\uavg) -- node[signallavender, fill=white, inner sep=2pt, anchor = north, xshift=1mm] {$\overline{u}_2$} (axis cs:pi/6+\a+0.4,\uavg/3);
-                        \draw[thin, signallavender] (axis cs:pi/3,0) -- node[signallavender, fill=white, inner sep=1pt, anchor = north east, xshift=2mm] {$u_2(t)$} (axis cs:pi/5,-0.4);
-                        \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, name path=A]{sin(deg(x))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalgreen, thick, name path=B]{sin(deg(x-pi/3*2))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalbrown, thick, name path=C]{sin(deg(x+pi/3*2))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signallavender, thick, dashed, name path=avg]{\uavg};
-                        \addplot[domain=0:2*pi, samples=150, signallavender, thick]{(x < \a + pi/6) * sin(deg(x+pi/3*2)) + (x > \a + pi/6)*(x < \a + pi*5/6)*sin(deg(x)) + (x > \a + pi*5/6)*(x < \a + pi*9/6)*sin(deg(x-pi/3*2)) + (x > \a + pi*9/6)*sin(deg(x+pi/3*2))};
-                        \draw[->] (axis cs:pi/6,1.2) -- node[above]{$\alpha$} (axis cs:{pi/6+\a},1.2);
-                        \draw[thin, dashed] (axis cs:pi/6,1.5) -- (axis cs:pi/6,0);
-                        \draw[thin, dashed] (axis cs:pi/6+pi/3*2,1.5) -- (axis cs:pi/6+pi/3*2,0);
-                        \draw[thin, dashed] (axis cs:pi/6+pi/3*4,1.5) -- (axis cs:pi/6+pi/3*4,0);
-                        \draw[->] (axis cs:pi/6+2*pi/3,1.2) -- node[above]{$\alpha$} (axis cs:{pi/6+\a+2*pi/3},1.2);
-                        \draw[->] (axis cs:pi/6+4*pi/3,1.2) -- node[above]{$\alpha$} (axis cs:{pi/6+\a+4*pi/3},1.2);
-                        \addplot[shadecolor, opacity=0.3] fill between[of=A and avg, soft clip={domain=pi/6+\a:5*pi/6+\a}];
-                        \addplot[shadecolor, opacity=0.3] fill between[of=B and avg, soft clip={domain=5*pi/6+\a:3*pi/2+\a}];
-                        \addplot[shadecolor, opacity=0.3] fill between[of=C and avg, soft clip={domain=3*pi/2+\a:2*pi+\a}];
-                        \addplot[shadecolor, opacity=0.3] fill between[of=C and avg, soft clip={domain=0:pi/6+\a}];
-                    \end{axis}
-                \end{tikzpicture}
-                \caption{Examplary firing angle for the M3C converter}
-                \label{fig:firing_angle_M3C}
-            \end{figure}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% B6C converter %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{B6C converter}
-    \begin{figure}
-        \begin{circuitikz}
-            \def\vd{1.5cm} % vertical distance AC sources
-            \def\hd{1.5cm} % horizontal distance diode bridge
-            \def\h1d{6.0cm} % horizontal position first diode string
-            % Voltage sources and neutral connection
-            \draw (0,0) to [sinusoidal voltage source, v^<=$u_{1\mathrm{a}}$] ++(1.5, 0) to [L] ++(1.75, 0) to [short, i=$i_{1\mathrm{a}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (A);
-            \draw (0,-1*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{b}}$] ++(1.5, 0) to [L] ++(1.75, 0) to [short, i=$i_{1\mathrm{b}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (B);
-            \draw (0,-2*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{c}}$] ++(1.5,0) to [L] ++(1.75, 0) to [short, i=$i_{1\mathrm{c}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (C);
-            \draw (0,0) to [short, -*] ++(0,-1.5) to [short] ++(0,-1.5); 
-            
-            %thyristor bridge
-            \draw (\h1d,0) to [thyristor, name=D1] ++(0,1.25) coordinate (D1top);
-            \draw (\h1d,-4.25) coordinate (D2bot) to [thyristor, name=D2] ++(0,1.25) to [short] (\h1d, 0);
-            \draw (\h1d, 0) to [short, *-] (A);
-            \draw (\h1d+\hd,0) to [thyristor, name=D3] ++(0,1.25) coordinate (D3top);
-            \draw (\h1d+\hd,-4.25) coordinate (D4bot) to [thyristor, name=D4] ++(0,1.25) to [short] (\h1d+\hd, 0);
-            \draw (\h1d+2*\hd,0) to [thyristor, name=D5] ++(0,1.25) coordinate (D5top);
-            \draw (\h1d+2*\hd,-4.25) coordinate (D6bot) to [thyristor, name=D6] ++(0,1.25) to [short] (\h1d+2*\hd, 0);
-            \draw (B -| D3) to [crossing, *-, mirror] ++(-2*\hd,0) -- (B);
-            \draw (C -| D5) to [short, *-] ++(-\hd/2,0) to [crossing, mirror] ++(-\hd,0) to [crossing, mirror] ++(-\hd,0) -- (C);
-            \draw (D1top) to [short, -*] (D3top) to [short, -*] (D5top) to [short, i=$i_2(t)$] ++(2,0) to [R, l=$R$, name = R] (D6bot -| \tikztostart) to (D6bot);
-            \draw (D2bot) to [short, -*] (D4bot) to [short, -*] (D6bot);
-            \draw ($(D5top)!.3!(D5top -| R)$) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] ($(D6bot)!.3!(D6bot -| R)$);
-            \draw (A) to [open, v^>=$\hspace{0.75cm}u_{1\mathrm{ab}}(t)$, voltage = straight] (B);
-            \draw (B) to [open, v^>=$\hspace{0.75cm}u_{1\mathrm{bc}}(t)$, voltage = straight] (C);
-            \draw (-0.5,-2*\vd) to [open, v^>=$u_{1\mathrm{ca}}(t)\hspace{0.75cm}$, voltage = straight] (-0.5,0);
-        \end{circuitikz}
-    \caption{B6C topology with line chokes and a resistive load}
-    \label{fig:B6C_topology}
-\end{figure}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Output voltage of a thyristor bridge converter with $p$ pulses %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Output voltage of a thyristor bridge converter with $p$ pulses}
-    \begin{columns}
-        \begin{column}{0.5\textwidth}
-            The average output voltage (under idealized CCM operation) of a thyristor bridge converter with $p$ pulses is given by
-            \begin{align}
-                    \overline{u}_2 &= \frac{p}{2\pi} \int_{\alpha-\frac{\pi}{p}}^{\alpha+\frac{\pi}{p}}\hat{u} \cos(\omega t) \mathrm{d}\omega t\notag\\
-                                   &=\hat{u}\frac{p}{2\pi}\left[\sin\left(\alpha+\frac{\pi}{p}\right)- \sin\left(\alpha-\frac{\pi}{p}\right)\right]\notag\\
-                                   &= \hat{u}\frac{p}{\pi}\sin\left(\frac{\pi}{p}\right)\cos(\alpha\vphantom{\frac{\pi}{p}}). 
-            \end{align}
-            Here, the maximum achievable voltage
-            \begin{equation}
-                \max_{\alpha} \overline{u}_2 = \hat{u}\frac{p}{\pi}\sin\left(\nicefrac{\pi}{p}\right)
-            \end{equation}
-            increases with the number of pulses $p$.
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \begin{figure}
-                \begin{tikzpicture}
-                    \tikzmath{
-                            real \uavg, \omegat1, \u1, \a;
-                            \u1 = 1;
-                            \a = 0.4*pi;
-                            \uavg = \u1*6/pi*sin(deg(pi/6))*cos(deg(\a));
-                        }
-        
-                    \begin{axis}[height=0.5\textheight, width=0.95\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/3, pi/6*4, pi, 8/6*pi, 10/6*pi,  2*pi}, xticklabels = {}, ytick = {-1, 0, 1}, yticklabels = {, 0, }, ylabel = {$u(t)$}, yticklabels = { $-\hat{u}$, $0$, $\hat{u}$}, xticklabels = {0, $\frac{2\pi}{p}$, $\frac{4\pi}{p}$, $\frac{6\pi}{p}$, $\frac{8\pi}{p}$, $\frac{10\pi}{p}$,$\frac{12\pi}{p}$},xlabel = {$\omega t$}]
-        
-                        \draw[thin, signallavender] (axis cs:pi/3,\uavg) -- node[signallavender, fill=white, inner sep=2pt, anchor = north] {$\overline{u}_2$} (axis cs:pi/3,-\uavg/6);
-                        \draw[thin, signallavender] (axis cs:pi*0.965,0.66) -- node[signallavender, fill=white, inner sep=1pt, anchor = south west, yshift=2mm] {$u_2(t)$} (axis cs:pi*1.2,1.4);
-                        \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, name path=A]{cos(deg(x))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalgreen, thick, name path=B]{cos(deg(x-pi/3*2))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalbrown, thick, name path=C]{cos(deg(x+pi/3*2))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, dashed, name path=D]{-cos(deg(x))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalgreen, thick, dashed, name path=E]{-cos(deg(x-pi/3*2))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalbrown, thick,dashed,  name path=F]{-cos(deg(x+pi/3*2))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signallavender, thick, dashed, name path=avg]{\uavg};
-                        \addplot[domain=0:2*pi, samples=200, signallavender, thick]{(x <  -pi/6+\a) * -cos(deg(x-pi/3*2)) + (x > \a -pi/6)*(x < \a + pi/6)*cos(deg(x)) + (x > \a+ pi/6)*(x < \a + 3*pi/6)*-cos(deg(x+pi/3*2)) + (x > \a + 3*pi/6)*(x < \a + 5*pi/6)*cos(deg(x-pi/3*2))+ (x > \a + 5*pi/6)*(x < \a + 7*pi/6)*-cos(deg(x))+ (x > \a + 7*pi/6)*(x < \a + 9*pi/6)*cos(deg(x+pi/3*2))+ (x > \a + 9*pi/6)*(x < \a + 11*pi/6)*-cos(deg(x-pi/3*2))+ (x > \a + 11*pi/6)*(x < \a + 13*pi/6)*cos(deg(x))};
-                        \draw[->] (axis cs:pi/6,1.2) -- node[above]{$\alpha$} (axis cs:{pi/6+\a},1.2);
-                        \draw[thin, dashed] (axis cs:pi/6,1.5) -- (axis cs:pi/6,0);
-                        \draw[thin, dashed] (axis cs:pi/6+\a,1.5) -- (axis cs:pi/6+\a,{-cos(deg(pi/6+\a+pi/3*2))});
-                        \draw[thin, dashed] (axis cs:pi/6*3+\a,1.5) -- (axis cs:pi/6*3+\a,{-cos(deg(pi/6+\a+pi/3*2))});
-                        \draw[<->] (axis cs:pi/6+\a,1.2) -- node[above]{$\nicefrac{2\pi}{p}$} (axis cs:pi/6*3+\a,1.2);
-                        \addplot[shadecolor, opacity=0.3] fill between[of=E and avg, soft clip={domain=0:-pi/6+\a}];
-                        \addplot[shadecolor, opacity=0.3] fill between[of=A and avg, soft clip={domain=-pi/6+\a:pi/6+\a}];
-                        \addplot[shadecolor, opacity=0.3] fill between[of=F and avg, soft clip={domain=pi/6+\a:pi/6*3+\a}];
-                        \addplot[shadecolor, opacity=0.3] fill between[of=B and avg, soft clip={domain=pi/6*3+\a:pi/6*5+\a}];
-                        \addplot[shadecolor, opacity=0.3] fill between[of=D and avg, soft clip={domain=pi/6*5+\a:pi/6*7+\a}];
-                        \addplot[shadecolor, opacity=0.3] fill between[of=C and avg, soft clip={domain=pi/6*7+\a:pi/6*9+\a}];
-                        \addplot[shadecolor, opacity=0.3] fill between[of=E and avg, soft clip={domain=pi/6*9+\a:pi/6*11+\a}];
-                    \end{axis}
-                \end{tikzpicture}
-                \caption{Generalized firing angle representation for a thyristor bridge converter with $p$ pulses and $\hat{u}$ being the line-to-line voltage amplitude} 
-                \label{fig:firing_angle_thyristor_bridge_gen}
-            \end{figure}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Commutation %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Commutation} 
@@ -1422,6 +1230,200 @@
     \end{equation}
     \onslide<5->{Hence, the average output voltage is deviating by $\Delta u$ due to the commutation process.}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Higher-pulse number converters %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Higher-pulse number converters} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M3C converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{M3C converter}
+    The previous diode-based rectifiers with higher-pulse numbers can be directly transferred to their controlled counterparts using thyristors, such as the 3-pulse converter shown in \figref{fig:M3C_topology_filter}.  
+    \begin{figure}
+          \begin{circuitikz}
+            \def\vd{1cm} % vertical distance inductors
+            \def\htraf{0.75cm} % horizontal distance transformer coils
+            \draw (0,0) to [short, o-] ++(0.5,0) coordinate (L1astart) to [short] ++(0.5,0) to [L] ++(2,0) coordinate (L1aend)
+            (0,-1*\vd) to [short, o-] ++(1,0) coordinate (L1bstart) to [L] ++(2,0) coordinate (L1bend)
+            (0,-2*\vd) to [short, o-] ++(1,0) coordinate (L1cstart) to [L] ++(2,0) coordinate (L1cend) -- ++(0,-0.5*\vd) to (\tikztostart -| L1astart) 
+            to [crossing] ++(0, 1*\vd) to [crossing] ++(0, 1*\vd) to [short, -*] (L1astart)
+            (L1aend) -- ++(0,-0.5*\vd) to (\tikztostart -| L1bstart) to [short, -*] (L1bstart)
+            (L1bend) -- ++(0,-0.5*\vd) to (\tikztostart -| L1cstart) to [short, -*] (L1cstart);
+            \draw let \p1=(L1aend) in (\x1 + \htraf, \y1) coordinate (L2astart) to [L, v^<=$u_{1\mathrm{a}}(t)$, voltage = straight] ++(2,0) to [short, i=$i_{1\mathrm{a}}(t)$] ++(0.5,0) coordinate (L2aend);
+            \draw let \p1=(L1bend) in (\x1 + \htraf, \y1) coordinate (L2bstart) to [L, v^<=$u_{1\mathrm{b}}(t)$, voltage = straight] ++(2,0) to [short, i=$i_{1\mathrm{b}}(t)$] ++(0.5,0) coordinate (L2bend);
+            \draw let \p1=(L1cend) in (\x1 + \htraf, \y1) coordinate (L2cstart) to [L, v^<=$u_{1\mathrm{c}}(t)$, voltage = straight] ++(2,0) to [short, i=$i_{1\mathrm{c}}(t)$] ++(0.5,0)  coordinate (L2cend);
+            \draw (L2astart) to [short, -*] (L2bstart) to [short, -*] (L2cstart) -- ++(0, -1*\vd) -- ++(5,0) coordinate (Rend);
+            \draw[double, double distance=3pt, thick] let \p1=(L1aend), \p2=(L2cstart) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
+            \draw (L2aend) to [thyristor] ++(1.25,0) coordinate (D1end);
+            \draw (L2bend) to [thyristor] ++(1.25,0) coordinate (D2end);
+            \draw (L2cend) to [thyristor] ++(1.25,0) coordinate (D3end) to [short, -*] (D2end) to [short, -*] (D1end);
+            \draw (D1end) to [short] ++(0.5,0) coordinate (u2) to [short, i=$i_2(t)$] ++(0.75,0) to [L, l=$L$] ++(2,0) coordinate (Ctop) to [short, i = $i_\mathrm{R}(t)$] ++(1.5,0) to [R, l=$R$] (Rend -| \tikztostart) to (Rend); 
+            \draw (u2) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] (Rend -| \tikztostart);
+            \draw (Ctop) to [C, l=$C$, i = $i_\mathrm{C}(t)$, v = $u_\mathrm{C}(t)$, voltage = straight, *-*]  (Rend -| Ctop);
+        \end{circuitikz}%
+        \caption{M3C topology with an input three-phase transformer, a resistive load and output filter}
+        \label{fig:M3C_topology_filter}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% M3C converter (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{M3C converter (cont.)}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \onslide<1->{The M3C converter's firing angle $\alpha$ starts at the crossing of two adjacent input voltages, that is, where the voltage over the next thyristor becomes positive.} \onslide<2->{For CCM and neglecting commutation and other parasitic effects, the M3C's \hl{average output voltage} is}
+            \begin{equation}
+                \begin{split}
+                    \onslide<2->{\overline{u}_2 &= \frac{3}{2\pi} \int_{\frac{1}{6}\pi+\alpha}^{\frac{5}{6}\pi+\alpha} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t\\}
+                    \onslide<3->{&= \frac{3}{2\pi} \hat{u}_1 \left[-\cos(\omega t)\right]_{\frac{1}{6}\pi+\alpha}^{\frac{5}{6}\pi+\alpha}=\ldots\\
+                                    &= \frac{3\sqrt{3}}{2\pi}\hat{u}_1\cos(\alpha).}
+                \end{split}
+            \end{equation}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \begin{tikzpicture}
+                    \tikzmath{
+                            real \uavg, \omegat1, \u1, \a;
+                            \u1 = 1;
+                            \a = 0.25*pi;
+                            \uavg = \u1*3*sqrt(3)/(2*pi)*cos(deg(\a));
+                        }
+        
+                    \begin{axis}[height=0.5\textheight, width=0.95\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/3, pi/6*4, pi, 8/6*pi, 10/6*pi,  2*pi}, xticklabels = {}, ytick = {-1, 0, 1}, yticklabels = {, 0, }, ylabel = {$u(t)$}, yticklabels = { $-\hat{u}_1$, $0$, $\hat{u}_1$}, xticklabels = {0, $\frac{1}{3}\pi$, $\frac{2}{3}\pi$, $\vphantom{\frac{1}{1}}\pi$, $\frac{4}{3}\pi$, $\frac{5}{3}\pi$,$\vphantom{\frac{1}{1}}2\pi$},xlabel = {$\omega t$}]
+        
+                        \draw[thin, signallavender] (axis cs:pi/6+\a+0.2,\uavg) -- node[signallavender, fill=white, inner sep=2pt, anchor = north, xshift=1mm] {$\overline{u}_2$} (axis cs:pi/6+\a+0.4,\uavg/3);
+                        \draw[thin, signallavender] (axis cs:pi/3,0) -- node[signallavender, fill=white, inner sep=1pt, anchor = north east, xshift=2mm] {$u_2(t)$} (axis cs:pi/5,-0.4);
+                        \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, name path=A]{sin(deg(x))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalgreen, thick, name path=B]{sin(deg(x-pi/3*2))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalbrown, thick, name path=C]{sin(deg(x+pi/3*2))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signallavender, thick, dashed, name path=avg]{\uavg};
+                        \addplot[domain=0:2*pi, samples=150, signallavender, thick]{(x < \a + pi/6) * sin(deg(x+pi/3*2)) + (x > \a + pi/6)*(x < \a + pi*5/6)*sin(deg(x)) + (x > \a + pi*5/6)*(x < \a + pi*9/6)*sin(deg(x-pi/3*2)) + (x > \a + pi*9/6)*sin(deg(x+pi/3*2))};
+                        \draw[->] (axis cs:pi/6,1.2) -- node[above]{$\alpha$} (axis cs:{pi/6+\a},1.2);
+                        \draw[thin, dashed] (axis cs:pi/6,1.5) -- (axis cs:pi/6,0);
+                        \draw[thin, dashed] (axis cs:pi/6+pi/3*2,1.5) -- (axis cs:pi/6+pi/3*2,0);
+                        \draw[thin, dashed] (axis cs:pi/6+pi/3*4,1.5) -- (axis cs:pi/6+pi/3*4,0);
+                        \draw[->] (axis cs:pi/6+2*pi/3,1.2) -- node[above]{$\alpha$} (axis cs:{pi/6+\a+2*pi/3},1.2);
+                        \draw[->] (axis cs:pi/6+4*pi/3,1.2) -- node[above]{$\alpha$} (axis cs:{pi/6+\a+4*pi/3},1.2);
+                        \addplot[shadecolor, opacity=0.3] fill between[of=A and avg, soft clip={domain=pi/6+\a:5*pi/6+\a}];
+                        \addplot[shadecolor, opacity=0.3] fill between[of=B and avg, soft clip={domain=5*pi/6+\a:3*pi/2+\a}];
+                        \addplot[shadecolor, opacity=0.3] fill between[of=C and avg, soft clip={domain=3*pi/2+\a:2*pi+\a}];
+                        \addplot[shadecolor, opacity=0.3] fill between[of=C and avg, soft clip={domain=0:pi/6+\a}];
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Examplary firing angle for the M3C converter}
+                \label{fig:firing_angle_M3C}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% B6C converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{B6C converter}
+    \begin{figure}
+        \begin{circuitikz}
+            \def\vd{1.5cm} % vertical distance AC sources
+            \def\hd{1.5cm} % horizontal distance diode bridge
+            \def\h1d{6.0cm} % horizontal position first diode string
+            % Voltage sources and neutral connection
+            \draw (0,0) to [sinusoidal voltage source, v^<=$u_{1\mathrm{a}}$] ++(1.5, 0) to [L] ++(1.75, 0) to [short, i=$i_{1\mathrm{a}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (A);
+            \draw (0,-1*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{b}}$] ++(1.5, 0) to [L] ++(1.75, 0) to [short, i=$i_{1\mathrm{b}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (B);
+            \draw (0,-2*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{c}}$] ++(1.5,0) to [L] ++(1.75, 0) to [short, i=$i_{1\mathrm{c}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (C);
+            \draw (0,0) to [short, -*] ++(0,-1.5) to [short] ++(0,-1.5); 
+            
+            %thyristor bridge
+            \draw (\h1d,0) to [thyristor, name=D1] ++(0,1.25) coordinate (D1top);
+            \draw (\h1d,-4.25) coordinate (D2bot) to [thyristor, name=D2] ++(0,1.25) to [short] (\h1d, 0);
+            \draw (\h1d, 0) to [short, *-] (A);
+            \draw (\h1d+\hd,0) to [thyristor, name=D3] ++(0,1.25) coordinate (D3top);
+            \draw (\h1d+\hd,-4.25) coordinate (D4bot) to [thyristor, name=D4] ++(0,1.25) to [short] (\h1d+\hd, 0);
+            \draw (\h1d+2*\hd,0) to [thyristor, name=D5] ++(0,1.25) coordinate (D5top);
+            \draw (\h1d+2*\hd,-4.25) coordinate (D6bot) to [thyristor, name=D6] ++(0,1.25) to [short] (\h1d+2*\hd, 0);
+            \draw (B -| D3) to [crossing, *-, mirror] ++(-2*\hd,0) -- (B);
+            \draw (C -| D5) to [short, *-] ++(-\hd/2,0) to [crossing, mirror] ++(-\hd,0) to [crossing, mirror] ++(-\hd,0) -- (C);
+            \draw (D1top) to [short, -*] (D3top) to [short, -*] (D5top) to [short, i=$i_2(t)$] ++(2,0) to [R, l=$R$, name = R] (D6bot -| \tikztostart) to (D6bot);
+            \draw (D2bot) to [short, -*] (D4bot) to [short, -*] (D6bot);
+            \draw ($(D5top)!.3!(D5top -| R)$) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] ($(D6bot)!.3!(D6bot -| R)$);
+            \draw (A) to [open, v^>=$\hspace{0.75cm}u_{1\mathrm{ab}}(t)$, voltage = straight] (B);
+            \draw (B) to [open, v^>=$\hspace{0.75cm}u_{1\mathrm{bc}}(t)$, voltage = straight] (C);
+            \draw (-0.5,-2*\vd) to [open, v^>=$u_{1\mathrm{ca}}(t)\hspace{0.75cm}$, voltage = straight] (-0.5,0);
+        \end{circuitikz}
+    \caption{B6C topology with line chokes and a resistive load}
+    \label{fig:B6C_topology}
+\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Output voltage of a thyristor bridge converter with $p$ pulses %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Output voltage of a thyristor bridge converter with $p$ pulses}
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            The average output voltage (under idealized CCM operation) of a thyristor bridge converter with $p$ pulses is given by
+            \begin{align}
+                    \overline{u}_2 &= \frac{p}{2\pi} \int_{\alpha-\frac{\pi}{p}}^{\alpha+\frac{\pi}{p}}\hat{u} \cos(\omega t) \mathrm{d}\omega t\notag\\
+                                   &=\hat{u}\frac{p}{2\pi}\left[\sin\left(\alpha+\frac{\pi}{p}\right)- \sin\left(\alpha-\frac{\pi}{p}\right)\right]\notag\\
+                                   &= \hat{u}\frac{p}{\pi}\sin\left(\frac{\pi}{p}\right)\cos(\alpha\vphantom{\frac{\pi}{p}}). 
+            \end{align}
+            Here, the maximum achievable voltage
+            \begin{equation}
+                \max_{\alpha} \overline{u}_2 = \hat{u}\frac{p}{\pi}\sin\left(\nicefrac{\pi}{p}\right)
+            \end{equation}
+            increases with the number of pulses $p$.
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \begin{tikzpicture}
+                    \tikzmath{
+                            real \uavg, \omegat1, \u1, \a;
+                            \u1 = 1;
+                            \a = 0.4*pi;
+                            \uavg = \u1*6/pi*sin(deg(pi/6))*cos(deg(\a));
+                        }
+        
+                    \begin{axis}[height=0.5\textheight, width=0.95\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/3, pi/6*4, pi, 8/6*pi, 10/6*pi,  2*pi}, xticklabels = {}, ytick = {-1, 0, 1}, yticklabels = {, 0, }, ylabel = {$u(t)$}, yticklabels = { $-\hat{u}$, $0$, $\hat{u}$}, xticklabels = {0, $\frac{2\pi}{p}$, $\frac{4\pi}{p}$, $\frac{6\pi}{p}$, $\frac{8\pi}{p}$, $\frac{10\pi}{p}$,$\frac{12\pi}{p}$},xlabel = {$\omega t$}]
+        
+                        \draw[thin, signallavender] (axis cs:pi/3,\uavg) -- node[signallavender, fill=white, inner sep=2pt, anchor = north] {$\overline{u}_2$} (axis cs:pi/3,-\uavg/6);
+                        \draw[thin, signallavender] (axis cs:pi*0.965,0.66) -- node[signallavender, fill=white, inner sep=1pt, anchor = south west, yshift=2mm] {$u_2(t)$} (axis cs:pi*1.2,1.4);
+                        \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, name path=A]{cos(deg(x))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalgreen, thick, name path=B]{cos(deg(x-pi/3*2))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalbrown, thick, name path=C]{cos(deg(x+pi/3*2))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, dashed, name path=D]{-cos(deg(x))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalgreen, thick, dashed, name path=E]{-cos(deg(x-pi/3*2))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalbrown, thick,dashed,  name path=F]{-cos(deg(x+pi/3*2))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signallavender, thick, dashed, name path=avg]{\uavg};
+                        \addplot[domain=0:2*pi, samples=200, signallavender, thick]{(x <  -pi/6+\a) * -cos(deg(x-pi/3*2)) + (x > \a -pi/6)*(x < \a + pi/6)*cos(deg(x)) + (x > \a+ pi/6)*(x < \a + 3*pi/6)*-cos(deg(x+pi/3*2)) + (x > \a + 3*pi/6)*(x < \a + 5*pi/6)*cos(deg(x-pi/3*2))+ (x > \a + 5*pi/6)*(x < \a + 7*pi/6)*-cos(deg(x))+ (x > \a + 7*pi/6)*(x < \a + 9*pi/6)*cos(deg(x+pi/3*2))+ (x > \a + 9*pi/6)*(x < \a + 11*pi/6)*-cos(deg(x-pi/3*2))+ (x > \a + 11*pi/6)*(x < \a + 13*pi/6)*cos(deg(x))};
+                        \draw[->] (axis cs:pi/6,1.2) -- node[above]{$\alpha$} (axis cs:{pi/6+\a},1.2);
+                        \draw[thin, dashed] (axis cs:pi/6,1.5) -- (axis cs:pi/6,0);
+                        \draw[thin, dashed] (axis cs:pi/6+\a,1.5) -- (axis cs:pi/6+\a,{-cos(deg(pi/6+\a+pi/3*2))});
+                        \draw[thin, dashed] (axis cs:pi/6*3+\a,1.5) -- (axis cs:pi/6*3+\a,{-cos(deg(pi/6+\a+pi/3*2))});
+                        \draw[<->] (axis cs:pi/6+\a,1.2) -- node[above]{$\nicefrac{2\pi}{p}$} (axis cs:pi/6*3+\a,1.2);
+                        \addplot[shadecolor, opacity=0.3] fill between[of=E and avg, soft clip={domain=0:-pi/6+\a}];
+                        \addplot[shadecolor, opacity=0.3] fill between[of=A and avg, soft clip={domain=-pi/6+\a:pi/6+\a}];
+                        \addplot[shadecolor, opacity=0.3] fill between[of=F and avg, soft clip={domain=pi/6+\a:pi/6*3+\a}];
+                        \addplot[shadecolor, opacity=0.3] fill between[of=B and avg, soft clip={domain=pi/6*3+\a:pi/6*5+\a}];
+                        \addplot[shadecolor, opacity=0.3] fill between[of=D and avg, soft clip={domain=pi/6*5+\a:pi/6*7+\a}];
+                        \addplot[shadecolor, opacity=0.3] fill between[of=C and avg, soft clip={domain=pi/6*7+\a:pi/6*9+\a}];
+                        \addplot[shadecolor, opacity=0.3] fill between[of=E and avg, soft clip={domain=pi/6*9+\a:pi/6*11+\a}];
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Generalized firing angle representation for a thyristor bridge converter with $p$ pulses and $\hat{u}$ being the line-to-line voltage amplitude} 
+                \label{fig:firing_angle_thyristor_bridge_gen}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Section summary %%

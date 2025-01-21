@@ -750,6 +750,233 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Blanking / interlocking time %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Blanking / interlocking time} 
+    \begin{columns}
+        \begin{column}{0.45\textwidth}
+            When the $i$-th half bridge is actuated, i.e., changes it switching state, an interlocking / blanking time $t_0$ is introduced to avoid short-circuiting the DC link:
+            \begin{itemize}
+                \item First: turn off conducting transistor,
+                \item Second: wait $t_0$ \newline(ensure safe turn off),
+                \item Third: turn on the other transistor.
+            \end{itemize}
+            \vspace{-0.5cm}
+            \begin{varblock}{Background}
+                Signal delays or component tolerances lead to varying switch on/off times, which is why the interlock ensures an orderly switching process.
+            \end{varblock}
+        \end{column}
+        \hfill
+        \begin{column}{0.55\textwidth}
+            \begin{figure}
+                \begin{circuitikz}[]
+                    \ctikzset{amplifiers/scale=0.25} % Scale of amplifier
+                    \draw (0,0) to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (A)
+                    to [Tnpn, n=npn2, invert, bodydiode] ++(0,-2) coordinate (B)
+                    ($(npn1.E)!0.5!(npn2.C)$) to [short, i=$i_2(t)$, *-o] ++(1.5,0) coordinate (C);
+                    \draw (npn1.B) node[plain mono amp, anchor = out, name=amp1]{};
+                    \draw (npn2.B) node[plain mono amp, anchor = out, name=amp2]{};
+                    \draw let \p1 = (amp1.up) in node[anchor=south, yshift=1mm] at (\x1,\y1) {$s_{i,1}(t)$};
+                    \draw let \p1 = (amp2.up) in node[anchor=south, yshift=1mm] at (\x1,\y1) {$s_{i,2}(t)$};
+                    \draw let \p1 = (npn1.C) in node[anchor=north east, yshift=1mm] at (\x1,\y1) {$T_1$};
+                    \draw let \p1 = (npn2.C) in node[anchor=north east, yshift=1mm] at (\x1,\y1) {$T_2$};
+                    \draw ($(amp1.in)!0.5!(amp2.in) + (-1.25,0)$) node [block, minimum width = 1cm, minimum height = 0.75cm] (driver) {\small Driver};
+                    \draw ($(driver.north east)!0.5!(driver.east)$) to ++(0.25,0) |- (amp1.in);
+                    \draw ($(driver.south east)!0.5!(driver.east)$) to ++(0.25,0) |- (amp2.in);
+                    \draw[<-] (driver.west) to node[above]{$s_i(t)$} ++(-0.75,0) coordinate (D);
+                    \draw let \p1 = (D) in (B) to [short] ++($(\x1 - 0.5cm, 0)$) coordinate (E);
+                    \draw let \p1 = (D) in (0,0) to [short, -o, -o, i<_=$i_1(t)$] ++($(\x1 - 0.5cm, 0)$) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight]  (E);
+                    \draw (C) to [open, v^=$\hspace{0.5cm}u_2(t)$, voltage = straight] ++(0,-2) to [short, o-*] (B);
+                \end{circuitikz}
+                \caption{Actuation of one half-bridge branch}
+                \label{fig:half_bridge_actuation}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Blanking / interlocking time: positive load current %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Blanking / interlocking time: positive load current} 
+    \vspace{-0.1cm}
+    \begin{figure}
+        \begin{tikzpicture}
+            \def\a{0.33*pi}
+            \def\it{0.1*pi}
+            \begin{groupplot}[group style={group size=1 by 5, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.31\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi}, xticklabels = {0,$\nicefrac{1}{4}$,$\nicefrac{1}{2}$, $\nicefrac{3}{2}$, $1$}, ytick = {-1, 0, 1}, yticklabels = {$-1$, $0$, $1$}]
+
+                % switching input
+                \nextgroupplot[ylabel = {$s_i(t)$}] 
+                \addplot[signalgreen, thick] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)};
+                \coordinate (a1) at (axis cs:\a,1);
+                \coordinate (a2) at (axis cs:\a+\it,1);
+                \coordinate (a3) at (axis cs:\a+pi,1);
+
+                % top transistor 
+                \nextgroupplot[ylabel = {$s_{i,1}(t)$}] 
+                \addplot[signalgreen, thick] coordinates {(0,-1) (\a+\it,-1) (\a+\it,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
+                \draw[<->] (axis cs:\a,0) -- node[above, fill=white, inner sep=1pt, yshift=1mm]{\small$t_0$} (axis cs:\a+\it,0);
+                
+
+                % bottom transistor
+                \nextgroupplot[ylabel = {$s_{i,2}(t)$}] 
+                \addplot[signalgreen, thick] coordinates {(0,1) (\a,1) (\a,-1) (\a+pi+\it,-1) (\a+pi+\it,1) (2*pi,1)}; 
+                
+
+                % current 
+                \nextgroupplot[ylabel = {$i_{2}(t)$}, ytick = {0}, yticklabels = {$0$}, ymin = 0] 
+                \addplot[signalred, thick] coordinates {(0,0.95/pi*\a) (\a,0.2) (\a+pi,0.95) (2*pi,0.95/pi*\a)}; 
+
+                % switching input
+                \nextgroupplot[ylabel = {$u_2(t)/U_1$}, ymin = -0.1, xlabel={$t/T_\mathrm{s}$}] 
+                \addplot[signalblue, thick] coordinates {(0,0) (\a+\it,0) (\a+\it,1) (\a+pi,1) (\a+pi,0) (2*pi,0)}; 
+                \addplot[signalblue, thick, dashed] coordinates {(\a,0) (\a,1) (\a+\it,1)}; 
+                \fill [signalblue, opacity=0.3] (axis cs:\a,0) rectangle (axis cs:\a+\it,1);
+                \draw[thin] (axis cs:\a+\it/2,0.5) -- (axis cs:\a-0.2,0.5) node[anchor=east, align=center]{$\Delta u$}; 
+                \coordinate (b1) at (axis cs:\a,0);
+                \coordinate (b2) at (axis cs:\a+\it,0);
+                \coordinate (b3) at (axis cs:\a+pi,0);
+            \end{groupplot}
+            \draw[thin, dashed] (a1) -- (b1);
+            \draw[thin, dashed] (a2) -- (b2);
+            \draw[thin, dashed] (a3) -- (b3);
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Blanking / interlocking time: negative load current %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Blanking / interlocking time: negative load current} 
+    \vspace{-0.1cm}
+    \begin{figure}
+        \begin{tikzpicture}
+            \def\a{0.33*pi}
+            \def\it{0.1*pi}
+            \begin{groupplot}[group style={group size=1 by 5, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.31\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi}, xticklabels = {0,$\nicefrac{1}{4}$,$\nicefrac{1}{2}$, $\nicefrac{3}{2}$, $1$}, ytick = {-1, 0, 1}, yticklabels = {$-1$, $0$, $1$}]
+
+                % switching input
+                \nextgroupplot[ylabel = {$s_i(t)$}] 
+                \addplot[signalgreen, thick] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)};
+                \coordinate (a1) at (axis cs:\a,1);
+                \coordinate (a2) at (axis cs:\a+pi,1);
+                \coordinate (a3) at (axis cs:\a+pi+\it,1);
+
+                % top transistor 
+                \nextgroupplot[ylabel = {$s_{i,1}(t)$}] 
+                \addplot[signalgreen, thick] coordinates {(0,-1) (\a+\it,-1) (\a+\it,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
+                
+
+                % bottom transistor
+                \nextgroupplot[ylabel = {$s_{i,2}(t)$}] 
+                \addplot[signalgreen, thick] coordinates {(0,1) (\a,1) (\a,-1) (\a+pi+\it,-1) (\a+pi+\it,1) (2*pi,1)}; 
+                \draw[<->] (axis cs:\a+pi,0) -- node[above, fill=white, inner sep=1pt, yshift=1mm]{\small$t_0$} (axis cs:\a+\it+pi,0);
+
+                % current 
+                \nextgroupplot[ylabel = {$i_{2}(t)$}, ytick = {0}, yticklabels = {$0$}, ymin = -1, ymax=0] 
+                \addplot[signalred, thick] coordinates {(0,{-0.2-0.65*(1-\a/pi)}) (\a,0.2-1) (\a+pi,0.85-1) (2*pi,{-0.2-0.65*(1-\a/pi)})}; 
+
+                % switching input
+                \nextgroupplot[ylabel = {$u_2(t)/U_1$}, ymin = -0.1, xlabel={$t/T_\mathrm{s}$}] 
+                \addplot[signalblue, thick] coordinates {(0,0) (\a,0) (\a,1) (\a+pi+\it,1) (\a+pi+\it,0) (2*pi,0)}; 
+                \addplot[signalblue, thick, dashed] coordinates {(\a+pi,1) (\a+pi+\it,1) (\a+\it+pi,0)}; 
+                \fill [signalblue, opacity=0.3] (axis cs:\a+pi,0) rectangle (axis cs:\a+\it+pi,1);
+                \draw[thin] (axis cs:\a+\it/2+pi,0.5) -- (axis cs:\a+0.2+pi+\it,0.5) node[anchor=west, align=center]{$\Delta u$}; 
+                \coordinate (b1) at (axis cs:\a,0);
+                \coordinate (b2) at (axis cs:\a+pi,0);
+                \coordinate (b3) at (axis cs:\a+\it+pi,0);
+            \end{groupplot}
+            \draw[thin, dashed] (a1) -- (b1);
+            \draw[thin, dashed] (a2) -- (b2);
+            \draw[thin, dashed] (a3) -- (b3);
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Blanking / interlocking time: discontinuous conduction %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Blanking / interlocking time: discontinuous conduction} 
+    \vspace{-0.1cm}
+    \begin{figure}
+        \begin{tikzpicture}
+            \def\a{0.33*pi}
+            \def\it{0.1*pi}
+            \begin{groupplot}[group style={group size=1 by 5, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.31\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi}, xticklabels = {0,$\nicefrac{1}{4}$,$\nicefrac{1}{2}$, $\nicefrac{3}{2}$, $1$}, ytick = {-1, 0, 1}, yticklabels = {$-1$, $0$, $1$}]
+
+                % switching input
+                \nextgroupplot[ylabel = {$s_i(t)$}] 
+                \addplot[signalgreen, thick] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)};
+                \coordinate (a1) at (axis cs:\a,1);
+                \coordinate (a2) at (axis cs:\a+\it,1);
+                \coordinate (a3) at (axis cs:\a+pi,1);
+
+                % top transistor 
+                \nextgroupplot[ylabel = {$s_{i,1}(t)$}] 
+                \addplot[signalgreen, thick] coordinates {(0,-1) (\a+\it,-1) (\a+\it,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
+                \draw[<->] (axis cs:\a,0) -- node[above, fill=white, inner sep=1pt, yshift=1mm]{\small$t_0$} (axis cs:\a+\it,0);
+                
+
+                % bottom transistor
+                \nextgroupplot[ylabel = {$s_{i,2}(t)$}] 
+                \addplot[signalgreen, thick] coordinates {(0,1) (\a,1) (\a,-1) (\a+pi+\it,-1) (\a+pi+\it,1) (2*pi,1)}; 
+                
+
+                % current 
+                \nextgroupplot[ylabel = {$i_{2}(t)$}, ytick = {0}, yticklabels = {$0$}, ymin = 0] 
+                \addplot[signalred, thick] coordinates {(0,0.95/pi*\a) (\a+0.15,0) (\a+\it,0) (\a+pi,0.95) (2*pi,0.95/pi*\a)}; 
+
+                % switching input
+                \nextgroupplot[ylabel = {$u_2(t)/U_1$}, ymin = -0.1, xlabel={$t/T_\mathrm{s}$}] 
+                \addplot[signalblue, thick] coordinates {(0,0) (\a,0) (\a+0.15,0) (\a+0.15,0.66) (\a+\it,0.66) (\a+\it,1) (\a+pi,1) (\a+pi,0) (2*pi,0)}; 
+                \addplot[signalblue, thick, dashed] coordinates {(\a,0) (\a,1) (\a+\it,1)}; 
+                \fill [signalblue, opacity=0.3] (axis cs:\a,0) rectangle (axis cs:\a+0.15,1);
+                \fill [signalblue, opacity=0.3] (axis cs:\a+0.15,0.66) rectangle (axis cs:\a+\it,1);
+                \draw[thin] (axis cs:\a+\it/4,0.5) -- (axis cs:\a-0.2,0.5) node[anchor=east, align=center]{$\Delta u$}; 
+                \draw[thin] (axis cs:\a+\it+0.05,0.66) -- (axis cs:\a+\it+0.25,0.5) node[anchor=west, align=center]{\small Depends on load voltage}; 
+                \coordinate (b1) at (axis cs:\a,0);
+                \coordinate (b2) at (axis cs:\a+\it,0);
+                \coordinate (b3) at (axis cs:\a+pi,0);
+            \end{groupplot}
+            \draw[thin, dashed] (a1) -- (b1);
+            \draw[thin, dashed] (a2) -- (b2);
+            \draw[thin, dashed] (a3) -- (b3);
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Blanking / interlocking time: current paths %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Blanking / interlocking time (cont.)} 
+        For the continuous conduction case, the \hl{voltage error} $\Delta u$ due to the interlocking time $t_0$ is given by
+        \begin{equation}
+            \Delta u =\overline{u}_2 - U_1s^* = -\mathrm{sgn}(i_2)\frac{t_0}{T_\mathrm{s}}  U_1= -\mathrm{sgn}(i_2)t_0 f_\mathrm{s} U_1.
+        \end{equation}
+        Hence, the error depends on the relative duration of the interlocking time $t_0$ compared to the switching period $T_\mathrm{s}$ which is a device-specific parameter (cf. below). 
+
+        \begin{table}
+            \begin{tabular}{c c c}
+                \toprule
+                Device type & $t_0$ & $f_\mathrm{s}$ \\
+                \midrule
+                GTO & \SIrange{10}{30}{\micro\second} & \SIrange{200}{500}{\hertz} \\
+                IGBT & \SIrange{2}{4}{\micro\second} & \SIrange{5}{20}{\kilo\hertz} \\
+                MOSFET & \SI{\leq 1}{\micro\second} & \SIrange{20}{1000}{\kilo\hertz} \\
+                \bottomrule
+            \end{tabular}
+            \caption{Typical interlocking times and switching frequencies for different power semiconductor devices}
+            \label{tab:interlocking_times}
+        \end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Rectifier operation for single-phase grids %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Rectifier operation for single-phase grids} 
@@ -927,9 +1154,11 @@
                 \addplot[signalblue, thick, domain=0:2*pi, samples = 100] {1+cos(deg(2*x))}; 
                 \addplot[signalblue, thick, domain=0:2*pi, samples = 100, dashed] {1+1.15*cos(deg(2*x-2*\p))};  
                 \draw[<->] (axis cs:pi/2+\p,-0.15) -- node[left, fill=white, inner sep=1pt]{$S_2$} (axis cs:pi/2+\p,1);      
-                \draw[<->] (axis cs:pi/2+\p,1) -- node[left, fill=white, inner sep=1pt]{$S_2$} (axis cs:pi/2+\p,2.15);         
+                \draw[<->] (axis cs:pi+\p,1) -- node[left, fill=white, inner sep=1pt]{$S_2$} (axis cs:pi+\p,2.15);         
                 \legend{$p_\mathrm{g}(t)$, $p_2(t)$};
             \end{groupplot}
         \end{tikzpicture}
+        \caption{Steady-state operation of the single-phase four-quadrant rectifier: (top) individual signals and (bottom) power oscillations at twice the grid frequency}
+        \label{fig:recitifier_single_phase_transistor_power_oscillations}
     \end{figure}
 \end{frame}
