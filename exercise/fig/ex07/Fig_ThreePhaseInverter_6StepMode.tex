@@ -4,64 +4,91 @@
     \begin{figure}[htb]
         \begin{center}
             \begin{circuitikz}
-                \def\vd{1.5cm} % vertical distance AC sources
-                \def\hd{1.5cm} % horizontal distance diode bridge
-                \def\h1d{5.0cm} % horizontal position first diode string
-                % Base point for voltage supplies
-                \coordinate (orig) at (0,0);
-                % Voltage sources and neutral connection
-                \draw 
-                % draw the neutral connection
-                (0,0) to [short, -*] ++(0,-1.5) to [short] ++(0,-1.5)
-                % draw first phase ua
-                (0,0) to [sinusoidal voltage source, v^<=$u_{1\mathrm{a}}(t)$] ++(1.5, 0) to [short, i=$i_{1\mathrm{a}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (A)
-                % draw second phase ub
-                (0,-1*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{b}}(t)$] ++(1.5, 0) to [short, i=$i_{1\mathrm{b}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (B)
-                % draw third phase uc
-                (0,-2*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{c}}(t)$] ++(1.5,0) to [short, i=$i_{1\mathrm{c}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (C)
-                %thyristor bridge
-                % Add thyristor T1
-                (\h1d,0) to [thyristor, l=$T_1$, name=D1] ++(0,1.25) coordinate (D1top)
-                % Add thyristor T2
-                (\h1d,-4.25) coordinate (D2bot) to [thyristor, l=$T_2$, name=D2] ++(0,1.25) to [short] (\h1d, 0)
-                % Add connection to junction A
-                (\h1d, 0) to [short, *-] (A)
-                % Add thyristor T3
-                (\h1d+\hd,0) to [thyristor, l=$T_3$, name=D3] ++(0,1.25) coordinate (D3top)
-                % Add thyristor T4
-                (\h1d+\hd,-4.25) coordinate (D4bot) to [thyristor, l=$T_4$, name=D4] ++(0,1.25) to [short] (\h1d+\hd, 0)
-                % Add thyristor T5
-                (\h1d+2*\hd,0) to [thyristor, l=$T_5$, name=D5] ++(0,1.25) coordinate (D5top)
-                % Add thyristor T6
-                (\h1d+2*\hd,-4.25) coordinate (D6bot) to [thyristor, l=$T_6$, name=D6] ++(0,1.25) to [short] (\h1d+2*\hd, 0)
-                % Add connection to junction B
-                (B -| D3) to [crossing, *-, mirror] ++(-2*\hd,0) -- (B)
-                % Add connection to junction C
-                (C -| D5) to [short, *-] ++(-\hd/2,0) to [crossing, mirror] ++(-\hd,0) to [crossing, mirror] ++(-\hd,0) -- (C)
-                % Add wire T1-T3-T5
-                (D1top) to [short, -*] (D3top) to [short, -*] (D5top) to [short, -] ++(0.5,0) coordinate (jL1)
-                % Add inductor L and motor current
-                (jL1) to [L, l=$L$, name = L] ++(2,0) to [short,i=$\overline{i}_\mathrm{mot}$] ++(0.5,0)  coordinate (jL2)
-                % Add DC-motor and motor voltage
-                (jL2) ++ (0,-3) node[elmech](motor){M}
-                (jL2) to (motor.north)
-                (motor.bottom) to (D6bot -| \tikztostart) to (D6bot)
-                % (jL2) to [R, l=$R$, name = R, v_>=$\overline{u}_\mathrm{mot}$, voltage = straight]  (D6bot -| \tikztostart) to (D6bot)
+                % Add voltage U1p
+                \draw (0,0) coordinate (U1p) to [open, o-o, v = $U_1p\hspace{0.5cm}$, voltage = straight] ++(0,-2.5) coordinate (Gnd)
+                (Gnd) to [short,o-o] ++(1,0)
+                (Gnd) to [open, -o, v = $U_1m\hspace{0.5cm}$, voltage = straight] ++(0,-2.5) coordinate (U1m)
+                % Add current
+                (U1p) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (jT1c)
+                % Add T1
+                (jT1c) to [Tnpn, n=T1, invert, bodydiode] ++(0,-2) coordinate (jT1e)
+                % Add connection to u2a
+                (jT1e) to [short, *-] ++(1,0) to [crossing] ++(2,0) to [crossing] ++(2,0) to [short,-] ++(1,0) coordinate (ju2a)          
+                % Add junction to T2
+                (jT1e) to [short] ++(0,-1) coordinate (jT2c)
+                % Add T2
+                (jT2c) to [Tnpn, n=T2, invert, bodydiode] ++(0,-2) coordinate (jT2e)
+                % Add connection to T3
+                (jT1c) to [short, *-] ++(2,0) coordinate (jT3c)
+                % Add T3
+                (jT3c) to [Tnpn, n=T3, invert, bodydiode] ++(0,-2) coordinate (jT3e)
+                % Add junction to ju2b
+                (jT3e) to [short] ++(0,-0.5) coordinate (jmu2b)
+                % Add connection to u1b
+                (jmu2b) to [short,*-] ++(1,0) to [crossing] ++(2,0) to [short,-] ++(1,0) coordinate (ju2b)
+                % Add junction to T4
+                (jmu2b) to [short] ++(0,-0.5) coordinate (jT4c)
+                % Add T4
+                (jT4c) to [Tnpn, n=T4, invert, bodydiode] ++(0,-2) coordinate (jT4e)
+                % Add connection to T5
+                (jT3c) to [short, *-] ++(2,0) coordinate (jT5c)
+                % Add T5
+                (jT5c) to [Tnpn, n=T5, invert, bodydiode] ++(0,-2) coordinate (jT5e)
+                % Add junction to T6
+                (jT5e) to [short] ++(0,-1) coordinate (jT6c)
+                % Add T6
+                (jT6c) to [Tnpn, n=T6, invert, bodydiode] ++(0,-2) coordinate (jT6e)
+                % Add connection to T4
+                (jT6e) to [short, -*] (jT4e)
+                % Add connection to T2
+                (jT4e) to [short, -*] (jT2e)
+                % Add connection to U1m
+                (jT2e) to [short, -] (U1m)
+                % Add connection to u1c
+                (jT6c) to [short,*-] ++(2,0) coordinate (ju2c)
+                % Add connection to u2a inductor
+                (ju2a) to [short,-] ++(0,2) coordinate (ju2ax)
+                % Add u2a inductor
+                (ju2ax) to [L, l=$L$, name = L] ++(2,0) coordinate (ju2ae)
+                % Add u2ae
+                 (ju2ae) to [sV=$u_\mathrm{1ae}$] ++(1.5,0) coordinate (ju2an)
+                % Add u2b inductor
+                (ju2b) to [L, l=$L$, name = L] ++(2,0) coordinate (ju2be)
+                % Add u2be
+                 (ju2be) to [sV=$u_\mathrm{1be}$] ++(1.5,0) coordinate (ju2bn)
+                % Add connection to u2c inductor
+                (ju2c) to [short,-] ++(0,-2) coordinate (ju2cx)
+                % Add u2a inductor
+                (ju2cx) to [L, l=$L$, name = L] ++(2,0) coordinate (ju2ce)
+                % Add u2ce
+                (ju2ce) to [sV=$u_\mathrm{1ce}$] ++(1.5,0) coordinate (ju2cn)
+                % Add connection of u2in
+                (ju2an) to [short,-*] (ju2bn) to [short,-] (ju2cn);
 
-                % Add wire T2-T3-T6
-                (D2bot) to [short, -*] (D4bot) to [short, -*] (D6bot)
-                % Add voltage arrow u2(t) between Dtop and Dbot
-                (jL1) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] (D6bot-|jL1)                
-                % Add voltage arrow u2+n(t) between Dtop and neutral
-                (D1top) ++(-0.2,0) to [open, v_>=$u_\mathrm{2,p}(t)$, voltage = straight] ++(-5.5,0)
-                % Add voltage arrow u2-n(t) between Dbot and neutral
-                (D2bot) ++(-0.2,0) to [open, v_>=$u_\mathrm{2,m}(t)$, voltage = straight] ++(-5.5,0)
-                % Add voltage arrow between AC source a and b
-                (A) to [open, v^>=$\hspace{0.75cm}u_{1\mathrm{ab}}(t)$, voltage = straight] (B)
-                % Add voltage arrow between AC source b and c
-                (B) to [open, v^>=$\hspace{0.75cm}u_{1\mathrm{bc}}(t)$, voltage = straight] (C)
-                % Add voltage arrow between AC source a and c
-                (-0.5,-2*\vd) to [open, v^>=$u_{1\mathrm{ca}}(t)\hspace{0.75cm}$, voltage = straight] (-0.5,0);
+
+                % Add component name of transistors
+                \draw let \p1 = (T1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+                \draw let \p1 = (T2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+                \draw let \p1 = (T3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
+                \draw let \p1 = (T4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
+                \draw let \p1 = (T5.B) in node[anchor=east] at (\x1,\y1) {$T_5$};
+                \draw let \p1 = (T6.B) in node[anchor=east] at (\x1,\y1) {$T_6$};
+                % Add current arrows i2a, i2b and i2c
+                \draw (jT1e) ++(1,0) node[currarrow](i2a){}
+                (i2a)  node[anchor=north,color=black]{$i_\mathrm{2a}(t)$}
+                (jmu2b) ++(1,0) node[currarrow](i2b){}
+                (i2b)  node[anchor=north,color=black]{$i_\mathrm{2b}(t)$}
+                (jT6c) ++(1,0) node[currarrow](i2c){}
+                (i2c)  node[anchor=north,color=black]{$i_\mathrm{2c}(t)$}
+                % Add voltage arrows u2an, u2bn and u2cn
+                (ju2ax) ++(0,-0.8) to [open,v^=$u_\mathrm{2a}(t)$,voltage = straight] ++(3.8,0)
+                (ju2b) ++(0,-0.8) to [open,v^=$u_\mathrm{2b}(t)$,voltage = straight] ++(3.8,0)
+                (ju2cx) ++(0,-0.8) to [open,v^=$u_\mathrm{2c}(t)$,voltage = straight] ++(3.8,0)
+                % Add voltage arrows u2ab and u2bc
+                (ju2ax) ++(0.2,0) to [open,v^=$u_\mathrm{2ab}(t)$,voltage = straight] ++(0,-2.5)
+                (ju2b) ++(0.2,0) to [open,v^=$u_\mathrm{2bc}(t)$,voltage = straight] ++(0,-2.5);
+
+
             \end{circuitikz}
         \end{center}
         \caption{Three-phase inverter in six-step mode.}
