@@ -796,6 +796,85 @@
     \end{columns}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Current paths depending on the switching state and current flow direction} 
+    \begin{figure}
+        \centering
+        \begin{subfigure}{0.32\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,0) node[npn, bodydiode]{};
+                \draw (0,0) node[npn, name=npn1, color=signalred]{};
+                \draw (0,-1.5) node[npn, name=npn2, bodydiode]{};
+                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i>0$}, color=signalred] ++(0.5,0);
+                \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=1$};
+                \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=0$};
+            \end{circuitikz}
+            \\[1em]
+            \begin{circuitikz}[]
+                \draw[signalred] (0,0) node[npn, bodydiode, color=signalred]{};
+                \draw (0,0) node[npn, name=npn1]{};
+                \draw[signalred] (npn1.body E in) to (npn1.E);
+                \draw[signalred] (npn1.body C in) to (npn1.C);
+                \draw (0,-1.5) node[npn, name=npn2, bodydiode]{};
+                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i<0$}, color=signalred] ++(0.5,0);
+                \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=1$};
+                \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=0$};
+            \end{circuitikz}
+            \caption{Upper transistor on}
+        \end{subfigure}
+        %
+        \begin{subfigure}{0.32\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,0) node[npn, name=npn1, bodydiode]{};
+                \draw[signalred] (0,-1.5) node[npn, name=npn2, bodydiode, color=signalred]{};
+                \draw (0,-1.5) node[npn]{};
+                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i>0$}, color=signalred] ++(0.5,0);
+                \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=0$};
+                \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=1$};
+                \draw[signalred] (npn2.body E in) to (npn2.E);
+                \draw[signalred] (npn2.body C in) to (npn2.C);
+            \end{circuitikz}
+            \\[1em]
+            \begin{circuitikz}[]
+                \draw (0,0) node[npn, name=npn1, bodydiode]{};
+                \draw (0,-1.5) node[npn, name=npn2, bodydiode]{};
+                \draw[signalred] (0,-1.5) node[npn, color=signalred]{};
+                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i<0$}, color=signalred] ++(0.5,0);
+                \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=0$};
+                \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=1$};
+            \end{circuitikz}
+            \caption{Lower transistor on}
+        \end{subfigure}
+        \begin{subfigure}{0.32\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,0) node[npn, name=npn1, bodydiode]{};
+                \draw[signalred] (0,-1.5) node[npn, name=npn2, bodydiode, color=signalred]{};
+                \draw (0,-1.5) node[npn]{};
+                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i>0$}, color=signalred] ++(0.5,0);
+                \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=0$};
+                \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=0$};
+                \draw[signalred] (npn2.body E in) to (npn2.E);
+                \draw[signalred] (npn2.body C in) to (npn2.C);
+            \end{circuitikz}
+            \\[1em]
+            \begin{circuitikz}[]
+                \draw[signalred] (0,0) node[npn, bodydiode, color=signalred]{};
+                \draw (0,0) node[npn, name=npn1]{};
+                \draw[signalred] (npn1.body E in) to (npn1.E);
+                \draw[signalred] (npn1.body C in) to (npn1.C);
+                \draw (0,-1.5) node[npn, name=npn2, bodydiode]{};
+                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i<0$}, color=signalred] ++(0.5,0);
+                \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=0$};
+                \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=0$};
+            \end{circuitikz}
+            \caption{Both transistors off}
+        \end{subfigure}
+    \end{figure}                
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Blanking / interlocking time: positive load current %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
