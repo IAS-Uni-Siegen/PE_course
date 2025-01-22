@@ -21,10 +21,48 @@ symmetrical three-phase consumer. The consumer is simulated by an inductance and
 a sinusoidal counter voltage per phase. The inverter is operated with a basic frequency clock.
 The switching elements are considered as ideal.
 
+% \input{fig/ex07/Fig_ThreePhaseInverter_6StepMode}
 \input{fig/ex07/Fig_ThreePhaseInverter_6StepMode}
 
-\subtask{Aufgabe 4}
+
+\subtask{Create a table with all possible switching states for basic frequency clocking.
+Use the following notation: \\
+$(s_\mathrm{a}(t),s_\mathrm{b}(t),s_\mathrm{c}(t))=\begin{cases}
+        s_i(t)= +1 & \text{upper position,}\\
+        s_i(t)= -1 & \text{lower position.}
+    \end{cases}$\\
+Sketch the switching states in the correct chronological order for minimum one periode.
+Calculate and sketch the voltages $u_\mathrm{a,0}(t)$, $u_\mathrm{b,0}(t)$ and $u_\mathrm{c,0}(t)$ depending on these switching states.
+}
 \begin{solutionblock}
-\input{fig/ex07/Fig_Voltage_U_um_excerpt}   
-\input{fig/ex07/Fig_graphic_solutions_cos_terms} 
+\end{solutionblock}
+
+\subtask{The internal voltages $u_\mathrm{ea}(t)$, $u_\mathrm{eb}(t)$ and $u_\mathrm{ec}(t)$ are a symmetrical voltage system, 
+i.e. the following always applies: $u_\mathrm{ea}(t)+u_\mathrm{eb}(t)+u_\mathrm{ec}(t)=0V$. 
+Show that this equation is also applicable for the voltages $u_\mathrm{a}(t)$, $u_\mathrm{b}(t)$ and $u_\mathrm{c}(t)$ under the same conditions.
+}
+\begin{solutionblock}
+\end{solutionblock}
+
+\subtask{Calculate and sketch the voltages $u_\mathrm{ab}(t)$, $u_\mathrm{bc}(t)$, $u_\mathrm{a}(t)$ and $u_\mathrm{a,0}(t)$ 
+depending on these switching states.}
+\begin{solutionblock}
+\end{solutionblock}
+
+\subtask{Decompose the voltage $u_\mathrm{a}(t)$ into a Fourier series and sketch the spectral lines related to the
+amplitude of the fundamental signal up to order n=13. Hint: The following applies to the Fourier coefficients of an odd and alternating function:
+\begin{align*}
+b_k = \frac{4}{\pi} \int_{0}^{\frac{\pi}{2}} f(x)\sin(kx) \mathrm{d}x \quad k =\mathrm{odd} \quad  \quad
+\end{align*}
+\label{sub:DecomposeVoltage}
+}
+\begin{solutionblock}
+    \input{fig/ex07/Fig_Voltage_U_um_excerpt}   
+    \input{fig/ex07/Fig_graphic_solutions_cos_terms} 
+\end{solutionblock}
+
+
+\subtask{Based on \autoref{sub:DecomposeVoltage}, calculate the fundamental amplitude $\hat{i}_\mathrm{a}^1$ using a vector diagram and complex alternating current calculations. 
+From this, determine the total active power converted in the load.}
+\begin{solutionblock}
 \end{solutionblock}
