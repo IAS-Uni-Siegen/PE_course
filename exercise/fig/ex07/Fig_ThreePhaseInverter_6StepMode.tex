@@ -81,13 +81,15 @@
                 (jT6c) ++(1,0) node[currarrow](i2c){}
                 (i2c)  node[anchor=north,color=black]{$i_\mathrm{2c}(t)$}
                 % Add voltage arrows u2an, u2bn and u2cn
-                (ju2ax) ++(0,-0.8) to [open,v^=$u_\mathrm{2a}(t)$,voltage = straight] ++(3.8,0)
+                (ju2ax) ++(0,-0.8) to [open,v^=$u_\mathrm{2a}(t)$, voltage = straight] ++(3.8,0)
                 (ju2b) ++(0,-0.8) to [open,v^=$u_\mathrm{2b}(t)$,voltage = straight] ++(3.8,0)
                 (ju2cx) ++(0,-0.8) to [open,v^=$u_\mathrm{2c}(t)$,voltage = straight] ++(3.8,0)
-                % Add voltage arrows u2ab and u2bc
-                (ju2ax) ++(0.2,0) to [open,v^=$u_\mathrm{2ab}(t)$,voltage = straight] ++(0,-2.5)
-                (ju2b) ++(0.2,0) to [open,v^=$u_\mathrm{2bc}(t)$,voltage = straight] ++(0,-2.5);
-
+                % Add voltage arrows u2ab
+                (ju2ax) ++(0.2,0) to [open,v^=$$,voltage = straight] ++(0,-2.5)
+                (ju2ax) ++ (0.9,-1) node[anchor=north,color=black]{$u_\mathrm{2ab}(t)$}
+                % Add voltage arrows u2bc
+                (ju2b) ++(0.2,0) to [open,v^=$$,voltage = straight] ++(0,-2.5)
+                (ju2b) ++ (0.9,-1) node[anchor=north,color=black]{$u_\mathrm{2bc}(t)$};
 
             \end{circuitikz}
         \end{center}

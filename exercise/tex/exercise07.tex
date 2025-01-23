@@ -24,6 +24,21 @@ The switching elements are considered as ideal.
 % \input{fig/ex07/Fig_ThreePhaseInverter_6StepMode}
 \input{fig/ex07/Fig_ThreePhaseInverter_6StepMode}
 
+\begin{table}[ht]
+    \centering  % Center the table
+    \begin{tabular}{ll}
+        \toprule
+        Input voltages: & $U_{\mathrm{1p},i}=\SI{255}{\volt}$ \quad $U_{\mathrm{1m},i}=\SI{255}{\volt}$ \\
+        Internal voltages: & $u_{\mathrm{1ae}(t)} = \sqrt{2} \cdot \SI{220}{\volt} \cdot \sin(\omega_1t)$ \\
+        Circular frequency: & $\omega_1 = \SI{2 \pi \cdot 30}{\frac{1}{\second}}$ \\ 
+        Inductivity per phase: & $L= \SI{10}{\milli \henry}$ \\
+        Phase angle between  $u_{\mathrm{1ae}(t)}$ and $i_{\mathrm{1ae}^\mathrm{(1)}(t)}$ & $\alpha=\SI{30}{\degree}$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Parameters of three-phase inverter in six-step mode.}  
+    \label{table:ex07_Task2_ParametersOfTheCircuit}
+\end{table}
+
 
 \subtask{Create a table with all possible switching states for basic frequency clocking.
 Use the following notation: \\
