@@ -92,6 +92,7 @@
                     +1 & \text{upper position,}\\
                     -1 & \text{lower position.}
                 \end{cases}
+                \label{eq:switching_function_VSI}
             \end{equation}}%
             \onslide<3->{Output voltage considering a voltage source at the input is:
             \begin{equation}
@@ -179,7 +180,7 @@
                     \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
                     \draw let \p1 = (npn4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
                 \end{circuitikz}
-                \caption{Full-bridge single phase AC/DC converter (identical to the one used in the DC/DC section in \figref{fig:DCDC-4Q-switch})}
+                \caption{Full-bridge single-phase AC/DC converter (identical to the one used in the DC/DC section in \figref{fig:DCDC-4Q-switch})}
                 \label{fig:ACDC-4Q-switch}
             \end{figure}
         \end{column}
@@ -796,6 +797,85 @@
     \end{columns}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Current paths depending on the switching state and current flow direction} 
+    \begin{figure}
+        \centering
+        \begin{subfigure}{0.32\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,0) node[npn, bodydiode]{};
+                \draw (0,0) node[npn, name=npn1, color=signalred]{};
+                \draw (0,-1.5) node[npn, name=npn2, bodydiode]{};
+                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i>0$}, color=signalred] ++(0.5,0);
+                \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=1$};
+                \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=0$};
+            \end{circuitikz}
+            \\[1em]
+            \begin{circuitikz}[]
+                \draw[signalred] (0,0) node[npn, bodydiode, color=signalred]{};
+                \draw (0,0) node[npn, name=npn1]{};
+                \draw[signalred] (npn1.body E in) to (npn1.E);
+                \draw[signalred] (npn1.body C in) to (npn1.C);
+                \draw (0,-1.5) node[npn, name=npn2, bodydiode]{};
+                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i<0$}, color=signalred] ++(0.5,0);
+                \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=1$};
+                \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=0$};
+            \end{circuitikz}
+            \caption{Upper transistor on}
+        \end{subfigure}
+        %
+        \begin{subfigure}{0.32\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,0) node[npn, name=npn1, bodydiode]{};
+                \draw[signalred] (0,-1.5) node[npn, name=npn2, bodydiode, color=signalred]{};
+                \draw (0,-1.5) node[npn]{};
+                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i>0$}, color=signalred] ++(0.5,0);
+                \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=0$};
+                \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=1$};
+                \draw[signalred] (npn2.body E in) to (npn2.E);
+                \draw[signalred] (npn2.body C in) to (npn2.C);
+            \end{circuitikz}
+            \\[1em]
+            \begin{circuitikz}[]
+                \draw (0,0) node[npn, name=npn1, bodydiode]{};
+                \draw (0,-1.5) node[npn, name=npn2, bodydiode]{};
+                \draw[signalred] (0,-1.5) node[npn, color=signalred]{};
+                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i<0$}, color=signalred] ++(0.5,0);
+                \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=0$};
+                \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=1$};
+            \end{circuitikz}
+            \caption{Lower transistor on}
+        \end{subfigure}
+        \begin{subfigure}{0.32\textwidth}
+            \centering
+            \begin{circuitikz}[]
+                \draw (0,0) node[npn, name=npn1, bodydiode]{};
+                \draw[signalred] (0,-1.5) node[npn, name=npn2, bodydiode, color=signalred]{};
+                \draw (0,-1.5) node[npn]{};
+                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i>0$}, color=signalred] ++(0.5,0);
+                \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=0$};
+                \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=0$};
+                \draw[signalred] (npn2.body E in) to (npn2.E);
+                \draw[signalred] (npn2.body C in) to (npn2.C);
+            \end{circuitikz}
+            \\[1em]
+            \begin{circuitikz}[]
+                \draw[signalred] (0,0) node[npn, bodydiode, color=signalred]{};
+                \draw (0,0) node[npn, name=npn1]{};
+                \draw[signalred] (npn1.body E in) to (npn1.E);
+                \draw[signalred] (npn1.body C in) to (npn1.C);
+                \draw (0,-1.5) node[npn, name=npn2, bodydiode]{};
+                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i<0$}, color=signalred] ++(0.5,0);
+                \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=0$};
+                \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=0$};
+            \end{circuitikz}
+            \caption{Both transistors off}
+        \end{subfigure}
+    \end{figure}                
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Blanking / interlocking time: positive load current %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -974,6 +1054,141 @@
             \caption{Typical interlocking times and switching frequencies for different power semiconductor devices}
             \label{tab:interlocking_times}
         \end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Outlook: multi-level converters %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Outlook: multi-level converters} 
+    \begin{figure}
+        \centering
+        \begin{subfigure}{0.32\textwidth}
+            \centering
+            \begin{circuitikz}
+                \draw
+                    (0,0) to [short, o-*] ++(1,0) coordinate (A)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{2}$}, voltage = straight] ++(0,-2) coordinate (B)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{2}$}, voltage = straight] ++(0,-2) coordinate (C)
+                    to [short, -o] ++(-1,0) coordinate (D)
+                    (B) to [short] ++(-0.5, 0) coordinate (E)
+                    (E) node[rground, rotate=-90, name = gnd1]{}; 
+                \draw 
+                    ($(B) + (1.5,0)$) node[cute spdt up arrow, xscale=-1] (Sw1) {}
+                    (A) -| (Sw1-out 1.n)
+                    (C) -| (Sw1-out 2.s)
+                    (Sw1-in) to [short, -o] ++(1,0) coordinate (F);
+                \draw 
+                    (F |- C) node[rground, anchor = south, name = gnd2]{}
+                    (F) to [open, v={$u_2(t)\hspace{0.3cm}$}, voltage = straight] (gnd2); 
+            \end{circuitikz}\\[1em]
+            \begin{tikzpicture}
+                \begin{axis}[
+                    width=0.99\textwidth,
+                    height=0.375\textheight,
+                    xlabel={$t$},
+                    ylabel={$u_2$},
+                    xmin=0, xmax=1.2,
+                    ymin=-1.15, ymax=1.15,
+                    ytick={-1,0,1},
+                    yticklabels={$-\frac{U_\mathrm{dc}}{2}$,$0$,$\frac{U_\mathrm{dc}}{2}$},
+                    xticklabels={},
+                    grid=both,
+                    axis lines=middle,
+                    xlabel style={anchor=west},
+                    ylabel style={anchor=south},
+                ]
+                \addplot[signalblue, thick] coordinates {(0,-1) (0.1,-1) (0.1,1) (0.6,1) (0.6,-1) (1.1,-1) (1.1,1) (1.2,1)};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{2-level half bridge}
+        \end{subfigure}
+        \begin{subfigure}{0.32\textwidth}
+            \centering
+            \begin{circuitikz}
+                \draw
+                    (0,0) to [short, o-*] ++(1,0) coordinate (A)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{2}$}, voltage = straight] ++(0,-2) coordinate (B)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{2}$}, voltage = straight] ++(0,-2) coordinate (C)
+                    to [short, -o] ++(-1,0) coordinate (D)
+                    (B) to [short] ++(-0.5, 0) coordinate (E)
+                    (E) node[rground, rotate=-90, name = gnd1]{}; 
+                \draw 
+                    ($(B) + (1.0,0)$) node[rotary switch ->=3 in 90 wiper 90, xscale=-1, anchor=out 2](Sw1){}
+                    (A) -| (Sw1-out 1.n)
+                    (C) -| (Sw1-out 3.s)
+                    (Sw1-in) to [short, -o] ++(1,0) coordinate (F)
+                    (Sw1-out 2.w) to [short] (B);
+                \draw 
+                    (F |- C) node[rground, anchor = south, name = gnd2]{}
+                    (F) to [open, v={$u_2(t)\hspace{0.3cm}$}, voltage = straight] (gnd2); 
+            \end{circuitikz}\\[1em]
+            \begin{tikzpicture}
+                \begin{axis}[
+                    width=0.99\textwidth,
+                    height=0.375\textheight,
+                    xlabel={$t$},
+                    ylabel={$u_2$},
+                    xmin=0, xmax=1.2,
+                    ymin=-1.15, ymax=1.15,
+                    ytick={-1,0,1},
+                    yticklabels={$-\frac{U_\mathrm{dc}}{2}$,$0$,$\frac{U_\mathrm{dc}}{2}$},
+                    xticklabels={},
+                    grid=both,
+                    axis lines=middle,
+                    xlabel style={anchor=west},
+                    ylabel style={anchor=south},
+                ]
+                \addplot[signalblue, thick] coordinates {(0,-1) (0.1,-1) (0.1,0) (0.35,0) (0.35,1) (0.6,1) (0.6,0) (0.85,0) (0.85,-1) (1.1,-1) (1.1,0) (1.1,0) (1.2,0)};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{3-level half bridge}
+        \end{subfigure}
+        \begin{subfigure}{0.32\textwidth}
+            \centering
+            \begin{circuitikz}
+                \draw
+                    (0,0) to [short, o-*] ++(1,0) coordinate (A)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{3}$}, voltage = straight] ++(0,-1.0) coordinate (B)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{6}$}, voltage = straight] ++(0,-1.0) coordinate (C)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{6}$}, voltage = straight] ++(0,-1.0) coordinate (D)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{3}$}, voltage = straight] ++(0,-1.0) coordinate (E)
+                    to [short, -o] ++(-1,0) coordinate (F)
+                    (C) to [short] ++(-0.5, 0) coordinate (G)
+                    (G) node[rground, rotate=-90, name = gnd1]{}; 
+                \draw 
+                    ($(C) + (1.75,0)$) node[rotary switch ->=4 in 90 wiper 90, xscale=-1, anchor=in](Sw1){}
+                    (A) -| (Sw1-out 1.n)
+                    (E) -| (Sw1-out 4.s)
+                    (Sw1-in) to [short, -o] ++(1,0) coordinate (H)
+                    (Sw1-out 2.n) |- (B)
+                    (Sw1-out 3.s) |- (D);
+                \draw 
+                    (H |- E) node[rground, anchor = south, name = gnd2]{}
+                    (H) to [open, v={$u_2(t)\hspace{0.3cm}$}, voltage = straight] (gnd2); 
+            \end{circuitikz}\\[1em]
+            \begin{tikzpicture}
+                \begin{axis}[
+                    width=0.99\textwidth,
+                    height=0.375\textheight,
+                    xlabel={$t$},
+                    ylabel={$u_2$},
+                    xmin=0, xmax=1.2,
+                    ymin=-1.15, ymax=1.15,
+                    ytick={-1,0,1},
+                    yticklabels={$-\frac{U_\mathrm{dc}}{2}$,$0$,$\frac{U_\mathrm{dc}}{2}$},
+                    xticklabels={},
+                    grid=both,
+                    axis lines=middle,
+                    xlabel style={anchor=west},
+                    ylabel style={anchor=south},
+                ]
+                \addplot[signalblue, thick] coordinates {(0,-1) (1/4,-1) (1/4,-1/3) (1/4+1/8,-1/3) (1/4+1/8,1/3) (2/4,1/3) (2/4,1) (3/4,1) (3/4,1/3) (3/4+1/8,1/3) (3/4+1/8,-1/3) (1,-1/3) (1,-1) (1.2,-1)};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{4-level half bridge}
+        \end{subfigure}
+        \end{figure}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1161,4 +1376,127 @@
         \caption{Steady-state operation of the single-phase four-quadrant rectifier: (top) individual signals and (bottom) power oscillations at twice the grid frequency}
         \label{fig:recitifier_single_phase_transistor_power_oscillations}
     \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase AC/DC bridge converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Three-phase AC/DC bridge converter} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Idealized switch representation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Idealized switch representation of a three-phase AC/DC bridge converter}
+        \begin{figure}
+            \begin{circuitikz}
+                \draw (0,0) node[cute spdt up arrow, xscale=-1] (Sw1) {};
+                \draw (1.5,-1.5) node[cute spdt down arrow, xscale=-1] (Sw2) {};
+                \draw (3,-3) node[cute spdt down arrow, xscale=-1] (Sw3) {};
+                \draw (Sw2.in) to [short, -o] ++(3,0) coordinate (out2);
+                \draw (Sw1.in) to [short] ++(3.75,0) to [short, -o] (Sw1.in -| out2) coordinate (out1); 
+                \draw (Sw3.in) to [short, -o, i=$i_{2\mathrm{c}}(t)$] (Sw3.in -| out2) coordinate (out3);
+                \draw (Sw3.in |- Sw2.in) to [short, -o, i=$i_{2\mathrm{b}}(t)$] (Sw2.in -| out2);
+                \draw (Sw3.in |- Sw1.in) to [short, -o, i=$i_{2\mathrm{a}}(t)$] (Sw1.in -| out2);
+                \draw (out1) to [open, v^=$\hspace{0.75cm}u_{2\mathrm{ab}}(t)$, voltage = straight] (out2);
+                \draw (out2) to [open, v^=$\hspace{0.75cm}u_{2\mathrm{bc}}(t)$, voltage = straight] (out3);
+                \draw ($(out3) + (1.5,0)$) to [open, v_=$\hspace{0.75cm}u_{2\mathrm{ca}}(t)$, voltage = straight] ($(out1) + (1.5,0)$);
+                \draw (Sw1-out 1.n) to [short, -*] ++(0,0.5) coordinate (int1);
+                \draw (Sw3-out 2.s) to [short] ++(0,-0.5) coordinate (int3);
+                \draw (int3) to [short] (int3 -| Sw1-out 2.s) coordinate (int4) to [short, *-] (Sw1-out 2.s);
+                \draw node[crossingshape, name=x1, rotate=-90] at (out1 -| Sw2-out 1.n) {};
+                \draw (x1.west) to [short] (int1 -| x1.west) coordinate (int2) to [short] (int1);
+                \draw (x1.east) to [short] (Sw2-out 1.n);
+                \draw (int1) to [short] ++(-1,0) to [short, i_<=$i_1(t)$, -o] ++(-1,0) coordinate (in1);
+                \draw (int4) to [short, -o] ++(-2,0) coordinate (in2);
+                \draw (in1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (in2);
+                \draw node[anchor = east, xshift=-0.3cm] at (Sw1) {$s_1(t)$};
+                \draw node[anchor = east, xshift=-0.3cm] at (Sw2) {$s_2(t)$};
+                \draw node[anchor = east, xshift=-0.3cm] at (Sw3) {$s_3(t)$};
+                \draw (Sw2-out 2.s) to [short, -*] (int3 -| Sw2-out 2.s);
+                \draw node[crossingshape, name=x2, rotate=-90] at (out1 -| Sw3-out 1.n) {};
+                \draw node[crossingshape, name=x3, rotate=-90] at (out2 -| Sw3-out 1.n) {};
+                \draw (x3.west) to [short] (x2.east);
+                \draw (x3.east) to [short] (Sw3-out 1.n);
+                \draw (x2.west) to [short] (int2 -| x2.west) to [short,-*] (int2);
+            \end{circuitikz}
+            \caption{Idealized switch representation of a three-phase two-level AC/DC bridge converter}
+            \label{fig:idealized_switch_three_phase_bridge_converter}
+        \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Circuit realization %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Circuit realization}
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw (0,4) coordinate (A) to [capacitor, *-*, v = $\frac{u_1(t)}{2}$, voltage = straight] ++(0,-3) coordinate (Z) to [capacitor, *-*, v = $\frac{u_1(t)}{2}$, voltage = straight] ++(0,-3) coordinate (B)
+            (Z) node[rground, rotate=-90, name = gnd1]{}
+            (A) to [short, *-o] ++(-2,0) coordinate (Y)
+            (B) to [short, *-o] ++(-2,0) coordinate (X)
+            (Y) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] (X)
+            (A) to [short, i=$i_{1}(t)$] ++(2,0) coordinate (E)
+            to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
+            to [short, *-] ++(1,0) to [crossing] ++(2,0) to [crossing] ++(2,0)   
+            to [short, i=$i_{2\mathrm{a}}(t)$] ++(1,0) coordinate (U) to [short] ++(1,0) coordinate (G)
+            (C) to [short] ++(0,-2) 
+            to [Tnpn, n=npn2, invert, bodydiode] ++(0,-2) coordinate (D)
+            (E) to [short, *-] ++(2,0) coordinate (I)
+            to [Tnpn, n=npn3, invert, bodydiode] ++(0,-2)
+            to [short] ++(0,-1) coordinate (F)
+            to [short] ++(0,-1)
+            to [Tnpn, n=npn4, invert, bodydiode] ++(0,-2) 
+            to [short, -*] ++(-2,0)
+            to [short, -o] (B)
+            (I) to [short, *-] ++(2,0)
+            to [Tnpn, n=npn5, invert, bodydiode] ++(0,-2) coordinate (J)
+            to [short] ++(0,-2) coordinate (K)
+            to [Tnpn, n=npn6, invert, bodydiode] ++(0,-2) 
+            to [short, -*] ++(-2,0)
+            (F) to [short, *-] ++(1,0) to [crossing] ++(2,0) to [short, i=$i_{2\mathrm{b}}(t)$] ++(1,0) coordinate (V) to [short] ++(1,0) coordinate (H)
+            (K) to [short, *-] ++(1,0) to [short, i=$i_{2\mathrm{c}}(t)$] ++(1,0) to [short] ++(0.5,0) coordinate(W) to [short] ++(0.5,0) coordinate (L)
+            (G) to [open, o-o, v^=$\hspace{0.75cm}u_{2\mathrm{ab}}(t)$, voltage = straight] (H)
+            (H) to [open, o-o, v^=$\hspace{0.75cm}u_{2\mathrm{bc}}(t)$, voltage = straight] (L)
+            ($(L) + (1.5,0)$) to [open, v_=$\hspace{0.75cm} u_{2\mathrm{bc}}(t)$, voltage = straight] ($(G) + (1.5,0)$);
+            \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+            \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+            \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
+            \draw let \p1 = (npn4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
+            \draw let \p1 = (npn5.B) in node[anchor=east] at (\x1,\y1) {$T_5$};
+            \draw let \p1 = (npn6.B) in node[anchor=east] at (\x1,\y1) {$T_6$};
+            \draw 
+                    (W |- D) node[rground, anchor = south, name = gnd2]{};
+            \draw[->] ($(W) + (0.5,-0.2)$) to ($(W |- gnd2) + (0.5,0.2)$);
+            \draw[->] ($(V) + (0.5,-0.2)$) to ($(V |- gnd2) + (0.5,0.2)$);
+            \draw[->] ($(U) + (0,-0.2)$) to ($(U |- gnd2) + (0,0.2)$);
+            \draw ($(W)!0.5!(gnd2) + (0.5,0)$) node[anchor = west] {$u_{2i0}(t)$};
+        \end{circuitikz}
+        \caption{Three-phase two-level AC/DC converter}
+        \label{fig:VSI_three_phase_two_level_bridge_converter}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Switching states and load-independent output voltages %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Switching states and load-independent output voltages}
+    Reutilizing the switching function definition \eqref{eq:switching_function_VSI}, the \hl{line-to-line voltages} can be expressed as
+    \begin{equation}
+        \begin{split}
+            u_{2\mathrm{ab}}(t) &= \frac{1}{2}\left(s_{\mathrm{a}}(t)-s_{\mathrm{b}}(t)\right)u_1(t),\\
+            u_{2\mathrm{bc}}(t) &= \frac{1}{2}\left(s_{\mathrm{b}}(t)-s_{\mathrm{c}}(t)\right)u_1(t),\\
+            u_{2\mathrm{ca}}(t) &= \frac{1}{2}\left(s_{\mathrm{c}}(t)-s_{\mathrm{a}}(t)\right)u_1(t).
+        \end{split}
+    \end{equation}
+    The \hl{line-to-neutral voltages} are given by
+    \begin{equation}
+        \begin{split}
+            u_{2\mathrm{a}0}(t) &= \frac{1}{2}s_{\mathrm{a}}(t)u_1(t),\\
+            u_{2\mathrm{b}0}(t) &= \frac{1}{2}s_{\mathrm{b}}(t)u_1(t),\\
+            u_{2\mathrm{c}0}(t) &= \frac{1}{2}s_{\mathrm{c}}(t)u_1(t).
+        \end{split}
+    \end{equation}    
 \end{frame}
