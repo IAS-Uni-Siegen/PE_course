@@ -92,6 +92,7 @@
                     +1 & \text{upper position,}\\
                     -1 & \text{lower position.}
                 \end{cases}
+                \label{eq:switching_function_VSI}
             \end{equation}}%
             \onslide<3->{Output voltage considering a voltage source at the input is:
             \begin{equation}
@@ -179,7 +180,7 @@
                     \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
                     \draw let \p1 = (npn4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
                 \end{circuitikz}
-                \caption{Full-bridge single phase AC/DC converter (identical to the one used in the DC/DC section in \figref{fig:DCDC-4Q-switch})}
+                \caption{Full-bridge single-phase AC/DC converter (identical to the one used in the DC/DC section in \figref{fig:DCDC-4Q-switch})}
                 \label{fig:ACDC-4Q-switch}
             \end{figure}
         \end{column}
@@ -1375,4 +1376,127 @@
         \caption{Steady-state operation of the single-phase four-quadrant rectifier: (top) individual signals and (bottom) power oscillations at twice the grid frequency}
         \label{fig:recitifier_single_phase_transistor_power_oscillations}
     \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase AC/DC bridge converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Three-phase AC/DC bridge converter} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Idealized switch representation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Idealized switch representation of a three-phase AC/DC bridge converter}
+        \begin{figure}
+            \begin{circuitikz}
+                \draw (0,0) node[cute spdt up arrow, xscale=-1] (Sw1) {};
+                \draw (1.5,-1.5) node[cute spdt down arrow, xscale=-1] (Sw2) {};
+                \draw (3,-3) node[cute spdt down arrow, xscale=-1] (Sw3) {};
+                \draw (Sw2.in) to [short, -o] ++(3,0) coordinate (out2);
+                \draw (Sw1.in) to [short] ++(3.75,0) to [short, -o] (Sw1.in -| out2) coordinate (out1); 
+                \draw (Sw3.in) to [short, -o, i=$i_{2\mathrm{c}}(t)$] (Sw3.in -| out2) coordinate (out3);
+                \draw (Sw3.in |- Sw2.in) to [short, -o, i=$i_{2\mathrm{b}}(t)$] (Sw2.in -| out2);
+                \draw (Sw3.in |- Sw1.in) to [short, -o, i=$i_{2\mathrm{a}}(t)$] (Sw1.in -| out2);
+                \draw (out1) to [open, v^=$\hspace{0.75cm}u_{2\mathrm{ab}}(t)$, voltage = straight] (out2);
+                \draw (out2) to [open, v^=$\hspace{0.75cm}u_{2\mathrm{bc}}(t)$, voltage = straight] (out3);
+                \draw ($(out3) + (1.5,0)$) to [open, v_=$\hspace{0.75cm}u_{2\mathrm{ca}}(t)$, voltage = straight] ($(out1) + (1.5,0)$);
+                \draw (Sw1-out 1.n) to [short, -*] ++(0,0.5) coordinate (int1);
+                \draw (Sw3-out 2.s) to [short] ++(0,-0.5) coordinate (int3);
+                \draw (int3) to [short] (int3 -| Sw1-out 2.s) coordinate (int4) to [short, *-] (Sw1-out 2.s);
+                \draw node[crossingshape, name=x1, rotate=-90] at (out1 -| Sw2-out 1.n) {};
+                \draw (x1.west) to [short] (int1 -| x1.west) coordinate (int2) to [short] (int1);
+                \draw (x1.east) to [short] (Sw2-out 1.n);
+                \draw (int1) to [short] ++(-1,0) to [short, i_<=$i_1(t)$, -o] ++(-1,0) coordinate (in1);
+                \draw (int4) to [short, -o] ++(-2,0) coordinate (in2);
+                \draw (in1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (in2);
+                \draw node[anchor = east, xshift=-0.3cm] at (Sw1) {$s_1(t)$};
+                \draw node[anchor = east, xshift=-0.3cm] at (Sw2) {$s_2(t)$};
+                \draw node[anchor = east, xshift=-0.3cm] at (Sw3) {$s_3(t)$};
+                \draw (Sw2-out 2.s) to [short, -*] (int3 -| Sw2-out 2.s);
+                \draw node[crossingshape, name=x2, rotate=-90] at (out1 -| Sw3-out 1.n) {};
+                \draw node[crossingshape, name=x3, rotate=-90] at (out2 -| Sw3-out 1.n) {};
+                \draw (x3.west) to [short] (x2.east);
+                \draw (x3.east) to [short] (Sw3-out 1.n);
+                \draw (x2.west) to [short] (int2 -| x2.west) to [short,-*] (int2);
+            \end{circuitikz}
+            \caption{Idealized switch representation of a three-phase two-level AC/DC bridge converter}
+            \label{fig:idealized_switch_three_phase_bridge_converter}
+        \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Circuit realization %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Circuit realization}
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw (0,4) coordinate (A) to [capacitor, *-*, v = $\frac{u_1(t)}{2}$, voltage = straight] ++(0,-3) coordinate (Z) to [capacitor, *-*, v = $\frac{u_1(t)}{2}$, voltage = straight] ++(0,-3) coordinate (B)
+            (Z) node[rground, rotate=-90, name = gnd1]{}
+            (A) to [short, *-o] ++(-2,0) coordinate (Y)
+            (B) to [short, *-o] ++(-2,0) coordinate (X)
+            (Y) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] (X)
+            (A) to [short, i=$i_{1}(t)$] ++(2,0) coordinate (E)
+            to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
+            to [short, *-] ++(1,0) to [crossing] ++(2,0) to [crossing] ++(2,0)   
+            to [short, i=$i_{2\mathrm{a}}(t)$] ++(1,0) coordinate (U) to [short] ++(1,0) coordinate (G)
+            (C) to [short] ++(0,-2) 
+            to [Tnpn, n=npn2, invert, bodydiode] ++(0,-2) coordinate (D)
+            (E) to [short, *-] ++(2,0) coordinate (I)
+            to [Tnpn, n=npn3, invert, bodydiode] ++(0,-2)
+            to [short] ++(0,-1) coordinate (F)
+            to [short] ++(0,-1)
+            to [Tnpn, n=npn4, invert, bodydiode] ++(0,-2) 
+            to [short, -*] ++(-2,0)
+            to [short, -o] (B)
+            (I) to [short, *-] ++(2,0)
+            to [Tnpn, n=npn5, invert, bodydiode] ++(0,-2) coordinate (J)
+            to [short] ++(0,-2) coordinate (K)
+            to [Tnpn, n=npn6, invert, bodydiode] ++(0,-2) 
+            to [short, -*] ++(-2,0)
+            (F) to [short, *-] ++(1,0) to [crossing] ++(2,0) to [short, i=$i_{2\mathrm{b}}(t)$] ++(1,0) coordinate (V) to [short] ++(1,0) coordinate (H)
+            (K) to [short, *-] ++(1,0) to [short, i=$i_{2\mathrm{c}}(t)$] ++(1,0) to [short] ++(0.5,0) coordinate(W) to [short] ++(0.5,0) coordinate (L)
+            (G) to [open, o-o, v^=$\hspace{0.75cm}u_{2\mathrm{ab}}(t)$, voltage = straight] (H)
+            (H) to [open, o-o, v^=$\hspace{0.75cm}u_{2\mathrm{bc}}(t)$, voltage = straight] (L)
+            ($(L) + (1.5,0)$) to [open, v_=$\hspace{0.75cm} u_{2\mathrm{bc}}(t)$, voltage = straight] ($(G) + (1.5,0)$);
+            \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+            \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+            \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
+            \draw let \p1 = (npn4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
+            \draw let \p1 = (npn5.B) in node[anchor=east] at (\x1,\y1) {$T_5$};
+            \draw let \p1 = (npn6.B) in node[anchor=east] at (\x1,\y1) {$T_6$};
+            \draw 
+                    (W |- D) node[rground, anchor = south, name = gnd2]{};
+            \draw[->] ($(W) + (0.5,-0.2)$) to ($(W |- gnd2) + (0.5,0.2)$);
+            \draw[->] ($(V) + (0.5,-0.2)$) to ($(V |- gnd2) + (0.5,0.2)$);
+            \draw[->] ($(U) + (0,-0.2)$) to ($(U |- gnd2) + (0,0.2)$);
+            \draw ($(W)!0.5!(gnd2) + (0.5,0)$) node[anchor = west] {$u_{2i0}(t)$};
+        \end{circuitikz}
+        \caption{Three-phase two-level AC/DC converter}
+        \label{fig:VSI_three_phase_two_level_bridge_converter}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Switching states and load-independent output voltages %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Switching states and load-independent output voltages}
+    Reutilizing the switching function definition \eqref{eq:switching_function_VSI}, the \hl{line-to-line voltages} can be expressed as
+    \begin{equation}
+        \begin{split}
+            u_{2\mathrm{ab}}(t) &= \frac{1}{2}\left(s_{\mathrm{a}}(t)-s_{\mathrm{b}}(t)\right)u_1(t),\\
+            u_{2\mathrm{bc}}(t) &= \frac{1}{2}\left(s_{\mathrm{b}}(t)-s_{\mathrm{c}}(t)\right)u_1(t),\\
+            u_{2\mathrm{ca}}(t) &= \frac{1}{2}\left(s_{\mathrm{c}}(t)-s_{\mathrm{a}}(t)\right)u_1(t).
+        \end{split}
+    \end{equation}
+    The \hl{line-to-neutral voltages} are given by
+    \begin{equation}
+        \begin{split}
+            u_{2\mathrm{a}0}(t) &= \frac{1}{2}s_{\mathrm{a}}(t)u_1(t),\\
+            u_{2\mathrm{b}0}(t) &= \frac{1}{2}s_{\mathrm{b}}(t)u_1(t),\\
+            u_{2\mathrm{c}0}(t) &= \frac{1}{2}s_{\mathrm{c}}(t)u_1(t).
+        \end{split}
+    \end{equation}    
 \end{frame}
