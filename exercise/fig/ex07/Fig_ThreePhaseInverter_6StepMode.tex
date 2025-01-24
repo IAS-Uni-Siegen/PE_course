@@ -6,7 +6,7 @@
             \begin{circuitikz}
                 % Add voltage U1p
                 \draw (0,0) coordinate (U1p) to [open, o-o, v = $U_1p\hspace{0.5cm}$, voltage = straight] ++(0,-2.5) coordinate (Gnd)
-                (Gnd) to [short,o-o] ++(1,0)
+                (Gnd) to [short,o-o] ++(0.4,0)
                 (Gnd) to [open, -o, v = $U_1m\hspace{0.5cm}$, voltage = straight] ++(0,-2.5) coordinate (U1m)
                 % Add current
                 (U1p) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (jT1c)
@@ -51,17 +51,17 @@
                 % Add u2a inductor
                 (ju2ax) to [L, l=$L$, name = L] ++(2,0) coordinate (ju2ae)
                 % Add u2ae
-                 (ju2ae) to [sV=$u_\mathrm{1ae}$] ++(1.5,0) coordinate (ju2an)
+                 (ju2ae) to [sV=$u_\mathrm{2ae}$] ++(1.5,0) coordinate (ju2an)
                 % Add u2b inductor
                 (ju2b) to [L, l=$L$, name = L] ++(2,0) coordinate (ju2be)
                 % Add u2be
-                 (ju2be) to [sV=$u_\mathrm{1be}$] ++(1.5,0) coordinate (ju2bn)
+                 (ju2be) to [sV=$u_\mathrm{2be}$] ++(1.5,0) coordinate (ju2bn)
                 % Add connection to u2c inductor
                 (ju2c) to [short,-] ++(0,-2) coordinate (ju2cx)
                 % Add u2a inductor
                 (ju2cx) to [L, l=$L$, name = L] ++(2,0) coordinate (ju2ce)
                 % Add u2ce
-                (ju2ce) to [sV=$u_\mathrm{1ce}$] ++(1.5,0) coordinate (ju2cn)
+                (ju2ce) to [sV=$u_\mathrm{2ce}$] ++(1.5,0) coordinate (ju2cn)
                 % Add connection of u2in
                 (ju2an) to [short,-*] (ju2bn) to [short,-] (ju2cn);
 
@@ -80,16 +80,21 @@
                 (i2b)  node[anchor=north,color=black]{$i_\mathrm{2b}(t)$}
                 (jT6c) ++(1,0) node[currarrow](i2c){}
                 (i2c)  node[anchor=north,color=black]{$i_\mathrm{2c}(t)$}
-                % Add voltage arrows u2an, u2bn and u2cn
+                % Add voltage arrow u2an, u2bn and u2cn
                 (ju2ax) ++(0,-0.8) to [open,v^=$u_\mathrm{2a}(t)$, voltage = straight] ++(3.8,0)
                 (ju2b) ++(0,-0.8) to [open,v^=$u_\mathrm{2b}(t)$,voltage = straight] ++(3.8,0)
                 (ju2cx) ++(0,-0.8) to [open,v^=$u_\mathrm{2c}(t)$,voltage = straight] ++(3.8,0)
-                % Add voltage arrows u2ab
+                % Add voltage arrow u2ab
                 (ju2ax) ++(0.2,0) to [open,v^=$$,voltage = straight] ++(0,-2.5)
                 (ju2ax) ++ (0.9,-1) node[anchor=north,color=black]{$u_\mathrm{2ab}(t)$}
-                % Add voltage arrows u2bc
+                % Add voltage arrow u2bc
                 (ju2b) ++(0.2,0) to [open,v^=$$,voltage = straight] ++(0,-2.5)
-                (ju2b) ++ (0.9,-1) node[anchor=north,color=black]{$u_\mathrm{2bc}(t)$};
+                (ju2b) ++ (0.9,-1) node[anchor=north,color=black]{$u_\mathrm{2bc}(t)$}
+                % Add voltage arrow ua0
+                (Gnd) ++(2,0) to [open,v^=$$,voltage = straight] ++(-1.6,0)
+                (Gnd) ++ (1.2,0.7) node[anchor=north,color=black]{$u_\mathrm{2a,0}(t)$};
+
+
 
             \end{circuitikz}
         \end{center}
