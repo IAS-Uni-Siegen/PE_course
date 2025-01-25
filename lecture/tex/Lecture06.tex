@@ -1500,3 +1500,170 @@
         \end{split}
     \end{equation}    
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase converter with symmetric load in star connection %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Three-phase converter with symmetric load in star connection}
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw (0,4) coordinate (A) to [capacitor, *-*, v = $\frac{u_1(t)}{2}$, voltage = straight] ++(0,-3) coordinate (Z) to [capacitor, *-*, v = $\frac{u_1(t)}{2}$, voltage = straight] ++(0,-3) coordinate (B)
+            (Z) node[rground, rotate=-90, name = gnd1]{}
+            (A) to [short, *-o] ++(-2,0) coordinate (Y)
+            (B) to [short, *-o] ++(-2,0) coordinate (X)
+            (Y) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] (X)
+            (A) to [short, i=$i_{1}(t)$] ++(2,0) coordinate (E)
+            to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
+            to [short, *-] ++(1,0) to [crossing] ++(2,0) to [crossing] ++(2,0)   
+            to [short, i=$i_{2\mathrm{a}}(t)$] ++(1,0) coordinate (U) to [short] ++(1,0) coordinate (G)
+            (C) to [short] ++(0,-2) 
+            to [Tnpn, n=npn2, invert, bodydiode] ++(0,-2) coordinate (D)
+            (E) to [short, *-] ++(2,0) coordinate (I)
+            to [Tnpn, n=npn3, invert, bodydiode] ++(0,-2)
+            to [short] ++(0,-1) coordinate (F)
+            to [short] ++(0,-1)
+            to [Tnpn, n=npn4, invert, bodydiode] ++(0,-2) 
+            to [short, -*] ++(-2,0)
+            to [short, -o] (B)
+            (I) to [short, *-] ++(2,0)
+            to [Tnpn, n=npn5, invert, bodydiode] ++(0,-2) coordinate (J)
+            to [short] ++(0,-2) coordinate (K)
+            to [Tnpn, n=npn6, invert, bodydiode] ++(0,-2) 
+            to [short, -*] ++(-2,0)
+            (F) to [short, *-] ++(1,0) to [crossing] ++(2,0) to [short, i=$i_{2\mathrm{b}}(t)$] ++(1,0) coordinate (V) to [short] ++(1,0) coordinate (H)
+            (K) to [short, *-] ++(1,0) to [short, i=$i_{2\mathrm{c}}(t)$] ++(1,0) to [short] ++(0.5,0) coordinate(W) to [short] ++(0.5,0) coordinate (L);
+            \draw (H) to [inductor, v^=$u_{2\mathrm{b}}(t)$, voltage=straight] ++(1.5,0) to [short,-*] ++(1,0) coordinate (N)
+            (L) to [inductor, v^=$u_{2\mathrm{c}}(t)$, voltage=straight] ++(1.5,0) to [short] (\tikztostart) -| (N)
+            (G) to [inductor, v^=$u_{2\mathrm{a}}(t)$, voltage=straight] ++(1.5,0) to [short] (\tikztostart) -| (N);
+            \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+            \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+            \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
+            \draw let \p1 = (npn4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
+            \draw let \p1 = (npn5.B) in node[anchor=east] at (\x1,\y1) {$T_5$};
+            \draw let \p1 = (npn6.B) in node[anchor=east] at (\x1,\y1) {$T_6$};
+            \draw (W |- D) node[rground, anchor = south, name = gnd2]{};
+            \draw[->] ($(W) + (0.5,-0.2)$) to ($(W |- gnd2) + (0.5,0.2)$);
+            \draw[->] ($(V) + (0.5,-0.2)$) to ($(V |- gnd2) + (0.5,0.2)$);
+            \draw[->] ($(U) + (0,-0.2)$) to ($(U |- gnd2) + (0,0.2)$);
+            \draw ($(W)!0.5!(gnd2) + (0.5,0)$) node[anchor = west] {$u_{2i0}(t)$};
+            \draw[->] ($(N) + (0,-1.25)$) to ($(N |- gnd2) + (0,0.2)$);
+            \draw ($(W)!0.5!(gnd2) + (1.8,0)$) node[anchor = west] {$u_{\mathrm{n}0}(t)$};
+            \draw (N |- D) node[rground, anchor = south, name = gnd3]{};
+        \end{circuitikz}
+        \caption{Three-phase two-level AC/DC converter with symmetric load in star connection}
+        \label{fig:VSI_three_phase_two_level_bridge_converter_load_star}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase converter with symmetric load in star connection (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Three-phase converter with symmetric load in star connection (cont.)}
+    Assuming a star-connected load, the three-phase currents sum up to zero:
+    \begin{equation}
+       i_{2\mathrm{a}}(t) + i_{2\mathrm{b}}(t) + i_{2\mathrm{c}}(t) = 0.
+       \label{eq:three_phase_current_sum_star}
+    \end{equation}
+    If the star point is not connected to ground, $u_{\mathrm{n}0}(t)\neq 0$ may occur leading to a load voltage of 
+    \begin{equation}
+        u_{2\mathrm{a}}(t) = u_{2\mathrm{a}0}(t) - u_{\mathrm{n}0}(t), \quad u_{2\mathrm{b}}(t) = u_{2\mathrm{b}0}(t) - u_{\mathrm{n}0}(t), \quad u_{2\mathrm{c}}(t) = u_{2\mathrm{c}0}(t) - u_{\mathrm{n}0}(t).
+    \end{equation} 
+    To calculate $u_{\mathrm{n}0}(t)$ one can utilize the load equation (assuming an inductive load):
+    \begin{equation}
+        u_{2i}(t) = L \frac{\mathrm{d}}{\mathrm{d}t} i_{2i}(t) + u_{\mathrm{n}0}(t)
+    \end{equation}
+    summing up to
+    \begin{equation}
+        3u_{\mathrm{n}0}(t) +  L \frac{\mathrm{d}}{\mathrm{d}t} \left(i_{2\mathrm{a}}(t) + i_{2\mathrm{b}}(t) + i_{2\mathrm{c}}(t)\right) = u_{2\mathrm{a}0}(t) + u_{2\mathrm{b}0}(t) +u_{2\mathrm{c}0}(t)
+    \end{equation}
+    and finally delivering the star-to-ground voltage as 
+    \begin{equation}
+        u_{\mathrm{n}0}(t) = \frac{1}{3} \left(u_{2\mathrm{a}0}(t) + u_{2\mathrm{b}0}(t) +u_{2\mathrm{c}0}(t)\right).
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase converter with symmetric load in star connection (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[b]
+    \frametitle{Three-phase converter with symmetric load in star connection (cont.)}
+    \vspace{1em}
+    \begin{table}
+        \renewcommand{\arraystretch}{1.25}
+        \centering
+        \begin{tabular}{c c c c c c c c c c c c c c}
+            \toprule
+            $\mathrm{No.}$ & $s_\mathrm{a}$ & $s_\mathrm{b}$ & $s_\mathrm{c}$ & $\frac{u_{2a0}}{u_1}$ & $\frac{u_{2b0}}{u_1}$ & $\frac{u_{2c0}}{u_1}$ & $\frac{u_{2a}}{u_1}$ & $\frac{u_{2b}}{u_1}$ & $\frac{u_{2c}}{u_1}$ & $\frac{u_{\mathrm{ab}}}{u_1}$ & $\frac{u_{\mathrm{bc}}}{u_1}$ & $\frac{u_{\mathrm{ca}}}{u_1}$ & $\frac{u_{\mathrm{n}0}}{u_1}$ \\
+            \midrule
+            $0$ & $-1$ & $-1$ & $-1$ & $-\frac{1}{2}$ & $-\frac{1}{2}$ & $-\frac{1}{2}$ & $0$ & $0$ & $0$ & $0$& $0$& $0$&$-\frac{1}{2}$\\
+
+            $1$ & $+1$ & $-1$ & $-1$ & $+\frac{1}{2}$ & $-\frac{1}{2}$ & $-\frac{1}{2}$ & $+\frac{2}{3}$ & $-\frac{1}{3}$ & $-\frac{1}{3}$ & $+1$& $0$& $-1$& $-\frac{1}{6}$\\
+
+            $2$ & $+1$ & $+1$ & $-1$ & $+\frac{1}{2}$ & $+\frac{1}{2}$ & $-\frac{1}{2}$ & $+\frac{1}{3}$ & $+\frac{1}{3}$ & $-\frac{2}{3}$ & $0$& $+1$& $-1$& $+\frac{1}{6}$\\
+
+            $3$ & $-1$ & $+1$ & $-1$ & $-\frac{1}{2}$ & $+\frac{1}{2}$ & $-\frac{1}{2}$ & $-\frac{1}{3}$ & $+\frac{2}{3}$ & $-\frac{1}{3}$ & $-1$& $+1$& $0$& $-\frac{1}{6}$\\
+
+            $4$ & $-1$ & $+1$ & $+1$ & $-\frac{1}{2}$ & $+\frac{1}{2}$ & $+\frac{1}{2}$ & $-\frac{2}{3}$ & $+\frac{1}{3}$ & $+\frac{1}{3}$ & $-1$& $0$& $+1$& $+\frac{1}{6}$\\
+
+            $5$ & $-1$ & $-1$ & $+1$ & $-\frac{1}{2}$ & $-\frac{1}{2}$ & $+\frac{1}{2}$ & $-\frac{1}{3}$ & $-\frac{1}{3}$ & $+\frac{2}{3}$ & $0$& $-1$& $1$& $-\frac{1}{6}$\\
+
+            $6$ & $+1$ & $-1$ & $+1$ & $+\frac{1}{2}$ & $-\frac{1}{2}$ & $+\frac{1}{2}$ & $+\frac{1}{3}$ & $-\frac{2}{3}$ & $+\frac{1}{3}$ & $1$& $-1$& $0$& $+\frac{1}{6}$\\
+
+            $7$ & $+1$ & $+1$ & $+1$ & $+\frac{1}{2}$ & $+\frac{1}{2}$ & $+\frac{1}{2}$ & $0$ & $0$ & $0$ & $0$& $0$& $0$& $+\frac{1}{2}$\\
+
+            \bottomrule
+            
+        \end{tabular}
+        \caption{Switching states and resulting voltages of the three-phase two-level AC/DC converter with symmetric load in star connection (with $2^3=8$ possible switching states)}
+        \label{tab:VSI_three_phase_two_level_bridge_converter_load_star}
+    \end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase fundamental frequency modulation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Three-phase fundamental frequency modulation} 
+    \vspace{-0.1cm}
+    \begin{figure}
+        \begin{tikzpicture}
+            \def\a{0.33*pi}
+            \def\it{0.1*pi}
+            \begin{groupplot}[group style={group size=1 by 5, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.32\textheight, width=0.875\textwidth, xmin=0, xmax=3*pi, grid,clip = false, ymin = -0.8, ymax =0.8, xtick = {0, pi/2, pi, 3/2*pi, 2*pi, 5/2*pi, 3*pi}, xticklabels = {$0$,$\nicefrac{1}{2}\pi$, $\pi$, $\nicefrac{3}{2}\pi$, $2\pi$, $\nicefrac{5}{2}\pi$, $3\pi$}, ytick = {-1/2, 0, 1/2}, yticklabels = {$-\nicefrac{1}{2}$, , $\nicefrac{1}{2}$}, ylabel style={rotate=-90}]
+
+                % ua0
+                \nextgroupplot[ylabel = {$u_{\mathrm{a}0}(t)/U_1$}] 
+                \addplot[signalblue, thick] coordinates {(0,-1/2) (\a,-1/2) (\a,1/2) (\a+pi,1/2) (\a+pi,-1/2) (2*pi+\a,-1/2) (2*pi+\a,1/2) (3*pi,1/2)};
+                \addplot[signalblue, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(x-\a))};
+                \draw[thin] (pi+\a+0.1,0.0) -- (pi+\a+0.6,0.25) node[right, anchor=west, fill = white, inner sep = 1pt] {$\hat{u}^{(1)}_{\mathrm{a}0}=\frac{2}{\pi}$};
+                \draw[->] (axis cs:0,0) -- node[above, fill=white, inner sep=1pt]{$\alpha$} (axis cs:\a,0);
+
+                % ub0
+                \nextgroupplot[ylabel = {$u_{\mathrm{b}0}(t)/U_1$}] 
+                \addplot[signalgreen, thick] coordinates {(0,-1/2) (pi,-1/2) (pi,1/2) (2*pi,1/2) (2*pi,-1/2) (3*pi,-1/2)};
+                \addplot[signalgreen, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(-x))};
+                \draw[thin] (pi/3*5+\a+0.1,0.0) -- (pi/3*5+\a+0.6,0.25) node[right, anchor=west, fill = white, inner sep = 1pt] {$\hat{u}^{(1)}_{\mathrm{b}0}=\frac{2}{\pi}$};
+
+                % uc0
+                \nextgroupplot[ylabel = {$u_{\mathrm{c}0}(t)/U_1$}] 
+                \addplot[signalbrown, thick] coordinates {(0,1/2) (\a+pi/3,1/2) (\a+pi/3,-1/2) (\a+4*pi/3,-1/2) (\a+4*pi/3,1/2) (\a+7*pi/3,1/2) (\a+7*pi/3,-1/2) (3*pi,-1/2)};
+                \addplot[signalbrown, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(x-4/3*pi-\a))};
+                \draw[thin] (pi/3+\a+0.1,0.0) -- (pi/3+\a+0.6,0.25) node[right, anchor=west, fill = white, inner sep = 1pt] {$\hat{u}^{(1)}_{\mathrm{c}0}=\frac{2}{\pi}$};
+
+                % un0
+                \nextgroupplot[ylabel = {$u_{\mathrm{n}0}(t)/U_1$}, height=0.27\textheight, ymin = -1/5, ymax =1/5, ytick = {-1/6, 0, 1/6}, yticklabels = {$-\nicefrac{1}{6}$, , $\nicefrac{1}{6}$}] 
+                \addplot[signallavender, thick] coordinates {(0,-1/6) (pi/3,-1/6) (pi/3,1/6) (2*pi/3,1/6) (2*pi/3,-1/6) (3*pi/3,-1/6) (3*pi/3,1/6) (4*pi/3,1/6) (4*pi/3,-1/6) (5*pi/3,-1/6) (5*pi/3,1/6) (6*pi/3,1/6) (6*pi/3,-1/6) (7*pi/3,-1/6) (7*pi/3,1/6) (8*pi/3,1/6) (8*pi/3,-1/6) (9*pi/3,-1/6) (9*pi/3,1/6)};
+
+                % ua0
+                \nextgroupplot[ylabel = {$u_{\mathrm{a}}(t)/U_1$}, , ytick = {-2/3, 0, 2/3}, yticklabels = {$-\nicefrac{2}{3}$, , $\nicefrac{2}{3}$}, xlabel={$\omega t$}] 
+                \addplot[signalblue, thick] coordinates {(0,-1/3) (pi/3,-1/3) (pi/3,1/3) (2*pi/3,1/3) (2*pi/3,2/3) (3*pi/3,2/3) (3*pi/3,1/3) (4*pi/3,1/3) (4*pi/3,-1/3) (5*pi/3,-1/3) (5*pi/3,-2/3) (6*pi/3,-2/3) (6*pi/3,-1/3) (7*pi/3,-1/3) (7*pi/3,1/3) (8*pi/3,1/3) (8*pi/3,2/3) (9*pi/3,2/3)};
+                \addplot[signalblue, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(x-\a))};
+                \draw[thin] (pi+\a+0.1,0.0) -- (pi+\a+0.6,0.25) node[right, anchor=west, fill = white, inner sep = 1pt] {$\hat{u}^{(1)}_{\mathrm{a}}=\hat{u}^{(1)}_{\mathrm{a}0}=\frac{2}{\pi}$};
+                \draw[->] (axis cs:0,0) -- node[above, fill=white, inner sep=1pt]{$\alpha$} (axis cs:\a,0);
+
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
