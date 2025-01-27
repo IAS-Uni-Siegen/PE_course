@@ -86,6 +86,9 @@
                 (i2b)  node[anchor=north,color=black]{$i_\mathrm{2b}(t)$}
                 (jT6c) ++(1,0) node[currarrow](i2c){}
                 (i2c)  node[anchor=north,color=black]{$i_\mathrm{2c}(t)$}
+                % Add voltage arrow u1
+                (U1p) ++(0.3,0.5) to [open,v^=$$,voltage = straight] ++(0,-6)coordinate (Uges)
+                (Uges) ++ (0.3,3) node[anchor=north,color=black]{$U_\mathrm{1}$}
                 % Add voltage arrow u2an, u2bn and u2cn
                 (ju2ax) ++(0,-0.8) to [open,v^=$u_\mathrm{2a}(t)$, voltage = straight] ++(3.8,0)
                 (ju2b) ++(0,-0.8) to [open,v^=$u_\mathrm{2b}(t)$,voltage = straight] ++(3.8,0)

@@ -28,7 +28,7 @@ The switching elements are considered as ideal.
     \centering  % Center the table
     \begin{tabular}{ll}
         \toprule
-        Input voltages: & $U_\mathrm{1p}=\SI{255}{\volt}$ \quad $U_\mathrm{1m}=\SI{255}{\volt}$ \\
+        Input voltages: & $U_\mathrm{1}=\SI{510}{\volt}$ \quad $U_\mathrm{1p}=U_\mathrm{1m}=U_\mathrm{1}/2$ \\
         Internal voltages: & $u_{\mathrm{2ae}}(t) = \sqrt{2} \cdot \SI{220}{\volt} \cdot \sin(\omega_1t)$ \\
         Circular frequency: & $\omega_1 = \SI{2 \pi \cdot 30}{\frac{1}{\second}}$ \\ 
         Inductivity per phase: & $L= \SI{10}{\milli \henry}$ \\
@@ -190,6 +190,25 @@ b_k = \frac{4}{\pi} \int_{0}^{\frac{\pi}{2}} f(x)\sin(kx) \mathrm{d}x \quad k =\
 \label{sub:DecomposeVoltage}
 }
 \begin{solutionblock}
+    In the case of odd and alternating functions corresponding to $f(x)=-f(x+\pi)$ the Fourier coefficients are:
+    \begin{equation}
+        \begin{split}
+        a_\mathrm{k} &= 0 \\
+        a_\mathrm{k} &= \frac{4}{\pi} \int_0^{\pi/2} f(x)\sin(x) \mathrm{d}x \quad k=\mathrm{odd} \\
+        f(x) &= \sum_{k}^{} \left( b_k \sin(kx) \right).
+        \end{split}
+    \end{equation}
+    The coefficients $b_k$ are the amplitudes of the respective harmonic. The voltage $u_{\mathrm{2a}}(t)$ needs 
+    only to be integrated up to $\pi/2$. Only the terms with odd order numbers are taken into account.
+    \begin{equation}
+        \begin{split}
+        a_\mathrm{k} &= \frac{4}{\pi} \int_0^{\pi/3} f(x)\sin(x) \mathrm{d}x \quad k=\mathrm{odd} \\
+        f(x) &= \sum_{k}^{} \left( b_k \sin(kx) \right).
+        \end{split}
+    \end{equation}
+
+
+
     \input{fig/ex07/Fig_Voltage_U_um_excerpt}   
     \input{fig/ex07/Fig_graphic_solutions_cos_terms}
     \input{fig/ex07/Fig_standardization_to_fudamental_freq.tex}
