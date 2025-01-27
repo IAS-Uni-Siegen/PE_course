@@ -11,23 +11,29 @@
                 axis lines=middle, 
                 xlabel={$\cos(\varphi)$},
                 ylabel={$\sin(\varphi)$},
+                xlabel style={xshift=0.5cm},
                 width=7cm, height=7cm,
                 major grid style={line width=.2pt,draw=gray!50},
                 minor grid style={line width=.1pt,draw=gray!20},
                 xmin=-1.5, xmax=1.5,
                 ymin=-1.5, ymax=1.5,
-              ]
-              
-              \draw[thick, ->] (0,0) -- ({cos(40)}, {sin(40)}) node[above right] {};
-              \node at ({0.5*cos(40)}, {0.5*sin(40)}) [below] {$\varphi$};
-
-              \addplot[
-                  domain=0:360, 
-                  samples=200,  
-                  thick,
-                  color=blue,
-              ]
-              ({cos(x)}, {sin(x)}); 
+                xtick={-1, 0, 1},            % Manuelle Ticks auf der x-Achse
+                ytick={-1, 0, 1},            % Manuelle Ticks auf der y-Achse
+                tick label style={xshift=5pt, yshift=5pt}, % Verschiebt die Beschriftungen nach außen
+            ]
+            
+            % Vektor einzeichnen
+            \draw[thick, ->] (0,0) -- ({cos(40)}, {sin(40)}) node[above right] {};
+            \node at ({0.5*cos(40)}, {0.5*sin(40)}) [below] {$\varphi$};
+        
+            % Kreis zeichnen
+            \addplot[
+                domain=0:360, 
+                samples=200,  
+                thick,
+                color=blue,
+            ]
+            ({cos(x)}, {sin(x)}); 
             \end{axis}
         \end{tikzpicture}
     \end{minipage}

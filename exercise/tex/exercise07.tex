@@ -4,11 +4,58 @@
 \ex{Transistor-based AC-DC converters}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Task Single-phase inverter: %%
+%% Task 1: Single-phase inverter: %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\task{Single-phase inverter}
+\task{Single-phase DC inverter}
+The following ideal single-phase DC inverter
+\input{fig/ex07/Single-phase_DC_Inverter.tex} 
 
+configured in a bridge topology and supplies a load consisting of an inductor and an internal load voltage. The inverter consists
+of four thyristors arranged in H-bridge configuration.
+
+\begin{table}[ht]
+    \centering  % Zentriert die Tabelle
+    \begin{tabular}{ll}
+        \toprule
+        Input DC voltage: & $U_{\mathrm{1}}=\SI{200}{\volt}$ \\
+        Inductance: & $L = \SI{4.8}{\milli \henry}$ \\
+        Internal load voltage: & $u_\mathrm{1e}(t) = 150 \sin(\omega t - \frac{\pi}{6})$ \\ 
+        Reference angular frequency: & $\omega_2 = 2\pi \cdot \SI{50}{\hertz}$ \\ 
+        \bottomrule
+    \end{tabular}
+    \caption{Parameters of the single-phase DC inverter.}  
+    \label{table:ex07_Task1_ParametersOfTheCircuit}
+\end{table}
+The inverter is modulated using PWM with a modulation index of M=0.75.  Assuming ideal operation of the switching components:
+% Subtask1
+\subtask{Draw the inverter output voltage $u_\mathrm{2}(t)$ belonging to figure \ref{sfig:ex07_sub1.1_modulation}.
+and its fundamental component $u^\mathrm{(1)}_\mathrm{2}(t)$. How large is the phase difference $\delta$ of the voltage
+fundamental component $u^\mathrm{(1)}_\mathrm{2}(t)$ compared to the internal load voltage $u_\mathrm{1e}$?}
+
+% Subtask2
+\subtask{Calculate the amplitude $\hat{i}^\mathrm{(1)}_\mathrm{2}$ and the phase angle $\varphi^\mathrm{(1)}$ of the 
+current fundamental wave $i^\mathrm{(1)}_\mathrm{2}(t)$ compared to $u_\mathrm{1e}$ and draw $u^\mathrm{(1)}_\mathrm{2}(t)$ 
+and $i^\mathrm{(1)}_\mathrm{2}(t)$ in Fig. \ref{sfig:ex07_sub1.2_fund_components}.}
+
+% Subtask3
+\subtask{In Fig. \ref{sfig:ex07_sub1.3_Harmonics}, draw the voltage harmonics $u^\mathrm{(n)}_\mathrm{2}(t)$. Try to sketch, approximately,
+the current harmonics $i^\mathrm{(n)}_\mathrm{2}(t)$ by counting the voltage time area squares. 
+One square corresponds to a voltage time area of $\SI{17.8}{\milli \volt \second}$. The starting point is marked with \textbf{s}.\\
+
+Hint:  The current harmonics $i^\mathrm{(n)}_\mathrm{2}(t)$ have no mean values.}
+
+% Subtask4
+\subtask{Draw the inverter's output current $i_\mathrm{2}(t)$, its fundamental wave $i^\mathrm{(1)}_\mathrm{2}(t)$ 
+and its harmonics $i^\mathrm{(n)}_\mathrm{2}(t)$ in Fig. \ref{sfig:ex07_sub1.4_current_and_components}.}
+
+% Subtask5
+\subtask{Mark the input current $i_\mathrm{i}(t)$ of the DC voltage inverter in the same figure of subtask 2.1.4.}
+\input{fig/ex07/Fig_subtask1.1_modulation.tex} 
+\input{fig/ex07/Fig_subtask1.2.tex}
+\input{fig/ex07/Fig_subtask1.3.tex}
+\input{fig/ex07/Fig_subtask1.4.tex}
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: Three-phase inverter in six-step mode         %%
@@ -17,8 +64,8 @@
 \task{Symmetrical 3-phase switching rectifier}
 
 An symmetrical switching rectifier in three-phase bridge topology shall supply a
-symmetrical three-phase consumer. The consumer is simulated by an inductance and 
-a sinusoidal counter voltage per phase. The inverter is operated with a basic frequency clock.
+symmetrical three-phase consumer in star connection. The consumer is simulated by an inductance and 
+a sinusoidal counter voltage per phase. The inverter is operated with a basic switching frequency.
 The switching elements are considered as ideal.
 
 % \input{fig/ex07/Fig_ThreePhaseInverter_6StepMode}
@@ -28,7 +75,7 @@ The switching elements are considered as ideal.
     \centering  % Center the table
     \begin{tabular}{ll}
         \toprule
-        Input voltages: & $U_\mathrm{1p}=\SI{255}{\volt}$ \quad $U_\mathrm{1m}=\SI{255}{\volt}$ \\
+        Input voltages: & $U_\mathrm{1}=\SI{510}{\volt}$ \quad $U_\mathrm{1p}=U_\mathrm{1m}=U_\mathrm{1}/2$ \\
         Internal voltages: & $u_{\mathrm{2ae}}(t) = \sqrt{2} \cdot \SI{220}{\volt} \cdot \sin(\omega_1t)$ \\
         Circular frequency: & $\omega_1 = \SI{2 \pi \cdot 30}{\frac{1}{\second}}$ \\ 
         Inductivity per phase: & $L= \SI{10}{\milli \henry}$ \\
@@ -40,15 +87,16 @@ The switching elements are considered as ideal.
 \end{table}
 
 
-\subtask{Create a table with all possible switching states for basic frequency clocking.
+\subtask{Create a table with all possible switching states for basic switching frequency.
 Use the following notation: \\
 $(s_\mathrm{a}(t),s_\mathrm{b}(t),s_\mathrm{c}(t))=\begin{cases}
         s_i(t)= +1 & \text{upper position,}\\
         s_i(t)= -1 & \text{lower position.}
     \end{cases}$\\
+\bigskip    
 Sketch the switching states in the correct chronological order for minimum one periode.
-Calculate and sketch the voltages $u_\mathrm{a,0}(t)$, $u_\mathrm{b,0}(t)$ and $u_\mathrm{c,0}(t)$ depending on these switching states.
-}
+Calculate and sketch the voltages $u_\mathrm{a0}(t)$, $u_\mathrm{b0}(t)$ and $u_\mathrm{c0}(t)$ 
+depending on these switching states.}
 \begin{solutionblock}
     Each half bridge has got the 2 states '+1' and '-1', which results in $2^3 = 8$ combinations according table \autoref{stable:ex07_Task2_Switchingstates}.
     The correct chronological order is displayed in table \autoref{stable:ex07_Task2_UsedSwitchingStates}.
@@ -77,7 +125,7 @@ Calculate and sketch the voltages $u_\mathrm{a,0}(t)$, $u_\mathrm{b,0}(t)$ and $
         \begin{tabular}{|c|c|c|c|c|c|} % Each column is separated by a line
             \hline
             \bfseries $s_\mathrm{a}(t)$ & \bfseries $s_\mathrm{b}(t)$ & \bfseries $s_\mathrm{c}(t)$
-            & \bfseries $+U_\mathrm{2a,0}$ & \bfseries $+U_\mathrm{2b,0}$ & \bfseries $+U_\mathrm{2c,0}$ \\ \hline
+            & \bfseries $u_\mathrm{2a0}$ & \bfseries $u_\mathrm{2b0}$ & \bfseries $u_\mathrm{2c0}$ \\ \hline
             +1 & -1 & +1 & $U_\mathrm{1p}$ & $-U_\mathrm{1m}$ & $U_\mathrm{1p}$ \\ \hline
             +1 & -1 & -1 & $U_\mathrm{1p}$ & $-U_\mathrm{1m}$ & $-U_\mathrm{1m}$ \\ \hline
             +1 & +1 & -1 & $U_\mathrm{1p}$ & $U_\mathrm{1p}$ & $-U_\mathrm{1m}$ \\ \hline
@@ -97,15 +145,15 @@ Calculate and sketch the voltages $u_\mathrm{a,0}(t)$, $u_\mathrm{b,0}(t)$ and $
 \end{solutionblock}
 
 \subtask{The internal voltages $u_\mathrm{ea}(t)$, $u_\mathrm{eb}(t)$ and $u_\mathrm{ec}(t)$ are a symmetrical voltage system, 
-i.e. the following always applies: $u_\mathrm{ea}(t)+u_\mathrm{eb}(t)+u_\mathrm{ec}(t)=0V$. 
+i.e. the following is always applicable: $u_\mathrm{ea}(t)+u_\mathrm{eb}(t)+u_\mathrm{ec}(t)=0V$. 
 Show that this equation is also applicable for the voltages $u_\mathrm{a}(t)$, $u_\mathrm{b}(t)$ and $u_\mathrm{c}(t)$ under the same conditions.
 }
 \begin{solutionblock}
     In the case of a symmetrical three-phase consumer where the current sum at the consumer star point is zero, 
     the following results:
     \begin{equation}
-        u_{\mathrm{2a}(t)} + u_{\mathrm{2b}(t)} + u_{\mathrm{2c}(t)} = \SI{0}{\volt} \quad 
-        i_{\mathrm{2a}(t)} + i_{\mathrm{2b}(t)} + i_{\mathrm{2c}(t)} = \SI{0}{\ampere}.
+        u_{\mathrm{2a}}(t) + u_{\mathrm{2b}}(t) + u_{\mathrm{2c}}(t) = \SI{0}{\volt} \quad 
+        i_{\mathrm{2a}}(t) + i_{\mathrm{2b}}(t) + i_{\mathrm{2c}}(t) = \SI{0}{\ampere}.
         \label{eq:u2_i2_symgen}        
     \end{equation}
     This leads to
@@ -117,7 +165,7 @@ Show that this equation is also applicable for the voltages $u_\mathrm{a}(t)$, $
     \end{equation}
     Using \eqref{eq:u2_i2_symgen} leads to
     \begin{equation}
-        u_{\mathrm{2a}(t)} + u_{\mathrm{2b}(t)} + u_{\mathrm{2c}(t)} 
+        u_{\mathrm{2a}}(t) + u_{\mathrm{2b}}(t) + u_{\mathrm{2c}}(t) 
         = L \frac{\mathrm{d}}{\mathrm{d}t} \left( i_{\mathrm{2a}}(t)+i_{\mathrm{2b}}(t)+i_{\mathrm{2c}}(t) \right) 
          + \left( u_{\mathrm{2ae}}(t) + u_{\mathrm{2be}}(t) + u_{\mathrm{2ce}}(t)\right)=\SI{0}{\volt}.
         \label{eq:u2_i2_symres} 
@@ -131,65 +179,90 @@ Show that this equation is also applicable for the voltages $u_\mathrm{a}(t)$, $
     \end{itemize}     
 \end{solutionblock}
 
-\subtask{Calculate and sketch the voltages $u_\mathrm{2ab}(t)$, $u_\mathrm{2bc}(t)$, $u_\mathrm{2a}(t)$ and $u_\mathrm{2a,0}(t)$ 
-depending on these switching states.}
+\subtask{Calculate and sketch the voltages $u_\mathrm{2ab}(t)$, $u_\mathrm{2bc}(t)$, $u_\mathrm{2a}(t)$ and 
+the star-to-ground voltage $u_\mathrm{2n0}(t)$ depending on the switching states.}
 \begin{solutionblock}
-    The voltage $u_{\mathrm{2ab}(t)}$ is calculated by 
+    The voltage $u_{\mathrm{2ab}}(t)$ is calculated by 
     \begin{equation}
-        u_{\mathrm{2ab}(t)} =  u_{\mathrm{2a,0}(t)} - u_{\mathrm{2b,0}(t)}.
+        u_{\mathrm{2ab}}(t) =  u_{\mathrm{2a0}}(t) - u_{\mathrm{2b0}}(t).
         \label{eq:u2ab_gen}        
     \end{equation}    
-    In similar way the voltage $u_{\mathrm{2bc}(t)}$ is calculated by
+    In similar way the voltage $u_{\mathrm{2bc}}(t)$ is calculated by
     \begin{equation}
-        u_{\mathrm{2bc}(t)} =  u_{\mathrm{2b,0}(t)} - u_{\mathrm{2c,0}(t)}.
+        u_{\mathrm{2bc}}(t) =  u_{\mathrm{2b0}}(t) - u_{\mathrm{2c0}}(t).
         \label{eq:u2bc_gen}        
     \end{equation}    
-    The voltage $u_{\mathrm{2a}(t)}$ is obtained by
+    The voltage $u_{\mathrm{2a}}(t)$ is obtained by
     \begin{equation}
-        u_{\mathrm{2a}(t)} =  u_{\mathrm{2ab}(t)} + u_{\mathrm{2b,0}(t)}.
+        u_{\mathrm{2a}}(t) =  u_{\mathrm{2ab}}(t) + u_{\mathrm{2b0}}(t).
         \label{eq:u2a_1}        
     \end{equation}    
-    Additional voltage $u_{\mathrm{2a}(t)}$ is obtained by
+    Additional voltage $u_{\mathrm{2a}}(t)$ is obtained by
     \begin{equation}
-        u_{\mathrm{2a}(t)} =  u_{\mathrm{2ab}(t)} +  u_{\mathrm{2bc}(t)} + u_{\mathrm{2c}(t)}.
+        u_{\mathrm{2a}}(t) =  u_{\mathrm{2ab}}(t) +  u_{\mathrm{2bc}}(t) + u_{\mathrm{2c}}(t).
         \label{eq:u2a_2}        
     \end{equation}    
     The addition of \eqref{eq:u2a_1} and \eqref{eq:u2a_2} results in
     \begin{equation}
-        2u_{\mathrm{2a}(t)} =  2u_{\mathrm{2ab}(t)} +  u_{\mathrm{2bc}(t)} 
-                               + \left( u_{\mathrm{2a}(t)} + u_{\mathrm{2b}(t)} + u_{\mathrm{2v}(t)}\right)
-                               - u_{\mathrm{2a}(t)}.
+        2u_{\mathrm{2a}}(t) =  2u_{\mathrm{2ab}}(t) +  u_{\mathrm{2bc}}(t) 
+                               + \left( u_{\mathrm{2a}}(t) + u_{\mathrm{2b}}(t) + u_{\mathrm{2v}}(t)\right)
+                               - u_{\mathrm{2a}}(t).
         \label{eq:u2a_gen}        
     \end{equation}    
-    Solving \eqref{eq:u2a_gen} with respect to $u_{\mathrm{2a}(t)}$ leads to
+    Solving \eqref{eq:u2a_gen} with respect to $u_{\mathrm{2a}}(t)$ leads to
     \begin{equation}
-        u_{\mathrm{2a}(t)} = \frac{2}{3} u_{\mathrm{2ab}(t)} + \frac{1}{3} u_{\mathrm{2bc}(t)} 
+        u_{\mathrm{2a}}(t) = \frac{2}{3} u_{\mathrm{2ab}}(t) + \frac{1}{3} u_{\mathrm{2bc}}(t) 
     \end{equation}    
-    The voltage $u_{\mathrm{0,n}(t)}$ is obtained by    
+    The voltage $u_{\mathrm{0,n}}(t)$ is obtained by    
     \begin{equation}
-        u_{\mathrm{0,n}(t)} = u_{\mathrm{2a,0}(t)} - u_{\mathrm{2a}(t)} 
-        = u_{\mathrm{2a,0}(t)} - \frac{2}{3} u_{\mathrm{2ab}(t)} - \frac{1}{3} u_{\mathrm{2bc}(t)}
+        u_{\mathrm{0,n}}(t) = u_{\mathrm{2a0}}(t) - u_{\mathrm{2a}}(t)
+        = u_{\mathrm{2a0}}(t) - \frac{2}{3} u_{\mathrm{2ab}}(t) - \frac{1}{3} u_{\mathrm{2bc}}(t)
     \end{equation}
     Using \eqref{eq:u2ab_gen} and \eqref{eq:u2bc_gen} leads to
     \begin{equation}
         \begin{split}
-        u_{\mathrm{0,n}(t)} &= u_{\mathrm{2a,0}(t)} - \frac{2}{3} \left( u_{\mathrm{2a,0}(t)} - u_{\mathrm{2b,0}(t)} \right) 
-        - \frac{1}{3} \left( u_{\mathrm{2b,0}(t)} - u_{\mathrm{2c,0}(t)} \right) \\
-        u_{\mathrm{0,n}(t)} &= \frac{1}{3} \left( u_{\mathrm{2a,0}(t)} + u_{\mathrm{2b,0}(t)} + u_{\mathrm{2c,0}(t)} \right).
+        u_{\mathrm{0,n}}(t) &= u_{\mathrm{2a0}}(t) - \frac{2}{3} \left( u_{\mathrm{2a0}}(t) - u_{\mathrm{2b0}}(t) \right) 
+        - \frac{1}{3} \left( u_{\mathrm{2b0}}(t) - u_{\mathrm{2c0}}(t) \right) \\
+        u_{\mathrm{0,n}}(t) &= \frac{1}{3} \left( u_{\mathrm{2a0}}(t) + u_{\mathrm{2b0}}(t) + u_{\mathrm{2c0}}(t) \right).
         \end{split}
     \end{equation}
 \end{solutionblock}
 
 \subtask{Decompose the voltage $u_\mathrm{a}(t)$ into a Fourier series and sketch the spectral lines related to the
-amplitude of the fundamental signal up to order n=13. Hint: The following applies to the Fourier coefficients of an odd and alternating function:
+amplitude of the fu
+ndamental signal up to order n=13. Hint: The following applies to the Fourier coefficients of an odd and alternating function:
 \begin{align*}
 b_k = \frac{4}{\pi} \int_{0}^{\frac{\pi}{2}} f(x)\sin(kx) \mathrm{d}x \quad k =\mathrm{odd} \quad  \quad
 \end{align*}
 \label{sub:DecomposeVoltage}
 }
 \begin{solutionblock}
-\input{fig/ex07/Fig_Voltage_U_um_excerpt}   
-\input{fig/ex07/Fig_graphic_solutions_cos_terms} 
-\input{fig/ex07/Fig_standardization_to_fudamental_freq.tex}
-\input{fig/ex07/Fig_ trigonometric_approach_triangle.tex}
+    In the case of odd and alternating functions corresponding to $f(x)=-f(x+\pi)$ the Fourier coefficients are:
+    \begin{equation}
+        \begin{split}
+        a_\mathrm{k} &= 0 \\
+        a_\mathrm{k} &= \frac{4}{\pi} \int_0^{\pi/2} f(x)\sin(x) \mathrm{d}x \quad k=\mathrm{odd} \\
+        f(x) &= \sum_{k}^{} \left( b_k \sin(kx) \right).
+        \end{split}
+    \end{equation}
+    The coefficients $b_k$ are the amplitudes of the respective harmonic. The voltage $u_{\mathrm{2a}}(t)$ needs 
+    only to be integrated up to $\pi/2$. Only the terms with odd order numbers are taken into account.
+    \begin{equation}
+        \begin{split}
+        a_\mathrm{k} &= \frac{4}{\pi} \int_0^{\pi/3} f(x)\sin(x) \mathrm{d}x \quad k=\mathrm{odd} \\
+        f(x) &= \sum_{k}^{} \left( b_k \sin(kx) \right).
+        \end{split}
+    \end{equation}
+
+
+
+    \input{fig/ex07/Fig_Voltage_U_um_excerpt}   
+    \input{fig/ex07/Fig_graphic_solutions_cos_terms}
+    \input{fig/ex07/Fig_standardization_to_fudamental_freq.tex}
+    \input{fig/ex07/Fig_ trigonometric_approach_triangle.tex}    
+\end{solutionblock}
+
+\subtask{Based on \autoref{sub:DecomposeVoltage}, calculate the fundamental amplitude $\hat{i}_\mathrm{a}^1$ using a vector diagram and complex alternating current calculations. 
+From this, determine the total active power converted in the load.}
+\begin{solutionblock}
 \end{solutionblock}
