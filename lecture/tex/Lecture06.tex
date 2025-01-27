@@ -92,6 +92,7 @@
                     +1 & \text{upper position,}\\
                     -1 & \text{lower position.}
                 \end{cases}
+                \label{eq:switching_function_VSI}
             \end{equation}}%
             \onslide<3->{Output voltage considering a voltage source at the input is:
             \begin{equation}
@@ -179,7 +180,7 @@
                     \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
                     \draw let \p1 = (npn4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
                 \end{circuitikz}
-                \caption{Full-bridge single phase AC/DC converter (identical to the one used in the DC/DC section in \figref{fig:DCDC-4Q-switch})}
+                \caption{Full-bridge single-phase AC/DC converter (identical to the one used in the DC/DC section in \figref{fig:DCDC-4Q-switch})}
                 \label{fig:ACDC-4Q-switch}
             \end{figure}
         \end{column}
@@ -211,7 +212,7 @@
                         \pgfmathsetmacro{\signalheight}{\cheight/(1.3)}
 
                         % Start drawing the triangular signal
-                        \draw[signalblue, thick] 
+                        \draw[signalred, thick] 
                     ($(blockBottomLeft) + (0.025, 0.1*\cheight)$) % Starting point with a margin
                     \foreach \x in {1,...,\signalsteps} {
                         -- ($
@@ -256,7 +257,7 @@
                         \pgfmathsetmacro{\signalheight}{\cheight/(1.3)}
 
                         % Start drawing the triangular signal
-                        \draw[signalblue, thick] 
+                        \draw[signalred, thick] 
                     ($(blockBottomLeft) + (0.025, 0.1*\cheight)$) % Starting point with a margin
                     \foreach \x in {1,...,\signalsteps} {
                         -- ($
@@ -306,8 +307,8 @@
 
                  % Top plot: duty cycle reference and carrier signal
                 \nextgroupplot[ylabel = {$s^*(t), c(t)$}, legend pos=north east, legend columns=2]
-                \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_comp_example.csv}; 
-                \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_comp_example.csv}; 
+                \addplot[signalblue, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_comp_example.csv}; 
+                \addplot[signalred, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_comp_example.csv}; 
                 \legend{$s^*(t)$, $c(t)$}
 
                 % top middle plot: individual switching signals
@@ -343,9 +344,9 @@
 
                  % Top plot: duty cycle reference and carrier signal
                 \nextgroupplot[ylabel = {$s^*(t), c(t)$}, legend pos=north east, legend columns=2, ymin = -1.1, ymax =1.1]
-                \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_int_example.csv}; 
-                \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_int_example.csv}; 
-                \addplot[signalred, thick, dashed] table[x=wt, y expr=-\thisrow{d}, col sep=comma] {PWM_single_phase_int_example.csv};
+                \addplot[signalblue, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_int_example.csv}; 
+                \addplot[signalred, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_int_example.csv}; 
+                \addplot[signalblue, thick, dashed] table[x=wt, y expr=-\thisrow{d}, col sep=comma] {PWM_single_phase_int_example.csv};
                 \legend{$s^*(t)$, $c(t)$}
 
                 % top middle plot: individual switching signals
@@ -399,8 +400,8 @@
                          xlabel style={anchor=west}
                          ]
                      \nextgroupplot[ylabel = {$s^*(t), c(t)$}, height=0.36\textheight]
-                         \addplot[signalblue, thick] coordinates {(-0.1,-0.6) (0,-1) (0.5,1) (1,-1)(1.1,-0.6)};
-                         \addplot[domain = -0.1:1.1, samples = 10, signalred, thick] {\d};   
+                         \addplot[signalred, thick] coordinates {(-0.1,-0.6) (0,-1) (0.5,1) (1,-1)(1.1,-0.6)};
+                         \addplot[domain = -0.1:1.1, samples = 10, signalblue, thick] {\d};   
                          \node[anchor=west] at (axis cs:1.1,\d) {$s^*$};
                          \draw[<->] (axis cs:\t1,-1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1-s^*)}{2}$} (axis cs:1-\t1,-1);
                          \draw[<->] (axis cs:0,1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1+s^*)}{4}$} (axis cs:\t1,1);
@@ -462,9 +463,9 @@
                          xlabel style={anchor=west}
                          ]
                      \nextgroupplot[ylabel = {$s^*(t), c(t)$}, height=0.36\textheight]
-                         \addplot[signalblue, thick] coordinates {(-0.1,-0.6) (0,-1) (0.5,1) (1,-1)(1.1,-0.6)};
-                         \addplot[domain = -0.1:1.1, samples = 10, signalred, thick] {\d};   
-                         \addplot[domain = -0.1:1.1, samples = 10, signalred, thick, dashed] {-\d};   
+                         \addplot[signalred, thick] coordinates {(-0.1,-0.6) (0,-1) (0.5,1) (1,-1)(1.1,-0.6)};
+                         \addplot[domain = -0.1:1.1, samples = 10, signalblue, thick] {\d};   
+                         \addplot[domain = -0.1:1.1, samples = 10, signalblue, thick, dashed] {-\d};   
                          \node[anchor=west] at (axis cs:1.1,\d) {$s^*$};
                          \node[anchor=west, overlay] at (axis cs:1.1,-\d) {$-s^*$};
                          \draw[<->] (axis cs:\t1,-1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1-|s^*|)}{2}$} (axis cs:1-\t1,-1);
@@ -619,9 +620,9 @@
 
                  % Top plot: duty cycle reference and carrier signal
                 \nextgroupplot[ylabel = {$s^*(t), c(t)$}, ymin = -1.25, ymax =1.25, legend pos=north east, legend columns=2 ]
-                \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
-                \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
-                \addplot[signalred, thick, dashed] table[x=wt, y expr=-\thisrow{d}, col sep=comma] {PWM_single_phase_overmod_example.csv};
+                \addplot[signalblue, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+                \addplot[signalred, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+                \addplot[signalblue, thick, dashed] table[x=wt, y expr=-\thisrow{d}, col sep=comma] {PWM_single_phase_overmod_example.csv};
                 \legend{$s^*(t)$, $c(t)$}
 
                 % top middle plot: individual switching signals
@@ -651,12 +652,12 @@
     \frametitle{Overmodulation (cont.)} 
     \begin{columns}
         \begin{column}{0.45\textwidth}
-            Considering a normalized input reference
-        $$ s^*(t) = A\sin(\omega t)$$
-        one can distinguish two PWM operation areas:
+        Considering a normalized input reference
+        $$ s^*(t) = m\sin(\omega t)$$
+        with the \hl{modulation ratio} $m$ one can distinguish two PWM operation areas:
         \begin{itemize}
-            \item $A \leq 1$: linear modulation, 
-            \item $A > 1$: overmodulation.
+            \item $m \leq 1$: linear modulation, 
+            \item $m > 1$: overmodulation.
         \end{itemize}
         \vspace{-0.25cm}
         \onslide<2->{%
@@ -668,7 +669,7 @@
             \begin{figure}
                 \begin{tikzpicture}
                     \begin{axis}[
-                        xlabel={$A$},
+                        xlabel={$m$},
                         ylabel={$\hat{u}_2^{(1)}/U_1$},
                         ymin=0, ymax=4/pi*1.2,
                         xmin=0, xmax=3,
@@ -737,11 +738,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Fundamental frequency modulation (cont.)} 
-    \onslide<1->{The fundamental frequency modulation leads to a pulse pattern synchronized with the fundamental output voltage $\hat{u}_2^{(1)}(t)$, i.e., there are exactly \hl{two switching actions per fundamental} period $$ f_\mathrm{s} = 2\frac{\omega}{2\pi} = \frac{\omega}{\pi}.$$}% 
+    \onslide<1->{The fundamental frequency modulation leads to a pulse pattern synchronized with the fundamental output voltage $\hat{u}_2^{(1)}(t)$, i.e., the \hl{switching frequency matches the fundamental voltage frequency} $$ f_\mathrm{s} = \frac{\omega}{2\pi}.$$}% 
     \onslide<2->{The fundamental output voltage amplitude can be derived from the corresponding \hl{Fourier coefficient}}
     \begin{equation}
         \begin{split}
-            \onslide<2->{\hat{u}_2^{(k)} &= \frac{1}{\pi} \int_{\alpha}^{\alpha + \pi} u_2(t)\sin(k (\omega t-\alpha)) \mathrm{d}\omega t}\onslide<3->{ = \frac{2}{\pi} \int_{}^{\pi/2} U_1 \sin(k \omega t) \mathrm{d}\omega t} \\
+            \onslide<2->{\hat{u}_2^{(k)} &= \frac{1}{\pi} \int_{\alpha}^{\alpha + \pi} u_2(t)\sin(k (\omega t-\alpha)) \mathrm{d}\omega t}\onslide<3->{ = \frac{2}{\pi} \int_{0}^{\pi/2} U_1 \sin(k \omega t) \mathrm{d}\omega t} \\
                 & \onslide<4->{= \frac{2}{\pi} \left[-\frac{U_1}{k} \cos(k \omega t)\right]_{0}^{\pi/2}} \onslide<5->{= \frac{2}{\pi} \left[\frac{U_1}{k} \left(\cos(0) - \cos(k(\pi/2))\right)\right]} \\
                 &\onslide<6->{= \frac{4}{\pi} U_1 \frac{1}{k}, \quad k=1,3,5,7,\ldots}
             \end{split}
@@ -1056,6 +1057,141 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Outlook: multi-level converters %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Outlook: multi-level converters} 
+    \begin{figure}
+        \centering
+        \begin{subfigure}{0.32\textwidth}
+            \centering
+            \begin{circuitikz}
+                \draw
+                    (0,0) to [short, o-*] ++(1,0) coordinate (A)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{2}$}, voltage = straight] ++(0,-2) coordinate (B)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{2}$}, voltage = straight] ++(0,-2) coordinate (C)
+                    to [short, -o] ++(-1,0) coordinate (D)
+                    (B) to [short] ++(-0.5, 0) coordinate (E)
+                    (E) node[rground, rotate=-90, name = gnd1]{}; 
+                \draw 
+                    ($(B) + (1.5,0)$) node[cute spdt up arrow, xscale=-1] (Sw1) {}
+                    (A) -| (Sw1-out 1.n)
+                    (C) -| (Sw1-out 2.s)
+                    (Sw1-in) to [short, -o] ++(1,0) coordinate (F);
+                \draw 
+                    (F |- C) node[rground, anchor = south, name = gnd2]{}
+                    (F) to [open, v={$u_2(t)\hspace{0.3cm}$}, voltage = straight] (gnd2); 
+            \end{circuitikz}\\[1em]
+            \begin{tikzpicture}
+                \begin{axis}[
+                    width=0.99\textwidth,
+                    height=0.375\textheight,
+                    xlabel={$t$},
+                    ylabel={$u_2$},
+                    xmin=0, xmax=1.2,
+                    ymin=-1.15, ymax=1.15,
+                    ytick={-1,0,1},
+                    yticklabels={$-\frac{U_\mathrm{dc}}{2}$,$0$,$\frac{U_\mathrm{dc}}{2}$},
+                    xticklabels={},
+                    grid=both,
+                    axis lines=middle,
+                    xlabel style={anchor=west},
+                    ylabel style={anchor=south},
+                ]
+                \addplot[signalblue, thick] coordinates {(0,-1) (0.1,-1) (0.1,1) (0.6,1) (0.6,-1) (1.1,-1) (1.1,1) (1.2,1)};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{2-level half bridge}
+        \end{subfigure}
+        \begin{subfigure}{0.32\textwidth}
+            \centering
+            \begin{circuitikz}
+                \draw
+                    (0,0) to [short, o-*] ++(1,0) coordinate (A)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{2}$}, voltage = straight] ++(0,-2) coordinate (B)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{2}$}, voltage = straight] ++(0,-2) coordinate (C)
+                    to [short, -o] ++(-1,0) coordinate (D)
+                    (B) to [short] ++(-0.5, 0) coordinate (E)
+                    (E) node[rground, rotate=-90, name = gnd1]{}; 
+                \draw 
+                    ($(B) + (1.0,0)$) node[rotary switch ->=3 in 90 wiper 90, xscale=-1, anchor=out 2](Sw1){}
+                    (A) -| (Sw1-out 1.n)
+                    (C) -| (Sw1-out 3.s)
+                    (Sw1-in) to [short, -o] ++(1,0) coordinate (F)
+                    (Sw1-out 2.w) to [short] (B);
+                \draw 
+                    (F |- C) node[rground, anchor = south, name = gnd2]{}
+                    (F) to [open, v={$u_2(t)\hspace{0.3cm}$}, voltage = straight] (gnd2); 
+            \end{circuitikz}\\[1em]
+            \begin{tikzpicture}
+                \begin{axis}[
+                    width=0.99\textwidth,
+                    height=0.375\textheight,
+                    xlabel={$t$},
+                    ylabel={$u_2$},
+                    xmin=0, xmax=1.2,
+                    ymin=-1.15, ymax=1.15,
+                    ytick={-1,0,1},
+                    yticklabels={$-\frac{U_\mathrm{dc}}{2}$,$0$,$\frac{U_\mathrm{dc}}{2}$},
+                    xticklabels={},
+                    grid=both,
+                    axis lines=middle,
+                    xlabel style={anchor=west},
+                    ylabel style={anchor=south},
+                ]
+                \addplot[signalblue, thick] coordinates {(0,-1) (0.1,-1) (0.1,0) (0.35,0) (0.35,1) (0.6,1) (0.6,0) (0.85,0) (0.85,-1) (1.1,-1) (1.1,0) (1.1,0) (1.2,0)};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{3-level half bridge}
+        \end{subfigure}
+        \begin{subfigure}{0.32\textwidth}
+            \centering
+            \begin{circuitikz}
+                \draw
+                    (0,0) to [short, o-*] ++(1,0) coordinate (A)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{3}$}, voltage = straight] ++(0,-1.0) coordinate (B)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{6}$}, voltage = straight] ++(0,-1.0) coordinate (C)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{6}$}, voltage = straight] ++(0,-1.0) coordinate (D)
+                    to [capacitor, -*, v={$\frac{U_\mathrm{dc}}{3}$}, voltage = straight] ++(0,-1.0) coordinate (E)
+                    to [short, -o] ++(-1,0) coordinate (F)
+                    (C) to [short] ++(-0.5, 0) coordinate (G)
+                    (G) node[rground, rotate=-90, name = gnd1]{}; 
+                \draw 
+                    ($(C) + (1.75,0)$) node[rotary switch ->=4 in 90 wiper 90, xscale=-1, anchor=in](Sw1){}
+                    (A) -| (Sw1-out 1.n)
+                    (E) -| (Sw1-out 4.s)
+                    (Sw1-in) to [short, -o] ++(1,0) coordinate (H)
+                    (Sw1-out 2.n) |- (B)
+                    (Sw1-out 3.s) |- (D);
+                \draw 
+                    (H |- E) node[rground, anchor = south, name = gnd2]{}
+                    (H) to [open, v={$u_2(t)\hspace{0.3cm}$}, voltage = straight] (gnd2); 
+            \end{circuitikz}\\[1em]
+            \begin{tikzpicture}
+                \begin{axis}[
+                    width=0.99\textwidth,
+                    height=0.375\textheight,
+                    xlabel={$t$},
+                    ylabel={$u_2$},
+                    xmin=0, xmax=1.2,
+                    ymin=-1.15, ymax=1.15,
+                    ytick={-1,0,1},
+                    yticklabels={$-\frac{U_\mathrm{dc}}{2}$,$0$,$\frac{U_\mathrm{dc}}{2}$},
+                    xticklabels={},
+                    grid=both,
+                    axis lines=middle,
+                    xlabel style={anchor=west},
+                    ylabel style={anchor=south},
+                ]
+                \addplot[signalblue, thick] coordinates {(0,-1) (1/4,-1) (1/4,-1/3) (1/4+1/8,-1/3) (1/4+1/8,1/3) (2/4,1/3) (2/4,1) (3/4,1) (3/4,1/3) (3/4+1/8,1/3) (3/4+1/8,-1/3) (1,-1/3) (1,-1) (1.2,-1)};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{4-level half bridge}
+        \end{subfigure}
+        \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Rectifier operation for single-phase grids %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Rectifier operation for single-phase grids} 
@@ -1239,5 +1375,505 @@
         \end{tikzpicture}
         \caption{Steady-state operation of the single-phase four-quadrant rectifier: (top) individual signals and (bottom) power oscillations at twice the grid frequency}
         \label{fig:recitifier_single_phase_transistor_power_oscillations}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase AC/DC bridge converter %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Three-phase AC/DC bridge converter} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Idealized switch representation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Idealized switch representation of a three-phase AC/DC bridge converter}
+        \begin{figure}
+            \begin{circuitikz}
+                \draw (0,0) node[cute spdt up arrow, xscale=-1] (Sw1) {};
+                \draw (1.5,-1.5) node[cute spdt down arrow, xscale=-1] (Sw2) {};
+                \draw (3,-3) node[cute spdt down arrow, xscale=-1] (Sw3) {};
+                \draw (Sw2.in) to [short, -o] ++(3,0) coordinate (out2);
+                \draw (Sw1.in) to [short] ++(3.75,0) to [short, -o] (Sw1.in -| out2) coordinate (out1); 
+                \draw (Sw3.in) to [short, -o, i=$i_{2\mathrm{c}}(t)$] (Sw3.in -| out2) coordinate (out3);
+                \draw (Sw3.in |- Sw2.in) to [short, -o, i=$i_{2\mathrm{b}}(t)$] (Sw2.in -| out2);
+                \draw (Sw3.in |- Sw1.in) to [short, -o, i=$i_{2\mathrm{a}}(t)$] (Sw1.in -| out2);
+                \draw (out1) to [open, v^=$\hspace{0.75cm}u_{2\mathrm{ab}}(t)$, voltage = straight] (out2);
+                \draw (out2) to [open, v^=$\hspace{0.75cm}u_{2\mathrm{bc}}(t)$, voltage = straight] (out3);
+                \draw ($(out3) + (1.5,0)$) to [open, v_=$\hspace{0.75cm}u_{2\mathrm{ca}}(t)$, voltage = straight] ($(out1) + (1.5,0)$);
+                \draw (Sw1-out 1.n) to [short, -*] ++(0,0.5) coordinate (int1);
+                \draw (Sw3-out 2.s) to [short] ++(0,-0.5) coordinate (int3);
+                \draw (int3) to [short] (int3 -| Sw1-out 2.s) coordinate (int4) to [short, *-] (Sw1-out 2.s);
+                \draw node[crossingshape, name=x1, rotate=-90] at (out1 -| Sw2-out 1.n) {};
+                \draw (x1.west) to [short] (int1 -| x1.west) coordinate (int2) to [short] (int1);
+                \draw (x1.east) to [short] (Sw2-out 1.n);
+                \draw (int1) to [short] ++(-1,0) to [short, i_<=$i_1(t)$, -o] ++(-1,0) coordinate (in1);
+                \draw (int4) to [short, -o] ++(-2,0) coordinate (in2);
+                \draw (in1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (in2);
+                \draw node[anchor = east, xshift=-0.3cm] at (Sw1) {$s_1(t)$};
+                \draw node[anchor = east, xshift=-0.3cm] at (Sw2) {$s_2(t)$};
+                \draw node[anchor = east, xshift=-0.3cm] at (Sw3) {$s_3(t)$};
+                \draw (Sw2-out 2.s) to [short, -*] (int3 -| Sw2-out 2.s);
+                \draw node[crossingshape, name=x2, rotate=-90] at (out1 -| Sw3-out 1.n) {};
+                \draw node[crossingshape, name=x3, rotate=-90] at (out2 -| Sw3-out 1.n) {};
+                \draw (x3.west) to [short] (x2.east);
+                \draw (x3.east) to [short] (Sw3-out 1.n);
+                \draw (x2.west) to [short] (int2 -| x2.west) to [short,-*] (int2);
+            \end{circuitikz}
+            \caption{Idealized switch representation of a three-phase two-level AC/DC bridge converter}
+            \label{fig:idealized_switch_three_phase_bridge_converter}
+        \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Circuit realization %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Circuit realization}
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw (0,4) coordinate (A) to [capacitor, *-*, v = $\frac{u_1(t)}{2}$, voltage = straight] ++(0,-3) coordinate (Z) to [capacitor, *-*, v = $\frac{u_1(t)}{2}$, voltage = straight] ++(0,-3) coordinate (B)
+            (Z) node[rground, rotate=-90, name = gnd1]{}
+            (A) to [short, *-o] ++(-2,0) coordinate (Y)
+            (B) to [short, *-o] ++(-2,0) coordinate (X)
+            (Y) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] (X)
+            (A) to [short, i=$i_{1}(t)$] ++(2,0) coordinate (E)
+            to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
+            to [short, *-] ++(1,0) to [crossing] ++(2,0) to [crossing] ++(2,0)   
+            to [short, i=$i_{2\mathrm{a}}(t)$] ++(1,0) coordinate (U) to [short] ++(1,0) coordinate (G)
+            (C) to [short] ++(0,-2) 
+            to [Tnpn, n=npn2, invert, bodydiode] ++(0,-2) coordinate (D)
+            (E) to [short, *-] ++(2,0) coordinate (I)
+            to [Tnpn, n=npn3, invert, bodydiode] ++(0,-2)
+            to [short] ++(0,-1) coordinate (F)
+            to [short] ++(0,-1)
+            to [Tnpn, n=npn4, invert, bodydiode] ++(0,-2) 
+            to [short, -*] ++(-2,0)
+            to [short, -o] (B)
+            (I) to [short, *-] ++(2,0)
+            to [Tnpn, n=npn5, invert, bodydiode] ++(0,-2) coordinate (J)
+            to [short] ++(0,-2) coordinate (K)
+            to [Tnpn, n=npn6, invert, bodydiode] ++(0,-2) 
+            to [short, -*] ++(-2,0)
+            (F) to [short, *-] ++(1,0) to [crossing] ++(2,0) to [short, i=$i_{2\mathrm{b}}(t)$] ++(1,0) coordinate (V) to [short] ++(1,0) coordinate (H)
+            (K) to [short, *-] ++(1,0) to [short, i=$i_{2\mathrm{c}}(t)$] ++(1,0) to [short] ++(0.5,0) coordinate(W) to [short] ++(0.5,0) coordinate (L)
+            (G) to [open, o-o, v^=$\hspace{0.75cm}u_{2\mathrm{ab}}(t)$, voltage = straight] (H)
+            (H) to [open, o-o, v^=$\hspace{0.75cm}u_{2\mathrm{bc}}(t)$, voltage = straight] (L)
+            ($(L) + (1.5,0)$) to [open, v_=$\hspace{0.75cm} u_{2\mathrm{bc}}(t)$, voltage = straight] ($(G) + (1.5,0)$);
+            \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+            \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+            \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
+            \draw let \p1 = (npn4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
+            \draw let \p1 = (npn5.B) in node[anchor=east] at (\x1,\y1) {$T_5$};
+            \draw let \p1 = (npn6.B) in node[anchor=east] at (\x1,\y1) {$T_6$};
+            \draw 
+                    (W |- D) node[rground, anchor = south, name = gnd2]{};
+            \draw[->] ($(W) + (0.5,-0.2)$) to ($(W |- gnd2) + (0.5,0.2)$);
+            \draw[->] ($(V) + (0.5,-0.2)$) to ($(V |- gnd2) + (0.5,0.2)$);
+            \draw[->] ($(U) + (0,-0.2)$) to ($(U |- gnd2) + (0,0.2)$);
+            \draw ($(W)!0.5!(gnd2) + (0.5,0)$) node[anchor = west] {$u_{2i0}(t)$};
+        \end{circuitikz}
+        \caption{Three-phase two-level AC/DC converter}
+        \label{fig:VSI_three_phase_two_level_bridge_converter}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Switching states and load-independent output voltages %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Switching states and load-independent output voltages}
+    Reutilizing the switching function definition \eqref{eq:switching_function_VSI}, the \hl{line-to-line voltages} can be expressed as
+    \begin{equation}
+        \begin{split}
+            u_{2\mathrm{ab}}(t) &= \frac{1}{2}\left(s_{\mathrm{a}}(t)-s_{\mathrm{b}}(t)\right)u_1(t),\\
+            u_{2\mathrm{bc}}(t) &= \frac{1}{2}\left(s_{\mathrm{b}}(t)-s_{\mathrm{c}}(t)\right)u_1(t),\\
+            u_{2\mathrm{ca}}(t) &= \frac{1}{2}\left(s_{\mathrm{c}}(t)-s_{\mathrm{a}}(t)\right)u_1(t).
+        \end{split}
+    \end{equation}
+    The \hl{line-to-ground voltages} are given by
+    \begin{equation}
+        \begin{split}
+            u_{2\mathrm{a}0}(t) &= \frac{1}{2}s_{\mathrm{a}}(t)u_1(t),\\
+            u_{2\mathrm{b}0}(t) &= \frac{1}{2}s_{\mathrm{b}}(t)u_1(t),\\
+            u_{2\mathrm{c}0}(t) &= \frac{1}{2}s_{\mathrm{c}}(t)u_1(t).
+        \end{split}
+    \end{equation}    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase converter with symmetric load in star connection %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Three-phase converter with symmetric load in star connection}
+    \begin{figure}
+        \begin{circuitikz}[]
+            \draw (0,4) coordinate (A) to [capacitor, *-*, v = $\frac{u_1(t)}{2}$, voltage = straight] ++(0,-3) coordinate (Z) to [capacitor, *-*, v = $\frac{u_1(t)}{2}$, voltage = straight] ++(0,-3) coordinate (B)
+            (Z) node[rground, rotate=-90, name = gnd1]{}
+            (A) to [short, *-o] ++(-2,0) coordinate (Y)
+            (B) to [short, *-o] ++(-2,0) coordinate (X)
+            (Y) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] (X)
+            (A) to [short, i=$i_{1}(t)$] ++(2,0) coordinate (E)
+            to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
+            to [short, *-] ++(1,0) to [crossing] ++(2,0) to [crossing] ++(2,0)   
+            to [short, i=$i_{2\mathrm{a}}(t)$] ++(1,0) coordinate (U) to [short] ++(1,0) coordinate (G)
+            (C) to [short] ++(0,-2) 
+            to [Tnpn, n=npn2, invert, bodydiode] ++(0,-2) coordinate (D)
+            (E) to [short, *-] ++(2,0) coordinate (I)
+            to [Tnpn, n=npn3, invert, bodydiode] ++(0,-2)
+            to [short] ++(0,-1) coordinate (F)
+            to [short] ++(0,-1)
+            to [Tnpn, n=npn4, invert, bodydiode] ++(0,-2) 
+            to [short, -*] ++(-2,0)
+            to [short, -o] (B)
+            (I) to [short, *-] ++(2,0)
+            to [Tnpn, n=npn5, invert, bodydiode] ++(0,-2) coordinate (J)
+            to [short] ++(0,-2) coordinate (K)
+            to [Tnpn, n=npn6, invert, bodydiode] ++(0,-2) 
+            to [short, -*] ++(-2,0)
+            (F) to [short, *-] ++(1,0) to [crossing] ++(2,0) to [short, i=$i_{2\mathrm{b}}(t)$] ++(1,0) coordinate (V) to [short] ++(1,0) coordinate (H)
+            (K) to [short, *-] ++(1,0) to [short, i=$i_{2\mathrm{c}}(t)$] ++(1,0) to [short] ++(0.5,0) coordinate(W) to [short] ++(0.5,0) coordinate (L);
+            \draw (H) to [inductor, v^=$u_{2\mathrm{b}}(t)$, voltage=straight] ++(1.5,0) to [short,-*] ++(1,0) coordinate (N)
+            (L) to [inductor, v^=$u_{2\mathrm{c}}(t)$, voltage=straight] ++(1.5,0) to [short] (\tikztostart) -| (N)
+            (G) to [inductor, v^=$u_{2\mathrm{a}}(t)$, voltage=straight] ++(1.5,0) to [short] (\tikztostart) -| (N);
+            \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+            \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+            \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
+            \draw let \p1 = (npn4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
+            \draw let \p1 = (npn5.B) in node[anchor=east] at (\x1,\y1) {$T_5$};
+            \draw let \p1 = (npn6.B) in node[anchor=east] at (\x1,\y1) {$T_6$};
+            \draw (W |- D) node[rground, anchor = south, name = gnd2]{};
+            \draw[->] ($(W) + (0.5,-0.2)$) to ($(W |- gnd2) + (0.5,0.2)$);
+            \draw[->] ($(V) + (0.5,-0.2)$) to ($(V |- gnd2) + (0.5,0.2)$);
+            \draw[->] ($(U) + (0,-0.2)$) to ($(U |- gnd2) + (0,0.2)$);
+            \draw ($(W)!0.5!(gnd2) + (0.5,0)$) node[anchor = west] {$u_{2i0}(t)$};
+            \draw[->] ($(N) + (0,-1.25)$) to ($(N |- gnd2) + (0,0.2)$);
+            \draw ($(W)!0.5!(gnd2) + (1.8,0)$) node[anchor = west] {$u_{\mathrm{n}0}(t)$};
+            \draw (N |- D) node[rground, anchor = south, name = gnd3]{};
+        \end{circuitikz}
+        \caption{Three-phase two-level AC/DC converter with symmetric load in star connection}
+        \label{fig:VSI_three_phase_two_level_bridge_converter_load_star}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase converter with symmetric load in star connection (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Three-phase converter with symmetric load in star connection (cont.)}
+    Assuming a star-connected load, the three-phase currents sum up to zero:
+    \begin{equation}
+       i_{2\mathrm{a}}(t) + i_{2\mathrm{b}}(t) + i_{2\mathrm{c}}(t) = 0.
+       \label{eq:three_phase_current_sum_star}
+    \end{equation}
+    If the star point is not connected to ground, $u_{\mathrm{n}0}(t)\neq 0$ may occur leading to a load voltage of 
+    \begin{equation}
+        u_{2\mathrm{a}}(t) = u_{2\mathrm{a}0}(t) - u_{\mathrm{n}0}(t), \quad u_{2\mathrm{b}}(t) = u_{2\mathrm{b}0}(t) - u_{\mathrm{n}0}(t), \quad u_{2\mathrm{c}}(t) = u_{2\mathrm{c}0}(t) - u_{\mathrm{n}0}(t).
+    \end{equation} 
+    To calculate $u_{\mathrm{n}0}(t)$ one can utilize the load equation (assuming an inductive load):
+    \begin{equation}
+        u_{2i}(t) = L \frac{\mathrm{d}}{\mathrm{d}t} i_{2i}(t) + u_{\mathrm{n}0}(t)
+    \end{equation}
+    summing up to
+    \begin{equation}
+        3u_{\mathrm{n}0}(t) +  L \frac{\mathrm{d}}{\mathrm{d}t} \left(i_{2\mathrm{a}}(t) + i_{2\mathrm{b}}(t) + i_{2\mathrm{c}}(t)\right) = u_{2\mathrm{a}0}(t) + u_{2\mathrm{b}0}(t) +u_{2\mathrm{c}0}(t)
+    \end{equation}
+    and finally delivering the star-to-ground voltage as 
+    \begin{equation}
+        u_{\mathrm{n}0}(t) = \frac{1}{3} \left(u_{2\mathrm{a}0}(t) + u_{2\mathrm{b}0}(t) +u_{2\mathrm{c}0}(t)\right).
+    \end{equation}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase converter with symmetric load in star connection (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[b]
+    \frametitle{Three-phase converter with symmetric load in star connection (cont.)}
+    \vspace{1em}
+    \begin{table}
+        \renewcommand{\arraystretch}{1.25}
+        \centering
+        \begin{tabular}{c c c c c c c c c c c c c c}
+            \toprule
+            $\mathrm{No.}$ & $s_\mathrm{a}$ & $s_\mathrm{b}$ & $s_\mathrm{c}$ & $\frac{u_{2a0}}{u_1}$ & $\frac{u_{2b0}}{u_1}$ & $\frac{u_{2c0}}{u_1}$ & $\frac{u_{2a}}{u_1}$ & $\frac{u_{2b}}{u_1}$ & $\frac{u_{2c}}{u_1}$ & $\frac{u_{\mathrm{ab}}}{u_1}$ & $\frac{u_{\mathrm{bc}}}{u_1}$ & $\frac{u_{\mathrm{ca}}}{u_1}$ & $\frac{u_{\mathrm{n}0}}{u_1}$ \\
+            \midrule
+            $0$ & $-1$ & $-1$ & $-1$ & $-\frac{1}{2}$ & $-\frac{1}{2}$ & $-\frac{1}{2}$ & $0$ & $0$ & $0$ & $0$& $0$& $0$&$-\frac{1}{2}$\\
+
+            $1$ & $+1$ & $-1$ & $-1$ & $+\frac{1}{2}$ & $-\frac{1}{2}$ & $-\frac{1}{2}$ & $+\frac{2}{3}$ & $-\frac{1}{3}$ & $-\frac{1}{3}$ & $+1$& $0$& $-1$& $-\frac{1}{6}$\\
+
+            $2$ & $+1$ & $+1$ & $-1$ & $+\frac{1}{2}$ & $+\frac{1}{2}$ & $-\frac{1}{2}$ & $+\frac{1}{3}$ & $+\frac{1}{3}$ & $-\frac{2}{3}$ & $0$& $+1$& $-1$& $+\frac{1}{6}$\\
+
+            $3$ & $-1$ & $+1$ & $-1$ & $-\frac{1}{2}$ & $+\frac{1}{2}$ & $-\frac{1}{2}$ & $-\frac{1}{3}$ & $+\frac{2}{3}$ & $-\frac{1}{3}$ & $-1$& $+1$& $0$& $-\frac{1}{6}$\\
+
+            $4$ & $-1$ & $+1$ & $+1$ & $-\frac{1}{2}$ & $+\frac{1}{2}$ & $+\frac{1}{2}$ & $-\frac{2}{3}$ & $+\frac{1}{3}$ & $+\frac{1}{3}$ & $-1$& $0$& $+1$& $+\frac{1}{6}$\\
+
+            $5$ & $-1$ & $-1$ & $+1$ & $-\frac{1}{2}$ & $-\frac{1}{2}$ & $+\frac{1}{2}$ & $-\frac{1}{3}$ & $-\frac{1}{3}$ & $+\frac{2}{3}$ & $0$& $-1$& $1$& $-\frac{1}{6}$\\
+
+            $6$ & $+1$ & $-1$ & $+1$ & $+\frac{1}{2}$ & $-\frac{1}{2}$ & $+\frac{1}{2}$ & $+\frac{1}{3}$ & $-\frac{2}{3}$ & $+\frac{1}{3}$ & $1$& $-1$& $0$& $+\frac{1}{6}$\\
+
+            $7$ & $+1$ & $+1$ & $+1$ & $+\frac{1}{2}$ & $+\frac{1}{2}$ & $+\frac{1}{2}$ & $0$ & $0$ & $0$ & $0$& $0$& $0$& $+\frac{1}{2}$\\
+
+            \bottomrule
+            
+        \end{tabular}
+        \caption{Switching states and resulting voltages of the three-phase two-level AC/DC converter with symmetric load in star connection (with $2^3=8$ possible switching states)}
+        \label{tab:VSI_three_phase_two_level_bridge_converter_load_star}
+    \end{table}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase fundamental frequency modulation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Three-phase fundamental frequency modulation} 
+    \vspace{-0.1cm}
+    \begin{figure}
+        \begin{tikzpicture}
+            \def\a{0.33*pi}
+            \def\it{0.1*pi}
+            \begin{groupplot}[group style={group size=1 by 5, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.32\textheight, width=0.875\textwidth, xmin=0, xmax=3*pi, grid,clip = false, ymin = -0.8, ymax =0.8, xtick = {0, pi/2, pi, 3/2*pi, 2*pi, 5/2*pi, 3*pi}, xticklabels = {$0$,$\nicefrac{1}{2}\pi$, $\pi$, $\nicefrac{3}{2}\pi$, $2\pi$, $\nicefrac{5}{2}\pi$, $3\pi$}, ytick = {-1/2, 0, 1/2}, yticklabels = {$-\nicefrac{1}{2}$, , $\nicefrac{1}{2}$}, ylabel style={rotate=-90}]
+
+                % ua0
+                \nextgroupplot[ylabel = {$u_{2\mathrm{a}0}(t)/U_1$}] 
+                \addplot[signalblue, thick] coordinates {(0,-1/2) (\a,-1/2) (\a,1/2) (\a+pi,1/2) (\a+pi,-1/2) (2*pi+\a,-1/2) (2*pi+\a,1/2) (3*pi,1/2)};
+                \addplot[signalblue, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(x-\a))};
+                \draw[thin] (pi+\a+0.1,0.0) -- (pi+\a+0.6,0.25) node[right, anchor=west, fill = white, inner sep = 1pt] {$\hat{u}^{(1)}_{2\mathrm{a}0}=\frac{2}{\pi}$};
+                \draw[->] (axis cs:0,0) -- node[above, fill=white, inner sep=1pt]{$\alpha$} (axis cs:\a,0);
+
+                % ub0
+                \nextgroupplot[ylabel = {$u_{2\mathrm{b}0}(t)/U_1$}] 
+                \addplot[signalgreen, thick] coordinates {(0,-1/2) (pi,-1/2) (pi,1/2) (2*pi,1/2) (2*pi,-1/2) (3*pi,-1/2)};
+                \addplot[signalgreen, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(-x))};
+                \draw[thin] (pi/3*5+\a+0.1,0.0) -- (pi/3*5+\a+0.6,0.25) node[right, anchor=west, fill = white, inner sep = 1pt] {$\hat{u}^{(1)}_{2\mathrm{b}0}=\frac{2}{\pi}$};
+
+                % uc0
+                \nextgroupplot[ylabel = {$u_{2\mathrm{c}0}(t)/U_1$}] 
+                \addplot[signalbrown, thick] coordinates {(0,1/2) (\a+pi/3,1/2) (\a+pi/3,-1/2) (\a+4*pi/3,-1/2) (\a+4*pi/3,1/2) (\a+7*pi/3,1/2) (\a+7*pi/3,-1/2) (3*pi,-1/2)};
+                \addplot[signalbrown, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(x-4/3*pi-\a))};
+                \draw[thin] (pi/3+\a+0.1,0.0) -- (pi/3+\a+0.6,0.25) node[right, anchor=west, fill = white, inner sep = 1pt] {$\hat{u}^{(1)}_{2\mathrm{c}0}=\frac{2}{\pi}$};
+
+                % un0
+                \nextgroupplot[ylabel = {$u_{2\mathrm{n}0}(t)/U_1$}, height=0.27\textheight, ymin = -1/5, ymax =1/5, ytick = {-1/6, 0, 1/6}, yticklabels = {$-\nicefrac{1}{6}$, , $\nicefrac{1}{6}$}] 
+                \addplot[signallavender, thick] coordinates {(0,-1/6) (pi/3,-1/6) (pi/3,1/6) (2*pi/3,1/6) (2*pi/3,-1/6) (3*pi/3,-1/6) (3*pi/3,1/6) (4*pi/3,1/6) (4*pi/3,-1/6) (5*pi/3,-1/6) (5*pi/3,1/6) (6*pi/3,1/6) (6*pi/3,-1/6) (7*pi/3,-1/6) (7*pi/3,1/6) (8*pi/3,1/6) (8*pi/3,-1/6) (9*pi/3,-1/6) (9*pi/3,1/6)};
+                \draw[<->] (axis cs:\a,0) -- node[centered, fill=white, inner sep=1pt]{$T_\mathrm{s}$} (axis cs:\a+2*pi,0);
+
+                % ua0
+                \nextgroupplot[ylabel = {$u_{2\mathrm{a}}(t)/U_1$}, , ytick = {-2/3, 0, 2/3}, yticklabels = {$-\nicefrac{2}{3}$, , $\nicefrac{2}{3}$}, xlabel={$\omega t$}] 
+                \addplot[signalblue, thick] coordinates {(0,-1/3) (pi/3,-1/3) (pi/3,1/3) (2*pi/3,1/3) (2*pi/3,2/3) (3*pi/3,2/3) (3*pi/3,1/3) (4*pi/3,1/3) (4*pi/3,-1/3) (5*pi/3,-1/3) (5*pi/3,-2/3) (6*pi/3,-2/3) (6*pi/3,-1/3) (7*pi/3,-1/3) (7*pi/3,1/3) (8*pi/3,1/3) (8*pi/3,2/3) (9*pi/3,2/3)};
+                \addplot[signalblue, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(x-\a))};
+                \draw[thin] (pi+\a+0.1,0.0) -- (pi+\a+0.4,0.25) node[right, anchor=west, fill = white, inner sep = 1pt] {$\hat{u}^{(1)}_{2\mathrm{a}}=\hat{u}^{(1)}_{2\mathrm{a}0}=\frac{2}{\pi}$};
+                \draw[->] (axis cs:0,0) -- node[above, fill=white, inner sep=1pt]{$\alpha$} (axis cs:\a,0);
+
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase fundamental frequency modulation (cont.) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Three-phase fundamental frequency modulation (cont.)} 
+    From the previous figure and voltage equations, we can summarize the following observations:
+    \begin{itemize}
+        \item Due to the fundamental frequency modulation, the switching frequency of the inverter is identical to the fundamental frequency: $f_{\mathrm{s}} = \nicefrac{\omega}{2\pi}$.
+        \item The star-to-ground voltage $u_{\mathrm{n0}}(t)$ shows a rectangular signal pattern with triple fundamental frequency. 
+        \item Consequently, it does not influence the fundamental output voltage, that is, the fundamental components of the line-to-ground voltage $u_{2i0}(t)$ as well as the load voltage $u_{2i}(t)$ are identical: $\hat{u}^{(1)}_{2i0}=\hat{u}^{(1)}_{2i}$.
+    \end{itemize}\vspace{-0.25cm}
+    \begin{varblock}{Note on the star point}
+        The previous analysis assumed a non-connected star point, which comes with certain advantages, e.g., on the rejection of current harmonics. If, however, the star point would be connected, the three-phase converter can be interpreted and analyzed as three independent single-phase converters (each driven by a half bridge). 
+    \end{varblock}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase pulse width modulation (PWM) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Three-phase pulse width modulation (PWM)}
+        \begin{figure}
+            \begin{circuitikz}
+                \def\cwidth{1.5}
+                \def\cheight{1}
+                \draw[->] (0,0) to node[above]{$s_1^*(t)$} ++(1.0,0) node[adder, anchor = west, name=add1]{};
+                \draw node[ctrlblock, anchor = west, minimum width = \cwidth cm, minimum height = \cheight cm](carrier) at (-1.5,-4) {}; 
+                \path (carrier.south west) coordinate (blockBottomLeft);
+                
+                % Triangular signal pattern within block
+                \begin{scope}
+                    % Define the number of signal steps
+                    \def\signalsteps{6}
+                    
+                    % Compute step width and height of the triangular pattern
+                    \pgfmathsetmacro{\stepwidth}{\cwidth/\signalsteps}
+                    \pgfmathsetmacro{\signalheight}{\cheight/(1.3)}
+
+                    % Start drawing the triangular signal
+                    \draw[signalred, thick] 
+                ($(blockBottomLeft) + (0.025, 0.1*\cheight)$) % Starting point with a margin
+                \foreach \x in {1,...,\signalsteps} {
+                    -- ($
+                        (blockBottomLeft) + 
+                        (\x*\stepwidth - 0*\stepwidth, {0.1*\cheight + mod(\x, 2)*\signalheight})
+                    $)
+                };
+                \end{scope}
+                \draw[->] (carrier.east) to [short, l=$c(t)$] (carrier.east -| add1.south) coordinate (c1) -- (add1.south) node[anchor = north west] {$-$};
+                \draw[->] (add1.east) -- ++(4,0) node[ctrlblock, anchor = west, minimum width = \cwidth cm, minimum height = \cheight cm](comp1){};
+
+                \draw node[ctrlblock, below=0.2cm of comp1, minimum width = \cwidth cm, minimum height = \cheight cm](comp2){};
+                \draw node[ctrlblock, below=0.2cm of comp2, minimum width = \cwidth cm, minimum height = \cheight cm](comp3){};
+                \draw[<-] (comp2.west) -- ++(-2.5,0) node[adder, anchor = east, name=add2]{};
+                \draw[<-] (comp3.west) -- ++(-1,0) node[adder, anchor = east, name=add3]{};
+                \draw[<-] (add3.west) to node[above]{$s_3^*(t)$} ++(-1,0);
+                \draw[<-] (add2.west) to node[above]{$s_2^*(t)$} ++(-1,0);
+                \draw[->] (c1) to [short, *-] (c1 -| add2.south) coordinate (c11) to [short] (add2.south) node[anchor = north west] {$-$};
+                \draw[->] (c11) to [short, *-] (c1 -| add3.south) to [short] (add3.south) node[anchor = north west] {$-$};
+                
+                % Comperator block #1
+                \begin{axis}[at={(comp1)}, scale only axis, width = 0.8*\cwidth cm, height = 0. 8*\cheight cm, anchor = center, xtick=\empty, ytick={0,1}, axis lines=middle, ymax=1.25, ymin = -1.25, font = \footnotesize, extra y ticks={-1}, extra y tick style = {yticklabel shift = -0.75cm}]
+                    \addplot[thick, signalblue] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
+                \end{axis}
+                % Comperator block #2
+                \begin{axis}[at={(comp2)}, scale only axis, width = 0.8*\cwidth cm, height = 0.8*\cheight cm, anchor = center, xtick=\empty, ytick={0,1}, axis lines=middle, ymax=1.25, ymin = -1.25, font = \footnotesize, extra y ticks={-1}, extra y tick style = {yticklabel shift = -0.75cm}]
+                    \addplot[thick, signalblue] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
+                \end{axis}
+                % Comperator block #3
+                \begin{axis}[at={(comp3)}, scale only axis, width = 0.8*\cwidth cm, height = 0.8*\cheight cm, anchor = center, xtick=\empty, ytick={0,1}, axis lines=middle, ymax=1.25, ymin = -1.25, font = \footnotesize, extra y ticks={-1}, extra y tick style = {yticklabel shift = -0.75cm}]
+                    \addplot[thick, signalblue] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
+                \end{axis}
+                \draw[->] (comp1.east) -- ++(0.5,0) node[anchor = west]{$s_1(t)$};
+                \draw[->] (comp2.east) -- ++(0.5,0) node[anchor = west]{$s_2(t)$};
+                \draw[->] (comp3.east) -- ++(0.5,0) node[anchor = west]{$s_3(t)$};
+            \end{circuitikz}
+        \caption{Three-phase PWM (note: a distinction between interleaved and complementary PWM is not relevant here, as the three-phase converter operates on a half-bridge basis while the previously considered single-phase converter was based on a full bridge. While independent and phase-shifted carriers per phase could be also used in the three-phase converter, this is typically not utilized due to increasing current harmonics.)}
+        \label{fig:three-phase_pwm}
+    \end{figure}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase PWM example (with ref. modulation index $m=0.5$) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Three-phase PWM example (with ref. modulation index $m=0.5$)} 
+    \vspace{-0.1cm}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfplotsset{table/search path={fig/lec06}}
+            \begin{groupplot}[group style={group size=1 by 5, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.31\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi}, xticklabels = {0,$\nicefrac{1}{2}\pi$,$\pi$, $\nicefrac{3}{2}\pi$, $2\pi$}, ytick = {-1, 0, 1}, yticklabels = {$-1$, $0$, $1$}]
+
+                 % Top plot: duty cycle reference and carrier signal
+                \nextgroupplot[ylabel = {$s_{i}^*(t), c(t)$}]
+                \addplot[signalblue, thick] table[x=wt, y=d1, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+                \addplot[signalgreen, thick] table[x=wt, y=d2, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+                \addplot[signalbrown, thick] table[x=wt, y=d3, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+                \addplot[signalred, thick] table[x=wt, y=c, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+                \node[signalblue, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt] at (axis cs: pi/2, 1) {\small $s_1^*$};
+                \node[signalgreen, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=-3mm] at (axis cs: pi/2+pi/3*2, 1) {\small $s_2^*$};
+                \node[signalbrown, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=3mm] at (axis cs: pi/2+pi/3*4, 1) {\small $s_3^*$};
+                \node[signalred, anchor=south, fill = white, inner sep = 1pt] at (axis cs: pi/10, -0.6) {\small $c$};
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_1(t)$}] 
+                \addplot[signalblue, thick] table[x=wt, y=s1, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_2(t)$}] 
+                \addplot[signalgreen, thick] table[x=wt, y=s2, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_3(t)$}] 
+                \addplot[signalbrown, thick] table[x=wt, y=s3, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+
+                % bottom plot: line-to-line voltage
+                \nextgroupplot[ylabel = {$\frac{u_{2\mathrm{ab}}(t)}{U_1}$}, xlabel={$\omega t$}] 
+                \addplot[signalblue, thick] table[x=wt, y expr=(\thisrow{s1}-\thisrow{s2})/2, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase PWM example (with ref. modulation index $m=1$) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Three-phase PWM example (with ref. modulation index $m=1$)} 
+    \vspace{-0.1cm}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfplotsset{table/search path={fig/lec06}}
+            \begin{groupplot}[group style={group size=1 by 5, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.31\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi}, xticklabels = {0,$\nicefrac{1}{2}\pi$,$\pi$, $\nicefrac{3}{2}\pi$, $2\pi$}, ytick = {-1, 0, 1}, yticklabels = {$-1$, $0$, $1$}]
+
+                 % Top plot: duty cycle reference and carrier signal
+                \nextgroupplot[ylabel = {$s_{i}^*(t), c(t)$}]
+                \addplot[signalblue, thick] table[x=wt, y=d1, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+                \addplot[signalgreen, thick] table[x=wt, y=d2, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+                \addplot[signalbrown, thick] table[x=wt, y=d3, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+                \addplot[signalred, thick] table[x=wt, y=c, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+                \node[signalblue, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt] at (axis cs: pi/2, 1) {\small $s_1^*$};
+                \node[signalgreen, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=-3mm] at (axis cs: pi/2+pi/3*2, 1) {\small $s_2^*$};
+                \node[signalbrown, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=3mm] at (axis cs: pi/2+pi/3*4, 1) {\small $s_3^*$};
+                \node[signalred, anchor=south, fill = white, inner sep = 1pt] at (axis cs: pi/10, -0.6) {\small $c$};
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_1(t)$}] 
+                \addplot[signalblue, thick] table[x=wt, y=s1, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_2(t)$}] 
+                \addplot[signalgreen, thick] table[x=wt, y=s2, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_3(t)$}] 
+                \addplot[signalbrown, thick] table[x=wt, y=s3, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+
+                % bottom plot: line-to-line voltage
+                \nextgroupplot[ylabel = {$\frac{u_{2\mathrm{ab}}(t)}{U_1}$}, xlabel={$\omega t$}] 
+                \addplot[signalblue, thick] table[x=wt, y expr=(\thisrow{s1}-\thisrow{s2})/2, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Three-phase PWM example (with ref. modulation index $m=1.18$) %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+    \frametitle{Three-phase PWM example (with ref. modulation index $m=1.18$)} 
+    \vspace{-0.1cm}
+    \begin{figure}
+        \begin{tikzpicture}
+            \pgfplotsset{table/search path={fig/lec06}}
+            \begin{groupplot}[group style={group size=1 by 5, xticklabels at = edge bottom, vertical sep=0.25cm}, height=0.31\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi}, xticklabels = {0,$\nicefrac{1}{2}\pi$,$\pi$, $\nicefrac{3}{2}\pi$, $2\pi$}, ytick = {-1, 0, 1}, yticklabels = {$-1$, $0$, $1$}]
+
+                 % Top plot: duty cycle reference and carrier signal
+                \nextgroupplot[ylabel = {$s_{i}^*(t), c(t)$}, ymin = -1.2, ymax =1.2]
+                \addplot[signalblue, thick] table[x=wt, y=d1, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+                \addplot[signalgreen, thick] table[x=wt, y=d2, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+                \addplot[signalbrown, thick] table[x=wt, y=d3, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+                \addplot[signalred, thick] table[x=wt, y=c, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+                \node[signalblue, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt] at (axis cs: pi/2, 1.1) {\small $s_1^*$};
+                \node[signalgreen, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=-3mm] at (axis cs: pi/2+pi/3*2, 1.1) {\small $s_2^*$};
+                \node[signalbrown, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=3mm] at (axis cs: pi/2+pi/3*4, 1.1) {\small $s_3^*$};
+                \node[signalred, anchor=south, fill = white, inner sep = 1pt] at (axis cs: pi/10, -0.6) {\small $c$};
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_1(t)$}] 
+                \addplot[signalblue, thick] table[x=wt, y=s1, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_2(t)$}] 
+                \addplot[signalgreen, thick] table[x=wt, y=s2, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+
+                % top middle plot: individual switching signals
+                \nextgroupplot[ylabel = {$s_3(t)$}] 
+                \addplot[signalbrown, thick] table[x=wt, y=s3, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+
+                % bottom plot: line-to-line voltage
+                \nextgroupplot[ylabel = {$\frac{u_{2\mathrm{ab}}(t)}{U_1}$}, xlabel={$\omega t$}] 
+                \addplot[signalblue, thick] table[x=wt, y expr=(\thisrow{s1}-\thisrow{s2})/2, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+            \end{groupplot}
+        \end{tikzpicture}
     \end{figure}
 \end{frame}
