@@ -39,12 +39,15 @@
             %grid style={line width=.1pt, draw=gray!10},
             %major grid style={line width=.2pt,draw=gray!90},
         ] 
+        % Grid
         \draw[step=0.3cm, gray, thin] (0,-400) grid (540,400);
         % internal load voltage u
         \addplot[blue, domain= 0:540, solid] {-155.5*sin(x/1.5)+200};
         \addplot[blue, domain= 0:540, solid] {-155.5*sin(x/1.5)-200};
          % Label of u
          \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,160) {$u(t)$};
+         % Start point
+         \filldraw[black] (3,-195) circle (2pt) node[anchor=west]{\textbf{s}};
            \end{axis}
            \begin{axis}[
             % x/y range adjustment
