@@ -20,37 +20,42 @@ of four thyristors arranged in H-bridge configuration.
         \toprule
         Input DC voltage: & $U_{\mathrm{1}}=\SI{200}{\volt}$ \\
         Inductance: & $L = \SI{4.8}{\milli \henry}$ \\
-        Internal load voltage: & $u(t) = 150 \sin(\omega t - \frac{\pi}{6})$ \\ 
+        Internal load voltage: & $u_\mathrm{1e}(t) = 150 \sin(\omega t - \frac{\pi}{6})$ \\ 
         Reference angular frequency: & $\omega_2 = 2\pi \cdot \SI{50}{\hertz}$ \\ 
         \bottomrule
     \end{tabular}
-    \caption{Parameters of the lifting drive with B6C converter.}  
+    \caption{Parameters of the single-phase DC inverter.}  
     \label{table:ex07_Task1_ParametersOfTheCircuit}
 \end{table}
-The inverter is modulated using PWM with a modulation of M=0.75.  Assuming ideal operation of the switching components:
+The inverter is modulated using PWM with a modulation index of M=0.75.  Assuming ideal operation of the switching components:
 % Subtask1
 \subtask{Draw the inverter output voltage $u_\mathrm{2}(t)$ belonging to figure \ref{sfig:ex07_sub1.1_modulation}.
 and its fundamental component $u^\mathrm{(1)}_\mathrm{2}(t)$. How large is the phase difference $\delta$ of the voltage
 fundamental component $u^\mathrm{(1)}_\mathrm{2}(t)$ compared to the internal load voltage $u_\mathrm{1e}$?}
-\input{fig/ex07/Fig_subtask1.1_modulation.tex} 
+
 % Subtask2
 \subtask{Calculate the amplitude $\hat{i}^\mathrm{(1)}_\mathrm{2}$ and the phase angle $\varphi^\mathrm{(1)}$ of the 
 current fundamental wave $i^\mathrm{(1)}_\mathrm{2}(t)$ compared to $u_\mathrm{1e}$ and draw $u^\mathrm{(1)}_\mathrm{2}(t)$ 
 and $i^\mathrm{(1)}_\mathrm{2}(t)$ in Fig. \ref{sfig:ex07_sub1.2_fund_components}.}
-\input{fig/ex07/Fig_subtask1.2.tex}
+
 % Subtask3
 \subtask{In Fig. \ref{sfig:ex07_sub1.3_Harmonics}, draw the voltage harmonics $u^\mathrm{(n)}_\mathrm{2}(t)$. Try to sketch, approximately,
 the current harmonics $i^\mathrm{(n)}_\mathrm{2}(t)$ by counting the voltage time area squares. 
 One square corresponds to a voltage time area of $\SI{17.8}{\milli \volt \second}$. The starting point is marked with \textbf{s}.\\
 
 Hint:  The current harmonics $i^\mathrm{(n)}_\mathrm{2}(t)$ have no mean values.}
-\input{fig/ex07/Fig_subtask1.3.tex}
+
 % Subtask4
 \subtask{Draw the inverter's output current $i_\mathrm{2}(t)$, its fundamental wave $i^\mathrm{(1)}_\mathrm{2}(t)$ 
 and its harmonics $i^\mathrm{(n)}_\mathrm{2}(t)$ in Fig. \ref{sfig:ex07_sub1.4_current_and_components}.}
-\input{fig/ex07/Fig_subtask1.4.tex}
+
 % Subtask5
 \subtask{Mark the input current $i_\mathrm{i}(t)$ of the DC voltage inverter in the same figure of subtask 2.1.4.}
+\input{fig/ex07/Fig_subtask1.1_modulation.tex} 
+\input{fig/ex07/Fig_subtask1.2.tex}
+\input{fig/ex07/Fig_subtask1.3.tex}
+\input{fig/ex07/Fig_subtask1.4.tex}
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Task 2: Three-phase inverter in six-step mode         %%
