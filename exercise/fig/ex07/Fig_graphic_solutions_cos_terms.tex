@@ -8,32 +8,39 @@
         \centering
         \begin{tikzpicture}
             \begin{axis}[
+                % x/y range adjustment
+                xmin=-20, xmax=420,
+                ymin=-160, ymax=180,
+                width=7cm, height=7cm,
                 axis lines=middle, 
                 xlabel={$\cos(\varphi)$},
                 ylabel={$\sin(\varphi)$},
-                xlabel style={xshift=0.5cm},
-                width=7cm, height=7cm,
                 major grid style={line width=.2pt,draw=gray!50},
                 minor grid style={line width=.1pt,draw=gray!20},
                 xmin=-1.5, xmax=1.5,
                 ymin=-1.5, ymax=1.5,
-                xtick={-1, 0, 1},            % Manuelle Ticks auf der x-Achse
-                ytick={-1, 0, 1},            % Manuelle Ticks auf der y-Achse
-                tick label style={xshift=5pt, yshift=5pt}, % Verschiebt die Beschriftungen nach außen
-            ]
-            
-            % Vektor einzeichnen
-            \draw[thick, ->] (0,0) -- ({cos(40)}, {sin(40)}) node[above right] {};
-            \node at ({0.5*cos(40)}, {0.5*sin(40)}) [below] {$\varphi$};
-        
-            % Kreis zeichnen
-            \addplot[
-                domain=0:360, 
-                samples=200,  
-                thick,
-                color=blue,
-            ]
-            ({cos(x)}, {sin(x)}); 
+                % Label adjustment
+                x label style={at={(axis description cs:1,0.5)},anchor=west},
+                % x-Ticks
+                xtick={-1,0,1},
+                xticklabels={-1,,1},
+                xticklabel style = {anchor=north,shift={(0.25cm,0.1cm)}},
+                % y-Ticks
+                ytick={-1,0,1},
+                yticklabels={-1,,1},
+                yticklabel style = {anchor=east,shift={(0.1cm,0.2cm)}},
+              ]
+              
+              \draw[thick, ->] (0,0) -- ({cos(40)}, {sin(40)}) node[above right] {};
+              \node at ({0.5*cos(40)}, {0.5*sin(40)}) [below] {$\varphi$};
+
+              \addplot[
+                  domain=0:360, 
+                  samples=200,  
+                  thick,
+                  color=blue,
+              ]
+              ({cos(x)}, {sin(x)}); 
             \end{axis}
         \end{tikzpicture}
     \end{minipage}
@@ -44,10 +51,10 @@
             \draw[->] (-2,0) -- (2,0) node[right] {}; 
             \draw[->] (0,-2) -- (0,2) node[above] {}; 
             \node at (-1.5,1.5) {$\cos\left(k \frac{\pi}{2}\right)$};
-            \node at (-2,0) [left] {$2,6,\ldots$}; 
-            \node at (2,0) [right] {$0,4,\ldots$}; 
-            \node at (0,2) [above] {$1,5,9,13,\ldots$}; 
-            \node at (0,-2) [below] {$3,7,11,15,\ldots$}; 
+            \node at (-2,0) [left] {$k=2,6,\ldots$}; 
+            \node at (2,0) [right] {$k=0,4,\ldots$}; 
+            \node at (0,2) [above] {$k=1,5,9,13,\ldots$}; 
+            \node at (0,-2) [below] {$k=3,7,11,15,\ldots$}; 
 
             % Kreuz bei jedem markierten Punkt
             \foreach \x/\y in {-1.5/0, 1.5/0, 0/1.5, 0/-1.5} {
@@ -61,13 +68,13 @@
     \begin{tikzpicture}
         \draw[->] (-2,0) -- (2,0) node[right] {}; 
         \draw[->] (0,-2) -- (0,2) node[above] {}; 
-        \node at (-2.5,1.5) {$\cos\left(k \frac{\pi}{3}\right)$};
-        \node at (-1,0.2) [left] {$3,9,15,21\ldots$}; 
-        \node at (1,0.2) [right] {$0,6\ldots$}; 
-        \node at (2,1) [above] {$1,7,13,19\ldots$}; 
-        \node at (-0.8,1.6) [below] {$2,8\ldots$};
-        \node at (-0.8,-1) [below] {$4,10\ldots$}; 
-        \node at (2,-1) [below] {$5,11,17,23\ldots$};
+        \node at (-2.7,1.8) {$\cos\left(k \frac{\pi}{3}\right)$};
+        \node at (-0.3,0.4) [left] {$k=3,9,15,21\ldots$}; 
+        \node at (1,0.4) [right] {$k=0,6\ldots$}; 
+        \node at (2,1) [above] {$k=1,7,13,19\ldots$}; 
+        \node at (-1.2,1.6) [below] {$k=2,8\ldots$};
+        \node at (-1.2,-1.1) [below] {$k=4,10\ldots$}; 
+        \node at (2,-1.1) [below] {$k=5,11,17,23\ldots$};
         \node at (-0.75,-0.3) [left] {-1};
         \node at (1,-0.3) [left] {0.5};
         % Kreuz bei jedem markierten Punkt
@@ -93,7 +100,9 @@
         % Koordinatensystem zeichnen
         \draw[->] (-2,0) -- (2,0) node[right] {}; 
         \draw[->] (0,-2) -- (0,2) node[above] {}; 
-        \node at (-1.5,1.5) {$\cos\left(k \frac{\pi}{3}\right)+1$};
+        % \node at (-1.5,1.5) {$\cos\left(k \frac{\pi}{3}\right)+1$};
+        \node at (-1.7,1.8) {$\cos\left(k \frac{\pi}{3}\right)+1$};
+        
     
         % Beschriftungen an der x-Achse
         \node at (-0.00009,-0.2) [left] {0};
@@ -102,8 +111,8 @@
         }
     
         % Beschriftungen an spezifischen Punkten
-        \node at (1.5,1.1) [above] {$1,7,13,19,\ldots$}; 
-        \node at (1.5,-1.1) [below] {$5,11,17,23,\ldots$}; 
+        \node at (2,1.1) [above] {$k=1,7,13,19,\ldots$}; 
+        \node at (2,-1.1) [below] {$k=5,11,17,23,\ldots$}; 
     
         % Kreuz bei jedem markierten Punkt
         \foreach \x/\y in {0/0, 1.5/1, 1.5/-1} {
@@ -116,6 +125,6 @@
         \draw[thick, color=blue!70!black]
             (0,0) -- (1.5,1) -- (1.5,-1) -- cycle;
     \end{tikzpicture}
-    \caption{Graphical solution of the cos terms.}
-    \label{fig:Graphical solution of the cos terms}
+    \caption{Graphical solution of the cos terms within complex plane.}
+    \label{fig:GraphicalSolutionOfInComplexPlane}
 \end{solutionfigure}
