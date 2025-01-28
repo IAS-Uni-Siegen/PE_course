@@ -36,7 +36,7 @@
             % Add connection to u2 inductor
             (jmu2) to [short,-] ++(0,2) coordinate (ju2x)
             % Add u2ae
-            (ju2e) to [sV=$u_\mathrm{1e}$] ++(0,-1.5) coordinate (ju2n)
+            (ju2e) to [sV=$u_{2\mathrm{i}}(t)$] ++(0,-1.5) coordinate (ju2n)
             % Add connection of u2in
             (ju2n) to [short,-*] (jT4c);
 
@@ -50,7 +50,8 @@
             \draw (jT1e) ++(3,0) node[currarrow](i2){}
             (i2)  node[anchor=south,color=black]{$i_\mathrm{2}(t)$}
             % Add voltage arrows u2
-            (ju2) ++(-0.5,0) to [open,v^=$u_\mathrm{2}(t)$,voltage = straight] ++(0,-1.5);
+            (ju2) ++(-0.5,0) to [open,v^=$$,voltage = straight] ++(0,-1.5)
+            (ju2) ++ (0.1,-0.5) node[anchor=north,color=black]{$u_\mathrm{2}(t)$};
            % (ju2x) ++(0,-0.8) to [open,v^=$u_\mathrm{2}(t)$,voltage = straight] ++(3.8,0);
         \end{circuitikz}
     \end{center}
