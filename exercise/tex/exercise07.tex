@@ -61,41 +61,42 @@ and its harmonics $i^\mathrm{(n)}_\mathrm{2}(t)$ in Fig. \ref{sfig:ex07_sub1.4_c
 %% Task 2: Three-phase inverter in six-step mode         %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\task{Symmetrical 3-phase switching rectifier}
+\task{Symmetrical 3-phase rectifier}
 
-An symmetrical switching rectifier in three-phase bridge topology shall supply a
-symmetrical three-phase consumer in star connection. The consumer is simulated by an inductance and 
-a sinusoidal counter voltage per phase. The inverter is operated with a basic switching frequency.
-The switching elements are considered as ideal.
+A rectifier in three-phase bridge topology shall supply a
+symmetrical three-phase load in star connection. The load is represented by an inductance and 
+a sinusoidal internal (or inner) voltage per phase. The inverter is operated with the fundamental 
+frequency modulation (also known as six-step mode) and the switching elements are considered as ideal. 
+The schematic is depicted in \autoref{fig:Fig_ThreePhaseInverter_6StepMode}.
 
-% \input{fig/ex07/Fig_ThreePhaseInverter_6StepMode}
 \input{fig/ex07/Fig_ThreePhaseInverter_6StepMode}
 
 \begin{table}[ht]
     \centering  % Center the table
     \begin{tabular}{ll}
         \toprule
-        Input voltages: & $U_\mathrm{1}=\SI{510}{\volt}$ \quad $U_\mathrm{1p}=U_\mathrm{1m}=U_\mathrm{1}/2$ \\
-        Internal voltages: & $u_{\mathrm{2ae}}(t) = \sqrt{2} \cdot \SI{220}{\volt} \cdot \sin(\omega_1t)$ \\
-        Circular frequency: & $\omega_1 = \SI{2 \pi \cdot 30}{\frac{1}{\second}}$ \\ 
-        Inductivity per phase: & $L= \SI{10}{\milli \henry}$ \\
-        Phase angle between  $u_{\mathrm{2ae}}(t)$ and $i_{\mathrm{2ae}^\mathrm{(1)}}(t)$ & $\alpha=\SI{30}{\degree}$ \\
+        Input voltages: & $U_\mathrm{1}=\SI{510}{\volt}$ \\
+        Internal voltages: & $u_{\mathrm{2ai}}(t) = \sqrt{2} \cdot \SI{220}{\volt} \cdot \sin(\omega_1t)$ \\
+        Angular load frequency: & $\omega_1 = \SI{2 \pi \cdot 30}{\frac{1}{\second}}$ \\ 
+        Inductance per phase: & $L= \SI{10}{\milli \henry}$ \\
+        Phase angle between  $u_{\mathrm{2ai}}(t)$ and $i_{\mathrm{2ai}}^\mathrm{(1)}(t)$ & $\alpha=\SI{30}{\degree}$ \\
         \bottomrule
     \end{tabular}
     \caption{Parameters of three-phase inverter in six-step mode.}  
     \label{table:ex07_Task2_ParametersOfTheCircuit}
 \end{table}
 
-
-\subtask{Create a table with all possible switching states for basic switching frequency.
-Use the following notation: \\
-$(s_\mathrm{a}(t),s_\mathrm{b}(t),s_\mathrm{c}(t))=\begin{cases}
+\subtask{Create a table with all possible switching states for fundamental frequency modulation.
+Use the following notation:
+\begin{align*}
+    \{ s_\mathrm{a}(t),s_\mathrm{b}(t),s_\mathrm{c}(t) \}=\begin{cases}
         s_i(t)= +1 & \text{upper position,}\\
         s_i(t)= -1 & \text{lower position.}
-    \end{cases}$\\
+    \end{cases}
 \bigskip    
-Sketch the switching states in the correct chronological order for minimum one periode.
-Calculate and sketch the voltages $u_\mathrm{a0}(t)$, $u_\mathrm{b0}(t)$ and $u_\mathrm{c0}(t)$ 
+\end{align*}
+Sketch the switching states in the correct chronological order for one periode.
+Calculate and sketch the voltages $u_\mathrm{2a0}(t)$, $u_\mathrm{2b0}(t)$ and $u_\mathrm{2c0}(t)$ 
 depending on these switching states.}
 \begin{solutionblock}
     Each half bridge has got the 2 states '+1' and '-1', which results in $2^3 = 8$ combinations according table \autoref{stable:ex07_Task2_Switchingstates}.
@@ -144,9 +145,9 @@ depending on these switching states.}
     the switching only occurs twice per period. This results in the maximum possible voltage (square wave) at the output.
 \end{solutionblock}
 
-\subtask{The internal voltages $u_\mathrm{ea}(t)$, $u_\mathrm{eb}(t)$ and $u_\mathrm{ec}(t)$ are a symmetrical voltage system, 
-i.e. the following is always applicable: $u_\mathrm{ea}(t)+u_\mathrm{eb}(t)+u_\mathrm{ec}(t)=0V$. 
-Show that this equation is also applicable for the voltages $u_\mathrm{a}(t)$, $u_\mathrm{b}(t)$ and $u_\mathrm{c}(t)$ under the same conditions.
+\subtask{The internal voltages $u_\mathrm{2ai}(t)$, $u_\mathrm{2bi}(t)$ and $u_\mathrm{2ci}(t)$ are a symmetrical voltage system, 
+i.e., the following is always applicable: $u_\mathrm{2ai}(t)+u_\mathrm{2bi}(t)+u_\mathrm{2ci}(t)=\SI{0}{\volt}$. 
+Show that this equation is also applicable for the voltages $u_\mathrm{2a}(t)$, $u_\mathrm{2b}(t)$ and $u_\mathrm{2c}(t)$ under the same conditions.
 }
 \begin{solutionblock}
     In the case of a symmetrical three-phase consumer where the current sum at the consumer star point is zero, 
@@ -229,11 +230,13 @@ the star-to-ground voltage $u_\mathrm{2n0}(t)$ depending on the switching states
 \end{solutionblock}
 
 \subtask{Decompose the voltage $u_\mathrm{2a}(t)$ into a Fourier series and sketch the spectral lines related to the
-amplitude of the fundamental signal up to order n=13. Hint: The following applies to the Fourier coefficients of an odd and alternating function:
+amplitude of the fundamental signal up to order $k=13$. \\
+Hint:
 \begin{align*}
-    b_k = \frac{4}{\pi} \int_{0}^{\frac{\pi}{2}} f(x)\sin(kx) \mathrm{d}x \quad k =\mathrm{odd} \quad  \quad
+    b_k = \frac{4}{\pi} \int_{0}^{\frac{\pi}{2}} f(x)\sin(kx) \mathrm{d}x \quad k =\mathrm{odd}.
 \end{align*}
 \label{sub:DecomposeVoltage}
+The formula above applies to the Fourier coefficients of an odd and alternating function.
 }
 \begin{solutionblock}
     In the case of odd and alternating functions corresponding to $f(x)=-f(x+\pi)$ the Fourier coefficients are:
@@ -284,9 +287,9 @@ amplitude of the fundamental signal up to order n=13. Hint: The following applie
     \label{subtask:Ex07T2_FourierSeries}
  \end{solutionblock}
 
-\subtask{Based on \autoref{sub:DecomposeVoltage}, calculate the fundamental amplitude $\hat{i}_\mathrm{a}^1$ using a vector diagram and 
+\subtask{Based on \autoref{sub:DecomposeVoltage}, calculate the fundamental amplitude $\hat{i}_\mathrm{a}^\mathrm{(1)}$ using a vector diagram and 
 complex alternating current calculations. 
-From this, determine the total active power converted in the load.}
+From this, determine the total active power fed to the load.}
 \begin{solutionblock}
     According \eqref{eq:Ex07T2_FundamentelVoltage} the fundamental voltage  is calculated as:
     \begin{equation}
