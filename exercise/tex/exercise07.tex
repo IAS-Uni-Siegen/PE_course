@@ -7,12 +7,12 @@
 %% Task 1: Single-phase inverter: %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\task{Single-phase DC inverter}
-The following ideal single-phase DC inverter
+\task{Single-phase DC converter}
+The following ideal single-phase DC converter
 \input{fig/ex07/Single-phase_DC_Inverter.tex} 
 
-configured in a bridge topology and supplies a load consisting of an inductor and an internal load voltage. The inverter consists
-of four thyristors arranged in H-bridge configuration.
+configured in a bridge topology and supplies a load consisting of an inductor and an internal load voltage. The converter consists
+of four transistors arranged in H-bridge configuration.
 
 \begin{table}[ht]
     \centering  % Zentriert die Tabelle
@@ -20,37 +20,37 @@ of four thyristors arranged in H-bridge configuration.
         \toprule
         Input DC voltage: & $U_{\mathrm{1}}=\SI{200}{\volt}$ \\
         Inductance: & $L = \SI{4.8}{\milli \henry}$ \\
-        Internal load voltage: & $u_\mathrm{1e}(t) = 150 \sin(\omega t - \frac{\pi}{6})$ \\ 
+        Internal load voltage: & $u_{2\mathrm{i}}(t) = 150 \sin(\omega t - \frac{\pi}{6})$ \\ 
         Reference angular frequency: & $\omega_2 = 2\pi \cdot \SI{50}{\hertz}$ \\ 
         \bottomrule
     \end{tabular}
-    \caption{Parameters of the single-phase DC inverter.}  
+    \caption{Parameters of the single-phase DC converter.}  
     \label{table:ex07_Task1_ParametersOfTheCircuit}
 \end{table}
-The inverter is modulated using PWM with a modulation index of M=0.75.  Assuming ideal operation of the switching components:
+The converter is modulated using PWM with a modulation index of $m=0.75$.  Assuming ideal operation of the switching components, perform the following tasks:
 % Subtask1
-\subtask{Draw the inverter output voltage $u_\mathrm{2}(t)$ belonging to figure \ref{sfig:ex07_sub1.1_modulation}.
-and its fundamental component $u^\mathrm{(1)}_\mathrm{2}(t)$. How large is the phase difference $\delta$ of the voltage
-fundamental component $u^\mathrm{(1)}_\mathrm{2}(t)$ compared to the internal load voltage $u_\mathrm{1e}$?}
+\subtask{Draw the converter's output voltage $u_\mathrm{2}(t)$ belonging to Fig. \ref{sfig:ex07_sub1.1_modulation}.
+and its fundamental component $u^\mathrm{(1)}_\mathrm{2}(t)$. How large is the phase difference $\varphi_{2\mathrm{i}}$ of the voltage
+fundamental component $u^\mathrm{(1)}_\mathrm{2}(t)$ compared to the internal load voltage $u_{2\mathrm{i}}(t)$?}
 
 % Subtask2
 \subtask{Calculate the amplitude $\hat{i}^\mathrm{(1)}_\mathrm{2}$ and the phase angle $\varphi^\mathrm{(1)}$ of the 
-current fundamental wave $i^\mathrm{(1)}_\mathrm{2}(t)$ compared to $u_\mathrm{1e}$ and draw $u^\mathrm{(1)}_\mathrm{2}(t)$ 
+current fundamental component $i^\mathrm{(1)}_\mathrm{2}(t)$ compared to $u_{2\mathrm{i}}(t)$, and draw $u^\mathrm{(1)}_\mathrm{2}(t)$ 
 and $i^\mathrm{(1)}_\mathrm{2}(t)$ in Fig. \ref{sfig:ex07_sub1.2_fund_components}.}
 
 % Subtask3
-\subtask{In Fig. \ref{sfig:ex07_sub1.3_Harmonics}, draw the voltage harmonics $u^\mathrm{(n)}_\mathrm{2}(t)$. Try to sketch, approximately,
-the current harmonics $i^\mathrm{(n)}_\mathrm{2}(t)$ by counting the voltage time area squares. 
-One square corresponds to a voltage time area of $\SI{17.8}{\milli \volt \second}$. The starting point is marked with \textbf{s}.\\
+\subtask{In Fig. \ref{sfig:ex07_sub1.3_Harmonics}, draw the voltage harmonics $u^{(k)}_\mathrm{2}(t)$. Try to sketch, approximately,
+the current harmonics $i^{(k)}_\mathrm{2}(t)$ by counting the voltage time area squares. 
+One square corresponds to a voltage time area of $\SI{17.8}{\milli \volt \second}$. The starting point is marked with \textbf{x}.\\
 
-Hint:  The current harmonics $i^\mathrm{(n)}_\mathrm{2}(t)$ have no mean values.}
+Hint:  The current harmonics $i^{(k)}_\mathrm{2}(t)$ are free of any bias.}
 
 % Subtask4
-\subtask{Draw the inverter's output current $i_\mathrm{2}(t)$, its fundamental wave $i^\mathrm{(1)}_\mathrm{2}(t)$ 
-and its harmonics $i^\mathrm{(n)}_\mathrm{2}(t)$ in Fig. \ref{sfig:ex07_sub1.4_current_and_components}.}
+\subtask{Draw the converter's output current $i_\mathrm{2}(t)$, its fundamental wave $i^\mathrm{(1)}_\mathrm{2}(t)$ 
+and its harmonics $i^{(k)}_\mathrm{2}(t)$ in Fig. \ref{sfig:ex07_sub1.4_current_and_components}.}
 
 % Subtask5
-\subtask{Mark the input current $i_\mathrm{i}(t)$ of the DC voltage inverter in the same figure of subtask 2.1.4.}
+\subtask{Mark the input current $i_\mathrm{1}(t)$ of the DC voltage converter in the same figure of subtask 7.1.4.}
 \input{fig/ex07/Fig_subtask1.1_modulation.tex} 
 \input{fig/ex07/Fig_subtask1.2.tex}
 \input{fig/ex07/Fig_subtask1.3.tex}
@@ -61,41 +61,42 @@ and its harmonics $i^\mathrm{(n)}_\mathrm{2}(t)$ in Fig. \ref{sfig:ex07_sub1.4_c
 %% Task 2: Three-phase inverter in six-step mode         %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\task{Symmetrical 3-phase switching rectifier}
+\task{Symmetrical 3-phase rectifier}
 
-An symmetrical switching rectifier in three-phase bridge topology shall supply a
-symmetrical three-phase consumer in star connection. The consumer is simulated by an inductance and 
-a sinusoidal counter voltage per phase. The inverter is operated with a basic switching frequency.
-The switching elements are considered as ideal.
+A rectifier in three-phase bridge topology shall supply a
+symmetrical three-phase load in star connection. The load is represented by an inductance and 
+a sinusoidal internal (or inner) voltage per phase. The inverter is operated with the fundamental 
+frequency modulation (also known as six-step mode) and the switching elements are considered as ideal. 
+The schematic is depicted in \autoref{fig:Fig_ThreePhaseInverter_6StepMode}.
 
-% \input{fig/ex07/Fig_ThreePhaseInverter_6StepMode}
 \input{fig/ex07/Fig_ThreePhaseInverter_6StepMode}
 
 \begin{table}[ht]
     \centering  % Center the table
     \begin{tabular}{ll}
         \toprule
-        Input voltages: & $U_\mathrm{1}=\SI{510}{\volt}$ \quad $U_\mathrm{1p}=U_\mathrm{1m}=U_\mathrm{1}/2$ \\
-        Internal voltages: & $u_{\mathrm{2ae}}(t) = \sqrt{2} \cdot \SI{220}{\volt} \cdot \sin(\omega_1t)$ \\
-        Circular frequency: & $\omega_1 = \SI{2 \pi \cdot 30}{\frac{1}{\second}}$ \\ 
-        Inductivity per phase: & $L= \SI{10}{\milli \henry}$ \\
-        Phase angle between  $u_{\mathrm{2ae}}(t)$ and $i_{\mathrm{2ae}^\mathrm{(1)}}(t)$ & $\alpha=\SI{30}{\degree}$ \\
+        Input voltages: & $U_\mathrm{1}=\SI{510}{\volt}$ \\
+        Internal voltages: & $u_{\mathrm{2ai}}(t) = \sqrt{2} \cdot \SI{220}{\volt} \cdot \sin(\omega_1t)$ \\
+        Angular load frequency: & $\omega_1 = \SI{2 \pi \cdot 30}{\frac{1}{\second}}$ \\ 
+        Inductance per phase: & $L= \SI{10}{\milli \henry}$ \\
+        Phase angle between  $u_{\mathrm{2ai}}(t)$ and $i_{\mathrm{2ai}}^\mathrm{(1)}(t)$ & $\alpha=\SI{30}{\degree}$ \\
         \bottomrule
     \end{tabular}
     \caption{Parameters of three-phase inverter in six-step mode.}  
     \label{table:ex07_Task2_ParametersOfTheCircuit}
 \end{table}
 
-
-\subtask{Create a table with all possible switching states for basic switching frequency.
-Use the following notation: \\
-$(s_\mathrm{a}(t),s_\mathrm{b}(t),s_\mathrm{c}(t))=\begin{cases}
+\subtask{Create a table with all possible switching states for fundamental frequency modulation.
+Use the following notation:
+\begin{align*}
+    \{ s_\mathrm{a}(t),s_\mathrm{b}(t),s_\mathrm{c}(t) \}=\begin{cases}
         s_i(t)= +1 & \text{upper position,}\\
         s_i(t)= -1 & \text{lower position.}
-    \end{cases}$\\
+    \end{cases}
 \bigskip    
-Sketch the switching states in the correct chronological order for minimum one periode.
-Calculate and sketch the voltages $u_\mathrm{a0}(t)$, $u_\mathrm{b0}(t)$ and $u_\mathrm{c0}(t)$ 
+\end{align*}
+Sketch the switching states in the correct chronological order for one periode.
+Calculate and sketch the voltages $u_\mathrm{2a0}(t)$, $u_\mathrm{2b0}(t)$ and $u_\mathrm{2c0}(t)$ 
 depending on these switching states.}
 \begin{solutionblock}
     Each half bridge has got the 2 states '+1' and '-1', which results in $2^3 = 8$ combinations according table \autoref{stable:ex07_Task2_Switchingstates}.
@@ -144,9 +145,9 @@ depending on these switching states.}
     the switching only occurs twice per period. This results in the maximum possible voltage (square wave) at the output.
 \end{solutionblock}
 
-\subtask{The internal voltages $u_\mathrm{ea}(t)$, $u_\mathrm{eb}(t)$ and $u_\mathrm{ec}(t)$ are a symmetrical voltage system, 
-i.e. the following is always applicable: $u_\mathrm{ea}(t)+u_\mathrm{eb}(t)+u_\mathrm{ec}(t)=0V$. 
-Show that this equation is also applicable for the voltages $u_\mathrm{a}(t)$, $u_\mathrm{b}(t)$ and $u_\mathrm{c}(t)$ under the same conditions.
+\subtask{The internal voltages $u_\mathrm{2ai}(t)$, $u_\mathrm{2bi}(t)$ and $u_\mathrm{2ci}(t)$ are a symmetrical voltage system, 
+i.e., the following is always applicable: $u_\mathrm{2ai}(t)+u_\mathrm{2bi}(t)+u_\mathrm{2ci}(t)=\SI{0}{\volt}$. 
+Show that this equation is also applicable for the voltages $u_\mathrm{2a}(t)$, $u_\mathrm{2b}(t)$ and $u_\mathrm{2c}(t)$ under the same conditions.
 }
 \begin{solutionblock}
     In the case of a symmetrical three-phase consumer where the current sum at the consumer star point is zero, 
@@ -228,41 +229,131 @@ the star-to-ground voltage $u_\mathrm{2n0}(t)$ depending on the switching states
     \end{equation}
 \end{solutionblock}
 
-\subtask{Decompose the voltage $u_\mathrm{a}(t)$ into a Fourier series and sketch the spectral lines related to the
-amplitude of the fu
-ndamental signal up to order n=13. Hint: The following applies to the Fourier coefficients of an odd and alternating function:
+\subtask{Decompose the voltage $u_\mathrm{2a}(t)$ into a Fourier series and sketch the spectral lines related to the
+amplitude of the fundamental signal up to order $k=13$. \\
+Hint:
 \begin{align*}
-b_k = \frac{4}{\pi} \int_{0}^{\frac{\pi}{2}} f(x)\sin(kx) \mathrm{d}x \quad k =\mathrm{odd} \quad  \quad
+    b_k = \frac{4}{\pi} \int_{0}^{\frac{\pi}{2}} f(x)\sin(kx) \mathrm{d}x \quad k =\mathrm{odd}.
 \end{align*}
 \label{sub:DecomposeVoltage}
+The formula above applies to the Fourier coefficients of an odd and alternating function.
 }
 \begin{solutionblock}
     In the case of odd and alternating functions corresponding to $f(x)=-f(x+\pi)$ the Fourier coefficients are:
     \begin{equation}
         \begin{split}
         a_\mathrm{k} &= 0 \\
-        a_\mathrm{k} &= \frac{4}{\pi} \int_0^{\pi/2} f(x)\sin(x) \mathrm{d}x \quad k=\mathrm{odd} \\
+        b_\mathrm{k} &= \frac{4}{\pi} \int_0^{\pi/2} f(x)\sin(x) \mathrm{d}x \quad k=\mathrm{odd} \\
         f(x) &= \sum_{k}^{} \left( b_k \sin(kx) \right).
-        \end{split}
+       \end{split}
     \end{equation}
     The coefficients $b_k$ are the amplitudes of the respective harmonic. The voltage $u_{\mathrm{2a}}(t)$ needs 
     only to be integrated up to $\pi/2$. Only the terms with odd order numbers are taken into account.
+    Apply this to the current signal is expressed by 
+    \begin{equation}
+        b_\mathrm{k} = \frac{4}{\pi} \int_0^{\pi/3} \frac{U_{\mathrm{1}}}{3} \sin(kt) \mathrm{d}t 
+                        + \frac{4}{\pi} \int_{\pi/3}^{\pi/2} \frac{2U_{\mathrm{1}}}{3} \sin(kt) \mathrm{d}t
+    \end{equation}
+    Signal ratio $u_{\mathrm{2a0}}(\omega t)/U_{\mathrm{1}}$ is depicted in \autoref{fig:voltage_u2a0_section} for one periode.
+    \input{fig/ex07/Fig_Voltage_u2a0_excerpt}   
     \begin{equation}
         \begin{split}
-        a_\mathrm{k} &= \frac{4}{\pi} \int_0^{\pi/3} f(x)\sin(x) \mathrm{d}x \quad k=\mathrm{odd} \\
-        f(x) &= \sum_{k}^{} \left( b_k \sin(kx) \right).
-        \end{split}
+            b_\mathrm{k} &= \frac{4U_{\mathrm{1}}}{3k\pi} \big[-\cos(kt)\mathrm{d}t \big]_0^{\pi/3}
+            + \frac{4U_{\mathrm{1}}}{3k\pi} \big[-2\cos(kt)\mathrm{d}t \big]_{\pi/3}^{\pi/2} \\
+            &= \frac{4U_{\mathrm{1}}}{3k\pi} \left(-\cos(k\frac{\pi}{3})+\cos(0) -2 \cos(k\frac{\pi}{2})+ 2\cos(0) \right) \\
+            &= \frac{4U_{\mathrm{1}}}{3k\pi} \left( \cos(k\frac{\pi}{3})+ 1 -2 \cos(k\frac{\pi}{2})\right) \\
+            \text{with } &\cos(k\frac{\pi}{3})+1=1.5 \quad  \text{for } k=n \cdot 6\pm1 \text{ is odd} \\
+            \text{and  }&\cos(k\frac{\pi}{2})=0 \quad \text{ for } k=\text{ odd}
+        \end{split}            
+    \end{equation}
+    The result is displayed in the complex plane in \autoref{fig:voltage_u2a0_section}. 
+
+    \input{fig/ex07/Fig_graphic_solutions_cos_terms}
+
+    \autoref{fig:voltage_u2a0_section} leads to
+    \begin{equation}
+        \hat{u}_\mathrm{2a0,k} = b_\mathrm{k} = \frac{4U_{\mathrm{1}}}{3k\pi} \cdot \frac{3}{2}=\frac{2U_{\mathrm{1}}}{k\pi}
+        \label{eq:Ex07T2_FundamentelVoltage}
+    \end{equation}   
+    The amplitudes are depicted in \autoref{fig:NormalizationToTheAmplitude},
+    \input{fig/ex07/Fig_standardization_to_fudamental_freq.tex}
+    The relation between fundamental und harmonic amplitude is calculated by
+    \begin{equation}
+        \begin{split}        
+            \frac{\hat{u}_\mathrm{2a0,1}}{\hat{u}_\mathrm{2a0,k}} &= \frac{1}{k} \\
+            \text{with } &k=n \cdot 6\pm1 \text{ and } n=1,2,3...
+        \end{split}         
+    \end{equation}   
+    \label{subtask:Ex07T2_FourierSeries}
+ \end{solutionblock}
+
+\subtask{Based on \autoref{sub:DecomposeVoltage}, calculate the fundamental amplitude $\hat{i}_\mathrm{a}^\mathrm{(1)}$ using a vector diagram and 
+complex alternating current calculations. 
+From this, determine the total active power fed to the load.}
+\begin{solutionblock}
+    According \eqref{eq:Ex07T2_FundamentelVoltage} the fundamental voltage  is calculated as:
+    \begin{equation}
+        \hat{u}_\mathrm{2a0,1}(t)=\frac{2U_{\mathrm{1}}}{1\pi}=\frac{2\cdot \SI{510}{\volt}}{1\pi}=\SI{324,68}{\volt}
+    \end{equation}
+    The amplitude of $u_\mathrm{2ae}(t)$ is given with
+    \begin{equation}
+        \hat{u}_\mathrm{2ae}=\sqrt{2} \cdot \SI{220}{\volt}=\SI{311,13}{\volt}
     \end{equation}
 
+    A triangle is formed by the inverter voltage $u_\mathrm{2a}^\mathrm{(1)}(t)$, the voltage $u_\mathrm{2ae}(t)$ 
+    and the voltage drop across the inductance $L$. Two sides and one angle are known. By applying the sine theorem results in
+    \begin{equation}
+        \begin{split}        
+            \frac{a}{\sin(\alpha)} = &\frac{b}{\sin(\beta)} = \frac{c}{\sin(\gamma)} \\
+            \text{with } a=\SI{324,68}{\volt} &\quad \alpha=\SI{120}{\degree} \quad b=\SI{311,13}{\volt}.
+            \label{eq:Ex07T2_SinTheorem}
+        \end{split}                 
+    \end{equation}   
+    Solving \eqref{eq:Ex07T2_SinTheorem} with respect to $\beta$ leads to
+    \begin{equation}
+        \beta=\arcsin\big(\frac{b}{a}\sin(\alpha)\big) 
+        =\arcsin\big(\frac{\SI{311,13}{\volt}}{\SI{324,68}{\volt}}\sin(\SI{120}{\degree})\big) = \arcsin(0,8298)=\SI{56.1}{\degree}.
+        \label{eq:Ex07T2_sin_beta}
+    \end{equation}
+    Using the result for $\beta$ leads to
+    \begin{equation}
+        \gamma=\SI{180}{\degree}-\alpha-\beta = \SI{180}{\degree}-\SI{120}{\degree}-\SI{56.1}{\degree}= \SI{3.9}{\degree}
+        \label{eq:Ex07T2_sin_beta}
+    \end{equation}
+    In \autoref{fig:IllustrationForUsingSineTheorem} the triangle is depicted.
+    \input{fig/ex07/Fig_ trigonometric_approach_triangle.tex}
+    In a symmetrical three-phase system, the active power is:
+    \begin{equation}
+        P=\sqrt{3} U_{\mathrm{L-L}} I_{\mathrm{L}} \cos(\phi)
+        \label{eq:Ex07T2_EffPowergen}
+    \end{equation}
 
-
-    \input{fig/ex07/Fig_Voltage_U_um_excerpt}   
-    \input{fig/ex07/Fig_graphic_solutions_cos_terms}
-    \input{fig/ex07/Fig_standardization_to_fudamental_freq.tex}
-    \input{fig/ex07/Fig_ trigonometric_approach_triangle.tex}    
-\end{solutionblock}
-
-\subtask{Based on \autoref{sub:DecomposeVoltage}, calculate the fundamental amplitude $\hat{i}_\mathrm{a}^1$ using a vector diagram and complex alternating current calculations. 
-From this, determine the total active power converted in the load.}
-\begin{solutionblock}
+    $U_{\mathrm{L-L}}$ corresponds to the effective value of the line-to-line voltage and $IU_{\mathrm{L}}$ is the effective value
+    of the line current and $\phi$ is the phase angle between voltage and current. For this case $U_{\mathrm{L-L}}$ is calculated by
+    \begin{equation}
+        U_{\mathrm{L-L}}=\sqrt{3}\frac{\hat{u}_\mathrm{2a}^\mathrm{(1)}}{\sqrt{2}}
+        = \sqrt{\frac{3}{2}} \frac{2U_\mathrm{1}}{\pi} = \sqrt{3}\sqrt{2}\frac{U_\mathrm{1}}{\pi}
+        = \sqrt{3}\sqrt{2} \cdot \frac{\SI{510}{\volt}}{\pi}=\SI{397.6}{\volt}
+        \label{eq:Ex07T2_EffPowervoltage}
+    \end{equation}
+    The line current $I_{\mathrm{L}}$ is obtained by
+    \begin{equation}
+        I_{\mathrm{L}}=\frac{\hat{i}_\mathrm{2a}^\mathrm{(1)}}{\sqrt{2}}
+        = \frac{\SI{12.37}{\ampere}}{\sqrt{2}}=\SI{8.75}{\ampere}
+        \label{eq:Ex07T2_EffPowercurrent}
+    \end{equation}    
+    The angle $\phi$ results in
+    \begin{equation}
+        \begin{split}        
+            &\phi=\SI{30}{\degree}+ \gamma= \SI{30}{\degree}+\SI{3.9}{\degree}= \SI{33.9}{\degree}\phi=\SI{30}{\degree}+ \gamma= \SI{30}{\degree}+\SI{3.9}{\degree}= \SI{33.9}{\degree} \\
+            &\cos(\phi)=\cos(\SI{33.9}{\degree})=0.83
+        \end{split}          
+        \label{eq:Ex07T2_EffPowerangle}
+    \end{equation}
+    Using \eqref{eq:Ex07T2_EffPowervoltage},  \eqref{eq:Ex07T2_EffPowercurrent} and  \eqref{eq:Ex07T2_EffPowerangle}
+    in \eqref{eq:Ex07T2_EffPowergen} leads to
+    \begin{equation}
+        P=\sqrt{3} U_{\mathrm{L-L}} I_{\mathrm{L}} \cos(\phi)
+        = \sqrt{3} \SI{397.6}{\volt} \cdot \SI{8.75}{\ampere} \cdot 0.83= \SI{5}{\kilo\watt}
+    \end{equation}
 \end{solutionblock}
