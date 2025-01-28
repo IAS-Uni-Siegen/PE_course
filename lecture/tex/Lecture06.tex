@@ -712,15 +712,15 @@
             -1 & \text{if } s^*(t) < -1.
         \end{cases}
         $$ 
-        Hence, from $\omega t_0$ to $\omega t_1$ the converter's output voltage is clipped for $m>1$. With
+        \onslide<2->{Hence, from $\omega t_0$ to $\omega t_1$ the converter's output voltage is clipped for $m>1$. With
         $$
         m \sin(\omega t_0)\stackrel{!}{=}1
-        $$
-        one can find
+        $$}%
+        \onslide<3->{one can find
         \begin{align}
             \omega t_0 &= \arcsin\left(\frac{1}{m}\right).
             \label{eq:Overmodulation_t0}
-        \end{align}
+        \end{align}}%
         \end{column}
         \begin{column}{0.55\textwidth}
             \begin{figure}
@@ -749,7 +749,7 @@
                         \draw[dashed] (axis cs:{pi-rad(asin(1/\m))},1) to (axis cs:{pi-rad(asin(1/\m))},0) node[below] {$\omega t_1$};
                     \end{axis}
                 \end{tikzpicture}
-                \caption{Exemplary time series between reference and actual voltage in the overmodulation range}
+                \caption{Exemplary time series between average reference and actual voltage in the overmodulation range}
                 \label{fig:Overmodulation_time_series_example}
             \end{figure}
         \end{column}
@@ -761,18 +761,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Overmodulation (cont.)} 
-    To calculate the resulting fundamental output voltage during overmodulation, a Fourier analysis is performed while utilizing the quarter-wave symmetry of the output voltage signal:
+    \onslide<1->{To calculate the resulting fundamental output voltage during overmodulation, a \hl{Fourier analysis} is performed while utilizing the quarter-wave symmetry of the output voltage signal:}%
     \begin{equation}
         \begin{split}
-        \frac{u_2^{(1)}}{U_1}   &= \frac{1}{\pi} \int_0^{2\pi}s^*_\mathrm{lim}(\omega \tau)\sin(\omega \tau)\mathrm{d}\omega \tau \\
-                                &=\frac{4}{\pi}\left( \int_0^{\omega t_0} m\sin^2(\omega \tau)\mathrm{d}\omega \tau + \int_{\omega t_0}^{\frac{\pi}{2}} 1\sin(\omega \tau)\mathrm{d}\omega \tau\right)\\
-                                &=\frac{4}{\pi}\left[\frac{m}{2}\left(\omega t_0 -\frac{1}{2}\sin(2\omega t_0)\right)+\cos(\omega t_0)\right].
+            \onslide<1->{\frac{u_2^{(1)}}{U_1}   &= \frac{1}{\pi} \int_0^{2\pi}s^*_\mathrm{lim}(\omega \tau)\sin(\omega \tau)\mathrm{d}\omega \tau \\}%
+            \onslide<2->{&=\frac{4}{\pi}\left( \int_0^{\omega t_0} m\sin^2(\omega \tau)\mathrm{d}\omega \tau + \int_{\omega t_0}^{\frac{\pi}{2}} 1\sin(\omega \tau)\mathrm{d}\omega \tau\right)\\}%
+            \onslide<3->{&=\frac{4}{\pi}\left[\frac{m}{2}\left(\omega t_0 -\frac{1}{2}\sin(2\omega t_0)\right)+\cos(\omega t_0)\right].}%
     \end{split}
     \end{equation}
-    Inserting $\omega t_0$ from \eqref{eq:Overmodulation_t0} and applying trigonometric identities yields:
+    \onslide<4->{Inserting $\omega t_0$ from \eqref{eq:Overmodulation_t0} and applying trigonometric identities yields:
     \begin{equation}
         \frac{u_2^{(1)}}{U_1} = \frac{2}{\pi}\left[m\arcsin\left(\frac{1}{m}\right)+\sqrt{1-\frac{1}{m^2}}\right]\in\left[1,\frac{4}{\pi}\right] \quad \mbox{for} \quad m \geq 1.
-    \end{equation}
+    \end{equation}}%
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -820,9 +820,9 @@
     \onslide<2->{The fundamental output voltage amplitude can be derived from the corresponding \hl{Fourier coefficient}}
     \begin{equation}
         \begin{split}
-            \onslide<2->{\hat{u}_2^{(k)} &= \frac{1}{\pi} \int_{\alpha}^{\alpha + \pi} u_2(t)\sin(k (\omega t-\alpha)) \mathrm{d}\omega t}\onslide<3->{ = \frac{2}{\pi} \int_{0}^{\pi/2} U_1 \sin(k \omega t) \mathrm{d}\omega t} \\
-                & \onslide<4->{= \frac{2}{\pi} \left[-\frac{U_1}{k} \cos(k \omega t)\right]_{0}^{\pi/2}} \onslide<5->{= \frac{2}{\pi} \left[\frac{U_1}{k} \left(\cos(0) - \cos(k(\pi/2))\right)\right]} \\
-                &\onslide<6->{= \frac{4}{\pi} U_1 \frac{1}{k}, \quad k=1,3,5,7,\ldots}
+            \onslide<2->{\frac{u_2^{(k)}}{U_1} &= \frac{1}{\pi} \int_{\alpha}^{\alpha + \pi} \frac{u_2(t)}{U_1}\sin(k (\omega t-\alpha)) \mathrm{d}\omega t}\onslide<3->{ = \frac{2}{\pi} \int_{0}^{\pi/2} \sin(k \omega t) \mathrm{d}\omega t} \\
+                & \onslide<4->{= \frac{2}{\pi} \left[-\frac{1}{k} \cos(k \omega t)\right]_{0}^{\pi/2}} \onslide<5->{= \frac{2}{\pi} \left[\frac{1}{k} \left(\cos(0) - \cos(k\frac{\pi}{2})\right)\right]} \\
+                &\onslide<6->{= \frac{4}{\pi} \frac{1}{k}, \quad k=1,3,5,7,\ldots}
             \end{split}
     \end{equation}
     \onslide<7->{The fundamental output voltage amplitude is thus given by $ \hat{u}_2^{(1)} = \nicefrac{4}{\pi} \cdot U_1$ which is fixed due to fundamental frequency modulation while only the phase angle $\alpha$ can be adjusted.}
@@ -835,11 +835,11 @@
     \frametitle{Blanking / interlocking time} 
     \begin{columns}
         \begin{column}{0.45\textwidth}
-            When the $i$-th half bridge is actuated, i.e., changes it switching state, an interlocking / blanking time $t_0$ is introduced to avoid short-circuiting the DC link:
+            \onslide<2->{When the $i$-th half bridge is actuated, i.e., changes it switching state, an \hl{interlocking / blanking time} $t_0$ is introduced to avoid short-circuiting the DC link:}%
             \begin{itemize}
-                \item First: turn off conducting transistor,
-                \item Second: wait $t_0$ \newline(ensure safe turn off),
-                \item Third: turn on the other transistor.
+                \item<2-> First: turn off conducting transistor,
+                \item<3-> Second: wait $t_0$ \newline(ensure safe turn off),
+                \item<4-> Third: turn on the other transistor.
             \end{itemize}
             \vspace{-0.5cm}
             \begin{varblock}{Background}
@@ -903,6 +903,7 @@
             \caption{Upper transistor on}
         \end{subfigure}
         %
+        \onslide<2->{%
         \begin{subfigure}{0.32\textwidth}
             \centering
             \begin{circuitikz}[]
@@ -926,6 +927,8 @@
             \end{circuitikz}
             \caption{Lower transistor on}
         \end{subfigure}
+        }%
+        \onslide<3->{%
         \begin{subfigure}{0.32\textwidth}
             \centering
             \begin{circuitikz}[]
@@ -951,6 +954,7 @@
             \end{circuitikz}
             \caption{Both transistors off}
         \end{subfigure}
+        }%
     \end{figure}                
 \end{frame}
 
@@ -1117,8 +1121,9 @@
         \begin{equation}
             \Delta u =\overline{u}_2 - U_1s^* = -\mathrm{sgn}(i_2)\frac{t_0}{T_\mathrm{s}}  U_1= -\mathrm{sgn}(i_2)t_0 f_\mathrm{s} U_1.
         \end{equation}
+        \pause
         Hence, the error depends on the relative duration of the interlocking time $t_0$ compared to the switching period $T_\mathrm{s}$ which is a device-specific parameter (cf. below). 
-
+        
         \begin{table}
             \begin{tabular}{c c c}
                 \toprule
@@ -1181,6 +1186,7 @@
             \end{tikzpicture}
             \caption{2-level half bridge}
         \end{subfigure}
+        \onslide<2->{%
         \begin{subfigure}{0.32\textwidth}
             \centering
             \begin{circuitikz}
@@ -1222,6 +1228,8 @@
             \end{tikzpicture}
             \caption{3-level half bridge}
         \end{subfigure}
+        }%
+        \onslide<3->{%
         \begin{subfigure}{0.32\textwidth}
             \centering
             \begin{circuitikz}
@@ -1266,6 +1274,7 @@
             \end{tikzpicture}
             \caption{4-level half bridge}
         \end{subfigure}
+        }%
         \end{figure}
 \end{frame}
 
@@ -1316,11 +1325,11 @@
             \onslide<1->{Assuming steady state, the grid side input loop from \figref{fig:recitifier_single_phase_transistor_bridge_converter} can be described with \hl{complex phasors}:
             \begin{equation}
                 \underline{\hat{u}}_2 = \underline{\hat{u}}_\mathrm{g} - \mathrm{j}\omega L \underline{\hat{i}}_2.
-            \end{equation}} 
+            \end{equation}}% 
             \onslide<2->{The converter's input voltage amplitude is
             \begin{equation}
                 \hat{u}_2 = \sqrt{\hat{u}^2_\mathrm{g} + \left(\omega L \hat{i}_2\right)^2}.
-            \end{equation}}
+            \end{equation}}%
             \onslide<3->{As the converter boosts the grid voltage towards the DC-link, the following condition must apply:
             \begin{equation}
                 u_1(t)\approx U_\mathrm{dc} \geq \hat{u}_2 = \sqrt{\hat{u}^2_\mathrm{g} + \left(\omega L \hat{i}_2\right)^2}.
@@ -1361,7 +1370,7 @@
     \end{equation}
     \onslide<6->{The resulting apparent power $S_2$ is}
     \begin{equation}
-        \onslide<6->{S_2 = \sqrt{P^2 + Q_2^2}} \onslide<7->{= \sqrt{P^2 + \left(\omega L I_\mathrm{g}\right)^2}} \onslide<8->{= \sqrt{P^2 + \left(\frac{\omega L}{U_\mathrm{g}^2}P^2\right)^2}}\onslide<9->{ = P\sqrt{1 + \left(\frac{\omega L}{U_\mathrm{g}^2}P\right)^2}.}
+        \onslide<6->{S_2 = \sqrt{P^2 + Q_2^2}} \onslide<7->{= \sqrt{P^2 + \left(\omega L I^2_\mathrm{g}\right)^2}} \onslide<8->{= \sqrt{P^2 + \left(\frac{\omega L}{U_\mathrm{g}^2}P^2\right)^2}}\onslide<9->{ = P\sqrt{1 + \left(\frac{\omega L}{U_\mathrm{g}^2}P\right)^2}.}
     \end{equation}
 \end{frame}
 
@@ -1370,11 +1379,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Steady-state operation (cont.)} 
-    \onslide<1->{Neglecting the switching-induced current and voltage ripples, the instantaneous grid power is}
+    \onslide<1->{Neglecting the switching-induced current and voltage ripples, the \hl{instantaneous grid power} is}
     \begin{equation}
         \onslide<1->{p_\mathrm{g}(t) = u_\mathrm{g}(t)i_\mathrm{g}(t) = \hat{u}_\mathrm{g}\hat{i}_\mathrm{g}\cos^2(\omega t)} \onslide<2->{= P + P \cos(2\omega t).}
     \end{equation}
-    \onslide<3->{The instantaneous converter power at its AC input is}
+    \onslide<3->{The \hl{instantaneous converter power at its AC input} is}
     \begin{equation}
         \begin{split}
             \onslide<3->{p_2(t) &= u_2(t)i_2(t)} \onslide<4->{= \left(u_\mathrm{g}(t) + u_\mathrm{L}(t)\right)i_\mathrm{g}(t)} \onslide<5->{= \left(u_\mathrm{g}(t) + L\frac{\mathrm{d}}{\mathrm{d}t}i_\mathrm{g}(t)\right)i_\mathrm{g}(t)}\\
@@ -1382,7 +1391,7 @@
                 & \onslide<7->{= P\left(1 + \cos(2\omega t)\right) + Q_2 \sin(2\omega t)} \onslide<8->{= P + S_2\cos(2\omega t- 2\varphi_2)}
         \end{split}
     \end{equation}
-    \onslide<8->{with $\varphi_2$ being the phase angle between $i_2(t)$ and $u_2(t)$.}\onslide<9->{ Hence, the converter power oscillates at twice the grid frequency with an amplitude of $S_2$. As $S_2>P$ applies, the instantaneous output power gets temporarily negative as a result of the reactive power compensation on the grid input side. }
+    \onslide<8->{with $\varphi_2$ being the phase angle between $i_2(t)$ and $u_2(t)$.}\onslide<9->{ Hence, the \hl{converter power oscillates at twice the grid frequency} with an amplitude of $S_2$. As $S_2>P$ applies, \hl{the instantaneous output power gets temporarily negative as a result of the reactive power compensation} on the grid input side. }
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1394,11 +1403,11 @@
     \begin{equation}
         \onslide<1->{i_1(t) = \frac{p_1(t)}{U_\mathrm{dc}}}\onslide<2->{= \frac{p_2(t)}{U_\mathrm{dc}} = \frac{P}{U_\mathrm{dc}}+ \frac{S_2}{U_\mathrm{dc}}\cos(2\omega t - 2\varphi_2).}
     \end{equation}
-    \onslide<3->{For a constant load current $$I_0 = \frac{P}{U_\mathrm{dc}},$$ the converter's output current can be rewritten as
+    \onslide<3->{For a \hl{constant load} current $$I_0 = \frac{P}{U_\mathrm{dc}},$$ the converter's output current can be rewritten as
     \begin{equation}
         i_1(t) = I_0 \left(1 + \sqrt{1+\left(\frac{\omega L U_\mathrm{dc}}{U_\mathrm{g}^2}\right)^2}\cos(2\omega t - 2\varphi_2)\right).
     \end{equation}}%
-    \onslide<4->{Consequently, the DC-link capacitor current carries the harmonic content:
+    \onslide<4->{Consequently, the \hl{DC-link capacitor carries the harmonic current content}:
     \begin{equation}
         i_\mathrm{C}(t) =  i_1(t) - I_0 = I_0 \sqrt{1+\left(\frac{\omega L U_\mathrm{dc}}{U_\mathrm{g}^2}\right)^2}\cos(2\omega t - 2\varphi_2).
         \label{eq:DC_link_current_single_phase_ACDC}
@@ -1410,11 +1419,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Steady-state operation (cont.)} 
-    \onslide<1->{Assuming that the voltage ripple of  the DC-link capacitor does not significantly affect the output current, the voltage ripple amplitude can be approximated as:
+    \onslide<1->{Assuming that the voltage ripple of  the DC-link capacitor does not significantly affect the output current, the \hl{voltage oscillation amplitude} can be approximated as:
     \begin{equation}
         \hat{u}_\mathrm{C} = \hat{u}_1 \approx \frac{\hat{i}_1}{2\omega C} = \frac{I_0}{2C} \sqrt{1+\left(\frac{\omega L U_\mathrm{dc}}{U_\mathrm{g}^2}I_0\right)^2}.
         \label{eq:DC_link_voltage_single_phase_ACDC}}%
-    \end{equation}
+    \end{equation}%
     \onslide<2->{This relation results from the complex phasor analysis of the capacitor's impedance given the current ripple \eqref{eq:DC_link_current_single_phase_ACDC}.} \onslide<3->{From \eqref{eq:DC_link_voltage_single_phase_ACDC} one can }
     \begin{itemize}
         \item<3-> derive the required DC-link capacitance for a given voltage ripple,
@@ -1568,7 +1577,7 @@
             u_{2\mathrm{bc}}(t) &= \frac{1}{2}\left(s_{\mathrm{b}}(t)-s_{\mathrm{c}}(t)\right)u_1(t),\\
             u_{2\mathrm{ca}}(t) &= \frac{1}{2}\left(s_{\mathrm{c}}(t)-s_{\mathrm{a}}(t)\right)u_1(t).
         \end{split}
-    \end{equation}
+    \end{equation}\pause
     The \hl{line-to-ground voltages} are given by
     \begin{equation}
         \begin{split}
@@ -1639,24 +1648,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Three-phase converter with symmetric load in star connection (cont.)}
-    Assuming a star-connected load, the three-phase currents sum up to zero:
+    Assuming a \hl{star-connected load}, the three-phase currents sum up to zero:
     \begin{equation}
        i_{2\mathrm{a}}(t) + i_{2\mathrm{b}}(t) + i_{2\mathrm{c}}(t) = 0.
        \label{eq:three_phase_current_sum_star}
-    \end{equation}
+    \end{equation}\pause
     If the star point is not connected to ground, $u_{\mathrm{n}0}(t)\neq 0$ may occur leading to a load voltage of 
     \begin{equation}
         u_{2\mathrm{a}}(t) = u_{2\mathrm{a}0}(t) - u_{\mathrm{n}0}(t), \quad u_{2\mathrm{b}}(t) = u_{2\mathrm{b}0}(t) - u_{\mathrm{n}0}(t), \quad u_{2\mathrm{c}}(t) = u_{2\mathrm{c}0}(t) - u_{\mathrm{n}0}(t).
-    \end{equation} 
-    To calculate $u_{\mathrm{n}0}(t)$ one can utilize the load equation (assuming an inductive load):
+    \end{equation}\pause
+    To calculate $u_{\mathrm{n}0}(t)$ one can utilize the load equation (assuming an \hl{inductive load}):
     \begin{equation}
         u_{2i}(t) = L \frac{\mathrm{d}}{\mathrm{d}t} i_{2i}(t) + u_{\mathrm{n}0}(t)
-    \end{equation}
+    \end{equation}\pause
     summing up to
     \begin{equation}
         3u_{\mathrm{n}0}(t) +  L \frac{\mathrm{d}}{\mathrm{d}t} \left(i_{2\mathrm{a}}(t) + i_{2\mathrm{b}}(t) + i_{2\mathrm{c}}(t)\right) = u_{2\mathrm{a}0}(t) + u_{2\mathrm{b}0}(t) +u_{2\mathrm{c}0}(t)
-    \end{equation}
-    and finally delivering the star-to-ground voltage as 
+    \end{equation}\pause
+    and finally delivering the \hl{star-to-ground voltage} as 
     \begin{equation}
         u_{\mathrm{n}0}(t) = \frac{1}{3} \left(u_{2\mathrm{a}0}(t) + u_{2\mathrm{b}0}(t) +u_{2\mathrm{c}0}(t)\right).
     \end{equation}
@@ -1673,7 +1682,7 @@
         \centering
         \begin{tabular}{c c c c c c c c c c c c c c}
             \toprule
-            $\mathrm{No.}$ & $s_\mathrm{a}$ & $s_\mathrm{b}$ & $s_\mathrm{c}$ & $\frac{u_{2a0}}{u_1}$ & $\frac{u_{2b0}}{u_1}$ & $\frac{u_{2c0}}{u_1}$ & $\frac{u_{2a}}{u_1}$ & $\frac{u_{2b}}{u_1}$ & $\frac{u_{2c}}{u_1}$ & $\frac{u_{\mathrm{ab}}}{u_1}$ & $\frac{u_{\mathrm{bc}}}{u_1}$ & $\frac{u_{\mathrm{ca}}}{u_1}$ & $\frac{u_{\mathrm{n}0}}{u_1}$ \\
+            $\mathrm{No.}$ & $s_\mathrm{a}$ & $s_\mathrm{b}$ & $s_\mathrm{c}$ & $\frac{u_{2\mathrm{a}0}}{u_1}$ & $\frac{u_{2\mathrm{b}0}}{u_1}$ & $\frac{u_{2\mathrm{c}0}}{u_1}$ & $\frac{u_{2\mathrm{a}}}{u_1}$ & $\frac{u_{2\mathrm{b}}}{u_1}$ & $\frac{u_{2\mathrm{c}}}{u_1}$ & $\frac{u_{\mathrm{ab}}}{u_1}$ & $\frac{u_{\mathrm{bc}}}{u_1}$ & $\frac{u_{\mathrm{ca}}}{u_1}$ & $\frac{u_{\mathrm{n}0}}{u_1}$ \\
             \midrule
             $0$ & $-1$ & $-1$ & $-1$ & $-\frac{1}{2}$ & $-\frac{1}{2}$ & $-\frac{1}{2}$ & $0$ & $0$ & $0$ & $0$& $0$& $0$&$-\frac{1}{2}$\\
 
@@ -1703,7 +1712,7 @@
 %% Three-phase fundamental frequency modulation %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-    \frametitle{Three-phase fundamental frequency modulation} 
+    \frametitle{Three-phase fundamental frequency modulation (aka six-step mode)} 
     \vspace{-0.1cm}
     \begin{figure}
         \begin{tikzpicture}
@@ -1754,13 +1763,13 @@
     \frametitle{Three-phase fundamental frequency modulation (cont.)} 
     From the previous figure and voltage equations, we can summarize the following observations:
     \begin{itemize}
-        \item Due to the fundamental frequency modulation, the switching frequency of the inverter is identical to the fundamental frequency: $f_{\mathrm{s}} = \nicefrac{\omega}{2\pi}$.
-        \item The star-to-ground voltage $u_{\mathrm{n0}}(t)$ shows a rectangular signal pattern with triple fundamental frequency. 
-        \item Consequently, it does not influence the fundamental output voltage, that is, the fundamental components of the line-to-ground voltage $u_{2i0}(t)$ as well as the load voltage $u_{2i}(t)$ are identical: $\hat{u}^{(1)}_{2i0}=\hat{u}^{(1)}_{2i}$.
-    \end{itemize}\vspace{-0.25cm}
+        \item<1-> Due to the fundamental frequency modulation, the switching frequency of the inverter is identical to the fundamental frequency: $f_{\mathrm{s}} = \nicefrac{\omega}{2\pi}$.
+        \item<2-> The star-to-ground voltage $u_{\mathrm{n0}}(t)$ shows a rectangular signal pattern with triple fundamental frequency. 
+        \item<3-> Consequently, it does not influence the fundamental output voltage, that is, the fundamental components of the line-to-ground voltage $u_{2i0}(t)$ as well as the load voltage $u_{2i}(t)$ are identical: $\hat{u}^{(1)}_{2i0}=\hat{u}^{(1)}_{2i}$.
+    \end{itemize}\vspace{-0.25cm}\onslide<4->{%
     \begin{varblock}{Note on the star point}
         The previous analysis assumed a non-connected star point, which comes with certain advantages, e.g., on the rejection of current harmonics. If, however, the star point would be connected, the three-phase converter can be interpreted and analyzed as three independent single-phase converters (each driven by a half bridge). 
-    \end{varblock}
+    \end{varblock}}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
