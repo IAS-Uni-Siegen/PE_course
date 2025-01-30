@@ -100,6 +100,7 @@ Calculate and sketch the voltages $u_\mathrm{2a0}(t)$, $u_\mathrm{2b0}(t)$ and $
 depending on these switching states.}
 \begin{solutionblock}
     Each half bridge has got the 2 states '+1' and '-1', which results in $2^3 = 8$ combinations according table \autoref{stable:ex07_Task2_Switchingstates}.
+    To simplify the entries following is defined: $U_\mathrm{1h}=\frac{U_\mathrm{1}}{2}.$
     The correct chronological order is displayed in table \autoref{stable:ex07_Task2_UsedSwitchingStates}.
     \bigskip
     \FloatBarrier
@@ -127,12 +128,12 @@ depending on these switching states.}
             \hline
             \bfseries $s_\mathrm{a}(t)$ & \bfseries $s_\mathrm{b}(t)$ & \bfseries $s_\mathrm{c}(t)$
             & \bfseries $u_\mathrm{2a0}$ & \bfseries $u_\mathrm{2b0}$ & \bfseries $u_\mathrm{2c0}$ \\ \hline
-            +1 & -1 & +1 & $U_\mathrm{1p}$ & $-U_\mathrm{1m}$ & $U_\mathrm{1p}$ \\ \hline
-            +1 & -1 & -1 & $U_\mathrm{1p}$ & $-U_\mathrm{1m}$ & $-U_\mathrm{1m}$ \\ \hline
-            +1 & +1 & -1 & $U_\mathrm{1p}$ & $U_\mathrm{1p}$ & $-U_\mathrm{1m}$ \\ \hline
-            -1 & +1 & -1 & $-U_\mathrm{1m}$ & $U_\mathrm{1p}$ & $-U_\mathrm{1m}$ \\ \hline
-            -1 & +1 & +1 & $-U_\mathrm{1m}$ & $U_\mathrm{1p}$ & $U_\mathrm{1p}$ \\ \hline
-            -1 & -1 & +1 & $-U_\mathrm{1m}$ & $-U_\mathrm{1m}$ & $U_\mathrm{1p}$ \\ \hline
+            +1 & -1 & +1 & $U_\mathrm{1h}$ & $-U_\mathrm{1h}$ & $U_\mathrm{1h}$ \\ \hline
+            +1 & -1 & -1 & $U_\mathrm{1h}$ & $-U_\mathrm{1h}$ & $-U_\mathrm{1h}$ \\ \hline
+            +1 & +1 & -1 & $U_\mathrm{1h}$ & $U_\mathrm{1h}$ & $-U_\mathrm{1h}$ \\ \hline
+            -1 & +1 & -1 & $-U_\mathrm{1h}$ & $U_\mathrm{1h}$ & $-U_\mathrm{1h}$ \\ \hline
+            -1 & +1 & +1 & $-U_\mathrm{1h}$ & $U_\mathrm{1h}$ & $U_\mathrm{1h}$ \\ \hline
+            -1 & -1 & +1 & $-U_\mathrm{1h}$ & $-U_\mathrm{1h}$ & $U_\mathrm{1h}$ \\ \hline
         \end{tabular}
         \captionof{table}{Used switching states and voltages.}
         \label{stable:ex07_Task2_UsedSwitchingStates}    
@@ -144,13 +145,9 @@ depending on these switching states.}
     output voltage on average. In case of block switching, these switching states are not used, since
     the switching only occurs twice per period. This results in the maximum possible voltage (square wave) at the output.
     The voltages $u_\mathrm{2a0}(\mathrm{\omega t})$, $u_\mathrm{2b0}(\mathrm{\omega t})$, $u_\mathrm{2c0}(\mathrm{\omega t})$
-    ,$u_\mathrm{2ab}(\mathrm{\omega t})$ and $u_\mathrm{2bc}(\mathrm{\omega t})$ are displayed in \autoref{fig:voltage_u2a0_u2b0_u2c0_uab_ubc}.
+    ,$u_\mathrm{2ab}(\mathrm{\omega t})$ and $u_\mathrm{2bc}(\mathrm{\omega t})$ are displayed in \autoref{sfig:voltage_u2a0_u2b0_u2c0}.
 
-    \input{fig/ex07/Fig_Voltage_u2a0_u2b0_u2c0_u2ab_u2bc}
-    The voltages $u_\mathrm{2a}(\mathrm{\omega t})$ and $u_\mathrm{2n0}(\mathrm{\omega t})$ are depicted in \autoref{fig:voltage_u2a_u2n0}.
-
-    \input{fig/ex07/Fig_Voltage_u2a_um0}
-
+    \input{fig/ex07/sFig_Voltage_u2a0_u2b0_u2c0}
 \end{solutionblock}
 
 \subtask{The internal voltages $u_\mathrm{2ai}(t)$, $u_\mathrm{2bi}(t)$ and $u_\mathrm{2ci}(t)$ are from a symmetrical voltage system, 
@@ -158,7 +155,7 @@ i.e., the following is always applicable: $u_\mathrm{2ai}(t)+u_\mathrm{2bi}(t)+u
 Show that this equation is also applicable for the voltages $u_\mathrm{2a}(t)$, $u_\mathrm{2b}(t)$ and $u_\mathrm{2c}(t)$ under the same conditions.
 }
 \begin{solutionblock}
-    In the case of a symmetrical three-phase consumer where the current sum at the consumer star point is zero, 
+    In the case of a symmetrical three-phase load where the current sum at the load star point is zero, 
     the following results:
     \begin{equation}
         u_{\mathrm{2a}}(t) + u_{\mathrm{2b}}(t) + u_{\mathrm{2c}}(t) = \SI{0}{\volt} \quad 
@@ -167,22 +164,22 @@ Show that this equation is also applicable for the voltages $u_\mathrm{2a}(t)$, 
     \end{equation}
     This leads to
     \begin{equation}
-        u_{\mathrm{2a}}(t) = L \frac{\mathrm{d}i_{\mathrm{2a}}(t)}{\mathrm{d}t}+u_{\mathrm{2ae}}(t)
-        \quad u_{\mathrm{2a}}(t) = L \frac{\mathrm{d}i_{\mathrm{2a}}(t)}{\mathrm{d}t}+u_{\mathrm{2ae}}(t)
-        \quad u_{\mathrm{2a}}(t) = L \frac{\mathrm{d}i_{\mathrm{2a}}(t)}{\mathrm{d}t}+u_{\mathrm{2ae}}(t).
+        u_{\mathrm{2a}}(t) = L \frac{\mathrm{d}i_{\mathrm{2b}}(t)}{\mathrm{d}t}+u_{\mathrm{2ai}}(t)
+        \quad u_{\mathrm{2b}}(t) = L \frac{\mathrm{d}i_{\mathrm{2b}}(t)}{\mathrm{d}t}+u_{\mathrm{2bi}}(t)
+        \quad u_{\mathrm{2c}}(t) = L \frac{\mathrm{d}i_{\mathrm{2c}}(t)}{\mathrm{d}t}+u_{\mathrm{2ci}}(t).
         \label{eq:u2_i2_symL}         
     \end{equation}
     Using \eqref{eq:u2_i2_symgen} leads to
     \begin{equation}
         u_{\mathrm{2a}}(t) + u_{\mathrm{2b}}(t) + u_{\mathrm{2c}}(t) 
         = L \frac{\mathrm{d}}{\mathrm{d}t} \left( i_{\mathrm{2a}}(t)+i_{\mathrm{2b}}(t)+i_{\mathrm{2c}}(t) \right) 
-         + \left( u_{\mathrm{2ae}}(t) + u_{\mathrm{2be}}(t) + u_{\mathrm{2ce}}(t)\right)=\SI{0}{\volt}.
+         + \left( u_{\mathrm{2ai}}(t) + u_{\mathrm{2bi}}(t) + u_{\mathrm{2ci}}(t)\right)=\SI{0}{\volt}.
         \label{eq:u2_i2_symres} 
     \end{equation}
     This derivation is valid under following conditions:
     \begin{itemize}
         \item The induction $L$ is constant.
-        \item The internal voltages $u_{\mathrm{2ae}}(t)$, $u_{\mathrm{2be}}(t)$ and $u_{\mathrm{2ce}}(t)$ 
+        \item The internal voltages $u_{\mathrm{2ai}}(t)$, $u_{\mathrm{2bi}}(t)$ and $u_{\mathrm{2ci}}(t)$ 
         are purely sinusoidal (no harmonics), symmetrical (sum equals zero) and independent of the currents
         $i_{\mathrm{2a}}(t)$, $i_{\mathrm{2b}}(t)$ and $i_{\mathrm{2c}}(t)$.
     \end{itemize}     
@@ -203,7 +200,7 @@ the star-to-ground voltage $u_\mathrm{2n0}(t)$ depending on the switching states
     \end{equation}    
     The voltage $u_{\mathrm{2a}}(t)$ is obtained by
     \begin{equation}
-        u_{\mathrm{2a}}(t) =  u_{\mathrm{2ab}}(t) + u_{\mathrm{2b0}}(t).
+        u_{\mathrm{2a}}(t) =  u_{\mathrm{2ab}}(t) + u_{\mathrm{2b}}(t).
         \label{eq:u2a_1}        
     \end{equation}    
     Additional voltage $u_{\mathrm{2a}}(t)$ is obtained by
@@ -214,18 +211,18 @@ the star-to-ground voltage $u_\mathrm{2n0}(t)$ depending on the switching states
     The addition of \eqref{eq:u2a_1} and \eqref{eq:u2a_2} results in
     \begin{equation}
         2u_{\mathrm{2a}}(t) =  2u_{\mathrm{2ab}}(t) +  u_{\mathrm{2bc}}(t) 
-                               + \left( u_{\mathrm{2a}}(t) + u_{\mathrm{2b}}(t) + u_{\mathrm{2v}}(t)\right)
+                               + \left( u_{\mathrm{2a}}(t) + u_{\mathrm{2b}}(t) + u_{\mathrm{2c}}(t)\right)
                                - u_{\mathrm{2a}}(t).
         \label{eq:u2a_gen}        
     \end{equation}    
     Solving \eqref{eq:u2a_gen} with respect to $u_{\mathrm{2a}}(t)$ leads to
     \begin{equation}
-        u_{\mathrm{2a}}(t) = \frac{2}{3} u_{\mathrm{2ab}}(t) + \frac{1}{3} u_{\mathrm{2bc}}(t) 
+        u_{\mathrm{2a}}(t) = \frac{2}{3} u_{\mathrm{2ab}}(t) + \frac{1}{3} u_{\mathrm{2bc}}(t).
     \end{equation}    
     The voltage $u_{\mathrm{0,n}}(t)$ is obtained by    
     \begin{equation}
         u_{\mathrm{0,n}}(t) = u_{\mathrm{2a0}}(t) - u_{\mathrm{2a}}(t)
-        = u_{\mathrm{2a0}}(t) - \frac{2}{3} u_{\mathrm{2ab}}(t) - \frac{1}{3} u_{\mathrm{2bc}}(t)
+        = u_{\mathrm{2a0}}(t) - \frac{2}{3} u_{\mathrm{2ab}}(t) - \frac{1}{3} u_{\mathrm{2bc}}(t).
     \end{equation}
     Using \eqref{eq:u2ab_gen} and \eqref{eq:u2bc_gen} leads to
     \begin{equation}
@@ -235,6 +232,11 @@ the star-to-ground voltage $u_\mathrm{2n0}(t)$ depending on the switching states
         u_{\mathrm{0,n}}(t) &= \frac{1}{3} \left( u_{\mathrm{2a0}}(t) + u_{\mathrm{2b0}}(t) + u_{\mathrm{2c0}}(t) \right).
         \end{split}
     \end{equation}
+
+    The voltages $u_\mathrm{2ab}(\mathrm{\omega t})$, $u_\mathrm{2bc}(\mathrm{\omega t})$, $u_\mathrm{2a}(\mathrm{\omega t})$ and $u_\mathrm{2n0}(\mathrm{\omega t})$ are depicted in \autoref{sfig:voltage_u2ab_u2bc_u2a_u2n0}.
+
+    \input{fig/ex07/sFig_Voltage_u2ab_u2bc_u2a_um0}
+
 \end{solutionblock}
 
 \subtask{Decompose the voltage $u_\mathrm{2a}(t)$ into a Fourier series and sketch the spectral lines related to the
@@ -260,10 +262,10 @@ The formula above applies to the Fourier coefficients of an odd and alternating 
     Apply this to the current signal is expressed by 
     \begin{equation}
         b_\mathrm{k} = \frac{4}{\pi} \int_0^{\pi/3} \frac{U_{\mathrm{1}}}{3} \sin(kt) \mathrm{d}t 
-                        + \frac{4}{\pi} \int_{\pi/3}^{\pi/2} \frac{2U_{\mathrm{1}}}{3} \sin(kt) \mathrm{d}t
+                        + \frac{4}{\pi} \int_{\pi/3}^{\pi/2} \frac{2U_{\mathrm{1}}}{3} \sin(kt) \mathrm{d}t.
     \end{equation}
-    Signal ratio $u_{\mathrm{2a0}}(\omega t)/U_{\mathrm{1}}$ is depicted in \autoref{fig:voltage_u2a0_section} for one periode.
-    \input{fig/ex07/Fig_Voltage_u2a0_excerpt}   
+    Signal ratio $u_{\mathrm{2a0}}(\omega t)/U_{\mathrm{1}}$ is depicted in \autoref{sfig:voltage_u2a0_section} for one period.
+    \input{fig/ex07/sFig_Voltage_u2a0_excerpt}   
     \begin{equation}
         \begin{split}
             b_\mathrm{k} &= \frac{4U_{\mathrm{1}}}{3k\pi} \big[-\cos(kt)\mathrm{d}t \big]_0^{\pi/3}
@@ -271,26 +273,26 @@ The formula above applies to the Fourier coefficients of an odd and alternating 
             &= \frac{4U_{\mathrm{1}}}{3k\pi} \left(-\cos(k\frac{\pi}{3})+\cos(0) -2 \cos(k\frac{\pi}{2})+ 2\cos(0) \right) \\
             &= \frac{4U_{\mathrm{1}}}{3k\pi} \left( \cos(k\frac{\pi}{3})+ 1 -2 \cos(k\frac{\pi}{2})\right) \\
             \text{with } &\cos(k\frac{\pi}{3})+1=1.5 \quad  \text{for } k=n \cdot 6\pm1 \text{ is odd} \\
-            \text{and  }&\cos(k\frac{\pi}{2})=0 \quad \text{ for } k=\text{ odd}
+            \text{and  }&\cos(k\frac{\pi}{2})=0 \quad \text{ for } k=\text{ odd}.
         \end{split}            
     \end{equation}
-    The result is displayed in the complex plane in \autoref{fig:voltage_u2a0_section}. 
+    The result is displayed in the complex plane in \autoref{sfig:GraphicalSolutionOfInComplexPlane}. 
 
-    \input{fig/ex07/Fig_graphic_solutions_cos_terms}
+    \input{fig/ex07/sFig_graphic_solutions_cos_terms}
 
-    \autoref{fig:voltage_u2a0_section} leads to
+    \autoref{sfig:voltage_u2a0_section} leads to
     \begin{equation}
-        \hat{u}_\mathrm{2a0,k} = b_\mathrm{k} = \frac{4U_{\mathrm{1}}}{3k\pi} \cdot \frac{3}{2}=\frac{2U_{\mathrm{1}}}{k\pi}
+        \hat{u}_\mathrm{2a0,k} = b_\mathrm{k} = \frac{4U_{\mathrm{1}}}{3k\pi} \cdot \frac{3}{2}=\frac{2U_{\mathrm{1}}}{k\pi}.
         \label{eq:Ex07T2_FundamentelVoltage}
     \end{equation}   
-    The amplitudes are depicted in \autoref{fig:NormalizationToTheAmplitude},
-    \input{fig/ex07/Fig_standardization_to_fudamental_freq.tex}
+    The amplitudes are depicted in \autoref{sfig:NormalizationToTheAmplitude}.
+    \input{fig/ex07/sFig_standardization_to_fudamental_freq.tex}
     \FloatBarrier
     The relation between fundamental und harmonic amplitude is calculated by
     \begin{equation}
         \begin{split}        
             \frac{\hat{u}_\mathrm{2a0,1}}{\hat{u}_\mathrm{2a0,k}} &= \frac{1}{k} \\
-            \text{with } &k=n \cdot 6\pm1 \text{ and } n=1,2,3...
+            \text{with } &k=n \cdot 6\pm1 \text{ and } n=1,2,3... .
         \end{split}         
     \end{equation}   
     \label{subtask:Ex07T2_FourierSeries}
@@ -302,13 +304,15 @@ From this, determine the total active power fed to the load.}
 \begin{solutionblock}
     According \eqref{eq:Ex07T2_FundamentelVoltage} the fundamental voltage  is calculated as:
     \begin{equation}
-        \hat{u}_\mathrm{2a0,1}(t)=\frac{2U_{\mathrm{1}}}{1\pi}=\frac{2\cdot \SI{510}{\volt}}{1\pi}=\SI{324,68}{\volt}.
+        \hat{u}_\mathrm{2a0}^\mathrm{(1)}(t)=\frac{2U_{\mathrm{1}}}{\pi}=\frac{2\cdot \SI{510}{\volt}}{\pi}=\SI{324.68}{\volt}.
     \end{equation}
     The amplitude of $u_\mathrm{2ai}(t)$ is given with
     \begin{equation}
-        \hat{u}_\mathrm{2ai}=\sqrt{2} \cdot \SI{220}{\volt}=\SI{311,13}{\volt}.
+        \hat{u}_\mathrm{2ai}=\sqrt{2} \cdot \SI{220}{\volt}=\SI{311.13}{\volt}.
     \end{equation}
-    The angle between $u_\mathrm{2ai}(t)$ and the voltage drop at the inductor is calculated by
+    The angle between the  fundamental voltage drop across the inductance $L$ and $i_\mathrm{2a}^\mathrm{(1)}(t)$ is $\SI{90}{\degree}$. 
+    If this is taken in account the angle between $u_\mathrm{2ai}(t)$ and the fundamental voltage drop across 
+    the inductance $L$ is calculated by
     \begin{equation}
         \alpha=\SI{90}{\degree}+\varphi_{\mathrm{2ai}}^\mathrm{(1)}=\SI{90}{\degree}+\SI{30}{\degree}=\SI{120}{\degree}.  
     \end{equation}
@@ -317,48 +321,48 @@ From this, determine the total active power fed to the load.}
     \begin{equation}
         \begin{split}        
             \frac{a}{\sin(\alpha)} = &\frac{b}{\sin(\beta)} = \frac{c}{\sin(\gamma)} \\
-            \text{with } a=\SI{324,68}{\volt} &\quad \alpha=\SI{120}{\degree} \quad b=\SI{311,13}{\volt}.
+            \text{with } a=\SI{324.68}{\volt} &\quad \alpha=\SI{120}{\degree} \quad b=\SI{311.13}{\volt}.
             \label{eq:Ex07T2_SinTheorem}
         \end{split}                 
     \end{equation}   
     Solving \eqref{eq:Ex07T2_SinTheorem} with respect to $\beta$ leads to
     \begin{equation}
         \beta=\arcsin\big(\frac{b}{a}\sin(\alpha)\big) 
-        =\arcsin\big(\frac{\SI{311,13}{\volt}}{\SI{324,68}{\volt}}\sin(\SI{120}{\degree})\big) = \arcsin(0,8298)=\SI{56.1}{\degree}.
+        =\arcsin\big(\frac{\SI{311.13}{\volt}}{\SI{324.68}{\volt}}\sin(\SI{120}{\degree})\big) = \arcsin(0.8298)=\SI{56.1}{\degree}.
         \label{eq:Ex07T2_sin_beta}
     \end{equation}
     Using the result for $\beta$ leads to
     \begin{equation}
-        \gamma=\SI{180}{\degree}-\alpha-\beta = \SI{180}{\degree}-\SI{120}{\degree}-\SI{56.1}{\degree}= \SI{3.9}{\degree}
+        \gamma=\SI{180}{\degree}-\alpha-\beta = \SI{180}{\degree}-\SI{120}{\degree}-\SI{56.1}{\degree}= \SI{3.9}{\degree}.
         \label{eq:Ex07T2_sin_beta}
     \end{equation}
-    In \autoref{fig:IllustrationForUsingSineTheorem} the triangle is depicted.
-    \input{fig/ex07/Fig_ trigonometric_approach_triangle.tex}
+    In \autoref{sfig:IllustrationForUsingSineTheorem} the triangle is depicted.
+    \input{fig/ex07/sFig_ trigonometric_approach_triangle.tex}
     In a symmetrical three-phase system, the active power is:
     \begin{equation}
-        P=\sqrt{3} U_{\mathrm{L-L}} I_{\mathrm{L}} \cos(\varphi)
+        P=\sqrt{3} U_{\mathrm{L-L}} I_{\mathrm{L}} \cos(\varphi).
         \label{eq:Ex07T2_EffPowergen}
     \end{equation}
 
-    $U_{\mathrm{L-L}}$ corresponds to the effective value of the line-to-line voltage and $IU_{\mathrm{L}}$ is the effective value
+    $U_{\mathrm{L-L}}$ corresponds to the effective value of the line-to-line voltage and $I_{\mathrm{L}}$ is the effective value
     of the line current and $\varphi$ is the phase angle between voltage and current. For this case $U_{\mathrm{L-L}}$ is calculated by
     \begin{equation}
         U_{\mathrm{L-L}}=\sqrt{3}\frac{\hat{u}_\mathrm{2a}^\mathrm{(1)}}{\sqrt{2}}
         = \sqrt{\frac{3}{2}} \frac{2U_\mathrm{1}}{\pi} = \sqrt{3}\sqrt{2}\frac{U_\mathrm{1}}{\pi}
-        = \sqrt{3}\sqrt{2} \cdot \frac{\SI{510}{\volt}}{\pi}=\SI{397.6}{\volt}
+        = \sqrt{3}\sqrt{2} \cdot \frac{\SI{510}{\volt}}{\pi}=\SI{397.6}{\volt}.
         \label{eq:Ex07T2_EffPowervoltage}
     \end{equation}
     The line current $I_{\mathrm{L}}$ is obtained by
     \begin{equation}
         I_{\mathrm{L}}=\frac{\hat{i}_\mathrm{2a}^\mathrm{(1)}}{\sqrt{2}}
-        = \frac{\SI{12.37}{\ampere}}{\sqrt{2}}=\SI{8.75}{\ampere}
+        = \frac{\SI{12.37}{\ampere}}{\sqrt{2}}=\SI{8.75}{\ampere}.
         \label{eq:Ex07T2_EffPowercurrent}
     \end{equation}    
     The angle $\varphi$ results in
     \begin{equation}
         \begin{split}        
             &\varphi=\SI{30}{\degree}+ \gamma= \SI{30}{\degree}+\SI{3.9}{\degree}= \SI{33.9}{\degree} \\
-            &\cos(\varphi)=\cos(\SI{33.9}{\degree})=0.83
+            &\cos(\varphi)=\cos(\SI{33.9}{\degree})=0.83.
         \end{split}          
         \label{eq:Ex07T2_EffPowerangle}
     \end{equation}
@@ -366,6 +370,6 @@ From this, determine the total active power fed to the load.}
     in \eqref{eq:Ex07T2_EffPowergen} leads to
     \begin{equation}
         P=\sqrt{3} U_{\mathrm{L-L}} I_{\mathrm{L}} \cos(\varphi)
-        = \sqrt{3} \SI{397.6}{\volt} \cdot \SI{8.75}{\ampere} \cdot 0.83= \SI{5}{\kilo\watt}
+        = \sqrt{3} \SI{397.6}{\volt} \cdot \SI{8.75}{\ampere} \cdot 0.83= \SI{5}{\kilo\watt}.
     \end{equation}
 \end{solutionblock}
