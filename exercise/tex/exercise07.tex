@@ -87,7 +87,7 @@ as well as $i^\mathrm{(1)}_\mathrm{2}(t)$ in Fig. \ref{sfig:ex07_sub1.2_fund_com
     where 
     \begin{equation}
         \hat{u}^\mathrm{(1)}_\mathrm{2} =  \hat{u}_{2\mathrm{i}} = m U_1 = \SI{150}{\volt}. 
-        \label{7.1.2:eq:i_u_2_fund}          
+        \label{7.1.2:eq:u_2_fund_ui}          
     \end{equation}
     Consequently, the expressions for $u^\mathrm{(1)}_\mathrm{2}(t)$ and $i^\mathrm{(1)}_\mathrm{2}(t)$ are
     \begin{equation}
@@ -136,12 +136,12 @@ Hint:  The current harmonics $i^{(k)}_\mathrm{2}(t)$ are free of any bias.}
         For example, the change in the current staring from \textbf{x} until the time of the first switching $t_1$ from $U_1$ to $-U_1$ can be calculated as:
         \begin{equation}
             \Delta i^{(k)}_\mathrm{2} = \frac{1}{\SI{4.8}{\milli \henry}} \cdot 14 \cdot \SI{25.9}{\milli \volt \second} \approx \SI{75.5}{\ampere},
-            \label{7.1.2:eq:approx_i_2_harm}         
+            \label{7.1.2:eq:approx_i_2_harm_example}         
         \end{equation}
         where $14$ is, approximately, the number of squares below $u^{(k)}_\mathrm{2}(t)$ in this time interval. So, the current at the first switching time $t_1$ is:
         \begin{equation}
             i^{(k)}_\mathrm{2}(t_1) = i^{(k)}_\mathrm{2}(t_0) + \Delta i^{(k)}_\mathrm{2} = -44.4 + 75.5 \approx \SI{31}{\ampere}.
-            \label{7.1.2:eq:approx_i_2_harm}         
+            \label{7.1.2:eq:approx_i_2_harm_t1}         
         \end{equation}
 \end{solutionblock}
 \input{fig/ex07/Fig_subtask1.3.tex}
@@ -154,7 +154,7 @@ The fundamental component $i^\mathrm{(1)}_\mathrm{2}(t)$ and the harmonics $i^{(
 the output current $i_\mathrm{2}(t)$ of the converter can be calculated using 
 \begin{equation}
     i_\mathrm{2}(t) = i^\mathrm{(1)}_\mathrm{2}(t) + i^{(k)}_\mathrm{2}(t).
-    \label{7.1.2:eq:approx_i_2_harm}         
+    \label{7.1.2:eq:approx_i_2}         
 \end{equation}
 \end{solutionblock} 
 \input{fig/ex07/Fig_subtask1.4.tex}
@@ -165,7 +165,7 @@ the output current $i_\mathrm{2}(t)$ of the converter can be calculated using
     The input current $i_\mathrm{1}(t)$ can be calculated from $i_\mathrm{2}(t)$ using 
     \begin{equation}
         i_\mathrm{1}(t) = s(t) i_\mathrm{2}(t),
-        \label{7.1.2:eq:approx_i_2_harm}         
+        \label{7.1.2:eq:input_current_i_1}         
     \end{equation}
     where $s(t)$ is the switching function.
     \end{solutionblock}
