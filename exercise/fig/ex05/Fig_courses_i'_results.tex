@@ -2,7 +2,7 @@
     \centering
     \begin{tikzpicture}
         \pgfplotsset{table/search path={fig/ex05}}
-        \begin{groupplot}[group style={group size=1 by 3, vertical sep=1.5cm},  
+        \begin{groupplot}[group style={group size=1 by 3, vertical sep=2cm},  
             height=0.375\textheight, width=0.875\textwidth, xmin=0, xmax=pi, 
             grid, clip = false, ymin = -0.1, ymax = 1.1, 
             xtick = {0, pi/4, pi/2, 3*pi/4, pi}, 
@@ -26,14 +26,33 @@
   \node at (0,0.73) [left] {$20$}; 
   \node at (0,0.92) [left] {$25$}; 
   \node at (0,1.1) [left] {$30$};  
-  \nextgroupplot[ylabel = {$s(t)$}] 
+  \nextgroupplot[ylabel = {$s(t)$}, xlabel={$t/\text{ms}$}]
   \addplot[signalblue, thick] table[x=wt, y=s, col sep=comma] {PWM_PFC_example.csv}; 
-  \nextgroupplot[ylabel = {$d(t), c(t)$}, legend pos=south east, legend columns=2]
-             \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_PFC_example.csv}; 
-            \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_PFC_example.csv}; 
-            \legend{$d(t)$, $c(t)$}          
+       
 \end{groupplot}
 \end{tikzpicture}
-    \caption{Current $i'$ and control signal for transistor $T$.}
-    \label{fig:Current i' control signal ex05 result}
+    \caption{Complete representation of the mains current $i'$ and control signal for transistor $T$.}
+    \label{fig:Complete Current i' control signal ex05 result}
+
+
+
+\end{solutionfigure}
+\begin{solutionfigure}
+    \begin{tikzpicture}
+        \pgfplotsset{table/search path={fig/ex05}}
+        \begin{groupplot}[group style={group size=1 by 3, vertical sep=2cm},  
+            height=0.375\textheight, width=0.875\textwidth, xmin=0, xmax=pi, 
+            grid, clip = false, ymin = -0.1, ymax = 1.1, 
+            xtick = {0, pi/4, pi/2, 3*pi/4, pi}, 
+            xticklabels = {0,$2.5$, $5$,$7.5$, $10$}, 
+            ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
+  % bottom plot: current response 
+  \nextgroupplot[ylabel = {$d(t), c(t)$},xlabel={$t/\text{ms}$}, legend pos=south east, legend columns=2]
+  \addplot[signalred, thick] table[x=wt, y=d, col sep=comma] {PWM_PFC_example.csv}; 
+ \addplot[signalblue, thick] table[x=wt, y=c, col sep=comma] {PWM_PFC_example.csv}; 
+ \legend{$d(t)$, $c(t)$}      
+\end{groupplot}
+\end{tikzpicture}
+    \caption{Reference signal $c(t)$ and duty cycle signal d(t).}
+    \label{fig:Reference signal $c(t)$ and duty cycle signal d(t)}
 \end{solutionfigure}
