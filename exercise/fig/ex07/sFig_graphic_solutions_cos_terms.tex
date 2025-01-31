@@ -102,7 +102,10 @@
         \draw[->] (0,-2) -- (0,2) node[above] {}; 
         % \node at (-1.5,1.5) {$\cos\left(k \frac{\pi}{3}\right)+1$};
         \node at (-1.7,1.8) {$\cos\left(k \frac{\pi}{3}\right)+1$};
-        
+        % Bemerkung
+        \node at (-1.5, -0.6) {Values of};
+        \node at (-1.5, -1.0) {$k=$ even};
+        \node at (-1.5, -1.4) {are omitted.};
     
         % Beschriftungen an der x-Achse
         \node at (-0.00009,-0.2) [left] {0};
@@ -113,7 +116,8 @@
         % Beschriftungen an spezifischen Punkten
         \node at (2,1.1) [above] {$k=1,7,13,19,\ldots$}; 
         \node at (2,-1.1) [below] {$k=5,11,17,23,\ldots$}; 
-    
+        
+        
         % Kreuz bei jedem markierten Punkt
         \foreach \x/\y in {0/0, 1.5/1, 1.5/-1} {
             \draw[thick]
@@ -126,5 +130,5 @@
             (0,0) -- (1.5,1) -- (1.5,-1) -- cycle;
     \end{tikzpicture}
     \caption{Graphical solution of the cos terms within complex plane.}
-    \label{fig:GraphicalSolutionOfInComplexPlane}
+    \label{sfig:GraphicalSolutionOfInComplexPlane}
 \end{solutionfigure}
