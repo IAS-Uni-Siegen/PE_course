@@ -90,61 +90,9 @@
             (4,  1)
             (6.2,1)
         };  
-     
-        \nextgroupplot[
-          ymin=-1.2, ymax=1.2,
-          samples=500,
-          ytick distance=2,
-          x label style={at={(axis description cs:1,0)},anchor=north},
-          y label style={at={(axis description cs:0,.97)},anchor=south},
-          height=0.2\textwidth,
-          xlabel={$\omega t$},             
-          ylabel={$u_\mathrm{2ab}(\omega t)/ \SI{}{\volt}$},             
-          ytick={-1, 0,1},
-          yticklabels={$-510$,, $510$},
-        ]
-        \addplot[color=blue,mark=none,solid] 
-          coordinates{
-            (0, 1)
-            (2, 1)
-            (2, 0)
-            (3, 0)
-            (3, -1)
-            (5, -1)
-            (5, 0)
-            (6, 0)
-            (6, 1)
-            (6.2,1)
-        };          
-
-        \nextgroupplot[
-          ymin=-1.2, ymax=1.2,
-          samples=500,
-          ytick distance=2,
-          x label style={at={(axis description cs:1,0)},anchor=north},
-          y label style={at={(axis description cs:0,.97)},anchor=south},
-          height=0.2\textwidth,
-          xlabel={$\omega t$},             
-          ylabel={$u_\mathrm{2bc}(\omega t)/ \SI{}{\volt}$},             
-          ytick={-1, 0,1},
-          yticklabels={$-510$,,$510$},
-        ]
-        \addplot[color=blue,mark=none,solid] 
-          coordinates{
-            (0, -1)
-            (1, -1)
-            (1, 0)
-            (2, 0)
-            (2, 1)
-            (4, 1)
-            (4, 0)
-            (5, 0)
-            (5, -1)
-            (6.2,-1)
-        };          
+    
       \end{groupplot}
     \end{tikzpicture}
-    \caption{Voltage signals of $u_\mathrm{2a0}(\mathrm{\omega t})$, $u_\mathrm{2b0}(\mathrm{\omega t})$, $u_\mathrm{2c0}(\mathrm{\omega t})$
-    ,$u_\mathrm{2ab}(\mathrm{\omega t})$ and $u_\mathrm{2bc}(\mathrm{\omega t})$.}
-    \label{fig:voltage_u2a0_u2b0_u2c0_uab_ubc}
+    \caption{Voltage signals of $u_\mathrm{2a0}(\mathrm{\omega t})$, $u_\mathrm{2b0}(\mathrm{\omega t})$ and $u_\mathrm{2c0}(\mathrm{\omega t})$.}
+    \label{sfig:voltage_u2a0_u2b0_u2c0}
 \end{solutionfigure}
