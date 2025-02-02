@@ -124,7 +124,7 @@ into account the previously calculated angles $\alpha$ and $\beta$.}
 \begin{solutionblock}
     Two cases are to consider for the currents of $i_\mathrm{1}(\omega t)$ and  $i_\mathrm{C}(\omega t)$. If $\alpha<\omega t<\alpha+\beta$
     and $\pi+\alpha<\omega t<\pi+\alpha+\beta$, the capacitor supplies the load current $I_{\mathrm{0}}$.
-    The remaining phase angle range the input voltage supplies the load current $I_{\mathrm{0}}$ and charge the capacitor.
+    During the remaining phase angle range, the input voltage supplies the load current $I_{\mathrm{0}}$ and charge the capacitor.
     For $\alpha<\omega t<(\alpha+\beta)$ and $(\pi+\alpha)<\omega t<(\pi+\alpha+\beta)$ the current $i_\mathrm{C}(\omega t)$ 
     corresponds to the current $-I_{\mathrm{0}}$ while the diode bridge blocks:
     \begin{equation} 
@@ -187,7 +187,7 @@ absorbed by the current source? What will $P_\mathrm{0}$ be if $C=\SI{330}{\micr
         \end{aligned}
     \end{equation}
     For the phase angle range $\alpha<\omega t<(\alpha+\beta)$ the voltage $u_\mathrm{2}(\omega t)$ is linear and the current is independent of the voltage.
-    This means that the power is a linear function of the voltage. The average power is obtained by the load current multiplied
+    This means that the power is a linear function of the voltage. Using $\left|\sin(\alpha+\beta)\right|=\sin(\beta')$ the average power is obtained by the load current multiplied
     with the average voltage:
     \begin{equation} 
         P_\mathrm{0,2}=I_{\mathrm{0}} \cdot \hat{u}_\mathrm{1}\frac{\sin(\alpha) + \sin(\beta')}{2}=
@@ -315,7 +315,7 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
     \end{equation}
 \end{solutionblock}
 
-\subtask{Complete the current curve for a switching frequency $f_\mathrm{s2} = \SI{2}{\kilo\hertz}$ and a inductance $L = \SI{5}{\milli\henry}$ in \autoref{fig:Current i' control signal ex05}. Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T$ and are summarized for the first 4 switching times in \autoref{tab:switching_times}.}
+\subtask{Complete the current curve for a switching frequency $f_\mathrm{s2} = \SI{2}{\kilo\hertz}$ and a inductance $L = \SI{5}{\milli\henry}$ in \autoref{fig:Current i_1 and control signal ex05}. Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T$ and are summarized for the first 4 switching times in \autoref{tab:switching_times}.}
 
 \begin{table}[ht]
     \centering
@@ -342,46 +342,47 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
     \begin{equation}
         i'(t)=\frac{\hat u_\mathrm{1} \cos(\omega t)}{\omega L}.\label{eq:ex054currenti'1}
     \end{equation}
-    The first interval is from $0 < t < T_\mathrm{1,off} = \SI{480}{\micro\s}$ for conducting transistor $T$. Inserting into \eqref{eq:ex054currenti'1} used with the upper and lower limit leads to:
+    The first interval is from $0 < t < T_\mathrm{1,off} = \SI{490}{\micro\s}$ for conducting transistor $T$. Inserting into \eqref{eq:ex054currenti'1} used with the upper and lower limit leads to:
     \begin{equation}
-        i'(T_\mathrm{1,off}) = \frac{\hat u_\mathrm{1}}{L \omega}(1- \cos(\omega T_\mathrm{1,off})) = \frac{\sqrt{2}\cdot\SI{230}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (1-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{480}{\micro\s})) = \SI{2.35}{\ampere}.
+        i'(T_\mathrm{1,off}) = \frac{\hat u_\mathrm{1}}{L \omega}(1- \cos(\omega T_\mathrm{1,off})) = \frac{\sqrt{2}\cdot\SI{230}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (1-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{490}{\micro\s})) = \SI{2.45}{\ampere}.
     \end{equation}
-    For the interval $T_\mathrm{1,off} < t < T_\mathrm{1,on} = \SI{500}{\micro\s}$ in which the diode $D_\mathrm{5}$ conducts, the voltage $U_\mathrm{L,1}$ is first determined as:
+    For the interval $T_\mathrm{1,off} < t < T_\mathrm{1,on} = \SI{506}{\micro\s}$ in which the diode $D_\mathrm{5}$ conducts, the voltage $U_\mathrm{L,1}$ is first determined as:
     \begin{equation}
-        U_\mathrm{L,1} = u_\mathrm{1}(t) - U_\mathrm{2}= \hat u_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{20}{\micro\s}) - \SI{400}{\volt} = -\SI{350}{\volt}.
+        U_\mathrm{L,1} = u_\mathrm{1}(t) - U_\mathrm{2}= \hat u_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{490}{\micro\s}) - \SI{400}{\volt} = -\SI{350}{\volt}.
     \end{equation}
     This voltage value  $U_\mathrm{L,1}$ is used to calculate the current  $i'(T_\mathrm{1,on})$ as:
     \begin{equation}
-        i'(T_\mathrm{1,on}) = i'(T_\mathrm{1,off}) -\frac{ U_\mathrm{L,1}}{L}(T_\mathrm{1,on}-T_\mathrm{1,off}) = \SI{2.35}{\ampere} -\frac{\SI{350}{\volt}}{\SI{5}{\milli\henry}}\cdot (\SI{500}{\micro\s}-\SI{480}{\micro\s}) = \SI{0.95}{\ampere}.
+        i'(T_\mathrm{1,on}) = i'(T_\mathrm{1,off}) -\frac{ U_\mathrm{L,1}}{L}(T_\mathrm{1,on}-T_\mathrm{1,off}) = \SI{2.45}{\ampere} -\frac{\SI{350}{\volt}}{\SI{5}{\milli\henry}}\cdot (\SI{506}{\micro\s}-\SI{490}{\micro\s}) = \SI{1.33}{\ampere}.
     \end{equation}
-     The second interval  $T_\mathrm{1,on} < t < T_\mathrm{2,off}  = \SI{935}{\micro\s}$ in which the transistor $T$ conducts, have to be inserted  into \eqref{eq:ex054currenti'1} with the upper and lower limit. This leads to:
+     The second interval  $T_\mathrm{1,on} < t < T_\mathrm{2,off}  = \SI{960}{\micro\s}$ in which the transistor $T$ conducts, have to be inserted  into \eqref{eq:ex054currenti'1} with the upper and lower limit. This leads to:
      \begin{equation}
         i'(T_\mathrm{2,off}) = \frac{\hat u_\mathrm{1}}{L \omega}(\cos (\omega T_\mathrm{1,on})- \cos(\omega T_\mathrm{2,off}))+ i'(T_\mathrm{1,on}).
     \end{equation}
     With values:
     \begin{equation}
-        i'(T_\mathrm{2,off}) = \frac{\sqrt{2}\cdot\SI{230}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (\cos(2\pi \cdot \SI{50}{\hertz}\cdot \SI{500}{\micro\s})-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{935}{\micro\s})) + \SI{0.95}{\ampere}= \SI{7.27}{\ampere}.
+        i'(T_\mathrm{2,off}) = \frac{\sqrt{2}\cdot\SI{230}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (\cos(2\pi \cdot \SI{50}{\hertz}\cdot \SI{506}{\micro\s})-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{960}{\micro\s})) + \SI{1.33}{\ampere}= \SI{8.07}{\ampere}.
      \end{equation}
 
-     For the second interval $T_\mathrm{2,off} < t < T_\mathrm{2,on} = \SI{1008}{\micro\s}$ in which the diode $D_\mathrm{5}$ conducts, the voltage $U_\mathrm{L.2}$ is first determined as:
+     For the second interval $T_\mathrm{2,off} < t < T_\mathrm{2,on} = \SI{1040}{\micro\s}$ in which the diode $D_\mathrm{5}$ conducts, the voltage $U_\mathrm{L.2}$ is first determined as:
      \begin{equation}
-        U_\mathrm{L,2} = u_\mathrm{1}(t) - U_\mathrm{2}= \hat u_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{73}{\micro\s}) - \SI{400}{\volt} = \SI{306}{\volt}.
+        U_\mathrm{L,2} = u_\mathrm{1}(t) - U_\mathrm{2}= \hat u_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{960}{\micro\s}) - \SI{400}{\volt} = -\SI{303}{\volt}.
     \end{equation}
     This voltage value  $U_\mathrm{L,2}$ is used to calculate the current  $i'(T_\mathrm{2,on})$ as:
     \begin{equation}
-        i'(T_\mathrm{2,on}) = i'(T_\mathrm{2,off}) -\frac{ U_\mathrm{L,2}}{L}(T_\mathrm{2,on}-T_\mathrm{2,off}) = \SI{7.27}{\ampere} -\frac{\SI{306}{\volt}}{\SI{5}{\milli\henry}}\cdot (\SI{1008}{\micro\s}-\SI{935}{\micro\s}) = \SI{2.8}{\ampere}.
+        i'(T_\mathrm{2,on}) = i'(T_\mathrm{2,off}) -\frac{ U_\mathrm{L,2}}{L}(T_\mathrm{2,on}-T_\mathrm{2,off}) = \SI{8.07}{\ampere} -\frac{\SI{306}{\volt}}{\SI{5}{\milli\henry}}\cdot (\SI{1040}{\micro\s}-\SI{960}{\micro\s}) = \SI{3.32}{\ampere}.
     \end{equation}
     The values determined in this task for mains current
-    $i'(t)$ must be entered in \autoref{fig:Current i' control signal ex05}, just like the envelope. This results in the following diagram:
+    $i'(t)$ must be entered in \autoref{fig:Current i_1 and control signal ex05}. This results in \autoref{fig:Complete Current i' control signal ex05 result}. Figure \autoref{fig:Reference signal $c(t)$ and duty cycle signal d(t)} shows that with this type of PWM current open-loop control, an unphysical duty cycle signal of $>1$ is described at the beginning. This results in a open-loop control deviation that can no longer be compensated for during the control process. An alternative to prevent this deviation would be to implement a feedback control system. This would keep the system continuously within the permissible range $(0,1)$ of the duty cycle. One type of feedback control for this problem would be a voltage time surface control. 
 \end{solutionblock}
 
 \input{fig/ex05/Fig_courses_i'_results}
 
 
 
-\subtask{Approximately sketch the envelope of the current ripple in \autoref{fig:Current i' control signal ex05}. Sketch the voltage across the inductor in \autoref{fig:Voltage curve ul signal Transistor ex05} and enter the average value of the voltage as an approximation. How would the switch-on/switch-off ratio of the transistor have to be changed before and after the current peak in order to bring the average actual current value closer to the current setpoint?}
+\subtask{Approximately sketch the envelope of the current ripple in \autoref{fig:Current i_1 and control signal ex05}. Sketch the voltage across the inductor in \autoref{fig:Voltage curve ul signal Transistor ex05} and enter the average value of the voltage as an approximation. How would the switch-on/switch-off ratio of the transistor have to be changed before and after the current peak in order to bring the average actual current value closer to the current setpoint?}
 \begin{solutionblock}
-    The envelope of the current ripple is scetched in \autoref{fig:Current i' control signal ex05 result}. Moreover the voltage across the inductor is scetched in \autoref{fig:Voltage curve ul signal Transistor ex05 res}. The average value of the voltage at the inductor is zero. Before the current peak in \autoref{fig:Current i' control signal ex05 result}, the transistor should be switched on for longer and then the switch-on phase should be reduced. This allows the current to be controlled better.
+    The envelope of the current ripple is sketched in \autoref{fig:Complete Current i' control signal ex05 result}. In addition, the voltage at the inductor is sketched in \autoref{fig:Voltage curve ul signal Transistor ex05 res}. The mean value of the voltage across the inductance is zero. 
+    To bring the average actual setpoint value closer to the setpoint current value, the transistor must be switched on for longer before the current maximum in \autoref{fig:Complete Current i' control signal ex05 result} and the switch-on phase must be shortened after the current maximum. By adjusting the switching ratio in this way, the current can be better regulated.
     \input{fig/ex05/Fig_VoltageCourses_UL_res.tex}
 \end{solutionblock}
 \subtask{Dimension the output capacitance $C$ in a way that the amplitude of the output voltage ripple is $\Delta u_{\mathrm{2}}<0.05  \hat u_{\mathrm{2}}$.
@@ -472,4 +473,4 @@ Finally, \eqref{eq:ex056RMSIc} must be converted to $I^2_\mathrm{C}(t)$:
         I_{\mathrm{D,1-4}} = \sqrt{\frac{\hat{i}^2_{\mathrm{1}}}{2\pi}\frac{\pi}{2}} = \frac{\hat{i}^2_{\mathrm{1}}}{2}.
     \end{equation}
  \end{solutionblock}
-\input{fig/ex05/Fig_TEST.tex}
+

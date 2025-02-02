@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Fundamental Current i^1_1 and fundamental volage u^1_2 for single-phase DC inverter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}[h]
+\begin{figure}[h!]
 
     %   \documentclass{standalone}
     %   \usepackage{pgfplots}
@@ -22,7 +22,7 @@
             xlabel={$\omega t / \text{rad}$},
             ylabel={$u/\mathrm{V}$},
             % Label adjustment
-            x label style={at={(axis description cs:1,0.5)},anchor=west},
+            x label style={at={(axis description cs:1.05,0.5)},anchor=west},
             y label style={at={(axis description cs:0,.97)},anchor=south,yshift=0.2cm},
             width=0.6\textwidth,
             height=0.3\textwidth,
@@ -39,10 +39,16 @@
             %grid style={line width=.1pt, draw=gray!10},
             %major grid style={line width=.2pt,draw=gray!90},
         ] 
-        % internal load voltage u
+        % internal load voltage u_2i
         \addplot[blue, domain= 0:360, solid] {150*sin(x-(180/6))};
-         % Label of u
-         \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,160) {$u_{2\mathrm{i}}(t)$};
+        % Label of u_2i
+        \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,160) {$u_{2\mathrm{i}}(t)$};
+        \begin{solutionblock}
+        % fundamental voltage u^(1)_2
+        \addplot[red, domain= 0:360, solid] {150*sin(x)};
+         % Label of u^(1)_2
+         \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:70,155) {$u^\mathrm{(1)}_\mathrm{2}(t)$};
+        \end{solutionblock}
            \end{axis}
            \begin{axis}[
             % x/y range adjustment
@@ -63,12 +69,18 @@
             % y-Ticks
             ytick={-100,-50,0,50,100},
             yticklabels={-100,-50,0,50,100},
-            yticklabel style = {anchor=east},
+            yticklabel style = {anchor=west},
             % Grid layout
             grid,
             %grid style={line width=.1pt, draw=gray!10},
             %major grid style={line width=.2pt,draw=gray!90},
         ]
+        \begin{solutionblock}
+              % fundamental current i^(1)_2
+              \addplot[green, domain= 0:360, solid] {51.5*sin(x-14.9)};
+                % Label of i^(1)_2
+                \node[green, fill=white, inner sep = 1pt, anchor = south] at (axis cs:100,25) {$i^\mathrm{(1)}_\mathrm{2}(t)$};
+            \end{solutionblock}
            \end{axis}             
            \end{tikzpicture}
            \caption{Internal load voltage $u_{2\mathrm{i}}(t)$, fundamental voltage and current components $u^\mathrm{(1)}_\mathrm{2}(t)$
