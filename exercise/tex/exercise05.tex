@@ -7,7 +7,7 @@
 %% Task 1: B2U topology with capacitive filtering %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\task{B2U topology with capactive filtering}
+\task{B2U topology with capacitive filtering}
 An uncontrolled single-phase, two-pulse rectifier circuit with capacitive filtering 
 is shown in \autoref{fig:B2U_Topology_Cap_Filtering}.
 All components, including the diodes, are assumed to be ideal. On the input side, 
@@ -120,7 +120,7 @@ into account the previously calculated angles $\alpha$ and $\beta$.}
     \input{fig/ex05/sFig_VoltageU2AndCurrenti1_ic}  
 \end{solutionblock}
 
-\subtask{Calculate the currents $i_\mathrm{1}(\omega t)$  and $i_\mathrm{C}(\omega t)$ and and add them to the previous plot.}
+\subtask{Calculate the currents $i_\mathrm{1}(\omega t)$  and $i_\mathrm{C}(\omega t)$ and add them to the previous plot.}
 \begin{solutionblock}
     Two cases are to consider for the currents of $i_\mathrm{1}(\omega t)$ and  $i_\mathrm{C}(\omega t)$. If $\alpha<\omega t<\alpha+\beta$
     and $\pi+\alpha<\omega t<\pi+\alpha+\beta$, the capacitor supplies the load current $I_{\mathrm{0}}$.
@@ -315,7 +315,7 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
     \end{equation}
 \end{solutionblock}
 
-\subtask{Complete the current curve for a switching frequency $f_\mathrm{s2} = \SI{2}{\kilo\hertz}$ and a inductance $L = \SI{5}{\milli\henry}$ in \autoref{fig:Current i_1 and control signal ex05}. Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T$ and are summarized for the first 4 switching times in \autoref{tab:switching_times}.}
+\subtask{Complete the current curve for a switching frequency $f_\mathrm{s2} = \SI{2}{\kilo\hertz}$ and an inductance $L = \SI{5}{\milli\henry}$ in \autoref{fig:Current i_1 and control signal ex05}. Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T$ and are summarized for the first 4 switching times in \autoref{tab:switching_times}.}
 
 \begin{table}[ht]
     \centering
@@ -372,7 +372,7 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
         i'(T_\mathrm{2,on}) = i'(T_\mathrm{2,off}) -\frac{ U_\mathrm{L,2}}{L}(T_\mathrm{2,on}-T_\mathrm{2,off}) = \SI{8.07}{\ampere} -\frac{\SI{306}{\volt}}{\SI{5}{\milli\henry}}\cdot (\SI{1040}{\micro\s}-\SI{960}{\micro\s}) = \SI{3.32}{\ampere}.
     \end{equation}
     The values determined in this task for mains current
-    $i'(t)$ must be entered in \autoref{fig:Current i_1 and control signal ex05}. This results in \autoref{fig:Complete Current i' control signal ex05 result}. Figure \autoref{fig:Reference signal $c(t)$ and duty cycle signal d(t)} shows that with this type of PWM current open-loop control, an unphysical duty cycle signal of $>1$ is described at the beginning. This results in a open-loop control deviation that can no longer be compensated for during the control process. An alternative to prevent this deviation would be to implement a feedback control system. This would keep the system continuously within the permissible range $(0,1)$ of the duty cycle. One type of feedback control for this problem would be a voltage time surface control. 
+    $i'(t)$ must be entered in \autoref{fig:Current i_1 and control signal ex05}. This results in \autoref{fig:Complete Current i' control signal ex05 result}. Figure \autoref{fig:Reference signal $c(t)$ and duty cycle signal d(t)} shows that with this type of PWM current open-loop control, a nonphysical duty cycle signal of $>1$ is described at the beginning. This results in an open-loop control deviation that can no longer be compensated for during the control process. An alternative to prevent this deviation would be to implement a feedback control system. This would keep the system continuously within the permissible range $(0,1)$ of the duty cycle. One type of feedback control for this problem would be a voltage time surface control. 
 \end{solutionblock}
 
 \input{fig/ex05/Fig_courses_i'_results}
@@ -409,7 +409,7 @@ Note: assume an idealized lossless converter, with the assumption $u_2(t)\approx
     \begin{equation}
         i_\mathrm{C}(t)=C \frac{\mathrm{d}u_\mathrm{c}}{\mathrm{d}t} = \frac{\Delta p_\mathrm{2}}{U_\mathrm{2}} = \frac{P_\mathrm{2}\cos(2\omega t)}{U_\mathrm{2}}.\label{eq:ex056currentic}
     \end{equation}
-    The following follows from \eqref{eq:ex056currentic} for $U_\mathrm{C}$:
+    This follows from \eqref{eq:ex056currentic} for $U_\mathrm{C}$:
     \begin{equation}
         \frac{\mathrm{d}u_\mathrm{C}}{\mathrm{d}t} = \frac{P_\mathrm{2}\cos (2\omega t)}{C U_\mathrm{2}},
     \end{equation}
@@ -421,7 +421,7 @@ Note: assume an idealized lossless converter, with the assumption $u_2(t)\approx
     \begin{equation}
        \Delta u_\mathrm{2}= \hat u_\mathrm{C} = \frac{P_\mathrm{2}}{2\omega C U_\mathrm{2}}.
     \end{equation}
-    And now the capacitance can be calculate with $\Delta u_{\mathrm{2}}<0.05  \hat u_{\mathrm{2}}$ as:
+    Next, the capacitance can be calculated with $\Delta u_{\mathrm{2}}<0.05  \hat u_{\mathrm{2}}$ as:
     \begin{equation}
         C = \frac{P_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}  \Delta u_\mathrm{2} }= \frac{U_\mathrm{2}I_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}\  0.05 U_\mathrm{2}} = \frac{\SI{400}{\volt}\cdot \SI{10}{\ampere}}{4 \pi \cdot\SI{50}{\hertz}\cdot\SI{400}{\volt}\cdot 0.05 \cdot \SI{400}{\volt}} = \SI{796}{\micro\farad}.  
     \end{equation}
