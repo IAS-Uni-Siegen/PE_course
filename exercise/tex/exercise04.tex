@@ -65,17 +65,17 @@ Inserting in \eqref{eq:Duty cycle ex04} and solving for D with $\overline{i}_2 =
 
 \end{solutionblock}
 
-\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Calculate and sketch the following voltage and current curves for this operating points over two cycle periods: $u_\mathrm{T}(t), u_\mathrm{s}(t), i_\mathrm{2}(t), i_\mathrm{1}(t)$. Here, $u_\mathrm{T}(t)$ is the transistor voltage and $u_\mathrm{s}(t)$ is the voltage on the secondary side of the transformer.}
+\subtask{The input voltage is  $U_\mathrm{1}=\SI{382}{\volt}$ at nominal load. Calculate and sketch the following voltage and current curves for this operating point over two cycle periods: $u_\mathrm{T}(t), u_\mathrm{s}(t), i_\mathrm{2}(t), i_\mathrm{1}(t)$. Here, $u_\mathrm{T}(t)$ is the transistor voltage and $u_\mathrm{s}(t)$ is the voltage on the secondary side of the transformer.}
 
 \begin{solutionblock}
-    Because of a different input voltage, the duty cycle $D$ has changed:
+    Because of the different input voltage, the duty cycle $D$ has changed:
     \begin{equation}
         \Delta i_\mathrm{m,max}= \frac{T_\mathrm{s} \cdot U_1}{L_\mathrm{m}} = \frac{\frac{1}{\SI{50}{\kilo\hertz}}\cdot \SI{382}{\volt}}{\SI{760}{\micro\henry}}=\SI{10.05}{\ampere}.
     \end{equation}
     \begin{equation}
         D = \sqrt{\frac{2U_2\overline{i}_2}{U_1\Delta i_\mathrm{m,max}}} = \sqrt{\frac{2\cdot \SI{15}{\volt}\cdot\SI{30}{\watt}}{\SI{382}{\volt}\cdot\SI{15}{\volt}\cdot\SI{10.05}{\ampere}}} = 0.125.
     \end{equation}
-    Trough this result $T_\mathrm{on}$ can be calculated as:
+    Based on this result, $T_\mathrm{on}$ can be calculated as:
     \begin{equation}
         T_\mathrm{on} = D T_\mathrm{s} = 0.125 \cdot \frac{1}{\SI{50}{\kilo\hertz}} = \SI {2.5}{\micro\s}.
     \end{equation}
@@ -104,7 +104,7 @@ Inserting in \eqref{eq:Duty cycle ex04} and solving for D with $\overline{i}_2 =
         u_\mathrm{T} = \SI{382}{\volt} + \frac{60}{12}\cdot\SI{15}{\volt} = \SI{457}{\volt}.
     \end{equation}
     Because of the conducting diode, for the voltage $U_\mathrm{2}$ is following $U_\mathrm{2} = u_\mathrm{s} = \SI{15}{\volt}$.
-    The third interval is $T_\mathrm{on}+T'_\mathrm{off}$ < t < $T_\mathrm{s}$. In this interval the diode is not conducting and the transistor blocks. From this follows $u_\mathrm{T} = U_1$ and $u_\mathrm{s}=0$.
+    The third interval is $T_\mathrm{on}+T'_\mathrm{off} < t < T_\mathrm{s}$. In this interval the diode is not conducting and the transistor blocks. From this follows $u_\mathrm{T} = U_1$ and $u_\mathrm{s}=0$.
     Looking at the current $i_\mathrm{1}(t)$ over the entire course, the current can only be present when the transistor is switched on. When the transistor is switched on, the current value rises to the peak value $\hat i_\mathrm{1}= \SI{1.257}{\ampere}$. Current $i_\mathrm{2}(t)$ is the discharge current of the secondary winding when the diode is conducting and the transistor blocks. The discharge current starts at the peak value of the secondary side $\hat i_\mathrm{2}= \SI{6.28}{\ampere}$.
     \input{./fig/ex04/Fig_voltageTransistorUsPeriodTask1.tex}
     \input{./fig/ex04/Fig_currentI1I2PeriodTask1.tex}
@@ -205,9 +205,9 @@ The converter operates in steady-state conditions. Both transistors are controll
 
 \subtask{Calculate the peak value $\hat{i}_\mathrm{m}$ of the magnetizing current $i_\mathrm{m}$.}
 \begin{solutionblock}
-    The duty cycle is less than $0.5$, i.e. the magnetizing current $i_\mathrm{m}$ increase 
+    The duty cycle is less than $0.5$, i.e., the magnetizing current $i_\mathrm{m}$ increase 
     while the transistors are active and decrease to $\SI{0}{\ampere}$ before the next period starts.
-    This means that
+    This leads to 
     \begin{equation}
         \hat{i}_\mathrm{m}=\Delta i_\mathrm{m,max}= \frac{D \cdot U_\mathrm{1}}{L_\mathrm{m} \cdot f_\mathrm{s}} =
         \frac{0.4615 \cdot \SI{325}{\volt}}{\SI{2}{\milli\henry} \cdot \SI{50}{\kilo\hertz}} = \SI{1.5}{\ampere}.
@@ -399,7 +399,7 @@ The transformer's leakage inductance can be neglected.
         I_\mathrm{2}=P_\mathrm{2}/U_\mathrm{2}=\frac{\SI{125}{\watt}}{\SI{5}{\volt}}=\SI{25}{\ampere}
         \label{eq:ex04ouputcurrent}.
     \end{equation}
-    This is corresponds to the current at the primary side of
+    This corresponds to the current at the primary side of
     \begin{equation}
         I_\mathrm{2s}'=I_\mathrm{2}\frac{N_\mathrm{2}}{N_\mathrm{1}}.
     \end{equation}

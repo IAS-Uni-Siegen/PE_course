@@ -1197,6 +1197,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{Forward converter: demagnetization via negative input voltage}
+    \vspace{-0.25cm}
         \begin{figure}
             \begin{circuitikz}[]
                 %Asym. half-bridge
@@ -1216,7 +1217,7 @@
                 to [short, -o] (B)
                 (F) to [short,*-] ++(1,0) coordinate (I)
                 to [short] ++(1,0) coordinate (H)
-                (J) to [open,v^= $u_\mathrm{p}(t)\hspace{1.6cm}$, voltage = straight] (I);
+                (J) to [open,v_= $u_\mathrm{p}(t)\hspace{0.5cm}$, voltage = straight] (I);
                 \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
                 \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
 
@@ -1338,7 +1339,7 @@
                 to [short, -o] (B)
                 (F) to [short,*-] ++(1,0) coordinate (I)
                 to [short] ++(1,0) coordinate (H)
-                (J) to [open,v^= $u_\mathrm{p}(t)\hspace{1.6cm}$, voltage = straight] (I);
+                (J) to [open,v_= $u_\mathrm{p}(t)\hspace{0.5cm}$, voltage = straight] (I);
                 \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
                 \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
                 \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
