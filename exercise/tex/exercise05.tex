@@ -238,11 +238,11 @@ A variant of a PFC rectifier circuit is shown in \autoref{fig:Boost converter wi
 
 \subtask{Specify the voltage transformation ratio $m(t)= \frac{u_{\mathrm{2}}(t)}{u'(t)}$ as a function of the duty cycle $d(t)$.}
 \begin{solutionblock}
-    The equation for the average voltage $U_{\mathrm{L}}$ during a pulse period is given with:
+    The equation for the average voltage $U_{\mathrm{L}}$ during a pulse period is given by:
     \begin{equation}
         U_{\mathrm{L}} = (d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{2}})). 
     \end{equation}
-The average voltage over the inductance for a (quasi) steady-state operation is zero $U_{\mathrm{L}} = \SI{0}{\volt}$: 
+The average voltage over the inductance for a (quasi) steady-state operation is $U_{\mathrm{L}} = \SI{0}{\volt}$: 
     \begin{equation}
     0 = (d(t) u'(t) + (1-d(t))(u'(t)-U_{\mathrm{2}}))f_\mathrm{s}. \label{eq:ex05ratio2.2}
     \end{equation}   
@@ -255,7 +255,7 @@ The average voltage over the inductance for a (quasi) steady-state operation is 
 
 \subtask{Specify the conduction time of the transistor and the diode as a function of the transformation ratio $M$ and the time $t$, with the assumption $u_2(t)\approx U_2$.} 
 \begin{solutionblock}
-    Using $M = \frac{U_{\mathrm{2}}}{\hat u_{\mathrm{1}}}$, the transformation ratio is given with:
+    Using $M = \frac{U_{\mathrm{2}}}{\hat u_{\mathrm{1}}}$, the transformation ratio is given by:
     \begin{equation}
         m(t) = \frac{U_{\mathrm{2}}}{ u_{\mathrm{1}}(t)}=\frac{U_{\mathrm{2}}}{\hat u_{\mathrm{1}} \sin(\omega t)} = M \frac{1}{\sin(\omega t)}.
     \end{equation}
@@ -263,7 +263,7 @@ The average voltage over the inductance for a (quasi) steady-state operation is 
 \begin{equation}
     d(t) = 1-\frac{1}{m(t)} = 1- \frac{u_{\mathrm{1}}(t)}{U_{\mathrm{2}}}=1- \frac{\hat u_{\mathrm{1}}\sin(\omega t)}{U_{\mathrm{2}}} = 1 -\frac{1}{M} \sin(\omega t).
 \end{equation}
-If the diode $D_{\mathrm{5}}$ is conducting, the duty cycle $1-d(t)$ is derived from \eqref{eq:ex05ratio_m(t)} as:
+If the diode $D_{\mathrm{5}}$ is conducting, the turn-off duty cycle $1-d(t)$ is derived from \eqref{eq:ex05ratio_m(t)} as:
 \begin{equation}
     1-d(t) = \frac{1}{m(t)}=\frac{1}{M} \sin(\omega t).
 \end{equation}
@@ -273,7 +273,7 @@ If the diode $D_{\mathrm{5}}$ is conducting, the duty cycle $1-d(t)$ is derived 
 Note: Consider the conductive state of $T$ and set the voltage across the inductance as a function of the phase angle $(\omega t)$ and the conduction time of the transistor according to the previous subtask.} 
 \input{fig/ex05/Fig_courses_i'}
 \begin{solutionblock}
-    To solve this task, the component equation of inductance is used:
+    To solve this task, the component equation of the inductor is used:
     \begin{equation}
         u_{\mathrm{L}}(t) = L \frac{\mathrm{d}i'(t)}{\mathrm{d}t}.
     \end{equation}
@@ -281,7 +281,7 @@ Note: Consider the conductive state of $T$ and set the voltage across the induct
     \begin{equation}
         \frac{\Delta i'(t)}{\Delta t} = \frac{U_{\mathrm{L}}}{L}.
     \end{equation}
-    When transistor $T$ is conducting it applies $U_{\mathrm{L}} = u_{\mathrm{1}}(t) = \hat u_{\mathrm{1}} \sin(\omega t)$.
+    When the transistor $T$ is conducting, $U_{\mathrm{L}} = u_{\mathrm{1}}(t) = \hat u_{\mathrm{1}} \sin(\omega t)$ follows.
     This means for $\Delta i'(t)$:
 \begin{equation}
     \Delta i'(t) = \frac{ U_{\mathrm{L}} \Delta t}{L} = \frac{\hat u_{\mathrm{1}} \sin(\omega t) d(t) T_{\mathrm{s}}}{L} = \Delta i'_{\mathrm{1}}(t).
@@ -302,14 +302,14 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
     \end{equation}
     The first derivation is as follows:
     \begin{equation}
-        \frac{-\omega \cos(\omega t)(2\sin(\omega t)-M)}{M^2}=0.\label{eq:ex05derivationi1'}
+        \frac{\mathrm{d}}{\mathrm{d}t}\left[\frac{1}{M}\sin(\omega t)\left(1-\frac{1}{M}\right)\sin(\omega t)\right] =\frac{-\omega \cos(\omega t)(2\sin(\omega t)-M)}{M^2}=0.\label{eq:ex05derivationi1'}
     \end{equation}
     If the term $\frac{M}{2}=\sin(\omega t)$ is applied to \eqref{eq:ex05derivationi1'} this becomes zero:
 
     \begin{equation}
         \frac{-\omega \cos(\omega t)(2 \frac{M}{2}-M)}{M^2}=0.
     \end{equation}
-    The ratio $\frac{M}{2}=\sin(\omega t)$ can now be used in \eqref{eq:ex05Deltai1'} to calculate the maximum $\Delta i'_{\mathrm{1}}(t)$ as follows:
+    The ratio $\frac{M}{2}=\sin(\omega t)$ can be used in \eqref{eq:ex05Deltai1'} to calculate the maximum $\Delta i'_{\mathrm{1}}(t)$ as follows:
     \begin{equation}
         \Delta i'_{\mathrm{1}}(t) = \frac{U_{\mathrm{2}}T_{\mathrm{s}}M}{2LM}\left(1-\frac{M}{2M}\right) = \frac{U_{\mathrm{2}}\frac{1}{f_\mathrm{s}}}{4L}=\frac{\SI{400}{\volt}\cdot \SI{50}{\micro\s}}{4\cdot\SI{570}{\micro\henry}} = \SI{8.77}{\ampere}.
     \end{equation}
@@ -334,11 +334,11 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
 
 \input{fig/ex05/Fig_VoltageCourses_UL_No2}
 \begin{solutionblock}
-    The component equation of inductance is used to determine the current values $i'(t)$ as:
+    The component equation of the inductor is used to determine the current values $i'(t)$ as:
     \begin{equation}
         \frac{\mathrm{d}}{\mathrm{d}t}i'(t) = \frac{1}{L}\hat u_\mathrm{1} \sin(\omega t).\label{eq:ex054Deltai'}
     \end{equation}
-    \eqref{eq:ex054Deltai'} must now be converted to $i'$. To do this, the right-hand side of the equation must be integrated, with the initial state of the current $i'= 0$, to:
+    \eqref{eq:ex054Deltai'} must be solved for $i'$ by integration the ODE. To do this, the right-hand side of the equation must be integrated, with the initial state of the current $i'= 0$, to:
     \begin{equation}
         i'(t)=\frac{\hat u_\mathrm{1} \cos(\omega t)}{\omega L}.\label{eq:ex054currenti'1}
     \end{equation}
@@ -350,29 +350,29 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
     \begin{equation}
         U_\mathrm{L,1} = u_\mathrm{1}(t) - U_\mathrm{2}= \hat u_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{490}{\micro\s}) - \SI{400}{\volt} = -\SI{350}{\volt}.
     \end{equation}
-    This voltage value  $U_\mathrm{L,1}$ is used to calculate the current  $i'(T_\mathrm{1,on})$ as:
+    The voltage $U_\mathrm{L,1}$ is used to calculate the current  $i'(T_\mathrm{1,on})$ as:
     \begin{equation}
         i'(T_\mathrm{1,on}) = i'(T_\mathrm{1,off}) -\frac{ U_\mathrm{L,1}}{L}(T_\mathrm{1,on}-T_\mathrm{1,off}) = \SI{2.45}{\ampere} -\frac{\SI{350}{\volt}}{\SI{5}{\milli\henry}}\cdot (\SI{506}{\micro\s}-\SI{490}{\micro\s}) = \SI{1.33}{\ampere}.
     \end{equation}
-     The second interval  $T_\mathrm{1,on} < t < T_\mathrm{2,off}  = \SI{960}{\micro\s}$ in which the transistor $T$ conducts, have to be inserted  into \eqref{eq:ex054currenti'1} with the upper and lower limit. This leads to:
+     The second interval  $T_\mathrm{1,on} < t < T_\mathrm{2,off}  = \SI{960}{\micro\s}$, in which the transistor $T$ conducts, have to be inserted  into \eqref{eq:ex054currenti'1} with the upper and lower limit. This leads to:
      \begin{equation}
-        i'(T_\mathrm{2,off}) = \frac{\hat u_\mathrm{1}}{L \omega}(\cos (\omega T_\mathrm{1,on})- \cos(\omega T_\mathrm{2,off}))+ i'(T_\mathrm{1,on}).
+        i'(T_\mathrm{2,off}) = \frac{\hat u_\mathrm{1}}{L \omega}(\cos (\omega T_\mathrm{1,on})- \cos(\omega T_\mathrm{2,off}))+ i'(T_\mathrm{1,on}).\label{eq:ex05secint}
     \end{equation}
-    With values:
+    With inserted values, the following follows for \eqref{eq:ex05secint}:
     \begin{equation}
         i'(T_\mathrm{2,off}) = \frac{\sqrt{2}\cdot\SI{230}{\volt}}{\SI{5}{\milli\henry}\cdot 2\pi \cdot \SI{50}{\hertz}}\cdot (\cos(2\pi \cdot \SI{50}{\hertz}\cdot \SI{506}{\micro\s})-\cos(2\pi \cdot \SI{50}{\hertz} \cdot \SI{960}{\micro\s})) + \SI{1.33}{\ampere}= \SI{8.07}{\ampere}.
      \end{equation}
 
-     For the second interval $T_\mathrm{2,off} < t < T_\mathrm{2,on} = \SI{1040}{\micro\s}$ in which the diode $D_\mathrm{5}$ conducts, the voltage $U_\mathrm{L.2}$ is first determined as:
+     For the second interval $T_\mathrm{2,off} < t < T_\mathrm{2,on} = \SI{1040}{\micro\s}$, in which the diode $D_\mathrm{5}$ conducts, the voltage $U_\mathrm{L.2}$ is first determined as:
      \begin{equation}
         U_\mathrm{L,2} = u_\mathrm{1}(t) - U_\mathrm{2}= \hat u_\mathrm{1} \sin(\omega t) - U_\mathrm{2} = \sqrt{2} \cdot \SI{230}{\volt} \cdot \sin(2\pi \cdot \SI{50}{\hertz}\cdot \SI{960}{\micro\s}) - \SI{400}{\volt} = -\SI{303}{\volt}.
     \end{equation}
-    This voltage value  $U_\mathrm{L,2}$ is used to calculate the current  $i'(T_\mathrm{2,on})$ as:
+    The voltage $U_\mathrm{L,2}$ is used to calculate the current  $i'(T_\mathrm{2,on})$ as:
     \begin{equation}
         i'(T_\mathrm{2,on}) = i'(T_\mathrm{2,off}) -\frac{ U_\mathrm{L,2}}{L}(T_\mathrm{2,on}-T_\mathrm{2,off}) = \SI{8.07}{\ampere} -\frac{\SI{306}{\volt}}{\SI{5}{\milli\henry}}\cdot (\SI{1040}{\micro\s}-\SI{960}{\micro\s}) = \SI{3.32}{\ampere}.
     \end{equation}
     The values determined in this task for mains current
-    $i'(t)$ must be entered in \autoref{fig:Current i_1 and control signal ex05}. This results in \autoref{fig:Complete Current i' control signal ex05 result}. Figure \autoref{fig:Reference signal $c(t)$ and duty cycle signal d(t)} shows that with this type of PWM current open-loop control, an unphysical duty cycle signal of $>1$ is described at the beginning. This results in a open-loop control deviation that can no longer be compensated for during the control process. An alternative to prevent this deviation would be to implement a feedback control system. This would keep the system continuously within the permissible range $(0,1)$ of the duty cycle. One type of feedback control for this problem would be a voltage time surface control. 
+    $i'(t)$ must be entered in \autoref{fig:Current i_1 and control signal ex05}. This results in \autoref{fig:Complete Current i' control signal ex05 result}. Figure \autoref{fig:Reference signal $c(t)$ and duty cycle signal d(t)} shows that with this type of PWM current open-loop control, an unphysical duty cycle signal of $d(t) > 1$ is necessary at the beginning of the period. This results in a open-loop control deviation, that is, a mismatch between the reference and the actual current cruves. An alternative to prevent this deviation would be to implement a feedback control system. This closed loop allows the deviation caused by $d(t) > 1$ to be compensated for downstream.
 \end{solutionblock}
 
 \input{fig/ex05/Fig_courses_i'_results}
@@ -388,11 +388,11 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
 \subtask{Dimension the output capacitance $C$ in a way that the amplitude of the output voltage ripple is $\Delta u_{\mathrm{2}}<0.05  \hat u_{\mathrm{2}}$.
 Note: assume an idealized lossless converter, with the assumption $u_2(t)\approx U_2$.}
 \begin{solutionblock}
-    For the input power $p_\mathrm{1}(t)$ follows $p_\mathrm{1}(t)= P_\mathrm{2} -\Delta p_\mathrm{2}$. The power at the load minus the power at the capacitor. The part $\Delta p_\mathrm{2}$ is zero on average, because it is the pulsating power across capacitor $C$. From this consideration it can be concluded for $p_\mathrm{1}(t)$:
+    For the input power $p_\mathrm{1}(t)$ follows $p_\mathrm{1}(t)= P_\mathrm{2} -\Delta p_\mathrm{2}$. The eqaution means the input power is equal to the power at the load minus the power at the capacitor. The part $\Delta p_\mathrm{2}$ is zero on average, because it is the pulsating power across capacitor $C$. From this consideration it can be concluded for $p_\mathrm{1}(t)$:
     \begin{equation}
         p_\mathrm{1}(t) = \hat u_\mathrm{1} \sin(\omega t) \hat i_\mathrm{1} \sin(\omega t) = \hat u_\mathrm{1} \hat i_\mathrm{1} \sin^2(\omega t).
     \end{equation}
-    By using the addition theorem $\sin^2(\omega t) = \frac{1}{2}(1-\cos(2\omega t))$ follows:
+    By using the trigonometric addition formula $\sin^2(\omega t) = \frac{1}{2}(1-\cos(2\omega t))$ follows:
     \begin{equation}
         p_\mathrm{1}(t) = \frac{\hat u_\mathrm{1} \hat i_\mathrm{1}}{2}(1-\cos(2\omega t)).
     \end{equation}
@@ -417,11 +417,11 @@ Note: assume an idealized lossless converter, with the assumption $u_2(t)\approx
     \begin{equation}
         u_\mathrm{C} = \frac{1}{C} \int \frac{P_\mathrm{2}\cos(2\omega t)}{U_\mathrm{2}} \, \mathrm{d}t = \frac{P_\mathrm{2}\sin(2\omega t)}{2\omega C U_\mathrm{2}}.\label{eq:ex056voltageuc}
     \end{equation}
-    $u_\mathrm{C}$ is equal to $ \hat u_\mathrm{C} \sin(2\omega t)$ from this follows for \eqref{eq:ex056voltageuc}:
+    The capicator voltage $u_\mathrm{C}$ is equal to $ \hat u_\mathrm{C} \sin(2\omega t)$, from this follows for \eqref{eq:ex056voltageuc}:
     \begin{equation}
        \Delta u_\mathrm{2}= \hat u_\mathrm{C} = \frac{P_\mathrm{2}}{2\omega C U_\mathrm{2}}.
     \end{equation}
-    And now the capacitance can be calculate with $\Delta u_{\mathrm{2}}<0.05  \hat u_{\mathrm{2}}$ as:
+    Finally the capacitance can be calculate with $\Delta u_{\mathrm{2}}<0.05  \hat u_{\mathrm{2}}$ as:
     \begin{equation}
         C = \frac{P_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}  \Delta u_\mathrm{2} }= \frac{U_\mathrm{2}I_\mathrm{2}}{2\cdot 2\pi f  U_\mathrm{2}\  0.05 U_\mathrm{2}} = \frac{\SI{400}{\volt}\cdot \SI{10}{\ampere}}{4 \pi \cdot\SI{50}{\hertz}\cdot\SI{400}{\volt}\cdot 0.05 \cdot \SI{400}{\volt}} = \SI{796}{\micro\farad}.  
     \end{equation}
@@ -429,10 +429,11 @@ Note: assume an idealized lossless converter, with the assumption $u_2(t)\approx
 \subtask{Calculate the RMS value of the current through the capacitor $I_{\mathrm{C}}$.
 Note: the mean value of the current through the capacitor is $\overline i_{\mathrm{C}}=0$!}
 \begin{solutionblock}
+    Kirchhoff's junction rule can be used for the current $ i_\mathrm{2}(t)$:
     \begin{equation}
     i_\mathrm{2}(t) = i_\mathrm{C}(t)+i_\mathrm{R}(t).
 \end{equation}
-Using first biome:
+Since an RMS value must be calculated, the equation is squared to avoid the square root. When solving the equation, the first binomial formula must be used:
 \begin{equation}
     i^2_\mathrm{2}(t)= (i_\mathrm{C}(t)+i_\mathrm{R}(t))^2 = i^2_\mathrm{C}(t)+2i_\mathrm{R}(t) i_\mathrm{C}(t)+ i^2_\mathrm{R}(t).
 \end{equation}
@@ -457,15 +458,15 @@ Finally, \eqref{eq:ex056RMSIc} must be converted to $I^2_\mathrm{C}(t)$:
         C = \frac{I_\mathrm{C}}{\SI{10}{\frac{\ampere}{\milli\farad}}} = \frac{\SI{10.44}{\ampere}}{\SI{10}{\frac{\ampere}{\milli\farad}}}=\SI{1.04}{\milli\farad}.
     \end{equation}
     The dimensioned capacitance for an output voltage ripple $\Delta u_{\mathrm{2}}<0.05  \hat u_{\mathrm{2}}$ was determined as $\SI{796}{\micro\farad}$.
-    If these two capacitor values are compared, it becomes clear that the current carrying capacity of the capacitor is the determining factor. 
+    If these two capacitances are compared, it becomes clear that the current carrying capacity of the capacitor is the determining factor. 
 \end{solutionblock}
 \subtask{What is the current load (effective and average value) of the mains diodes?}
 \begin{solutionblock}
-    The rectification ensures that the current $\overline i_\mathrm{D,1-4}$ is calculated as the mean value over a half-period. So the average value is given with:
+    Due to the rectifier behavior, the current $\overline i_\mathrm{D,1-4}$ can be calculated as an average value over a half-period. So the average value is given by:
     \begin{equation}
         \overline{i}_{\mathrm{D,1-4}} = \frac{1}{2\pi} \int_{0}^{\pi} \hat{i}_{\mathrm{1}} \sin(\omega t) \, \mathrm{d}t\ = \frac{\hat{i}_{\mathrm{1}}}{2\pi} [-\cos(\pi)-[-\cos(0)]] = \frac{\hat{i}_{\mathrm{1}}}{\pi}.
     \end{equation}
-    The effective value is given with:
+    The effective value is given by:
     \begin{equation}
         I^2_{\mathrm{D,1-4}} = \frac{1}{2\pi} \int_{0}^{\pi} \hat{i}^2_{\mathrm{1}} \sin^2(\omega t) \, \mathrm{d}t\ = \frac{\hat{i}^2_{\mathrm{1}}}{2\pi}\left[\frac{\pi-\frac{\sin(2\pi)}{2}}{2}-\frac{\frac{-\sin(0)}{2}}{2}\right], 
     \end{equation}

@@ -9,7 +9,7 @@
             xticklabels = {0,$2.5$, $5$,$7.5$, $10$}, 
             ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
   % bottom plot: current response 
-  \nextgroupplot[ylabel = {$i_1(t)/{A}$}, xlabel={$t/\text{ms}$}, 
+  \nextgroupplot[ylabel = {$i_1(t)/\text{A}$}, xlabel={$t/\text{ms}$}, 
   ytick = {-1, 0, 0.5, 1}, yticklabels = {}, legend columns=2, ylabel shift = 0.2cm] 
   \addplot[signalred, thick] table[x=wt, y=i1, col sep=comma] {PWM_PFC_example.csv}; 
   \addplot[thick, dashed] table[x=wt, y=i1ref, col sep=comma] {PWM_PFC_example.csv};
@@ -18,7 +18,7 @@
 \addplot[domain=0:pi, samples=100, signalgreen, dashed, thick]{1 * sin(deg(x))};
 
   \addplot[domain=0:pi, samples=100, signalgreen, dashed, thick]{0.97*sin(deg(x))-0.9*sin(deg(x))*(1-sin(deg(x))/1.3)};
-  \legend{$i_1(t)$, $i_1^{(1)}(t)$} 
+  \legend{$i_1(t)$, $i_1^{*(1)}(t)$} 
   \node at (0,0) [left] {$0$}; 
   \node at (0,0.18) [left] {$5$}; 
   \node at (0,0.36) [left] {$10$}; 
@@ -31,7 +31,7 @@
        
 \end{groupplot}
 \end{tikzpicture}
-    \caption{Complete representation of the mains current $i'$ and control signal for transistor $T$.}
+    \caption{Overall representation of the mains current $i'$ and transistor $T$ control signal.}
     \label{fig:Complete Current i' control signal ex05 result}
 
 

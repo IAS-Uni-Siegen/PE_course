@@ -10,11 +10,11 @@
                          ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
             
             % bottom plot: current response 
-            \nextgroupplot[ylabel = {$i_1(t)/{A}$}, xlabel={$t/\text{ms}$}, 
+            \nextgroupplot[ylabel = {$i_1(t)/\text{A}$}, xlabel={$t/\text{ms}$}, 
                            ytick = {-1, 0, 0.5, 1}, yticklabels = {}, legend columns=2, ylabel shift = 0.2cm] 
             \addplot[signalred, thick] table[x=wt, y=i1, col sep=comma] {PWM_PFC_example copy.csv}; 
             \addplot[thick, dashed] table[x=wt, y=i1ref, col sep=comma] {PWM_PFC_example.csv};
-            \legend{$i_1(t)$, $i_1^{(1)}(t)$} 
+            \legend{$i_1(t)$, $i_1^{*(1)}(t)$} 
             \node at (0,0) [left] {$0$}; 
             \node at (0,0.18) [left] {$5$}; 
             \node at (0,0.36) [left] {$10$}; 
