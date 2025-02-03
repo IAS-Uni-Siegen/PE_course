@@ -1,112 +1,112 @@
 \begin{figure}[h!]
 
-   %   \documentclass{standalone}
-   %   \usepackage{pgfplots}
-   %   \pgfplotsset{compat=1.18} % Kompatibilität für neuere Versionen
-          \centering
-          \begin{tikzpicture}
-               \pgfplotsset{set layers}
-          \begin{axis}[
-           % x/y range adjustment
-           scale only axis,
-           ymin=-4, ymax=1.5,
-           xmin=0, xmax=360,
-           axis x line=none, 
-           samples=500,
-           axis y line=center,
-           axis x line=middle,
-           extra y ticks=0,
-           % Label text
-           xlabel={$\omega t / \text{rad}$},
-           ylabel={$u/\mathrm{V}$},
-           % Label adjustment
-           x label style={at={(axis description cs:1,0.5)},anchor=west},
-           y label style={at={(axis description cs:0,.97)},anchor=south,yshift=0.2cm},
-           width=0.6\textwidth,
-           height=0.3\textwidth,
-           % x-Ticks
-           xtick={0,60,120,180,240, 300, 360},
-           xticklabels={0,$\frac{\pi}{3}$,$\frac{2\pi}{3}$,$\pi$,$\frac{4\pi}{3}$, $\frac{5\pi}{3}$, $2\pi$},
-           xticklabel style = {anchor=north},
-           % y-Ticks
-           ytick={-1,-0.5,0,0.5,1},
-           yticklabels={-1,-0.5,0,0.5,1},
-           yticklabel style = {anchor=east},
-           % Grid layout
-           grid,
-           %grid style={line width=.1pt, draw=gray!10},
-           %major grid style={line width=.2pt,draw=gray!90},
-       ] 
-       % modulation s
-       \addplot[blue, domain= 0:360, solid] {0.75*sin(x)};
-     % carrier signal c
-      \draw[thin, black] (0,-1) -- (60,1) -- (60,-1) -- (120,1) -- (120,-1) -- (180,1) -- (180,-1) -- (240,1) -- (240,-1) -- (300,1) -- (300,-1) -- (360,1) -- (360,-1);
-       %\draw (0,-1) \foreach \x in {0 ,60, 120, 180, 240, 300} {-- ++(60,2) -- ++(0,-2) };
-       
-       % Label of s
-       \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:85,0.8) {$s^{*}(t)$};
-       % Label of c
-       \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:200,0.4) {$c(t)$};
-          \end{axis}
-          \begin{axis}[
-           % x/y range adjustment
-           scale only axis,
-           ymin=-6, ymax=1.5,
-           xmin=0, xmax=360,
-           samples=500,
-           axis y line=center,
-           axis x line=bottom,
-           % Label text
-           xlabel={$\omega t / \text{rad}$},
-           ylabel={$u/\mathrm{V}$},
-           % Label adjustment
-           x label style={at={(axis description cs:1,0)},anchor=west},
-           y label style={at={(axis description cs:0,.97)},anchor=south,yshift=0.2cm},
-           width=0.6\textwidth,
-           height=0.3\textwidth,
-           % x-Ticks
-           xtick={0,60,120,180,240, 300, 360},
-           xticklabels={0,$\frac{\pi}{3}$,$\frac{2\pi}{3}$,$\pi$,$\frac{4\pi}{3}$, $\frac{5\pi}{3}$, $2\pi$},
-           xticklabel style = {anchor=north},
-           % y-Ticks
-           ytick={-5,-4.5,-4,-3.5,-3},
-           yticklabels={-1,-0.5,0,0.5,1},
-           yticklabel style = {anchor=east},
-           % Grid layout
-           grid,
-           %grid style={line width=.1pt, draw=gray!10},
-           %major grid style={line width=.2pt,draw=gray!90},
-       ] 
- 
-     % switching times
-     \draw[thin, black, dashed] (46,1.5) -- (46,-6);
-     \draw[thin, black, dashed] (60,1.5) -- (60,-6);  
-     \draw[thin, black, dashed] (110,1.5) -- (110,-6);
-     \draw[thin, black, dashed] (120,1.5) -- (120,-6);
-     \draw[thin, black, dashed] (158,1.5) -- (158,-6);
-     \draw[thin, black, dashed] (180,1.5) -- (180,-6);
-     \draw[thin, black, dashed] (202,1.5) -- (202,-6);
-     \draw[thin, black, dashed] (240,1.5) -- (240,-6);
-     \draw[thin, black, dashed] (249,1.5) -- (249,-6);
-     \draw[thin, black, dashed] (300,1.5) -- (300,-6);
-     \draw[thin, black, dashed] (315,1.5) -- (315,-6);
-     \begin{solutionblock}
-             
-     % Fundamental voltage
-     \addplot[blue, domain= 0:360, solid] {0.75*sin(x)-4};
-     % Output voltage
-     \draw[thin, red, solid] (0,-3) -- (46,-3) -- (46,-5) -- (60,-5) -- (60,-3) -- (110,-3) -- (110,-5) -- (120,-5);
-     \draw[thin, red, solid] (120,-5) -- (120,-3) -- (158,-3) -- (158,-5) -- (180,-5) -- (180,-3) -- (202,-3);
-     \draw[thin, red, solid] (202,-3) -- (202,-5) -- (240,-5) -- (240,-3) -- (249,-3) -- (249,-5) -- (300,-5);
-     \draw[thin, red, solid] (300,-5) -- (300,-3) -- (315,-3) -- (315, -5) -- (360, -5);
- 
-       % Label of u_2
-       \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:90,-2.75) {$u_\mathrm{2}(t)$};
-       % Label of u^1_2
-       \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:275,-4.5) {$u^\mathrm{(1)}_\mathrm{2}(t)$};
-     \end{solutionblock}
-          \end{axis}                      
-          \end{tikzpicture}
-          \caption{Output voltage $u_\mathrm{2}(t)$ and fundamental voltage component $u^\mathrm{(1)}_\mathrm{2}(t)$.}
-          \label{sfig:ex07_sub1.1_modulation}
-  \end{figure}
+  %   \documentclass{standalone}
+  %   \usepackage{pgfplots}
+  %   \pgfplotsset{compat=1.18} % Kompatibilität für neuere Versionen
+         \centering
+         \begin{tikzpicture}
+              \pgfplotsset{set layers}
+         \begin{axis}[
+          % x/y range adjustment
+          scale only axis,
+          ymin=-4, ymax=1.5,
+          xmin=0, xmax=360,
+          axis x line=none, 
+          samples=500,
+          axis y line=center,
+          axis x line=middle,
+          extra y ticks=0,
+          % Label text
+          xlabel={$\omega t / \text{rad}$},
+          ylabel={$u/\mathrm{V}$},
+          % Label adjustment
+          x label style={at={(axis description cs:1,0.5)},anchor=west},
+          y label style={at={(axis description cs:0,.97)},anchor=south,yshift=0.2cm},
+          width=0.6\textwidth,
+          height=0.3\textwidth,
+          % x-Ticks
+          xtick={0,60,120,180,240, 300, 360},
+          xticklabels={0,$\frac{\pi}{3}$,$\frac{2\pi}{3}$,$\pi$,$\frac{4\pi}{3}$, $\frac{5\pi}{3}$, $2\pi$},
+          xticklabel style = {anchor=north},
+          % y-Ticks
+          ytick={-1,-0.5,0,0.5,1},
+          yticklabels={-1,-0.5,0,0.5,1},
+          yticklabel style = {anchor=east},
+          % Grid layout
+          grid,
+          %grid style={line width=.1pt, draw=gray!10},
+          %major grid style={line width=.2pt,draw=gray!90},
+      ] 
+      % modulation s
+      \addplot[blue, domain= 0:360, solid] {0.75*sin(x)};
+    % carrier signal c
+     \draw[thin, black] (0,-1) -- (60,1) -- (60,-1) -- (120,1) -- (120,-1) -- (180,1) -- (180,-1) -- (240,1) -- (240,-1) -- (300,1) -- (300,-1) -- (360,1) -- (360,-1);
+      %\draw (0,-1) \foreach \x in {0 ,60, 120, 180, 240, 300} {-- ++(60,2) -- ++(0,-2) };
+      
+      % Label of s
+      \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:85,0.8) {$s^{*}(t)$};
+      % Label of c
+      \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:200,0.4) {$c(t)$};
+         \end{axis}
+         \begin{axis}[
+          % x/y range adjustment
+          scale only axis,
+          ymin=-6, ymax=1.5,
+          xmin=0, xmax=360,
+          samples=500,
+          axis y line=center,
+          axis x line=bottom,
+          % Label text
+          xlabel={$\omega t / \text{rad}$},
+          ylabel={$u/\mathrm{V}$},
+          % Label adjustment
+          x label style={at={(axis description cs:1,0)},anchor=west},
+          y label style={at={(axis description cs:0,.97)},anchor=south,yshift=0.2cm},
+          width=0.6\textwidth,
+          height=0.3\textwidth,
+          % x-Ticks
+          xtick={0,60,120,180,240, 300, 360},
+          xticklabels={0,$\frac{\pi}{3}$,$\frac{2\pi}{3}$,$\pi$,$\frac{4\pi}{3}$, $\frac{5\pi}{3}$, $2\pi$},
+          xticklabel style = {anchor=north},
+          % y-Ticks
+          ytick={-5,-4.5,-4,-3.5,-3},
+          yticklabels={-1,-0.5,0,0.5,1},
+          yticklabel style = {anchor=east},
+          % Grid layout
+          grid,
+          %grid style={line width=.1pt, draw=gray!10},
+          %major grid style={line width=.2pt,draw=gray!90},
+      ] 
+
+    % switching times
+    \draw[thin, black, dashed] (46,1.5) -- (46,-6);
+    \draw[thin, black, dashed] (60,1.5) -- (60,-6);  
+    \draw[thin, black, dashed] (110,1.5) -- (110,-6);
+    \draw[thin, black, dashed] (120,1.5) -- (120,-6);
+    \draw[thin, black, dashed] (158,1.5) -- (158,-6);
+    \draw[thin, black, dashed] (180,1.5) -- (180,-6);
+    \draw[thin, black, dashed] (202,1.5) -- (202,-6);
+    \draw[thin, black, dashed] (240,1.5) -- (240,-6);
+    \draw[thin, black, dashed] (249,1.5) -- (249,-6);
+    \draw[thin, black, dashed] (300,1.5) -- (300,-6);
+    \draw[thin, black, dashed] (315,1.5) -- (315,-6);
+    \begin{solutionblock}
+            
+    % Fundamental voltage
+    \addplot[blue, domain= 0:360, solid] {0.75*sin(x)-4};
+    % Output voltage
+    \draw[thin, red, solid] (0,-3) -- (46,-3) -- (46,-5) -- (60,-5) -- (60,-3) -- (110,-3) -- (110,-5) -- (120,-5);
+    \draw[thin, red, solid] (120,-5) -- (120,-3) -- (158,-3) -- (158,-5) -- (180,-5) -- (180,-3) -- (202,-3);
+    \draw[thin, red, solid] (202,-3) -- (202,-5) -- (240,-5) -- (240,-3) -- (249,-3) -- (249,-5) -- (300,-5);
+    \draw[thin, red, solid] (300,-5) -- (300,-3) -- (315,-3) -- (315, -5) -- (360, -5);
+
+      % Label of u_2
+      \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:90,-2.75) {$u_\mathrm{2}(t)$};
+      % Label of u^1_2
+      \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:275,-4.5) {$u^\mathrm{(1)}_\mathrm{2}(t)$};
+    \end{solutionblock}
+         \end{axis}                      
+         \end{tikzpicture}
+         \caption{Output voltage $u_\mathrm{2}(t)$ and fundamental voltage component $u^\mathrm{(1)}_\mathrm{2}(t)$.}
+         \label{sfig:ex07_sub1.1_modulation}
+ \end{figure}
