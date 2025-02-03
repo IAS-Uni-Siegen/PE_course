@@ -7,7 +7,7 @@
 %% Task 1: B2U topology with capacitive filtering %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\task{B2U topology with capactive filtering}
+\task{B2U topology with capacitive filtering}
 An uncontrolled single-phase, two-pulse rectifier circuit with capacitive filtering 
 is shown in \autoref{fig:B2U_Topology_Cap_Filtering}.
 All components, including the diodes, are assumed to be ideal. On the input side, 
@@ -120,7 +120,7 @@ into account the previously calculated angles $\alpha$ and $\beta$.}
     \input{fig/ex05/sFig_VoltageU2AndCurrenti1_ic}  
 \end{solutionblock}
 
-\subtask{Calculate the currents $i_\mathrm{1}(\omega t)$  and $i_\mathrm{C}(\omega t)$ and and add them to the previous plot.}
+\subtask{Calculate the currents $i_\mathrm{1}(\omega t)$  and $i_\mathrm{C}(\omega t)$ and add them to the previous plot.}
 \begin{solutionblock}
     Two cases are to consider for the currents of $i_\mathrm{1}(\omega t)$ and  $i_\mathrm{C}(\omega t)$. If $\alpha<\omega t<\alpha+\beta$
     and $\pi+\alpha<\omega t<\pi+\alpha+\beta$, the capacitor supplies the load current $I_{\mathrm{0}}$.
@@ -315,7 +315,7 @@ Using $d(t) = 1 -\frac{1}{M} \sin(\omega t)$:
     \end{equation}
 \end{solutionblock}
 
-\subtask{Complete the current curve for a switching frequency $f_\mathrm{s2} = \SI{2}{\kilo\hertz}$ and a inductance $L = \SI{5}{\milli\henry}$ in \autoref{fig:Current i_1 and control signal ex05}. Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T$ and are summarized for the first 4 switching times in \autoref{tab:switching_times}.}
+\subtask{Complete the current curve for a switching frequency $f_\mathrm{s2} = \SI{2}{\kilo\hertz}$ and an inductance $L = \SI{5}{\milli\henry}$ in \autoref{fig:Current i_1 and control signal ex05}. Note: At the time $t =0$ is $i'=0$. The switch-on and switch-off times are determined by the control signal of the transistor $T$ and are summarized for the first 4 switching times in \autoref{tab:switching_times}.}
 
 \begin{table}[ht]
     \centering
@@ -409,7 +409,7 @@ Note: assume an idealized lossless converter, with the assumption $u_2(t)\approx
     \begin{equation}
         i_\mathrm{C}(t)=C \frac{\mathrm{d}u_\mathrm{c}}{\mathrm{d}t} = \frac{\Delta p_\mathrm{2}}{U_\mathrm{2}} = \frac{P_\mathrm{2}\cos(2\omega t)}{U_\mathrm{2}}.\label{eq:ex056currentic}
     \end{equation}
-    The following follows from \eqref{eq:ex056currentic} for $U_\mathrm{C}$:
+    This follows from \eqref{eq:ex056currentic} for $U_\mathrm{C}$:
     \begin{equation}
         \frac{\mathrm{d}u_\mathrm{C}}{\mathrm{d}t} = \frac{P_\mathrm{2}\cos (2\omega t)}{C U_\mathrm{2}},
     \end{equation}
