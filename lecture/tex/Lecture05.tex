@@ -103,7 +103,7 @@
         \begin{column}{0.5\textwidth}
             \centering
             \begin{circuitikz}[] % M1U diode circuit
-                \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-1.5) coordinate (A)
+                \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-1.5) coordinate (A)
                 (0,0) to [short] ++(0.75,0)
                 to [diode, l=$D$, v= $u_\mathrm{D}(t)$, voltage = straight]  ++(1.5,0)
                 to [short, i=$i_2(t)$] ++(0.75,0)
@@ -149,7 +149,7 @@
         \begin{column}{0.5\textwidth}
             \centering
             \begin{circuitikz}[] % M1C thyristor circuit
-                \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-1.5) coordinate (A)
+                \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-1.5) coordinate (A)
                 (0,0) to [short] ++(0.75,0)
                 to [thyristor, voltage = straight, v= $u_\mathrm{T}(t)$, name = T]  ++(1.5,0)
                 to [short, i=$i_2(t)$] ++(0.75,0)
@@ -253,15 +253,15 @@
             (T.A2) to [short] ++(0,-1) to [short, -o] ++(-1,0) coordinate (A2)
             (T.B1) to [short] ++(0, 1) coordinate (B1)
             (T.B2) to [short] ++(0,-1) coordinate (B2);
-            \draw (A1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (A2); 
+            \draw (A1) to [open, v=$u_1(t)$, voltage = straight] (A2); 
             \draw (B1) to [thyristor, name=T1] ++(2.0,0) coordinate (C1)
             (B2) to [thyristor, name=T2] ++(2.0,0)
             to [crossing, -*, mirror] (C1)
             to [short, i=$i_2(t)$] ++(1.0,0) coordinate (D)
             to [R, v^= $u_2(t)$, voltage = straight, l_=$R$] (T-L2.midtap -| D)
             to [short] (T-L2.midtap);
-            \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=$\hspace{0.5cm}{u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
-            \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=$\hspace{0.5cm}{u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+            \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=${u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+            \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=${u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
             \node at (T1.gate) [above, xshift=-5mm, yshift=-2mm]{$T_1$};
             \node at (T2.gate) [below, xshift=-5mm, yshift=-7mm]{$T_2$};
         \end{circuitikz}%
@@ -354,7 +354,7 @@
             (T.A2) to [short] ++(0,-1) to [short, -o] ++(-1,0) coordinate (A2)
             (T.B1) to [short] ++(0, 1) coordinate (B1)
             (T.B2) to [short] ++(0,-1) coordinate (B2);
-            \draw (A1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (A2); 
+            \draw (A1) to [open, v=$u_1(t)$, voltage = straight] (A2); 
             \draw (B1) to [thyristor, name=T1] ++(2.0,0) coordinate (C1)
             (B2) to [thyristor, name=T2] ++(2.0,0)
             to [crossing, -*, mirror] (C1)
@@ -362,13 +362,13 @@
             to [L, l=$L$] ++(2,0) 
             to [short] ++(0.5,0) coordinate (D)
             to [short, i=$i_2(t)$] ++(1.5,0)
-            to [open, v^= $\hspace{0.5cm}u_2(t)$, voltage = straight, o-o] (T-L2.midtap -| \tikztostart)
+            to [open, v^= $u_2(t)$, voltage = straight, o-o] (T-L2.midtap -| \tikztostart)
             to [short] (\tikztostart -| D)
             (D) to [C, voltage = straight, l=$C$, *-*] (T-L2.midtap -| D)
             to [short] (T-L2.midtap);
-            \draw (us) to [open, v^=$\hspace{0.5cm}u_\mathrm{s}(t)$, voltage = straight] (T-L2.midtap -| us);
-            \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=$\hspace{0.5cm}{u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
-            \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=$\hspace{0.5cm}{u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+            \draw (us) to [open, v^=$u_\mathrm{s}(t)$, voltage = straight] (T-L2.midtap -| us);
+            \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=${u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+            \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=${u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
             \node at (T1.gate) [above, xshift=-5mm, yshift=-2mm]{$T_1$};
             \node at (T2.gate) [below, xshift=-5mm, yshift=-7mm]{$T_2$};
         \end{circuitikz}%
@@ -738,15 +738,15 @@
          (T.A2) to [short] ++(0,-1) to [short, -o] ++(-1,0) coordinate (A2)
          (T.B1) to [short] ++(0, 1) coordinate (B1)
          (T.B2) to [short] ++(0,-1) coordinate (B2);
-         \draw (A1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (A2); 
+         \draw (A1) to [open, v=$u_1(t)$, voltage = straight] (A2); 
          \draw (B1) to [thyristor, name=T1] ++(2.0,0) coordinate (C1)
          (B2) to [thyristor, name=T2] ++(2.0,0)
          to [crossing, -*, mirror] (C1)
          to [short, i=$i_2(t)$] ++(0.75,0) coordinate (D)
          to [isource, v^>=$u_2(t)$, voltage = straight] (T-L2.midtap -| D)
          to [short] (T-L2.midtap);
-         \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=$\hspace{0.5cm}{u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
-         \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=$\hspace{0.5cm}{u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+         \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=${u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+         \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=${u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
          \node at (T1.gate) [above, xshift=-5mm, yshift=-2mm]{$T_1$};
          \node at (T2.gate) [below, xshift=-5mm, yshift=-7mm]{$T_2$};
      \end{circuitikz}%
@@ -1351,10 +1351,10 @@
             \draw (C -| D5) to [short, *-] ++(-\hd/2,0) to [crossing, mirror] ++(-\hd,0) to [crossing, mirror] ++(-\hd,0) -- (C);
             \draw (D1top) to [short, -*] (D3top) to [short, -*] (D5top) to [short, i=$i_2(t)$] ++(2,0) to [R, l=$R$, name = R] (D6bot -| \tikztostart) to (D6bot);
             \draw (D2bot) to [short, -*] (D4bot) to [short, -*] (D6bot);
-            \draw ($(D5top)!.3!(D5top -| R)$) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] ($(D6bot)!.3!(D6bot -| R)$);
-            \draw (A) to [open, v^>=$\hspace{0.75cm}u_{1\mathrm{ab}}(t)$, voltage = straight] (B);
-            \draw (B) to [open, v^>=$\hspace{0.75cm}u_{1\mathrm{bc}}(t)$, voltage = straight] (C);
-            \draw (-0.5,-2*\vd) to [open, v^>=$u_{1\mathrm{ca}}(t)\hspace{0.75cm}$, voltage = straight] (-0.5,0);
+            \draw ($(D5top)!.3!(D5top -| R)$) to [open, v^>=$u_2(t)$, voltage = straight] ($(D6bot)!.3!(D6bot -| R)$);
+            \draw (A) to [open, v^>=$u_{1\mathrm{ab}}(t)$, voltage = straight] (B);
+            \draw (B) to [open, v^>=$u_{1\mathrm{bc}}(t)$, voltage = straight] (C);
+            \draw (-0.5,-2*\vd) to [open, v^>=$u_{1\mathrm{ca}}(t)$, voltage = straight] (-0.5,0);
         \end{circuitikz}
     \caption{B6C topology with line chokes and a resistive load}
     \label{fig:B6C_topology}
