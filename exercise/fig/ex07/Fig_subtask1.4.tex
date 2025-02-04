@@ -69,7 +69,7 @@
     \begin{solutionblock}
     % fundamental current i^(1)_2
     \addplot[green, domain= 0:360, solid] {51.5*sin(x-14.9)};
-    % draw current harmonics i^(k)_2
+    % draw current harmonics i^(\mathrm{h})_2
     \draw[thick, red, solid] (0,-44) -- (46,31.5) ;
     \draw[thick, red, solid] (46,31.5) -- (60,-11.67) -- (110,15.31) -- (120,-25.16) -- (158,26.1) -- (180,-25.16) ;
     \draw[thick, red, solid] (180,-25.16) -- (202, 28.8) -- (240, -19.76) -- (249, 23.41) -- (300, -6.27) -- (315, 36.92) -- (360, -33.226);
@@ -112,7 +112,7 @@
      \draw[thin, orange, solid] (315,-7.625) -- (315,7.625) ;
      \addplot[orange, domain= 315:360, solid] {-(51.5*sin(x-14.9)+(-1.559*x +528))};
      % Label of i^(k)_2
-     \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:90,-30) {$i^\mathrm{(k)}_\mathrm{2}(t)$};
+     \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:90,-30) {$i^{(\mathrm{h})}_\mathrm{2}(t)$};
      % Label of i^(1)_2
      \node[green, fill=white, inner sep = 1pt, anchor = south] at (axis cs:90,15) {$i^\mathrm{(1)}_\mathrm{2}(t)$};
       % Label of i_2
@@ -122,7 +122,7 @@
     \end{solutionblock}
     \end{axis}             
     \end{tikzpicture}
-    \caption{Output current $i_\mathrm{2}(t)$, its fundamental wave $i^\mathrm{(1)}_\mathrm{2}(t)$ 
-    and its harmonics $i^{(k)}_\mathrm{2}(t)$. }
+    \caption{Output current $i_\mathrm{2}(t)$, its fundamental wave $i^\mathrm{(1)}_\mathrm{2}(t)$,
+     its harmonics $i^{(\mathrm{h})}_\mathrm{2}(t)$, and input current $i_\mathrm{1}(t)$ }
     \label{sfig:ex07_sub1.4_current_and_components}
    \end{figure}

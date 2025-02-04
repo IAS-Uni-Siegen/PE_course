@@ -46,9 +46,9 @@
         \addplot[blue, domain= 0:360, solid] {-150*sin(x)-200};
        
         \begin{solutionblock}
-         % Label of u^(k)_2
-         \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:25,210) {$u^\mathrm{(k)}_\mathrm{2}(t)$};
-        % plot of u^(k)_2
+         % Label of u^(\mathrm{h})_2
+         \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:25,210) {$u^{(\mathrm{h})}_\mathrm{2}(t)$};
+        % plot of u^(\mathrm{h})_2
         \addplot[black, thick, domain= 0:46, solid] {-150*sin(x)+200};
         \addplot[black,solid, thick] coordinates{(46,92.1) (46, -307.9)};
         \addplot[black, thick, domain= 46:60, solid] {-150*sin(x)-200};
@@ -104,13 +104,13 @@
          % Start point
          \filldraw[black] (3,-44) circle (2pt) node[anchor=west]{\textbf{x}};
         \begin{solutionblock}
-            % draw current harmonics i^(k)_2
+            % draw current harmonics i^(\mathrm{h})_2
             %\addplot[red, thick, domain= 0:46, solid] {80*sin(x)-50};
             \draw[thick, red, solid] (0,-44) -- (46,31.5) ;
             \draw[thick, red, solid] (46,31.5) -- (60,-11.67) -- (110,15.31) -- (120,-25.16) -- (158,26.1) -- (180,-25.16) ;
             \draw[thick, red, solid] (180,-25.16) -- (202, 28.8) -- (240, -19.76) -- (249, 23.41) -- (300, -6.27) -- (315, 36.92) -- (360, -33.226);
             % Label of i^(k)_2
-            \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:280,30) {$i^\mathrm{(k)}_\mathrm{2}(t)$};
+            \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:280,30) {$i^{(\mathrm{h})}_\mathrm{2}(t)$};
             %\draw[thick, red, solid] (90,-22.05) ;
         \end{solutionblock}
            \end{axis}             
