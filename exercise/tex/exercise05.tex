@@ -39,7 +39,7 @@ A steady-state operation is assumed for this task.
 Note: For the calculation of $\beta$ you can use the following simple approximation: $\sin(x) \approx x$.
 (This approximation is sufficiently accurate within a range of approximately $x=\pm \SI{25}{\degree}$.)}
 \begin{solutionblock}
-    As long as the current $i_\mathrm{2}(t)>\SI{0}{\ampere}$ the voltage at the 
+    As long as the current $i_\mathrm{2}(t)>\SI{0}{\ampere}$, the voltage at the 
     capacitor follows the absolute value of $u_\mathrm{1}(t)$:
     \begin{equation} 
         u_\mathrm{2}(t) = \left| \hat{u}_\mathrm{1}\sin(\omega t)\right| \quad \text{for} \quad i_\mathrm{2}(t)>\SI{0}{\ampere}.
@@ -50,8 +50,8 @@ Note: For the calculation of $\beta$ you can use the following simple approximat
     \begin{equation}
         i_\mathrm{C}(t) = \begin{cases}
             -I_\mathrm{0}, & i_2(t) = 0,\\
-            C\frac{\mathrm{d}}{\mathrm{d}t}u_2(t), & i_2(t) > 0,
-        \end{cases}.
+            C\frac{\mathrm{d}}{\mathrm{d}t}u_2(t), & i_2(t) > 0.
+        \end{cases}
         \label{eq:iC_B2U_cap_filt}
     \end{equation}
     In the conduction phase $i_\mathrm{2}(t)$ is calculated by:
@@ -66,7 +66,7 @@ Note: For the calculation of $\beta$ you can use the following simple approximat
         \label{eq:i2_B2U_cap_filt}
     \end{equation}
     In \eqref{eq:i2_B2U_cap_filt} the angle $\omega t_1$ corresponds to the angle $\alpha$ at which the conduction phase ends due to
-    $i_\mathrm{2}(t_1)=\SI{0}{\ampere}$. Enter $t_1$ in \eqref{eq:i2_B2U_cap_filt} leads to:
+    $i_\mathrm{2}(t_1)=\SI{0}{\ampere}$. Inserting $t_1$ in \eqref{eq:i2_B2U_cap_filt} leads to:
     \begin{equation}
         0 = C\omega \hat{u}_\mathrm{1} \cos(\omega t_\mathrm{1}) + I_\mathrm{0} = C\omega \hat{u}_1 \cos(\alpha) + I_\mathrm{0} .
         \label{eq:alpha_B2U_cap_filt_gen}
@@ -77,7 +77,7 @@ Note: For the calculation of $\beta$ you can use the following simple approximat
         \arccos(-\frac{\SI{7.5}{\ampere}}{2 \pi \cdot \SI{60}{\hertz} \cdot \SI{330}{\micro\farad} \cdot \SI{156}{\volt}}) = \SI{112.8}{\degree}.
         \label{eq:alpha_B2U_cap_filt_res}
     \end{equation}    
-    Starting at angle $\alpha$ the capacitor is discharging by the load current $I_\mathrm{0}$ up to the point 
+    Starting at angle $\alpha$ the capacitor is discharged by the load current $I_\mathrm{0}$ up to the point 
     $\omega t_2$, where $\left| u_\mathrm{1}(t_2) \right|=u_\mathrm{2}(t_2)$.
     In the phase angle range $\omega t_1 \leq \omega t < \omega t_2$ the voltage $u_\mathrm{2}(t)$ is:
     \begin{equation}
@@ -91,8 +91,8 @@ Note: For the calculation of $\beta$ you can use the following simple approximat
         u_\mathrm{2}(\alpha) - \frac{I_\mathrm{0}}{\omega C} (\omega t_\mathrm{2} - \alpha) = \left| \hat{u}_\mathrm{1}\sin(\omega t_\mathrm{2})\right|.
         \label{eq:alphabeta__B2U_cap_filt_gen}
     \end{equation}
-    This is solvable for $\omega t_\mathrm{2}$ in closed-form by using the approximation $\sin(\omega t) \approx \omega t$. The voltage 
-    $\left| u_\mathrm{1}(\omega t)\right|$ starts increasing at $\omega t > \pi$ with $\hat{u}_\mathrm{1} sin(\omega t - \pi)$.
+    This is solvable for $\omega t_\mathrm{2}$ in closed-form only by using the approximation $\sin(\omega t) \approx \omega t$. The voltage 
+    $\left| u_\mathrm{1}(\omega t)\right|$ starts increasing at $\omega t > \pi$ with $\hat{u}_\mathrm{1} \sin(\omega t - \pi)$.
     Using  \eqref{eq:alphabeta__B2U_cap_filt_gen} we obtain
     \begin{equation}
         u_2(\alpha) - \frac{I_\mathrm{0}}{\omega C} (\omega t_\mathrm{2} - \alpha) = \hat{u}_\mathrm{1}(\omega t_\mathrm{2} - \pi).
@@ -122,9 +122,9 @@ into account the previously calculated angles $\alpha$ and $\beta$.}
 
 \subtask{Calculate the currents $i_\mathrm{1}(\omega t)$  and $i_\mathrm{C}(\omega t)$ and add them to the previous plot.}
 \begin{solutionblock}
-    Two cases are to consider for the currents of $i_\mathrm{1}(\omega t)$ and  $i_\mathrm{C}(\omega t)$. If $\alpha<\omega t<\alpha+\beta$
+    Two cases are to consider for the currents of $i_\mathrm{1}(\omega t)$ and  $i_\mathrm{C}(\omega t)$: If $\alpha<\omega t<\alpha+\beta$
     and $\pi+\alpha<\omega t<\pi+\alpha+\beta$, the capacitor supplies the load current $I_{\mathrm{0}}$.
-    During the remaining phase angle range, the input voltage supplies the load current $I_{\mathrm{0}}$ and charge the capacitor.
+    During the remaining phase angle range, the input supplies the load current $I_{\mathrm{0}}$ and charge the capacitor.
     For $\alpha<\omega t<(\alpha+\beta)$ and $(\pi+\alpha)<\omega t<(\pi+\alpha+\beta)$ the current $i_\mathrm{C}(\omega t)$ 
     corresponds to the current $-I_{\mathrm{0}}$ while the diode bridge blocks:
     \begin{equation} 
@@ -143,15 +143,15 @@ into account the previously calculated angles $\alpha$ and $\beta$.}
     \begin{equation} 
         i_\mathrm{2}(\omega t)=i_\mathrm{C}(\omega t) + I_{\mathrm{0}}=\SI{19.4}{\ampere}\left|\cos(\omega t)\right| + \SI{7.5}{\ampere}.
     \end{equation}
-    The current $i_\mathrm{1}(\omega t)$ depends on the diodes, which conduct.
+    The current $i_\mathrm{1}(\omega t)$ depends on the diodes, which conduct:
     \begin{equation}
         \begin{split}
-            i_\mathrm{1}(\omega t)=i_\mathrm{2}(\omega t) \quad \text{for} \quad (\alpha+\beta-\pi)\leq\omega t\leq\alpha \\
+            i_\mathrm{1}(\omega t)=i_\mathrm{2}(\omega t) \quad \text{for} \quad (\alpha+\beta-\pi)\leq\omega t\leq\alpha, \\
             i_\mathrm{1}(\omega t)=-i_\mathrm{2}(\omega t) \quad \text{for} \quad (\alpha+\beta)\leq\omega t\leq\pi+\alpha.
         \end{split}
     \end{equation}
 
-    The currents $i_\mathrm{C}(\omega t)$ and $i_\mathrm{1}(\omega t)$ added to \autoref{sfig:ex05_Voltage_u2_andCurrent_i1_ic}.
+    The currents $i_\mathrm{C}(\omega t)$ and $i_\mathrm{1}(\omega t)$ are added to \autoref{sfig:ex05_Voltage_u2_andCurrent_i1_ic}.
 
 \end{solutionblock}
 
@@ -161,7 +161,7 @@ absorbed by the current source? What will $P_\mathrm{0}$ be if $C=\SI{330}{\micr
     Considering \eqref{eq:alpha_B2U_cap_filt_res} the term $I_\mathrm{0}/{\omega C}$ becomes zero, if $C\rightarrow \infty$. 
     This results in $\alpha=\SI{90}{\degree}$, which leads to
     \begin{equation} 
-        u_\mathrm{2}(\SI{90}{\degree})=\hat{u}_\mathrm{1}(\sin(\SI{90}{\degree}))=\hat{u}_\mathrm{1}.
+        u_\mathrm{2}(\SI{90}{\degree})=\hat{u}_\mathrm{1}(\SI{90}{\degree})=\hat{u}_\mathrm{1}.
     \end{equation}
     For a capacitor with $C\rightarrow \infty$ the voltage decrease is zero, so that the voltage $u_\mathrm{2}(t)$ is constant.
     In this case the power absorbed by the load current is obtained by
@@ -176,7 +176,7 @@ absorbed by the current source? What will $P_\mathrm{0}$ be if $C=\SI{330}{\micr
     \end{equation}
     Using $\beta'$ the absorbed average power of the load current is calculated by:
     \begin{equation} 
-        P_\mathrm{0,1}=\frac{\hat{u}_\mathrm{1} \cdot I_{\mathrm{0}} \cdot \omega}{\alpha-\beta'} \int_{\beta'}^{\alpha} \sin(\omega t) dt.
+        P_\mathrm{0,1}=\frac{\hat{u}_\mathrm{1} \cdot I_{\mathrm{0}} \cdot \omega}{\alpha-\beta'} \int_{\beta'}^{\alpha} \sin(\omega t)\mathrm{d}t.
     \end{equation}
     This leads to
     \begin{equation} 
@@ -186,7 +186,7 @@ absorbed by the current source? What will $P_\mathrm{0}$ be if $C=\SI{330}{\micr
              \left( \cos(\SI{0.337}{\radian}) - \cos(\SI{1.969}{\radian}) \right)=\SI{952}{\watt}.
         \end{aligned}
     \end{equation}
-    For the phase angle range $\alpha<\omega t<(\alpha+\beta)$ the voltage $u_\mathrm{2}(\omega t)$ is linear and the current is independent of the voltage.
+    For the phase angle range $\alpha<\omega t<(\alpha+\beta)$ the voltage $u_\mathrm{2}(\omega t)$ decreases linear and the current is independent of the voltage.
     This means that the power is a linear function of the voltage. Using $\left|\sin(\alpha+\beta)\right|=\sin(\beta')$ the average power is obtained by the load current multiplied
     with the average voltage:
     \begin{equation} 
@@ -205,11 +205,11 @@ absorbed by the current source? What will $P_\mathrm{0}$ be if $C=\SI{330}{\micr
 \subtask{What is the minimum blocking voltage ratings of the diodes to ensure that the rectifiers is not damaged?}
 \begin{solutionblock}
     If voltage $\left| u_\mathrm{1}(t) \right| < u_\mathrm{2}(t)$ the diode bridge blocks and the connection points of $u_\mathrm{1}(t)$
-    floats within the voltage range of $u_\mathrm{2}(t)$. The minimum blocking voltage ratings is to calculate, if a diode pair conducts.
-    The positive maximum of ${u}_\mathrm{1}(t)=\hat{u}_\mathrm{1}=\SI{156}{\volt}$. In this case $D_\mathrm{1}$
-    and $D_\mathrm{2}$ conduct and the voltage drops at $D_\mathrm{3}$ and $D_\mathrm{4}$ in block direction are $\hat{u}_\mathrm{1}=\SI{156}{\volt}$.
-    The negative maximum of ${u}_\mathrm{1}(t)=-\hat{u}_\mathrm{1}=-\SI{156}{\volt}$. In this case $D_\mathrm{3}$
-    and $D_\mathrm{4}$ conduct and the voltage drops at $D_\mathrm{1}$ and $D_\mathrm{2}$ in block direction are $\hat{u}_\mathrm{1}=\SI{156}{\volt}$.
+    floats within the voltage range of $u_\mathrm{2}(t)$. The minimum blocking voltage ratings is associated with a conducting diode pair.
+    The maximum of ${u}_\mathrm{1}(t)$ corresponds to $\hat{u}_\mathrm{1}=\SI{156}{\volt}$. In this case $D_\mathrm{1}$
+    and $D_\mathrm{2}$ conduct and the voltage drops at $D_\mathrm{3}$ and $D_\mathrm{4}$ in blocking direction are $\hat{u}_\mathrm{1}=\SI{156}{\volt}$.
+    The minimum of ${u}_\mathrm{1}(t)$ corresponds to $-\hat{u}_\mathrm{1}=-\SI{156}{\volt}$. In this case $D_\mathrm{3}$
+    and $D_\mathrm{4}$ conduct and the voltage drops at $D_\mathrm{1}$ and $D_\mathrm{2}$ in blocking direction are $\hat{u}_\mathrm{1}=\SI{156}{\volt}$.
     This leads to the result, that the minimum blocking voltage ratings of all diodes yields $\SI{156}{\volt}$.
 \end{solutionblock}
 

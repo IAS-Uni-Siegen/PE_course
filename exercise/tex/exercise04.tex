@@ -233,7 +233,9 @@ The converter operates in steady-state conditions. Both transistors are controll
 \FloatBarrier
 \subtask{Calculate the minimal necessary input voltage $U_\mathrm{1}$, if $U_\mathrm{2}$ = \SI{20}{\volt} shall being constant.}
 \begin{solutionblock}
-    For the forward converter the duty cycle should be less equal $0.5$. Using \eqref{eq:ex04voltageratioforwardconverter} leads to
+    Since $i_\mathrm{m}(t)$ should not increase after a switching period, the applicable duty cycle 
+    is limited to less than or equal to $0.5$. From \eqref{eq:ex04voltageratioforwardconverter} follows that at minimum input voltage
+    the duty cycle is maximum. Using \eqref{eq:ex04voltageratioforwardconverter} leads to
     \begin{equation}
         U_\mathrm{1}=\frac{N_\mathrm{2}}{N_\mathrm{1}}\frac{U_\mathrm{1}}{D_\mathrm{max}}=
         \frac{\SI{20}{\volt}}{0.5 \cdot 10}=\SI{400}{\volt}.
@@ -246,11 +248,11 @@ The converter operates in steady-state conditions. Both transistors are controll
 \begin{solutionblock}
     The ripple current $\Delta i_\mathrm{2}$ is expressed by
     \begin{equation}
-        \Delta i_\mathrm{2}= \frac{D \cdot U_\mathrm{2}}{L_\mathrm{m} \cdot f_\mathrm{s}} = 0.1 \overline{i}_\mathrm{2}.
+        \Delta i_\mathrm{2}= \frac{D \cdot U_\mathrm{2}}{L_\mathrm{m} \cdot f_\mathrm{s}} = 0.1 \cdot \overline{i}_\mathrm{2}.
     \end{equation}
     Using the result of \eqref{eq:ex04averageoutputcurrent} this leads to
     \begin{equation}
-        L_\mathrm{m}  = \frac{D \cdot U_\mathrm{2}}{0.1 \overline{i}_\mathrm{2} \cdot f_\mathrm{s}} 
+        L_\mathrm{m}  = \frac{D \cdot U_\mathrm{2}}{0.1 \cdot \overline{i}_\mathrm{2} \cdot f_\mathrm{s}} 
         = \frac{0.4615 \cdot \SI{15}{\volt}}{0.1 \cdot \SI{3.33}{\ampere} \cdot \SI{50}{\kilo\hertz}}=\SI{0.485}{\milli\henry}.
     \end{equation}    
 \end{solutionblock}
@@ -269,7 +271,7 @@ The power supply of a data processing system shall be realized by a singled-ende
 
 \FloatBarrier
 The parameters are listed in \autoref{table:Ex04_Parameters of the singled ended forward converter.}.
-The output inductance $L$ is dimensioned so that the current $i_\mathrm{L}$ exhibits a continuous waveform.
+The output inductance $L$ is dimensioned so that the current $i_\mathrm{L}$ exhibits a continuous curve shape.
 The transformer's leakage inductance can be neglected.
 
 \input{./fig/ex04/FigTab_SingledEndedForwardConverter}
@@ -401,11 +403,11 @@ The transformer's leakage inductance can be neglected.
     \end{equation}
     This corresponds to the current at the primary side of
     \begin{equation}
-        I_\mathrm{2s}'=I_\mathrm{2}\frac{N_\mathrm{2}}{N_\mathrm{1}}.
+        I_\mathrm{2p}'=I_\mathrm{2}\frac{N_\mathrm{2}}{N_\mathrm{1}}.
     \end{equation}
     This leads to the current $\hat{i}_\mathrm{m}$ of
     \begin{equation}
-        \hat{i}_\mathrm{m}=I_\mathrm{2s}'\cdot 0.1=I_\mathrm{2}\frac{N_\mathrm{2}}{N_\mathrm{1}}\cdot 0.1
+        \hat{i}_\mathrm{m}=I_\mathrm{2p}'\cdot 0.1=I_\mathrm{2}\frac{N_\mathrm{2}}{N_\mathrm{1}}\cdot 0.1
         =\frac{\SI{25}{\ampere}}{18.6} \cdot 0.1 =\SI{0.1344}{\ampere}.
         \label{eq:ex04magnetizationcurrent}  
     \end{equation}
@@ -440,7 +442,7 @@ The transformer's leakage inductance can be neglected.
         
 \subtask{Calculate the peak magnetizing current for each case assuming a constant output current.}
 \begin{solutionblock}
-    The current through the primary coil $N1$ is still calculated with \eqref{eq:ex04magnetizationcurrent} and yields
+    The current through the primary coil $N_\mathrm{1}$ is still calculated with \eqref{eq:ex04magnetizationcurrent} and yields
     $\SI{0.1344}{\ampere}$. 
     Using \eqref{eq:ex04ripplemagnetizationcurrent} the minimal duty cycle yields
     \begin{equation}
