@@ -275,7 +275,7 @@
         \end{tikzpicture}
         \hspace{0.5cm}
         \begin{circuitikz}[] % circuit (center plot)
-            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [short] ++(0.75,0)
             to [diode, l=$D$]  ++(1.5,0)
             to [short, i=$i_2(t)$] ++(0.75,0)
@@ -397,8 +397,8 @@
             (A2) to [short, -o] ++(-1.5,0) coordinate (A22)
             (T.B1) to [short, i=$i_\mathrm{s}(t)$] ++(1,0) coordinate (B1)
             (T.B2) to [short] ++(1,0) coordinate (B2);
-            \draw (A11) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (A22)
-            (B1) to [open, v = $u_\mathrm{s}(t)\hspace{0.5cm}$, voltage = straight] (B2); 
+            \draw (A11) to [open, v=$u_1(t)$, voltage = straight] (A22)
+            (B1) to [open, v = $u_\mathrm{s}(t)$, voltage = straight] (B2); 
             \draw (B1) to [open] (B2 -| B1) coordinate (A)
             (B1) to [short] ++(0.25,0)
             to [diode, l=$D$]  ++(1.5,0)
@@ -492,7 +492,7 @@
     \end{equation}}
     \begin{figure}
         \begin{circuitikz}[baseline=(current bounding box.center)] 
-            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [short] ++(0.75,0)
             to [diode, l=$D$]  ++(1.5,0)
             to [short, i=$i_2(t)$] ++(0.75,0)
@@ -555,7 +555,7 @@
 
     \begin{figure}
         \begin{circuitikz}[baseline=(current bounding box.center)] 
-            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [short, i=$i_1(t)$] ++(0.75,0)
             to [diode, l=$D$]  ++(1.5,0)
             to [short, i=${i_2(t)}$] ++(0.75,0) coordinate (C)
@@ -656,15 +656,15 @@
             (T.A2) to [short] ++(0,-1) to [short, -o] ++(-1,0) coordinate (A2)
             (T.B1) to [short] ++(0, 1) coordinate (B1)
             (T.B2) to [short] ++(0,-1) coordinate (B2);
-            \draw (A1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (A2); 
+            \draw (A1) to [open, v=$u_1(t)$, voltage = straight] (A2); 
             \draw (B1) to [diode, l=$D_1$] ++(2.5,0) coordinate (C1)
             (B2) to [diode, l=$D_2$] ++(2.5,0)
             to [crossing, -*, mirror] (C1)
             to [short, i=$i_2(t)$] ++(1.25,0) coordinate (D)
             to [R, v^= $u_2(t)$, voltage = straight, l_=$R$] (T-L2.midtap -| D)
             to [short] (T-L2.midtap);
-            \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=$\hspace{0.5cm}{u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
-            \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=$\hspace{0.5cm}{u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+            \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=${u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+            \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=${u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
         \end{circuitikz}%
         \begin{tikzpicture}[baseline=(current bounding box.center), , visible on =<2->]
             \begin{axis}[
@@ -773,7 +773,7 @@
     The B2U circuit also allows full-cycle rectification but without the need for a center-tapped transformer, that is, fully utilizes the input voltage without halving it on the output side.
     \begin{figure}
            \begin{circuitikz}[baseline=(current bounding box.center)]
-            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [short, i=$i_1(t)$, -*] ++(2,0)
             to [diode, l=$D_1$]  ++(0,1.5)
             to [short, -*] ++(2,0) coordinate (C)
@@ -858,7 +858,7 @@
     \frametitle{B2U uncontrolled rectifier circuit with capacitive output filtering}
     \begin{figure}
            \begin{circuitikz}
-            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [short, i=$i_1(t)$, -*] ++(2,0)
             to [diode, l=$D_1$]  ++(0,1.5)
             to [short, -*] ++(2,0) coordinate (C)
@@ -1035,7 +1035,7 @@
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance}
     \begin{figure}
            \begin{circuitikz}
-            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [L, i>^=$i_1(t)$, -*, l=$L$, v=$u_\mathrm{L}(t)$, voltage = straight] ++(3,0)
             to [diode, l=$D_1$]  ++(0,1.5)
             to [short, -*] ++(2,0) coordinate (C)
@@ -1593,7 +1593,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \frametitle{B2U rectifier impact on the grid voltage}
     \begin{figure}
            \begin{circuitikz}[scale = 0.8, transform shape]
-            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [L, i>^=$i_1(t)$, -*, l=$L$] ++(3,0) coordinate (G)  node[label={above:$\mathrm{PCC}$}] {}
             to [L, l=$L_\mathrm{A}$, i^>=$i_{1\mathrm{A}}(t)$] ++(3,0)
             to [short] ++(0.5,0) coordinate (K)
@@ -1625,9 +1625,9 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
             to ++ (0.5,0) node[fourport, anchor = port4, name=load]{Load B} 
             (A) to [short] (load.port1 -| A)
             to [short] (load.port1)
-            (I) to [open, v = $u_{1\mathrm{B}}(t)\hspace{0.5cm}$, voltage = straight] ++(0,-0.9)
-            (J) to [open, v = $u_{1\mathrm{PCC}}(t)\hspace{1cm}$, voltage = straight] ++(0,-0.9)
-            (K) to [open, v = $u_{1\mathrm{A}}(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2);
+            (I) to [open, v = $u_{1\mathrm{B}}(t)$, voltage = straight] ++(0,-0.9)
+            (J) to [open, v = $u_{1\mathrm{PCC}}(t)$, voltage = straight] ++(0,-0.9)
+            (K) to [open, v = $u_{1\mathrm{A}}(t)$, voltage = straight] ++(0,-2);
         \end{circuitikz}%
         \caption{B2U rectifier and a second load connected to the grid}
         \label{fig:B2U_grid_with_second_load}
@@ -1910,7 +1910,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \begin{figure}
            \begin{circuitikz}
             % Input rectifier
-            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [short, i>^=$i_1(t)$] ++(0.75,0) to [short, -*] ++(0.75,0)
             to [diode, l=$D_1$]  ++(0,1.5)
             to [short, -*] ++(1.5,0) coordinate (C)
@@ -1935,7 +1935,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
             (D) to [short] ++(1.5,0) coordinate (H)
             to [short] (DCDC.port1 -| H) -- ++(0.5,0)
             to [currtap, name=ct1] (DCDC.port1)
-            (DCDC.port4 -| G) to [open,v = $u'(t)\hspace{0.5cm}$, voltage = straight] (DCDC.port1 -| G);
+            (DCDC.port4 -| G) to [open,v = $u'(t)$, voltage = straight] (DCDC.port1 -| G);
 
             % Output filter and load
             \draw (DCDC.port3) to [short, i=$i_2(t)$] ++(0.9,0) coordinate (I)
@@ -2076,7 +2076,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \begin{figure}
            \begin{circuitikz}
             % Input rectifier
-            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [short, i>^=$i_1(t)$] ++(0.75,0) to [short, -*] ++(0.75,0)
             to [diode, l=$D_1$]  ++(0,1.5)
             to [short, -*] ++(1.5,0) coordinate (C)
@@ -2098,7 +2098,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
             (D) to [short] ++(1.5,0) coordinate (H)
             to [short] (DCDC.port1 -| H) -- ++(0.5,0)
             to [currtap, name=ct1] (DCDC.port1)
-            (DCDC.port4 -| G) to [open,v = $u'(t)\hspace{0.5cm}$, voltage = straight] (DCDC.port1 -| G);
+            (DCDC.port4 -| G) to [open,v = $u'(t)$, voltage = straight] (DCDC.port1 -| G);
 
             % Inner part
             \draw (DCDC.port4) to [L, l=$L$] ++(1.75,0) coordinate (boostup)
@@ -2398,7 +2398,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
            \begin{circuitikz}[scale = 0.8, transform shape]
             
             % Input rectifier
-            \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+            \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [short, i>^=$i_1(t)$] ++(0.75,0) to [short, -*] ++(0.75,0)
             to [diode, l=$D_1$]  ++(0,1.5)
             to [short, -*] ++(1.5,0) coordinate (C)
@@ -2419,7 +2419,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
             (D) to [short] ++(1.5,0) coordinate (H)
             to [short] (DCDC.port1 -| H) -- ++(0.5,0)
             to [currtap, name=ct1] (DCDC.port1)
-            (DCDC.port4 -| G) to [open,v = $u'(t)\hspace{0.5cm}$, voltage = straight] (DCDC.port1 -| G);
+            (DCDC.port4 -| G) to [open,v = $u'(t)$, voltage = straight] (DCDC.port1 -| G);
 
             % Inner part
             \draw (DCDC.port4) to [L, l=$L$] ++(1.75,0) coordinate (boostup)
@@ -2628,7 +2628,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
             \draw (L2bend) to [diode, l=$D_2$] ++(1.25,0) coordinate (D2end);
             \draw (L2cend) to [diode, l=$D_3$] ++(1.25,0) coordinate (D3end) to [short, -*] (D2end) to [short, -*] (D1end);
             \draw (D1end) to [short] ++(0.5,0) coordinate (u2) to [short, i=$i_2(t)$] ++(1.5,0) to [R, l=$R$] (Rend -| \tikztostart) to (Rend); 
-            \draw (u2) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] (Rend -| \tikztostart);
+            \draw (u2) to [open, v^>=$u_2(t)$, voltage = straight] (Rend -| \tikztostart);
         \end{circuitikz}%
         \caption{M3U topology (aka \hl{three-pulse mid-point rectifier}) with an input three-phase transformer and a resistive load}
         \label{fig:M3U_topology}
@@ -2732,7 +2732,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
             \draw (L2bend) to [diode, l=$D_2$] ++(1.25,0) coordinate (D2end);
             \draw (L2cend) to [diode, l=$D_3$] ++(1.25,0) coordinate (D3end) to [short, -*] (D2end) to [short, -*] (D1end);
             \draw (D1end) to [short] ++(0.5,0) coordinate (u2) to [short, i=$i_2(t)$] ++(0.75,0) to [L, l=$L$] ++(2,0) coordinate (Ctop) to [short, i = $i_\mathrm{R}(t)$] ++(1.5,0) to [R, l=$R$] (Rend -| \tikztostart) to (Rend); 
-            \draw (u2) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] (Rend -| \tikztostart);
+            \draw (u2) to [open, v^>=$u_2(t)$, voltage = straight] (Rend -| \tikztostart);
             \draw (Ctop) to [C, l=$C$, i = $i_\mathrm{C}(t)$, v = $u_\mathrm{C}(t)$, voltage = straight, *-*]  (Rend -| Ctop);
         \end{circuitikz}%
         \caption{M3U topology with an input three-phase transformer, a resistive load and output filter}
@@ -2915,10 +2915,10 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
                 \draw (C -| D5) to [short, *-] ++(-\hd/2,0) to [crossing, mirror] ++(-\hd,0) to [crossing, mirror] ++(-\hd,0) -- (C);
                 \draw (D1top) to [short, -*] (D3top) to [short, -*] (D5top) to [short, i=$i_2(t)$] ++(2,0) to [R, l=$R$, name = R] (D6bot -| \tikztostart) to (D6bot);
                 \draw (D2bot) to [short, -*] (D4bot) to [short, -*] (D6bot);
-                \draw ($(D5top)!.3!(D5top -| R)$) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] ($(D6bot)!.3!(D6bot -| R)$);
-                \draw (A) to [open, v^>=$\hspace{0.75cm}u_{1\mathrm{ab}}(t)$, voltage = straight] (B);
-                \draw (B) to [open, v^>=$\hspace{0.75cm}u_{1\mathrm{bc}}(t)$, voltage = straight] (C);
-                \draw (-0.5,-2*\vd) to [open, v^>=$u_{1\mathrm{ca}}(t)\hspace{0.75cm}$, voltage = straight] (-0.5,0);
+                \draw ($(D5top)!.3!(D5top -| R)$) to [open, v^>=$u_2(t)$, voltage = straight] ($(D6bot)!.3!(D6bot -| R)$);
+                \draw (A) to [open, v^>=$u_{1\mathrm{ab}}(t)$, voltage = straight] (B);
+                \draw (B) to [open, v^>=$u_{1\mathrm{bc}}(t)$, voltage = straight] (C);
+                \draw (-0.5,-2*\vd) to [open, v^>=$u_{1\mathrm{ca}}(t)$, voltage = straight] (-0.5,0);
             \end{circuitikz}
         \caption{B6U topology (aka \hl{six-pulse bridge rectifier}) with resistive load}
         \label{fig:B6U_topology}
@@ -3102,9 +3102,9 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
                 \draw (D2bot) to [short, -*] (D4bot) to [short, -*] (D6bot) to [short, -o] ++(3,0) coordinate (B6U2bot);
             \end{scope}
             \draw (B6U2top) to [short] (B6U1bot)
-            (B6U1top) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] (B6U2bot)
-            (B6U1top -| B6U1bot) to [open, v^>=$\hspace{0.7cm}u_{2,1}(t)$, voltage = straight] (B6U1bot)
-            (B6U2top) to [open, v^>=$\hspace{0.7cm}u_{2,2}(t)$, voltage = straight] (B6U2bot -| B6U2top);
+            (B6U1top) to [open, v^>=$u_2(t)$, voltage = straight] (B6U2bot)
+            (B6U1top -| B6U1bot) to [open, v^>=$u_{2,1}(t)$, voltage = straight] (B6U1bot)
+            (B6U2top) to [open, v^>=$u_{2,2}(t)$, voltage = straight] (B6U2bot -| B6U2top);
       \end{circuitikz}%
       \caption{12-pulse recitifier with B6U-2S topology: two B6U rectifiers connected in series}
       \label{fig:B6U-2S_topology_filter}
@@ -3251,7 +3251,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
             %Connect bottom row
             \draw (D2bot) to [short,-*] (D4bot) to [short,-*] (D6bot) to [short,-*] (D8bot) to [short,-*] (D10bot) to [short,-*] (D12bot) to [short,-o] ++(2,0) coordinate (B6Ubot);
             %Output voltage
-            \draw (B6Utop) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] (B6Ubot);
+            \draw (B6Utop) to [open, v^>=$u_2(t)$, voltage = straight] (B6Ubot);
       \end{circuitikz}%
       \caption{12-pulse recitifier with B6U-2P topology: two B6U rectifiers connected in parallel}
       \label{fig:B6U-2P_topology_filter}

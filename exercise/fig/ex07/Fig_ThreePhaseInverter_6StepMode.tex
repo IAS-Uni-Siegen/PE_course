@@ -5,10 +5,10 @@
         \begin{center}
             \begin{circuitikz}
                 % Add voltage U1p
-                \draw (0,0) coordinate (U1p) to [open, o-o, v = $\frac{U_1}{2}\hspace{0.5cm}$, voltage = straight] ++(0,-2.5) coordinate (Gnd)
+                \draw (0,0) coordinate (U1p) to [open, o-o, v = $\frac{U_1}{2}$, voltage = straight] ++(0,-2.5) coordinate (Gnd)
                 (Gnd) ++ (-0.4,0) node[rground](){} coordinate (GndSymb)
                 (Gnd) to [short,-] (GndSymb)
-                (Gnd) to [open, -o, v = $\frac{U_1}{2}\hspace{0.5cm}$, voltage = straight] ++(0,-2.5) coordinate (U1m)
+                (Gnd) to [open, -o, v = $\frac{U_1}{2}$, voltage = straight] ++(0,-2.5) coordinate (U1m)
                 % Add current
                 (U1p) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (jT1c)
                 % Add T1
@@ -112,9 +112,6 @@
                 % Add voltage arrow un0
                 (Gnd3) ++(0,2.8) to [open,v^=$$,voltage = straight] ++(0,-3.01)
                 (Gnd3) ++ (-0.7,1.2) node[anchor=north,color=black,rotate = 90]{$u_\mathrm{2n0}(t)$};
-
-
-
             \end{circuitikz}
         \end{center}
         \caption{Three-phase inverter in six-step mode.}

@@ -5,7 +5,7 @@
         \begin{center}
             \begin{circuitikz}[european currents,european resistors,american inductors]
          % Input rectifier
-         \draw (0,0) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (A)
+         \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
          (0,0) to [short, i>^=$i_1(t)$] ++(0.75,0) to [short, -*] ++(0.75,0)
          to [diode, l=$D_1$]  ++(0,1.5)
          to [short, -*] ++(1.5,0) coordinate (C)
@@ -27,7 +27,7 @@
          (D) to [short] ++(1.5,0) coordinate (H)
          to [short] (DCDC.port1 -| H) -- ++(0.5,0)
          to [currtap, name=ct1] (DCDC.port1)
-         (DCDC.port4 -| G) to [open,v = $u'(t)\hspace{0.5cm}$, voltage = straight] (DCDC.port1 -| G);
+         (DCDC.port4 -| G) to [open,v = $u'(t)$, voltage = straight] (DCDC.port1 -| G);
 
          % Inner part
          \draw (DCDC.port4) to [L, l=$L$] ++(1.75,0) coordinate (boostup)

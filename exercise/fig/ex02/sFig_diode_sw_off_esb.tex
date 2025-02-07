@@ -1,7 +1,7 @@
 \begin{solutionfigure}[htb]
     \centering
     \begin{circuitikz}[european currents,european resistors,american inductors]
-        \draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+        \draw (0,2) to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
         to ++(-5.3,0);
         \draw (0,2) to (2,2);
         \draw (2,0) to (0.05,0);
@@ -13,7 +13,7 @@
         to [short, -o, i=$i_2(t)$] (0,2) 
         (S.mid) to [short, o-*](\x1,0);
         \draw (-1.5,2) to [capacitor, *-*, l=$C$, i>^=$i_\mathrm{C}(t)$] ++(0,-2);
-        \draw (-6,2) to [open, v>=$u_1(t)\hspace{0.3cm}$, voltage = straight] ++(0,-2);
+        \draw (-6,2) to [open, v>=$u_1(t)$, voltage = straight] ++(0,-2);
         \draw (-5,0)  to [short, -o]  ++(-1,0);
         \draw (-5.75,2) to [short, -o] ++(-0.25,0);
     \end{circuitikz}

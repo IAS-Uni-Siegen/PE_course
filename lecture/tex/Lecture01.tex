@@ -727,9 +727,9 @@
 	\frametitle{Linear power conversion}
 	\begin{figure}
 		\begin{circuitikz}[]
-			\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+			\draw (0,2) to [open, o-o, v^=$u_2(t)$, voltage = straight] ++(0,-2)
 			to ++(-6,0)
-			to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+			to [open, o-o, v^<= $u_1(t)$, voltage = straight] ++(0,2)
 			to [european resistor, R=$R_1$] ++(4,0) 
 			to ++(2,0)
 			(-2,0) to [variable european resistor, *-*, l=$R_2$] (-2,2);
@@ -759,9 +759,9 @@
 			\begin{figure}
 				\onslide<1->{
 				\begin{circuitikz}[]
-					\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+					\draw (0,2) to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
 					to ++(-5.5,0)
-					to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+					to [open, o-o, v^<= $u_1(t)$, voltage = straight] ++(0,2)
 					(-5.5,2) to ++(1.25,0) node [nigbt, anchor=C, rotate=90](nigbt1){}
 					(nigbt1.E) to [short, i=$i_2(t)$] (0,2);
 					\draw node[rectangle, draw, anchor = north] (r) at (nigbt1.B) {Linear amplifier}
@@ -793,7 +793,6 @@
 						xmin=0, xmax=5,
 						xtick={0,1,2,3,4},
 						ytick={0,1,2,3,4,5},
-						%no x/y ticks displayed
 						xticklabels={},
 						yticklabels={},
 						domain=0:5,
@@ -844,9 +843,9 @@
 			\begin{figure}
 				\onslide<1->{
 				\begin{circuitikz}[]
-					\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+					\draw (0,2) to [open, o-o, v^=$u_2(t)$, voltage = straight] ++(0,-2)
 					to ++(-5,0)
-					to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+					to [open, o-o, v^<= $u_1(t)$, voltage = straight] ++(0,2)
 					(-5,2) to ++(1.25,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
 					let \p1 = (S.mid) in (S.in) to (0,2)
 					([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
@@ -1067,14 +1066,14 @@
 					
 					\node[] (A) at (0,0) {
 						\begin{circuitikz}[]
-							\draw (0,2) to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+							\draw (0,2) to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
 							to ++(-6,0)
-							to [open, o-o, v<= $u_1(t) \hspace{2cm}$, voltage = straight] ++(0,2)
+							to [open, o-o, v^<= $u_1(t)$, voltage = straight] ++(0,2)
 							(-6,2) to ++(1.25,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
 							let \p1 = (S.mid) in (S.in) to [inductor, l_=$L$] (0,2) 
 							([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
 							\draw (-0.75,2) to [capacitor, *-*, l_=$C$] (-0.75,0);
-							\draw (-3.5,2) to [open, v = $\hspace{1.75cm}u_\mathrm{s}(t)$, voltage = straight] ++(0,-2);
+							\draw (-3.5,2) to [open, v^= $u_\mathrm{s}(t)$, voltage = straight] ++(0,-2);
 						\end{circuitikz}
 					};
 					\pause	
@@ -1595,21 +1594,21 @@
 			&
 			\onslide<2->{
 			{\large
-			$ i(t) =C \frac{}{ t}u(t)$
+			$ i(t) =C \frac{\mathrm{d}}{\mathrm{d}t}u(t)$
 			}
 			}
 			\vspace{0.5cm}
 			&
 			\onslide<3->{
 			{\large
-			$u(t) =L \frac{}{ t}i(t)$
+			$u(t) =L \frac{\mathrm{d}}{\mathrm{d}t}i(t)$
 			}
 			}
 			\vspace{0.5cm}
 			&
 			\onslide<4->{
 			{\large
-			$\bm{u}(t) =\bm{L} \frac{}{ t}\bm{i}(t)$
+			$\bm{u}(t) =\bm{L} \frac{\mathrm{d}}{\mathrm{d}t}\bm{i}(t)$
 			}
 			}
 			\vspace{0.5cm}

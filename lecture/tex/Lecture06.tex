@@ -110,7 +110,7 @@
                     \draw (2,-1.5) node[cute spdt down arrow, xscale=-1] (Sw2) {};
                     \draw (Sw2.in) to [short, -o] ++(1,0) coordinate (out2);
                     \draw (Sw1.in) to [short] ++(1.75,0) to [short, -o, i=$i_2(t)$] (Sw1.in -| out2) coordinate (out1);
-                    \draw (out1) to [open, v^=$\hspace{0.5cm}u_2(t)$, voltage = straight] (out2);
+                    \draw (out1) to [open, v^=$u_2(t)$, voltage = straight] (out2);
                     \draw (Sw1-out 1.n) to [short, -*] ++(0,0.5) coordinate (int1);
                     \draw (Sw2-out 2.s) to [short] ++(0,-0.5) coordinate (int2);
                     \draw (int2) to [short] (int2 -| Sw1-out 2.s) coordinate (int3) to [short, *-] (Sw1-out 2.s);
@@ -119,7 +119,7 @@
                     \draw (x1.east) to [short] (Sw2-out 1.n);
                     \draw (int1) to [short] ++(-1,0) to [short, i_<=$i_1(t)$, -o] ++(-1,0) coordinate (in1);
                     \draw (int3) to [short, -o] ++(-2,0) coordinate (in2);
-                    \draw (in1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (in2);
+                    \draw (in1) to [open, v=$u_1(t)$, voltage = straight] (in2);
                     \draw node[anchor = east, xshift=-0.3cm] at (Sw1) {$s_1(t)$};
                     \draw node[anchor = east, xshift=-0.3cm] at (Sw2) {$s_2(t)$};
                 \end{circuitikz}
@@ -160,7 +160,7 @@
         \begin{column}{0.55\textwidth}
             \begin{figure}
                 \begin{circuitikz}[]
-                    \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-5) coordinate (B)
+                    \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-5) coordinate (B)
                     (A) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (E)
                     to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
                     to [short, *-] ++(1,0) to [crossing] ++(2,0)   
@@ -174,7 +174,7 @@
                     to [short, -*] ++(-2,0)
                     to [short, -o] (B)
                     (F) to [short,*-o] ++(2,0) coordinate (H)
-                    (G) to [open, o-o, v = $\hspace{1.9cm}u_2(t)$, voltage = straight] (H);
+                    (G) to [open, o-o, v^= $u_2(t)$, voltage = straight] (H);
                     \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
                     \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
                     \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
@@ -865,8 +865,8 @@
                     \draw ($(driver.south east)!0.5!(driver.east)$) to ++(0.25,0) |- (amp2.in);
                     \draw[<-] (driver.west) to node[above]{$s_i(t)$} ++(-0.75,0) coordinate (D);
                     \draw let \p1 = (D) in (B) to [short] ++($(\x1 - 0.5cm, 0)$) coordinate (E);
-                    \draw let \p1 = (D) in (0,0) to [short, -o, -o, i<_=$i_1(t)$] ++($(\x1 - 0.5cm, 0)$) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight]  (E);
-                    \draw (C) to [open, v^=$\hspace{0.5cm}u_2(t)$, voltage = straight] ++(0,-2) to [short, o-*] (B);
+                    \draw let \p1 = (D) in (0,0) to [short, -o, -o, i<_=$i_1(t)$] ++($(\x1 - 0.5cm, 0)$) to [open, v=$u_1(t)$, voltage = straight]  (E);
+                    \draw (C) to [open, v^=$u_2(t)$, voltage = straight] ++(0,-2) to [short, o-*] (B);
                 \end{circuitikz}
                 \caption{Actuation of one half-bridge branch}
                 \label{fig:half_bridge_actuation}
@@ -1163,7 +1163,7 @@
                     (Sw1-in) to [short, -o] ++(1,0) coordinate (F);
                 \draw 
                     (F |- C) node[rground, anchor = south, name = gnd2]{}
-                    (F) to [open, v={$u_2(t)\hspace{0.3cm}$}, voltage = straight] (gnd2); 
+                    (F) to [open, v={$u_2(t)$}, voltage = straight] (gnd2); 
             \end{circuitikz}\\[1em]
             \begin{tikzpicture}
                 \begin{axis}[
@@ -1201,11 +1201,11 @@
                     ($(B) + (1.0,0)$) node[rotary switch ->=3 in 90 wiper 90, xscale=-1, anchor=out 2](Sw1){}
                     (A) -| (Sw1-out 1.n)
                     (C) -| (Sw1-out 3.s)
-                    (Sw1-in) to [short, -o] ++(1,0) coordinate (F)
+                    (Sw1-in) to [short, -o] ++(1.25,0) coordinate (F)
                     (Sw1-out 2.w) to [short] (B);
                 \draw 
                     (F |- C) node[rground, anchor = south, name = gnd2]{}
-                    (F) to [open, v={$u_2(t)\hspace{0.3cm}$}, voltage = straight] (gnd2); 
+                    (F) to [open, v={$u_2(t)$}, voltage = straight] (gnd2); 
             \end{circuitikz}\\[1em]
             \begin{tikzpicture}
                 \begin{axis}[
@@ -1246,12 +1246,12 @@
                     ($(C) + (1.75,0)$) node[rotary switch ->=4 in 90 wiper 90, xscale=-1, anchor=in](Sw1){}
                     (A) -| (Sw1-out 1.n)
                     (E) -| (Sw1-out 4.s)
-                    (Sw1-in) to [short, -o] ++(1,0) coordinate (H)
+                    (Sw1-in) to [short, -o] ++(1.25,0) coordinate (H)
                     (Sw1-out 2.n) |- (B)
                     (Sw1-out 3.s) |- (D);
                 \draw 
                     (H |- E) node[rground, anchor = south, name = gnd2]{}
-                    (H) to [open, v={$u_2(t)\hspace{0.3cm}$}, voltage = straight] (gnd2); 
+                    (H) to [open, v={$u_2(t)$}, voltage = straight] (gnd2); 
             \end{circuitikz}\\[1em]
             \begin{tikzpicture}
                 \begin{axis}[
@@ -1295,7 +1295,7 @@
                 \draw (-2,-1.5) node[cute spdt down arrow] (Sw2) {};
                 \draw (Sw2.in) to [short, -o] ++(-1,0) coordinate (out2);
                 \draw (Sw1.in) to [short] ++(-1.75,0) to [short, -o, i_<=$i_2(t)$] (Sw1.in -| out2) coordinate (out1);
-                \draw (out1) to [open, v=$u_2(t)\hspace{0.5cm}$, voltage = straight] (out2);
+                \draw (out1) to [open, v^=$u_2(t)$, voltage = straight] (out2);
                 \draw (Sw1-out 1.n) to [short, -*] ++(0,0.5) coordinate (int1);
                 \draw (Sw2-out 2.s) to [short] ++(0,-0.5) coordinate (int2);
                 \draw (int2) to [short] (int2 -| Sw1-out 2.s) coordinate (int3) to [short, *-] (Sw1-out 2.s);
@@ -1304,7 +1304,7 @@
                 \draw (x1.east) to [short] (Sw2-out 1.n);
                 \draw (int1) to [short,i=$i_1(t)$] ++(1.5,0) coordinate (c1) to [short, i={$I_0$}, -o] ++(1,0) coordinate (in1);
                 \draw (int3) to [short, -o] ++(2.5,0) coordinate (in2);
-                \draw (in1) to [open, v^=$\hspace{0.5cm}u_1(t)$, voltage = straight] (in2);
+                \draw (in1) to [open, v^=$u_1(t)$, voltage = straight] (in2);
                 \draw node[anchor = west, xshift=0.3cm] at (Sw1) {$s_1(t)$};
                 \draw node[anchor = west, xshift=0.3cm] at (Sw2) {$s_2(t)$};
                 \draw (c1) to [capacitor, *-*, l=$C$, i_=$i_\mathrm{C}(t)$] (c1 |- int2);
@@ -1485,9 +1485,9 @@
                 \draw (Sw3.in) to [short, -o, i=$i_{2\mathrm{c}}(t)$] (Sw3.in -| out2) coordinate (out3);
                 \draw (Sw3.in |- Sw2.in) to [short, -o, i=$i_{2\mathrm{b}}(t)$] (Sw2.in -| out2);
                 \draw (Sw3.in |- Sw1.in) to [short, -o, i=$i_{2\mathrm{a}}(t)$] (Sw1.in -| out2);
-                \draw (out1) to [open, v^=$\hspace{0.75cm}u_{2\mathrm{ab}}(t)$, voltage = straight] (out2);
-                \draw (out2) to [open, v^=$\hspace{0.75cm}u_{2\mathrm{bc}}(t)$, voltage = straight] (out3);
-                \draw ($(out3) + (1.5,0)$) to [open, v_=$\hspace{0.75cm}u_{2\mathrm{ca}}(t)$, voltage = straight] ($(out1) + (1.5,0)$);
+                \draw (out1) to [open, v^=$u_{2\mathrm{ab}}(t)$, voltage = straight] (out2);
+                \draw (out2) to [open, v^=$u_{2\mathrm{bc}}(t)$, voltage = straight] (out3);
+                \draw ($(out3) + (1.5,0)$) to [open, v_=$u_{2\mathrm{ca}}(t)$, voltage = straight] ($(out1) + (1.5,0)$);
                 \draw (Sw1-out 1.n) to [short, -*] ++(0,0.5) coordinate (int1);
                 \draw (Sw3-out 2.s) to [short] ++(0,-0.5) coordinate (int3);
                 \draw (int3) to [short] (int3 -| Sw1-out 2.s) coordinate (int4) to [short, *-] (Sw1-out 2.s);
@@ -1496,7 +1496,7 @@
                 \draw (x1.east) to [short] (Sw2-out 1.n);
                 \draw (int1) to [short] ++(-1,0) to [short, i_<=$i_1(t)$, -o] ++(-1,0) coordinate (in1);
                 \draw (int4) to [short, -o] ++(-2,0) coordinate (in2);
-                \draw (in1) to [open, v=$u_1(t)\hspace{0.5cm}$, voltage = straight] (in2);
+                \draw (in1) to [open, v=$u_1(t)$, voltage = straight] (in2);
                 \draw node[anchor = east, xshift=-0.3cm] at (Sw1) {$s_1(t)$};
                 \draw node[anchor = east, xshift=-0.3cm] at (Sw2) {$s_2(t)$};
                 \draw node[anchor = east, xshift=-0.3cm] at (Sw3) {$s_3(t)$};
@@ -1523,7 +1523,7 @@
             (Z) node[rground, rotate=-90, name = gnd1]{}
             (A) to [short, *-o] ++(-2,0) coordinate (Y)
             (B) to [short, *-o] ++(-2,0) coordinate (X)
-            (Y) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] (X)
+            (Y) to [open, o-o, v = $u_1(t)$, voltage = straight] (X)
             (A) to [short, i=$i_{1}(t)$] ++(2,0) coordinate (E)
             to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
             to [short, *-] ++(1,0) to [crossing] ++(2,0) to [crossing] ++(2,0)   
@@ -1544,9 +1544,9 @@
             to [short, -*] ++(-2,0)
             (F) to [short, *-] ++(1,0) to [crossing] ++(2,0) to [short, i=$i_{2\mathrm{b}}(t)$] ++(1,0) coordinate (V) to [short] ++(1,0) coordinate (H)
             (K) to [short, *-] ++(1,0) to [short, i=$i_{2\mathrm{c}}(t)$] ++(1,0) to [short] ++(0.5,0) coordinate(W) to [short] ++(0.5,0) coordinate (L)
-            (G) to [open, o-o, v^=$\hspace{0.75cm}u_{2\mathrm{ab}}(t)$, voltage = straight] (H)
-            (H) to [open, o-o, v^=$\hspace{0.75cm}u_{2\mathrm{bc}}(t)$, voltage = straight] (L)
-            ($(L) + (1.5,0)$) to [open, v_=$\hspace{0.75cm} u_{2\mathrm{bc}}(t)$, voltage = straight] ($(G) + (1.5,0)$);
+            (G) to [open, o-o, v^=$u_{2\mathrm{ab}}(t)$, voltage = straight] (H)
+            (H) to [open, o-o, v^=$u_{2\mathrm{bc}}(t)$, voltage = straight] (L)
+            ($(L) + (1.5,0)$) to [open, v_=$u_{2\mathrm{bc}}(t)$, voltage = straight] ($(G) + (1.5,0)$);
             \draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
             \draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
             \draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
@@ -1599,7 +1599,7 @@
             (Z) node[rground, rotate=-90, name = gnd1]{}
             (A) to [short, *-o] ++(-2,0) coordinate (Y)
             (B) to [short, *-o] ++(-2,0) coordinate (X)
-            (Y) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] (X)
+            (Y) to [open, o-o, v = $u_1(t)$, voltage = straight] (X)
             (A) to [short, i=$i_{1}(t)$] ++(2,0) coordinate (E)
             to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
             to [short, *-] ++(1,0) to [crossing] ++(2,0) to [crossing] ++(2,0)   

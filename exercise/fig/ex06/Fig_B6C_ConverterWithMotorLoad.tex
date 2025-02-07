@@ -51,17 +51,17 @@
                 % Add wire T2-T3-T6
                 (D2bot) to [short, -*] (D4bot) to [short, -*] (D6bot)
                 % Add voltage arrow u2(t) between Dtop and Dbot
-                (jL1) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] (D6bot-|jL1)                
+                (jL1) to [open, v^>=$u_2(t)$, voltage = straight] (D6bot-|jL1)                
                 % Add voltage arrow u2+n(t) between Dtop and neutral
                 (D1top) ++(-0.2,0) to [open, v_>=$u_\mathrm{2,p}(t)$, voltage = straight] ++(-5.5,0)
                 % Add voltage arrow u2-n(t) between Dbot and neutral
                 (D2bot) ++(-0.2,0) to [open, v_>=$u_\mathrm{2,m}(t)$, voltage = straight] ++(-5.5,0)
                 % Add voltage arrow between AC source a and b
-                (A) to [open, v^>=$\hspace{0.75cm}u_{1\mathrm{ab}}(t)$, voltage = straight] (B)
+                (A) to [open, v^>=$u_{1\mathrm{ab}}(t)$, voltage = straight] (B)
                 % Add voltage arrow between AC source b and c
-                (B) to [open, v^>=$\hspace{0.75cm}u_{1\mathrm{bc}}(t)$, voltage = straight] (C)
+                (B) to [open, v^>=$u_{1\mathrm{bc}}(t)$, voltage = straight] (C)
                 % Add voltage arrow between AC source a and c
-                (-0.5,-2*\vd) to [open, v^>=$u_{1\mathrm{ca}}(t)\hspace{0.75cm}$, voltage = straight] (-0.5,0);
+                (-0.5,-2*\vd) to [open, v^>=$u_{1\mathrm{ca}}(t)$, voltage = straight] (-0.5,0);
             \end{circuitikz}
         \end{center}
         \caption{B6C converter at a motor load.}

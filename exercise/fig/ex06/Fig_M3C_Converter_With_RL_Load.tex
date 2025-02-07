@@ -21,7 +21,7 @@
       \draw (L2bend) to [thyristor] ++(1.25,0) coordinate (D2end);
       \draw (L2cend) to [thyristor] ++(1.25,0) coordinate (D3end) to [short, -*] (D2end) to [short, -*] (D1end);
       \draw (D1end) to [short] ++(0.5,0) coordinate (u2) to [short, i=$i_2(t)$] ++(0.75,0) to [L, l=$L$] ++(2,0) coordinate (Ctop) to [short, i = $i_\mathrm{R}(t)$] ++(1.5,0) to [R, l=$R$] (Rend -| \tikztostart) to (Rend); 
-      \draw (u2) to [open, v^>=$\hspace{0.5cm}u_2(t)$, voltage = straight] (Rend -| \tikztostart);
+      \draw (u2) to [open, v^>=$u_2(t)$, voltage = straight] (Rend -| \tikztostart);
     \end{circuitikz}%
   \end{center}
   \caption{M3C topology with an input three-phase transformer and an RL-load.}

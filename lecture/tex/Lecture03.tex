@@ -298,11 +298,11 @@
             \draw (0,0) to [short, *-] ++(1.0,0)
             to [diode, l=$D$, invert]  ++(1.0,0)
             to [short, -o, i=$i_2(t)$] ++(1.0,0)
-            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
+            to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [short, *-] ++(-1.0,0) 
             to [Tnpn, n=npn1] ++(-1.0,0)
             to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
-            to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-2)
+            to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2)
             to [short, o-o] (A)
             (0,0) to [inductor, *-*] ++(0,-2);
             \draw let \p1 = (npn1.B) in node[anchor=north] at (\x1,\y1) {$T$};
@@ -312,11 +312,11 @@
             \draw (0,0) to [short] ++(1.0,0)
             to [diode, l=$D$, invert]  ++(1.0,0)
             to [short, -o, i=$i_2(t)$] ++(1.0,0)
-            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
+            to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [short] ++(-1.0,0) 
             to [Tnpn, n=npn1] ++(-1.0,0)
             to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
-            to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-2)
+            to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2)
             to [short, o-o] (A)
             (-0.5,0) to [inductor, *-*, n=l1] ++(0,-2)
             (0.5,0) to [inductor, *-*, n=l2, mirror] ++(0,-2);
@@ -340,11 +340,11 @@
             \draw (0,0) to [short] ++(1.0,0)
             to [diode, l=$D$, invert]  ++(1.0,0)
             to [short, -o, i=$i_2(t)$] ++(1.0,0)
-            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
+            to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (0,0) to [short] ++(-1.0,0) 
             to [Tnpn, n=npn1] ++(-1.0,0)
             to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
-            to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-2)
+            to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2)
             to [short, o-o] (A)
             (-0.5,0) to [inductor, *-*, n=l1] ++(0,-2)
             (0.5,0) to [inductor, *-*, n=l2, mirror] ++(0,-2);
@@ -360,11 +360,11 @@
             \draw (0.5,0) to [short] ++(0.5,0)
             to [diode, l=$D$, invert]  ++(1.0,0)
             to [short, -o, i=$i_2(t)$] ++(1.0,0)
-            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
+            to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
             (-0.5,0) to [short] ++(-0.5,0) 
             to [Tnpn, n=npn1] ++(-1.0,0)
             to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
-            to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-2) coordinate (B)
+            to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2) coordinate (B)
             (-0.5,0) to [inductor, n=l1] ++(0,-2) coordinate (C)
             (0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
             (D) to [short, -o] (A)
@@ -400,9 +400,9 @@
                     \draw (0.5,0) to [short] ++(0.5,0)
                     to [diode, l=$D$]  ++(1.0,0)
                     to [short, -o, i=$i_2(t)$] ++(1.0,0)
-                    to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
+                    to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
                     (-0.5,0) to [short, -o, i_<=$i_1(t)$] ++(-1.5,0)
-                    to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-3.75) coordinate (B)
+                    to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-3.75) coordinate (B)
                     (-0.5,0) to [inductor, n=l1] ++(0,-2) 
                     to [Tnpn, n=npn1, invert] ++(0,-1.75) coordinate (C)
                     (0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
@@ -438,10 +438,10 @@
                 \draw (0.5,0) to [short] ++(0.5,0)
                 to [open]  ++(1.0,0)
                 to [short, -o, i={$i_2(t)=0$}] ++(1.0,0)
-                to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
+                to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
                 (-0.5,0) to ++(-1,0) coordinate (E)
                 to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
-                to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-3) coordinate (B)
+                to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-3) coordinate (B)
                 (-0.5,0) to [inductor, n=l1] ++(0,-2) 
                 to [short] ++(0,-1) coordinate (C)
                 (0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
@@ -464,10 +464,10 @@
                 \begin{circuitikz}[]
                     \draw (0.5,0) to [short] ++(0.5,0)
                     to [short, -o, i={$i_2(t)$}] ++(0.75,0)
-                    to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
+                    to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
                     (-0.5,0) to ++(-1,0) coordinate (E)
                     to [short, -o, i_<={$i_1(t)=0$}] ++(-1.0,0)
-                    to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-3) coordinate (B)
+                    to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-3) coordinate (B)
                     (-0.5,0) to [inductor, n=l1] ++(0,-2) 
                     to [open] ++(0,-1) coordinate (C)
                     (0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
@@ -925,38 +925,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Forward converter}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Topology derivation based on the buck converter %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-    \frametitle{Topology derivation based on the buck converter}
-    \begin{figure}
-        \begin{circuitikz}[]
-            \draw (0,0) to [short, i=$i_1(t)$] ++(0.75,0)
-            to [Tnpn, n=npn1, invert] ++(2.0,0) coordinate (A)
-            to [inductor, l=$L$] ++(2.0,0)
-            to [short, i=$i_2(t)$] ++(0.75,0)
-            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (B)
-            (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-2.0) coordinate (C)
-            (C) to [short, o-o]  (B)
-            (A) to [diode, l=$D$, invert, *-*]  ++(0,-2);
-            \draw let \p1 = (npn1.B) in node[anchor=north] at (\x1,\y1) {$T$};
-            \draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=0.5cm},yshift=0pt] (0,-2.0) -- (5.5,-2.0) node [black,midway,yshift=-0.6cm] {};
-        \end{circuitikz}
-        \begin{circuitikz}[]
-            \draw (0,0) to [short, i=$i_1(t)$] ++(0.75,0)
-            to [short] ++(2.0,0) coordinate (A)
-            to [inductor, l=$L$] ++(2.0,0)
-            to [short, i=$i_2(t)$] ++(0.75,0)
-            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (B)
-            (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-2.0) coordinate (D) 
-            (A) to [diode, l=$D$, invert, *-*]  ++(0,-2) coordinate (C)
-            (C) to [short, -o]  (B)
-            (C) to [Tnpn, n=npn1, invert] (D);
-            \draw let \p1 = (npn1.B) in node[anchor=south] at (\x1,\y1) {$T$};
-        \end{circuitikz}
-    \end{figure}
-\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Topology derivation based on the buck converter %%
@@ -969,8 +937,8 @@
             to [short] ++(2.0,0) coordinate (A)
             to [inductor, l=$L$] ++(2.0,0)
             to [short, i=$i_2(t)$] ++(0.75,0)
-            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2) coordinate (B)
-            (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-2.0) coordinate (D) 
+            to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (B)
+            (0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2.0) coordinate (D) 
             (A) to [diode, l=$D$, invert, *-*]  ++(0,-2) coordinate (C)
             (C) to [short, -o]  (B)
             (C) to [Tnpn, n=npn1, invert] (D);
@@ -983,13 +951,13 @@
             to [short] ++(2.0,0)
             to [inductor, n=l1] ++(0,-2) 
             to [Tnpn, n=npn1, invert] ++(-2.75,0) 
-            (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-2.0);
+            (0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2.0);
             \draw  (3.75,0) to [inductor, n=l2, mirror] ++(0,-2) 
             to [short] ++(2,0) coordinate (A)
             to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
             to [inductor, l=$L$] ++(2,0)
             to [short, i=$i_2(t)$] ++(0.75,0)
-            to [open, o-o, v = $\hspace{2cm}u_2(t)$, voltage = straight] ++(0,-2)
+            to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
             to [short] (A)
             (3.75,0) to [diode, l=$D_1$] (B);
             \draw (2,-0.25) to [open, v = $u_\mathrm{p}$, voltage = straight] ++(0,-1.5);
@@ -1033,13 +1001,13 @@
                     \draw (0,0) to [short, i=$i_1(t)$] ++(1.5,0)
                     to [inductor, n=l1] ++(0,-2) 
                     to [Tnpn, n=npn1, invert] ++(0,-2)  -- (0,-4.0)
-                    (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-4.0);
+                    (0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-4.0);
                     \draw  (2.5,0) to [inductor, n=l2, mirror] ++(0,-2) 
                     to [short] ++(2,0) coordinate (A)
                     to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
                     to [inductor, l=$L$] ++(2,0)
                     to [short, i=$i_2(t)$] ++(0.75,0)
-                    to [open, o-o, v = $u_2(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
+                    to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
                     to [short] (A)
                     (2.5,0) to [diode, l=$D_1$] (B);
                     \draw (0.75,-0.25) to [open, v = $u_\mathrm{p}$, voltage = straight] ++(0,-1.5);
@@ -1167,13 +1135,13 @@
                     to [short] ++(1,0)
                     to [inductor, n=l1] ++(0,-2) coordinate (A2)
                     to [Tnpn, n=npn1, invert] ++(0,-2)   -- (0,-4.0)
-                    (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-4.0);
+                    (0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-4.0);
                     \draw  (2.5,0) to [inductor, n=l2, mirror] ++(0,-2) 
                     to [short] ++(2,0) coordinate (A)
                     to [diode, l_=$D_2$, *-*] ++(0,2) coordinate (B)
                     to [inductor, l=$L$] ++(2,0)
                     to [short, i=$i_2(t)$] ++(0.75,0)
-                    to [open, o-o, v = $u_2(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
+                    to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
                     to [short] (A)
                     (2.5,0) to [diode, l=$D_1$] (B)
                     (A1) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-] ++(-0,-2)
@@ -1201,7 +1169,7 @@
         \begin{figure}
             \begin{circuitikz}[]
                 %Asym. half-bridge
-                \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-6) coordinate (B)
+                \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-6) coordinate (B)
                 (A) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (E)
                 to [Tnpn, n=npn1, invert] ++(0,-2) coordinate (C)
                 to [short,*-] ++(2,0)  
@@ -1230,7 +1198,7 @@
                 to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}(t)$, voltage = straight] ++(0,2) coordinate (D1)
                 to [inductor, l=$L$] ++(2,0)
                 to [short, i=$i_2(t)$] ++(0.75,0)
-                to [open, o-o, v^= $\hspace{0.5cm}u_2(t)$, voltage = straight] ++(0,-2)
+                to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
                 to [short] (C1)
                 (A1) to [open] ++(0.75,0) to [diode, l=$D_1$] (D1)
                 (G) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-*] ++(-0,-2)
@@ -1324,7 +1292,7 @@
         \begin{figure}
             \begin{circuitikz}[]
                 %full-bridge
-                \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-6) coordinate (B)
+                \draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-6) coordinate (B)
                 (A) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (E)
                 to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
                 to [short,*-] ++(2,0)  
@@ -1355,7 +1323,7 @@
                 to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}(t)$, voltage = straight] ++(0,2) coordinate (D1)
                 to [inductor, l=$L$] ++(2,0)
                 to [short, i=$i_2(t)$] ++(0.75,0)
-                to [open, o-o, v^= $\hspace{0.5cm}u_2(t)$, voltage = straight] ++(0,-2)
+                to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
                 to [short] (C1)
                 (A1) to [open] ++(0.75,0) to [diode, l=$D_1$] (D1)
                 (G) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-*] ++(-0,-2)
@@ -1536,14 +1504,14 @@
             \draw (0,0) to [short, i=$i_1(t)$] ++(1.5,0) -- ++(1.0,0) 
             to [inductor, n=l1] ++(0,-2) 
             to [Tnpn, n=npn1, invert] ++(0,-2) coordinate (C) -- (0,-4.0) 
-            (0,0) to [open, o-o, v_= $u_1(t)\hspace{0.75cm}$, voltage = straight] ++(0,-4.0);
+            (0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-4.0);
             %secondary side
             \draw  (4.25,0) to [inductor, n=l2, mirror] ++(0,-2) 
             to [short] ++(2,0) coordinate (A)
             to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
             to [inductor, l=$L$] ++(2,0)
             to [short, i=$i_2(t)$] ++(0.75,0)
-            to [open, o-o, v = $u_2(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2)
+            to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
             to [short] (A)
             (4.25,0) to [diode, l=$D_1$] (B);
             %demag winding

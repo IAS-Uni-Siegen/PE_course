@@ -7,8 +7,8 @@
                 \draw
                 % Base point for voltage supply
                 (0,0) coordinate (jU1v)
-                % Add supply U1 [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight]
-                (jU1v) to [open, o-o, v = $u_1(t)\hspace{0.5cm}$, voltage = straight] ++(0,-2) coordinate (jU1g)
+                % Add supply U1 
+                (jU1v) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (jU1g)
                 % Add arrow and Text
                 (jU1v) ++(0.5,0) node[currarrow](I1){}  
                 (I1)  node[anchor=south,color=black]{$i_\mathrm{1}(t)$}  
