@@ -16,12 +16,12 @@ This work is licensed under a
 <a href="https://ias-uni-siegen.github.io/PE_course/lecture.pdf" target="_blank" class="image fit"><img src="misc/Lecture_preview.png" alt=""></a>
 
 The covered topics are:
-- An initial overview of power electronics
-- DC-DC converters
-- Isolated DC-DC converters
-- Diode-based rectifiers
-- Thyristor-based AC/DC converters
-- Transistor-based AC/DC converters
+- [An initial overview of power electronics](https://ias-uni-siegen.github.io/PE_course/lecture.pdf#sec1) 
+- [DC-DC converters](https://ias-uni-siegen.github.io/PE_course/lecture.pdf#sec2)
+- [Isolated DC-DC converters](https://ias-uni-siegen.github.io/PE_course/lecture.pdf#sec3)
+- [Diode-based rectifiers](https://ias-uni-siegen.github.io/PE_course/lecture.pdf#sec4)
+- [Thyristor-based AC/DC converters](https://ias-uni-siegen.github.io/PE_course/lecture.pdf#sec5)
+- [Transistor-based AC/DC converters](https://ias-uni-siegen.github.io/PE_course/lecture.pdf#sec6)
 
 
 ## Exercise tasks (click on preview picture)
