@@ -119,6 +119,9 @@ acs-*.bib
 *.slg
 *.slo
 *.sls
+.*ist
+.*nom
+.*nomc
 
 # uncomment this for glossaries-extra (will ignore makeindex's style files!)
 # *.ist
@@ -310,3 +313,8 @@ TSWLatexianTemp*
 
 # KiCad backups
 simulations/*/*backups*
+
+#misc
+*.ist
+*.equ
+*.eqn
