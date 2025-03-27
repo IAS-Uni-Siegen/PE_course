@@ -29,6 +29,10 @@ jobs:
             cp ../course_template/lectureClass.cls ./
             python3 build.py
             cd ..
+
+            cd exam
+            cp ../course_template/examClass.cls ./
+            python3 build.py
             
 
             
