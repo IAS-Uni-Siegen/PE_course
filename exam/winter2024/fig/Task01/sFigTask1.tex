@@ -1,0 +1,95 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SolutionFigure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{solutionfigure}[htb]  
+    \begin{center}
+        \definecolor{orange}{rgb}{1.0,0.5,0}
+        \begin{tikzpicture}
+            % groupplot begin
+            \begin{groupplot}[group style={
+                group size=1 by 2,
+                xlabels at=edge bottom,
+                y descriptions at=edge left,
+                },
+                domain=0:15,
+                % x/y range adjustment
+                xmin=0, xmax=10.25,
+                samples=500,
+                axis y line=center,
+                axis x line=middle,
+                extra y ticks=0,
+                % Label text
+                xlabel={$t / \SI{}{\micro\second}$},,
+                % Label adjustment
+                x label style={at={(axis description cs:1,0.5)},anchor=west},
+                y label style={at={(axis description cs:-.05,.97)},anchor=south},
+                width=0.95\textwidth,
+                height=0.3\textwidth,
+                % x-Ticks
+                xtick={0,1,2,3,4,5,6,7,8,9,10},
+                xticklabels={0,2,4,6,8,10,12,14,16,18,20},
+                xticklabel style = {yshift=0.1cm, xshift=0.15cm,anchor=north},
+                % Grid layout
+                grid=both,
+                grid style={line width=.1pt, draw=gray!10},
+                major grid style={line width=.2pt,draw=gray!50},
+                ]
+                % Ul
+                \nextgroupplot[
+                    ymin=-22, ymax=42,
+                    samples=500,
+                    extra y ticks=0,
+                    % x-Label text
+                    xlabel={$t / \SI{}{\micro\second}$},,                    
+                    % y-Label
+                    y label style={at={(axis description cs:-.05,1)},anchor=south},
+                    height=0.25\textwidth,
+                    ylabel={\color{black}$u_\mathrm{L}(t)/\mathrm{V}$},
+                    % y-Ticks
+                    ytick={-20,-10,0,10,20,30,40},
+                    yticklabels={-20,,0,,20,,40},
+                    yticklabel style = {anchor=east},
+                ]
+
+
+                \addplot[color=blue,mark=none,solid,line width=1pt] coordinates{
+                    (0, 36)
+                    (1.33, 36)
+                    (1.33, -12.8)
+                    (5, -12.8)
+                    (5, 36)
+                    (6.33, 36)
+                    (6.33, -12.8)
+                    (10, -12.8)
+                    (10, 36)
+                    (10.1, 36)
+                };
+                % il
+                \nextgroupplot[
+                    ymin=64, ymax=78,
+                    samples=500,
+                    % x-Label text
+                    xlabel={$t / \SI{}{\micro\second}$},,
+                    x label style={at={(axis description cs:1,0)},anchor=west},                    
+                    % y-Label
+                    y label style={at={(axis description cs:-.05,1)},anchor=south},
+                    height=0.25\textwidth,
+                    ylabel={\color{black}$i_\text{L}(t)/\mathrm{A}$},
+                    ytick={65,70,75},
+                    yticklabels={65,70,75},
+                    yticklabel style = {anchor=east},                        
+                    xticklabel style = {xshift=0cm,anchor=north},
+                    ];                
+                    % Voltage ul(wt)
+                    \addplot[red, domain= 0:1.33,solid,line width=1pt] {67.75+x*4.5/1.33};
+                    \addplot[red, domain= 1.33:5,solid,line width=1pt] {72.25-(x-1.33)*4.5/3.67};
+                    \addplot[red, domain= 5:6.33,solid,line width=1pt] {67.75+(x-5)*4.5/1.33};
+                    \addplot[red, domain= 6.33:10,solid,line width=1pt] {72.25-(x-6.33)*4.5/3.67};
+                    \addplot[red, domain= 10:10.1,solid,line width=1pt] {67.75+(x-10)*4.5/1.33};
+            \end{groupplot}
+        \end{tikzpicture}
+    \end{center}
+    \caption{Relevant voltage and current signals.}
+    \label{fig:transistor_circuit}
+\end{solutionfigure}       

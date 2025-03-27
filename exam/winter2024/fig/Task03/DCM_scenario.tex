@@ -1,0 +1,64 @@
+\begin{figure}[htb]
+        \begin{tikzpicture} % M1C output voltage
+            \tikzmath{
+                    real \Lw, \u1, \b, \adcm, \E, \R;
+                    \Lw = 2; %angular frequency times inductance
+                    \u1 = 1; %Input voltage amplitude
+                    \b = 0.5*pi; %conduction interval for DCM
+                    \adcm = pi/3; %firing angle for DCM (\b + \adcm must be greater than 2pi/3 for correct visualization)
+                    \E = 0.4; %battery voltage
+                    \R = 0.1;
+                }
+            \begin{groupplot}[group style={group size= 1 by 1, xticklabels at = edge bottom, vertical sep=1em, yticklabels at = edge left, horizontal sep = 1em}, 
+                width=1\textwidth,
+                height=0.34\textheight,
+                axis x line=bottom,
+                axis y line=left,
+                xmin=0, xmax=4*pi,
+                ymin=-1.15, ymax=1.15,
+                xtick={0, pi/2, pi, 3*pi/2, 2*pi, 5*pi/2, 3*pi, 7*pi/2, 4*pi},
+                xticklabels={$0$,$\frac{1}{2}\pi$, $\pi$,$\frac{3}{2}\pi$, $2\pi$,$\frac{5}{2}\pi$, $3\pi$, $\frac{7}{2}\pi$, $4\pi$},
+                ytick={-1, -1/2, 0,1/2, 1},
+                yticklabels={$-\hat{u}_\mathrm{s}$, ,$0$, ,$\hat{u}_\mathrm{2}$},
+                grid=both,
+                clip=false
+                ]
+
+            \nextgroupplot[title=DCM, height=0.35\textheight] % voltage DCM
+                %\addplot[domain=0:4*pi, samples=200, signalblue, thick, name path = A3]{(x < \b) * cos(deg(x)) + (x > \adcm + pi/3)*(\adcm + pi/3 + \b > x)* cos(deg(x+(4*pi/3)))  + (x > \adcm + pi)*( \adcm + pi + \b > x)*cos(deg(x+(2*pi/3)))+ (x > 5*pi/3 + \adcm)* (x < 5*pi/3 + \adcm+ \b) * cos(deg(x)) + (x > \adcm + 7*pi/3)*(\adcm + (7*pi/3) + \b > x)* cos(deg(x+(4*pi/3)))+ (x > \adcm + 3*pi)*( \adcm + (3*pi) + \b > x)*cos(deg(x+(2*pi/3)))};
+                
+                \addplot[domain=0:4*pi, samples=200, signalblue, thick, name path = A3]{(x < pi/3 + \adcm +\b - 2*pi/3) * cos(deg(x)) + (x > pi/3 +\adcm + \b - 2*pi/3) * (x < pi/3 +\adcm) * \E + (x > pi/3+\adcm)* (x < pi/3+\adcm + \b) * cos(deg(x+(4*pi/3)))+ (x > pi/3 + \adcm + \b) * (x < pi + \adcm ) * \E + (x > \adcm + pi)*( \adcm + pi + \b > x) *cos(deg(x+(2*pi/3))) + (\adcm + pi + \b < x)* (x < 5*pi/3 + \adcm) * \E + (x > 5*pi/3 +\adcm) * (x < 5*pi/3 + \adcm + \b) * cos(deg(x))+(x > 5*pi/3 + \adcm + \b)*(x < 7*pi/3 + \adcm) *\E  + (x > 7*pi/3 + \adcm) *  (x < 7*pi/3 + \adcm + \b)*cos(deg(x+(4*pi/3))) + (x > 7*pi/3 + \adcm + \b)*(x < 3*pi + \adcm) *\E + (x > 3*pi + \adcm) *  (x < 3*pi + \adcm + \b)*cos(deg(x+(2*pi/3))) + (x > 3*pi + \adcm + \b)*\E};
+                  
+               
+                %\addplot[domain=0:4*pi, samples=10, signalblue, thick,dashed, name path = avg3]{\ucdcm};
+                \addplot[domain=0:4*pi, samples=10, signalblue, thick,dashed, name path = avg3]{\E};
+               % \node at (axis cs:-0.3,\ucdcm) [anchor=north] {$\overline{u}_2$};
+                \node at (axis cs:-0.3,\E) [anchor=north] {$U_\mathrm{batt}$};
+                \addplot[domain=0:4*pi, samples=50, signalgreen, dashed]{cos(deg(x))};
+                \addplot[domain=0:4*pi, samples=50, signalbrown, dashed]{cos(deg(x+(2*pi/3))};
+                \addplot[domain=0:4*pi, samples=50, signalyellow, dashed]{cos(deg(x+(4*pi/3))};
+                \node at (axis cs:pi/3,-0.85) [signalbrown, fill=white,inner sep=1pt] {$u_\mathrm{1b}$};
+                \node at (axis cs:pi,-0.85) [signalgreen, fill=white,inner sep=1pt] {$u_\mathrm{1c}$};
+                \node at (axis cs:pi*6.7/4,-0.85) [signalyellow, fill=white,inner sep=1pt] {$u_\mathrm{1a}$};
+                \draw[->] (axis cs:pi/3,1) -- node[above]{$\alpha$} (axis cs:pi/3+\adcm,1) ;
+                \draw[->] (axis cs:pi,1) -- node[above]{$\alpha$} (axis cs:pi+\adcm,1) ;
+                 \draw[->] (axis cs:5*pi/3,1) -- node[above]{$\alpha$} (axis cs:5*pi/3+\adcm,1) ;
+                \draw[->] (axis cs:7*pi/3,1) -- node[above]{$\alpha$} (axis cs:7*pi/3+\adcm,1) ;
+                 \draw[->] (axis cs:3*pi,1) -- node[above]{$\alpha$} (axis cs:3*pi+\adcm,1);
+                 \draw[->] (axis cs:11*pi/3,1) -- node[above]{$\alpha$} (axis cs:11*pi/3+\adcm,1) ;
+                \draw[dashed, thick] (axis cs:pi/3,0) -- (axis cs:pi/3,1);
+                \draw[dashed, thick] (axis cs:pi,0) -- (axis cs:pi,1);
+                 \draw[dashed, thick] (axis cs:5*pi/3,0) -- (axis cs:5*pi/3,1);
+                \draw[dashed, thick] (axis cs:7*pi/3,0) -- (axis cs:7*pi/3,1);
+                \draw[dashed, thick] (axis cs:3*pi,0) -- (axis cs:3*pi,1);
+                 \draw[dashed, thick] (axis cs:11*pi/3,0) -- (axis cs:11*pi/3,1);
+                \addplot[shadecolor, opacity=0.3] fill between[of=A3 and avg3, soft clip={domain=0:4*pi}];
+                \draw[<->, thick] (axis cs:pi/3 +\adcm,-0.5) -- node[above]{$\beta$} (axis cs:pi/3 +\adcm + \b,-0.5) ;
+            %    \draw[dashed, thick] (axis cs:pi/3 + \adcm,\E) -- (axis cs:pi/3 + \adcm,-0.5);
+            %    \draw[dashed, thick] (axis cs:pi/3 + \adcm + \b,\E) -- (axis cs:pi/3 + \adcm + \b,-0.5);
+           
+            \end{groupplot}
+        \end{tikzpicture}   
+        \caption{M3C voltages in DCM.}
+        \label{fig:M3C_dcm}
+    \end{figure}

@@ -40,22 +40,22 @@
 				\centering
 				\begin{tikzpicture}
                     \begin{scope}[]
-                        \fill[signalgreen, opacity=0.3] (0,0) -- (2,0) -- (2,2) -- (0,2) -- cycle;
-                        \fill[signalgreen, opacity=0.3] (0,0) -- (2,0) -- (2,-2) -- (0,-2) -- cycle;
+                        \fill[signalgreen, opacity=0.3] (0,0) -- (-2,0) -- (-2,-2) -- (0,-2) -- cycle;
+                        \fill[signalgreen, opacity=0.3] (0,0) -- (-2,0) -- (-2,2) -- (0,2) -- cycle;
                     \end{scope}
                     \begin{scope}[]
-                        \fill[shadecolor, opacity=0.3] (0,0) -- (-2,0) -- (-2,2) -- (0,2) -- cycle;
-                        \fill[shadecolor, opacity=0.3] (0,0) -- (-2,0) -- (-2,-2) -- (0,-2) -- cycle;
+                        \fill[shadecolor, opacity=0.3] (0,0) -- (2,0) -- (2,-2) -- (0,-2) -- cycle;
+                        \fill[shadecolor, opacity=0.3] (0,0) -- (2,0) -- (2,2) -- (0,2) -- cycle;
                     \end{scope}
                     \draw[<->] (-2,0) -- (2,0) node[anchor=west] {$i_1$};
                     \draw[<->] (0,-2) -- (0,2) node[anchor=south] {$u_1$};
-                    \node[anchor=center, align = center] at (1.0,1.0) {$\mathrm{I}$\\$P \geq 0$\\(recitifier)};
-                    \node[anchor=center, align = center] at (-1.0,1.0) {$\mathrm{II}$\\$P \leq 0$\\(inverter)};
-                    \node[anchor=center, align = center] at (-1.0,-1.0) {$\mathrm{III}$\\$P \geq 0$\\(recitifier)};
-                    \node[anchor=center, align = center] at (1.0,-1.0) {$\mathrm{IV}$\\$P \leq 0$\\(inverter)};
-                    \draw[thin, visible on=<2->] (1.75,0.75) to (2.4,0.25) node[anchor=north west] {Thyristors};
-                    \draw[thin, visible on=<2->] (1.75,-0.75) to (2.4,-0.25) node[anchor=south west] {};
-                    \draw[thin] (1.75,1.75) to (2.4,2.25) node[anchor=west] {Diodes};
+                    \node[anchor=center, align = center] at (1.0,1.0) {$\mathrm{I}$\\$P \geq 0$\\(inverter)};
+                    \node[anchor=center, align = center] at (-1.0,1.0) {$\mathrm{II}$\\$P \leq 0$\\(recitifier)};
+                    \node[anchor=center, align = center] at (-1.0,-1.0) {$\mathrm{III}$\\$P \geq 0$\\(inverter)};
+                    \node[anchor=center, align = center] at (1.0,-1.0) {$\mathrm{IV}$\\$P \leq 0$\\(recitifier)};
+                    \draw[thin, visible on=<2->] (-1.85,0.4) to (-2.2,0) node[anchor=east] {Thyristors};
+                    \draw[thin, visible on=<2->] (-1.85,-0.4) to (-2.2,0) node[anchor=east] {};
+                    \draw[thin] (-1.75,1.75) to (-2.2,2.25) node[anchor=east] {Diodes};
 					\node[anchor = center, xshift = 1mm] at (0, 3.5) {
 						\begin{circuitikz}
 							\node[twoportsplitshape, scale = 1.5](tp){};

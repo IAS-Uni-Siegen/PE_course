@@ -177,6 +177,9 @@ acs-*.bib
 *.slt[0-9]*
 *.stc[0-9]*
 
+# exam pdfs
+exam/winter2024/*.pdf
+
 # minted
 _minted*
 *.pyg

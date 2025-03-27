@@ -1,0 +1,132 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Examtask 2: Four quadrant converter with pulse width modulation %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\task{Four-quadrant converter with pulse width modulation}
+
+\taskGerman{Vier-Quadranten-Steller mit Pulsweitenmodulation}
+
+% Insipired by Task 2 of the winter 2023/24 exam of Prof. Pacas (cf. \\filer.uni-siegen.de\NAS\IAS\300_Teaching\359_Lecture_notes_Prof_Pacas\Leistungselektronik\Alte Klausuren Leistungselektronik)
+% However, there should be some variations to the original task:
+% - Add the information that the PWM is interleaving (while not providing a second reference or carrier signal, as this should 
+%   be identifed by the students when it comes to the switching pattern) and also not providing a switching table or something
+% - add an additional question asking for the conducting / current carrying components during each sub switching interval 
+%   (could be added to the plot), that is which transistors/diodes carry the current at each time step
+% - change the values of the voltage, inductor and initial current conditions
+% - change the nomenclature of the task to the usual definitions of our course
+
+
+The components of the four quadrant converter according \autoref{fig:Dual_Active_Bridge} are considered as ideal.
+The converter's data is displayed in \autoref{table:four_quad_converter}. The inner load voltage is constant: $u_{2\mathrm{i}}(t)=U_{2\mathrm{i}}$.
+
+\begin{germanblock}
+Die Komponenten des in \autoref{fig:Dual_Active_Bridge} abgebildeten Vier-Quadranten-Stellers sind als ideal zu betrachten. Dessen Daten sind 
+in \autoref{table:four_quad_converter} angegeben. Die innere Lastspannung ist konstant: $u_{2\mathrm{i}}(t)=U_{2\mathrm{i}}$.
+\end{germanblock}
+
+% figure figStepDownConverterOutputFilter
+\input{fig/Task02/figDual_Active_Bridge}
+
+\begin{table}[ht]
+    \centering  % Zentriert die Tabelle
+    \begin{tabular}{llll}
+        \toprule
+        Input voltage: &  $U_{\mathrm{1}} = \SI{450}{\volt}$ & Current at $t=\SI{0}{\second}$: & $i_{\mathrm{2}}(0) = \SI{30}{\ampere}$ \\ 
+        Inner voltage: & $U_{\mathrm{2i}} = \SI{150}{\volt}$  & Inductance: & $L = \SI{60}{\micro\henry}$ \\ 
+        \bottomrule
+    \end{tabular}
+    \caption{Parameters of the four-quadrant converter.}  % Beschriftung der Tabelle
+    \label{table:four_quad_converter}
+\end{table}
+
+The four quadrant converter is controlled by a PWM with interleaved switching. $T_1$ is connected to the  output of the PWM, 
+which uses the non-inverted reference voltage. On the other hand, $T_3$ is connected to the output of the PWM, 
+which uses the inverted reference voltage.
+The triangular carrier voltage and the reference voltage are displayed in the the solution diagram.
+Note that the reference signal changes at $t=\SI{24}{\micro\second}$ and $t=\SI{36}{\micro\second}$.
+
+\vspace{1em}
+\color{gray}
+Der Vier-Quadranten-Steller wird durch eine PWM mit phasenversetztem Schalten gesteuert.
+Der Ausgang der Steuerung, der die nicht invertierte Referenzspannung verwendet, ist mit $T_1$ verbunden, während der Ausgang, der die invertierte Referenzspannung verwendet, mit $T_3$ verbunden ist.
+Der Dreiecksträger und die Referenzspannung werden im Lösungsdiagramm dargestellt.
+Beachten Sie, dass das Referenzsignal bei $t=\SI{24}{\micro\second}$ and $t=\SI{36}{\micro\second}$ wechselt.
+\color{black}
+
+\subtask{Add the voltage signals of $u_{\mathrm{a}(t)}$, $u_{\mathrm{b}(t)}$ and $u_{\mathrm{ab}(t)}$ to the diagram in \autoref{fig:solutionfigureTemplateTask2}
+and and complete the axis scaling of the ordinates.}{3}
+
+\subtaskGerman{Zeichnen Sie $u_{\mathrm{a}(t)}$, $u_{\mathrm{b}(t)}$ and $u_{\mathrm{ab}(t)}$ in das Lösungsblatt \autoref{fig:solutionfigureTemplateTask2} ein
+ und ergänzen Sie die Achsenskalierung der Ordinaten.}
+ 
+\subtask{Calculate the current signals $i_\mathrm{2}(t)$ and $i_\mathrm{1}(t)$ and add them to template diagram.}{4}
+\begin{hintblock}
+    If you are not able to exactly calculate the current signals, you can qualitatively add them to the template diagram for partial points.
+\end{hintblock}
+
+\subtaskGerman{Berechnen Sie die Ströme von $i_\mathrm{2}(t)$ und $i_\mathrm{1}(t)$ und zeichnen Sie diese in Vorlage ein.}
+\begin{germanhintblock}
+    Wenn Sie die Ströme nicht exakt berechnen können, können Sie diese qualitativ in die Vorlage für Teilpunkte eintragen.
+\end{germanhintblock}
+
+% Solution of subtask
+\begin{solutionblock}
+    The voltage at the inductor $L$ is calculated by
+    \begin{equation*}
+        u_\mathrm{L}(t) = u_\mathrm{2ab}(t)-U_\mathrm{2i}.
+        \label{eq:u_inductor}
+    \end{equation*}
+    The slope of the current is determined by the voltage at the inductance.
+    \begin{equation*}
+        \frac{\mathrm{d}}{\mathrm{d}t}i_\mathrm{2}(t) = \frac{1}{L}u_\mathrm{L}(t).
+        \label{eq:i2_slope_gen}
+    \end{equation*}
+    Using the two equations above for the slope of $i_\mathrm{2}(t)$ at the three different voltages, we obtain:
+    \begin{equation*}
+        \frac{\mathrm{d}}{\mathrm{d}t}i_\mathrm{2}(t) =
+        \begin{cases}
+            u_\mathrm{2ab}(t)=\SI{450}{\volt}:  &\frac{\mathrm{d}}{\mathrm{d}t}i_\mathrm{2}(t)
+            =\frac{1}{\SI{60}{\micro\henry}}(\SI{450}{\volt}-\SI{150}{\volt})=\SI{5}{\frac{\ampere}{\micro\second}}, \\
+            u_\mathrm{2ab}(t)=\SI{0}{\volt}:  &\frac{\mathrm{d}}{\mathrm{d}t}i_\mathrm{2}(t)
+            =\frac{1}{\SI{60}{\micro\henry}}(-\SI{150}{\volt})=\SI{-2.5}{\frac{\ampere}{\micro\second}}, \\
+            u_\mathrm{2ab}(t)=\SI{-450}{\volt}: &\frac{\mathrm{d}}{\mathrm{d}t}i_\mathrm{2}(t)
+            =\frac{1}{\SI{60}{\micro\henry}}(\SI{-450}{\volt}-\SI{150}{\volt})=\SI{-10}{\frac{\ampere}{\micro\second}}.
+        \end{cases}
+        \label{eq:i2_slope_res}
+    \end{equation*}
+
+    The voltage at the inductor $L$ is constant for discrete time intervals. So $i_\mathrm{2}(t)$ is calculated by
+    \begin{equation*}
+        \begin{aligned}        
+            &i_\mathrm{2}(t) = i_\mathrm{2}(\tau)+\frac{\mathrm{d}}{\mathrm{d}t}i_\mathrm{2}(\tau) \cdot (t-\tau) \\
+            &\text{with $\tau$ is start of a constant time interval.}
+        \end{aligned}
+        \label{eq:i2_res}
+    \end{equation*}
+    The current $i_\mathrm{1}(t)$ corresponds to:
+    \begin{equation*}
+        i_\mathrm{1}(t) =
+        \begin{cases}
+            \SI{0}{\ampere} \quad &u_\mathrm{2ab}(t) = \SI{0}{\volt} \\
+            i_\mathrm{2}(t) \quad &u_\mathrm{2ab}(t) \neq \SI{0}{\volt}.
+        \end{cases}        
+    \end{equation*}    
+    These results are used to sketch $i_\mathrm{2}(t)$ and $i_\mathrm{1}(t)$ within the solution sheet.    
+
+\end{solutionblock}
+
+\subtask{Mark which semiconductors carry the current $i_\mathrm{2}(t)$ in the template diagram. For example, if $T_\mathrm{1}$ and $D_\mathrm{4}$ conduct 
+ during the range $\SI{10}{\micro\second}$ and $\SI{14}{\micro\second}$, the range must be marked with 2 vertical 
+lines and $T_\mathrm{1}/D_\mathrm{4}$ entered there.}{3}
+
+\subtaskGerman{Kennzeichnen Sie die jeweils leitenden Halbleiterkomponenten, welche den Strom $i_\mathrm{2}(t)$ führen. Wenn beispielsweise $T_\mathrm{1}$ und $D_\mathrm{4}$ den Strom $i_\mathrm{2}(t)$ innerhalb
+des Bereichs $\SI{10}{\micro\second}$ und $\SI{14}{\micro\second}$ leiten, ist der Bereich mit 2 vertikalen Linien zu markieren und 
+in diesen $T_\mathrm{1}/D_\mathrm{4}$ einzutragen.}
+
+
+\input{fig/Task02/FigTask2Template}
+
+% Solution of subtasks
+\begin{solutionblock}
+\input{fig/Task02/sFigTask2}
+\end{solutionblock}

@@ -1,0 +1,52 @@
+\begin{solutionfigure}[htb]
+     \centering
+     \begin{subfigure}[b]{0.25\textwidth}
+        \centering
+        \begin{tikzpicture}
+            \draw[->] (-0.5,0) to (3,0) node[right]{$\mathrm{Re}$};
+            \draw[->] (0,-2) to (0,2) node[above]{$\mathrm{Im}$};
+            \draw[->, thick, signalblue] (0,0) to (2.5,0) node[below]{$\underline{\hat{u}}_{\mathrm{2i}}$} coordinate (ug);
+            \draw[->, thick, signalred] (0,0) to (1.5,0) node[below]{$\underline{\hat{i}}_{\mathrm{2}}$};
+            \draw[->, thick, signalblue] (ug) to node[right]{$\underline{\hat{u}}^\mathrm{(1)}_{\mathrm{L}}$}  ++(0,1.25) coordinate (ul);
+            \draw[->, thick, signalblue] (0,0) to (ul);
+            \draw[->] let \p1 = (ul) in (1,0) arc(0:atan(\y1/\x1):1);
+            \draw node[right] at (1.1, 0.3) {$\varphi_2$};
+            \draw node[right, signalblue] at (2.2, 1.7){$\underline{\hat{u}}^\mathrm{(1)}_2$};
+        \end{tikzpicture}
+        \caption{Starting}
+        \label{sfig:phasor:Starting}
+     \end{subfigure}
+    \hspace*{0.2em}
+     \begin{subfigure}[b]{0.25\textwidth}
+           \centering
+        \begin{tikzpicture}
+            \draw[->] (-0.5,0) to (3,0) node[right]{$\mathrm{Re}$};
+            \draw[->] (0,-2) to (0,2) node[above]{$\mathrm{Im}$};
+            \draw[->, thick, signalblue] (0,0) to (2.5,0) node[below]{$\underline{\hat{u}}_{\mathrm{2i}}$} coordinate (ug);
+            \draw[->, thick, signalred] (0,0) to (0,0) node[below right]{$\underline{\hat{i}}_{\mathrm{2}}$};
+            \draw[->, thick, signalblue] (0,0) to node[above right]{$\underline{\hat{u}}^\mathrm{(1)}_{\mathrm{L}}$}  ++(0,0) coordinate (ul);
+            \draw[->, thick, signalblue] (0,0) to (ul);
+            \draw node[right, signalblue] at (2, 0.3){$\underline{\hat{u}}^\mathrm{(1)}_2$};
+        \end{tikzpicture}
+        \caption{Rolling}
+        \label{sfig:phasor:Rolling}
+     \end{subfigure}
+    \hspace*{0.2em}
+     \begin{subfigure}[b]{0.25\textwidth}
+         \centering
+             \begin{tikzpicture}
+        \draw[->] (-2,0) to (3,0) node[right]{$\mathrm{Re}$};
+        \draw[->] (0,-2) to (0,2) node[above]{$\mathrm{Im}$};
+        \draw[->, thick, signalblue] (0,0) to (2.5,0) node[above]{$\underline{\hat{u}}_{\mathrm{2i}}$} coordinate (ug);
+        \draw[->, thick, signalred] (0,0) to (-1.5,0) node[above]{$\underline{\hat{i}}_{\mathrm{2}}$};
+        \draw[->, thick, signalblue] (ug) to node[right]{$\underline{\hat{u}}^\mathrm{(1)}_{\mathrm{L}}$}  ++(0,-1.25) coordinate (ul);
+        \draw[->, thick, signalblue] (0,0) to (ul) node[below]{$\underline{\hat{u}}^\mathrm{(1)}_2$};
+        \draw[->] let \p1 = (ul) in (1,0) arc(0:atan(\y1/\x1):1);
+        \draw node[right] at (1.1, -0.4) {$\varphi_2$};
+    \end{tikzpicture}
+    \caption{Braking}
+     \label{sfig:phasor:Braking}
+     \end{subfigure}
+        \caption{Steady-state phasor diagrams.}
+       \label{sfig:sfig:subtask4.1_phasors}
+\end{solutionfigure}
