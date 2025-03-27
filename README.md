@@ -30,6 +30,13 @@ The covered topics are:
 ## Exercise tasks including solutions (click on preview picture)
 <a href="https://ias-uni-siegen.github.io/PE_course/exercise_with_solution.pdf" target="_blank" class="image fit"><img src="misc/Exercise_with_solution_preview.png" alt=""></a>
 
+## Exam history
+
+| Exam       | Only tasks                                  | Tasks with solutions                            |
+|------------|---------------------------------------------|-------------------------------------------------|
+| Winter 2024       | [Only tasks](https://ias-uni-siegen.github.io/PE_course/winter2024.pdf)   | [Tasks with solutions](https://ias-uni-siegen.github.io/PE_course/winter2024_with_solution.pdf) |
+
+
 
 ## Simulations
 - Download KiCad for your operating system at the following link: https://www.kicad.org/download/ and set the system language to English.
