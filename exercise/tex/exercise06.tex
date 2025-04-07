@@ -139,7 +139,7 @@ to operate the motor at rated voltage.}
 \begin{solutionblock}
     The average voltage $\overline{u}_\mathrm{2}$ is calculated by
     \begin{equation} 
-        \overline{u}_\mathrm{2} = \hat{u}_\mathrm{1,LL} \frac{\pi}{p}\sin(\frac{p}{\pi}) \cos(\alpha).
+        \overline{u}_\mathrm{2} = \hat{u}_\mathrm{1,LL} \frac{p}{\pi}\sin(\frac{\pi}{p}) \cos(\alpha).
         \label{eq:ex06t2_u2_gen}
     \end{equation}
     In case of B6C-topology $p$ is equal to 6. The maximum value of $u_\mathrm{1,LL}(t)$ is calculated by
@@ -149,13 +149,13 @@ to operate the motor at rated voltage.}
     \end{equation}
     The voltage $\overline{u}_\mathrm{2}$ corresponds to $U_\mathrm{mot}$. Solving \eqref{eq:ex06t2_u2_gen} with respect to $\alpha$ results in
     \begin{equation} 
-        \alpha = \arccos( \frac{\overline{u}_\mathrm{2} \cdot p}{\hat{u}_\mathrm{1,LL}\pi \sin(\frac{p}{\pi})}).
+        \alpha = \arccos( \frac{\overline{u}_\mathrm{2} \cdot \pi}{\hat{u}_\mathrm{1,LL}\cdot p \cdot  \sin(\frac{\pi}{p})}).
     \end{equation}
     The following applies to the relevant cases:
     \begin{equation}     
         \begin{split}
-            \alpha_\mathrm{up} &= \arccos( \frac{\SI{466}{\volt} \cdot 6}{\SI{563}{\volt}\pi \sin(\frac{6}{\pi})})=\SI{30}{\degree}     \\
-            \alpha_\mathrm{down} &= \arccos( \frac{\SI{-466}{\volt} \cdot 6}{\SI{563}{\volt}\pi \sin(\frac{6}{\pi})})=\SI{150}{\degree}    \\
+            \alpha_\mathrm{up} &= \arccos( \frac{\SI{466}{\volt} \cdot \pi}{\SI{563}{\volt}\cdot 6 \cdot \sin(\frac{\pi}{6})})=\SI{30}{\degree} \\
+            \alpha_\mathrm{up} &= \arccos( \frac{\SI{-466}{\volt} \cdot \pi}{\SI{563}{\volt}\cdot 6 \cdot \sin(\frac{\pi}{6})})=\SI{150}{\degree} \\
         \end{split}.
         \label{eq:ex06t2_alpha_gen}
     \end{equation}
