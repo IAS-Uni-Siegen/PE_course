@@ -6,7 +6,7 @@
                     \u1 = 1; %Input voltage amplitude
                     \b = 0.5*pi; %conduction interval for DCM
                     \adcm = pi/3; %firing angle for DCM (\b + \adcm must be greater than 2pi/3 for correct visualization)
-                    \E = 0.4; %battery voltage
+                    \Ebatt= 0.4; %battery voltage
                     \R = 0.1;
                 }
             \begin{groupplot}[group style={group size= 1 by 1, xticklabels at = edge bottom, vertical sep=1em, yticklabels at = edge left, horizontal sep = 1em}, 
@@ -27,16 +27,16 @@
             \nextgroupplot[title=DCM, height=0.35\textheight] % voltage DCM
                 %\addplot[domain=0:4*pi, samples=200, signalblue, thick, name path = A3]{(x < \b) * cos(deg(x)) + (x > \adcm + pi/3)*(\adcm + pi/3 + \b > x)* cos(deg(x+(4*pi/3)))  + (x > \adcm + pi)*( \adcm + pi + \b > x)*cos(deg(x+(2*pi/3)))+ (x > 5*pi/3 + \adcm)* (x < 5*pi/3 + \adcm+ \b) * cos(deg(x)) + (x > \adcm + 7*pi/3)*(\adcm + (7*pi/3) + \b > x)* cos(deg(x+(4*pi/3)))+ (x > \adcm + 3*pi)*( \adcm + (3*pi) + \b > x)*cos(deg(x+(2*pi/3)))};
                 
-                \addplot[domain=0:4*pi, samples=200, signalblue, thick, name path = A3]{(x < pi/3 + \adcm +\b - 2*pi/3) * cos(deg(x)) + (x > pi/3 +\adcm + \b - 2*pi/3) * (x < pi/3 +\adcm) * \E + (x > pi/3+\adcm)* (x < pi/3+\adcm + \b) * cos(deg(x+(4*pi/3)))+ (x > pi/3 + \adcm + \b) * (x < pi + \adcm ) * \E + (x > \adcm + pi)*( \adcm + pi + \b > x) *cos(deg(x+(2*pi/3))) + (\adcm + pi + \b < x)* (x < 5*pi/3 + \adcm) * \E + (x > 5*pi/3 +\adcm) * (x < 5*pi/3 + \adcm + \b) * cos(deg(x))+(x > 5*pi/3 + \adcm + \b)*(x < 7*pi/3 + \adcm) *\E  + (x > 7*pi/3 + \adcm) *  (x < 7*pi/3 + \adcm + \b)*cos(deg(x+(4*pi/3))) + (x > 7*pi/3 + \adcm + \b)*(x < 3*pi + \adcm) *\E + (x > 3*pi + \adcm) *  (x < 3*pi + \adcm + \b)*cos(deg(x+(2*pi/3))) + (x > 3*pi + \adcm + \b)*\E};
+                \addplot[domain=0:4*pi, samples=200, signalblue, thick, name path = A3]{(x < pi/3 + \adcm +\b - 2*pi/3) * cos(deg(x)) + (x > pi/3 +\adcm + \b - 2*pi/3) * (x < pi/3 +\adcm) * \Ebatt+ (x > pi/3+\adcm)* (x < pi/3+\adcm + \b) * cos(deg(x+(4*pi/3)))+ (x > pi/3 + \adcm + \b) * (x < pi + \adcm ) * \Ebatt+ (x > \adcm + pi)*( \adcm + pi + \b > x) *cos(deg(x+(2*pi/3))) + (\adcm + pi + \b < x)* (x < 5*pi/3 + \adcm) * \Ebatt+ (x > 5*pi/3 +\adcm) * (x < 5*pi/3 + \adcm + \b) * cos(deg(x))+(x > 5*pi/3 + \adcm + \b)*(x < 7*pi/3 + \adcm) *\Ebatt + (x > 7*pi/3 + \adcm) *  (x < 7*pi/3 + \adcm + \b)*cos(deg(x+(4*pi/3))) + (x > 7*pi/3 + \adcm + \b)*(x < 3*pi + \adcm) *\Ebatt+ (x > 3*pi + \adcm) *  (x < 3*pi + \adcm + \b)*cos(deg(x+(2*pi/3))) + (x > 3*pi + \adcm + \b)*\Ebatt};
                   
                
                 %\addplot[domain=0:4*pi, samples=10, signalblue, thick,dashed, name path = avg3]{\ucdcm};
-                \addplot[domain=0:4*pi, samples=10, signalblue, thick,dashed, name path = avg3]{\E};
+                \addplot[domain=0:4*pi, samples=10, signalblue, thick,dashed, name path = avg3]{\Ebatt};
                % \node at (axis cs:-0.3,\ucdcm) [anchor=north] {$\overline{u}_2$};
-                \node at (axis cs:-0.3,\E) [anchor=north] {$U_\mathrm{batt}$};
+                \node at (axis cs:-0.3,\Ebatt) [anchor=north] {$U_\mathrm{batt}$};
                 \addplot[domain=0:4*pi, samples=50, signalgreen, dashed]{cos(deg(x))};
-                \addplot[domain=0:4*pi, samples=50, signalbrown, dashed]{cos(deg(x+(2*pi/3))};
-                \addplot[domain=0:4*pi, samples=50, signalyellow, dashed]{cos(deg(x+(4*pi/3))};
+                \addplot[domain=0:4*pi, samples=50, signalbrown, dashed]{cos(deg(x+(2*pi/3)))};
+                \addplot[domain=0:4*pi, samples=50, signalyellow, dashed]{cos(deg(x+(4*pi/3)))};
                 \node at (axis cs:pi/3,-0.85) [signalbrown, fill=white,inner sep=1pt] {$u_\mathrm{1b}$};
                 \node at (axis cs:pi,-0.85) [signalgreen, fill=white,inner sep=1pt] {$u_\mathrm{1c}$};
                 \node at (axis cs:pi*6.7/4,-0.85) [signalyellow, fill=white,inner sep=1pt] {$u_\mathrm{1a}$};
