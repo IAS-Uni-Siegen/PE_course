@@ -44,6 +44,7 @@ jobs:
 
 
   deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build_latex
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
