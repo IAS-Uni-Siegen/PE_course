@@ -1,0 +1,63 @@
+\begin{figure}[htb]
+    \begin{center}
+        
+    %\begin{tikzpicture}
+    \begin{circuitikz}[european currents,european resistors,american inductors]
+        \draw
+
+        (1.5, 0.5) to [short,-, v^=$U_1$(t), voltage = straight] ++ (0, -4)
+        (0.5, 0.5) to [short,-] ++ (0, -4)
+        
+        (0.5,0) coordinate(u1o)
+        (1.5,-3) coordinate(u1u)
+        % Add points
+        (u1o) to [short,-*] ++ (0,0)
+        (u1u) to [short,-*] ++ (0,0)
+
+        (u1o) to  [short,-, crossing] ++ (2,0) coordinate (jPtg)
+
+        (2.5,0) to[L, l=${L}$, v_=$u_\mathrm{L}(t)$, voltage = straight] (4,0)
+
+        (2.5,0) to[L, l=${L}$] (4,0)
+
+        (4,0) coordinate(N1) to [short] ++(1.5,0) coordinate(Ud)
+        ++(0,-1.5) node[nigfete](Trans){}
+        (Ud) to [short] (Trans.drain)
+        (Trans.source) to [short,-*] ++(0,-0.73) coordinate(U2p) % Punkt unten beim Transistor
+
+        (Trans) ++(-1,0) node {$T$}
+
+        (4,0) to [short,-] (9.5,0)
+        (8,-3) to[short,*-] ++(0,0) 
+
+        (5.5,-1.5) to [short,-] ++(0,-1.5) 
+
+        % Current arrow for the diode
+        (6,0) to [short,-,i^>=$i_\mathrm{D}$(t)]  (6.8,0)
+
+        (6.5,0) to[D, l=$D$] (8,0)
+        (8,0) to[short,*-] ++(0,0) 
+
+        (8,0) to[C,l_=$C$] (8,-3)
+        % Current arrow for the capacitor
+        (8,-1.0) to [short,-,i^>=$i_\mathrm{C}$(t)] (8,-0.5)
+
+        (9.5,0) to [R,l_=$R$,v^=$U_\text{2}$,voltage shift=0.5, voltage=straight] (9.5,-3)
+
+        (9.5,-3) to [short,-] (1.5,-3)
+
+        (2.5,0) to [short,i_<=$i_1$(t)] (1.6,0)
+        (4.5,0) to [short,-*,i^>=$i_\mathrm{L}$(t)] (5.5,0)
+
+        (5.5,-0.5) to [short,i^<=$i_\mathrm{T}$(t)] (5.5,-1)
+
+        (9,0) to [short,i_<=$i_2$(t)] (8.5,0)
+        ;
+        \node[draw, dashed, minimum width=2cm, minimum height=2.5cm, anchor=west] at (8.75,-1.5) (dev) {};
+        \node[anchor=north] at (10.5,-2.75){$\text{Load}$};
+\end{circuitikz}
+    \caption{Step-up converter with filter capacitor.}
+     \label{fig:boost converter with filter capacitor}
+\end{center}
+%\end{tikzpicture}
+\end{figure}

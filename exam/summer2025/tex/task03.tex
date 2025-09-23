@@ -1,0 +1,161 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Task 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\task{Line-commuted three-phase rectifier}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\taskGerman{Netzgeführter dreiphasiger Gleichrichter}
+
+An industrial conveyor system is powered by a DC motor that is supplied via a controlled three-phase 
+midpoint rectifier (M3C). The motor draws a steady current $I_\mathrm{2}$ and operates at a nominal induced  
+motor voltage $U_\mathrm{mot,ind}$. The motor has an internal armature resistance $R$. To smooth the output
+current, a large inductor ($L \to  \infty$) is placed such that CCM is 
+maintained. The input to the rectifier is a symmetrical three-phase grid connected via an ideal 
+transformer. On the secondary side, each phase has an effective voltage of 
+$U_\mathrm{1,i} = \SI{200}{\volt}$, $\forall i=\mathrm{a, b, c}$. All components (switches, transformer, 
+etc.) are ideal.\\
+\color{gray}
+Ein industrielles Fördersystem wird von einem Gleichstrommotor angetrieben, der über einen geregelten 
+Dreiphasen-Mittelpunktgleichrichter (M3C) versorgt wird. Der Motor zieht einen konstanten Strom 
+$I_\mathrm{2}$ und weist eine induzierte Spannung $U_\mathrm{mot,ind}$ im Nennpunkt auf. Der Motor hat einen internen 
+Ankerwiderstand $R$. Um den Ausgangsstrom zu glätten, wird eine große Induktivität ($L \to  \infty$) so 
+platziert, dass der CCM aufrechterhalten bleibt. Der Eingang des Gleichrichters 
+ist ein symmetrisches Dreiphasennetz, das über einen idealen Transformator angeschlossen ist. Auf
+der Sekundärseite hat jede Phase eine effektive Spannung von $U_\mathrm{1,i} = \SI{200}{\volt}$, 
+$\forall i=\mathrm{a, b, c}$. Alle Komponenten (Schalter, Transformator usw.) sind ideal.
+
+\color{black}
+\input{fig/Task03/Fig_M3C_with_motor_load}
+\begin{table}[ht]
+    \centering  % Zentriert die Tabelle
+    \begin{tabular}{ll}
+        \toprule
+        Input voltages ($i=\mathrm{a,b,c}$): & $U_{\mathrm{1},i}=\SI{200}{\volt}$ (phase voltage) \\
+                        & $U_{\mathrm{1,LL},i} = \SI{346}{\volt}$ (line-to-line voltage)\\
+        Nom. motor current: & $I_{\mathrm{2}} = \SI{50}{\ampere}$ \\
+        Nom. motor induced voltage: & $U_\mathrm{mot,ind} = \SI{150}{\volt}$ \\ 
+        Motor internal resistance: & $R_\mathrm{mot} = \SI{0.2}{\ohm}$\\ 
+        Grid frequency: & $f= \SI{50}{\hertz}$ \\ 
+        \bottomrule
+    \end{tabular}
+    \caption{Drive parameters}  
+    \label{table:Task03_ParametersOfTheCircuit}
+\end{table}
+
+\subtask{ Calculate the required firing angle $\alpha$ to deliver the specified motor terminal voltage (induced + ohmic). 
+Draw the output voltage signal $u_2(t)$ for this angle into \autoref{fig:Task03_M3C_with_RLE}.}{3}
+\subtaskGerman{Berechnen Sie den erforderlichen Zündwinkel $\alpha$, um die spezifiziert 
+Motoranschlussspannung (induziert + resistiv) zu liefern. Zeichnen Sie der Ausgangsspannung $u_2(t)$ 
+für diesen Winkel in \autoref{fig:Task03_M3C_with_RLE}.}
+\input{fig/Task03/Three-phase_secondary_voltage}
+\begin{solutionblock}
+    First, the voltage drop across the internal resistance can be calculated with
+        $$ U_\mathrm{R} = I_2 \cdot R = \SI{50}{\ampere} \cdot \SI{0.2}{\ohm} = \SI{10}{\volt}.$$
+        Hence, the required rectifier output voltage is
+        $$ \bar{u}_\mathrm{2} =  U_\mathrm{mot,term} = U_\mathrm{mot,ind} + U_\mathrm{R} = \SI{150}{\volt} + \SI{10}{\volt} = \SI{160}{\volt}.$$
+        Also, the peak phase voltage is:
+        $$ \hat{u}_\mathrm{1} = \sqrt{2} \cdot U_\mathrm{1,i} = \sqrt{2} \cdot \SI{200}{\volt} \approx \SI{282.84}{\volt}.$$
+        So, using the average voltage equation of B6C, $\alpha$ can be calculated as 
+        $$\SI{160}{\volt} = \frac{3\sqrt{3}}{2\pi} \cdot \SI{282.84}{\volt} \cdot \cos(\alpha)
+        \Rightarrow \cos(\alpha) = \frac{\SI{160}{\volt} \cdot 2\pi}{3\sqrt{3} \cdot \SI{282.84}{\volt}}
+        \approx 0.684,$$
+        $$\alpha = \cos^{-1}(0.684) \approx \SI{46.84}{\degree}.$$
+\input{fig/Task03/sFig_subtask3.1_output_voltage}
+\end{solutionblock}
+\subtask{Explain how adjusting $\alpha$ affects the speed of the motor, especially $\alpha = 
+\frac{\pi}{2}$ and $\alpha = 0$.}{3}
+\begin{hintblock}
+    the motors' speed is proportional to the back EMF ($ \omega \propto U_\mathrm{mot,ind} $).
+\end{hintblock}
+\subtaskGerman{Erklären Sie, wie sich die Einstellung von $\alpha$ auf die Drehzahl des Gleichstrommotors 
+auswirkt, insbesondere $\alpha = \frac{\pi}{2}$ and $\alpha = 0$.}
+
+\begin{germanhintblock}
+    die Drehzahl der Motoren ist proportional zur Gegen-EMK ($ \omega \propto U_\mathrm{mot,ind} $).
+\end{germanhintblock}
+\begin{solutionblock}
+The average voltage applied to the motor is controlled by the firing angle $\alpha $. The motor speed 
+$\omega $ (assuming constant flux and neglecting armature reaction) is approximately proportional to the 
+back EMF $U_\mathrm{mot,ind}$, which is itself proportional to the applied voltage minus internal resistance drop:
+$$ U_\mathrm{mot,ind} = \bar{u}_\mathrm{2} - I_\mathrm{2} R_\mathrm{internal}.$$
+Since:
+$$ \omega \propto U_\mathrm{mot,ind} \Rightarrow \omega \propto \bar{u}_\mathrm{2} - I_\mathrm{2} R_\mathrm{internal}, $$
+and:
+$$ \bar{u}_\mathrm{2} = \frac{3\sqrt{2}}{\pi} \hat{u}_\mathrm{1} \cos(\alpha), $$
+we conclude:
+$$ \omega \propto \cos(\alpha).$$
+So increasing $ \alpha $ reduces $ \cos(\alpha) $, leading to lower $\bar{u}_\mathrm{2}$ and thus lower motor 
+speed. Conversely, reducing $ \alpha $ increases speed.
+\vspace{0.3em}
+\textbf{Constraints on $\alpha$:}
+\begin{itemize}
+    \item $\alpha$ should not be too small (close to $ \SI{0}{\degree} $), as this results in maximum 
+    $\bar{u}_\mathrm{2}$ and could lead to overvoltage and overspeed conditions in the motor.
+    \item $\alpha$ must be kept below $ 90^\circ $. At $ \alpha = \SI{90}{\degree} $, $ \cos(\alpha) = 0 $, 
+    which gives zero output voltage.
+\end{itemize}
+\end{solutionblock}
+\subtask{Calculate the output power delivered to the motor, the power dissipated in the internal 
+resistance, and the total power drawn from the rectifier output.}{3}
+\subtaskGerman{Berechnen Sie die an den Motor abgegebene Ausgangsleistung, die im Innenwiderstand 
+dissipierte Leistung und die vom Gleichrichterausgang insgesamt aufgenommene Leistung.}
+\begin{solutionblock}
+ \begin{itemize}
+        \item Motor power output:
+        $$ P_\mathrm{mot,ind} = U_\mathrm{mot,ind} \cdot I_\mathrm{2} = \SI{150}{\volt} \cdot \SI{50}{\ampere} = \SI{7500}{\watt}. $$
+        \item Power loss in internal resistance:
+        $$ P_\mathrm{R} = I^2_\mathrm{2} \cdot R = \SI{50^2}{\ampere^2} \cdot \SI{0.2}{\ohm} = \SI{500}{\watt}. $$
+        \item Total power drawn from rectifier:
+        $$ P_\mathrm{total} = \bar{u}_\mathrm{2} \cdot I_\mathrm{2} = \SI{160}{\volt} \cdot \SI{50}{\ampere} = \SI{8000}{\watt}. $$
+    \end{itemize}
+\end{solutionblock}
+\subtask{Sketch the input current $i_\mathrm{1a}(\omega t)$ in \autoref{sfig:task03_current_signal_3_5}, calculate the effective 
+value of the fundamental component $I^\mathrm{(1)}_\mathrm{1a}$ and the corresponding total harmonic distortion (THD).}{4}
+\begin{hintblock}
+    to calculate the THD, use $$ \mathrm{THD} = \sqrt{\left(\frac{I^2_\mathrm{1a}}{(I^\mathrm{(1)}_\mathrm{1a})^2}\right)-1},$$ where $I_\mathrm{1a}$
+    is the effective value of the phase current. 
+\end{hintblock}
+\subtaskGerman{Zeichnen Sie den Eingangsstrom $i_\mathrm{1a}(\omega t)$ in \autoref{sfig:task03_current_signal_3_5}, Berechnen Sie den Effektivwert der Grundkomponente $I^\mathrm{(1)}_\mathrm{1a}$, 
+und berechnen Sie die entsprechende gesamte harmonische Verzerrung (THD).}
+\begin{germanhintblock}
+    um den THD zu berechnen, verwenden Sie die obige Gleichung, wobei $I_\mathrm{1a}$ der effektive Wert des Phasenstroms ist.
+\end{germanhintblock}
+ \input{fig/Task03/Fig_subtask3.4.tex}
+\begin{solutionblock}
+ \input{fig/Task03/sFig_subtask3.4.tex}
+
+    For simplification, we can position the y-xis in the middle of the conducting period of $i_\mathrm{1a}(\omega t)$ 
+    signal and make use of the period's symmetry. This would simplify the calculations by integrating over one 
+    half of the period and then multiply by 2. 
+    One can see that the shifted signal $i'_{\mathrm{1a}}(\omega t)$ is an even signal, hence, we expect that the fundamental component of the Fourier 
+    Series would contain only cosine component ($a_1 \neq 0$) and no sine component ($b_1 = 0$). 
+        
+     In this case the integration would be from 0 to $\frac{\pi}{3}$, as 
+    one conducting period is equal to $\frac{2\pi}{3}$. Thus, $a_1$ ($\hat{i}^\mathrm{(1)}_\mathrm{1a}$) 
+    can be calculated as:
+
+        
+    $$ a_1 = \hat{i}^\mathrm{(1)}_\mathrm{1a} = \frac{2}{\pi}\int_{0}^{\frac{\pi}{3}}I_\mathrm{2}\cos(\omega t) \mathrm{d}\omega t = \left[\frac{2}{\pi} I_\mathrm{2} \sin(\omega t)\right]^{\frac{\pi}{3}}_{0} = \frac{1}{\pi}I_\mathrm{2}\sqrt{3}.$$  
+        
+    Then the effective value $I^\mathrm{(1)}_\mathrm{1a}$ is
+    
+    $$ I^\mathrm{(1)}_\mathrm{1a} = \frac{\hat{i}^\mathrm{(1)}_\mathrm{1a}}{\sqrt{2}} \approx \SI{19.49}{\ampere}.$$
+        
+    Moreover, the effective value of $I_\mathrm{1a}$ can be calculated as 
+    
+    $$ I_\mathrm{1a} = \sqrt{\frac{1}{2\pi}\int_{0}^{\frac{2\pi}{3}} I^2_\mathrm{2}\mathrm{d}\omega t} =  \frac{I_\mathrm{2}}{\sqrt{3}} \approx \SI{28.87}{\ampere}.$$   
+    So, the THD is
+    
+    $$ \mathrm{THD} = \sqrt{\left(\frac{I^2_\mathrm{1a}}{(I^\mathrm{(1)}_\mathrm{1a})^2}\right)-1} = \SI{109.3}{\percent}.$$ 
+\end{solutionblock}
+\subtask{Suppose the inductance of the inductor is finite and was designed too low. How 
+would that affect the output voltage and current?}{2}
+
+\subtaskGerman{ Angenommen die Induktivität der Glättungsdrossel habe einen endlichen und zu niedrigen Wert. 
+Wie würde sich das auf die Ausgangsspannung und den Ausgangsstrom auswirken?}
+
+\begin{solutionblock}
+If the inductance is finite, it cannot sustain continuous current when the AC voltage drops below the DC output voltage. 
+The current reaches zero before the next thyristor is triggered. This causes the load current to fall to zero during part of
+the cycle, discontinuity in load current.
+\end{solutionblock}

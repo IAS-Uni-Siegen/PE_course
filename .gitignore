@@ -179,6 +179,7 @@ acs-*.bib
 
 # exam pdfs
 exam/winter2024/*.pdf
+exam/summer2025/*.pdf
 
 # minted
 _minted*
