@@ -57,8 +57,8 @@
                             yticklabels=\empty,
                             anchor = center
                             ]
-                            \addplot[signalred, very thick] coordinates {(-1,0) (1,0)};
-                            \addplot[signalgreen, very thick] coordinates {(0,0) (0,1)};
+                            \addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
+                            \addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
                             \draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
                             \draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
                             \draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
@@ -125,11 +125,11 @@
                     grid=both,
                     ]
                 \nextgroupplot[ylabel = {$u_2(\omega t)$}]
-                    \addplot[domain=0:pi, samples=50, signalblue, thick, name path = A]{sin(deg(x))};
-                    \addplot[domain=pi:2*pi, samples=10, signalblue, thick, name path = B]{0};
-                    \addplot[domain=2*pi:3*pi, samples=50, signalblue, thick, name path = C]{sin(deg(x))};
-                    \addplot[domain=3*pi:4*pi, samples=10, signalblue, thick, name path = D]{0};
-                    \addplot[domain=0:4*pi, samples=10, signalblue, thick,dashed, name path = avg]{1/pi};
+                    \addplot[domain=0:pi, samples=50, signalalpha, thick, name path = A]{sin(deg(x))};
+                    \addplot[domain=pi:2*pi, samples=10, signalalpha, thick, name path = B]{0};
+                    \addplot[domain=2*pi:3*pi, samples=50, signalalpha, thick, name path = C]{sin(deg(x))};
+                    \addplot[domain=3*pi:4*pi, samples=10, signalalpha, thick, name path = D]{0};
+                    \addplot[domain=0:4*pi, samples=10, signalalpha, thick,dashed, name path = avg]{1/pi};
                     \node at (axis cs:3*pi/2,1/pi) [anchor=south] {$\overline{u}_2$};
                     \addplot[shadecolor, opacity=0.3] fill between[of=A and avg, soft clip={domain=0:pi}];
                     \addplot[shadecolor, opacity=0.3] fill between[of=B and avg, soft clip={domain=pi:2*pi}];
@@ -137,11 +137,11 @@
                     \addplot[shadecolor, opacity=0.3] fill between[of=D and avg, soft clip={domain=3*pi:4*pi}];
 
                 \nextgroupplot[ylabel = {$u_\mathrm{D}(\omega t)$}, ymin=-1.15, ymax=1.15, height=0.4\textheight, xlabel = {$\omega t$}]
-                    \addplot[domain=0:4*pi, samples=50, signalblue, dashed]{sin(deg(x))};
-                    \addplot[domain=0:pi, samples=10, signalblue, thick]{0};
-                    \addplot[domain=pi:2*pi, samples=50, signalblue, thick]{sin(deg(x))};
-                    \addplot[domain=2*pi:3*pi, samples=10, signalblue, thick]{0};
-                    \addplot[domain=3*pi:4*pi, samples=50, signalblue, thick]{sin(deg(x))};
+                    \addplot[domain=0:4*pi, samples=50, signalalpha, dashed]{sin(deg(x))};
+                    \addplot[domain=0:pi, samples=10, signalalpha, thick]{0};
+                    \addplot[domain=pi:2*pi, samples=50, signalalpha, thick]{sin(deg(x))};
+                    \addplot[domain=2*pi:3*pi, samples=10, signalalpha, thick]{0};
+                    \addplot[domain=3*pi:4*pi, samples=50, signalalpha, thick]{sin(deg(x))};
                     \node at (axis cs:pi*3/4,1/pi) [anchor=south west] {${u}_1(\omega t)$};
                 \end{groupplot}
             \end{tikzpicture}    
@@ -173,9 +173,9 @@
                     grid=both,
                     ]
                 \nextgroupplot[ylabel = {$u_2(\omega t)$}]
-                    \addplot[domain=0:2*pi, samples=150, signalblue, thick, name path = A]{max(sin(deg(x))*max(sign(x-\a),0),0)};
-                    \addplot[domain=2*pi:4*pi, samples=150, signalblue, thick, name path = B]{max(sin(deg(x))*max(sign(x-\a-2*pi),0),0)};
-                    \addplot[domain=0:4*pi, samples=10, signalblue, thick,dashed, name path = avg]{1/(2*pi)*(1+cos(deg(\a)))};
+                    \addplot[domain=0:2*pi, samples=150, signalalpha, thick, name path = A]{max(sin(deg(x))*max(sign(x-\a),0),0)};
+                    \addplot[domain=2*pi:4*pi, samples=150, signalalpha, thick, name path = B]{max(sin(deg(x))*max(sign(x-\a-2*pi),0),0)};
+                    \addplot[domain=0:4*pi, samples=10, signalalpha, thick,dashed, name path = avg]{1/(2*pi)*(1+cos(deg(\a)))};
                     \node at (axis cs:3*pi/2,{1/(2*pi)*(1+cos(deg(\a)))}) [anchor=south] {$\overline{u}_2$};
                     \draw[->] (axis cs:0,0.5) -- node[above]{$\alpha$} (axis cs:\a,0.5) ;
                     \draw[->] (axis cs:2*pi,0.5) -- node[above]{$\alpha$} (axis cs:2*pi+\a,0.5) ;
@@ -185,9 +185,9 @@
 
 
                 \nextgroupplot[ylabel = {$u_\mathrm{T}(\omega t)$}, ymin=-1.15, ymax=1.15, height=0.4\textheight, xlabel = {$\omega t$}]
-                    \addplot[domain=0:4*pi, samples=50, signalblue, dashed]{sin(deg(x))};
-                    \addplot[domain=0:2*pi, samples=150, signalblue, thick]{max(sin(deg(x))*max(-sign(x-\a),0),0) + sin(deg(x))*max(sign(x-pi),0)};
-                    \addplot[domain=2*pi:4*pi, samples=150, signalblue, thick]{max(sin(deg(x))*max(-sign(x-\a-2*pi),0),0) + sin(deg(x))*max(sign(x-3*pi),0)};
+                    \addplot[domain=0:4*pi, samples=50, signalalpha, dashed]{sin(deg(x))};
+                    \addplot[domain=0:2*pi, samples=150, signalalpha, thick]{max(sin(deg(x))*max(-sign(x-\a),0),0) + sin(deg(x))*max(sign(x-pi),0)};
+                    \addplot[domain=2*pi:4*pi, samples=150, signalalpha, thick]{max(sin(deg(x))*max(-sign(x-\a-2*pi),0),0) + sin(deg(x))*max(sign(x-3*pi),0)};
                     \node at (axis cs:pi*3/4,1/pi) [anchor=south west] {${u}_1(\omega t)$};
                 \end{groupplot}
             \end{tikzpicture}          
@@ -283,19 +283,19 @@
                 clip=false
                 ]
             \nextgroupplot[ylabel = {$u_2(\omega t)$}]
-                \addplot[domain=0:pi, samples=50, signalblue, thick, name path = A]{(x < \a) * 0 + (x > \a) * sin(deg(x))};
-                \addplot[domain=pi:2*pi, samples=50, signalblue, thick, name path = B]{(x - pi < \a) * 0 + (x - pi > \a) * -sin(deg(x))};
-                \addplot[domain=2*pi:3*pi, samples=50, signalblue, thick, name path = C]{(x - 2*pi < \a) * 0 + (x - 2*pi > \a) * sin(deg(x))};
-                \addplot[domain=3*pi:4*pi, samples=50, signalblue, thick, name path = D]{(x - 3*pi < \a) * 0 + (x - 3*pi > \a) * -sin(deg(x))};
-                \addplot[domain=0:4*pi, samples=10, signalblue, thick,dashed, name path = avg]{1/(pi)*(1+cos(deg(\a)))};
+                \addplot[domain=0:pi, samples=50, signalalpha, thick, name path = A]{(x < \a) * 0 + (x > \a) * sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=50, signalalpha, thick, name path = B]{(x - pi < \a) * 0 + (x - pi > \a) * -sin(deg(x))};
+                \addplot[domain=2*pi:3*pi, samples=50, signalalpha, thick, name path = C]{(x - 2*pi < \a) * 0 + (x - 2*pi > \a) * sin(deg(x))};
+                \addplot[domain=3*pi:4*pi, samples=50, signalalpha, thick, name path = D]{(x - 3*pi < \a) * 0 + (x - 3*pi > \a) * -sin(deg(x))};
+                \addplot[domain=0:4*pi, samples=10, signalalpha, thick,dashed, name path = avg]{1/(pi)*(1+cos(deg(\a)))};
                 \node at (axis cs:3*pi/2+0.4,{1/(pi)*(1+cos(deg(\a)))}) [anchor=north] {$\overline{u}_2$};
                 \draw[->] (axis cs:0,1) -- node[above]{$\alpha$} (axis cs:\a,1) ;
                 \draw[->] (axis cs:2*pi,1) -- node[above]{$\alpha$} (axis cs:2*pi+\a,1) ;
                 \draw[dashed, thick] (axis cs:2*pi,0) -- (axis cs:2*pi,1);
-                \addplot[domain=0:4*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
-                \addplot[domain=0:4*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
-                \node at (axis cs:pi*2.5,-0.75) [anchor=south, signalbrown] {$u_{s,2}$};
-                \node at (axis cs:pi*3.5,-0.75) [anchor=south, signalgreen] {$u_{s,1}$};
+                \addplot[domain=0:4*pi, samples=50, signalgamma, dashed]{sin(deg(x))};
+                \addplot[domain=0:4*pi, samples=50, signalbeta, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*2.5,-0.75) [anchor=south, signalbeta] {$u_{s,2}$};
+                \node at (axis cs:pi*3.5,-0.75) [anchor=south, signalgamma] {$u_{s,1}$};
                 \addplot[shadecolor, opacity=0.3] fill between[of=A and avg, soft clip={domain=0:pi}];
                 \addplot[shadecolor, opacity=0.3] fill between[of=B and avg, soft clip={domain=pi:2*pi}];
                 \addplot[shadecolor, opacity=0.3] fill between[of=C and avg, soft clip={domain=2*pi:3*pi}];
@@ -303,16 +303,16 @@
 
 
             \nextgroupplot[ylabel = {$u_\mathrm{T}(\omega t)$}, xlabel = {$\omega t$}, ymin=-2.15, ytick={-2, -1,0,1}, yticklabels={$-2\hat{u}_\mathrm{s}$, $-\hat{u}_\mathrm{s}$,$0$,$\hat{u}_\mathrm{s}$}, height=0.5\textheight]
-                \node at (axis cs:\a,0.5) [signalgreen, right, inner sep=1pt] {${u}_{T_1}$};
-                \node at (axis cs:\a+pi,0.5) [signalbrown, right, inner sep=1pt] {${u}_{T_2}$};
-                \addplot[domain=0:pi, samples=50, signalgreen, thick]{(x < \a) * sin(deg(x)) + (x > \a) * 0};
-                \addplot[domain=0:pi, samples=50, signalbrown, thick]{-sin(deg(x)) + (x > \a) * -sin(deg(x))};
-                \addplot[domain=pi:2*pi, samples=50, signalbrown, thick]{(x -pi < \a) * -sin(deg(x)) + (x-pi > \a) * 0};
-                \addplot[domain=pi:2*pi, samples=50, signalgreen, thick]{sin(deg(x)) + (x -pi > \a) * sin(deg(x))};
-                \addplot[domain=2*pi:3*pi, samples=50, signalgreen, thick]{(x -2*pi < \a) * sin(deg(x)) + (x  -2*pi > \a) * 0};
-                \addplot[domain=2*pi:3*pi, samples=50, signalbrown, thick]{-sin(deg(x)) + (x  -2*pi > \a) * -sin(deg(x))};
-                \addplot[domain=3*pi:4*pi, samples=50, signalbrown, thick]{(x - 3*pi < \a) * -sin(deg(x)) + (x - 3*pi > \a) * 0};
-                \addplot[domain=3*pi:4*pi, samples=50, signalgreen, thick]{sin(deg(x)) + (x - 3*pi > \a) * sin(deg(x))};
+                \node at (axis cs:\a,0.5) [signalgamma, right, inner sep=1pt] {${u}_{T_1}$};
+                \node at (axis cs:\a+pi,0.5) [signalbeta, right, inner sep=1pt] {${u}_{T_2}$};
+                \addplot[domain=0:pi, samples=50, signalgamma, thick]{(x < \a) * sin(deg(x)) + (x > \a) * 0};
+                \addplot[domain=0:pi, samples=50, signalbeta, thick]{-sin(deg(x)) + (x > \a) * -sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=50, signalbeta, thick]{(x -pi < \a) * -sin(deg(x)) + (x-pi > \a) * 0};
+                \addplot[domain=pi:2*pi, samples=50, signalgamma, thick]{sin(deg(x)) + (x -pi > \a) * sin(deg(x))};
+                \addplot[domain=2*pi:3*pi, samples=50, signalgamma, thick]{(x -2*pi < \a) * sin(deg(x)) + (x  -2*pi > \a) * 0};
+                \addplot[domain=2*pi:3*pi, samples=50, signalbeta, thick]{-sin(deg(x)) + (x  -2*pi > \a) * -sin(deg(x))};
+                \addplot[domain=3*pi:4*pi, samples=50, signalbeta, thick]{(x - 3*pi < \a) * -sin(deg(x)) + (x - 3*pi > \a) * 0};
+                \addplot[domain=3*pi:4*pi, samples=50, signalgamma, thick]{sin(deg(x)) + (x - 3*pi > \a) * sin(deg(x))};
             \end{groupplot}
         \end{tikzpicture}   
         \caption{M2C topology (aka \hl{two-pulse mid-point converter}) with center-tapped transformer and a resistive load}
@@ -414,43 +414,43 @@
                 clip=false
                 ]
             \nextgroupplot[ylabel = {$u_\mathrm{s}(\omega t)$}, title=CCM, height=0.475\textheight] % voltage CCM
-                \addplot[domain=0:pi, samples=50, signalblue, thick, name path = A1]{(x < \a) * -sin(deg(x)) + (x > \a) * sin(deg(x))};
-                \addplot[domain=pi:2*pi, samples=50, signalblue, thick, name path = B1]{(x - pi < \a) * sin(deg(x)) + (x - pi > \a) * -sin(deg(x))};
-                \addplot[domain=0:2*pi, samples=10, signalblue, thick,dashed, name path = avg1]{2/(pi)*(cos(deg(\a)))};
+                \addplot[domain=0:pi, samples=50, signalalpha, thick, name path = A1]{(x < \a) * -sin(deg(x)) + (x > \a) * sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=50, signalalpha, thick, name path = B1]{(x - pi < \a) * sin(deg(x)) + (x - pi > \a) * -sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=10, signalalpha, thick,dashed, name path = avg1]{2/(pi)*(cos(deg(\a)))};
                 \node at (axis cs:3*pi/2+0.4,{2/(pi)*(cos(deg(\a)))}) [anchor=north] {$\overline{u}_2$};
                 \draw[->] (axis cs:0,1) -- node[above]{$\alpha$} (axis cs:\a,1) ;
                 \draw[->] (axis cs:pi,1) -- node[above]{$\alpha$} (axis cs:pi+\a,1) ;
                 \draw[dashed, thick] (axis cs:pi,0) -- (axis cs:pi,1);
-                \addplot[domain=0:2*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
-                \addplot[domain=0:2*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
-                \node at (axis cs:pi*3/4,-0.75) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
-                \node at (axis cs:pi*7/4,-0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
+                \addplot[domain=0:2*pi, samples=50, signalgamma, dashed]{sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=50, signalbeta, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*3/4,-0.75) [signalbeta, fill=white,inner sep=1pt] {$u_{s,2}$};
+                \node at (axis cs:pi*7/4,-0.75) [signalgamma, fill=white,inner sep=1pt] {$u_{s,1}$};
                 \addplot[shadecolor, opacity=0.3] fill between[of=A1 and avg1, soft clip={domain=0:pi}];
                 \addplot[shadecolor, opacity=0.3] fill between[of=B1 and avg1, soft clip={domain=pi:2*pi}];
 
             \nextgroupplot[title=BCM, height=0.475\textheight, visible on=<2->] % voltage BCM
-                \addplot[domain=0:pi, samples=50, signalblue, thick, name path = A2]{(x < \a) * -sin(deg(x)) + (x > \a) * sin(deg(x))};
-                \addplot[domain=pi:2*pi, samples=50, signalblue, thick, name path = B2]{(x - pi < \a) * sin(deg(x)) + (x - pi > \a) * -sin(deg(x))};
-                \addplot[domain=0:2*pi, samples=10, signalblue, thick,dashed, name path = avg2]{2/(pi)*(cos(deg(\a)))};
+                \addplot[domain=0:pi, samples=50, signalalpha, thick, name path = A2]{(x < \a) * -sin(deg(x)) + (x > \a) * sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=50, signalalpha, thick, name path = B2]{(x - pi < \a) * sin(deg(x)) + (x - pi > \a) * -sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=10, signalalpha, thick,dashed, name path = avg2]{2/(pi)*(cos(deg(\a)))};
                 \node at (axis cs:3*pi/2+0.4,{2/(pi)*(cos(deg(\a)))}) [anchor=north] {$\overline{u}_2$};
                 \draw[->] (axis cs:0,1) -- node[above]{$\alpha$} (axis cs:\a,1) ;
                 \draw[->] (axis cs:pi,1) -- node[above]{$\alpha$} (axis cs:pi+\a,1) ;
                 \draw[dashed, thick] (axis cs:pi,0) -- (axis cs:pi,1);
-                \addplot[domain=0:2*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
-                \addplot[domain=0:2*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
-                \node at (axis cs:pi*3/4,-0.75) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
-                \node at (axis cs:pi*7/4,-0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
+                \addplot[domain=0:2*pi, samples=50, signalgamma, dashed]{sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=50, signalbeta, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*3/4,-0.75) [signalbeta, fill=white,inner sep=1pt] {$u_{s,2}$};
+                \node at (axis cs:pi*7/4,-0.75) [signalgamma, fill=white,inner sep=1pt] {$u_{s,1}$};
                 \addplot[shadecolor, opacity=0.3, visible on=<2->] fill between[of=A2 and avg2, soft clip={domain=0:pi}];
                 \addplot[shadecolor, opacity=0.3, visible on=<2->] fill between[of=B2 and avg2, soft clip={domain=pi:2*pi}];
 
             \nextgroupplot[title=DCM, height=0.475\textheight, visible on=<3->] % voltage DCM
-                \addplot[domain=0:2*pi, samples=200, signalblue, thick, name path = A3]{(x < \adcm +\b - pi) * sin(deg(x+pi)) + (x > \adcm + \b -pi) * (x < \adcm) * \ucdcm + (x > \adcm)* (x < \adcm + \b) * sin(deg(x)) + (x > \adcm + \b) * (x < \adcm + pi) * \ucdcm + (x > \adcm + pi) * sin(deg(x-pi))};
-                \addplot[domain=0:2*pi, samples=10, signalblue, thick,dashed, name path = avg3]{\ucdcm};
+                \addplot[domain=0:2*pi, samples=200, signalalpha, thick, name path = A3]{(x < \adcm +\b - pi) * sin(deg(x+pi)) + (x > \adcm + \b -pi) * (x < \adcm) * \ucdcm + (x > \adcm)* (x < \adcm + \b) * sin(deg(x)) + (x > \adcm + \b) * (x < \adcm + pi) * \ucdcm + (x > \adcm + pi) * sin(deg(x-pi))};
+                \addplot[domain=0:2*pi, samples=10, signalalpha, thick,dashed, name path = avg3]{\ucdcm};
                 \node at (axis cs:3*pi/2+0.4,\ucdcm) [anchor=north] {$\overline{u}_2$};
-                \addplot[domain=0:2*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
-                \addplot[domain=0:2*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
-                \node at (axis cs:pi*3/4,-0.75) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
-                \node at (axis cs:pi*7/4,-0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
+                \addplot[domain=0:2*pi, samples=50, signalgamma, dashed]{sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=50, signalbeta, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*3/4,-0.75) [signalbeta, fill=white,inner sep=1pt] {$u_{s,2}$};
+                \node at (axis cs:pi*7/4,-0.75) [signalgamma, fill=white,inner sep=1pt] {$u_{s,1}$};
                 \draw[->] (axis cs:0,1) -- node[above]{$\alpha$} (axis cs:\adcm,1) ;
                 \draw[->] (axis cs:pi,1) -- node[above]{$\alpha$} (axis cs:pi+\adcm,1) ;
                 \draw[dashed, thick] (axis cs:pi,0) -- (axis cs:pi,1);
@@ -459,11 +459,11 @@
 
 
             \nextgroupplot[ylabel = {$i_\mathrm{L}(\omega t)$}, xlabel = {$\omega t$}, ymin=-0.01, ytick={0, 1/2, 1}, yticklabels={$0$, } ] %current CCM
-                \addplot[domain=0:\a, samples=50, signalred, thick, name path = Ai1]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs1};
-                \addplot[domain=\a:pi, samples=50, signalred, thick, name path = Bi1]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
-                \addplot[domain=pi:pi+\a, samples=50, signalred, thick, name path = Ci1]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs1};
-                \addplot[domain=pi+\a:2*pi, samples=50, signalred, thick, name path = Di1]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x-pi))+cos(deg(\a))) - \uc1*(x-\a-pi))};
-                \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed, name path = avgi1]{\iLavg1};
+                \addplot[domain=0:\a, samples=50, signaldelta, thick, name path = Ai1]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs1};
+                \addplot[domain=\a:pi, samples=50, signaldelta, thick, name path = Bi1]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
+                \addplot[domain=pi:pi+\a, samples=50, signaldelta, thick, name path = Ci1]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs1};
+                \addplot[domain=pi+\a:2*pi, samples=50, signaldelta, thick, name path = Di1]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x-pi))+cos(deg(\a))) - \uc1*(x-\a-pi))};
+                \addplot[domain=0:2*pi, samples=10, signaldelta, thick,dashed, name path = avgi1]{\iLavg1};
                 \draw[<->] (axis cs:\a,0.75) -- node[above, fill = white]{$\beta=\pi$} (axis cs:\a+pi,0.75) ;
                 \addplot[shadecolor, opacity=0.3] fill between[of=Ai1 and avgi1, soft clip={domain=0:\a}];
                 \addplot[shadecolor, opacity=0.3] fill between[of=Bi1 and avgi1, soft clip={domain=\a:pi}];
@@ -471,11 +471,11 @@
                 \addplot[shadecolor, opacity=0.3] fill between[of=Di1 and avgi1, soft clip={domain=pi+\a:2*pi}];
 
             \nextgroupplot[xlabel = {$\omega t$}, ymin=-0.01, ytick={0, 1/2, 1}, yticklabels={ } , visible on=<2->] %current BCM
-                \addplot[domain=0:\a, samples=50, signalred, thick, name path = Ai2]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs2};
-                \addplot[domain=\a:pi, samples=50, signalred, thick, name path = Bi2]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
-                \addplot[domain=pi:pi+\a, samples=50, signalred, thick, name path = Ci2]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs2};
-                \addplot[domain=pi+\a:2*pi, samples=50, signalred, thick, name path = Di2]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x-pi))+cos(deg(\a))) - \uc1*(x-\a-pi))};
-                \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed, name path = avgi2]{\iLavg2};
+                \addplot[domain=0:\a, samples=50, signaldelta, thick, name path = Ai2]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs2};
+                \addplot[domain=\a:pi, samples=50, signaldelta, thick, name path = Bi2]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
+                \addplot[domain=pi:pi+\a, samples=50, signaldelta, thick, name path = Ci2]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs2};
+                \addplot[domain=pi+\a:2*pi, samples=50, signaldelta, thick, name path = Di2]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x-pi))+cos(deg(\a))) - \uc1*(x-\a-pi))};
+                \addplot[domain=0:2*pi, samples=10, signaldelta, thick,dashed, name path = avgi2]{\iLavg2};
                 \draw[<->] (axis cs:\a,0.6) -- node[above, fill = white]{$\beta=\pi$} (axis cs:\a+pi,0.6) ;
                 \addplot[shadecolor, opacity=0.3, visible on=<2->] fill between[of=Ai2 and avgi2, soft clip={domain=0:\a}];
                 \addplot[shadecolor, opacity=0.3, visible on=<2->] fill between[of=Bi2 and avgi2, soft clip={domain=\a:pi}];
@@ -483,12 +483,12 @@
                 \addplot[shadecolor, opacity=0.3, visible on=<2->] fill between[of=Di2 and avgi2, soft clip={domain=pi+\a:2*pi}];
 
             \nextgroupplot[xlabel = {$\omega t$}, ymin=-0.01, ytick={0, 1/2, 1}, yticklabels={}, visible on=<3->] %current DCM
-                \addplot[domain=\adcm:\adcm+\b, samples=50, signalred, thick, name path = Ai3]{1/\Lw*(-\ucdcm*(x-\adcm) - \u1*(cos(deg(x))-cos(deg(\adcm))))};
-                \addplot[domain=0:\adcm+\b-pi, samples=50, signalred, thick, name path = Bi3]{1/\Lw*(-\ucdcm*(x-\adcm+pi) - \u1*(cos(deg(x+pi))-cos(deg(\adcm))))};
-                \addplot[domain=\adcm+pi:2*pi, samples=50, signalred, thick, name path = Ci3]{1/\Lw*(-\ucdcm*(x-\adcm-pi) - \u1*(cos(deg(x-pi))-cos(deg(\adcm))))};
-                \addplot[domain=\adcm+\b:\adcm+pi, samples=50, signalred, thick, name path = Di3]{0};
-                \addplot[domain=\adcm+\b-pi:\adcm, samples=50, signalred, thick, name path = Ei3]{0};
-                \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed, name path = avgi3]{\iLavg3};
+                \addplot[domain=\adcm:\adcm+\b, samples=50, signaldelta, thick, name path = Ai3]{1/\Lw*(-\ucdcm*(x-\adcm) - \u1*(cos(deg(x))-cos(deg(\adcm))))};
+                \addplot[domain=0:\adcm+\b-pi, samples=50, signaldelta, thick, name path = Bi3]{1/\Lw*(-\ucdcm*(x-\adcm+pi) - \u1*(cos(deg(x+pi))-cos(deg(\adcm))))};
+                \addplot[domain=\adcm+pi:2*pi, samples=50, signaldelta, thick, name path = Ci3]{1/\Lw*(-\ucdcm*(x-\adcm-pi) - \u1*(cos(deg(x-pi))-cos(deg(\adcm))))};
+                \addplot[domain=\adcm+\b:\adcm+pi, samples=50, signaldelta, thick, name path = Di3]{0};
+                \addplot[domain=\adcm+\b-pi:\adcm, samples=50, signaldelta, thick, name path = Ei3]{0};
+                \addplot[domain=0:2*pi, samples=10, signaldelta, thick,dashed, name path = avgi3]{\iLavg3};
                 \draw[<->] (axis cs:\adcm,0.5) -- node[above, fill = white]{$\beta<\pi$} (axis cs:\adcm+\b,0.5) ;
                 \addplot[shadecolor, opacity=0.3, visible on=<3->] fill between[of=Ai3 and avgi3, soft clip={domain=\adcm:\adcm+\b}];
                 \addplot[shadecolor, opacity=0.3, visible on=<3->] fill between[of=Bi3 and avgi3, soft clip={domain=0:\adcm+\b-pi}];
@@ -584,41 +584,41 @@
                 clip=false
                 ]
             \nextgroupplot[ylabel = {$u_\mathrm{s}(\omega t)$}, title=CCM, height=0.475\textheight] % voltage CCM
-                \addplot[domain=0:pi, samples=50, signalblue, thick, name path = A1]{(x < \a) * -sin(deg(x)) + (x > \a) * sin(deg(x))};
-                \addplot[domain=pi:2*pi, samples=50, signalblue, thick, name path = B1]{(x - pi < \a) * sin(deg(x)) + (x - pi > \a) * -sin(deg(x))};
-                \addplot[domain=0:2*pi, samples=10, signalblue, thick,dashed, name path = avg1]{2/(pi)*(cos(deg(\a)))};
+                \addplot[domain=0:pi, samples=50, signalalpha, thick, name path = A1]{(x < \a) * -sin(deg(x)) + (x > \a) * sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=50, signalalpha, thick, name path = B1]{(x - pi < \a) * sin(deg(x)) + (x - pi > \a) * -sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=10, signalalpha, thick,dashed, name path = avg1]{2/(pi)*(cos(deg(\a)))};
                 \node at (axis cs:pi,\uc1) [anchor=north, fill = white, inner sep = 2pt] {$\overline{u}_2$};
                 \draw[->] (axis cs:0,0) -- node[above]{$\alpha$} (axis cs:\a,0);
                 \draw[->] (axis cs:pi,0) -- node[above]{$\alpha$} (axis cs:pi+\a,0);
-                \addplot[domain=0:2*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
-                \addplot[domain=0:2*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
-                \node at (axis cs:pi*1/4,0.75) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
-                \node at (axis cs:pi*5/4,0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
+                \addplot[domain=0:2*pi, samples=50, signalgamma, dashed]{sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=50, signalbeta, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*1/4,0.75) [signalgamma, fill=white,inner sep=1pt] {$u_{s,2}$};
+                \node at (axis cs:pi*5/4,0.75) [signalbeta, fill=white,inner sep=1pt] {$u_{s,1}$};
                 \addplot[shadecolor, opacity=0.3] fill between[of=A1 and avg1, soft clip={domain=0:pi}];
                 \addplot[shadecolor, opacity=0.3] fill between[of=B1 and avg1, soft clip={domain=pi:2*pi}];
 
             \nextgroupplot[title=BCM, height=0.475\textheight, visible on=<2->] % voltage BCM
-                \addplot[domain=0:pi, samples=50, signalblue, thick, name path = A2]{(x < \a) * -sin(deg(x)) + (x > \a) * sin(deg(x))};
-                \addplot[domain=pi:2*pi, samples=50, signalblue, thick, name path = B2]{(x - pi < \a) * sin(deg(x)) + (x - pi > \a) * -sin(deg(x))};
-                \addplot[domain=0:2*pi, samples=10, signalblue, thick,dashed, name path = avg2]{2/(pi)*(cos(deg(\a)))};
+                \addplot[domain=0:pi, samples=50, signalalpha, thick, name path = A2]{(x < \a) * -sin(deg(x)) + (x > \a) * sin(deg(x))};
+                \addplot[domain=pi:2*pi, samples=50, signalalpha, thick, name path = B2]{(x - pi < \a) * sin(deg(x)) + (x - pi > \a) * -sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=10, signalalpha, thick,dashed, name path = avg2]{2/(pi)*(cos(deg(\a)))};
                 \node at (axis cs:pi,\uc1) [anchor=north, fill = white, inner sep = 2pt] {$\overline{u}_2$};
                 \draw[->] (axis cs:0,0) -- node[above]{$\alpha$} (axis cs:\a,0);
                 \draw[->] (axis cs:pi,0) -- node[above]{$\alpha$} (axis cs:pi+\a,0);
-                \addplot[domain=0:2*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
-                \addplot[domain=0:2*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
-                \node at (axis cs:pi*1/4,0.75) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
-                \node at (axis cs:pi*5/4,0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
+                \addplot[domain=0:2*pi, samples=50, signalgamma, dashed]{sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=50, signalbeta, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*1/4,0.75) [signalgamma, fill=white,inner sep=1pt] {$u_{s,2}$};
+                \node at (axis cs:pi*5/4,0.75) [signalbeta, fill=white,inner sep=1pt] {$u_{s,1}$};
                 \addplot[shadecolor, opacity=0.3, visible on=<2->] fill between[of=A2 and avg2, soft clip={domain=0:pi}];
                 \addplot[shadecolor, opacity=0.3, visible on=<2->] fill between[of=B2 and avg2, soft clip={domain=pi:2*pi}];
 
             \nextgroupplot[title=DCM, height=0.475\textheight, visible on=<3->] % voltage DCM
-                \addplot[domain=0:2*pi, samples=200, signalblue, thick, name path = A3]{(x < \adcm +\b - pi) * sin(deg(x+pi)) + (x > \adcm + \b -pi) * (x < \adcm) * \ucdcm + (x > \adcm)* (x < \adcm + \b) * sin(deg(x)) + (x > \adcm + \b) * (x < \adcm + pi) * \ucdcm + (x > \adcm + pi) * sin(deg(x-pi))};
-                \addplot[domain=0:2*pi, samples=10, signalblue, thick,dashed, name path = avg3]{\ucdcm};
+                \addplot[domain=0:2*pi, samples=200, signalalpha, thick, name path = A3]{(x < \adcm +\b - pi) * sin(deg(x+pi)) + (x > \adcm + \b -pi) * (x < \adcm) * \ucdcm + (x > \adcm)* (x < \adcm + \b) * sin(deg(x)) + (x > \adcm + \b) * (x < \adcm + pi) * \ucdcm + (x > \adcm + pi) * sin(deg(x-pi))};
+                \addplot[domain=0:2*pi, samples=10, signalalpha, thick,dashed, name path = avg3]{\ucdcm};
                 \node at (axis cs:pi,\ucdcm) [anchor=north, fill = white, inner sep = 2pt] {$\overline{u}_2$};
-                \addplot[domain=0:2*pi, samples=50, signalgreen, dashed]{sin(deg(x))};
-                \addplot[domain=0:2*pi, samples=50, signalbrown, dashed]{-sin(deg(x))};
-                \node at (axis cs:pi*1/4,0.75) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
-                \node at (axis cs:pi*5/4,0.75) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
+                \addplot[domain=0:2*pi, samples=50, signalgamma, dashed]{sin(deg(x))};
+                \addplot[domain=0:2*pi, samples=50, signalbeta, dashed]{-sin(deg(x))};
+                \node at (axis cs:pi*1/4,0.75) [signalgamma, fill=white,inner sep=1pt] {$u_{s,2}$};
+                \node at (axis cs:pi*5/4,0.75) [signalbeta, fill=white,inner sep=1pt] {$u_{s,1}$};
                 \draw[->] (axis cs:0,0) -- node[above]{$\alpha$} (axis cs:\a,0);
                 \draw[->] (axis cs:pi,0) -- node[above]{$\alpha$} (axis cs:pi+\a,0);
                 \addplot[shadecolor, opacity=0.3, visible on=<3->] fill between[of=A3 and avg3, soft clip={domain=0:2*pi}];
@@ -627,11 +627,11 @@
 
 
             \nextgroupplot[ylabel = {$i_\mathrm{L}(\omega t)$}, xlabel = {$\omega t$}, ymin=-0.01, ytick={0, 1/2, 1}, yticklabels={$0$, } ] %current CCM
-                \addplot[domain=0:\a, samples=50, signalred, thick, name path = Ai1]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs1};
-                \addplot[domain=\a:pi, samples=50, signalred, thick, name path = Bi1]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
-                \addplot[domain=pi:pi+\a, samples=50, signalred, thick, name path = Ci1]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs1};
-                \addplot[domain=pi+\a:2*pi, samples=50, signalred, thick, name path = Di1]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x-pi))+cos(deg(\a))) - \uc1*(x-\a-pi))};
-                \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed, name path = avgi1]{\iLavg1};
+                \addplot[domain=0:\a, samples=50, signaldelta, thick, name path = Ai1]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs1};
+                \addplot[domain=\a:pi, samples=50, signaldelta, thick, name path = Bi1]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
+                \addplot[domain=pi:pi+\a, samples=50, signaldelta, thick, name path = Ci1]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs1};
+                \addplot[domain=pi+\a:2*pi, samples=50, signaldelta, thick, name path = Di1]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs1 + 1/\Lw*(\u1*(-cos(deg(x-pi))+cos(deg(\a))) - \uc1*(x-\a-pi))};
+                \addplot[domain=0:2*pi, samples=10, signaldelta, thick,dashed, name path = avgi1]{\iLavg1};
                 \draw[<->] (axis cs:\a,0.75) -- node[above, fill = white]{$\beta=\pi$} (axis cs:\a+pi,0.75) ;
                 \addplot[shadecolor, opacity=0.3] fill between[of=Ai1 and avgi1, soft clip={domain=0:\a}];
                 \addplot[shadecolor, opacity=0.3] fill between[of=Bi1 and avgi1, soft clip={domain=\a:pi}];
@@ -639,11 +639,11 @@
                 \addplot[shadecolor, opacity=0.3] fill between[of=Di1 and avgi1, soft clip={domain=pi+\a:2*pi}];
 
             \nextgroupplot[xlabel = {$\omega t$}, ymin=-0.01, ytick={0, 1/2, 1}, yticklabels={}, visible on=<2->] %current BCM
-                \addplot[domain=0:\a, samples=50, signalred, thick, name path = Ai2]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs2};
-                \addplot[domain=\a:pi, samples=50, signalred, thick, name path = Bi2]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
-                \addplot[domain=pi:pi+\a, samples=50, signalred, thick, name path = Ci2]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs2};
-                \addplot[domain=pi+\a:2*pi, samples=50, signalred, thick, name path = Di2]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x-pi))+cos(deg(\a))) - \uc1*(x-\a-pi))};
-                \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed, name path = avgi2]{\iLavg2};
+                \addplot[domain=0:\a, samples=50, signaldelta, thick, name path = Ai2]{1/\Lw*(-\uc1*x + \u1*(cos(deg(x))-1))+\iLs2};
+                \addplot[domain=\a:pi, samples=50, signaldelta, thick, name path = Bi2]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x))+cos(deg(\a))) - \uc1*(x-\a))};
+                \addplot[domain=pi:pi+\a, samples=50, signaldelta, thick, name path = Ci2]{1/\Lw*(-\uc1*(x-pi) + \u1*(cos(deg(x - pi))-1))+\iLs2};
+                \addplot[domain=pi+\a:2*pi, samples=50, signaldelta, thick, name path = Di2]{1/\Lw*(-\uc1*\a + \u1*(cos(deg(\a))-1))+\iLs2 + 1/\Lw*(\u1*(-cos(deg(x-pi))+cos(deg(\a))) - \uc1*(x-\a-pi))};
+                \addplot[domain=0:2*pi, samples=10, signaldelta, thick,dashed, name path = avgi2]{\iLavg2};
                 \draw[<->] (axis cs:\a,0.6) -- node[above, fill = white]{$\beta=\pi$} (axis cs:\a+pi,0.6) ;
                 \addplot[shadecolor, opacity=0.3, visible on=<2->] fill between[of=Ai2 and avgi2, soft clip={domain=0:\a}];
                 \addplot[shadecolor, opacity=0.3, visible on=<2->] fill between[of=Bi2 and avgi2, soft clip={domain=\a:pi}];
@@ -651,12 +651,12 @@
                 \addplot[shadecolor, opacity=0.3, visible on=<2->] fill between[of=Di2 and avgi2, soft clip={domain=pi+\a:2*pi}];
 
             \nextgroupplot[xlabel = {$\omega t$}, ymin=-0.01, ytick={0, 1/2, 1}, yticklabels={}, visible on=<3->] %current DCM
-                \addplot[domain=\adcm:\adcm+\b, samples=50, signalred, thick, name path = Ai3]{1/\Lw*(-\ucdcm*(x-\adcm) - \u1*(cos(deg(x))-cos(deg(\adcm))))};
-                \addplot[domain=0:\adcm+\b-pi, samples=50, signalred, thick, name path = Bi3]{1/\Lw*(-\ucdcm*(x-\adcm+pi) - \u1*(cos(deg(x+pi))-cos(deg(\adcm))))};
-                \addplot[domain=\adcm+pi:2*pi, samples=50, signalred, thick, name path = Ci3]{1/\Lw*(-\ucdcm*(x-\adcm-pi) - \u1*(cos(deg(x-pi))-cos(deg(\adcm))))};
-                \addplot[domain=\adcm+\b:\adcm+pi, samples=50, signalred, thick, name path = Di3]{0};
-                \addplot[domain=\adcm+\b-pi:\adcm, samples=50, signalred, thick, name path = Ei3]{0};
-                \addplot[domain=0:2*pi, samples=10, signalred, thick,dashed, name path = avgi3]{\iLavg3};
+                \addplot[domain=\adcm:\adcm+\b, samples=50, signaldelta, thick, name path = Ai3]{1/\Lw*(-\ucdcm*(x-\adcm) - \u1*(cos(deg(x))-cos(deg(\adcm))))};
+                \addplot[domain=0:\adcm+\b-pi, samples=50, signaldelta, thick, name path = Bi3]{1/\Lw*(-\ucdcm*(x-\adcm+pi) - \u1*(cos(deg(x+pi))-cos(deg(\adcm))))};
+                \addplot[domain=\adcm+pi:2*pi, samples=50, signaldelta, thick, name path = Ci3]{1/\Lw*(-\ucdcm*(x-\adcm-pi) - \u1*(cos(deg(x-pi))-cos(deg(\adcm))))};
+                \addplot[domain=\adcm+\b:\adcm+pi, samples=50, signaldelta, thick, name path = Di3]{0};
+                \addplot[domain=\adcm+\b-pi:\adcm, samples=50, signaldelta, thick, name path = Ei3]{0};
+                \addplot[domain=0:2*pi, samples=10, signaldelta, thick,dashed, name path = avgi3]{\iLavg3};
                 \draw[<->] (axis cs:\adcm,0.5) -- node[above, fill = white]{$\beta<\pi$} (axis cs:\adcm+\b,0.5) ;
                 \addplot[shadecolor, opacity=0.3, visible on=<3->] fill between[of=Ai3 and avgi3, soft clip={domain=\adcm:\adcm+\b}];
                 \addplot[shadecolor, opacity=0.3, visible on=<3->] fill between[of=Bi3 and avgi3, soft clip={domain=0:\adcm+\b-pi}];
@@ -698,7 +698,7 @@
                     \addplot[domain=0:pi, samples=50, thick]{sin(deg(\b/2))*sin(deg(x+\b/2))};
                 \addplot[domain=0:pi, samples=50, thick, name path = u0]{sin(deg(0/2))*sin(deg(x+0/2))};
                 \addplot[domain=0:pi, samples=50, thick, name path = upi]{sin(deg(pi/2))*sin(deg(x+pi/2))};
-                \addplot[domain=0:pi, samples=50, thick, signalred, name path = uR]{(1+cos(deg(x)))/2};
+                \addplot[domain=0:pi, samples=50, thick, signaldelta, name path = uR]{(1+cos(deg(x)))/2};
                 \addplot[shadecolor, opacity=0.3] fill between[of=uR and u0];
                 \addplot[shadecolor, opacity=0.3] fill between[of=upi and u0, soft clip={domain=pi/2:pi}];
                 \node at (axis cs:pi*1/4,0) [anchor=south, font=\tiny, fill=shadecolor!30, inner sep=1pt, yshift=1pt] {$\beta = 0$}; 
@@ -706,7 +706,7 @@
                 \node at (axis cs:pi*1/6,{sin(deg(pi/5))*sin(deg(pi*1/6+pi/5))}) [font=\tiny, fill=shadecolor!30, inner sep=1pt] {$\beta = \frac{2}{5}\pi$};
                 \node at (axis cs:pi*1/10,{sin(deg(pi/10*3))*sin(deg(pi*1/10+pi/10*3))}) [font=\tiny, fill=shadecolor!30, inner sep=1pt] {$\beta = \frac{3}{5}\pi$};
                 \draw[-, thin] (axis cs:pi/20,{sin(deg(pi/10*4))*sin(deg(pi*1/20+pi/10*4))}) -- (axis cs:pi/3-0.15,0.9) node[anchor = west, font=\tiny, fill=white, inner sep=1pt] {$\beta = \frac{4}{5}\pi$};
-                \draw[signalred, thin] (axis cs:pi/2,0.5) -- (axis cs:pi/1.7,0.6) node[signalred, anchor = west, font=\small, fill=white, inner sep=1pt] {Ohmic load};
+                \draw[signaldelta, thin] (axis cs:pi/2,0.5) -- (axis cs:pi/1.7,0.6) node[signaldelta, anchor = west, font=\small, fill=white, inner sep=1pt] {Ohmic load};
                 \draw[thin] (axis cs:pi/2.7,0.5) -- (axis cs:pi/1.7,0.9) node[anchor = west, font=\small, fill=white, inner sep=1pt, align = center] {Filtered load \\($u_2= \mbox{const.}$)};
                 \draw[decorate,decoration={brace,amplitude=3pt,raise=2pt},yshift=0pt] (axis cs:pi/2,-0.95) -- (axis cs:pi/2,-0.05);
                 \node at (axis cs:pi*1/2-0.1,-0.5) [font=\small, fill=white, inner sep=1pt, anchor = east, align = left] {$\overline{p}_2 < 0$\\(active load)};
@@ -769,14 +769,14 @@
              clip=false
              ]
          \nextgroupplot[ylabel = {$u_1(\omega t)$}]
-             \addplot[domain=0:2*pi, samples=50, signalblue, thick]{sin(deg(x))};
+             \addplot[domain=0:2*pi, samples=50, signalalpha, thick]{sin(deg(x))};
              \coordinate (a1) at (axis cs:\a,1.15);
              \draw[->] (0,-0.75) -- node[above, inner sep = 1pt, yshift = 2pt, fill = white, font=\small]{$\alpha=\varphi^{(1)}$} (\a,-0.75); 
 
 
          \nextgroupplot[ylabel = {$i_1(\omega t)$}, xlabel = {$\omega t$}, yticklabels={$-\hat{i}^{(1)}_1$,$0$,$\hat{i}^{(1)}_\mathrm{1}$}]
-            \addplot[domain=0:2*pi, samples=50, signalred, thick, dashed]{sin(deg(x-\a))};
-            \addplot[domain=0:2*pi, samples=150, signalred, thick]{(x  < \a) * -\ia + (x > \a) * (x < \a + pi) * \ia +  (x > \a + pi) * -\ia};
+            \addplot[domain=0:2*pi, samples=50, signaldelta, thick, dashed]{sin(deg(x-\a))};
+            \addplot[domain=0:2*pi, samples=150, signaldelta, thick]{(x  < \a) * -\ia + (x > \a) * (x < \a + pi) * \ia +  (x > \a + pi) * -\ia};
             \coordinate (a2) at (axis cs:\a,-1.15);
             \draw[thin] (axis cs:pi/1.8,-0.3) -- (axis cs:pi/4,0.25) node[anchor = south, font=\small, fill=white, inner sep=1pt] {$i^{(1)}_1$};
 
@@ -980,10 +980,10 @@
                         xlabel style = {at={(axis description cs:1,0)},anchor=west},
                         grid=both
                     ]
-                        \addplot[domain=0:pi/4, samples=75, signalorange, thick]{(x < \a) * 1 + (x > \a) * 0};
-                        \addplot[domain=0:pi/4, samples=75, signalred, thick]{(x < \a) * 0 + (x > \a) * 1};
-                        \node at (axis cs:pi/8,0.25) [anchor=west, signalorange] {$i_{T_2}(t)$};
-                        \node at (axis cs:pi/8,0.75) [anchor=west, signalred] {$i_{T_1}(t)$};
+                        \addplot[domain=0:pi/4, samples=75, signalepsilon, thick]{(x < \a) * 1 + (x > \a) * 0};
+                        \addplot[domain=0:pi/4, samples=75, signaldelta, thick]{(x < \a) * 0 + (x > \a) * 1};
+                        \node at (axis cs:pi/8,0.25) [anchor=west, signalepsilon] {$i_{T_2}(t)$};
+                        \node at (axis cs:pi/8,0.75) [anchor=west, signaldelta] {$i_{T_1}(t)$};
                         \draw[->] (axis cs:0,0.5) -- node[above]{$\alpha$} (axis cs:\a,0.5);
                     \end{axis}              
                 \end{tikzpicture}
@@ -1034,10 +1034,10 @@
                         xlabel style = {at={(axis description cs:1,0)},anchor=west},
                         grid=both
                     ]
-                        \addplot[domain=0:pi/4, samples=75, signalorange, thick]{(x < \a) * \i2 + (x > \a) * (x < \a + \k)* (\i2 - \ic*(cos(deg(\a))-cos(deg(x)))) + (x > \a + \k)*0};
-                        \addplot[domain=0:pi/4, samples=75, signalred, thick]{(x < \a) * 0 + (x > \a) * (x < \a + \k)* (\ic*(cos(deg(\a))-cos(deg(x)))) + (x > \a + \k)*1};
-                        \node at (axis cs:pi/16*3.5,0.01) [anchor=south, signalorange] {$i_{T_2}(t)$};
-                        \node at (axis cs:pi/16*3.5,0.99) [anchor=north, signalred] {$i_{T_1}(t)$};
+                        \addplot[domain=0:pi/4, samples=75, signalzeta, thick]{(x < \a) * \i2 + (x > \a) * (x < \a + \k)* (\i2 - \ic*(cos(deg(\a))-cos(deg(x)))) + (x > \a + \k)*0};
+                        \addplot[domain=0:pi/4, samples=75, signaldelta, thick]{(x < \a) * 0 + (x > \a) * (x < \a + \k)* (\ic*(cos(deg(\a))-cos(deg(x)))) + (x > \a + \k)*1};
+                        \node at (axis cs:pi/16*3.5,0.01) [anchor=south, signalzeta] {$i_{T_2}(t)$};
+                        \node at (axis cs:pi/16*3.5,0.99) [anchor=north, signaldelta] {$i_{T_1}(t)$};
                         \draw[->] (axis cs:0,0.5) -- node[above]{$\alpha$} (axis cs:\a,0.5);
                         \draw[dashed, thin] (axis cs:\a,0) -- (axis cs:\a,1);
                     \end{axis}              
@@ -1146,19 +1146,19 @@
                 % Voltages
                 \nextgroupplot[ylabel = {$u(t)$}, ymin=-1.15, ymax=1.15, height=0.5\textheight, ytick={-1, -1/2, 0,1/2, 1}, yticklabels={$-\hat{u}_\mathrm{s}$, ,$0$, ,$\hat{u}_\mathrm{s}$}]
                     % Phase voltages
-                    \addplot[domain=0:5*pi/4, samples=50, signalgreen, dashed]{sin(deg(x))};
-                    \addplot[domain=0:5*pi/4, samples=50, signalbrown, dashed]{-sin(deg(x))};
-                    \node at (axis cs:pi*1.2,{-sin(deg(pi*1.2))}) [signalbrown, fill=white,inner sep=1pt] {$u_{s,2}$};
-                    \node at (axis cs:pi*1.2,{sin(deg(pi*1.2))}) [signalgreen, fill=white,inner sep=1pt] {$u_{s,1}$};
-                    \node at (axis cs:\a2,-0.5) [signalblue, fill=white,inner sep=2pt, anchor = east] {$u_2(t)$};
+                    \addplot[domain=0:5*pi/4, samples=50, signalgamma, dashed]{sin(deg(x))};
+                    \addplot[domain=0:5*pi/4, samples=50, signalbeta, dashed]{-sin(deg(x))};
+                    \node at (axis cs:pi*1.2,{-sin(deg(pi*1.2))}) [signalbeta, fill=white,inner sep=1pt] {$u_{s,2}$};
+                    \node at (axis cs:pi*1.2,{sin(deg(pi*1.2))}) [signalgamma, fill=white,inner sep=1pt] {$u_{s,1}$};
+                    \node at (axis cs:\a2,-0.5) [signalalpha, fill=white,inner sep=2pt, anchor = east] {$u_2(t)$};
                     % 1st commutation
-                    \addplot[domain=\a1-\da:\a1+\k1+\da, samples=50, signalblue, thick]{(x < \a1) * -sin(deg(x)) + (x > \a1+\k1)  * sin(deg(x))};
+                    \addplot[domain=\a1-\da:\a1+\k1+\da, samples=50, signalalpha, thick]{(x < \a1) * -sin(deg(x)) + (x > \a1+\k1)  * sin(deg(x))};
                     % 2nd commutation
-                    \addplot[domain=\a2-\da:\a2+\k2+\da, samples=50, signalblue, thick, visible on =<2->]{(x < \a2) * -sin(deg(x)) + (x > \a2+\k2)  * sin(deg(x))};
+                    \addplot[domain=\a2-\da:\a2+\k2+\da, samples=50, signalalpha, thick, visible on =<2->]{(x < \a2) * -sin(deg(x)) + (x > \a2+\k2)  * sin(deg(x))};
                     % 3rd commutation
-                    \addplot[domain=\a3-\da:\a3+\k3+\da, samples=50, signalblue, thick, visible on =<3->]{(x < \a3) * -sin(deg(x)) + (x > \a3+\k3)  * sin(deg(x))};
+                    \addplot[domain=\a3-\da:\a3+\k3+\da, samples=50, signalalpha, thick, visible on =<3->]{(x < \a3) * -sin(deg(x)) + (x > \a3+\k3)  * sin(deg(x))};
                     % 4th commutation
-                    \addplot[domain=\a4-\da:pi+\k4+\da, samples=50, signalblue, thick, visible on =<4->]{(x < \a4) * -sin(deg(x)) + (x > pi+\k4)  * -sin(deg(x))};
+                    \addplot[domain=\a4-\da:pi+\k4+\da, samples=50, signalalpha, thick, visible on =<4->]{(x < \a4) * -sin(deg(x)) + (x > pi+\k4)  * -sin(deg(x))};
                     % Coordinates for vertical lines
                     \coordinate (a1) at (axis cs:\a1,1);
                     \coordinate (b1) at (axis cs:\a1+\k1,1);
@@ -1169,20 +1169,20 @@
                 % Currents
                 \nextgroupplot[ylabel = {$i(t)$}, xlabel = {$\omega t$}, ymin=-0.01, ymax=1.1, ytick={0, 0.5, 1},  yticklabels={$0$, $i_2/2$, $i_2$},]
                     % 1st commutation
-                    \addplot[domain=\a1-\da:\a1+\k1+\da, samples=50, signalorange, thick]{(x < \a1) * \i2 + (x > \a1) * (x < \a1 + \k1)* (\i2 - \ic*(cos(deg(\a1))-cos(deg(x)))) + (x > \a1 + \k1)*0};
-                    \addplot[domain=\a1-\da:\a1+\k1+\da, samples=50, signalred, thick]{(x < \a1) * 0 + (x > \a1) * (x < \a1 + \k1)* (\ic*(cos(deg(\a1))-cos(deg(x)))) + (x > \a1 + \k1)*1};
+                    \addplot[domain=\a1-\da:\a1+\k1+\da, samples=50, signalzeta, thick]{(x < \a1) * \i2 + (x > \a1) * (x < \a1 + \k1)* (\i2 - \ic*(cos(deg(\a1))-cos(deg(x)))) + (x > \a1 + \k1)*0};
+                    \addplot[domain=\a1-\da:\a1+\k1+\da, samples=50, signaldelta, thick]{(x < \a1) * 0 + (x > \a1) * (x < \a1 + \k1)* (\ic*(cos(deg(\a1))-cos(deg(x)))) + (x > \a1 + \k1)*1};
                     % 2nd commutation
-                    \addplot[domain=\a2-\da:\a2+\k2+\da, samples=50, signalorange, thick, visible on =<2->]{(x < \a2) * \i2 + (x > \a2) * (x < \a2 + \k2)* (\i2 - \ic*(cos(deg(\a2))-cos(deg(x)))) + (x > \a2 + \k2)*0};
-                    \addplot[domain=\a2-\da:\a2+\k2+\da, samples=50, signalred, thick, visible on =<2->]{(x < \a2) * 0 + (x > \a2) * (x < \a2 + \k2)* (\ic*(cos(deg(\a2))-cos(deg(x)))) + (x > \a2 + \k2)*1};
+                    \addplot[domain=\a2-\da:\a2+\k2+\da, samples=50, signalzeta, thick, visible on =<2->]{(x < \a2) * \i2 + (x > \a2) * (x < \a2 + \k2)* (\i2 - \ic*(cos(deg(\a2))-cos(deg(x)))) + (x > \a2 + \k2)*0};
+                    \addplot[domain=\a2-\da:\a2+\k2+\da, samples=50, signaldelta, thick, visible on =<2->]{(x < \a2) * 0 + (x > \a2) * (x < \a2 + \k2)* (\ic*(cos(deg(\a2))-cos(deg(x)))) + (x > \a2 + \k2)*1};
                     % 3rd commutation
-                    \addplot[domain=\a3-\da:\a3+\k3+\da, samples=50, signalorange, thick, visible on =<3->]{(x < \a3) * \i2 + (x > \a3) * (x < \a3 + \k3)* (\i2 - \ic*(cos(deg(\a3))-cos(deg(x)))) + (x > \a3 + \k3)*0};
-                    \addplot[domain=\a3-\da:\a3+\k3+\da, samples=50, signalred, thick, visible on =<3->]{(x < \a3) * 0 + (x > \a3) * (x < \a3 + \k3)* (\ic*(cos(deg(\a3))-cos(deg(x)))) + (x > \a3 + \k3)*1};
+                    \addplot[domain=\a3-\da:\a3+\k3+\da, samples=50, signalzeta, thick, visible on =<3->]{(x < \a3) * \i2 + (x > \a3) * (x < \a3 + \k3)* (\i2 - \ic*(cos(deg(\a3))-cos(deg(x)))) + (x > \a3 + \k3)*0};
+                    \addplot[domain=\a3-\da:\a3+\k3+\da, samples=50, signaldelta, thick, visible on =<3->]{(x < \a3) * 0 + (x > \a3) * (x < \a3 + \k3)* (\ic*(cos(deg(\a3))-cos(deg(x)))) + (x > \a3 + \k3)*1};
                     % 4th commutation
-                    \addplot[domain=\a4-\da:pi+\k4+\da, samples=50, signalorange, thick, visible on =<4->]{(x < \a4) * \i2 + (x > \a4) * (x < pi + \k4)* (\i2 - \ic*(cos(deg(\a4))-cos(deg(x)))) + (x > pi + \k4)*\i2};
-                    \addplot[domain=\a4-\da:pi+\k4+\da, samples=50, signalred, thick, visible on =<4->]{(x < \a4) * 0 + (x > \a4) * (x < pi + \k4)* (\ic*(cos(deg(\a4))-cos(deg(x)))) + (x > pi + \k4)*0};
+                    \addplot[domain=\a4-\da:pi+\k4+\da, samples=50, signalzeta, thick, visible on =<4->]{(x < \a4) * \i2 + (x > \a4) * (x < pi + \k4)* (\i2 - \ic*(cos(deg(\a4))-cos(deg(x)))) + (x > pi + \k4)*\i2};
+                    \addplot[domain=\a4-\da:pi+\k4+\da, samples=50, signaldelta, thick, visible on =<4->]{(x < \a4) * 0 + (x > \a4) * (x < pi + \k4)* (\ic*(cos(deg(\a4))-cos(deg(x)))) + (x > pi + \k4)*0};
                     \node at (axis cs:pi,0.5) [fill = white, inner sep = 1pt, visible on =<4->] {Failed commutation};
-                    \node at (axis cs:pi*1.125,0.85) [anchor=west, signalorange] {$i_{T_2}(t)$};
-                    \node at (axis cs:pi*1.125,0.15) [anchor=west, signalred] {$i_{T_1}(t)$};
+                    \node at (axis cs:pi*1.125,0.85) [anchor=west, signalzeta] {$i_{T_2}(t)$};
+                    \node at (axis cs:pi*1.125,0.15) [anchor=west, signaldelta] {$i_{T_1}(t)$};
                     % Coordinates for vertical lines
                     \coordinate (a2) at (axis cs:\a1,0);
                     \coordinate (b2) at (axis cs:\a1+\k1,0);
@@ -1297,13 +1297,13 @@
         
                     \begin{axis}[height=0.5\textheight, width=0.95\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/3, pi/6*4, pi, 8/6*pi, 10/6*pi,  2*pi}, xticklabels = {}, ytick = {-1, 0, 1}, yticklabels = {, 0, }, ylabel = {$u(t)$}, yticklabels = { $-\hat{u}_1$, $0$, $\hat{u}_1$}, xticklabels = {0, $\frac{1}{3}\pi$, $\frac{2}{3}\pi$, $\vphantom{\frac{1}{1}}\pi$, $\frac{4}{3}\pi$, $\frac{5}{3}\pi$,$\vphantom{\frac{1}{1}}2\pi$},xlabel = {$\omega t$}]
         
-                        \draw[thin, signallavender] (axis cs:pi/6+\a+0.2,\uavg) -- node[signallavender, fill=white, inner sep=2pt, anchor = north, xshift=1mm] {$\overline{u}_2$} (axis cs:pi/6+\a+0.4,\uavg/3);
-                        \draw[thin, signallavender] (axis cs:pi/3,0) -- node[signallavender, fill=white, inner sep=1pt, anchor = north east, xshift=2mm] {$u_2(t)$} (axis cs:pi/5,-0.4);
-                        \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, name path=A]{sin(deg(x))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalgreen, thick, name path=B]{sin(deg(x-pi/3*2))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalbrown, thick, name path=C]{sin(deg(x+pi/3*2))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signallavender, thick, dashed, name path=avg]{\uavg};
-                        \addplot[domain=0:2*pi, samples=150, signallavender, thick]{(x < \a + pi/6) * sin(deg(x+pi/3*2)) + (x > \a + pi/6)*(x < \a + pi*5/6)*sin(deg(x)) + (x > \a + pi*5/6)*(x < \a + pi*9/6)*sin(deg(x-pi/3*2)) + (x > \a + pi*9/6)*sin(deg(x+pi/3*2))};
+                        \draw[thin, black] (axis cs:pi/6+\a+0.2,\uavg) -- node[black, fill=white, inner sep=2pt, anchor = north, xshift=1mm] {$\overline{u}_2$} (axis cs:pi/6+\a+0.4,\uavg/3);
+                        \draw[thin, black] (axis cs:pi/3,0) -- node[black, fill=white, inner sep=1pt, anchor = north east, xshift=2mm] {$u_2(t)$} (axis cs:pi/5,-0.4);
+                        \addplot[domain=0*pi:2*pi, samples=100, signalalpha, thick, name path=A]{sin(deg(x))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalgamma, thick, name path=B]{sin(deg(x-pi/3*2))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalbeta, thick, name path=C]{sin(deg(x+pi/3*2))};
+                        \addplot[domain=0*pi:2*pi, samples=100, black, thick, dashed, name path=avg]{\uavg};
+                        \addplot[domain=0:2*pi, samples=150, black, thick]{(x < \a + pi/6) * sin(deg(x+pi/3*2)) + (x > \a + pi/6)*(x < \a + pi*5/6)*sin(deg(x)) + (x > \a + pi*5/6)*(x < \a + pi*9/6)*sin(deg(x-pi/3*2)) + (x > \a + pi*9/6)*sin(deg(x+pi/3*2))};
                         \draw[->] (axis cs:pi/6,1.2) -- node[above]{$\alpha$} (axis cs:{pi/6+\a},1.2);
                         \draw[thin, dashed] (axis cs:pi/6,1.5) -- (axis cs:pi/6,0);
                         \draw[thin, dashed] (axis cs:pi/6+pi/3*2,1.5) -- (axis cs:pi/6+pi/3*2,0);
@@ -1392,16 +1392,16 @@
         
                     \begin{axis}[height=0.5\textheight, width=0.95\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/3, pi/6*4, pi, 8/6*pi, 10/6*pi,  2*pi}, xticklabels = {}, ytick = {-1, 0, 1}, yticklabels = {, 0, }, ylabel = {$u(t)$}, yticklabels = { $-\hat{u}$, $0$, $\hat{u}$}, xticklabels = {0, $\frac{2\pi}{p}$, $\frac{4\pi}{p}$, $\frac{6\pi}{p}$, $\frac{8\pi}{p}$, $\frac{10\pi}{p}$,$\frac{12\pi}{p}$},xlabel = {$\omega t$}]
         
-                        \draw[thin, signallavender] (axis cs:pi/3,\uavg) -- node[signallavender, fill=white, inner sep=2pt, anchor = north] {$\overline{u}_2$} (axis cs:pi/3,-\uavg/6);
-                        \draw[thin, signallavender] (axis cs:pi*0.965,0.66) -- node[signallavender, fill=white, inner sep=1pt, anchor = south west, yshift=2mm] {$u_2(t)$} (axis cs:pi*1.2,1.4);
-                        \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, name path=A]{cos(deg(x))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalgreen, thick, name path=B]{cos(deg(x-pi/3*2))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalbrown, thick, name path=C]{cos(deg(x+pi/3*2))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalblue, thick, dashed, name path=D]{-cos(deg(x))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalgreen, thick, dashed, name path=E]{-cos(deg(x-pi/3*2))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signalbrown, thick,dashed,  name path=F]{-cos(deg(x+pi/3*2))};
-                        \addplot[domain=0*pi:2*pi, samples=100, signallavender, thick, dashed, name path=avg]{\uavg};
-                        \addplot[domain=0:2*pi, samples=200, signallavender, thick]{(x <  -pi/6+\a) * -cos(deg(x-pi/3*2)) + (x > \a -pi/6)*(x < \a + pi/6)*cos(deg(x)) + (x > \a+ pi/6)*(x < \a + 3*pi/6)*-cos(deg(x+pi/3*2)) + (x > \a + 3*pi/6)*(x < \a + 5*pi/6)*cos(deg(x-pi/3*2))+ (x > \a + 5*pi/6)*(x < \a + 7*pi/6)*-cos(deg(x))+ (x > \a + 7*pi/6)*(x < \a + 9*pi/6)*cos(deg(x+pi/3*2))+ (x > \a + 9*pi/6)*(x < \a + 11*pi/6)*-cos(deg(x-pi/3*2))+ (x > \a + 11*pi/6)*(x < \a + 13*pi/6)*cos(deg(x))};
+                        \draw[thin, black] (axis cs:pi/3,\uavg) -- node[black, fill=white, inner sep=2pt, anchor = north] {$\overline{u}_2$} (axis cs:pi/3,-\uavg/6);
+                        \draw[thin, black] (axis cs:pi*0.965,0.66) -- node[black, fill=white, inner sep=1pt, anchor = south west, yshift=2mm] {$u_2(t)$} (axis cs:pi*1.2,1.4);
+                        \addplot[domain=0*pi:2*pi, samples=100, signalalpha, thick, name path=A]{cos(deg(x))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalgamma, thick, name path=B]{cos(deg(x-pi/3*2))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalbeta, thick, name path=C]{cos(deg(x+pi/3*2))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalalpha, thick, dashed, name path=D]{-cos(deg(x))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalgamma, thick, dashed, name path=E]{-cos(deg(x-pi/3*2))};
+                        \addplot[domain=0*pi:2*pi, samples=100, signalbeta, thick,dashed,  name path=F]{-cos(deg(x+pi/3*2))};
+                        \addplot[domain=0*pi:2*pi, samples=100, black, thick, dashed, name path=avg]{\uavg};
+                        \addplot[domain=0:2*pi, samples=200, black, thick]{(x <  -pi/6+\a) * -cos(deg(x-pi/3*2)) + (x > \a -pi/6)*(x < \a + pi/6)*cos(deg(x)) + (x > \a+ pi/6)*(x < \a + 3*pi/6)*-cos(deg(x+pi/3*2)) + (x > \a + 3*pi/6)*(x < \a + 5*pi/6)*cos(deg(x-pi/3*2))+ (x > \a + 5*pi/6)*(x < \a + 7*pi/6)*-cos(deg(x))+ (x > \a + 7*pi/6)*(x < \a + 9*pi/6)*cos(deg(x+pi/3*2))+ (x > \a + 9*pi/6)*(x < \a + 11*pi/6)*-cos(deg(x-pi/3*2))+ (x > \a + 11*pi/6)*(x < \a + 13*pi/6)*cos(deg(x))};
                         \draw[->] (axis cs:pi/6,1.2) -- node[above]{$\alpha$} (axis cs:{pi/6+\a},1.2);
                         \draw[thin, dashed] (axis cs:pi/6,1.5) -- (axis cs:pi/6,0);
                         \draw[thin, dashed] (axis cs:pi/6+\a,1.5) -- (axis cs:pi/6+\a,{-cos(deg(pi/6+\a+pi/3*2))});

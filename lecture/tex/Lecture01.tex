@@ -119,7 +119,7 @@
 					yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
 					grid=both,
 					]
-					\addplot[domain=0:2*pi, samples=100, signalblue, thick]{1};
+					\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{1};
 				\end{axis}
 			}
 			\&
@@ -145,7 +145,7 @@
 					yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
 					grid=both,
 					]
-					\addplot[domain=0:2*pi, samples=100, signalblue, thick]{sin(deg(x))};
+					\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{sin(deg(x))};
 				\end{axis}
 			}
 			\&
@@ -171,7 +171,7 @@
 					yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
 					grid=both,
 					]
-					\addplot[domain=0:2*pi, samples=100, signalblue, thick]{sin(deg(x))};
+					\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{sin(deg(x))};
 				\end{axis}
 			}
 			\\
@@ -219,7 +219,7 @@
 					yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
 					grid=both,
 					]
-					\addplot[domain=0:2*pi, samples=100, signalblue, thick]{sin(deg(x))};
+					\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{sin(deg(x))};
 				\end{axis}
 			}
 			\&
@@ -245,7 +245,7 @@
 					yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
 					grid=both,
 					]
-					\addplot[domain=0:2*pi, samples=100, signalblue, thick]{0.5*sin(deg(2*x+pi/2))};
+					\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{0.5*sin(deg(2*x+pi/2))};
 				\end{axis}
 			}
 			\&
@@ -271,9 +271,9 @@
 					yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
 					grid=both,
 					]
-					\addplot[domain=0:2*pi, samples=100, signalblue, thick]{sin(deg(x))};
-					\addplot[domain=0:2*pi, samples=100, signalred, thick]{sin(deg(x-2*pi/3))};
-					\addplot[domain=0:2*pi, samples=100, signalgreen, thick]{sin(deg(x+2*pi/3))};
+					\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{sin(deg(x))};
+					\addplot[domain=0:2*pi, samples=100, signalbeta, thick]{sin(deg(x-2*pi/3))};
+					\addplot[domain=0:2*pi, samples=100, signalgamma, thick]{sin(deg(x+2*pi/3))};
 				\end{axis}
 			}
 			\\
@@ -474,7 +474,7 @@
 				mesh,
 				samples=20,
 				domain=0:1,
-				draw = signalblue
+				draw = signalalpha
 			](
 				{sqrt(1-x^2) * cos(deg(y))},
 				{sqrt( 1-x^2 ) * sin(deg(y))},
@@ -524,9 +524,9 @@
 			\begin{scope}[on background layer]
 				\onslide<2->\draw[-{Latex[length=4mm, width=8mm]}, line width=4mm] (energy.mid) -- node[above, midway, name = work] {Work} (energy2);
 				\onslide<3->{
-					\draw[-{Latex[length=4mm, width=8mm]}, line width=2mm, color=signalred, transform canvas={yshift=-3mm}] (energy.mid) --  (3,0) to [out=0,in=120] (loss.south) ;
-					\node[below, transform canvas={yshift=-3mm}] at (loss) {\color{signalred} \large Heat};
-					\node[below=of work, yshift = 6mm, color=signalred] {Losses};
+					\draw[-{Latex[length=4mm, width=8mm]}, line width=2mm, color=signaldelta, transform canvas={yshift=-3mm}] (energy.mid) --  (3,0) to [out=0,in=120] (loss.south) ;
+					\node[below, transform canvas={yshift=-3mm}] at (loss) {\color{signaldelta} \large Heat};
+					\node[below=of work, yshift = 6mm, color=signaldelta] {Losses};
 				}
 			\end{scope}
 		\end{tikzpicture}
@@ -549,12 +549,12 @@
 				node [output, name = output, right = of pc] {}
 				node [output, name = losses, below = of pc] {};
 				\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm] (input) -- node[below, midway, align=left, name = input2] {Electrical\\input power} (pc);
-			\onslide<3->{\node[overlay, bubble, right = of input, minimum height = 4em, pin=80:Change of stored energy $ \frac{}{t}E_\mathrm{i}(t)$] {\large Power converter};}
+			\onslide<3->{\node[overlay, bubble, right = of input, minimum height = 4em, pin=80:Change of stored energy $ \frac{\mathrm{d}}{\mathrm{d}t}E_\mathrm{i}(t)$] {\large Power converter};}
 			\begin{scope}[on background layer]
 				\onslide<4->{\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm] (pc.mid) -- node[below, near end, align=left, name=output2] {Electrical\\output power} (output);}
-				\onslide<2->{\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm, color=signalred] (pc.mid) -- node[right, yshift=-2.5mm, name = losses2] {Losses} (losses);}
+				\onslide<2->{\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm, color=signaldelta] (pc.mid) -- node[right, yshift=-2.5mm, name = losses2] {Losses} (losses);}
 			\end{scope}
-			\onslide<2->{\node[left=of losses2, color=signalred, xshift = 1.8cm] {$P_\mathrm{l}(t)$};}
+			\onslide<2->{\node[left=of losses2, color=signaldelta, xshift = 1.8cm] {$P_\mathrm{l}(t)$};}
 			\onslide<4->{\node[above=of output2.mid,, align=center, xshift = -0.3cm, yshift = -5mm] {$P_\mathrm{out}(t)$};}
 			\node[above=of input2.mid,, align=center, xshift = -0.3cm, yshift = -5mm] {$P_\mathrm{in}(t)$};
 		\end{tikzpicture}
@@ -564,7 +564,7 @@
 	\vspace{-0.5cm}
 	The \hl{power balance}
 	\begin{equation}
-		\onslide<1->{P_\mathrm{in}(t)} \onslide<2->{= P_\mathrm{l}(t)}  \onslide<3->{+ \frac{}{t}E_\mathrm{i}(t)} \onslide<4->{+ P_\mathrm{out}(t)}
+		\onslide<1->{P_\mathrm{in}(t)} \onslide<2->{= P_\mathrm{l}(t)}  \onslide<3->{+ \frac{\mathrm{d}}{\mathrm{d}t}E_\mathrm{i}(t)} \onslide<4->{+ P_\mathrm{out}(t)}
 	\end{equation}
 	must hold for any point in time as energy is conserved, that is, not created or destroyed.
 \end{frame}
@@ -584,9 +584,9 @@
 			\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm] (input) -- node[below, midway, align=left, name = input2] {Electrical\\input power} (pc);
 			\begin{scope}[on background layer]
 				\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm] (pc.mid) -- node[below, near end, align=left, name=output2] {Electrical\\output power} (output);
-				\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm, color=signalred] (pc.mid) -- node[right, yshift=-2.5mm, name = losses2] {Losses} (losses);
+				\draw[-{Latex[length=4mm, width=8mm]}, line width=3mm, color=signaldelta] (pc.mid) -- node[right, yshift=-2.5mm, name = losses2] {Losses} (losses);
 			\end{scope}
-			\node[left=of losses2, color=signalred, xshift = 1.8cm] {$P_\mathrm{l}$};
+			\node[left=of losses2, color=signaldelta, xshift = 1.8cm] {$P_\mathrm{l}$};
 			\node[above=of output2.mid,, align=center, xshift = -0.3cm, yshift = -5mm] {$P_\mathrm{out}$};
 			\node[above=of input2.mid,, align=center, xshift = -0.3cm, yshift = -5mm] {$P_\mathrm{in}$};
 		\end{tikzpicture}
@@ -803,19 +803,19 @@
 						width = 0.95\textwidth,
 						grid
 						]
-						\addplot[signalblue, domain=0:0.3]{0.01};
-						\addplot[signalblue, domain=0.3:5]{11.5 / (1+exp(-2*(x-0.3)))-6};
-						\addplot[signalblue, domain=0.3:5]{7.7 / (1+exp(-2.5*(x-0.3)))-4};
-						\addplot[signalblue, domain=0.3:5]{4 / (1+exp(-3*(x-0.3)))-2};
-						\addplot[signalblue, domain=0.3:5]{2 / (1+exp(-3.25*(x-0.3)))-1};
-						\addplot[signalblue, domain=0.3:5]{1 / (1+exp(-3.5*(x-0.325)))-0.5};
-						\addplot[signalblue, domain=0.3:5]{0.25 / (1+exp(-3.5*(x-0.325)))-0.125};
-						\draw[->, signalbrown, thick, dashed] (axis cs:1.5,0.25) -- (axis cs:1.5,5.2);
-						\node[signalbrown, anchor = west] at (axis cs:1.5,2.75) {$U_\mathrm{GE}$};
-						\draw[signalgreen, thick, dashed, rotate=-10] (axis cs:0.5,1) ellipse (0.35cm and 3.0cm);
-						\node[signalgreen, anchor = south] at (axis cs:1.1,5.1) {\small Linear region};
-						\draw[signalred, thick, dashed, rounded corners] (axis cs:2.5,0.2) rectangle (axis cs:4.75,5.9);
-						\node[signalred, anchor = south, ,  align=center] at (axis cs:3.6,3.7) {\small Saturation\\region};
+						\addplot[signalalpha, domain=0:0.3]{0.01};
+						\addplot[signalalpha, domain=0.3:5]{11.5 / (1+exp(-2*(x-0.3)))-6};
+						\addplot[signalalpha, domain=0.3:5]{7.7 / (1+exp(-2.5*(x-0.3)))-4};
+						\addplot[signalalpha, domain=0.3:5]{4 / (1+exp(-3*(x-0.3)))-2};
+						\addplot[signalalpha, domain=0.3:5]{2 / (1+exp(-3.25*(x-0.3)))-1};
+						\addplot[signalalpha, domain=0.3:5]{1 / (1+exp(-3.5*(x-0.325)))-0.5};
+						\addplot[signalalpha, domain=0.3:5]{0.25 / (1+exp(-3.5*(x-0.325)))-0.125};
+						\draw[->, signaldelta, thick, dashed] (axis cs:1.5,0.25) -- (axis cs:1.5,5.2);
+						\node[signaldelta, anchor = west] at (axis cs:1.5,2.75) {$U_\mathrm{GE}$};
+						\draw[signalgamma, thick, dashed, rotate=-10] (axis cs:0.5,1) ellipse (0.35cm and 3.0cm);
+						\node[signalgamma, anchor = south] at (axis cs:1.1,5.1) {\small Linear region};
+						\draw[signalbeta, thick, dashed, rounded corners] (axis cs:2.5,0.2) rectangle (axis cs:4.75,5.9);
+						\node[signalbeta, anchor = south, ,  align=center] at (axis cs:3.6,3.7) {\small Saturation\\region};
 					\end{axis}
 				\end{tikzpicture}
 				\caption{Output characteristics of an insulated-gate bipolar transistor (IGBT)}
@@ -874,13 +874,13 @@
 						clip = false,
 						]
 						% plt u_out = 1 for t = 0 to D*Ts and u_out = 0 for t = D*Ts to Ts in a single plot
-						\addplot[signalblue] coordinates {(-0.1,0) (0,0) (0,1) (0.4,1) (0.4,0) (1,0) (1,1) (1.1,1)};
+						\addplot[signalalpha] coordinates {(-0.1,0) (0,0) (0,1) (0.4,1) (0.4,0) (1,0) (1,1) (1.1,1)};
 						\draw [thick,<->]  (0,0.5) -- node[above,fill=white]{$T_\mathrm{on}$}(0.4, 0.5); 
 						\draw [thick,<->]  (0.4,0.5) -- node[above]{$T_\mathrm{off}$}(1.0, 0.5);
 						\draw [thick,<->]  (0.0,1.2) -- node[above]{$T_\mathrm{s}$}(1.0, 1.2); 
 					\end{axis}
 				\end{tikzpicture}
-				\caption{Switching output voltage from \figref{fig:Switched_power_conversion}}
+				\caption{Switching voltage from \figref{fig:Switched_power_conversion}}
 				\label{fig:Switched_power_conversion_output}
 				}
 			\end{figure}
@@ -927,28 +927,28 @@
 
 					% Top plot: switch control signal
 					\nextgroupplot[ylabel = {$u_\mathrm{ctrl}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {off, , on}]
-						\addplot[signalblue, thick] coordinates {(-0.1,0) (0,0) (0,1) (0.5,1) (0.5,0) (1,0) (1,1) (1.1,1)};
+						\addplot[signalalpha, thick] coordinates {(-0.1,0) (0,0) (0,1) (0.5,1) (0.5,0) (1,0) (1,1) (1.1,1)};
 						\draw [thick,<->]  (0,0.4) -- node[above, fill=white, inner sep = 1pt]{$T_\mathrm{on}$}(0.5, 0.4); 
 						\draw [thick,<->]  (0.5,0.4) -- node[above, fill=white, inner sep = 1pt]{$T_\mathrm{off}$}(1.0, 0.4);
 						
 						% Middle plot: voltage and current through a switch (two y-axes)
 						\nextgroupplot[ylabel = {$u_\mathrm{s}(t)/u_0$}]
-							\addplot[signalblue, thick] coordinates {(-0.1,1) (0,1) (0.1,0) (0.5,0) (0.6,1) (1,1) (1.1,1)};
-							\draw[{Latex[length=2mm]}-, thin, signalblue] (axis cs:0.6,0.9) -- node[right=1mm, fill=white, inner sep = 1pt]{$u_\mathrm{s}(t)$}(axis cs:0.75,0.5);
-							\draw[{Latex[length=2mm]}-, thin, signalred] (axis cs:0.8,0.1) -- node[right=1mm, fill=white, inner sep = 1pt]{$i_\mathrm{s}(t)$}(axis cs:0.95,0.5);
+							\addplot[signalalpha, thick] coordinates {(-0.1,1) (0,1) (0.1,0) (0.5,0) (0.6,1) (1,1) (1.1,1)};
+							\draw[{Latex[length=2mm]}-, thin, signalalpha] (axis cs:0.6,0.9) -- node[right=1mm, fill=white, inner sep = 1pt]{$u_\mathrm{s}(t)$}(axis cs:0.75,0.5);
+							\draw[{Latex[length=2mm]}-, thin, signaldelta] (axis cs:0.8,0.1) -- node[right=1mm, fill=white, inner sep = 1pt]{$i_\mathrm{s}(t)$}(axis cs:0.95,0.5);
 						
 						% Bottom plot: power loss in the switch
 						\nextgroupplot[xlabel = {$t/T_\mathrm{s}$}, ylabel = {$P_\mathrm{l}(t)/P_\mathrm{max}$}]
-							\addplot[signalblue, domain = -0.1:0, thick] {0};
-							\addplot[signalblue, domain = 0.0:0.1, thick,fill=signalblue, 
+							\addplot[signalalpha, domain = -0.1:0, thick] {0};
+							\addplot[signalalpha, domain = 0.0:0.1, thick,fill=signalalpha, 
 							fill opacity=0.1] {-(x-0.05)^2/(0.05)^2+1};
-							\addplot[signalblue, domain = 0.5:0.6, thick,fill=signalblue, 
+							\addplot[signalalpha, domain = 0.5:0.6, thick,fill=signalalpha, 
 							fill opacity=0.1] {-(x-0.55)^2/(0.05)^2+1};
-							\addplot[signalblue, domain = 0.1:0.5, thick] {0};
-							\addplot[signalblue, domain = 0.6:1.1, thick] {0};
+							\addplot[signalalpha, domain = 0.1:0.5, thick] {0};
+							\addplot[signalalpha, domain = 0.6:1.1, thick] {0};
 							% add textbox with arrow pointing towards the first power loss curve
-							\draw[{Latex[length=2mm]}-, thin, signalblue] (axis cs:0.05,0.4) -- node[right=1mm, fill=white, inner sep = 1pt]{$E_\mathrm{on}$}(axis cs:0.25,0.5);
-							\draw[{Latex[length=2mm]}-, thin, signalblue] (axis cs:0.55,0.4) -- node[right=1mm, fill=white, inner sep = 1pt]{$E_\mathrm{off}$}(axis cs:0.75,0.5);
+							\draw[{Latex[length=2mm]}-, thin, signalalpha] (axis cs:0.05,0.4) -- node[right=1mm, fill=white, inner sep = 1pt]{$E_\mathrm{on}$}(axis cs:0.25,0.5);
+							\draw[{Latex[length=2mm]}-, thin, signalalpha] (axis cs:0.55,0.4) -- node[right=1mm, fill=white, inner sep = 1pt]{$E_\mathrm{off}$}(axis cs:0.75,0.5);
 						
 					\end{groupplot}
 					% second y-axis for the middle plot
@@ -956,8 +956,8 @@
 						\nextgroupplot[ytick = \empty]
 							%
 						\nextgroupplot[ylabel = {$i_\mathrm{s}(t)/i_0$}, ytick = {}, yticklabels = {}]
-							\addplot[signalred, thick] coordinates {(-0.1,0) (0,0) (0.1,1) (0.5,1) (0.6,0) (1,0) (1.1,0)};
-							\addplot[signalblue, thick] coordinates {(-0.1,1) (0,1) (0.1,0) (0.5,0) (0.6,1) (1,1) (1.1,1)}; %plot second time to prevent overlap from grid lines
+							\addplot[signaldelta, thick] coordinates {(-0.1,0) (0,0) (0.1,1) (0.5,1) (0.6,0) (1,0) (1.1,0)};
+							\addplot[signalalpha, thick] coordinates {(-0.1,1) (0,1) (0.1,0) (0.5,0) (0.6,1) (1,1) (1.1,1)}; %plot second time to prevent overlap from grid lines
 						\nextgroupplot[ytick = \empty]
 							%
 					\end{groupplot}
@@ -983,16 +983,16 @@
 				% Top-left plot: switch control signal for ZVS
 				
 				\nextgroupplot[ylabel = {$u_\mathrm{ctrl}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {off, , on}]
-					\addplot[signalblue, thick] coordinates {(-0.1,0) (0.3,0) (0.3,1) (0.7,1) (0.7,0) (1.1,0)};
+					\addplot[signalalpha, thick] coordinates {(-0.1,0) (0.3,0) (0.3,1) (0.7,1) (0.7,0) (1.1,0)};
 					\coordinate (a) at (0.3,0);
 					\coordinate (b) at (0.7,0);
 					
 	
 				% Bottom-left plot: voltage and current through a switch for ZVS
 				\nextgroupplot[ylabel = {$u_\mathrm{s}(t)/u_0$}]
-					\addplot[signalblue, thick] coordinates {(0,1) (0.2,1) (0.3,0) (0.7,0) (0.8,1) (1,1)};
-					\node[signalred, fill=white, inner sep = 1pt, anchor = north] at (axis cs:0.5,1) {$i_\mathrm{s}(t)$};
-					\node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0) {$u_\mathrm{s}(t)$};
+					\addplot[signalalpha, thick] coordinates {(0,1) (0.2,1) (0.3,0) (0.7,0) (0.8,1) (1,1)};
+					\node[signaldelta, fill=white, inner sep = 1pt, anchor = north] at (axis cs:0.5,1) {$i_\mathrm{s}(t)$};
+					\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0) {$u_\mathrm{s}(t)$};
 					\coordinate (c) at (0.3,0);
 					\coordinate (d) at (0.7,0);
 				\end{groupplot}
@@ -1002,8 +1002,8 @@
 					\nextgroupplot[ytick = \empty]
 					%
 					\nextgroupplot[ylabel = {$i_\mathrm{s}(t)/i_0$}, ytick = {}, yticklabels = {}]
-						\addplot[signalred, thick] coordinates {(0,0) (0.25,0) (0.35,1) (0.65,1) (0.75,0) (1,0)};
-						\addplot[signalblue, thick] coordinates {(0,1) (0.2,1) (0.3,0) (0.7,0) (0.8,1) (1,1)};
+						\addplot[signaldelta, thick] coordinates {(0,0) (0.25,0) (0.35,1) (0.65,1) (0.75,0) (1,0)};
+						\addplot[signalalpha, thick] coordinates {(0,1) (0.2,1) (0.3,0) (0.7,0) (0.8,1) (1,1)};
 				\end{groupplot}
 				\draw [dashed] (a) -- (c);
                 \draw [dashed] (b) -- (d);
@@ -1021,15 +1021,15 @@
 	
 				% Top-right plot: switch control signal for ZVS
 				\nextgroupplot[ylabel = {$u_\mathrm{ctrl}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {off, , on}]
-					\addplot[signalblue, thick] coordinates {(-0.1,0) (0.3,0) (0.3,1) (0.7,1) (0.7,0) (1.1,0)};
+					\addplot[signalalpha, thick] coordinates {(-0.1,0) (0.3,0) (0.3,1) (0.7,1) (0.7,0) (1.1,0)};
 					\coordinate (a) at (0.3,0);
 					\coordinate (b) at (0.7,0);
 				
 				% Bottom-right plot: voltage and current through a switch for ZCS
 				\nextgroupplot[ylabel = {$u_\mathrm{s}(t)/u_0$}]
-					\addplot[signalblue, thick] coordinates {(0,1) (0.25,1) (0.35,0) (0.65,0) (0.75,1) (1,1)};
-					\node[signalred, fill=white, inner sep = 1pt, anchor = north] at (axis cs:0.5,1) {$i_\mathrm{s}(t)$};
-					\node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0) {$u_\mathrm{s}(t)$};
+					\addplot[signalalpha, thick] coordinates {(0,1) (0.25,1) (0.35,0) (0.65,0) (0.75,1) (1,1)};
+					\node[signaldelta, fill=white, inner sep = 1pt, anchor = north] at (axis cs:0.5,1) {$i_\mathrm{s}(t)$};
+					\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0) {$u_\mathrm{s}(t)$};
 					\coordinate (c) at (0.3,0);
 					\coordinate (d) at (0.7,0);
 				\end{groupplot}
@@ -1039,8 +1039,8 @@
 					\nextgroupplot[ytick = \empty]
 					%
 					\nextgroupplot[ylabel = {$i_\mathrm{s}(t)/i_0$}, ytick = {}, yticklabels = {}]
-						\addplot[signalred, thick] coordinates {(0,0) (0.3,0) (0.4,1) (0.6,1) (0.7,0) (1,0)};
-						\addplot[signalblue, thick] coordinates {(0,1) (0.25,1) (0.35,0) (0.65,0) (0.75,1) (1,1)};
+						\addplot[signaldelta, thick] coordinates {(0,0) (0.3,0) (0.4,1) (0.6,1) (0.7,0) (1,0)};
+						\addplot[signalalpha, thick] coordinates {(0,1) (0.25,1) (0.35,0) (0.65,0) (0.75,1) (1,1)};
 					%
 				\end{groupplot}
 				\draw [dashed] (a) -- (c);
@@ -1090,7 +1090,7 @@
 							clip = false,
 							]
 							% plt u_out = 1 for t = 0 to D*Ts and u_out = 0 for t = D*Ts to Ts in a single plot
-							\addplot[signalblue] coordinates {(-0.1,0) (0,0) (0,1) (0.4,1) (0.4,0) (1,0) (1,1) (1.1,1)};
+							\addplot[signalalpha] coordinates {(-0.1,0) (0,0) (0,1) (0.4,1) (0.4,0) (1,0) (1,1) (1.1,1)};
 							\draw [thick,<->]  (0,0.5) -- node[above,fill=white]{$T_\mathrm{on}$}(0.4, 0.5); 
 							\draw [thick,<->]  (0.4,0.5) -- node[above]{$T_\mathrm{off}$}(1.0, 0.5);
 							\draw [thick,<->]  (0.0,1.2) -- node[above]{$T_\mathrm{s}$}(1.0, 1.2); 
@@ -1109,19 +1109,19 @@
 							thick,
 							clip = false,
 							]
-							\addplot[signalblue, dashed] coordinates {(-0.1,0.4) (1.1,0.4)};
+							\addplot[signalalpha, dashed] coordinates {(-0.1,0.4) (1.1,0.4)};
 							\addplot[dashed] coordinates {(-0.1,0.5) (1.1,0.5)};
 							\addplot[dashed] coordinates {(-0.1,0.25) (1.1,0.25)};
-							\addplot[signalblue, domain=0:0.4]{0.25 + (x-0.2)^2*0.15/(0.2)^2};
-							\addplot[signalblue, domain=0.4:1.0]{0.5 - (x-0.7)^2*0.1/(0.3)^2};
-							\addplot[signalblue, domain=-0.1:0]{0.5 - (x+0.3)^2*0.1/(0.3)^2};
-							\addplot[signalblue, domain=1.0:1.1]{0.25 + (x-1.2)^2*0.15/(0.2)^2};
+							\addplot[signalalpha, domain=0:0.4]{0.25 + (x-0.2)^2*0.15/(0.2)^2};
+							\addplot[signalalpha, domain=0.4:1.0]{0.5 - (x-0.7)^2*0.1/(0.3)^2};
+							\addplot[signalalpha, domain=-0.1:0]{0.5 - (x+0.3)^2*0.1/(0.3)^2};
+							\addplot[signalalpha, domain=1.0:1.1]{0.25 + (x-1.2)^2*0.15/(0.2)^2};
 							\draw [thick,<->, anchor = mid]  (0,0.8) -- node[midway,fill=white,inner sep = 1pt]{$T_\mathrm{on}$}(0.4, 0.8); 
 							\draw [thick,<->, anchor = mid]  (0.4,0.8) -- node[midway,fill=white,inner sep = 1pt]{$T_\mathrm{off}$} (1.0, 0.8);
 							\draw [thick,<->]  (0.0,1.2) -- node[above]{$T_\mathrm{s}$}(1.0, 1.2); 
 							\draw[-{Latex[length=2mm]}] (0.4, 0.7) -- (0.4, 0.5);
 							\draw[-{Latex[length=2mm]}] (0.4, 0.05) -- node[left=1mm, fill=white, inner sep = 1pt, yshift=-0.5mm]{$\Delta u$}(0.4, 0.25);
-							\draw[-{Latex[length=2mm]}, thin, signalblue] (0.7, 0.05) -- node[right=1mm, fill=white, inner sep = 1pt, yshift=-2mm]{$\overline{u}_2$}(0.6, 0.4);
+							\draw[-{Latex[length=2mm]}, thin, signalalpha] (0.7, 0.05) -- node[right=1mm, fill=white, inner sep = 1pt, yshift=-2mm]{$\overline{u}_2$}(0.6, 0.4);
 						\end{axis}
 						\\
 						};	
@@ -1162,8 +1162,8 @@
 						let \p1 = (S.mid) in (S.in) to [short] (0,2) 
 						([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
 						\draw (-1,2) to [capacitor, *-*, name = C1] (-1,0);
-						\node[correct forbidden sign, line width = 0.6ex, draw = signalred, minimum size = 1.3cm] at (C1){};
-						\node[correct forbidden sign, line width = 0.65ex, draw = signalred, minimum size = 1.3cm] at (L1){};
+						\node[correct forbidden sign, line width = 0.6ex, draw = signaldelta, minimum size = 1.3cm] at (C1){};
+						\node[correct forbidden sign, line width = 0.65ex, draw = signaldelta, minimum size = 1.3cm] at (L1){};
 			\end{circuitikz}
 			\caption{Infeasible filter topology}
 		\end{subfigure}
@@ -1240,7 +1240,7 @@
 					yticklabels=\empty,
 					anchor = center
 					]
-					\addplot[signalred, very thick] coordinates {(-1,0) (0,0) (0,1)};
+					\addplot[signaldelta, very thick] coordinates {(-1,0) (0,0) (0,1)};
 				\end{axis}
 			\end{tikzpicture}
 			}
@@ -1265,8 +1265,8 @@
 					yticklabels=\empty,
 					anchor = center
 					]
-					\addplot[signalred, very thick] coordinates {(-1,0) (1,0)};
-					\addplot[signalgreen, very thick] coordinates {(0,0) (0,1)};
+					\addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
+					\addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
 					\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
 					\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
 					\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
@@ -1294,8 +1294,8 @@
 					yticklabels=\empty,
 					anchor = center
 					]
-					\addplot[signalred, very thick] coordinates {(-1,0) (1,0)};
-					\addplot[signalgreen, very thick] coordinates {(0,-1) (0,1)};
+					\addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
+					\addplot[signalbeta, very thick] coordinates {(0,-1) (0,1)};
 					\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
 					\draw [pin] (axis cs:0.25,-0.05) -- +(10pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
 					\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
@@ -1323,8 +1323,8 @@
 					yticklabels=\empty,
 					anchor = center
 					]
-					\addplot[signalred, very thick] coordinates {(-1,0) (1,0)};
-					\addplot[signalgreen, very thick] coordinates {(0,0) (0,1)};
+					\addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
+					\addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
 					\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
 					\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {costly\\turn off};
 					\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
@@ -1410,8 +1410,8 @@
 					yticklabels=\empty,
 					anchor = center
 					]
-					\addplot[signalred, very thick] coordinates {(0,0) (1,0)};
-					\addplot[signalgreen, very thick] coordinates {(0,0) (0,1)};
+					\addplot[signaldelta, very thick] coordinates {(0,0) (1,0)};
+					\addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
 					\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
 					\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
 				\end{axis}
@@ -1438,8 +1438,8 @@
 					yticklabels=\empty,
 					anchor = center
 					]
-					\addplot[signalred, very thick] coordinates {(0.025,-1) (0.025,0) (1,0)};
-					\addplot[signalgreen, very thick] coordinates {(0,-1) (0,1)};
+					\addplot[signaldelta, very thick] coordinates {(0.025,-1) (0.025,0) (1,0)};
+					\addplot[signalbeta, very thick] coordinates {(0,-1) (0,1)};
 					\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
 					\draw [pin] (axis cs:0.25,-0.05) -- +(10pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
 					\draw [pin] (axis cs:-0.05,-0.5) -- +(-12pt,5pt) node[left, align=center, font=\footnotesize ] {body\\ diode};
@@ -1467,8 +1467,8 @@
 					yticklabels=\empty,
 					anchor = center
 					]
-					\addplot[signalred, very thick] coordinates {(0,0) (1,0)};
-					\addplot[signalgreen, very thick] coordinates {(0,0) (0,1)};
+					\addplot[signaldelta, very thick] coordinates {(0,0) (1,0)};
+					\addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
 					\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
 					\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
 					\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
@@ -1496,8 +1496,8 @@
 					yticklabels=\empty,
 					anchor = center
 					]
-					\addplot[signalred, very thick] coordinates {(-1,0) (1,0)};
-					\addplot[signalgreen, very thick] coordinates {(0,0) (0,1)};
+					\addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
+					\addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
 					\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
 					\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
 					\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
@@ -1583,8 +1583,8 @@
 					yticklabels=\empty,
 					anchor = center
 					]
-					\addplot[signalred, very thick] coordinates {(-1,0) (1,0)};
-					\addplot[signalgreen, very thick] coordinates {(0,-1) (0,1)};
+					\addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
+					\addplot[signalbeta, very thick] coordinates {(0,-1) (0,1)};
 					\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
 					\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
 				\end{axis}
@@ -1665,58 +1665,58 @@
 				\pgfmathsetmacro{\mosfetFrequency}{5} % 1 MHz 
 				
 				% Thyristor faces
-				\addplot3[fill=signalblue, opacity=0.6] coordinates { (0, 0, 0) (\thyristorCurrent, 0, 0) (\thyristorCurrent, \thyristorFrequency, 0) (0, \thyristorFrequency, 0)};
+				\addplot3[fill=signalalpha, opacity=0.6] coordinates { (0, 0, 0) (\thyristorCurrent, 0, 0) (\thyristorCurrent, \thyristorFrequency, 0) (0, \thyristorFrequency, 0)};
 
-				\addplot3[fill=signalblue, opacity=0.6] coordinates { (0, 0, \thyristorVoltage) (\thyristorCurrent, 0, \thyristorVoltage) (\thyristorCurrent, \thyristorFrequency, \thyristorVoltage) (0, \thyristorFrequency, \thyristorVoltage)};
+				\addplot3[fill=signalalpha, opacity=0.6] coordinates { (0, 0, \thyristorVoltage) (\thyristorCurrent, 0, \thyristorVoltage) (\thyristorCurrent, \thyristorFrequency, \thyristorVoltage) (0, \thyristorFrequency, \thyristorVoltage)};
 
-				\addplot3[fill=signalblue, opacity=0.6] coordinates { (0, 0, 0) (\thyristorCurrent, 0, 0) (\thyristorCurrent,  0, \thyristorVoltage) (0, 0, \thyristorVoltage)};
+				\addplot3[fill=signalalpha, opacity=0.6] coordinates { (0, 0, 0) (\thyristorCurrent, 0, 0) (\thyristorCurrent,  0, \thyristorVoltage) (0, 0, \thyristorVoltage)};
 
-				\addplot3[fill=signalblue, opacity=0.6] coordinates { (0, \thyristorFrequency, 0) (\thyristorCurrent, \thyristorFrequency, 0) (\thyristorCurrent, \thyristorFrequency, \thyristorVoltage) (0, \thyristorFrequency, \thyristorVoltage)};
+				\addplot3[fill=signalalpha, opacity=0.6] coordinates { (0, \thyristorFrequency, 0) (\thyristorCurrent, \thyristorFrequency, 0) (\thyristorCurrent, \thyristorFrequency, \thyristorVoltage) (0, \thyristorFrequency, \thyristorVoltage)};
 
-				\addplot3[fill=signalblue, opacity=0.6] coordinates { (0, 0, 0) (0, \thyristorFrequency, 0) (0, \thyristorFrequency, \thyristorVoltage) (0, 0, \thyristorVoltage)};
+				\addplot3[fill=signalalpha, opacity=0.6] coordinates { (0, 0, 0) (0, \thyristorFrequency, 0) (0, \thyristorFrequency, \thyristorVoltage) (0, 0, \thyristorVoltage)};
 
-				\addplot3[fill=signalblue, opacity=0.6] coordinates { (\thyristorCurrent, 0, 0) (\thyristorCurrent, \thyristorFrequency, 0) (\thyristorCurrent, \thyristorFrequency, \thyristorVoltage) (\thyristorCurrent, 0, \thyristorVoltage)};
+				\addplot3[fill=signalalpha, opacity=0.6] coordinates { (\thyristorCurrent, 0, 0) (\thyristorCurrent, \thyristorFrequency, 0) (\thyristorCurrent, \thyristorFrequency, \thyristorVoltage) (\thyristorCurrent, 0, \thyristorVoltage)};
 
 
 				% GTO faces
-				\addplot3[fill=signalred, opacity=0.6] coordinates { (0, \thyristorFrequency, 0) (\gtoCurrent, \thyristorFrequency, 0) (\gtoCurrent, \gtoFrequency, 0) (0, \gtoFrequency, 0)};
+				\addplot3[fill=signalbeta, opacity=0.6] coordinates { (0, \thyristorFrequency, 0) (\gtoCurrent, \thyristorFrequency, 0) (\gtoCurrent, \gtoFrequency, 0) (0, \gtoFrequency, 0)};
 
-				\addplot3[fill=signalred, opacity=0.6] coordinates { (0, \thyristorFrequency, \gtoVoltage) (\gtoCurrent, \thyristorFrequency, \gtoVoltage) (\gtoCurrent, \gtoFrequency, \gtoVoltage) (0, \gtoFrequency, \gtoVoltage)};
+				\addplot3[fill=signalbeta, opacity=0.6] coordinates { (0, \thyristorFrequency, \gtoVoltage) (\gtoCurrent, \thyristorFrequency, \gtoVoltage) (\gtoCurrent, \gtoFrequency, \gtoVoltage) (0, \gtoFrequency, \gtoVoltage)};
 
-				\addplot3[fill=signalred, opacity=0.6] coordinates { (0, \thyristorFrequency, 0) (\gtoCurrent, \thyristorFrequency, 0) (\gtoCurrent, \thyristorFrequency, \gtoVoltage) (0, \thyristorFrequency, \gtoVoltage)};
+				\addplot3[fill=signalbeta, opacity=0.6] coordinates { (0, \thyristorFrequency, 0) (\gtoCurrent, \thyristorFrequency, 0) (\gtoCurrent, \thyristorFrequency, \gtoVoltage) (0, \thyristorFrequency, \gtoVoltage)};
 
-				\addplot3[fill=signalred, opacity=0.6] coordinates { (0, \gtoFrequency, 0) (\gtoCurrent, \gtoFrequency, 0) (\gtoCurrent, \gtoFrequency, \gtoVoltage) (0, \gtoFrequency, \gtoVoltage)};
+				\addplot3[fill=signalbeta, opacity=0.6] coordinates { (0, \gtoFrequency, 0) (\gtoCurrent, \gtoFrequency, 0) (\gtoCurrent, \gtoFrequency, \gtoVoltage) (0, \gtoFrequency, \gtoVoltage)};
 
-				\addplot3[fill=signalred, opacity=0.6] coordinates { (0, \thyristorFrequency, 0) (0, \gtoFrequency, 0) (0, \gtoFrequency, \gtoVoltage) (0, \thyristorFrequency, \gtoVoltage)};
+				\addplot3[fill=signalbeta, opacity=0.6] coordinates { (0, \thyristorFrequency, 0) (0, \gtoFrequency, 0) (0, \gtoFrequency, \gtoVoltage) (0, \thyristorFrequency, \gtoVoltage)};
 
-				\addplot3[fill=signalred, opacity=0.6] coordinates { (\gtoCurrent, \thyristorFrequency, 0) (\gtoCurrent, \gtoFrequency, 0) (\gtoCurrent, \gtoFrequency, \gtoVoltage) (\gtoCurrent, \thyristorFrequency, \gtoVoltage)};
+				\addplot3[fill=signalbeta, opacity=0.6] coordinates { (\gtoCurrent, \thyristorFrequency, 0) (\gtoCurrent, \gtoFrequency, 0) (\gtoCurrent, \gtoFrequency, \gtoVoltage) (\gtoCurrent, \thyristorFrequency, \gtoVoltage)};
 
 				% IGBT faces
-				\addplot3[fill=signalgreen, opacity=0.6] coordinates { (0, \gtoFrequency, 0) (\igbtCurrent, \gtoFrequency, 0) (\igbtCurrent, \igbtFrequency, 0) (0, \igbtFrequency, 0)};
+				\addplot3[fill=signalgamma, opacity=0.6] coordinates { (0, \gtoFrequency, 0) (\igbtCurrent, \gtoFrequency, 0) (\igbtCurrent, \igbtFrequency, 0) (0, \igbtFrequency, 0)};
 
-				\addplot3[fill=signalgreen, opacity=0.6] coordinates { (0, \gtoFrequency, \igbtVoltage) (\igbtCurrent, \gtoFrequency, \igbtVoltage) (\igbtCurrent, \igbtFrequency, \igbtVoltage) (0, \igbtFrequency, \igbtVoltage)};
+				\addplot3[fill=signalgamma, opacity=0.6] coordinates { (0, \gtoFrequency, \igbtVoltage) (\igbtCurrent, \gtoFrequency, \igbtVoltage) (\igbtCurrent, \igbtFrequency, \igbtVoltage) (0, \igbtFrequency, \igbtVoltage)};
 
-				\addplot3[fill=signalgreen, opacity=0.6] coordinates { (0, \gtoFrequency, 0) (\igbtCurrent, \gtoFrequency, 0) (\igbtCurrent, \gtoFrequency, \igbtVoltage) (0, \gtoFrequency, \igbtVoltage)};
+				\addplot3[fill=signalgamma, opacity=0.6] coordinates { (0, \gtoFrequency, 0) (\igbtCurrent, \gtoFrequency, 0) (\igbtCurrent, \gtoFrequency, \igbtVoltage) (0, \gtoFrequency, \igbtVoltage)};
 
-				\addplot3[fill=signalgreen, opacity=0.6] coordinates { (0, \igbtFrequency, 0) (\igbtCurrent, \igbtFrequency, 0) (\igbtCurrent, \igbtFrequency, \igbtVoltage) (0, \igbtFrequency, \igbtVoltage)};
+				\addplot3[fill=signalgamma, opacity=0.6] coordinates { (0, \igbtFrequency, 0) (\igbtCurrent, \igbtFrequency, 0) (\igbtCurrent, \igbtFrequency, \igbtVoltage) (0, \igbtFrequency, \igbtVoltage)};
 
-				\addplot3[fill=signalgreen, opacity=0.6] coordinates { (0, \gtoFrequency, 0) (0, \igbtFrequency, 0) (0, \igbtFrequency, \igbtVoltage) (0, \gtoFrequency, \igbtVoltage)};
+				\addplot3[fill=signalgamma, opacity=0.6] coordinates { (0, \gtoFrequency, 0) (0, \igbtFrequency, 0) (0, \igbtFrequency, \igbtVoltage) (0, \gtoFrequency, \igbtVoltage)};
 
-				\addplot3[fill=signalgreen, opacity=0.6] coordinates { (\igbtCurrent, \gtoFrequency, 0) (\igbtCurrent, \igbtFrequency, 0) (\igbtCurrent, \igbtFrequency, \igbtVoltage) (\igbtCurrent, \gtoFrequency, \igbtVoltage)};
+				\addplot3[fill=signalgamma, opacity=0.6] coordinates { (\igbtCurrent, \gtoFrequency, 0) (\igbtCurrent, \igbtFrequency, 0) (\igbtCurrent, \igbtFrequency, \igbtVoltage) (\igbtCurrent, \gtoFrequency, \igbtVoltage)};
 
 
 				% MOSFET faces
-				\addplot3[fill=signalyellow, opacity=0.6] coordinates { (0, \igbtFrequency, 0) (\mosfetCurrent, \igbtFrequency, 0) (\mosfetCurrent, \mosfetFrequency, 0) (0, \mosfetFrequency, 0)};
+				\addplot3[fill=signaldelta, opacity=0.6] coordinates { (0, \igbtFrequency, 0) (\mosfetCurrent, \igbtFrequency, 0) (\mosfetCurrent, \mosfetFrequency, 0) (0, \mosfetFrequency, 0)};
 
-				\addplot3[fill=signalyellow, opacity=0.6] coordinates { (0, \igbtFrequency, \mosfetVoltage) (\mosfetCurrent, \igbtFrequency, \mosfetVoltage) (\mosfetCurrent, \mosfetFrequency, \mosfetVoltage) (0, \mosfetFrequency, \mosfetVoltage)};
+				\addplot3[fill=signaldelta, opacity=0.6] coordinates { (0, \igbtFrequency, \mosfetVoltage) (\mosfetCurrent, \igbtFrequency, \mosfetVoltage) (\mosfetCurrent, \mosfetFrequency, \mosfetVoltage) (0, \mosfetFrequency, \mosfetVoltage)};
 
-				\addplot3[fill=signalyellow, opacity=0.6] coordinates { (0, \igbtFrequency, 0) (\mosfetCurrent, \igbtFrequency, 0) (\mosfetCurrent, \igbtFrequency, \mosfetVoltage) (0, \igbtFrequency, \mosfetVoltage)};
+				\addplot3[fill=signaldelta, opacity=0.6] coordinates { (0, \igbtFrequency, 0) (\mosfetCurrent, \igbtFrequency, 0) (\mosfetCurrent, \igbtFrequency, \mosfetVoltage) (0, \igbtFrequency, \mosfetVoltage)};
 
-				\addplot3[fill=signalyellow, opacity=0.6] coordinates { (0, \mosfetFrequency, 0) (\mosfetCurrent, \mosfetFrequency, 0) (\mosfetCurrent, \mosfetFrequency, \mosfetVoltage) (0, \mosfetFrequency, \mosfetVoltage)};
+				\addplot3[fill=signaldelta, opacity=0.6] coordinates { (0, \mosfetFrequency, 0) (\mosfetCurrent, \mosfetFrequency, 0) (\mosfetCurrent, \mosfetFrequency, \mosfetVoltage) (0, \mosfetFrequency, \mosfetVoltage)};
 
-				\addplot3[fill=signalyellow, opacity=0.6] coordinates { (0, \igbtFrequency, 0) (0, \mosfetFrequency, 0) (0, \mosfetFrequency, \mosfetVoltage) (0, \igbtFrequency, \mosfetVoltage)};
+				\addplot3[fill=signaldelta, opacity=0.6] coordinates { (0, \igbtFrequency, 0) (0, \mosfetFrequency, 0) (0, \mosfetFrequency, \mosfetVoltage) (0, \igbtFrequency, \mosfetVoltage)};
 
-				\addplot3[fill=signalyellow, opacity=0.6] coordinates { (\mosfetCurrent, \igbtFrequency, 0) (\mosfetCurrent, \mosfetFrequency, 0) (\mosfetCurrent, \mosfetFrequency, \mosfetVoltage) (\mosfetCurrent, \igbtFrequency, \mosfetVoltage)};
+				\addplot3[fill=signaldelta, opacity=0.6] coordinates { (\mosfetCurrent, \igbtFrequency, 0) (\mosfetCurrent, \mosfetFrequency, 0) (\mosfetCurrent, \mosfetFrequency, \mosfetVoltage) (\mosfetCurrent, \igbtFrequency, \mosfetVoltage)};
 
 				% Labels
 				\node[anchor=center] at (axis cs:5.5, 0.5, 6.1) {Thyristor};
@@ -1790,9 +1790,9 @@
 						width = 0.99\textwidth,
 						grid
 						]
-						\addplot[signalblue, domain=0:0.4] {0};
+						\addplot[signalalpha, domain=0:0.4] {0};
 						\addplot[dashed] coordinates {(0.4,0) (0.6,1)};
-						\addplot[signalblue, domain=0.4:1.0] {exp(2*x)-exp(0.8)};
+						\addplot[signalalpha, domain=0.4:1.0] {exp(2*x)-exp(0.8)};
 						\draw[-] (axis cs:0.5,0.5) -- (axis cs:0.55,0.5);
 						\draw[-] (axis cs:0.55,0.5) -- (axis cs:0.55,0.75);
 						\node[anchor=west, fill=white, inner sep = 1pt] at (axis cs:0.55,0.6) {$\frac{1}{R_\mathrm{i}}$};

@@ -40,8 +40,8 @@
 				\centering
 				\begin{tikzpicture}
                     \begin{scope}[]
-                        \fill[signalgreen, opacity=0.3] (0,0) -- (-2,0) -- (-2,-2) -- (0,-2) -- cycle;
-                        \fill[signalgreen, opacity=0.3] (0,0) -- (-2,0) -- (-2,2) -- (0,2) -- cycle;
+                        \fill[signalbeta, opacity=0.3] (0,0) -- (-2,0) -- (-2,-2) -- (0,-2) -- cycle;
+                        \fill[signalbeta, opacity=0.3] (0,0) -- (-2,0) -- (-2,2) -- (0,2) -- cycle;
                     \end{scope}
                     \begin{scope}[]
                         \fill[shadecolor, opacity=0.3] (0,0) -- (2,0) -- (2,-2) -- (0,-2) -- cycle;
@@ -212,7 +212,7 @@
                         \pgfmathsetmacro{\signalheight}{\cheight/(1.3)}
 
                         % Start drawing the triangular signal
-                        \draw[signalred, thick] 
+                        \draw[signaldelta, thick] 
                     ($(blockBottomLeft) + (0.025, 0.1*\cheight)$) % Starting point with a margin
                     \foreach \x in {1,...,\signalsteps} {
                         -- ($
@@ -226,7 +226,7 @@
                     
                     % Comperator block 
                     \begin{axis}[at={(comp)}, scale only axis, width = 0.8*\cwidth cm, height = 0.8*\cheight cm, anchor = center, xtick=\empty, ytick={0,1}, axis lines=middle, ymax=1.25, ymin = -1.25, font = \footnotesize, extra y ticks={-1}, extra y tick style = {yticklabel shift = -0.75cm}]
-                        \addplot[thick, signalblue] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
+                        \addplot[thick, signalalpha] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
                     \end{axis}
                     \draw[-] (comp.east) -- ++(0.5,0) coordinate (out1);
                     \draw[->] ($(comp.east)!0.5!(out1)$) to [short, *-] ++(0,-2.25) to ++(0.5,0) node[ctrlblock, anchor = west, minimum width = \cheight cm, minimum height = \cheight cm](comp2){-1};
@@ -257,7 +257,7 @@
                         \pgfmathsetmacro{\signalheight}{\cheight/(1.3)}
 
                         % Start drawing the triangular signal
-                        \draw[signalred, thick] 
+                        \draw[signaldelta, thick] 
                     ($(blockBottomLeft) + (0.025, 0.1*\cheight)$) % Starting point with a margin
                     \foreach \x in {1,...,\signalsteps} {
                         -- ($
@@ -278,11 +278,11 @@
                     
                     % Comperator block #1
                     \begin{axis}[at={(comp1)}, scale only axis, width = 0.8*\cwidth cm, height = 0.8*\cheight cm, anchor = center, xtick=\empty, ytick={0,1}, axis lines=middle, ymax=1.25, ymin = -1.25, font = \footnotesize, extra y ticks={-1}, extra y tick style = {yticklabel shift = -0.75cm}]
-                        \addplot[thick, signalblue] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
+                        \addplot[thick, signalalpha] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
                     \end{axis}
                      % Comperator block #2
                      \begin{axis}[at={(comp2)}, scale only axis, width = 0.8*\cwidth cm, height = 0.8*\cheight cm, anchor = center, xtick=\empty, ytick={0,1}, axis lines=middle, ymax=1.25, ymin = -1.25, font = \footnotesize, extra y ticks={-1}, extra y tick style = {yticklabel shift = -0.75cm}]
-                        \addplot[thick, signalblue] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
+                        \addplot[thick, signalalpha] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
                     \end{axis}
                     \draw[->] (comp1.east) -- ++(0.5,0) node[anchor = west]{$s_1(t)$};
                     \draw[->] (comp2.east) -- ++(0.5,0) node[anchor = west]{$s_2(t)$};
@@ -307,25 +307,25 @@
 
                  % Top plot: duty cycle reference and carrier signal
                 \nextgroupplot[ylabel = {$s^*(t), c(t)$}, legend pos=north east, legend columns=2]
-                \addplot[signalblue, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_comp_example.csv}; 
-                \addplot[signalred, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_comp_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_comp_example.csv}; 
+                \addplot[black, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_comp_example.csv}; 
                 \legend{$s^*(t)$, $c(t)$}
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_1(t)$}] 
-                \addplot[signalgreen, thick] table[x=wt, y=s1, col sep=comma] {PWM_single_phase_comp_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=s1, col sep=comma] {PWM_single_phase_comp_example.csv}; 
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_2(t)$}] 
-                \addplot[signallavender, thick] table[x=wt, y=s2, col sep=comma] {PWM_single_phase_comp_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=s2, col sep=comma] {PWM_single_phase_comp_example.csv}; 
 
                 % bottom middle plot: combined switching signal
                 \nextgroupplot[ylabel = {$s(t)$}] 
-                \addplot[signalblue, thick] table[x=wt, y=s, col sep=comma] {PWM_single_phase_comp_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=s, col sep=comma] {PWM_single_phase_comp_example.csv}; 
 
                 % bottom plot: approximation error 
                 \nextgroupplot[ylabel = {$e(t)$}, xlabel={$\omega t$}, ymax = 0.175, ymin = -0.175, ytick = {-0.15, 0, 0.15}, yticklabels = {$-0.15$, $0$, $0.15$}] 
-                \addplot[signalblue, thick] table[x=wt, y=e, col sep=comma] {PWM_single_phase_comp_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=e, col sep=comma] {PWM_single_phase_comp_example.csv}; 
             \end{groupplot}
         \end{tikzpicture}
     \end{figure}
@@ -344,26 +344,26 @@
 
                  % Top plot: duty cycle reference and carrier signal
                 \nextgroupplot[ylabel = {$s^*(t), c(t)$}, legend pos=north east, legend columns=2, ymin = -1.1, ymax =1.1]
-                \addplot[signalblue, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_int_example.csv}; 
-                \addplot[signalred, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_int_example.csv}; 
-                \addplot[signalblue, thick, dashed] table[x=wt, y expr=-\thisrow{d}, col sep=comma] {PWM_single_phase_int_example.csv};
+                \addplot[signalalpha, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_int_example.csv}; 
+                \addplot[black, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_int_example.csv}; 
+                \addplot[signalalpha, thick, dashed] table[x=wt, y expr=-\thisrow{d}, col sep=comma] {PWM_single_phase_int_example.csv};
                 \legend{$s^*(t)$, $c(t)$}
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_1(t)$}] 
-                \addplot[signalgreen, thick] table[x=wt, y=s1, col sep=comma] {PWM_single_phase_int_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=s1, col sep=comma] {PWM_single_phase_int_example.csv}; 
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_2(t)$}] 
-                \addplot[signallavender, thick] table[x=wt, y=s2, col sep=comma] {PWM_single_phase_int_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=s2, col sep=comma] {PWM_single_phase_int_example.csv}; 
 
                 % bottom middle plot: combined switching signal
                 \nextgroupplot[ylabel = {$s(t)$}] 
-                \addplot[signalblue, thick] table[x=wt, y=s, col sep=comma] {PWM_single_phase_int_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=s, col sep=comma] {PWM_single_phase_int_example.csv}; 
 
                 % bottom plot: approximation error 
                 \nextgroupplot[ylabel = {$e(t)$}, xlabel={$\omega t$}, ymax = 0.175, ymin = -0.175, ytick = {-0.15, 0, 0.15}, yticklabels = {$-0.15$, $0$, $0.15$}] 
-                \addplot[signalblue, thick] table[x=wt, y=e, col sep=comma] {PWM_single_phase_int_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=e, col sep=comma] {PWM_single_phase_int_example.csv}; 
             \end{groupplot}
         \end{tikzpicture}
     \end{figure}
@@ -400,8 +400,8 @@
                          xlabel style={anchor=west}
                          ]
                      \nextgroupplot[ylabel = {$s^*(t), c(t)$}, height=0.36\textheight]
-                         \addplot[signalred, thick] coordinates {(-0.1,-0.6) (0,-1) (0.5,1) (1,-1)(1.1,-0.6)};
-                         \addplot[domain = -0.1:1.1, samples = 10, signalblue, thick] {\d};   
+                         \addplot[black, thick] coordinates {(-0.1,-0.6) (0,-1) (0.5,1) (1,-1)(1.1,-0.6)};
+                         \addplot[domain = -0.1:1.1, samples = 10, signalalpha, thick] {\d};   
                          \node[anchor=west] at (axis cs:1.1,\d) {$s^*$};
                          \draw[<->] (axis cs:\t1,-1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1-s^*)}{2}$} (axis cs:1-\t1,-1);
                          \draw[<->] (axis cs:0,1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1+s^*)}{4}$} (axis cs:\t1,1);
@@ -410,15 +410,15 @@
                          \coordinate (b1) at (axis cs:1-\t1,1);
                         
                         \nextgroupplot[ylabel = {$s_1(t)$}];
-                            \addplot[signalgreen, thick] coordinates {(-0.1,1) (\t1,1) (\t1,-1) (1-\t1,-1) (1-\t1,1) (1.1,1)};
+                            \addplot[signalalpha, thick] coordinates {(-0.1,1) (\t1,1) (\t1,-1) (1-\t1,-1) (1-\t1,1) (1.1,1)};
             
                         \nextgroupplot[ylabel = {$s_2(t)$}];
-                        \addplot[signallavender, thick] coordinates {(-0.1,-1) (\t1,-1) (\t1,1) (1-\t1,1) (1-\t1,-1) (1.1,-1)};
+                        \addplot[signalalpha, thick] coordinates {(-0.1,-1) (\t1,-1) (\t1,1) (1-\t1,1) (1-\t1,-1) (1.1,-1)};
             
                         \nextgroupplot[ylabel = {$u_2(t)/U_1$}, , height=0.36\textheight, xticklabel style={below, yshift=-0.75cm}];
-                            \addplot[domain = -0.1:1.1, samples = 10, signalblue, thick, dashed, name path = A] {\d}; 
+                            \addplot[domain = -0.1:1.1, samples = 10, signalalpha, thick, dashed, name path = A] {\d}; 
                             \node[anchor=west] at (axis cs:1.1,\d) {$\overline{u}_2$};
-                            \addplot[signalblue, thick, name path = B] coordinates {(-0.1,1) (\t1,1) (\t1,-1) (1-\t1,-1) (1-\t1,1) (1.1,1)};
+                            \addplot[signalalpha, thick, name path = B] coordinates {(-0.1,1) (\t1,1) (\t1,-1) (1-\t1,-1) (1-\t1,1) (1.1,1)};
                             \coordinate (a2) at (axis cs:\t1,0);
                             \coordinate (b2) at (axis cs:1-\t1,0);
                             \draw[thin] (axis cs:0.55,-0.4) -- (axis cs:0.7,-0.6) node[right, anchor=west]{\footnotesize$e(t)$};
@@ -463,9 +463,9 @@
                          xlabel style={anchor=west}
                          ]
                      \nextgroupplot[ylabel = {$s^*(t), c(t)$}, height=0.36\textheight]
-                         \addplot[signalred, thick] coordinates {(-0.1,-0.6) (0,-1) (0.5,1) (1,-1)(1.1,-0.6)};
-                         \addplot[domain = -0.1:1.1, samples = 10, signalblue, thick] {\d};   
-                         \addplot[domain = -0.1:1.1, samples = 10, signalblue, thick, dashed] {-\d};   
+                         \addplot[black, thick] coordinates {(-0.1,-0.6) (0,-1) (0.5,1) (1,-1)(1.1,-0.6)};
+                         \addplot[domain = -0.1:1.1, samples = 10, signalalpha, thick] {\d};   
+                         \addplot[domain = -0.1:1.1, samples = 10, signalalpha, thick, dashed] {-\d};   
                          \node[anchor=west] at (axis cs:1.1,\d) {$s^*$};
                          \node[anchor=west, overlay] at (axis cs:1.1,-\d) {$-s^*$};
                          \draw[<->] (axis cs:\t1,-1) -- node[above, fill=white, inner sep=1pt,yshift=2pt]{\footnotesize$\frac{T_\mathrm{s}(1-|s^*|)}{2}$} (axis cs:1-\t1,-1);
@@ -475,15 +475,15 @@
                          \coordinate (b1) at (axis cs:1-\t1,1);
                         
                         \nextgroupplot[ylabel = {$s_1(t)$}];
-                            \addplot[signalgreen, thick] coordinates {(-0.1,1) (\t1,1) (\t1,-1) (1-\t1,-1) (1-\t1,1) (1.1,1)};
+                            \addplot[signalalpha, thick] coordinates {(-0.1,1) (\t1,1) (\t1,-1) (1-\t1,-1) (1-\t1,1) (1.1,1)};
             
                         \nextgroupplot[ylabel = {$s_2(t)$}];
-                        \addplot[signallavender, thick] coordinates {(-0.1,1) (\t2,1) (\t2,-1) (1-\t2,-1) (1-\t2,1) (1.1,1)};
+                        \addplot[signalalpha, thick] coordinates {(-0.1,1) (\t2,1) (\t2,-1) (1-\t2,-1) (1-\t2,1) (1.1,1)};
             
                         \nextgroupplot[ylabel = {$u_2(t)/U_1$}, , height=0.36\textheight, xticklabel style={below, yshift=-0.75cm}];
-                            \addplot[domain = -0.1:1.1, samples = 10, signalblue, thick, dashed, name path = A] {\d}; 
+                            \addplot[domain = -0.1:1.1, samples = 10, signalalpha, thick, dashed, name path = A] {\d}; 
                             \node[anchor=west] at (axis cs:1.1,\d) {$\overline{u}_2$};
-                            \addplot[signalblue, thick, name path = B] coordinates {(-0.1,0) (\t2,0) (\t2,1) (\t1,1) (\t1,0) (1-\t1,0) (1-\t1,1) (1-\t2,1) (1-\t2,0) (1.1,0)};
+                            \addplot[signalalpha, thick, name path = B] coordinates {(-0.1,0) (\t2,0) (\t2,1) (\t1,1) (\t1,0) (1-\t1,0) (1-\t1,1) (1-\t2,1) (1-\t2,0) (1.1,0)};
                             \coordinate (a2) at (axis cs:\t1,0);
                             \coordinate (b2) at (axis cs:1-\t1,0);
                             \draw node[inner sep = 1pt, anchor=north] at (\t1, -0.1) {\footnotesize$t_1$};
@@ -595,8 +595,8 @@
                         xtick = {-1, -0.5, 0, 0.5,1.0}, 
                         ytick = {0, 0.25, 0.5, 0.75, 1.0}, 
                         ]
-                        \addplot[signalblue, domain=-1:1, samples=50] {(1-x)*(1+x)};
-                        \addplot[signalred, domain=-1:1, samples=50] {(1-abs(x))*abs(x)};
+                        \addplot[signalalpha, domain=-1:1, samples=50] {(1-x)*(1+x)};
+                        \addplot[signaldelta, domain=-1:1, samples=50] {(1-abs(x))*abs(x)};
                         \legend{cs, is};
                     \end{axis}
                 \end{tikzpicture}
@@ -620,26 +620,26 @@
 
                  % Top plot: duty cycle reference and carrier signal
                 \nextgroupplot[ylabel = {$s^*(t), c(t)$}, ymin = -1.25, ymax =1.25, legend pos=north east, legend columns=2 ]
-                \addplot[signalblue, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
-                \addplot[signalred, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
-                \addplot[signalblue, thick, dashed] table[x=wt, y expr=-\thisrow{d}, col sep=comma] {PWM_single_phase_overmod_example.csv};
+                \addplot[signalalpha, thick] table[x=wt, y=d, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+                \addplot[black, thick] table[x=wt, y=c, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+                \addplot[signalalpha, thick, dashed] table[x=wt, y expr=-\thisrow{d}, col sep=comma] {PWM_single_phase_overmod_example.csv};
                 \legend{$s^*(t)$, $c(t)$}
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_1(t)$}] 
-                \addplot[signalgreen, thick] table[x=wt, y=s1, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=s1, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_2(t)$}] 
-                \addplot[signallavender, thick] table[x=wt, y=s2, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=s2, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
 
                 % bottom middle plot: combined switching signal
                 \nextgroupplot[ylabel = {$s(t)$}] 
-                \addplot[signalblue, thick] table[x=wt, y=s, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=s, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
 
                 % bottom plot: approximation error 
                 \nextgroupplot[ylabel = {$e(t)$}, xlabel={$\omega t$}, ymax = 0.2, ymin = -0.2, ytick = {-0.15, 0, 0.15}, yticklabels = {$-0.15$, $0$, $0.15$}] 
-                \addplot[signalblue, thick] table[x=wt, y=e, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=e, col sep=comma] {PWM_single_phase_overmod_example.csv}; 
             \end{groupplot}
         \end{tikzpicture}
     \end{figure}
@@ -681,8 +681,8 @@
                         ytick = {0, 0.25, 0.5, 0.75, 1.0, 4/pi}, 
                         yticklabels = {$0$, $0.25$, $0.5$, $0.75$, $1$, $\nicefrac{4}{\pi}$}, 
                         ]
-                        \addplot[signalblue, domain=0:1, samples=10] {x};
-                        \addplot[signalblue, domain=1:3, samples=40, smooth] {2/pi*(x*rad(asin(1/x))+sqrt(1-1/x^2))};
+                        \addplot[signalalpha, domain=0:1, samples=10] {x};
+                        \addplot[signalalpha, domain=1:3, samples=40, smooth] {2/pi*(x*rad(asin(1/x))+sqrt(1-1/x^2))};
                         \draw[dashed] (axis cs:0, 4/pi) -- (axis cs:3, 4/pi);
                         \draw[dash dot] (axis cs:1, 0) -- (axis cs:1, 4/pi);
                         \draw node[fill=white, inner sep = 1pt] at (axis cs:0.5,1) {\small linear mod.};
@@ -741,8 +741,8 @@
                         xtick = {0, pi/2, pi}, 
                         xticklabels = {$0$,$\frac{1}{2}\pi$,$\pi$},
                         ]
-                        \addplot[signalblue, domain=0:pi, samples=50] {min(\m*sin(deg(x)),1)};
-                        \addplot[signalblue, domain=rad(asin(1/\m)):pi-rad(asin(1/\m)), samples=50, dashed] {\m*sin(deg(x))};
+                        \addplot[signalalpha, domain=0:pi, samples=50] {min(\m*sin(deg(x)),1)};
+                        \addplot[signalalpha, domain=rad(asin(1/\m)):pi-rad(asin(1/\m)), samples=50, dashed] {\m*sin(deg(x))};
                         \draw[<-] (axis cs:pi/3,1.1) to (axis cs:pi/5, 1.1) node[left] {$s^*(t)$};
                         \draw[<-] (axis cs:pi/2,0.95) to (axis cs:pi/2, 0.7) node[below] {$s_\mathrm{lim}^*(t)$};
                         \draw[dashed] (axis cs:{rad(asin(1/\m))},1) to (axis cs:{rad(asin(1/\m))},0) node[below] {$\omega t_0$};
@@ -788,24 +788,24 @@
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_1(t)$}] 
-                \addplot[signalgreen, thick] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
+                \addplot[signalalpha, thick] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_2(t)$}] 
-                \addplot[signallavender, thick, domain = 0:2*pi, samples = 100] coordinates {(0,1) (\a,1) (\a,-1) (\a+pi,-1) (\a+pi,1) (2*pi,1)}; 
+                \addplot[signalalpha, thick, domain = 0:2*pi, samples = 100] coordinates {(0,1) (\a,1) (\a,-1) (\a+pi,-1) (\a+pi,1) (2*pi,1)}; 
 
                 % bottom middle plot: combined switching signal
                 \nextgroupplot[ylabel = {$s(t)$}, ymin = -1.1*4/pi, ymax =1.1*4/pi] 
-                \addplot[signalblue, thick, domain = 0:2*pi, samples = 100] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
-                \addplot[signalblue, thick, domain=0:2*pi, samples=50, dashed] {4/pi*sin(deg(x-\a))};
+                \addplot[signalalpha, thick, domain = 0:2*pi, samples = 100] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
+                \addplot[signalalpha, thick, domain=0:2*pi, samples=50, dashed] {4/pi*sin(deg(x-\a))};
                 \draw[->] (axis cs:0,0) -- node[above, fill=white, inner sep=1pt]{\small$\alpha$} (axis cs:\a,0); 
                 \draw[thin] (axis cs:\a+pi+0.2, -0.1) -- node[right, fill=white, inner sep=1pt]{\small $\frac{\hat{u}_2^{(1)}}{U_1}=s^*$} (axis cs:\a+pi+0.5, 0.6);
 
                 % bottom plot: approximation error 
                 \nextgroupplot[ylabel = {$e(t)$}, xlabel={$\omega t$}, ymin=-0.5, ymax=0.5, ytick = {-0.5, 0, 0.5}, yticklabels = {$-0.5$, $0$, $0.5$}] 
-                \addplot[signalblue, thick, domain=0:\a, samples=25] {-4/pi*(cos(deg(x-\a))-cos(deg(-\a)))+x}; 
-                \addplot[signalblue, thick, domain=\a:\a+pi, samples=25] {-4/pi*(cos(deg(x-\a))-cos(deg(\a)))-(x-2*\a)}; 
-                \addplot[signalblue, thick, domain=\a+pi:2*pi, samples=25] {-4/pi*(cos(deg(x-\a))-cos(deg(\a)))+(x-2*pi)}; 
+                \addplot[signalalpha, thick, domain=0:\a, samples=25] {-4/pi*(cos(deg(x-\a))-cos(deg(-\a)))+x}; 
+                \addplot[signalalpha, thick, domain=\a:\a+pi, samples=25] {-4/pi*(cos(deg(x-\a))-cos(deg(\a)))-(x-2*\a)}; 
+                \addplot[signalalpha, thick, domain=\a+pi:2*pi, samples=25] {-4/pi*(cos(deg(x-\a))-cos(deg(\a)))+(x-2*pi)}; 
             \end{groupplot}
         \end{tikzpicture}
     \end{figure}
@@ -883,20 +883,20 @@
             \centering
             \begin{circuitikz}[]
                 \draw (0,0) node[npn, bodydiode]{};
-                \draw (0,0) node[npn, name=npn1, color=signalred]{};
+                \draw (0,0) node[npn, name=npn1, color=signaldelta]{};
                 \draw (0,-1.5) node[npn, name=npn2, bodydiode]{};
-                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i>0$}, color=signalred] ++(0.5,0);
+                \draw[signaldelta] (npn1.E) to [short,*-, color=signaldelta] ++(0.5,0) to [short, i={$i>0$}, color=signaldelta] ++(0.5,0);
                 \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=1$};
                 \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=0$};
             \end{circuitikz}
             \\[1em]
             \begin{circuitikz}[]
-                \draw[signalred] (0,0) node[npn, bodydiode, color=signalred]{};
+                \draw[signaldelta] (0,0) node[npn, bodydiode, color=signaldelta]{};
                 \draw (0,0) node[npn, name=npn1]{};
-                \draw[signalred] (npn1.body E in) to (npn1.E);
-                \draw[signalred] (npn1.body C in) to (npn1.C);
+                \draw[signaldelta] (npn1.body E in) to (npn1.E);
+                \draw[signaldelta] (npn1.body C in) to (npn1.C);
                 \draw (0,-1.5) node[npn, name=npn2, bodydiode]{};
-                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i<0$}, color=signalred] ++(0.5,0);
+                \draw[signaldelta] (npn1.E) to [short,*-, color=signaldelta] ++(0.5,0) to [short, i={$i<0$}, color=signaldelta] ++(0.5,0);
                 \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=1$};
                 \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=0$};
             \end{circuitikz}
@@ -908,20 +908,20 @@
             \centering
             \begin{circuitikz}[]
                 \draw (0,0) node[npn, name=npn1, bodydiode]{};
-                \draw[signalred] (0,-1.5) node[npn, name=npn2, bodydiode, color=signalred]{};
+                \draw[signaldelta] (0,-1.5) node[npn, name=npn2, bodydiode, color=signaldelta]{};
                 \draw (0,-1.5) node[npn]{};
-                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i>0$}, color=signalred] ++(0.5,0);
+                \draw[signaldelta] (npn1.E) to [short,*-, color=signaldelta] ++(0.5,0) to [short, i={$i>0$}, color=signaldelta] ++(0.5,0);
                 \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=0$};
                 \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=1$};
-                \draw[signalred] (npn2.body E in) to (npn2.E);
-                \draw[signalred] (npn2.body C in) to (npn2.C);
+                \draw[signaldelta] (npn2.body E in) to (npn2.E);
+                \draw[signaldelta] (npn2.body C in) to (npn2.C);
             \end{circuitikz}
             \\[1em]
             \begin{circuitikz}[]
                 \draw (0,0) node[npn, name=npn1, bodydiode]{};
                 \draw (0,-1.5) node[npn, name=npn2, bodydiode]{};
-                \draw[signalred] (0,-1.5) node[npn, color=signalred]{};
-                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i<0$}, color=signalred] ++(0.5,0);
+                \draw[signaldelta] (0,-1.5) node[npn, color=signaldelta]{};
+                \draw[signaldelta] (npn1.E) to [short,*-, color=signaldelta] ++(0.5,0) to [short, i={$i<0$}, color=signaldelta] ++(0.5,0);
                 \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=0$};
                 \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=1$};
             \end{circuitikz}
@@ -933,22 +933,22 @@
             \centering
             \begin{circuitikz}[]
                 \draw (0,0) node[npn, name=npn1, bodydiode]{};
-                \draw[signalred] (0,-1.5) node[npn, name=npn2, bodydiode, color=signalred]{};
+                \draw[signaldelta] (0,-1.5) node[npn, name=npn2, bodydiode, color=signaldelta]{};
                 \draw (0,-1.5) node[npn]{};
-                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i>0$}, color=signalred] ++(0.5,0);
+                \draw[signaldelta] (npn1.E) to [short,*-, color=signaldelta] ++(0.5,0) to [short, i={$i>0$}, color=signaldelta] ++(0.5,0);
                 \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=0$};
                 \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=0$};
-                \draw[signalred] (npn2.body E in) to (npn2.E);
-                \draw[signalred] (npn2.body C in) to (npn2.C);
+                \draw[signaldelta] (npn2.body E in) to (npn2.E);
+                \draw[signaldelta] (npn2.body C in) to (npn2.C);
             \end{circuitikz}
             \\[1em]
             \begin{circuitikz}[]
-                \draw[signalred] (0,0) node[npn, bodydiode, color=signalred]{};
+                \draw[signaldelta] (0,0) node[npn, bodydiode, color=signaldelta]{};
                 \draw (0,0) node[npn, name=npn1]{};
-                \draw[signalred] (npn1.body E in) to (npn1.E);
-                \draw[signalred] (npn1.body C in) to (npn1.C);
+                \draw[signaldelta] (npn1.body E in) to (npn1.E);
+                \draw[signaldelta] (npn1.body C in) to (npn1.C);
                 \draw (0,-1.5) node[npn, name=npn2, bodydiode]{};
-                \draw[signalred] (npn1.E) to [short,*-, color=signalred] ++(0.5,0) to [short, i={$i<0$}, color=signalred] ++(0.5,0);
+                \draw[signaldelta] (npn1.E) to [short,*-, color=signaldelta] ++(0.5,0) to [short, i={$i<0$}, color=signaldelta] ++(0.5,0);
                 \draw (npn1.B) node[anchor=east, yshift=-1pt] {$s_{i,1}=0$};
                 \draw (npn2.B) node[anchor=east, yshift=-1pt] {$s_{i,2}=0$};
             \end{circuitikz}
@@ -972,31 +972,31 @@
 
                 % switching input
                 \nextgroupplot[ylabel = {$s_i(t)$}] 
-                \addplot[signalgreen, thick] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)};
+                \addplot[signalalpha, thick] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)};
                 \coordinate (a1) at (axis cs:\a,1);
                 \coordinate (a2) at (axis cs:\a+\it,1);
                 \coordinate (a3) at (axis cs:\a+pi,1);
 
                 % top transistor 
                 \nextgroupplot[ylabel = {$s_{i,1}(t)$}] 
-                \addplot[signalgreen, thick] coordinates {(0,-1) (\a+\it,-1) (\a+\it,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
+                \addplot[signalalpha, thick] coordinates {(0,-1) (\a+\it,-1) (\a+\it,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
                 \draw[<->] (axis cs:\a,0) -- node[above, fill=white, inner sep=1pt, yshift=1mm]{\small$t_0$} (axis cs:\a+\it,0);
                 
 
                 % bottom transistor
                 \nextgroupplot[ylabel = {$s_{i,2}(t)$}] 
-                \addplot[signalgreen, thick] coordinates {(0,1) (\a,1) (\a,-1) (\a+pi+\it,-1) (\a+pi+\it,1) (2*pi,1)}; 
+                \addplot[signalalpha, thick] coordinates {(0,1) (\a,1) (\a,-1) (\a+pi+\it,-1) (\a+pi+\it,1) (2*pi,1)}; 
                 
 
                 % current 
                 \nextgroupplot[ylabel = {$i_{2}(t)$}, ytick = {0}, yticklabels = {$0$}, ymin = 0] 
-                \addplot[signalred, thick] coordinates {(0,0.95/pi*\a) (\a,0.2) (\a+pi,0.95) (2*pi,0.95/pi*\a)}; 
+                \addplot[signaldelta, thick] coordinates {(0,0.95/pi*\a) (\a,0.2) (\a+pi,0.95) (2*pi,0.95/pi*\a)}; 
 
                 % switching input
                 \nextgroupplot[ylabel = {$u_2(t)/U_1$}, ymin = -0.1, xlabel={$t/T_\mathrm{s}$}] 
-                \addplot[signalblue, thick] coordinates {(0,0) (\a+\it,0) (\a+\it,1) (\a+pi,1) (\a+pi,0) (2*pi,0)}; 
-                \addplot[signalblue, thick, dashed] coordinates {(\a,0) (\a,1) (\a+\it,1)}; 
-                \fill [signalblue, opacity=0.3] (axis cs:\a,0) rectangle (axis cs:\a+\it,1);
+                \addplot[signalalpha, thick] coordinates {(0,0) (\a+\it,0) (\a+\it,1) (\a+pi,1) (\a+pi,0) (2*pi,0)}; 
+                \addplot[signalalpha, thick, dashed] coordinates {(\a,0) (\a,1) (\a+\it,1)}; 
+                \fill [signalalpha, opacity=0.3] (axis cs:\a,0) rectangle (axis cs:\a+\it,1);
                 \draw[thin] (axis cs:\a+\it/2,0.5) -- (axis cs:\a-0.2,0.5) node[anchor=east, align=center]{$\Delta u$}; 
                 \coordinate (b1) at (axis cs:\a,0);
                 \coordinate (b2) at (axis cs:\a+\it,0);
@@ -1023,30 +1023,30 @@
 
                 % switching input
                 \nextgroupplot[ylabel = {$s_i(t)$}] 
-                \addplot[signalgreen, thick] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)};
+                \addplot[signalalpha, thick] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)};
                 \coordinate (a1) at (axis cs:\a,1);
                 \coordinate (a2) at (axis cs:\a+pi,1);
                 \coordinate (a3) at (axis cs:\a+pi+\it,1);
 
                 % top transistor 
                 \nextgroupplot[ylabel = {$s_{i,1}(t)$}] 
-                \addplot[signalgreen, thick] coordinates {(0,-1) (\a+\it,-1) (\a+\it,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
+                \addplot[signalalpha, thick] coordinates {(0,-1) (\a+\it,-1) (\a+\it,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
                 
 
                 % bottom transistor
                 \nextgroupplot[ylabel = {$s_{i,2}(t)$}] 
-                \addplot[signalgreen, thick] coordinates {(0,1) (\a,1) (\a,-1) (\a+pi+\it,-1) (\a+pi+\it,1) (2*pi,1)}; 
+                \addplot[signalalpha, thick] coordinates {(0,1) (\a,1) (\a,-1) (\a+pi+\it,-1) (\a+pi+\it,1) (2*pi,1)}; 
                 \draw[<->] (axis cs:\a+pi,0) -- node[above, fill=white, inner sep=1pt, yshift=1mm]{\small$t_0$} (axis cs:\a+\it+pi,0);
 
                 % current 
                 \nextgroupplot[ylabel = {$i_{2}(t)$}, ytick = {0}, yticklabels = {$0$}, ymin = -1, ymax=0] 
-                \addplot[signalred, thick] coordinates {(0,{-0.2-0.65*(1-\a/pi)}) (\a,0.2-1) (\a+pi,0.85-1) (2*pi,{-0.2-0.65*(1-\a/pi)})}; 
+                \addplot[signaldelta, thick] coordinates {(0,{-0.2-0.65*(1-\a/pi)}) (\a,0.2-1) (\a+pi,0.85-1) (2*pi,{-0.2-0.65*(1-\a/pi)})}; 
 
                 % switching input
                 \nextgroupplot[ylabel = {$u_2(t)/U_1$}, ymin = -0.1, xlabel={$t/T_\mathrm{s}$}] 
-                \addplot[signalblue, thick] coordinates {(0,0) (\a,0) (\a,1) (\a+pi+\it,1) (\a+pi+\it,0) (2*pi,0)}; 
-                \addplot[signalblue, thick, dashed] coordinates {(\a+pi,1) (\a+pi+\it,1) (\a+\it+pi,0)}; 
-                \fill [signalblue, opacity=0.3] (axis cs:\a+pi,0) rectangle (axis cs:\a+\it+pi,1);
+                \addplot[signalalpha, thick] coordinates {(0,0) (\a,0) (\a,1) (\a+pi+\it,1) (\a+pi+\it,0) (2*pi,0)}; 
+                \addplot[signalalpha, thick, dashed] coordinates {(\a+pi,1) (\a+pi+\it,1) (\a+\it+pi,0)}; 
+                \fill [signalalpha, opacity=0.3] (axis cs:\a+pi,0) rectangle (axis cs:\a+\it+pi,1);
                 \draw[thin] (axis cs:\a+\it/2+pi,0.5) -- (axis cs:\a+0.2+pi+\it,0.5) node[anchor=west, align=center]{$\Delta u$}; 
                 \coordinate (b1) at (axis cs:\a,0);
                 \coordinate (b2) at (axis cs:\a+pi,0);
@@ -1073,32 +1073,32 @@
 
                 % switching input
                 \nextgroupplot[ylabel = {$s_i(t)$}] 
-                \addplot[signalgreen, thick] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)};
+                \addplot[signalalpha, thick] coordinates {(0,-1) (\a,-1) (\a,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)};
                 \coordinate (a1) at (axis cs:\a,1);
                 \coordinate (a2) at (axis cs:\a+\it,1);
                 \coordinate (a3) at (axis cs:\a+pi,1);
 
                 % top transistor 
                 \nextgroupplot[ylabel = {$s_{i,1}(t)$}] 
-                \addplot[signalgreen, thick] coordinates {(0,-1) (\a+\it,-1) (\a+\it,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
+                \addplot[signalalpha, thick] coordinates {(0,-1) (\a+\it,-1) (\a+\it,1) (\a+pi,1) (\a+pi,-1) (2*pi,-1)}; 
                 \draw[<->] (axis cs:\a,0) -- node[above, fill=white, inner sep=1pt, yshift=1mm]{\small$t_0$} (axis cs:\a+\it,0);
                 
 
                 % bottom transistor
                 \nextgroupplot[ylabel = {$s_{i,2}(t)$}] 
-                \addplot[signalgreen, thick] coordinates {(0,1) (\a,1) (\a,-1) (\a+pi+\it,-1) (\a+pi+\it,1) (2*pi,1)}; 
+                \addplot[signalalpha, thick] coordinates {(0,1) (\a,1) (\a,-1) (\a+pi+\it,-1) (\a+pi+\it,1) (2*pi,1)}; 
                 
 
                 % current 
                 \nextgroupplot[ylabel = {$i_{2}(t)$}, ytick = {0}, yticklabels = {$0$}, ymin = 0] 
-                \addplot[signalred, thick] coordinates {(0,0.95/pi*\a) (\a+0.15,0) (\a+\it,0) (\a+pi,0.95) (2*pi,0.95/pi*\a)}; 
+                \addplot[signaldelta, thick] coordinates {(0,0.95/pi*\a) (\a+0.15,0) (\a+\it,0) (\a+pi,0.95) (2*pi,0.95/pi*\a)}; 
 
                 % switching input
                 \nextgroupplot[ylabel = {$u_2(t)/U_1$}, ymin = -0.1, xlabel={$t/T_\mathrm{s}$}] 
-                \addplot[signalblue, thick] coordinates {(0,0) (\a,0) (\a+0.15,0) (\a+0.15,0.66) (\a+\it,0.66) (\a+\it,1) (\a+pi,1) (\a+pi,0) (2*pi,0)}; 
-                \addplot[signalblue, thick, dashed] coordinates {(\a,0) (\a,1) (\a+\it,1)}; 
-                \fill [signalblue, opacity=0.3] (axis cs:\a,0) rectangle (axis cs:\a+0.15,1);
-                \fill [signalblue, opacity=0.3] (axis cs:\a+0.15,0.66) rectangle (axis cs:\a+\it,1);
+                \addplot[signalalpha, thick] coordinates {(0,0) (\a,0) (\a+0.15,0) (\a+0.15,0.66) (\a+\it,0.66) (\a+\it,1) (\a+pi,1) (\a+pi,0) (2*pi,0)}; 
+                \addplot[signalalpha, thick, dashed] coordinates {(\a,0) (\a,1) (\a+\it,1)}; 
+                \fill [signalalpha, opacity=0.3] (axis cs:\a,0) rectangle (axis cs:\a+0.15,1);
+                \fill [signalalpha, opacity=0.3] (axis cs:\a+0.15,0.66) rectangle (axis cs:\a+\it,1);
                 \draw[thin] (axis cs:\a+\it/4,0.5) -- (axis cs:\a-0.2,0.5) node[anchor=east, align=center]{$\Delta u$}; 
                 \draw[thin] (axis cs:\a+\it+0.05,0.66) -- (axis cs:\a+\it+0.25,0.5) node[anchor=west, align=center]{\small Depends on load voltage}; 
                 \coordinate (b1) at (axis cs:\a,0);
@@ -1181,7 +1181,7 @@
                     xlabel style={anchor=west},
                     ylabel style={anchor=south},
                 ]
-                \addplot[signalblue, thick] coordinates {(0,-1) (0.1,-1) (0.1,1) (0.6,1) (0.6,-1) (1.1,-1) (1.1,1) (1.2,1)};
+                \addplot[signalalpha, thick] coordinates {(0,-1) (0.1,-1) (0.1,1) (0.6,1) (0.6,-1) (1.1,-1) (1.1,1) (1.2,1)};
                 \end{axis}
             \end{tikzpicture}
             \caption{2-level half bridge}
@@ -1223,7 +1223,7 @@
                     xlabel style={anchor=west},
                     ylabel style={anchor=south},
                 ]
-                \addplot[signalblue, thick] coordinates {(0,-1) (0.1,-1) (0.1,0) (0.35,0) (0.35,1) (0.6,1) (0.6,0) (0.85,0) (0.85,-1) (1.1,-1) (1.1,0) (1.1,0) (1.2,0)};
+                \addplot[signalalpha, thick] coordinates {(0,-1) (0.1,-1) (0.1,0) (0.35,0) (0.35,1) (0.6,1) (0.6,0) (0.85,0) (0.85,-1) (1.1,-1) (1.1,0) (1.1,0) (1.2,0)};
                 \end{axis}
             \end{tikzpicture}
             \caption{3-level half bridge}
@@ -1269,7 +1269,7 @@
                     xlabel style={anchor=west},
                     ylabel style={anchor=south},
                 ]
-                \addplot[signalblue, thick] coordinates {(0,-1) (1/4,-1) (1/4,-1/3) (1/4+1/8,-1/3) (1/4+1/8,1/3) (2/4,1/3) (2/4,1) (3/4,1) (3/4,1/3) (3/4+1/8,1/3) (3/4+1/8,-1/3) (1,-1/3) (1,-1) (1.2,-1)};
+                \addplot[signalalpha, thick] coordinates {(0,-1) (1/4,-1) (1/4,-1/3) (1/4+1/8,-1/3) (1/4+1/8,1/3) (2/4,1/3) (2/4,1) (3/4,1) (3/4,1/3) (3/4+1/8,1/3) (3/4+1/8,-1/3) (1,-1/3) (1,-1) (1.2,-1)};
                 \end{axis}
             \end{tikzpicture}
             \caption{4-level half bridge}
@@ -1340,10 +1340,10 @@
                 \begin{tikzpicture}
                     \draw[->] (-0.5,0) to (3.5,0) node[right]{$\mathrm{Re}$};
                     \draw[->] (0,-2) to (0,2) node[above]{$\mathrm{Im}$};
-                    \draw[->, thick, signalblue] (0,0) to (3,0) node[above]{$\underline{\hat{u}}_{\mathrm{g}}$} coordinate (ug);
-                    \draw[->, thick, signalred] (0,0) to (1.5,0) node[above]{$\underline{\hat{i}}_{\mathrm{g}}$};
-                    \draw[<-, thick, signalblue] (ug) to node[right]{$\underline{\hat{u}}_{\mathrm{L}}$}  ++(0,-1.5) coordinate (ul);
-                    \draw[->, thick, signalblue] (0,0) to (ul) node[below]{$\underline{\hat{u}}_2$};
+                    \draw[->, thick, signalalpha] (0,0) to (3,0) node[above]{$\underline{\hat{u}}_{\mathrm{g}}$} coordinate (ug);
+                    \draw[->, thick, signaldelta] (0,0) to (1.5,0) node[above]{$\underline{\hat{i}}_{\mathrm{g}}$};
+                    \draw[<-, thick, signalalpha] (ug) to node[right]{$\underline{\hat{u}}_{\mathrm{L}}$}  ++(0,-1.5) coordinate (ul);
+                    \draw[->, thick, signalalpha] (0,0) to (ul) node[below]{$\underline{\hat{u}}_2$};
                     \draw[->] let \p1 = (ul) in (1,0) arc(0:atan(\y1/\x1):1);
                     \draw node[right] at (1.1, -0.4) {$\varphi_2$};
                 \end{tikzpicture}
@@ -1444,17 +1444,17 @@
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$x(t)$}, legend pos=north east, legend columns=3, ytick = {0}, yticklabels = {$0$}] 
-                \addplot[signalblue, thick, domain=0:2*pi, samples = 100] {cos(deg(x))};
-                \addplot[signalred, thick, domain=0:2*pi, samples = 100] {0.6*cos(deg(x))};
-                \addplot[signalblue, thick, domain=0:2*pi, samples = 100, dashed] {cos(deg(x-\p))};
+                \addplot[signalalpha, thick, domain=0:2*pi, samples = 100] {cos(deg(x))};
+                \addplot[signaldelta, thick, domain=0:2*pi, samples = 100] {0.6*cos(deg(x))};
+                \addplot[signalalpha, thick, domain=0:2*pi, samples = 100, dashed] {cos(deg(x-\p))};
                 \draw[->] (axis cs:pi/2,0) -- node[above, fill=white, inner sep=1pt]{$\varphi_2$} (axis cs:pi/2+\p,0);
                 \legend{$u_\mathrm{g}(t)$, $i_\mathrm{g}(t)$, $u_2(t)$};
 
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$p(t)/P$}, legend pos=north east, legend columns=2, ymin= -0.2, ymax = 2.2, ytick = {0, 1, 2}, yticklabels = {$0$, $1$, $2$}, xlabel={$\omega t$}] 
-                \addplot[signalblue, thick, domain=0:2*pi, samples = 100] {1+cos(deg(2*x))}; 
-                \addplot[signalblue, thick, domain=0:2*pi, samples = 100, dashed] {1+1.15*cos(deg(2*x-2*\p))};  
+                \addplot[signalalpha, thick, domain=0:2*pi, samples = 100] {1+cos(deg(2*x))}; 
+                \addplot[signalalpha, thick, domain=0:2*pi, samples = 100, dashed] {1+1.15*cos(deg(2*x-2*\p))};  
                 \draw[<->] (axis cs:pi/2+\p,-0.15) -- node[left, fill=white, inner sep=1pt]{$S_2$} (axis cs:pi/2+\p,1);      
                 \draw[<->] (axis cs:pi+\p,1) -- node[left, fill=white, inner sep=1pt]{$S_2$} (axis cs:pi+\p,2.15);         
                 \legend{$p_\mathrm{g}(t)$, $p_2(t)$};
@@ -1722,32 +1722,32 @@
 
                 % ua0
                 \nextgroupplot[ylabel = {$u_{2\mathrm{a}0}(t)/U_1$}] 
-                \addplot[signalblue, thick] coordinates {(0,-1/2) (\a,-1/2) (\a,1/2) (\a+pi,1/2) (\a+pi,-1/2) (2*pi+\a,-1/2) (2*pi+\a,1/2) (3*pi,1/2)};
-                \addplot[signalblue, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(x-\a))};
+                \addplot[signalalpha, thick] coordinates {(0,-1/2) (\a,-1/2) (\a,1/2) (\a+pi,1/2) (\a+pi,-1/2) (2*pi+\a,-1/2) (2*pi+\a,1/2) (3*pi,1/2)};
+                \addplot[signalalpha, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(x-\a))};
                 \draw[thin] (pi+\a+0.1,0.0) -- (pi+\a+0.6,0.25) node[right, anchor=west, fill = white, inner sep = 1pt] {$\hat{u}^{(1)}_{2\mathrm{a}0}=\frac{2}{\pi}$};
                 \draw[->] (axis cs:0,0) -- node[above, fill=white, inner sep=1pt]{$\alpha$} (axis cs:\a,0);
 
                 % ub0
                 \nextgroupplot[ylabel = {$u_{2\mathrm{b}0}(t)/U_1$}] 
-                \addplot[signalgreen, thick] coordinates {(0,-1/2) (pi,-1/2) (pi,1/2) (2*pi,1/2) (2*pi,-1/2) (3*pi,-1/2)};
-                \addplot[signalgreen, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(-x))};
+                \addplot[signalbeta, thick] coordinates {(0,-1/2) (pi,-1/2) (pi,1/2) (2*pi,1/2) (2*pi,-1/2) (3*pi,-1/2)};
+                \addplot[signalbeta, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(-x))};
                 \draw[thin] (pi/3*5+\a+0.1,0.0) -- (pi/3*5+\a+0.6,0.25) node[right, anchor=west, fill = white, inner sep = 1pt] {$\hat{u}^{(1)}_{2\mathrm{b}0}=\frac{2}{\pi}$};
 
                 % uc0
                 \nextgroupplot[ylabel = {$u_{2\mathrm{c}0}(t)/U_1$}] 
-                \addplot[signalbrown, thick] coordinates {(0,1/2) (\a+pi/3,1/2) (\a+pi/3,-1/2) (\a+4*pi/3,-1/2) (\a+4*pi/3,1/2) (\a+7*pi/3,1/2) (\a+7*pi/3,-1/2) (3*pi,-1/2)};
-                \addplot[signalbrown, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(x-4/3*pi-\a))};
+                \addplot[signalgamma, thick] coordinates {(0,1/2) (\a+pi/3,1/2) (\a+pi/3,-1/2) (\a+4*pi/3,-1/2) (\a+4*pi/3,1/2) (\a+7*pi/3,1/2) (\a+7*pi/3,-1/2) (3*pi,-1/2)};
+                \addplot[signalgamma, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(x-4/3*pi-\a))};
                 \draw[thin] (pi/3+\a+0.1,0.0) -- (pi/3+\a+0.6,0.25) node[right, anchor=west, fill = white, inner sep = 1pt] {$\hat{u}^{(1)}_{2\mathrm{c}0}=\frac{2}{\pi}$};
 
                 % un0
                 \nextgroupplot[ylabel = {$u_{2\mathrm{n}0}(t)/U_1$}, height=0.27\textheight, ymin = -1/5, ymax =1/5, ytick = {-1/6, 0, 1/6}, yticklabels = {$-\nicefrac{1}{6}$, , $\nicefrac{1}{6}$}] 
-                \addplot[signallavender, thick] coordinates {(0,-1/6) (pi/3,-1/6) (pi/3,1/6) (2*pi/3,1/6) (2*pi/3,-1/6) (3*pi/3,-1/6) (3*pi/3,1/6) (4*pi/3,1/6) (4*pi/3,-1/6) (5*pi/3,-1/6) (5*pi/3,1/6) (6*pi/3,1/6) (6*pi/3,-1/6) (7*pi/3,-1/6) (7*pi/3,1/6) (8*pi/3,1/6) (8*pi/3,-1/6) (9*pi/3,-1/6) (9*pi/3,1/6)};
+                \addplot[black, thick] coordinates {(0,-1/6) (pi/3,-1/6) (pi/3,1/6) (2*pi/3,1/6) (2*pi/3,-1/6) (3*pi/3,-1/6) (3*pi/3,1/6) (4*pi/3,1/6) (4*pi/3,-1/6) (5*pi/3,-1/6) (5*pi/3,1/6) (6*pi/3,1/6) (6*pi/3,-1/6) (7*pi/3,-1/6) (7*pi/3,1/6) (8*pi/3,1/6) (8*pi/3,-1/6) (9*pi/3,-1/6) (9*pi/3,1/6)};
                 \draw[<->] (axis cs:\a,0) -- node[centered, fill=white, inner sep=1pt]{$T_\mathrm{s}$} (axis cs:\a+2*pi,0);
 
                 % ua0
                 \nextgroupplot[ylabel = {$u_{2\mathrm{a}}(t)/U_1$}, , ytick = {-2/3, 0, 2/3}, yticklabels = {$-\nicefrac{2}{3}$, , $\nicefrac{2}{3}$}, xlabel={$\omega t$}] 
-                \addplot[signalblue, thick] coordinates {(0,-1/3) (pi/3,-1/3) (pi/3,1/3) (2*pi/3,1/3) (2*pi/3,2/3) (3*pi/3,2/3) (3*pi/3,1/3) (4*pi/3,1/3) (4*pi/3,-1/3) (5*pi/3,-1/3) (5*pi/3,-2/3) (6*pi/3,-2/3) (6*pi/3,-1/3) (7*pi/3,-1/3) (7*pi/3,1/3) (8*pi/3,1/3) (8*pi/3,2/3) (9*pi/3,2/3)};
-                \addplot[signalblue, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(x-\a))};
+                \addplot[signalalpha, thick] coordinates {(0,-1/3) (pi/3,-1/3) (pi/3,1/3) (2*pi/3,1/3) (2*pi/3,2/3) (3*pi/3,2/3) (3*pi/3,1/3) (4*pi/3,1/3) (4*pi/3,-1/3) (5*pi/3,-1/3) (5*pi/3,-2/3) (6*pi/3,-2/3) (6*pi/3,-1/3) (7*pi/3,-1/3) (7*pi/3,1/3) (8*pi/3,1/3) (8*pi/3,2/3) (9*pi/3,2/3)};
+                \addplot[signalalpha, thick, domain = 0:3*pi, samples = 100, dashed] {4/pi/2*sin(deg(x-\a))};
                 \draw[thin] (pi+\a+0.1,0.0) -- (pi+\a+0.4,0.25) node[right, anchor=west, fill = white, inner sep = 1pt] {$\hat{u}^{(1)}_{2\mathrm{a}}=\hat{u}^{(1)}_{2\mathrm{a}0}=\frac{2}{\pi}$};
                 \draw[->] (axis cs:0,0) -- node[above, fill=white, inner sep=1pt]{$\alpha$} (axis cs:\a,0);
 
@@ -1795,7 +1795,7 @@
                     \pgfmathsetmacro{\signalheight}{\cheight/(1.3)}
 
                     % Start drawing the triangular signal
-                    \draw[signalred, thick] 
+                    \draw[signaldelta, thick] 
                 ($(blockBottomLeft) + (0.025, 0.1*\cheight)$) % Starting point with a margin
                 \foreach \x in {1,...,\signalsteps} {
                     -- ($
@@ -1818,15 +1818,15 @@
                 
                 % Comperator block #1
                 \begin{axis}[at={(comp1)}, scale only axis, width = 0.8*\cwidth cm, height = 0. 8*\cheight cm, anchor = center, xtick=\empty, ytick={0,1}, axis lines=middle, ymax=1.25, ymin = -1.25, font = \footnotesize, extra y ticks={-1}, extra y tick style = {yticklabel shift = -0.75cm}]
-                    \addplot[thick, signalblue] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
+                    \addplot[thick, signalalpha] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
                 \end{axis}
                 % Comperator block #2
                 \begin{axis}[at={(comp2)}, scale only axis, width = 0.8*\cwidth cm, height = 0.8*\cheight cm, anchor = center, xtick=\empty, ytick={0,1}, axis lines=middle, ymax=1.25, ymin = -1.25, font = \footnotesize, extra y ticks={-1}, extra y tick style = {yticklabel shift = -0.75cm}]
-                    \addplot[thick, signalblue] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
+                    \addplot[thick, signalalpha] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
                 \end{axis}
                 % Comperator block #3
                 \begin{axis}[at={(comp3)}, scale only axis, width = 0.8*\cwidth cm, height = 0.8*\cheight cm, anchor = center, xtick=\empty, ytick={0,1}, axis lines=middle, ymax=1.25, ymin = -1.25, font = \footnotesize, extra y ticks={-1}, extra y tick style = {yticklabel shift = -0.75cm}]
-                    \addplot[thick, signalblue] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
+                    \addplot[thick, signalalpha] coordinates {(-1,-1) (0,-1) (0,1) (1,1)};
                 \end{axis}
                 \draw[->] (comp1.east) -- ++(0.5,0) node[anchor = west]{$s_1(t)$};
                 \draw[->] (comp2.east) -- ++(0.5,0) node[anchor = west]{$s_2(t)$};
@@ -1852,30 +1852,30 @@
 
                  % Top plot: duty cycle reference and carrier signal
                 \nextgroupplot[ylabel = {$s_{i}^*(t), c(t)$}]
-                \addplot[signalblue, thick] table[x=wt, y=d1, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
-                \addplot[signalgreen, thick] table[x=wt, y=d2, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
-                \addplot[signalbrown, thick] table[x=wt, y=d3, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
-                \addplot[signalred, thick] table[x=wt, y=c, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
-                \node[signalblue, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt] at (axis cs: pi/2, 1) {\small $s_1^*$};
-                \node[signalgreen, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=-3mm] at (axis cs: pi/2+pi/3*2, 1) {\small $s_2^*$};
-                \node[signalbrown, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=3mm] at (axis cs: pi/2+pi/3*4, 1) {\small $s_3^*$};
-                \node[signalred, anchor=south, fill = white, inner sep = 1pt] at (axis cs: pi/10, -0.6) {\small $c$};
+                \addplot[signalalpha, thick] table[x=wt, y=d1, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+                \addplot[signalbeta, thick] table[x=wt, y=d2, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+                \addplot[signalgamma, thick] table[x=wt, y=d3, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+                \addplot[black, thick] table[x=wt, y=c, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+                \node[signalalpha, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt] at (axis cs: pi/2, 1) {\small $s_1^*$};
+                \node[signalbeta, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=-3mm] at (axis cs: pi/2+pi/3*2, 1) {\small $s_2^*$};
+                \node[signalgamma, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=3mm] at (axis cs: pi/2+pi/3*4, 1) {\small $s_3^*$};
+                \node[black, anchor=south, fill = white, inner sep = 1pt] at (axis cs: pi/10, -0.6) {\small $c$};
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_1(t)$}] 
-                \addplot[signalblue, thick] table[x=wt, y=s1, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=s1, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_2(t)$}] 
-                \addplot[signalgreen, thick] table[x=wt, y=s2, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+                \addplot[signalbeta, thick] table[x=wt, y=s2, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_3(t)$}] 
-                \addplot[signalbrown, thick] table[x=wt, y=s3, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+                \addplot[signalgamma, thick] table[x=wt, y=s3, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
 
                 % bottom plot: line-to-line voltage
                 \nextgroupplot[ylabel = {$\frac{u_{2\mathrm{ab}}(t)}{U_1}$}, xlabel={$\omega t$}] 
-                \addplot[signalblue, thick] table[x=wt, y expr=(\thisrow{s1}-\thisrow{s2})/2, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y expr=(\thisrow{s1}-\thisrow{s2})/2, col sep=comma] {PWM_three-phase_mod05_example.csv}; 
             \end{groupplot}
         \end{tikzpicture}
     \end{figure}
@@ -1894,30 +1894,30 @@
 
                  % Top plot: duty cycle reference and carrier signal
                 \nextgroupplot[ylabel = {$s_{i}^*(t), c(t)$}]
-                \addplot[signalblue, thick] table[x=wt, y=d1, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
-                \addplot[signalgreen, thick] table[x=wt, y=d2, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
-                \addplot[signalbrown, thick] table[x=wt, y=d3, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
-                \addplot[signalred, thick] table[x=wt, y=c, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
-                \node[signalblue, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt] at (axis cs: pi/2, 1) {\small $s_1^*$};
-                \node[signalgreen, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=-3mm] at (axis cs: pi/2+pi/3*2, 1) {\small $s_2^*$};
-                \node[signalbrown, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=3mm] at (axis cs: pi/2+pi/3*4, 1) {\small $s_3^*$};
-                \node[signalred, anchor=south, fill = white, inner sep = 1pt] at (axis cs: pi/10, -0.6) {\small $c$};
+                \addplot[signalalpha, thick] table[x=wt, y=d1, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+                \addplot[signalbeta, thick] table[x=wt, y=d2, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+                \addplot[signalgamma, thick] table[x=wt, y=d3, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+                \addplot[black, thick] table[x=wt, y=c, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+                \node[signalalpha, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt] at (axis cs: pi/2, 1) {\small $s_1^*$};
+                \node[signalbeta, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=-3mm] at (axis cs: pi/2+pi/3*2, 1) {\small $s_2^*$};
+                \node[signalgamma, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=3mm] at (axis cs: pi/2+pi/3*4, 1) {\small $s_3^*$};
+                \node[black, anchor=south, fill = white, inner sep = 1pt] at (axis cs: pi/10, -0.6) {\small $c$};
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_1(t)$}] 
-                \addplot[signalblue, thick] table[x=wt, y=s1, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=s1, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_2(t)$}] 
-                \addplot[signalgreen, thick] table[x=wt, y=s2, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+                \addplot[signalbeta, thick] table[x=wt, y=s2, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_3(t)$}] 
-                \addplot[signalbrown, thick] table[x=wt, y=s3, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+                \addplot[signalgamma, thick] table[x=wt, y=s3, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
 
                 % bottom plot: line-to-line voltage
                 \nextgroupplot[ylabel = {$\frac{u_{2\mathrm{ab}}(t)}{U_1}$}, xlabel={$\omega t$}] 
-                \addplot[signalblue, thick] table[x=wt, y expr=(\thisrow{s1}-\thisrow{s2})/2, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y expr=(\thisrow{s1}-\thisrow{s2})/2, col sep=comma] {PWM_three-phase_mod1_example.csv}; 
             \end{groupplot}
         \end{tikzpicture}
     \end{figure}
@@ -1936,30 +1936,30 @@
 
                  % Top plot: duty cycle reference and carrier signal
                 \nextgroupplot[ylabel = {$s_{i}^*(t), c(t)$}, ymin = -1.2, ymax =1.2]
-                \addplot[signalblue, thick] table[x=wt, y=d1, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
-                \addplot[signalgreen, thick] table[x=wt, y=d2, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
-                \addplot[signalbrown, thick] table[x=wt, y=d3, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
-                \addplot[signalred, thick] table[x=wt, y=c, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
-                \node[signalblue, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt] at (axis cs: pi/2, 1.1) {\small $s_1^*$};
-                \node[signalgreen, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=-3mm] at (axis cs: pi/2+pi/3*2, 1.1) {\small $s_2^*$};
-                \node[signalbrown, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=3mm] at (axis cs: pi/2+pi/3*4, 1.1) {\small $s_3^*$};
-                \node[signalred, anchor=south, fill = white, inner sep = 1pt] at (axis cs: pi/10, -0.6) {\small $c$};
+                \addplot[signalalpha, thick] table[x=wt, y=d1, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+                \addplot[signalbeta, thick] table[x=wt, y=d2, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+                \addplot[signalgamma, thick] table[x=wt, y=d3, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+                \addplot[black, thick] table[x=wt, y=c, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+                \node[signalalpha, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt] at (axis cs: pi/2, 1.1) {\small $s_1^*$};
+                \node[signalbeta, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=-3mm] at (axis cs: pi/2+pi/3*2, 1.1) {\small $s_2^*$};
+                \node[signalgamma, anchor=north, fill = white, inner sep = 1pt, yshift=-1pt, xshift=3mm] at (axis cs: pi/2+pi/3*4, 1.1) {\small $s_3^*$};
+                \node[black, anchor=south, fill = white, inner sep = 1pt] at (axis cs: pi/10, -0.6) {\small $c$};
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_1(t)$}] 
-                \addplot[signalblue, thick] table[x=wt, y=s1, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y=s1, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_2(t)$}] 
-                \addplot[signalgreen, thick] table[x=wt, y=s2, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+                \addplot[signalbeta, thick] table[x=wt, y=s2, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
 
                 % top middle plot: individual switching signals
                 \nextgroupplot[ylabel = {$s_3(t)$}] 
-                \addplot[signalbrown, thick] table[x=wt, y=s3, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+                \addplot[signalgamma, thick] table[x=wt, y=s3, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
 
                 % bottom plot: line-to-line voltage
                 \nextgroupplot[ylabel = {$\frac{u_{2\mathrm{ab}}(t)}{U_1}$}, xlabel={$\omega t$}] 
-                \addplot[signalblue, thick] table[x=wt, y expr=(\thisrow{s1}-\thisrow{s2})/2, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
+                \addplot[signalalpha, thick] table[x=wt, y expr=(\thisrow{s1}-\thisrow{s2})/2, col sep=comma] {PWM_three-phase_overmod_example.csv}; 
             \end{groupplot}
         \end{tikzpicture}
     \end{figure}

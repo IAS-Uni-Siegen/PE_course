@@ -43,8 +43,8 @@
                         \draw (human.south) node[ground](G2){}
                         let \p1 = (G2), \p2 = (A2) in (\x2, \y1) node[ground](G1){}
                         (G1) -- (A2);
-                        \draw let \p1 = (G2), \p2 = (A2)  in (\x2, \y1) [signalred, ultra thick, -latex, dashed] (G1.south) -- (\x2,\y2) -- (\x1,\y2) -- (G2.south) -- (G1.south);
-                        \draw let \p1 = (G2), \p2 = (A2)  in (\x2/2+\x1/2, \y1) node[signalred, below] {current through ground};
+                        \draw let \p1 = (G2), \p2 = (A2)  in (\x2, \y1) [signaldelta, ultra thick, -latex, dashed] (G1.south) -- (\x2,\y2) -- (\x1,\y2) -- (G2.south) -- (G1.south);
+                        \draw let \p1 = (G2), \p2 = (A2)  in (\x2/2+\x1/2, \y1) node[signaldelta, below] {current through ground};
                     \end{circuitikz}
                 \caption{Lack of galvanic isolation}
             \end{subfigure}
@@ -63,8 +63,8 @@
                     \draw (human.south) node[ground](G2){}
                     let \p1 = (G2), \p2 = (A2) in (\x2, \y1) node[ground](G1){}
                     (G1) -- (A2);
-                    \draw [signalgreen, ultra thick, latex-latex, dashed] (G1.south) (G2.south) -- (G1.south);
-                    \draw let \p1 = (G2), \p2 = (A2)  in (\x2/2+\x1/2, \y1) node[signalgreen, below] {output $u_2$ can 'float'};
+                    \draw [signalbeta, ultra thick, latex-latex, dashed] (G1.south) (G2.south) -- (G1.south);
+                    \draw let \p1 = (G2), \p2 = (A2)  in (\x2/2+\x1/2, \y1) node[signalbeta, below] {output $u_2$ can 'float'};
                 \end{circuitikz}
                 \caption{Galvanic isolation via inductive separation}
             \end{subfigure}
@@ -176,28 +176,28 @@
                     \draw (\b-\dr,\dr) --++(\dx, \dy);
                     \draw (\b-\dr,\b-\dr) --++(\dx, \dy);
                     \draw (\dr,\b-\dr) --++(\dx, \dy);
-                    \draw [signalblue, thick, postaction={decorate}] (0, \ly) --++(-1.5,0);
-                    \draw [rounded corners=2pt,signalblue, thick]
+                    \draw [signalalpha, thick, postaction={decorate}] (0, \ly) --++(-1.5,0);
+                    \draw [rounded corners=2pt,signalalpha, thick]
                         (-0.09,\ly) -- (\lx, \ly)--++(0.89,0.5)
                         --++(-0.08, 0.05);
                     \foreach \z in {.24,.48,...,2.5}
                         {
-                        \draw [rounded corners=2pt,signalblue, thick]
+                        \draw [rounded corners=2pt,signalalpha, thick]
                         (-0.0,\ly+\z+0.08)--(-0.09,\ly+\z) -- (\lx, \ly+\z)--++(0.89,0.5)
                         --++(-0.08, 0.05);
                     }
-                    \draw [rounded corners=2pt,signalblue, thick, postaction={decorate}] (-1.5,
+                    \draw [rounded corners=2pt,signalalpha, thick, postaction={decorate}] (-1.5,
                     \ly+2.8) --++(1.5,0) node[black, above, pos=0.4] {$i_1(t)$};
                     \draw[latex-] (-\lx, \ly+0.2) --++(0, 2.4) node[midway, left] {$u_1(t)$};
                     
-                    \draw [rounded corners=2pt,signalred, thick] (\a+\lx-2*\dr,
+                    \draw [rounded corners=2pt,signaldelta, thick] (\a+\lx-2*\dr,
                     \ly+2*\dr)--++(-\dr, -\dr)--++(\lx+\dx+2*\dr, 0);
-                    \draw [signalred, postaction={decorate}] (\b+\dx-\dr+\a/2, \ly+\dr)--(\b+\dx-\dr, \ly+\dr);
-                    \draw [rounded corners=2pt, signalred, thick, postaction={decorate}]
+                    \draw [signaldelta, postaction={decorate}] (\b+\dx-\dr+\a/2, \ly+\dr)--(\b+\dx-\dr, \ly+\dr);
+                    \draw [rounded corners=2pt, signaldelta, thick, postaction={decorate}]
                     (\a+3*\lx-0.2, \ly+3.1) --++(\a/2, 0) node[black, midway, above] {$i_2(t)$};
                     \foreach \z in {.125,.25,.375,...,2.5}
                         {
-                        \draw [rounded corners=2pt, signalred, thick] (\a+\lx,\ly+\z+0.1)--
+                        \draw [rounded corners=2pt, signaldelta, thick] (\a+\lx,\ly+\z+0.1)--
                         (\a+\lx-0.07,\ly+\z) -- (\a+2*\lx, \ly+\z)--++(0.87,0.5)--++(-0.06,
                         0.06);
                         }
@@ -505,7 +505,7 @@
                 % Top plot: voltage at the switch
                 \nextgroupplot[ylabel = {$u_\mathrm{L_\mathrm{m}}(t)$}, ytick = {-1, -0.5, 0, 0.5, 1}, yticklabels = {$-U_1$, , 0, , $U_1$}, ymin = -1.1, ymax = 1.1]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},-\gain) ({0 + #1},1) ({\D + #1},1) ({\D + #1},-\gain) ({1 + #1},-\gain) ({1 + #1},1)};}
+                        \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},-\gain) ({0 + #1},1) ({\D + #1},1) ({\D + #1},-\gain) ({1 + #1},-\gain) ({1 + #1},1)};}
                         \AddPlot
                     }
                     \node[above, inner sep = 2pt, anchor = south] at (axis cs:1.5+\D/2, -\gain) {$-U_2\frac{N_1}{N_2}$}; % label U_2
@@ -517,10 +517,10 @@
                 % Middle plot: inductor current
                 \nextgroupplot[ylabel = {$i_\mathrm{m}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{m}$, }]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({1 + #1},0.25)};}
+                        \edef\AddPlot{\noexpand\addplot[signaldelta, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({1 + #1},0.25)};}
                         \AddPlot
                     }
-                    \draw[signalred, thick, dashed] (axis cs:0,0.5) -- (axis cs:4,0.5); % dashed line at average current
+                    \draw[signaldelta, thick, dashed] (axis cs:0,0.5) -- (axis cs:4,0.5); % dashed line at average current
                     \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{m}\}$}(axis cs:\D+0.3,0.9); % indicate max current
                     \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{m}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
                     \draw[thin] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
@@ -531,12 +531,12 @@
                 % Bottom plot: input current
                 \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
+                        \edef\AddPlot{\noexpand\addplot[signaldelta, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
                         \AddPlot
                     }
-                    \draw[signalred, thick, dashed] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
-                    \node[signalred, above, inner sep = 1pt, anchor = east, fill = white, xshift=-1mm] at (axis cs:\D, 0.5 * \D) {$\overline{i}_1$}; % label average current
-                    \node[signalred, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:\D/2-0.05, 0.85) {$i_1(t)$}; % label input current
+                    \draw[signaldelta, thick, dashed] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
+                    \node[signaldelta, above, inner sep = 1pt, anchor = east, fill = white, xshift=-1mm] at (axis cs:\D, 0.5 * \D) {$\overline{i}_1$}; % label average current
+                    \node[signaldelta, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:\D/2-0.05, 0.85) {$i_1(t)$}; % label input current
             \end{groupplot}
 
             % second y-axis for the bottom plot
@@ -547,12 +547,12 @@
                         %
 						\nextgroupplot[ylabel = {$i_2(t)$}, ytick = {}, yticklabels = {}]
                             \pgfplotsinvokeforeach{0,...,3}{
-                                \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({\D + #1},0) ({\D + #1},0.75/\n) ({1 + #1},0.25/\n) ({1 + #1},0)};}
+                                \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},0) ({\D + #1},0) ({\D + #1},0.75/\n) ({1 + #1},0.25/\n) ({1 + #1},0)};}
                                 \AddPlot
                             }
-                            \node[signalblue, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:0.95, 0.85) {$i_2(t)$}; % label output current
-                            \draw[signalblue, thick, dashed] (axis cs:0,0.5/\n-0.5*\D/\n) -- (axis cs:4, 0.5/\n-0.5*\D/\n); % dashed line at average current
-                            \node[signalblue, above, inner sep = 1pt, anchor = west, fill = white, xshift=1mm] at (axis cs:\D, 0.5/\n-0.5*\D/\n) {$\overline{i}_2$}; % label average current
+                            \node[signalalpha, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:0.95, 0.85) {$i_2(t)$}; % label output current
+                            \draw[signalalpha, thick, dashed] (axis cs:0,0.5/\n-0.5*\D/\n) -- (axis cs:4, 0.5/\n-0.5*\D/\n); % dashed line at average current
+                            \node[signalalpha, above, inner sep = 1pt, anchor = west, fill = white, xshift=1mm] at (axis cs:\D, 0.5/\n-0.5*\D/\n) {$\overline{i}_2$}; % label average current
 					\end{groupplot}
         \end{tikzpicture}
     \end{figure}
@@ -600,12 +600,12 @@
                         xtick = {-\D, 0.001, 1-\D},
                         xticklabels = {$0$, $T_\mathrm{on}$, $T_\mathrm{s}$},
                         ]
-                        \addplot[signalred] coordinates {(-\D,0) (-\D,\ioff) (0,1) (0,0) (1-\D, 0)};
-                        \addplot[signalblue] coordinates {(-\D,0)  (0,0) (0,1/\n) (1-\D, \ioff/\n) (1-\D, 0)};
-                        \addplot[signalblue, dashed] coordinates {(-1,1/\n) (-\D,\ioff/\n) (-\D,0)};
-                        \addplot[signalred, dashed] coordinates {(1-\D, 0) (1-\D, \ioff) (1, 1)};
-                        \node[signalblue, above, inner sep = 2pt, anchor = south, fill = white] at (axis cs:\D/2, 1) {$i_2(t)$};
-                        \node[signalred, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:-\D/2, 0.3) {$i_1(t)$};
+                        \addplot[signaldelta] coordinates {(-\D,0) (-\D,\ioff) (0,1) (0,0) (1-\D, 0)};
+                        \addplot[signalalpha] coordinates {(-\D,0)  (0,0) (0,1/\n) (1-\D, \ioff/\n) (1-\D, 0)};
+                        \addplot[signalalpha, dashed] coordinates {(-1,1/\n) (-\D,\ioff/\n) (-\D,0)};
+                        \addplot[signaldelta, dashed] coordinates {(1-\D, 0) (1-\D, \ioff) (1, 1)};
+                        \node[signalalpha, above, inner sep = 2pt, anchor = south, fill = white] at (axis cs:\D/2, 1) {$i_2(t)$};
+                        \node[signaldelta, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:-\D/2, 0.3) {$i_1(t)$};
                     \end{axis}
                 \end{tikzpicture}
                 \caption{Example of the ratio of the input and output current for $\nicefrac{N_2}{N_1}=0.6$}
@@ -755,7 +755,7 @@
                 % Top plot: voltage at the switch
                 \nextgroupplot[ylabel = {$u_\mathrm{L_\mathrm{m}}(t)$}, ytick = {-1, -0.5, 0, 0.5, 1}, yticklabels = {$-U_1$, , 0, , $U_1$}, ymin = -1.1, ymax = 1.1]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},-\gain) ({\D + \Doff + #1},-\gain) ({\D + \Doff + #1}, 0) ({1 + #1},0) ({1 + #1},1)};}
+                        \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},-\gain) ({\D + \Doff + #1},-\gain) ({\D + \Doff + #1}, 0) ({1 + #1},0) ({1 + #1},1)};}
                         \AddPlot
                     }
                     \node[above, inner sep = 2pt, anchor = west] at (axis cs:0.85, -\gain) {$-U_2\frac{N_1}{N_2}$}; % label U_2
@@ -768,10 +768,10 @@
                 % Middle plot: inductor current
                 \nextgroupplot[ylabel = {$i_\mathrm{m}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , }]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0) ({\D + #1},0.75) ({\D + \Doff + #1},0) ({1 + #1},0)};}
+                        \edef\AddPlot{\noexpand\addplot[signaldelta, thick] coordinates {({0 + #1},0) ({\D + #1},0.75) ({\D + \Doff + #1},0) ({1 + #1},0)};}
                         \AddPlot
                     }
-                    \draw[signalred, thick, dashed] (axis cs:0,0.75/2*\D+0.75/2*\Doff) -- (axis cs:4,0.75/2*\D+0.75/2*\Doff); % dashed line at average current
+                    \draw[signaldelta, thick, dashed] (axis cs:0,0.75/2*\D+0.75/2*\Doff) -- (axis cs:4,0.75/2*\D+0.75/2*\Doff); % dashed line at average current
                     \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{m}\}$}(axis cs:\D+0.3,0.9); % indicate max current
                     \draw[thin] (axis cs:2+\D/4,0.75/4) -- (axis cs:2+\D/4,0.75/4*3) -- (axis cs:2+\D*3/4,0.75/4*3); % indicate positive current slopde
                     \node[above, inner sep = 2pt, anchor = south, xshift = -4mm] at (axis cs:2+\D/2, 0.75-0.165) {$\nicefrac{U_1}{L_\mathrm{m}}$}; % label positive current slope
@@ -781,12 +781,12 @@
                 % Bottom plot: input current
                 \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0)};}
+                        \edef\AddPlot{\noexpand\addplot[signaldelta, thick] coordinates {({0 + #1},0) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0)};}
                         \AddPlot
                     }
-                    \draw[signalred, thick, dashed] (axis cs:0,0.75/2 * \D) -- (axis cs:4, 0.75/2 * \D); % dashed line at average current
-                    \node[signalred, above, inner sep = 1pt, anchor = south, fill = white] at (axis cs:3-\Doff/2, 0.75/2 * \D) {$\overline{i}_1$}; % label average current
-                    \node[signalred, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:\D/2-0.05, 0.8) {$i_1(t)$}; % label input current
+                    \draw[signaldelta, thick, dashed] (axis cs:0,0.75/2 * \D) -- (axis cs:4, 0.75/2 * \D); % dashed line at average current
+                    \node[signaldelta, above, inner sep = 1pt, anchor = south, fill = white] at (axis cs:3-\Doff/2, 0.75/2 * \D) {$\overline{i}_1$}; % label average current
+                    \node[signaldelta, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:\D/2-0.05, 0.8) {$i_1(t)$}; % label input current
             \end{groupplot}
 
             % second y-axis for the bottom plot
@@ -797,12 +797,12 @@
                         %
 						\nextgroupplot[ylabel = {$i_2(t)$}, ytick = {}, yticklabels = {}]
                             \pgfplotsinvokeforeach{0,...,3}{
-                                \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({\D + #1},0) ({\D + #1},0.75/\n) ({\D + \Doff + #1},0) ({1 + #1},0)};}
+                                \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},0) ({\D + #1},0) ({\D + #1},0.75/\n) ({\D + \Doff + #1},0) ({1 + #1},0)};}
                                 \AddPlot
                             }
-                            \node[signalblue, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:0.75, 0.75) {$i_2(t)$}; % label output current
-                            \draw[signalblue, thick, dashed] (axis cs:0,0.75/2*\Doff/\n) -- (axis cs:4, 0.75/2*\Doff/\n); % dashed line at average current
-                            \node[signalblue, above, inner sep = 1pt, anchor = south, fill = white] at (axis cs:2-\Doff/2, 0.75/2*\Doff/\n) {$\overline{i}_2$}; % label average current
+                            \node[signalalpha, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:0.75, 0.75) {$i_2(t)$}; % label output current
+                            \draw[signalalpha, thick, dashed] (axis cs:0,0.75/2*\Doff/\n) -- (axis cs:4, 0.75/2*\Doff/\n); % dashed line at average current
+                            \node[signalalpha, above, inner sep = 1pt, anchor = south, fill = white] at (axis cs:2-\Doff/2, 0.75/2*\Doff/\n) {$\overline{i}_2$}; % label average current
 					\end{groupplot}
         \end{tikzpicture}
     \end{figure}
@@ -1038,10 +1038,10 @@
                 % Top plot: voltage at the switch
                 \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $\frac{N_2}{N_1}U_1$}]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
+                        \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
                         \AddPlot
                     }
-                    \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
+                    \draw[signalalpha, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
                     \node[above, inner sep = 2pt, anchor = south] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
                     \draw [thick,<->]  (0,0.5) -- node[below]{$T_\mathrm{on}$}(\D, 0.5); % T_on 
                     \draw [thick,<->]  (\D,0.5) -- node[below]{$T_\mathrm{off}$}(1.0, 0.5); % T_off
@@ -1051,10 +1051,10 @@
                 % Middle plot: inductor current
                 \nextgroupplot[ylabel = {$i_\mathrm{L}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, $\overline{i}_\mathrm{L}$, }]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({1 + #1},0.25)};}
+                        \edef\AddPlot{\noexpand\addplot[signaldelta, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({1 + #1},0.25)};}
                         \AddPlot
                     }
-                    \draw[signalred, thick, dashed] (axis cs:0,0.5) -- (axis cs:4,0.5); % dashed line at average current
+                    \draw[signaldelta, thick, dashed] (axis cs:0,0.5) -- (axis cs:4,0.5); % dashed line at average current
                     \draw[{Latex[length=2mm]}-, thin] (axis cs:\D+0.02,0.75) -- node[right=1mm, fill=white, inner sep = 1pt]{$\max\{i_\mathrm{L}\}$}(axis cs:\D+0.3,0.9); % indicate max current
                     \draw[-{Latex[length=2mm]}, thin] (axis cs:0.75,0.2) node[right=1mm, fill=white, inner sep = 1pt, anchor = east]{$\min\{i_\mathrm{L}\}$} -- (axis cs:1-0.02,0.25); % indicate min current
                     \draw[thin] (axis cs:2+\D/4,0.25+0.125) -- (axis cs:2+\D/4,0.75-0.125) -- (axis cs:2+\D*3/4,0.75-0.125); % indicate positive current slopde
@@ -1065,10 +1065,10 @@
                 % Bottom plot: input current
                 \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
+                        \edef\AddPlot{\noexpand\addplot[signaldelta, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.75) ({\D + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
                         \AddPlot
                     }
-                    \draw[signalred, thick, dashed] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
+                    \draw[signaldelta, thick, dashed] (axis cs:0,0.5 * \D) -- (axis cs:4, 0.5 * \D); % dashed line at average current
                     \node[above, inner sep = 2pt, anchor = south, fill = white] at (axis cs:1.5+\D/2, 0.5 * \D) {$\overline{i}_1$}; % label average current
             \end{groupplot}
         \end{tikzpicture}
@@ -1120,9 +1120,9 @@
                         ytick = {0, 1, 2}, 
                         yticklabels = {$0$, $1\frac{U_1}{L_\mathrm{m}}T_\mathrm{on}$, $2 \frac{U_1}{L_\mathrm{m}}T_\mathrm{on}$}
                         ]
-                        \addplot[signalred] coordinates {(0,0) (\D,1) (1,1) (1+\D, 2) (2,2)};
-                        \addplot[signalred, dashed] coordinates {(2,2) (2+\D,3)};
-                        \node[signalred, above, inner sep = 2pt, anchor = south, fill=white] at (axis cs:0.6, 1.1) {$i_\mathrm{m}(t)$};
+                        \addplot[signaldelta] coordinates {(0,0) (\D,1) (1,1) (1+\D, 2) (2,2)};
+                        \addplot[signaldelta, dashed] coordinates {(2,2) (2+\D,3)};
+                        \node[signaldelta, above, inner sep = 2pt, anchor = south, fill=white] at (axis cs:0.6, 1.1) {$i_\mathrm{m}(t)$};
                     \end{axis}
                 \end{tikzpicture}
             \end{figure}
@@ -1227,7 +1227,7 @@
                 % Top plot: input voltage a primary side
                 \nextgroupplot[ylabel = {$u_\mathrm{p}(t)$}, ytick = {-1, 0, 1}, yticklabels = {$-U_1$, 0, $U_1$}, ymin = -1.1, ymax =1.1]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},-1) ({2*\D + #1},-1) ({2*\D + #1},0) ({1 + #1},0)};}
+                        \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},-1) ({2*\D + #1},-1) ({2*\D + #1},0) ({1 + #1},0)};}
                         \AddPlot
                     }
                     \draw [thick,<->]  (0,0) -- node[below]{$D T_\mathrm{s}$}(\D, 0);  
@@ -1238,10 +1238,10 @@
                 % Middle plot: switch voltage at buck side
                 \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $\frac{N_2}{N_1}U_1$}]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
+                        \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
                         \AddPlot
                     }
-                    \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
+                    \draw[signalalpha, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
                     \node[above, inner sep = 2pt, anchor = south] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
                     \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{on}$}(\D, -0.2);  
                     \draw [thick,<->]  (\D,-0.2) -- node[below]{$T_\mathrm{off}$}(1, -0.2);  
@@ -1250,7 +1250,7 @@
                 % Bottom plot: magnetizing current
                 \nextgroupplot[ylabel = {$i_\mathrm{m}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0) ({\D + #1},0.6) ({2*\D + #1},0) ({1 + #1},0)};}
+                        \edef\AddPlot{\noexpand\addplot[signaldelta, thick] coordinates {({0 + #1},0) ({\D + #1},0.6) ({2*\D + #1},0) ({1 + #1},0)};}
                         \AddPlot
                     }
             \end{groupplot}
@@ -1353,7 +1353,7 @@
                 % Top plot: input voltage a primary side
                 \nextgroupplot[ylabel = {$u_\mathrm{p}(t)$}, ytick = {-1, 0, 1}, yticklabels = {$-U_1$, 0, $U_1$}, ymin = -1.1, ymax =1.1]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1/2 + #1},0) ({1/2 + #1},-1) ({1/2+\D + #1},-1) ({1/2+\D + #1},0) ({1 + #1},0)};}
+                        \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1/2 + #1},0) ({1/2 + #1},-1) ({1/2+\D + #1},-1) ({1/2+\D + #1},0) ({1 + #1},0)};}
                         \AddPlot
                     }
                     \draw [thick,<->]  (0,0) -- node[below]{$D T_\mathrm{s}$}(\D, 0);  
@@ -1364,10 +1364,10 @@
                 % Middle plot: switch voltage at buck side
                 \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $\frac{N_2}{N_1}U_1$}]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
+                        \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
                         \AddPlot
                     }
-                    \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
+                    \draw[signalalpha, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
                     \node[above, inner sep = 2pt, anchor = south] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
                     \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{on}$}(\D, -0.2);  
                     \draw [thick,<->]  (\D,-0.2) -- node[below]{$T_\mathrm{off}$}(1, -0.2);  
@@ -1376,7 +1376,7 @@
                 % Bottom plot: magnetizing current
                 \nextgroupplot[ylabel = {$i_\mathrm{m}(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {-0.5, 0, 0.5}, yticklabels = {, 0,}, ymin = -0.6, ymax =0.6]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},-0.3) ({\D + #1},0.3) ({1/2 + #1},0.3) ({1/2+\D + #1},-0.3) ({1 + #1},-0.3)};}
+                        \edef\AddPlot{\noexpand\addplot[signaldelta, thick] coordinates {({0 + #1},-0.3) ({\D + #1},0.3) ({1/2 + #1},0.3) ({1/2+\D + #1},-0.3) ({1 + #1},-0.3)};}
                         \AddPlot
                     }
             \end{groupplot}
@@ -1420,11 +1420,11 @@
                              width=\textwidth]
                     \addplot[shadecolor, dashed, domain = -\hm:\hm] {\a/(1 + exp(-\b*x+\c))-\d};
                     \addplot[shadecolor, dashed ,domain = -\hm:\hm] {\a/(1 + exp(-\b*x-\c))-\d};
-                    \addplot[signalred, name path=A, domain=\hcc:\hn, samples = 100] {\a/(1 + exp(-\b*x+\c))-\d};
-                    \addplot[signalred, name path=B, domain=-\hcc:-\hc, samples = 100] {\a/(1 + exp(-\b*x-\c))-\d};
+                    \addplot[signaldelta, name path=A, domain=\hcc:\hn, samples = 100] {\a/(1 + exp(-\b*x+\c))-\d};
+                    \addplot[signaldelta, name path=B, domain=-\hcc:-\hc, samples = 100] {\a/(1 + exp(-\b*x-\c))-\d};
                     \addplot[shadecolor, opacity=0.3] fill between[of=A and B];
-                    \addplot[signalred] coordinates {(-\hc, -\bc) (\hn, -\bc)};
-                    \addplot[signalred] coordinates {(-\hcc, 0) (\hcc, 0)};
+                    \addplot[signaldelta] coordinates {(-\hc, -\bc) (\hn, -\bc)};
+                    \addplot[signaldelta] coordinates {(-\hcc, 0) (\hcc, 0)};
                 \end{axis}
             \end{tikzpicture}
             \caption{Asym. half-bridge: utilizes only the upper half of the hysteresis curve due to non-negative magnetizing currents}
@@ -1458,11 +1458,11 @@
                              width=\textwidth]
                     \addplot[shadecolor, dashed, domain = -\hm:\hm] {\a/(1 + exp(-\b*x+\c))-\d};
                     \addplot[shadecolor, dashed ,domain = -\hm:\hm] {\a/(1 + exp(-\b*x-\c))-\d};
-                    \addplot[signalred, name path=A, domain=\hc:\hn, samples = 100] {\a/(1 + exp(-\b*x+\c))-\d};
-                    \addplot[signalred, name path=B, domain=-\hn:-\hc, samples = 100] {\a/(1 + exp(-\b*x-\c))-\d};
+                    \addplot[signaldelta, name path=A, domain=\hc:\hn, samples = 100] {\a/(1 + exp(-\b*x+\c))-\d};
+                    \addplot[signaldelta, name path=B, domain=-\hn:-\hc, samples = 100] {\a/(1 + exp(-\b*x-\c))-\d};
                     \addplot[shadecolor, opacity=0.3] fill between[of=A and B];
-                    \addplot[signalred] coordinates {(-\hc, -\bc) (\hn, -\bc)};
-                    \addplot[signalred] coordinates {(-\hn, \bc) (\hc, \bc)};
+                    \addplot[signaldelta] coordinates {(-\hc, -\bc) (\hn, -\bc)};
+                    \addplot[signaldelta] coordinates {(-\hn, \bc) (\hc, \bc)};
                 \end{axis}
             \end{tikzpicture}
             \caption{Full-bridge: utilizes both positive and negative hysteresis curve parts due the four-quadrant input stage}
@@ -1551,7 +1551,7 @@
                 % Top plot: input voltage a primary side
                 \nextgroupplot[ylabel = {$u_\mathrm{p}(t)$}, ytick = {-1, 0, 1}, yticklabels = {$-U_1$, 0, $U_1$}, ymin = -1.1, ymax =1.1]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},-0.75) ({\D+\D/0.75 + #1},-0.75) ({\D+\D/0.75 + #1},0) ({1 + #1},0)};}
+                        \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},-0.75) ({\D+\D/0.75 + #1},-0.75) ({\D+\D/0.75 + #1},0) ({1 + #1},0)};}
                         \AddPlot
                     }
                     \draw [thick,<->]  (0,0) -- node[above]{$D T_\mathrm{s}$}(\D, 0);  
@@ -1564,10 +1564,10 @@
                 % Middle plot: switch voltage at buck side
                 \nextgroupplot[ylabel = {$u_\mathrm{s}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , $\frac{N_2}{N_1}U_1$}]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalblue, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
+                        \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},0) ({0 + #1},1) ({\D + #1},1) ({\D + #1},0) ({1 + #1},0) ({1 + #1},1)};}
                         \AddPlot
                     }
-                    \draw[signalblue, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
+                    \draw[signalalpha, thick, dashed] (axis cs:0, \D) -- (axis cs:4, \D); % dashed line at U_2 (average)
                     \node[above, inner sep = 2pt, anchor = south] at (axis cs:1.5+\D/2, \D) {$U_2$}; % label U_2
                     \draw [thick,<->]  (0.0,-0.2) -- node[below]{$T_\mathrm{on}$}(\D, -0.2);  
                     \draw [thick,<->]  (\D,-0.2) -- node[below]{$T_\mathrm{off}$}(1, -0.2);  
@@ -1576,13 +1576,13 @@
                 % Bottom plot: input current
                 \nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$t/T_\mathrm{s}$}, ytick = {0, 0.5, 1}, yticklabels = {0, ,}, ymin = -0.25, ymax =1.1]
                     \pgfplotsinvokeforeach{0,...,3}{
-                        \edef\AddPlot{\noexpand\addplot[signalred, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.9) ({\D + #1},-0.15) ({\D+\D/0.75 + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
+                        \edef\AddPlot{\noexpand\addplot[signaldelta, thick] coordinates {({0 + #1},0.25) ({\D + #1},0.9) ({\D + #1},-0.15) ({\D+\D/0.75 + #1},0) ({1 + #1},0) ({1 + #1},0.25)};}
                         \AddPlot
-                        \edef\AddPlot{\noexpand\addplot[signalred, thick, name path=A] coordinates {({0 + #1},0.25) ({\D + #1},0.9)};}
+                        \edef\AddPlot{\noexpand\addplot[signaldelta, thick, name path=A] coordinates {({0 + #1},0.25) ({\D + #1},0.9)};}
                         \AddPlot
-                        \edef\AddPlot{\noexpand\addplot[signalred, dashed, name path=B] coordinates {({0 + #1},0.25) ({\D + #1},0.7)};}
+                        \edef\AddPlot{\noexpand\addplot[signaldelta, dashed, name path=B] coordinates {({0 + #1},0.25) ({\D + #1},0.7)};}
                         \AddPlot
-                        \edef\AddPlot{\noexpand\addplot[signalred, dashed, name path=C] coordinates {({\D + #1},-0.15) ({\D+\D/0.75 + #1},0)};}
+                        \edef\AddPlot{\noexpand\addplot[signaldelta, dashed, name path=C] coordinates {({\D + #1},-0.15) ({\D+\D/0.75 + #1},0)};}
                         \AddPlot
                         \path [name path=D] ({\D + #1},0) -- ({\D+\D/0.75 + #1},0);
                         \addplot[shadecolor, opacity=0.3] fill between[of=A and B];
