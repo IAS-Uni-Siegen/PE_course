@@ -20,15 +20,16 @@
                 width=0.8\textwidth,
                 height=0.25\textwidth,
                 xlabel={$t$},
-                ylabel={{\color{blue}$u_\text{2}(t)$}\quad{\color{red}$i_\text{2}(t)$}},
+                ylabel={{\color{signalalpha}$u_\text{2}(t)$}\quad{\color{signaldelta}$i_\text{2}(t)$}},
                 xtick={0},
                 xticklabels={$0$},
                 ytick={0,1,2},
-                yticklabels={0,{\color{red}$\frac{U_1}{R_\text{L}}$},{\color{blue}$U_1$}},
+                yticklabels={0,{\color{signaldelta}$\frac{U_1}{R_\text{L}}$},{\color{signalalpha}$U_1$}},
                 grid=none,
                 grid style={line width=.1pt, draw=gray!10},
-                major grid style={line width=.2pt,draw=gray!50},    ]
-                \addplot[color=red,mark=none,solid] coordinates{
+                major grid style={line width=.2pt,draw=gray!50},    
+                thick]
+                \addplot[color=signaldelta,mark=none,solid] coordinates{
                     (0, 0)
                     (1, 0)
                     (1, 1)
@@ -44,7 +45,7 @@
                     (13, 0)
                     (15, 0)
                 };
-                \addplot[color=blue,mark=none,dashed] coordinates{
+                \addplot[color=signalalpha,mark=none,dashed] coordinates{
                     (0, 0)
                     (1, 0)
                     (1, 2)

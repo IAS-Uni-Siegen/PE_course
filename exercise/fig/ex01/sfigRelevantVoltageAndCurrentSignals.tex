@@ -22,6 +22,7 @@
                     major grid style={line width=.2pt,draw=gray!50},    
                     axis y line=center,
                     axis x line=middle,
+                    every axis plot/.append style={thick},
                 ]
 
                 \nextgroupplot[
@@ -33,11 +34,11 @@
                     y label style={at={(axis description cs:-.05,.97)},anchor=south},
                     height=0.2\textwidth,
                     xlabel={$t$},
-                    ylabel={{\color{orange}$u_\text{T}$}},
+                    ylabel={{\color{signalalpha}$u_\text{T}$}},
                     ytick={0,1},
                     yticklabels={0,$U_1$},
                 ]
-                \addplot[color=orange,mark=none,solid] coordinates{
+                \addplot[color=signalalpha,mark=none,solid] coordinates{
                     (0, 0)
                     (1, 0)
                     (1, 1)
@@ -64,11 +65,11 @@
                     y label style={at={(axis description cs:-.05,.97)},anchor=south},
                     height=0.2\textwidth,
                     xlabel={$t$},
-                    ylabel={{\color{blue}$u_\text{D}$}},
+                    ylabel={{\color{signalalpha}$u_\text{D}$}},
                     ytick={0,.33,1},
                     yticklabels={0,$U_2$,$U_1$},
                 ]
-                \addplot[color=blue,mark=none,solid] coordinates{
+                \addplot[color=signalalpha,mark=none,solid] coordinates{
                     (0, 1)
                     (1, 1)
                     (1, 0)
@@ -96,13 +97,13 @@
                     y label style={at={(axis description cs:-.05,.97)},anchor=south},
                     height=0.25\textwidth,
                     xlabel={$t$},
-                    ylabel={{\color{orange}$u_\text{L}$}},
+                    ylabel={{\color{signalalpha}$u_\text{L}$}},
                     ytick={-.333,0,1},
                     yticklabels={$-U_2$,0,$U_1-U_2$},
                 ]
-                \draw [fill=green] (axis cs:4,0) rectangle (axis cs:5,1);
-                \draw [fill=cyan] (axis cs:5,0) rectangle (axis cs:8,-.3333);
-                \addplot[color=orange,mark=none,solid] coordinates{
+                \draw [fill=shadecolor] (axis cs:4,0) rectangle (axis cs:5,1);
+                \draw [fill=shadecolor] (axis cs:5,0) rectangle (axis cs:8,-.3333);
+                \addplot[color=signalalpha,mark=none,solid] coordinates{
                     (0, 1)
                     (1, 1)
                     (1, -.333)
@@ -132,11 +133,11 @@
                     y label style={at={(axis description cs:-.05,.97)},anchor=south},
                     height=0.2\textwidth,
                     xlabel={$t$},
-                    ylabel={{\color{red}$i_\text{L}$}},
+                    ylabel={{\color{signaldelta}$i_\text{L}$}},
                     ytick={0,.5,.75,1},
                     yticklabels={0,,,},
                 ]
-                \addplot[color=red,mark=none,solid] coordinates{
+                \addplot[color=signaldelta,mark=none,solid] coordinates{
                     (0, 0.5)
                     (1, 1)
                     (4, 0.5)
@@ -157,11 +158,11 @@
                     y label style={at={(axis description cs:-.0,.97)},anchor=south},
                     height=0.2\textwidth,
                     xlabel={$t$},
-                    ylabel={{\color{orange}$i_\text{T}$}\quad{\color{blue}$i_\text{D}$}},
+                    ylabel={{\color{signaldelta}$i_\text{T}$}\quad{\color{signalzeta}$i_\text{D}$}},
                     ytick={0,.5,.75,1},
                     yticklabels={0,,,},
                 ]
-                \addplot[color=orange,mark=none,solid] coordinates{
+                \addplot[color=signaldelta,mark=none,solid] coordinates{
                     (0,0)
                     (0, 0.5)
                     (1, 1)
@@ -179,59 +180,59 @@
                     (13,1)
                     (13,0)
                 };
-                \addplot[color=blue,mark=none,solid] coordinates{
+                \addplot[color=signalzeta,mark=none,solid] coordinates{
                     (1,1)
                     (4, 0.5)
                 };
-                \addplot[color=blue,mark=none,solid] coordinates{
+                \addplot[color=signalzeta,mark=none,solid] coordinates{
                     (5,1)
                     (8, 0.5)
                 };
-                \addplot[color=blue,mark=none,solid] coordinates{
+                \addplot[color=signalzeta,mark=none,solid] coordinates{
                     (9,1)
                     (12, 0.5)
                 };
-                \addplot[color=blue,mark=none,solid] coordinates{
+                \addplot[color=signalzeta,mark=none,solid] coordinates{
                     (0,0)
                     (1, 0)
                 };
-                \addplot[color=blue,mark=none,solid] coordinates{
+                \addplot[color=signalzeta,mark=none,solid] coordinates{
                     (4,0)
                     (5,0)
                 };
-                \addplot[color=blue,mark=none,solid] coordinates{
+                \addplot[color=signalzeta,mark=none,solid] coordinates{
                     (8,0)
                     (9,0)
                 };
-                \addplot[color=blue,mark=none,solid] coordinates{
+                \addplot[color=signalzeta,mark=none,solid] coordinates{
                     (12,0)
                     (13,0)
                 };
-                \addplot[color=blue,mark=none,dashed] coordinates{
+                \addplot[color=signalzeta,mark=none,dashed] coordinates{
                     (1,0)
                     (1,1)
                 };
-                \addplot[color=blue,mark=none,dashed] coordinates{
+                \addplot[color=signalzeta,mark=none,dashed] coordinates{
                     (4,0)
                     (4,0.5)
                 };
-                \addplot[color=blue,mark=none,dashed] coordinates{
+                \addplot[color=signalzeta,mark=none,dashed] coordinates{
                     (5,0)
                     (5,1)
                 };
-                \addplot[color=blue,mark=none,dashed] coordinates{
+                \addplot[color=signalzeta,mark=none,dashed] coordinates{
                     (8,0)
                     (8,0.5)
                 };
-                \addplot[color=blue,mark=none,dashed] coordinates{
+                \addplot[color=signalzeta,mark=none,dashed] coordinates{
                     (9,0)
                     (9,1)
                 };
-                \addplot[color=blue,mark=none,dashed] coordinates{
+                \addplot[color=signalzeta,mark=none,dashed] coordinates{
                     (12,0)
                     (12,0.5)
                 };
-                \addplot[color=blue,mark=none,dashed] coordinates{
+                \addplot[color=signalzeta,mark=none,dashed] coordinates{
                     (13,0)
                     (13,1)
                 };

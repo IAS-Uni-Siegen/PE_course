@@ -20,15 +20,16 @@
             width=0.8\textwidth,
             height=0.25\textwidth,
             xlabel={$t$},
-            ylabel={{\color{blue}$p(t)$}},
+            ylabel={{\color{signalalpha}$p(t)$}},
             xtick={0},
             xticklabels={$0$},
             ytick={0,2},
-            yticklabels={0,{\color{blue}$\frac{U_1^2}{R_L}$}},
+            yticklabels={0,{\color{signalalpha}$\frac{U_1^2}{R_L}$}},
             grid=none,
             grid style={line width=.1pt, draw=gray!10},
-            major grid style={line width=.2pt,draw=gray!50},    ]
-            \addplot[color=blue,mark=none,solid] coordinates{
+            major grid style={line width=.2pt,draw=gray!50},  
+            thick ]
+            \addplot[color=signalalpha,mark=none,solid] coordinates{
                 (0, 0)
                 (1, 0)
                 (1, 2)
