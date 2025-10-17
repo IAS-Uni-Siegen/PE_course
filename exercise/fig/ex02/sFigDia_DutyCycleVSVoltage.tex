@@ -33,7 +33,7 @@
                 grid style={line width=.1pt, draw=gray!10},
                 major grid style={line width=.2pt,draw=gray!50},
             ]
-            \addplot[signalred, domain=300:750] {400/(x+400)};
+            \addplot[signaldelta, domain=300:750, thick] {400/(x+400)};
         \end{axis}
     \end{tikzpicture}
     \caption{Duty cycle versus input voltage.}

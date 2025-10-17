@@ -34,7 +34,7 @@
                 grid style={line width=.1pt, draw=gray!10},
                 major grid style={line width=.2pt,draw=gray!50},
             ]
-            \addplot[signalred, domain=300:750] {12.5*(1+(400/x))};
+            \addplot[signaldelta, domain=300:750, thick] {12.5*(1+(400/x))};
         \end{axis}
     \end{tikzpicture}
     \caption{Inductor current versus input voltage.}

@@ -33,23 +33,24 @@
                 grid=both,
                 grid style={line width=.1pt, draw=gray!10},
                 major grid style={line width=.2pt,draw=gray!50},
+                thick
             ]
             % D1-plot
-            \addplot[color=red,mark=none,solid] coordinates{
+            \addplot[color=signaldelta,mark=none,solid] coordinates{
              (320, 1)
              (400, 1)
             };
-            \addplot[signalred, domain=400:720] {400/x};
+            \addplot[signaldelta, domain=400:720] {400/x};
             % Label of D1
-            \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:550,0.8) {$D_{\mathrm{1}}$};
+            \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:550,0.8) {$D_{\mathrm{1}}$};
             % D2-plot
-            \addplot[color=blue,mark=none,solid] coordinates{
+            \addplot[color=signalalpha,mark=none,solid] coordinates{
              (400, 0)
              (720, 0)
             };
-            \addplot[signalblue, domain=320:400] {1-(x/400)};
+            \addplot[signalalpha, domain=320:400] {1-(x/400)};
             % Label of D2
-            \node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:350,0.2) {$D_{\mathrm{2}}$};
+            \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:350,0.2) {$D_{\mathrm{2}}$};
         \end{axis}
     \end{tikzpicture}
     \caption{Duty cycle versus input voltage.}

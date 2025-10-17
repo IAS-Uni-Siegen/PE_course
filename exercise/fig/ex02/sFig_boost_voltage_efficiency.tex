@@ -20,10 +20,10 @@
                 width = 0.99\textwidth,
                 grid
                 ]
-                \addplot[signalblue, domain=0:0.95] {(1-x)/((1-x)^2)};
-                \node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,8) {ideal converter};
-                \addplot[signalred, domain=0:1.0] {(1-x)/((1-x)^2+0.2/30)};
-                \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,7) {converter with losses};
+                \addplot[signalalpha, domain=0:0.95] {(1-x)/((1-x)^2)};
+                \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,8) {ideal converter};
+                \addplot[signaldelta, domain=0:1.0] {(1-x)/((1-x)^2+0.2/30)};
+                \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,7) {converter with losses};
                 \end{axis}
         \end{tikzpicture}
     \end{subfigure}%
@@ -46,10 +46,10 @@
                 width = 0.99\textwidth,
                 grid
                 ]
-                \addplot[signalblue, domain=0:1] {1};
-                \node[signalblue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0.4) {ideal converter};
-                \addplot[signalred, domain=0:1] {1/(1+(0.2/30)/(1-x)^2)};
-                \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0.3) {converter with losses};
+                \addplot[signalalpha, domain=0:1] {1};
+                \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0.4) {ideal converter};
+                \addplot[signaldelta, domain=0:1] {1/(1+(0.2/30)/(1-x)^2)};
+                \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0.3) {converter with losses};
             \end{axis}
         \end{tikzpicture}
     \end{subfigure}
