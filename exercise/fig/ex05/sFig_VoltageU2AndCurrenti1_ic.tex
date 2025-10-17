@@ -36,16 +36,17 @@
                     grid,
                     %grid style={line width=.1pt, draw=gray!10},
                     %major grid style={line width=.2pt,draw=gray!90},
+                    thick
                 ]
                 % Voltage u2(wt) if supplied by u1(wt)
-                \addplot[blue, domain= 19.3:112.8] {abs(156*sin(x))};                
-                \addplot[blue, domain= 199.3:292.8] {abs(156*sin(x))};                
+                \addplot[signalalpha, domain= 19.3:112.8] {abs(156*sin(x))};                
+                \addplot[signalalpha, domain= 199.3:292.8] {abs(156*sin(x))};                
                 % Voltage u2(wt) if supplied by uc(wt)
-                \addplot[blue, domain=-5:19.3] {143.8-(x+67.2)*1.06};                
-                \addplot[blue, domain=112.8:199.3] {143.8-(x-112.8)*1.06};                
-                \addplot[blue, domain=292.8:375] {143.8-(x-292.8)*1.06};
+                \addplot[signalalpha, domain=-5:19.3] {143.8-(x+67.2)*1.06};                
+                \addplot[signalalpha, domain=112.8:199.3] {143.8-(x-112.8)*1.06};                
+                \addplot[signalalpha, domain=292.8:375] {143.8-(x-292.8)*1.06};
                 % Label of u2
-                \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:145,140) {$u_{\mathrm{2}}(\omega t)$};
+                \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:145,140) {$u_{\mathrm{2}}(\omega t)$};
                 % Voltage u1(wt)
                 \addplot[black, domain= -20:375,dotted] {abs(156*sin(x))};                
                 % Label of u2
@@ -91,50 +92,51 @@
                 % grid=both,
                 % grid style={line width=.1pt, draw=gray!10},
                 % major grid style={line width=.2pt,draw=gray!90},
+                thick
             ]
                 % Current ic(t)
-                \addplot[red, domain= 19.3:112.8] {19.4*cos(x)};                
-                \addplot[red, domain= 199.3:292.8] {-19.4*cos(x)};                
+                \addplot[signaldelta, domain= 19.3:112.8] {19.4*cos(x)};                
+                \addplot[signaldelta, domain= 199.3:292.8] {-19.4*cos(x)};                
                 % Current ic(t) if supplied by uc(t)
-                \addplot[color=red,mark=none,solid] coordinates{
+                \addplot[color=signaldelta,mark=none,solid] coordinates{
                     (-5, -7.5)
                     (19.3, -7.5)
                     (19.3,18.3)
                     }; 
-                \addplot[color=red,mark=none,solid] coordinates{
+                \addplot[color=signaldelta,mark=none,solid] coordinates{
                     (112.8, -7.5)
                     (199.3, -7.5)
                     (199.3,18.3)
                     }; 
-                \addplot[color=red,mark=none,solid] coordinates{
+                \addplot[color=signaldelta,mark=none,solid] coordinates{
                     (292.8, -7.5)
                     (375, -7.5)
                      }; 
                 % Label of ic
-                \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:50,-10) {$i_{\mathrm{C}}(\omega t)$};
+                \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:50,-10) {$i_{\mathrm{C}}(\omega t)$};
 
                 % Current i1(wt)
-                \addplot[magenta, domain= 19.3:112.8] {19.4*cos(x)+7.5};                
-                \addplot[magenta, domain= 199.3:292.8] {19.4*cos(x)-7.5};                
+                \addplot[signalzeta, domain= 19.3:112.8] {19.4*cos(x)+7.5};                
+                \addplot[signalzeta, domain= 199.3:292.8] {19.4*cos(x)-7.5};                
                 % Current i1(wt) if supplied by uc(t)
-                \addplot[color=red,mark=none,solid] coordinates{
+                \addplot[color=signaldelta,mark=none,solid] coordinates{
                     (-5,0)
                     (19.3,0)
                     (19.3,25.8)
                     }; 
-                \addplot[color=red,mark=none,solid] coordinates{
+                \addplot[color=signaldelta,mark=none,solid] coordinates{
                     (112.8,0)                    
                     (112.8,0)
                     (199.3,0)
                     (199.3,-25.8)
                     }; 
-                \addplot[color=red,mark=none,solid] coordinates{
+                \addplot[color=signaldelta,mark=none,solid] coordinates{
                     (292.8,0)                    
                     (292.8,0)
                     (375,0)
                     }; 
                 % Label of i1
-                \node[magenta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:260,-30) {$i_{\mathrm{1}}(\omega t)$};
+                \node[signalzeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:260,-30) {$i_{\mathrm{1}}(\omega t)$};
             \end{axis}
         \end{tikzpicture}
         \caption{Voltage at primary side.}
