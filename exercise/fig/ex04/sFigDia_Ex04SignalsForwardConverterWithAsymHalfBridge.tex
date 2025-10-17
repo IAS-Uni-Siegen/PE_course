@@ -35,7 +35,7 @@
                 grid style={line width=.1pt, draw=gray!10},
                 major grid style={line width=.2pt,draw=gray!50},
             ]
-            \addplot[color=blue,mark=none,solid] coordinates{
+            \addplot[color=signalalpha,mark=none,solid, thick] coordinates{
                 (0, 325)
                 (9.2, 325)
                 (9.2, -325)
@@ -79,9 +79,10 @@
                 grid=both,
                 grid style={line width=.1pt, draw=gray!10},
                 major grid style={line width=.2pt,draw=gray!50},
+                thick
             ]
             % im
-            \addplot[color=red,mark=none,solid] coordinates{
+            \addplot[signaldelta,mark=none,solid] coordinates{
                 (0, 0)
                 (9.2, 1.5)
                 (18.4,0)
@@ -89,9 +90,9 @@
                 (24,0.65)
                 };      
             % Label of im
-            \node[signalred, fill=white, inner sep = 1pt, anchor = south] at (axis cs:7,0.3) {$i_{\mathrm{m}}$};
+            \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:7,0.3) {$i_{\mathrm{m}}$};
             % i1
-            \addplot[color=magenta,mark=none,solid] coordinates{
+            \addplot[color=signalzeta,mark=none,solid] coordinates{
                 (0, 0.52)
                 (9.2, 2.42)
                 (9.2, -1.5)
@@ -101,7 +102,7 @@
                 (24,1.25)
                 };                
             % Label of i1
-            \node[magenta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:8,-1) {$i_{\mathrm{1}}$};
+            \node[signalzeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:8,-1) {$i_{\mathrm{1}}$};
             % ip
             \addplot[color=black,mark=none,dashdotted] coordinates{
                 (0, 0.56)

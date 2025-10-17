@@ -34,9 +34,10 @@
                 grid=both,
                 grid style={line width=.1pt, draw=gray!10},
                 major grid style={line width=.2pt,draw=gray!50},
+                thick
             ]
             %UT at U1=360V
-            \addplot[color=blue,mark=none,solid] coordinates{
+            \addplot[signalalpha,mark=none,solid] coordinates{
                 (0, 0)
                 (0.26, 0)
                 (0.26, 600)
@@ -46,9 +47,9 @@
                 (1,0)
                 (1.05,0)
                 };            
-                \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,500) {$U_{\mathrm{1}}=\SI{360}{\volt}$};                    
+                \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,500) {$U_{\mathrm{1}}=\SI{360}{\volt}$};                    
             %UT at U1=240V
-            \addplot[color=black,mark=none,solid] coordinates{
+            \addplot[signalbeta,mark=none,solid] coordinates{
                 (0, 0)
                 (0.4, 0)
                 (0.4, 400)
@@ -56,7 +57,7 @@
                 (1,0)
                 (1.05,0)
                 };                
-                \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.55,200) {$U_{\mathrm{1}}=\SI{240}{\volt}$};                    
+                \node[signalbeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.55,200) {$U_{\mathrm{1}}=\SI{240}{\volt}$};                    
             \end{axis}     
     \end{tikzpicture}
     \caption{Voltage at the transistor.}
@@ -91,18 +92,19 @@
                 grid=both,
                 grid style={line width=.1pt, draw=gray!10},
                 major grid style={line width=.2pt,draw=gray!50},
+                thick
             ]
             %im at U1=360V
-            \addplot[color=red,mark=none,solid] coordinates{
+            \addplot[color=signaldelta,mark=none,solid] coordinates{
                 (0, 0)
                 (0.26, 0)
                 (0.26, 896)
                 (0.65, 0)
                 (1.05,0)
                 };                
-            \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.2,900) {$U_{\mathrm{1}}=\SI{360}{\volt}$};                    
+            \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.2,900) {$U_{\mathrm{1}}=\SI{360}{\volt}$};                    
             %im at U1=240V
-            \addplot[color=magenta,mark=none,solid] coordinates{
+            \addplot[signalzeta,mark=none,solid] coordinates{
                 (0, 0)
                 (0.4, 0)
                 (0.4, 890)
@@ -110,7 +112,7 @@
                 (1,0)
                 (1.05,0)
                 };                
-            \node[magenta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.6,800) {$U_{\mathrm{1}}=\SI{240}{\volt}$};                    
+            \node[signalzeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.6,800) {$U_{\mathrm{1}}=\SI{240}{\volt}$};                    
             \end{axis}     
     \end{tikzpicture}
     \caption{Demagnetization current of  $N_3$.}
@@ -145,9 +147,10 @@
                 grid=both,
                 grid style={line width=.1pt, draw=gray!10},
                 major grid style={line width=.2pt,draw=gray!50},
+                thick
             ]
             %im at U1=360V
-            \addplot[color=red,mark=none,solid] coordinates{
+            \addplot[signaldelta,mark=none,solid] coordinates{
                 (0, 0)
                 (0.26, 0)
                 (0.26, 25)
@@ -155,9 +158,9 @@
                 (1,0.2)
                 (1.05,0)
                 };                
-            \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.15,25) {$U_{\mathrm{1}}=\SI{360}{\volt}$};                    
+            \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.15,25) {$U_{\mathrm{1}}=\SI{360}{\volt}$};                    
             %im at U1=240V
-            \addplot[color=black,mark=none,dashdotted] coordinates{
+            \addplot[color=signalzeta,mark=none,dashdotted] coordinates{
                 (0, 0)
                 (0.4, 0)
                 (0.4, 25)
@@ -165,7 +168,7 @@
                 (1,0)
                 (1.05,0)
                 };                
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.55,10) {$U_{\mathrm{1}}=\SI{240}{\volt}$};                    
+            \node[signalzeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.55,10) {$U_{\mathrm{1}}=\SI{240}{\volt}$};                    
             \end{axis}     
     \end{tikzpicture}
     \caption{Current through $D_2$.}
