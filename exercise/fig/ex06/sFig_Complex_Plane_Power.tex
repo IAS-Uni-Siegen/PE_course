@@ -32,21 +32,22 @@
                 extra y tick labels = {},
                 % Grid layout
                 grid,
+                thick
                 %grid style={line width=.1pt, draw=gray!10},
                 %major grid style={line width=.2pt,draw=gray!90},
                 ]
                 % Q1/2
-                \draw[->,blue, solid, thick] (axis cs:0,0) -- (axis cs:0,5380);
+                \draw[->,signalalpha, solid, thick] (axis cs:0,0) -- (axis cs:0,5380);
                 % Label of Qup/down
-                \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:2.5,4000) {$Q_\mathrm{up+down}^\mathrm{(1)}$};
+                \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:2.5,4000) {$Q_\mathrm{up+down}^\mathrm{(1)}$};
                 %Pup
-                \draw[->,red, solid, thick] (axis cs:0,0) -- (axis cs:9.320,0);
+                \draw[->,signaldelta, solid, thick] (axis cs:0,0) -- (axis cs:9.320,0);
                 % Label of Pup
-                \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:5,200) {$P_\mathrm{up}$};
+                \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:5,200) {$P_\mathrm{up}$};
                 %Pdown
-                \draw[->,red, solid, thick] (axis cs:0,0) -- (axis cs:-9.320,0);
+                \draw[->,signaldelta, solid, thick] (axis cs:0,0) -- (axis cs:-9.320,0);
                 % Label of Pup
-                \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:-5,200) {$P_\mathrm{down}$};
+                \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:-5,200) {$P_\mathrm{down}$};
                 %Sup
                 \draw[->, solid, thick] (axis cs:0,0) -- (axis cs:9.320,5380);
                 % Label of Pup

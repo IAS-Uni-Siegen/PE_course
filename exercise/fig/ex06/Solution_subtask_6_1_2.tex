@@ -38,13 +38,13 @@
                    %major grid style={line width=.2pt,draw=gray!90},
                ]
                % Voltage u_2(alpha)/u_2(alpha=0)
-               \addplot[black, domain= 0:180,dashed] {cos(x)}; 
+               \addplot[black, domain= 0:180,dashed, thick] {cos(x)}; 
                % u_2(alpha)/u_2(alpha=0) when alpha = 0.87               
-               \addplot[color=blue,solid, thick] coordinates{
+               \addplot[color=signalalpha,solid, thick] coordinates{
                 (49.9,0)
                 (49.9, 0.644)
             };
-            \addplot[color=blue,solid, thick] coordinates{
+            \addplot[color=signalalpha,solid, thick] coordinates{
                 (0,0.644)
                 (49.9, 0.644)
             };

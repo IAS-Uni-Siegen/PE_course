@@ -34,13 +34,14 @@
                 yticklabel style = {anchor=east},
                 % Grid layout
                 grid,
+                thick
                 %grid style={line width=.1pt, draw=gray!10},
                 %major grid style={line width=.2pt,draw=gray!90},
             ]
             % Current i1 fundamentel
             \addplot[black, domain= 0:360,dashed] {-22*cos(x+30)};                
             % Current i1d
-            \addplot[color=red,solid] coordinates{
+            \addplot[color=signaldelta,solid] coordinates{
                 (0, -20)
                 (30, -20)
                 (30, 0)
@@ -54,13 +55,13 @@
             };     
         
             % Label of i1a
-            \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:260,20) {$i_{\mathrm{1a}}(\omega t)$};
+            \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:260,20) {$i_{\mathrm{1a}}(\omega t)$};
             % Line to i1a
-            \draw[thin, red] (218,21) -- (233,24); 
+            \draw[signaldelta] (218,21) -- (233,24); 
             % Label of i1afundamental
             \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:45,10) {$i_\mathrm{1}^\mathrm{(1)}(\omega t)$};
             % Line to u1a
-            \draw[thin, black] (82,14) -- (90,12);                
+            \draw[black] (82,14) -- (90,12);                
         \end{axis}     
         \end{tikzpicture}
         \caption{Output current $i_\mathrm{1a}(t)$ and it's fundamental amplitude  for lowering the load.}

@@ -70,29 +70,30 @@
             yticklabel style = {anchor=east},
             % Grid layout
             grid,
+            thick
             %grid style={line width=.1pt, draw=gray!10},
             %major grid style={line width=.2pt,draw=gray!90},
         ] 
         % Current i^1_1a(wt) fundamental
-        \addplot[red, domain= -150:150, dashed] {19.07*cos(x-(49.9))};
+        \addplot[signaldelta, domain= -150:150, dashed] {19.07*cos(x-(49.9))};
         % Current i1a(wt)
-        \addplot[color=red,solid] coordinates{
+        \addplot[color=signaldelta,solid] coordinates{
             (-150,0)
             (-10.09, 0)
         };                 
-           \addplot[color=red,solid] coordinates{
+           \addplot[color=signaldelta,solid] coordinates{
             (-10.09,0)
             (-10.09, 34.6)
         };                   
-           \addplot[color=red,solid] coordinates{
+           \addplot[color=signaldelta,solid] coordinates{
                (-10.09,34.6)
                (109.9, 34.6)
            };  
-           \addplot[color=red,solid] coordinates{
+           \addplot[color=signaldelta,solid] coordinates{
             (109.9,0)
             (109.9, 34.6)
         };
-        \addplot[color=red,solid] coordinates{
+        \addplot[color=signaldelta,solid] coordinates{
             (109.9,0)
             (150, 0)
         };    
@@ -101,9 +102,9 @@
            % Label of i^1_1a fundamental 
            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:-100,-35) {$i^\mathrm{(1)}_{\mathrm{1a}}(\omega t)$}; 
             % Line to i1a
-            \draw[thin, black] (112,20) -- (120,27);
+            \draw[black] (112,20) -- (120,27);
             % Line to i^1_1a fundamental
-            \draw[thin, black] (-85,-25) -- (-77,-14);
+            \draw[black] (-85,-25) -- (-77,-14);
            \end{axis}         
            \end{tikzpicture}
            \caption{Fundamental current component $i^\mathrm{(1)}_{\mathrm{1a}}(\omega t)$ for $\alpha = 0.871$.}

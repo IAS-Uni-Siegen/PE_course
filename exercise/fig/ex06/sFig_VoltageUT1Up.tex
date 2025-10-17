@@ -34,6 +34,7 @@
                 yticklabel style = {anchor=east},
                 % Grid layout
                 grid,
+                thick
                 %grid style={line width=.1pt, draw=gray!10},
                 %major grid style={line width=.2pt,draw=gray!90},
             ]
@@ -46,22 +47,22 @@
             \addplot[black, domain= 0:360,dashed] {-563*cos(x+210)}; 
             \addplot[black, domain= 0:360,dashed] {-563*cos(x+90)};
             % Voltage uT1(wt)
-            \addplot[blue, domain= 90:210] {-563*cos(x+210)};                
-            \addplot[blue, domain= 210:330] {563*cos(x-30)};                
-            \addplot[color=blue,solid] coordinates{
+            \addplot[signalalpha, domain= 90:210] {-563*cos(x+210)};                
+            \addplot[signalalpha, domain= 210:330] {563*cos(x-30)};                
+            \addplot[color=signalalpha,solid] coordinates{
                 (0, 0)
                 (90, 0)
                 (90, -282)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (210, -563)
                 (210, -282)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (330, 282)
                 (330, 0)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (330, 0)
                 (360, 0)
             };     
@@ -69,19 +70,19 @@
             % Label of u1ab
             \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:30,10) {$u_{\mathrm{1ab}}$};
             % Line to +u1ab
-            \draw[thin, black] (30,140) -- (35,190);            
+            \draw[black] (30,140) -- (35,190);            
             % Label of u1bc
             \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:150,10) {$u_{\mathrm{1bc}}$};
             % Line to +u1bc
-            \draw[thin, black] (150,140) -- (155,190);            
+            \draw[black] (150,140) -- (155,190);            
             % Label of u1ca
             \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:270,10) {$u_{\mathrm{1ca}}$};
             % Line to +u1ca
-            \draw[thin, black] (270,140) -- (275,190);            
+            \draw[black] (270,140) -- (275,190);            
             % Label of uT1
-            \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,-380) {$u_{\mathrm{T1}}$};
+            \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,-380) {$u_{\mathrm{T1}}$};
             % Line to uT1
-            \draw[thin, blue] (120,-380) -- (115,-430);
+            \draw[signalalpha] (120,-380) -- (115,-430);
         \end{axis}     
         \end{tikzpicture}
         \caption{Voltage $u_\mathrm{T1}(\omega t)$ for raising the load.}

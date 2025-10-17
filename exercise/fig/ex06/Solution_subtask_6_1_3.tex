@@ -36,30 +36,31 @@
                    grid,
                    %grid style={line width=.1pt, draw=gray!10},
                    %major grid style={line width=.2pt,draw=gray!90},
+                   thick
                ]
                % Voltage u1a(wt), u1b(wt) u1c(wt)
                \addplot[black, domain= -90:360,dashed] {325*cos(x)};                
                \addplot[black, domain= -90:360,dashed] {325*cos(x+120)};                
                \addplot[black, domain= -90:360,dashed] {325*cos(x+240)}; 
                % Voltage u2(wt)
-               \addplot[blue, domain= -90:-10] {325*cos(x+120)}; 
-               \addplot[blue, domain= -10:110] {325*cos(x)};                
-               \addplot[blue, domain= 110:230] {325*cos(x+240)};                
-               \addplot[blue, domain= 230:350] {325*cos(x+120)};
-               \addplot[blue, domain= 350:360] {325*cos(x)}; 
-               \addplot[color=blue,solid] coordinates{
+               \addplot[signalalpha, domain= -90:-10] {325*cos(x+120)}; 
+               \addplot[signalalpha, domain= -10:110] {325*cos(x)};                
+               \addplot[signalalpha, domain= 110:230] {325*cos(x+240)};                
+               \addplot[signalalpha, domain= 230:350] {325*cos(x+120)};
+               \addplot[signalalpha, domain= 350:360] {325*cos(x)}; 
+               \addplot[color=signalalpha,solid] coordinates{
                 (-10,-111)
                 (-10, 317)
             };               
-               \addplot[color=blue,solid] coordinates{
+               \addplot[color=signalalpha,solid] coordinates{
                    (110,-111)
                    (110, 317)
                };     
-               \addplot[color=blue,solid] coordinates{
+               \addplot[color=signalalpha,solid] coordinates{
                    (230,-111)
                    (230, 317)
                };     
-               \addplot[color=blue,solid] coordinates{
+               \addplot[color=signalalpha,solid] coordinates{
                    (350,-111)
                    (350, 317)
                };
@@ -71,11 +72,11 @@
                % Label of u1b
                \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:250,350) {$u_{\mathrm{1b}}(\omega t)$};
                % Label of u2
-               \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:180,310) {$u_{\mathrm{2}}(\omega t)$};
+               \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:180,310) {$u_{\mathrm{2}}(\omega t)$};
                %Label Firing angle 
                \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:80,275){$\alpha$};
                % Line to u2
-               \draw[thin, blue] (185,305) -- (170,230);
+               \draw[ signalalpha] (185,305) -- (170,230);
                % Line for alpha
                \draw[->](60,270) -- (109.9,270); 
            \end{axis}     

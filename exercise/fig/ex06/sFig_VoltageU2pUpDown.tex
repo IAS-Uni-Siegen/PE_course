@@ -34,6 +34,7 @@
                 yticklabel style = {anchor=east},
                 % Grid layout
                 grid,
+                thick
                 %grid style={line width=.1pt, draw=gray!10},
                 %major grid style={line width=.2pt,draw=gray!90},
             ]
@@ -46,67 +47,67 @@
             \addplot[black, domain= 0:360,dashed] {-563*cos(x+90)};                
             \addplot[black, domain= 0:360,dashed] {-563*cos(x+210)}; 
             % Voltage u2(wt) up
-            \addplot[blue, domain= 0:30] {-563*cos(x+210)};            
-            \addplot[blue, domain= 30:90] {563*cos(x-30)};                
-            \addplot[blue, domain= 270:330] {563*cos(x+90)};                
-            \addplot[blue, domain= 150:210] {563*cos(x+210)}; 
-            \addplot[blue, domain= 210:270] {-563*cos(x-30)};                
-            \addplot[blue, domain= 90:150] {-563*cos(x+90)};                
-            \addplot[blue, domain= 330:360] {-563*cos(x+210)};            
-            \addplot[color=blue,solid] coordinates{
+            \addplot[signalalpha, domain= 0:30] {-563*cos(x+210)};            
+            \addplot[signalalpha, domain= 30:90] {563*cos(x-30)};                
+            \addplot[signalalpha, domain= 270:330] {563*cos(x+90)};                
+            \addplot[signalalpha, domain= 150:210] {563*cos(x+210)}; 
+            \addplot[signalalpha, domain= 210:270] {-563*cos(x-30)};                
+            \addplot[signalalpha, domain= 90:150] {-563*cos(x+90)};                
+            \addplot[signalalpha, domain= 330:360] {-563*cos(x+210)};            
+            \addplot[color=signalalpha,solid] coordinates{
                 (30, 563)
                 (30, 282)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (90, 563)
                 (90, 282)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (150, 563)
                 (150, 282)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (210, 563)
                 (210, 282)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (270, 563)
                 (270, 282)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (330, 563)
                 (330, 282)
             };     
     
             % Voltage u2(wt) down
-            \addplot[blue, domain= 0:30] {-563*cos(x-30)};                
-            \addplot[blue, domain= 150:210] {563*cos(x-30)};                
-            \addplot[blue, domain= 30:90] {563*cos(x+90)};                
-            \addplot[blue, domain= 270:330] {563*cos(x+210)};            
-            \addplot[blue, domain= 330:360] {-563*cos(x-30)};                
-            \addplot[blue, domain= 210:270] {-563*cos(x+90)};                
-            \addplot[blue, domain= 90:150] {-563*cos(x+210)}; 
-            \addplot[color=blue,solid] coordinates{
+            \addplot[signalalpha, domain= 0:30] {-563*cos(x-30)};                
+            \addplot[signalalpha, domain= 150:210] {563*cos(x-30)};                
+            \addplot[signalalpha, domain= 30:90] {563*cos(x+90)};                
+            \addplot[signalalpha, domain= 270:330] {563*cos(x+210)};            
+            \addplot[signalalpha, domain= 330:360] {-563*cos(x-30)};                
+            \addplot[signalalpha, domain= 210:270] {-563*cos(x+90)};                
+            \addplot[signalalpha, domain= 90:150] {-563*cos(x+210)}; 
+            \addplot[color=signalalpha,solid] coordinates{
                 (30,-563)
                 (30,-282)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (90,-563)
                 (90,-282)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (150,-563)
                 (150,-282)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (210,-563)
                 (210,-282)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (270,-563)
                 (270,-282)
             };     
-            \addplot[color=blue,solid] coordinates{
+            \addplot[color=signalalpha,solid] coordinates{
                 (330,-563)
                 (330,-282)
             };     
@@ -114,29 +115,29 @@
             % Label of +-u1ab
             \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:30,10) {$\pm u_{\mathrm{1ab}}$};
             % Line to +u1ab
-            \draw[thin, black] (30,140) -- (35,190);            
+            \draw[black] (30,140) -- (35,190);            
             % Line to -u1ab
-            \draw[thin, black] (30,-10) -- (35,-100);            
+            \draw[black] (30,-10) -- (35,-100);            
             % Label of +-u1bc
             \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:150,10) {$\pm u_{\mathrm{1bc}}$};
             % Line to +u1bc
-            \draw[thin, black] (150,140) -- (155,190);            
+            \draw[black] (150,140) -- (155,190);            
             % Line to -u1bc
-            \draw[thin, black] (150,-10) -- (155,-100);   
+            \draw[black] (150,-10) -- (155,-100);   
             % Label of +-u1ca
             \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:270,10) {$\pm u_{\mathrm{1ca}}$};
             % Line to +u1ca
-            \draw[thin, black] (270,140) -- (275,190);            
+            \draw[black] (270,140) -- (275,190);            
             % Line to -u1ca
-            \draw[thin, black] (270,-10) -- (275,-100);               
+            \draw[black] (270,-10) -- (275,-100);               
             % Label of u2up
-            \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,210) {$u_{\mathrm{2 up}}$};
+            \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,210) {$u_{\mathrm{2 up}}$};
             % Line to u2,up
-            \draw[thin, blue] (120,370) -- (125,440);
+            \draw[signalalpha] (120,370) -- (125,440);
             % Label of u2down
-            \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:240,-380) {$u_{\mathrm{2 dn}}$};
+            \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:240,-380) {$u_{\mathrm{2 dn}}$};
             % Line to u2,down
-            \draw[thin, blue] (240,-380) -- (235,-430);
+            \draw[signalalpha] (240,-380) -- (235,-430);
         \end{axis}     
         \end{tikzpicture}
         \caption{Output voltage $u_\mathrm{2 up}(\omega t)$ for raising and $u_\mathrm{2 dn}(\omega t)$ lowering the load.}

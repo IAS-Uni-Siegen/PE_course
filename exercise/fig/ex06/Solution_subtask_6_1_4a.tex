@@ -72,32 +72,33 @@
             grid,
             %grid style={line width=.1pt, draw=gray!10},
             %major grid style={line width=.2pt,draw=gray!90},
+            thick
         ] 
         % Current i1a(wt)
-        \addplot[color=red,solid] coordinates{
+        \addplot[color=signaldelta,solid] coordinates{
             (-150,0)
             (-10.09, 0)
         };                 
-           \addplot[color=red,solid] coordinates{
+           \addplot[color=signaldelta,solid] coordinates{
             (-10.09,0)
             (-10.09, 34.6)
         };                   
-           \addplot[color=red,solid] coordinates{
+           \addplot[color=signaldelta,solid] coordinates{
                (-10.09,34.6)
                (109.9, 34.6)
            };  
-           \addplot[color=red,solid] coordinates{
+           \addplot[color=signaldelta,solid] coordinates{
             (109.9,0)
             (109.9, 34.6)
         };
-        \addplot[color=red,solid] coordinates{
+        \addplot[color=signaldelta,solid] coordinates{
             (109.9,0)
             (150, 0)
         };    
            % Label of i1a
            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:131,28) {$i_{\mathrm{1a}}(\omega t)$};
             % Line to i1a
-            \draw[thin, black] (112,10) -- (120,27);
+            \draw[black] (112,10) -- (120,27);
            \end{axis}    
            \end{tikzpicture}
            \caption{Input current $i_\mathrm{1a}(\omega t)$.}
