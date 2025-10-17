@@ -22,8 +22,8 @@
     \draw (-0.05,0) node[left] {0};
     % Balken zeichnen
     \foreach \x/\y in {1/4.5, 5/0.9, 7/0.6, 11/0.5, 13/0.4} {
-        \draw[thick] (\x,0) -- (\x,\y); % Balken
-        \draw[thick] (\x-0.1,\y) -- (\x+0.1,\y); % Querstrich oben
+        \draw[thick, signalalpha] (\x,0) -- (\x,\y); % Balken
+        \draw[thick, signalalpha] (\x-0.1,\y) -- (\x+0.1,\y); % Querstrich oben
     }
 \end{tikzpicture}
 \caption{Normalization to the amplitude of the fundamental oscillation.}

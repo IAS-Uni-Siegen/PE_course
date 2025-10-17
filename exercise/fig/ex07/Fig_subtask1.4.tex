@@ -33,13 +33,14 @@
     yticklabel style = {anchor=east},
     % Grid layout
     grid,
+    thick
     %grid style={line width=.1pt, draw=gray!10},
     %major grid style={line width=.2pt,draw=gray!90},
 ] 
     % internal load voltage u
-    \addplot[blue, domain= 0:360, solid] {150*sin(x-(180/6))};
+    \addplot[signalalpha, domain= 0:360, solid, thick] {150*sin(x-(180/6))};
     % Label of u
-    \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,160) {$u_{2\mathrm{i}}(t)$};
+    \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,160) {$u_{2\mathrm{i}}(t)$};
     \end{axis}
     \begin{axis}[
     % x/y range adjustment
@@ -63,62 +64,63 @@
     yticklabel style = {anchor=west},
     % Grid layout
     grid,
+    thick
     %grid style={line width=.1pt, draw=gray!10},
     %major grid style={line width=.2pt,draw=gray!90},
 ]
     \begin{solutionblock}
     % fundamental current i^(1)_2
-    \addplot[green, domain= 0:360, solid] {51.5*sin(x-14.9)};
+    \addplot[signalzeta, domain= 0:360, dashed, thick] {51.5*sin(x-14.9)};
     % draw current harmonics i^(\mathrm{h})_2
-    \draw[thick, red, solid] (0,-44) -- (46,31.5) ;
-    \draw[thick, red, solid] (46,31.5) -- (60,-11.67) -- (110,15.31) -- (120,-25.16) -- (158,26.1) -- (180,-25.16) ;
-    \draw[thick, red, solid] (180,-25.16) -- (202, 28.8) -- (240, -19.76) -- (249, 23.41) -- (300, -6.27) -- (315, 36.92) -- (360, -33.226);
+    \draw[thick, signalzeta, dotted] (0,-44) -- (46,31.5) ;
+    \draw[thick, signalzeta, dotted] (46,31.5) -- (60,-11.67) -- (110,15.31) -- (120,-25.16) -- (158,26.1) -- (180,-25.16) ;
+    \draw[thick, signalzeta, dotted] (180,-25.16) -- (202, 28.8) -- (240, -19.76) -- (249, 23.41) -- (300, -6.27) -- (315, 36.92) -- (360, -33.226);
     % draw i_2
-    \addplot[black, domain= 0:46, solid] {51.5*sin(x-14.9)+(1.64*x -43.94)};
-    \addplot[black, domain= 46:60, solid] {51.5*sin(x-14.9)+(-3.08*x +173.18)};
-    \addplot[black, domain= 60:110, solid] {51.5*sin(x-14.9)+(0.5396*x -44.046)};
-    \addplot[black, domain= 110:120, solid] {51.5*sin(x-14.9)+(-4.047*x +460.48)};
-    \addplot[black, domain= 120:158, solid] {51.5*sin(x-14.9)+(1.349*x -187.04)};
-    \addplot[black, domain= 158:180, solid] {51.5*sin(x-14.9)+(-2.33*x +394.24)};
-    \addplot[black, domain= 180:202, solid] {51.5*sin(x-14.9)+(2.45*x -466.16)};
-    \addplot[black, domain= 202:240, solid] {51.5*sin(x-14.9)+(-1.278*x +286.956)};
-    \addplot[black, domain= 240:249, solid] {51.5*sin(x-14.9)+(4.8*x -1171.76)};
-    \addplot[black, domain= 249:300, solid] {51.5*sin(x-14.9)+(-0.582*x +168.33)};
-    \addplot[black, domain= 300:315, solid] {51.5*sin(x-14.9)+(2.88*x -870.27)};
-    \addplot[black, domain= 315:360, solid] {51.5*sin(x-14.9)+(-1.559*x +528)};
+    \addplot[black, domain= 0:46, solid, thick] {51.5*sin(x-14.9)+(1.64*x -43.94)};
+    \addplot[black, domain= 46:60, solid, thick] {51.5*sin(x-14.9)+(-3.08*x +173.18)};
+    \addplot[black, domain= 60:110, solid, thick] {51.5*sin(x-14.9)+(0.5396*x -44.046)};
+    \addplot[black, domain= 110:120, solid, thick] {51.5*sin(x-14.9)+(-4.047*x +460.48)};
+    \addplot[black, domain= 120:158, solid, thick] {51.5*sin(x-14.9)+(1.349*x -187.04)};
+    \addplot[black, domain= 158:180, solid, thick] {51.5*sin(x-14.9)+(-2.33*x +394.24)};
+    \addplot[black, domain= 180:202, solid, thick] {51.5*sin(x-14.9)+(2.45*x -466.16)};
+    \addplot[black, domain= 202:240, solid, thick] {51.5*sin(x-14.9)+(-1.278*x +286.956)};
+    \addplot[black, domain= 240:249, solid, thick] {51.5*sin(x-14.9)+(4.8*x -1171.76)};
+    \addplot[black, domain= 249:300, solid, thick] {51.5*sin(x-14.9)+(-0.582*x +168.33)};
+    \addplot[black, domain= 300:315, solid, thick] {51.5*sin(x-14.9)+(2.88*x -870.27)};
+    \addplot[black, domain= 315:360, solid, thick] {51.5*sin(x-14.9)+(-1.559*x +528)};
 
      % draw i_1
-     \addplot[orange, domain= 0:46, solid] {51.5*sin(x-14.9)+(1.64*x -43.94)};
-     \draw[thin, orange, solid] (46,57.84) -- (46,-57.84) ;
-     \addplot[orange, domain= 46:60, solid] {-(51.5*sin(x-14.9)+(-3.08*x +173.18))};
-     \draw[thin, orange, solid] (60,-24.86) -- (60,24.86) ;
-     \addplot[orange, domain= 60:110, solid] {51.5*sin(x-14.9)+(0.5396*x -44.046)};
-     \draw[thin, orange, solid] (110,66.61) -- (110,-66.61) ;
-     \addplot[orange, domain= 110:120, solid] {-(51.5*sin(x-14.9)+(-4.047*x +460.48))};
-     \draw[thin, orange, solid] (120,-24.56) -- (120,24.56) ;
-     \addplot[orange, domain= 120:158, solid] {51.5*sin(x-14.9)+(1.349*x -187.04)};
-     \draw[thin, orange, solid] (158,57.84) -- (158,-57.84) ;
-     \addplot[orange, domain= 158:180, solid] {-(51.5*sin(x-14.9)+(-2.33*x +394.24))};
-     \draw[thin, orange, solid] (180,11.92) -- (180,-11.92) ;
-     \addplot[orange, domain= 180:202, solid] {51.5*sin(x-14.9)+(2.45*x -466.16)};
-     \draw[thin, orange, solid] (202,22.374) -- (202,-22.374) ;
-     \addplot[orange, domain= 202:240, solid] {-(51.5*sin(x-14.9)+(-1.278*x +286.956))};
-     \draw[thin, orange, solid] (240,56.24) -- (240,-56.24) ;
-     \addplot[orange, domain= 240:249, solid] {51.5*sin(x-14.9)+(4.8*x -1171.76)};
-     \draw[thin, orange, solid] (249,-18.28) -- (249,18.28) ;
-     \addplot[orange, domain= 249:300, solid] {-(51.5*sin(x-14.9)+(-0.582*x +168.33))};
-     \draw[thin, orange, solid] (300,56) -- (300,-56) ;
-     \addplot[orange, domain= 300:315, solid] {51.5*sin(x-14.9)+(2.88*x -870.27)};
-     \draw[thin, orange, solid] (315,-7.625) -- (315,7.625) ;
-     \addplot[orange, domain= 315:360, solid] {-(51.5*sin(x-14.9)+(-1.559*x +528))};
+     \addplot[signaldelta, domain= 0:46, solid, thick] {51.5*sin(x-14.9)+(1.64*x -43.94)};
+     \draw[signaldelta, solid, thick] (46,57.84) -- (46,-57.84) ;
+     \addplot[signaldelta, domain= 46:60, solid, thick] {-(51.5*sin(x-14.9)+(-3.08*x +173.18))};
+     \draw[signaldelta, solid, thick] (60,-24.86) -- (60,24.86) ;
+     \addplot[signaldelta, domain= 60:110, solid, thick] {51.5*sin(x-14.9)+(0.5396*x -44.046)};
+     \draw[signaldelta, solid, thick] (110,66.61) -- (110,-66.61) ;
+     \addplot[signaldelta, domain= 110:120, solid, thick] {-(51.5*sin(x-14.9)+(-4.047*x +460.48))};
+     \draw[signaldelta, solid, thick] (120,-24.56) -- (120,24.56) ;
+     \addplot[signaldelta, domain= 120:158, solid, thick] {51.5*sin(x-14.9)+(1.349*x -187.04)};
+     \draw[signaldelta, solid, thick] (158,57.84) -- (158,-57.84) ;
+     \addplot[signaldelta, domain= 158:180, solid, thick] {-(51.5*sin(x-14.9)+(-2.33*x +394.24))};
+     \draw[signaldelta, solid, thick] (180,11.92) -- (180,-11.92) ;
+     \addplot[signaldelta, domain= 180:202, solid, thick] {51.5*sin(x-14.9)+(2.45*x -466.16)};
+     \draw[signaldelta, solid, thick] (202,22.374) -- (202,-22.374) ;
+     \addplot[signaldelta, domain= 202:240, solid, thick] {-(51.5*sin(x-14.9)+(-1.278*x +286.956))};
+     \draw[signaldelta, solid, thick] (240,56.24) -- (240,-56.24) ;
+     \addplot[signaldelta, domain= 240:249, solid, thick] {51.5*sin(x-14.9)+(4.8*x -1171.76)};
+     \draw[signaldelta, solid, thick] (249,-18.28) -- (249,18.28) ;
+     \addplot[signaldelta, domain= 249:300, solid, thick] {-(51.5*sin(x-14.9)+(-0.582*x +168.33))};
+     \draw[signaldelta, solid, thick] (300,56) -- (300,-56) ;
+     \addplot[signaldelta, domain= 300:315, solid, thick] {51.5*sin(x-14.9)+(2.88*x -870.27)};
+     \draw[signaldelta, solid, thick] (315,-7.625) -- (315,7.625) ;
+     \addplot[signaldelta, domain= 315:360, solid, thick] {-(51.5*sin(x-14.9)+(-1.559*x +528))};
      % Label of i^(k)_2
-     \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:90,-30) {$i^{(\mathrm{h})}_\mathrm{2}(t)$};
+     \node[signalzeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:90,-30) {$i^{(\mathrm{h})}_\mathrm{2}(t)$};
      % Label of i^(1)_2
-     \node[green, fill=white, inner sep = 1pt, anchor = south] at (axis cs:90,15) {$i^\mathrm{(1)}_\mathrm{2}(t)$};
+     \node[signalzeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:90,15) {$i^\mathrm{(1)}_\mathrm{2}(t)$};
       % Label of i_2
       \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:25,50) {$i_\mathrm{2}(t)$};
       % Label of i_1
-      \node[orange, fill=white, inner sep = 1pt, anchor = south] at (axis cs:70,-60) {$i_\mathrm{1}(t)$};
+      \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:70,-60) {$i_\mathrm{1}(t)$};
     \end{solutionblock}
     \end{axis}             
     \end{tikzpicture}

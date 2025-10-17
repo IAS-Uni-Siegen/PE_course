@@ -36,18 +36,19 @@
             yticklabel style = {anchor=east},
             % Grid layout
             grid,
+            thick
             %grid style={line width=.1pt, draw=gray!10},
             %major grid style={line width=.2pt,draw=gray!90},
         ] 
         % internal load voltage u_2i
-        \addplot[blue, domain= 0:360, solid] {150*sin(x-(180/6))};
+        \addplot[signalalpha, domain= 0:360, solid, thick] {150*sin(x-(180/6))};
         % Label of u_2i
-        \node[blue, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,160) {$u_{2\mathrm{i}}(t)$};
+        \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,160) {$u_{2\mathrm{i}}(t)$};
         \begin{solutionblock}
         % fundamental voltage u^(1)_2
-        \addplot[red, domain= 0:360, solid] {150*sin(x)};
+        \addplot[signalbeta, domain= 0:360, solid, thick] {150*sin(x)};
          % Label of u^(1)_2
-         \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:70,155) {$u^\mathrm{(1)}_\mathrm{2}(t)$};
+         \node[signalbeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:70,155) {$u^\mathrm{(1)}_\mathrm{2}(t)$};
         \end{solutionblock}
            \end{axis}
            \begin{axis}[
@@ -72,14 +73,15 @@
             yticklabel style = {anchor=west},
             % Grid layout
             grid,
+            thick
             %grid style={line width=.1pt, draw=gray!10},
             %major grid style={line width=.2pt,draw=gray!90},
         ]
         \begin{solutionblock}
               % fundamental current i^(1)_2
-              \addplot[green, domain= 0:360, solid] {51.5*sin(x-14.9)};
+              \addplot[signaldelta, domain= 0:360, solid, thick] {51.5*sin(x-14.9)};
                 % Label of i^(1)_2
-                \node[green, fill=white, inner sep = 1pt, anchor = south] at (axis cs:100,25) {$i^\mathrm{(1)}_\mathrm{2}(t)$};
+                \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:100,25) {$i^\mathrm{(1)}_\mathrm{2}(t)$};
             \end{solutionblock}
            \end{axis}             
            \end{tikzpicture}

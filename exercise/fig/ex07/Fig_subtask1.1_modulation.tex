@@ -34,13 +34,14 @@
           yticklabel style = {anchor=east},
           % Grid layout
           grid,
+          thick
           %grid style={line width=.1pt, draw=gray!10},
           %major grid style={line width=.2pt,draw=gray!90},
       ] 
       % modulation s
-      \addplot[blue, domain= 0:360, solid] {0.75*sin(x)};
+      \addplot[signaldelta, domain= 0:360, solid, thick] {0.75*sin(x)};
     % carrier signal c
-     \draw[thin, black] (0,-1) -- (60,1) -- (60,-1) -- (120,1) -- (120,-1) -- (180,1) -- (180,-1) -- (240,1) -- (240,-1) -- (300,1) -- (300,-1) -- (360,1) -- (360,-1);
+     \draw[signalalpha, thick] (0,-1) -- (60,1) -- (60,-1) -- (120,1) -- (120,-1) -- (180,1) -- (180,-1) -- (240,1) -- (240,-1) -- (300,1) -- (300,-1) -- (360,1) -- (360,-1);
       %\draw (0,-1) \foreach \x in {0 ,60, 120, 180, 240, 300} {-- ++(60,2) -- ++(0,-2) };
       
       % Label of s
@@ -74,31 +75,32 @@
           yticklabel style = {anchor=east},
           % Grid layout
           grid,
+          thick,
           %grid style={line width=.1pt, draw=gray!10},
           %major grid style={line width=.2pt,draw=gray!90},
       ] 
 
     % switching times
-    \draw[thin, black, dashed] (46,1.5) -- (46,-6);
-    \draw[thin, black, dashed] (60,1.5) -- (60,-6);  
-    \draw[thin, black, dashed] (110,1.5) -- (110,-6);
-    \draw[thin, black, dashed] (120,1.5) -- (120,-6);
-    \draw[thin, black, dashed] (158,1.5) -- (158,-6);
-    \draw[thin, black, dashed] (180,1.5) -- (180,-6);
-    \draw[thin, black, dashed] (202,1.5) -- (202,-6);
-    \draw[thin, black, dashed] (240,1.5) -- (240,-6);
-    \draw[thin, black, dashed] (249,1.5) -- (249,-6);
-    \draw[thin, black, dashed] (300,1.5) -- (300,-6);
-    \draw[thin, black, dashed] (315,1.5) -- (315,-6);
+    \draw[black, dashed] (46,1.5) -- (46,-6);
+    \draw[black, dashed] (60,1.5) -- (60,-6);  
+    \draw[black, dashed] (110,1.5) -- (110,-6);
+    \draw[black, dashed] (120,1.5) -- (120,-6);
+    \draw[black, dashed] (158,1.5) -- (158,-6);
+    \draw[black, dashed] (180,1.5) -- (180,-6);
+    \draw[black, dashed] (202,1.5) -- (202,-6);
+    \draw[black, dashed] (240,1.5) -- (240,-6);
+    \draw[black, dashed] (249,1.5) -- (249,-6);
+    \draw[black, dashed] (300,1.5) -- (300,-6);
+    \draw[black, dashed] (315,1.5) -- (315,-6);
     \begin{solutionblock}
             
     % Fundamental voltage
-    \addplot[blue, domain= 0:360, solid] {0.75*sin(x)-4};
+    \addplot[black, domain= 0:360, dashed, thick] {0.75*sin(x)-4};
     % Output voltage
-    \draw[thin, red, solid] (0,-3) -- (46,-3) -- (46,-5) -- (60,-5) -- (60,-3) -- (110,-3) -- (110,-5) -- (120,-5);
-    \draw[thin, red, solid] (120,-5) -- (120,-3) -- (158,-3) -- (158,-5) -- (180,-5) -- (180,-3) -- (202,-3);
-    \draw[thin, red, solid] (202,-3) -- (202,-5) -- (240,-5) -- (240,-3) -- (249,-3) -- (249,-5) -- (300,-5);
-    \draw[thin, red, solid] (300,-5) -- (300,-3) -- (315,-3) -- (315, -5) -- (360, -5);
+    \draw[signalalpha, solid, thick] (0,-3) -- (46,-3) -- (46,-5) -- (60,-5) -- (60,-3) -- (110,-3) -- (110,-5) -- (120,-5);
+    \draw[signalalpha, solid, thick] (120,-5) -- (120,-3) -- (158,-3) -- (158,-5) -- (180,-5) -- (180,-3) -- (202,-3);
+    \draw[signalalpha, solid, thick] (202,-3) -- (202,-5) -- (240,-5) -- (240,-3) -- (249,-3) -- (249,-5) -- (300,-5);
+    \draw[signalalpha, solid, thick] (300,-5) -- (300,-3) -- (315,-3) -- (315, -5) -- (360, -5);
 
       % Label of u_2
       \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:90,-2.75) {$u_\mathrm{2}(t)$};
