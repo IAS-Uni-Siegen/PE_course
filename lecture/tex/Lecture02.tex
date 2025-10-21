@@ -389,7 +389,7 @@
         \label{eq:power-loss-ripple-inductor-step-down-converter}
     \end{equation}
     \pause
-    The power loss in the inductor is thus composed of a constant part $\overline{P}_\mathrm{L} = R_\mathrm{i} \overline{i}^2_\mathrm{L}$, which is related to the power transfer from input to output, and a ripple part $\Delta P_\mathrm{L} = R_\mathrm{i} \Delta I^2_\mathrm{L}$.   
+    The power loss in the inductor is thus composed of a \hl{constant part} $\overline{P}_\mathrm{L} = R_\mathrm{i} \overline{i}^2_\mathrm{L}$, which is related to the power transfer from input to output, and a \hl{ripple part} $\Delta P_\mathrm{L} = R_\mathrm{i} \Delta I^2_\mathrm{L}$.   
     \pause%
     \begin{varblock}{Current ripple and power losses}
         The current ripple produces additional losses in the inductor. From \eqref{eq:RMS-current-ripple} it seems tempting to increase the switching frequency $f_\mathrm{s}$ to reduce the ripple, but this will increase switching losses (compare \figref{fig:idealized_switch_model}). Hence, there is a trade-off decision between switching and conduction losses.
@@ -416,7 +416,7 @@
     \end{equation}
     \onslide<6->{which is associated with the maximum current ripple since the second derivative 
     \begin{equation}
-        \frac{\mathrm{d}^2\Delta i_\mathrm{L}}{\mathrm{d}D^2} = -\frac{2T_\mathrm{s}U_\mathrm{on}}{L}
+        \frac{\mathrm{d}^2\Delta i_\mathrm{L}}{\mathrm{d}D^2} = -\frac{2T_\mathrm{s}U_1}{L}
     \end{equation}
     is negative.} 
 \end{frame}
