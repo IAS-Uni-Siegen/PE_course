@@ -11,7 +11,7 @@
 The following ideal single-phase converter
 \input{fig/ex07/Single-phase_DC_Inverter.tex} 
 
-configured in a bridge topology and supplies a load consisting of an inductor and an internal load voltage. The converter consists
+is configured in a bridge topology and supplies a load consisting of an inductor and an internal load voltage. The converter consists
 of four transistors arranged in full bridge configuration.
 
 \begin{table}[ht]
@@ -234,9 +234,10 @@ depending on these switching states.}
     The correct chronological order is displayed in table \autoref{stable:ex07_Task2_UsedSwitchingStates}.
     \bigskip
     \FloatBarrier
-
-    \begin{minipage}{0.3\textwidth}
-            \begin{tabular}{|c|c|c|} % Each column is separated by a line
+    
+    \begin{solutiontable}[ht]
+        \centering
+    \begin{tabular}{|c|c|c|} % Each column is separated by a line
             \hline
             \bfseries $s_\mathrm{a}(t)$ & \bfseries $s_\mathrm{b}(t)$ & \bfseries $s_\mathrm{c}(t)$ \\ \hline
             -1 & -1 & -1 \\ \hline
@@ -249,11 +250,11 @@ depending on these switching states.}
             +1 & +1 & +1 \\ \hline
         \end{tabular}
         \noindent
-        \captionof{table}{Possible switching states.}
-        \label{stable:ex07_Task2_Switchingstates}    
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.55\textwidth} 
+        \caption{Possible switching states.}
+        \label{stable:ex07_Task2_Switchingstates}  
+    \end{solutiontable}
+    \begin{solutiontable}[ht]
+        \centering
         \begin{tabular}{|c|c|c|c|c|c|} % Each column is separated by a line
             \hline
             \bfseries $s_\mathrm{a}(t)$ & \bfseries $s_\mathrm{b}(t)$ & \bfseries $s_\mathrm{c}(t)$
@@ -265,9 +266,9 @@ depending on these switching states.}
             -1 & +1 & +1 & $-U_\mathrm{1h}$ & $U_\mathrm{1h}$ & $U_\mathrm{1h}$ \\ \hline
             -1 & -1 & +1 & $-U_\mathrm{1h}$ & $-U_\mathrm{1h}$ & $U_\mathrm{1h}$ \\ \hline
         \end{tabular}
-        \captionof{table}{Used switching states and voltages.}
-        \label{stable:ex07_Task2_UsedSwitchingStates}    
-    \end{minipage}
+        \caption{Used switching states and voltages.}
+        \label{stable:ex07_Task2_UsedSwitchingStates} 
+    \end{solutiontable}  
     \bigskip
     \FloatBarrier
     The switching state (-1,-1,-1) and (+1,+1,+1) are not used. In this case the chained voltages are zero. 
