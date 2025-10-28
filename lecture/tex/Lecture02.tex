@@ -945,7 +945,7 @@
     \begin{itemize}
         \item<1-> The ideal (mechanical) switch cannot be operated with high frequency in practice.  
         \item<2-> It must be replaced with \hl{semiconductor devices} to allow for a practical realization.
-        \item<3-> In \figref{fig:step-down-converter-realization-1Q} the simplest realization is shown utilizing one transistor and one diode. 
+        \item<3-> \figref{fig:step-down-converter-realization-1Q} shows the simplest realization  utilizing one transistor and one diode. 
         \item<4-> However, this configuration can only provide positive voltages and currents.
         \item<5-> Hence, the converter can operate in the \hl{first quadrant} only.
     \end{itemize}
@@ -1113,7 +1113,7 @@
             < \frac{\Delta i_\mathrm{L}}{2}= 2D(1-D)\Delta i_\mathrm{L,max}: & \text{DCM}
         \end{cases}
     \end{equation}
-    with $$\Delta i_\mathrm{L,max} = \frac{U_1T_\mathrm{s}}{4L}.$$ \pause  Hence, the operation mode directly depends on the duty cycle $D$ and average load current $\overline{i}_2$, that is, it can change during runtime. While we have already discussed the operation in CCM, we will now focus on the operation in DCM. Here, it must be noted that
+    with $$\Delta i_\mathrm{L,max} = \frac{U_1T_\mathrm{s}}{4L}.$$ \pause  \hl{Hence, the operation mode directly depends on the duty cycle $D$ and average load current $\overline{i}_2$, that is, it can change during runtime.} While we have already discussed the operation in CCM, we will now focus on the operation in DCM. Here, it must be noted that
     $$ U_2 \neq U_1 D \quad \mbox{(DCM operation)}$$
     applies due to the non-conducting diode during  $T''_\mathrm{off}$.
 \end{frame}
@@ -1334,17 +1334,17 @@
             \draw (-1.25, 3.6) node[white, scale=0.75] {\textbf{+}};
            
             \fill[signalalpha] (1.8, 0.35) circle (0.3cm);
-            \draw (1.8, 0.35) node[white] {\textbf{-}};
+            \draw (1.8, 0.35) node[white, yshift=-1pt] {\textbf{-}};
             \fill[signalalpha] (2.35, 1) circle (0.3cm);
-            \draw (2.35, 1) node[white] {\textbf{-}};
+            \draw (2.35, 1) node[white, yshift=-1pt] {\textbf{-}};
             \fill[signalalpha] (0.9, 1.65) circle (0.3cm);
-            \draw (0.9, 1.65) node[white] {\textbf{-}};
+            \draw (0.9, 1.65) node[white, yshift=-1pt] {\textbf{-}};
             \fill[signalalpha] (2.6, 2.3) circle (0.3cm);
-            \draw (2.6, 2.3) node[white] {\textbf{-}};
+            \draw (2.6, 2.3) node[white, yshift=-1pt] {\textbf{-}};
             \fill[signalalpha] (1.4, 2.95) circle (0.3cm);
-            \draw (1.4, 2.95) node[white] {\textbf{-}};
+            \draw (1.4, 2.95) node[white, yshift=-1pt] {\textbf{-}};
             \fill[signalalpha] (0.65, 3.6) circle (0.3cm);
-            \draw (0.65, 3.6) node[white] {\textbf{-}};
+            \draw (0.65, 3.6) node[white, yshift=-1pt] {\textbf{-}};
             \node at (0,-0.5) {Forward mode};
             \end{scope}
             
@@ -1380,17 +1380,17 @@
             \draw (-2.5, 3.6) node[white, scale=0.75] {\textbf{+}};
            
             \fill[signalalpha] (2.5, 0.35) circle (0.3cm);
-            \draw (2.5, 0.35) node[white] {\textbf{-}};
+            \draw (2.5, 0.35) node[white, yshift=-1pt] {\textbf{-}};
             \fill[signalalpha] (2.5, 1) circle (0.3cm);
-            \draw (2.5, 1) node[white] {\textbf{-}};
+            \draw (2.5, 1) node[white, yshift=-1pt] {\textbf{-}};
             \fill[signalalpha] (2.5, 1.65) circle (0.3cm);
-            \draw (2.5, 1.65) node[white] {\textbf{-}};
+            \draw (2.5, 1.65) node[white, yshift=-1pt] {\textbf{-}};
             \fill[signalalpha] (2.5, 2.3) circle (0.3cm);
-            \draw (2.5, 2.3) node[white] {\textbf{-}};
+            \draw (2.5, 2.3) node[white, yshift=-1pt] {\textbf{-}};
             \fill[signalalpha] (2.5, 2.95) circle (0.3cm);
-            \draw (2.5, 2.95) node[white] {\textbf{-}};
+            \draw (2.5, 2.95) node[white, yshift=-1pt] {\textbf{-}};
             \fill[signalalpha] (2.5, 3.6) circle (0.3cm);
-            \draw (2.5, 3.6) node[white] {\textbf{-}};
+            \draw (2.5, 3.6) node[white, yshift=-1pt] {\textbf{-}};
             \node at (0,-0.5) {Blocking mode};
             \end{scope}
 
