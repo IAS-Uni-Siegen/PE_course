@@ -2279,7 +2279,7 @@
 
 \begin{frame}[b]
     \frametitle{Buck-boost converter: switching states}
-    \onslide<1->{The buck-boost converter switches are \hl{operated synchronously}, that is, $S_1$ and $S_2$ are either on or off at the same time.} \onslide<2->{Thus, the converter has only two switch states:}
+    \onslide<1->{The buck-boost converter switches are \hl{operated synchronously}, that is, $S_1$ and $S_2$ are either on or off at the same time.} \onslide<2->{Thus, the converter has (effectively)  only two switch states:}
     \begin{equation}
         \begin{alignedat}{3}
             \onslide<2->{\{S_\mathrm{1,on}, S_\mathrm{2,on}\} \quad &\rightarrow \quad u_{\mathrm{s}_1}(t) &&= U_1, \,&&u_{\mathrm{s}_2}(t) = 0, \quad} \\
@@ -2415,12 +2415,12 @@
                         %
 						\nextgroupplot[ylabel = {$i_2(t)$}, ytick = {}, yticklabels = {}]
                             \pgfplotsinvokeforeach{0,...,3}{
-                                \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},0) ({\D + #1},0) ({\D + #1},0.75) ({1 + #1},0.25) ({1 + #1},0)};}
+                                \edef\AddPlot{\noexpand\addplot[signalepsilon, thick] coordinates {({0 + #1},0) ({\D + #1},0) ({\D + #1},0.75) ({1 + #1},0.25) ({1 + #1},0)};}
                                 \AddPlot
                             }
-                            \node[signalalpha, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:0.5+\D/2, 0.85) {$i_2(t)$}; % label output current
-                            \draw[signalalpha, thick, dashed] (axis cs:0,0.5-0.25*\D) -- (axis cs:4, 0.5-0.25*\D); % dashed line at average current
-                            \node[signalalpha, above, inner sep = 1pt, anchor = west, fill = white, xshift=1mm] at (axis cs:\D, 0.5-0.25*\D) {$\overline{i}_2$}; % label average current
+                            \node[signalepsilon, above, inner sep = 2pt, anchor = center, fill = white] at (axis cs:0.5+\D/2, 0.85) {$i_2(t)$}; % label output current
+                            \draw[signalepsilon, thick, dashed] (axis cs:0,0.5-0.25*\D) -- (axis cs:4, 0.5-0.25*\D); % dashed line at average current
+                            \node[signalepsilon, above, inner sep = 1pt, anchor = west, fill = white, xshift=1mm] at (axis cs:\D, 0.5-0.25*\D) {$\overline{i}_2$}; % label average current
 					\end{groupplot}
         \end{tikzpicture}
     \end{figure}
@@ -2455,7 +2455,7 @@
     \frametitle{Buck-boost converter: output capacitor and voltage ripple}
     \onslide<2->{With the usual \hl{simplifying assumptions} (cf. \figref{fig:step-up-converter-simple-output-cap}), in particular, a constant output current $i_2(t)=I_2,$ the capacitor's current during the switch-on time is given by
     \begin{equation*}
-        i_\mathrm{C}(t) = -i_2(t) = -I_2, \quad t \in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{off}].
+        i_\mathrm{C}(t) = -i_2(t) = -I_2, \quad t \in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}].
     \end{equation*}}
     \onslide<3->{This is \hl{identical to the step-up converter}, leading to the same voltage ripple
     \begin{equation*}
@@ -2616,7 +2616,7 @@
     \onslide<4->{Solving for $D'$ yields
     \begin{equation}
         D' = \frac{U_1}{U_2}D.
-    \end{equation}}
+    \end{equation}}%
     \onslide<5->{The average load current is }
     \begin{equation}
         \onslide<5->{\overline{i}_2 = \frac{\Delta i_\mathrm{L}}{2}\frac{T'_\mathrm{off}}{T_\mathrm{s}}} \onslide<6->{= \frac{\Delta i_\mathrm{L,max}D}{2}D'}\onslide<7->{= \frac{\Delta i_\mathrm{L,max}}{2}\frac{U_1}{U_2}D^2.}
