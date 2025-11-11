@@ -3166,7 +3166,7 @@
         \item How large do the filter components need to be sized to ensure sufficiently smooth input and output signals?
     \end{itemize}
         \onslide<2->{
-        To answer this, we consider the following assumptions:}
+        To answer this, we consider the following assumptions for the lossless converter:}
         \begin{itemize}
             \item<2-> The input and output current are constant: $i_1(t) = I_1$, $i_2(t) = I_2$.
             \item<3-> Additional input capacitor necessary to buffer the pulsating input current.
@@ -3201,7 +3201,7 @@
 
 \begin{frame}
     \frametitle{Filter component requirements: step-down converter (cont.)}
-    The input voltage ripple is
+    The \hl{input capacitor voltage ripple} is
     \begin{equation}
         \Delta u_\mathrm{C_1} = \frac{I_1(1-D)T_\mathrm{s}}{C_1}
     \end{equation}
@@ -3209,7 +3209,7 @@
     \begin{equation}
         C_1 \geq \frac{I_1(1-D)T_\mathrm{s}}{\Delta u_\mathrm{C_1}}=C_{1,\mathrm{min}}.
     \end{equation}\pause
-    The stored input capacitor energy yields
+    The (maximum) stored input capacitor energy yields
     \begin{equation}
         E_\mathrm{C_1} = \frac{1}{2} C_{1,\mathrm{min}} \left(U_1 + \frac{1}{2}\Delta u_\mathrm{C_1}\right)^2 \pause = \frac{1}{2} (1-D)\frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{u_\mathrm{C_1}}}{2}\right)^2}{\varepsilon_{u_\mathrm{C_1}}}
     \end{equation}
@@ -3222,7 +3222,7 @@
 
 \begin{frame}
     \frametitle{Filter component requirements: step-down converter (cont.)}
-    \onslide<+->We already know from \eqref{eq:current-ripple-simple-step-down} the inductor current ripple being
+    \onslide<+->We already know from \eqref{eq:current-ripple-simple-step-down} the \hl{inductor current ripple} being
     \begin{equation*}
         \Delta i_\mathrm{L} = \frac{(1-D)U_2T_\mathrm{s}}{L}.
     \end{equation*}\onslide<+->
@@ -3231,7 +3231,7 @@
         L \geq \frac{(1-D)U_2T_\mathrm{s}}{\Delta i_\mathrm{L}} = L_{\mathrm{min}}.
         \label{eq:inductor-minimum-inductance-step-down}
     \end{equation}\onslide<+->
-    The stored inductor energy is
+    The (maximum) stored inductor energy is
     \begin{equation}
         E_\mathrm{L} = \frac{1}{2} L_{\mathrm{min}} \left(I_2 + \frac{1}{2}\Delta i_\mathrm{L}\right)^2 \uncover<+->{= \frac{1}{2} (1-D)\frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{i_\mathrm{L}}}{2}\right)^2}{\varepsilon_{i_\mathrm{L}}}}
     \end{equation}\onslide<4->
@@ -3244,7 +3244,7 @@
 
 \begin{frame}
     \frametitle{Filter component requirements: step-down converter (cont.)}
-    We already know from \eqref{eq:voltage-ripple-step-down-converter} the output capacitor voltage ripple being
+    We already know from \eqref{eq:voltage-ripple-step-down-converter} the \hl{output capacitor voltage ripple} being
     \begin{equation*}
         \Delta u_\mathrm{C_2} = \frac{D(1-D)T_\mathrm{s}^2U_1}{8LC_2} \pause = \frac{(1-D)}{8LC_2}\frac{U_2}{f_\mathrm{s}^2}.
     \end{equation*}  \pause
@@ -3256,7 +3256,7 @@
     \begin{equation}
         C_2 \geq \frac{\varepsilon_{i_\mathrm{L}}I_2}{8f_\mathrm{s}\Delta u_\mathrm{C_2}} = C_{2,\mathrm{min}}.
     \end{equation}\pause
-    The stored output capacitor energy yields
+    The (maximum) stored output capacitor energy yields
     \begin{equation}
         E_\mathrm{C_2} = \frac{1}{2} C_{2,\mathrm{min}} \left(U_2 + \frac{1}{2}\Delta u_\mathrm{C_2}\right)^2 \pause = \frac{1}{16} \varepsilon_{i_\mathrm{L}}\frac{P_2}{f_\mathrm{s}}\frac{\left(1+\frac{\varepsilon_{u_\mathrm{C_2}}}{2}\right)^2}{\varepsilon_{u_\mathrm{C_2}}}.
     \end{equation}
@@ -3287,10 +3287,10 @@
 
 \begin{frame}[b]
     \frametitle{Filter component requirements: inverting buck-boost converter}
-    Again, we assume the following:
+    Again, we assume the following for the lossless converter:
         \begin{itemize}
             \item The input and output current are constant: $i_1(t) = I_1$, $i_2(t) = I_2$.
-            \item Additional capacitors necessary to buffer the pulsating input / output  currents.
+            \item Additional capacitors are necessary to buffer the pulsating input / output  currents.
             \item Voltage and current ripples do not influence each other (simplified superposition).
         \end{itemize}
     \begin{figure}
@@ -3333,7 +3333,7 @@
     \begin{itemize}
         \item<3-> Same dependence on $P_2$, $f_\mathrm{s}$, and $\varepsilon_{u_\mathrm{C}}$ or $\varepsilon_{i_\mathrm{L}}$.
         \item<4-> Missing $(1-D)$ scaling factor.
-        \item<4-> Result: The inverting buck-boost converter's passive components are generally larger due to the pulsating input and output current which needs to be filtered.
+        \item<4-> Result: The inverting buck-boost converter's passive components are generally larger due to the pulsating input and output current which needs to be both filtered.
     \end{itemize} 
 \end{frame}
 
@@ -3514,7 +3514,7 @@
     \begin{equation}
         L_1:\quad D U_1 + (1-D)(U_1-U_\mathrm{C})=0, \pause \qquad L_2:\quad D(U_2+U_\mathrm{C}) + (1-D)U_2=0.
     \end{equation}
-    Above, $U_1$, $U_2$, and $U_\mathrm{C}$ are considered constant.\pause From those we can derive:
+    Above, $U_1$, $U_2$, and $U_\mathrm{C}$ are considered constant.\pause  From those we can derive:
     \begin{equation}
         L_1:\quad U_\mathrm{C}=\frac{U_1}{1-D}, \qquad L_2:\quad U_\mathrm{C}=-\frac{U_2}{D}.
     \end{equation}\pause
@@ -3858,18 +3858,18 @@
     \frametitle{Section summary}
     This section introduced non-isolated DC-DC converters. The key takeaways are:
     \begin{itemize}
-        \item \textbf{Buck converter:} step-down voltage conversion, voltage gain $0\leq D\leq1$,
-        \item \textbf{Boost converter:} step-up voltage conversion, voltage gain $1 \leq \frac{1}{(1-D)}$.
+        \item \textbf{Buck converter:} step-down voltage conversion, voltage gain $0\leq D\leq1$,\pause
+        \item \textbf{Boost converter:} step-up voltage conversion, voltage gain $1 \leq \frac{1}{(1-D)}$. \pause
     \end{itemize}
     From those basic topologies, we could derive all others:
     \begin{itemize}
-        \item \textbf{(Inverting) buck-boost converter:} voltage gain $(-)\frac{D}{(1-D)}$,
-        \item \textbf{(Inverting) boost-buck / Ćuk converter and SEPIC:}  voltage gain $(-)\frac{D}{(1-D)}$.
+        \item \textbf{(Inverting) buck-boost converter:} voltage gain $(-)\frac{D}{(1-D)}$, \pause
+        \item \textbf{(Inverting) boost-buck / Ćuk converter and SEPIC:}  voltage gain $(-)\frac{D}{(1-D)}$. \pause
     \end{itemize}
-    Finally, we discussed the realization of converters for both current and voltage polarities by using bridge-type switch realizations. Also, we have emphasized the \hl{trade-off decisions} between 
+    Finally, we discussed the realization of converters for both current and voltage polarities by using bridge-type switch realizations.\pause  Also, we have emphasized the \hl{trade-off decisions} between% 
     \begin{itemize}
-        \item semiconductor utilization
-        \item filter requirements / sizing,
+        \item semiconductor utilization \pause
+        \item filter requirements / sizing, \pause
         \item applied voltage gain as well as voltage and current signal quality.
     \end{itemize}
 \end{frame}
