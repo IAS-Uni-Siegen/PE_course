@@ -321,3 +321,4 @@ simulations/*/*backups*
 *.ist
 *.equ
 *.eqn
+*.vscode
