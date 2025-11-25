@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{High-level view of the rectification task}
-    Assuming that the input voltage is an \hl{ideal sinusoidal signal} $$u_1(t) = \hat{u}_1 \sin(\omega t)$$ with the angular frequency $\omega = 2\pi f$ and the amplitude $\hat{u}_1$, the task of a rectifier is to convert this input into a \hl{unidirectional, ideally constant, voltage} $u_2(t)\approx u_2$, as shown in Figure \ref{fig:rectification_task}. A typical application is the grid voltage rectification in power supplies.
+    Assuming that the input voltage is an \hl{ideal sinusoidal signal} $$u_1(t) = \hat{u}_1 \sin(\omega t)$$ with the angular frequency $\omega = 2\pi f$ and the amplitude $\hat{u}_1$, the task of a rectifier is to convert this input into a \hl{unidirectional, ideally constant, voltage} $u_2(t)\approx u_2$, as shown in  \figref{fig:rectification_task}. A typical application is the grid voltage rectification in power supplies.
 
     \begin{figure}
         \begin{tikzpicture}
@@ -714,7 +714,7 @@
     \begin{equation}
         u_\mathrm{s,1}(t) = \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \sin(\omega t) \quad \text{and} \quad u_\mathrm{s,2}(t) = -\frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \sin(\omega t).
     \end{equation}
-    Here, it should be noted that both $u_\mathrm{s,1}(t)$ and $u_\mathrm{s,2}(t)$ are utilizing only half of the secondary winding turns due to the central tapping.\pause The output voltage results in
+    Here, it should be noted that both $u_\mathrm{s,1}(t)$ and $u_\mathrm{s,2}(t)$ are utilizing only half of the secondary winding turns due to the central tapping.\pause The \hl{output voltage} results in
     \begin{equation}
         u_2(t) = \frac{1}{2}\frac{N_2}{N_1}\left|u_1(t)\right| = \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \left|\sin(\omega t)\right|.
         \label{eq:u2_M2U}
@@ -1181,10 +1181,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
-    \onslide<1->{At $\omega t_2 = \alpha + \beta$ the current reaches zero again and the diode bridge blocks again:}
+    \onslide<1->{At $\omega t_3 = \alpha + \beta$ the current reaches zero again and the diode bridge blocks again:}
    \begin{equation}
     \begin{split}
-        \onslide<1->{i_2(\omega t_2) &= \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha)-\cos(\omega t_2)-\frac{U_2}{\hat{u}_1}(\omega t_2 - \alpha)\right) \stackrel{!}{=} 0}\\
+        \onslide<1->{i_2(\omega t_3) &= \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha)-\cos(\omega t_3)-\frac{U_2}{\hat{u}_1}(\omega t_3 - \alpha)\right) \stackrel{!}{=} 0}\\
         \onslide<2->{&\Leftrightarrow \cos(\alpha)-\cos(\alpha+\beta)-\beta\sin(\alpha) = 0.}
     \end{split}
    \end{equation}
@@ -1380,12 +1380,12 @@
             i_2(t), & \alpha \leq \omega t < \alpha+\beta,\\
             -i_2(t), & \pi+\alpha \leq \omega t < \pi+\alpha+\beta.
         \end{cases}
-    \end{equation}}
+    \end{equation}}%
     \onslide<2->{The minus sign during the second half-cycle results from the conducting diodes D3/D4 reversing the current direction in the inductor -- cf. \figref{fig:B2U_topology_capacitive_filter_grid}.}\onslide<3->{ The input current can be decomposed into its \hl{fundamental and harmonic components}:
     \begin{equation}
         i_1(t) = \underbrace{a_1 \cos(\omega t) + b_1 \sin(\omega t)\vphantom{\sum_{k=2}^{\infty}}}_{=i_1^{(1)}(t)} + \underbrace{\sum_{k=2}^{\infty} \left( a^{(k)} \cos(k\omega t) + b^{(k)} \sin(k\omega t) \right)}_{i_1^{(\mathrm{h})}(t)}, \quad k\in \mathbb{N}.
         \label{eq:input_current_decomposition_B2U}
-    \end{equation}}
+    \end{equation}}%
     \onslide<4->{As will be discussed in the following, the harmonic components $i_1^{(\mathrm{h})}(t)$ are considered distortions negatively impacting the grid quality.}
 \end{frame}
 
