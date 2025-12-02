@@ -1158,11 +1158,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
-    \onslide<1->{In \hl{steady-state DCM} the output current is zero for
+    \onslide<1->{In periodic \hl{steady-state DCM} the output current is zero for
    \begin{equation}
         i_2(\omega t) = 0, \quad 0 \leq \omega t < \omega t_1.
    \end{equation}
-   Until then the diode bridge is in blocking mode and disconnects the input from the output.}\onslide<2->{ At $\omega t_1 = \alpha$ the diodes start conducting since the input voltage exceeds the output voltage:}
+   Until then the diode bridge is in blocking mode and disconnects the input from the output.}\onslide<2->{ \hl{At $\omega t_1 = \alpha$ the diodes start conducting} since the input voltage exceeds the output voltage:}
    \begin{equation}
     \onslide<2->{u_1(\omega t_1 = \alpha) = \hat{u}_1 \sin(\alpha)} \onslide<3->{\stackrel{!}{=} U_2 \quad \Leftrightarrow \quad \alpha = \arcsin\left(\frac{U_2}{\hat{u}_1}\right).}
    \end{equation}
@@ -1181,7 +1181,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
-    \onslide<1->{At $\omega t_3 = \alpha + \beta$ the current reaches zero again and the diode bridge blocks again:}
+    \onslide<1->{\hl{At $\omega t_3 = \alpha + \beta$ the current reaches zero again} and the diode bridge blocks again:}
    \begin{equation}
     \begin{split}
         \onslide<1->{i_2(\omega t_3) &= \frac{\hat{u}_1}{\omega L} \left(\cos(\alpha)-\cos(\omega t_3)-\frac{U_2}{\hat{u}_1}(\omega t_3 - \alpha)\right) \stackrel{!}{=} 0}\\
@@ -1381,12 +1381,12 @@
             -i_2(t), & \pi+\alpha \leq \omega t < \pi+\alpha+\beta.
         \end{cases}
     \end{equation}}%
-    \onslide<2->{The minus sign during the second half-cycle results from the conducting diodes D3/D4 reversing the current direction in the inductor -- cf. \figref{fig:B2U_topology_capacitive_filter_grid}.}\onslide<3->{ The input current can be decomposed into its \hl{fundamental and harmonic components}:
+    \onslide<2->{The minus sign during the second half-cycle results from the conducting diodes D3/D4 reversing the current direction in the inductor -- cf. \figref{fig:B2U_topology_capacitive_filter_grid}.}\onslide<3->{ The input current can be decomposed via the Fourier series into its \hl{fundamental and harmonic components}:
     \begin{equation}
         i_1(t) = \underbrace{a_1 \cos(\omega t) + b_1 \sin(\omega t)\vphantom{\sum_{k=2}^{\infty}}}_{=i_1^{(1)}(t)} + \underbrace{\sum_{k=2}^{\infty} \left( a^{(k)} \cos(k\omega t) + b^{(k)} \sin(k\omega t) \right)}_{i_1^{(\mathrm{h})}(t)}, \quad k\in \mathbb{N}.
         \label{eq:input_current_decomposition_B2U}
     \end{equation}}%
-    \onslide<4->{As will be discussed in the following, the harmonic components $i_1^{(\mathrm{h})}(t)$ are considered distortions negatively impacting the grid quality.}
+    \onslide<4->{As will be discussed in the following, the \hl{harmonic components $i_1^{(\mathrm{h})}(t)$ are considered distortions} negatively impacting the grid quality.}
 \end{frame}
 
 
@@ -1463,7 +1463,7 @@
             u(\omega t) = \overline{u} + \sum_{k=1}^{\infty} \hat{u}^{(k)}\cos(k\omega t -\varphi_u^{(k)}),\quad 
             i(\omega t) = \overline{i} + \sum_{k=1}^{\infty} \hat{i}^{(k)}\cos(k\omega t -\varphi_i^{(k)})
     \end{equation}
-    with $\overline{u}$ and $\overline{i}$ being the DC components, $\hat{u}^{(k)}$ and $\hat{i}^{(k)}$ the amplitudes of the $k$-th harmonic and $\varphi_u^{(k)}$ and $\varphi_i^{(k)}$ the phase angles of the voltage and current harmonics.\pause This amplitude-phase representation is analogous to \eqref{eq:Fourier_series} with the relations:
+    with $\overline{u}$ and $\overline{i}$ being the DC components, $\hat{u}^{(k)}$ and $\hat{i}^{(k)}$ the amplitudes of the $k$-th harmonic and $\varphi_u^{(k)}$ and $\varphi_i^{(k)}$ the phase angles of the $k$-th voltage and current harmonics.\pause This amplitude-phase representation is analogous to the orthogonal representation \eqref{eq:Fourier_series} with the relations:
     \begin{equation}
             \hat{x}^{(k)} = \sqrt{(a^{(k)})^2 + (b^{(k)})^2}, \quad \varphi_x^{(k)} = -\arccos\left(\frac{a^{(k)}}{\hat{x}^{(k)}}\right) \cdot \mathrm{sign}\left(b^{(k)}\right).
     \end{equation}
@@ -2064,7 +2064,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
         \label{eq:PFC_duty_cycle_feed_forward}
     \end{equation}\pause 
     \begin{varblock}{Remark on nomenclature and steady state}
-        In contrast to the previous DC/DC converter section, the duty cycle $d(t)$ is now a function of time and not a constant (small $d$ instead of capital $D$). However, the voltage transfer to duty cycle ratio was derived in steady state, i.e., \eqref{eq:PFC_duty_cycle_feed_forward} only holds approximately for $f_\mathrm{s}>> f=\nicefrac{\omega}{2\pi}$ (so-called \hl{quasi steady state}). 
+        In contrast to the previous DC/DC converter section, the duty cycle $d(t)$ is a function of time and not a constant (small $d$ instead of capital $D$) now. However, the voltage transfer to duty cycle ratio was derived in steady state, i.e., \eqref{eq:PFC_duty_cycle_feed_forward} only holds approximately for $f_\mathrm{s}>> f=\nicefrac{\omega}{2\pi}$ (so-called \hl{quasi steady state}). 
     \end{varblock}
 \end{frame}
 
