@@ -2142,7 +2142,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{PFC rectifier with boost converter (cont.)}
-    \onslide<1->{The duty cycle from \eqref{eq:PFC_duty_cycle_feed_forward} does not consider the inner voltage demand of the boost converter, in particular of its filter inductor $L$:} 
+    \onslide<1->{The duty cycle from \eqref{eq:PFC_duty_cycle_feed_forward} does not consider the \hl{inner voltage demand} of the boost converter, in particular of its filter inductor $L$:} 
     \begin{equation}
     \begin{split}
         \onslide<1->{u_\mathrm{L}(t) &= L \frac{\mathrm{d}}{\mathrm{d}t}i'(t)}\onslide<2->{ = L \frac{\mathrm{d}}{\mathrm{d}t} \left(\hat{i}_1 |\sin(\omega t)|\right)}\\
@@ -2355,7 +2355,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \onslide<5->{Inserting $d(t)$ from \eqref{eq:PFC_duty_cycle_feed_forward_with_inductor} in a quasi steady-state fashion yields
     \begin{equation}
         \Delta i_1(t) = \pm \frac{\hat{u}_1 T_\mathrm{s} \sin(\omega t)}{2L}\left(1 - \frac{1}{M}|\sin(\omega t)| + \frac{\hat{i}_1\omega L}{M\hat{u}_1} \cos(\omega t) \mathrm{sgn}(\sin(\omega t))\right).
-    \end{equation}}
+    \end{equation}}%
     \onslide<6->{Due to the varying input voltage and duty cycle, the ripple current is not constant but also varies with time (cf. next slide).} 
 \end{frame}
 
@@ -2556,10 +2556,10 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \begin{equation}
         \onslide<1->{i_2^{(\mathrm{h})}(t) \approx \frac{p_2^{(\mathrm{h})}(t)}{\overline{u}_2}}\onslide<2->{ = -\frac{\hat{u}_1\hat{i}_1}{2\overline{u}_2}\cos(2\omega t)}\onslide<3->{ = -\frac{\overline{p}_2}{\overline{u}_2}\cos(2\omega t).}
     \end{equation}
-    \onslide<4->{If the load current $I_0$ is (approximately) constant, the harmonic current is entirely flowing into the output capacitor $i_2^{(\mathrm{h})}(t)=i_\mathrm{C}(t)$}\onslide<5->{ leading to the voltage ripple:
+    \onslide<4->{If the load current $I_0$ is (approximately) constant, the \hl{harmonic current is flowing into the filter capacitor} $i_2^{(\mathrm{h})}(t)=i_\mathrm{C}(t)$}\onslide<5->{ leading to the voltage ripple:
     \begin{equation}
         \Delta u_2(t) = \frac{1}{C} \int  i_\mathrm{C}(t) \mathrm{d} t = -\underbrace{\frac{\overline{p}_2}{\overline{u}_2} \frac{1}{2\omega C}}_{\Delta \hat{u}_2} \sin(2\omega t).
-    \end{equation}}
+    \end{equation}}%
     \onslide<6->{To limit the output voltage ripple to a certain amplitude value $\Delta \hat{u}_2$, the output capacitor $C$ must exhibit a minimal capacitance value:
     \begin{equation}
         C > \frac{\overline{p}_2}{\overline{u}_2} \frac{1}{2\omega \Delta \hat{u}_2}.
@@ -2694,7 +2694,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
         \item Hence, there is a negative voltage difference between the phases $b$-$a$ and $c$-$a$.
         \item These can be only compensated by the diodes $D_2$ and $D_3$, which are in blocking mode while $D_1$ is conducting.
     \end{itemize}}
-    \onslide<3->{The average output voltage can be found by evaluating the conduction interval of one phase, e.g., $u_{1\mathrm{a}}(t)$:}
+    \onslide<3->{The \hl{average output voltage} can be found by evaluating the conduction interval of one phase, e.g., $u_{1\mathrm{a}}(t)$:}
     \begin{equation}
         \begin{split}
             \onslide<3->{\bar{u}_2 = \frac{3}{2\pi} \int^{\frac{5}{6}\pi}_{\frac{1}{6}\pi} \hat{u}_1 \sin(\omega t) \mathrm{d}\omega t } \onslide<4->{ = \frac{3}{2\pi} \left[-\hat{u}_1 \cos(\omega t) \right]^{\frac{5}{6}\pi}_{\frac{1}{6}\pi} } \onslide<5->{= \frac{3}{2\pi}\hat{u}_1 2\frac{\sqrt{3}}{2} = \frac{3\sqrt{3}}{2\pi}\hat{u}_1.}
@@ -2845,7 +2845,7 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{M3U rectifier with output filter (cont.)}
-    \onslide<1->{The average inductor current can be calculated as}
+    \onslide<1->{The \hl{average inductor current} can be calculated as}
     \begin{equation}
         \begin{split}
             \onslide<1->{\overline{i}_2 &= \frac{3}{2\pi} \int_{\frac{1}{6}\pi}^{\frac{5}{6}\pi} i_2(\omega \tau) \mathrm{d} \omega \tau} \onslide<2->{= \frac{3}{2\pi} \int_{\frac{1}{6}\pi}^{\frac{5}{6}\pi} i_2(\omega t_1) \mathrm{d} \omega \tau} \\ \onslide<2->{&+ \frac{3}{2\pi} \int_{\frac{1}{6}\pi}^{\frac{5}{6}\pi} \frac{\hat{u}_1}{\omega L} \left[-\cos(\omega \tau) + \cos(\omega t_1) -\sin(\omega t_1)\left(\omega \tau - \omega t_1\right)\right] \mathrm{d} \omega \tau\\}
@@ -2873,12 +2873,12 @@ with $n=k-m\in\mathbb{Z}$ or $n=k+m\in\mathbb{Z}$, respectively.} \onslide<4->{D
     \begin{equation}
         \begin{split}
             \onslide<4->{\overline{i}_2 &= \frac{\hat{u}_1}{\omega L}\left[\cos(\omega t_1) + \sin(\omega t_1)(\omega t_1 - \frac{\pi}{2})\right]\\} \onslide<5->{
-                           & =  \frac{\overline{u}_2}{\omega L}\left[\tan(\omega t_1) + \omega t_1 - \frac{\pi}{2}\right].}
+                           & =  \frac{\overline{u}_2}{\omega L}\left[\cot(\omega t_1) + \omega t_1 - \frac{\pi}{2}\right].}
         \end{split}
     \end{equation}
     \onslide<6->{One can also reinterpret this result for designing the filter inductor $L$ to ensure CCM operation:
     \begin{equation}
-        L \geq \frac{\overline{u}_2}{\omega \overline{i}_2}\left[\tan(\omega t_1) + \omega t_1 - \frac{\pi}{2}\right].
+        L \geq \frac{\overline{u}_2}{\omega \overline{i}_2}\left[\cot(\omega t_1) + \omega t_1 - \frac{\pi}{2}\right].
     \end{equation}}
 \end{frame}
 
