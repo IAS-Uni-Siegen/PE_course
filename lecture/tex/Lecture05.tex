@@ -1368,17 +1368,18 @@
     \frametitle{Output voltage of a thyristor bridge converter with $p$ pulses}
     \begin{columns}
         \begin{column}{0.5\textwidth}
-            The average output voltage (under idealized CCM operation) of a thyristor bridge converter with $p$ pulses is given by
+            \onslide<1->{The average output voltage (under idealized CCM operation) of a thyristor bridge converter with $p$ pulses is given by}
             \begin{align}
-                \overline{u}_2 & = \frac{p}{2\pi} \int_{\alpha-\frac{\pi}{p}}^{\alpha+\frac{\pi}{p}}\hat{u} \cos(\omega t) \mathrm{d}\omega t\notag    \\
-                               & =\hat{u}\frac{p}{2\pi}\left[\sin\left(\alpha+\frac{\pi}{p}\right)- \sin\left(\alpha-\frac{\pi}{p}\right)\right]\notag \\
-                               & = \hat{u}\frac{p}{\pi}\sin\left(\frac{\pi}{p}\right)\cos(\alpha\vphantom{\frac{\pi}{p}}).
-            \end{align}
-            Here, the maximum achievable voltage
-            \begin{equation}
-                \max_{\alpha} \overline{u}_2 = \hat{u}\frac{p}{\pi}\sin\left(\nicefrac{\pi}{p}\right)
-            \end{equation}
-            increases with the number of pulses $p$.
+                \onslide<1->{\overline{u}_2 & = \frac{p}{2\pi} \int_{\alpha-\frac{\pi}{p}}^{\alpha+\frac{\pi}{p}}\hat{u} \cos(\omega t) \mathrm{d}\omega t\notag}   \\
+                \onslide<2->{               & =\hat{u}\frac{p}{2\pi}\left[\sin\left(\alpha+\frac{\pi}{p}\right)- \sin\left(\alpha-\frac{\pi}{p}\right)\right]\notag \\
+                                            & = \hat{u}\frac{p}{\pi}\sin\left(\frac{\pi}{p}\right)\cos(\alpha\vphantom{\frac{\pi}{p}}).}
+            \end{align}%
+            \onslide<3->{
+                Here, the maximum achievable voltage
+                \begin{equation}
+                    \max_{\alpha} \overline{u}_2 = \hat{u}\frac{p}{\pi}\sin\left(\nicefrac{\pi}{p}\right)
+                \end{equation}
+                increases with the number of pulses $p$.}
         \end{column}
         \begin{column}{0.5\textwidth}
             \begin{figure}
