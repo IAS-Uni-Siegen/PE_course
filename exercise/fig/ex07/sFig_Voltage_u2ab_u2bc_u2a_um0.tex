@@ -3,147 +3,144 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{solutionfigure}[ht]
-    \centering
-    \begin{tikzpicture}
-      % groupplot begin
-      \begin{groupplot}[group style={
-            group size=1 by 7,
-            xlabels at=edge bottom,
-            y descriptions at=edge left,
-          },
-          width=16cm, height=10cm,
-          axis lines=middle, 
-          enlargelimits,
-          axis line style={->}, % Pfeilspitzen an den Achsen
-          xmin=0, xmax=6.2,
-          ymin=-1, ymax=1,
-          extra x ticks=0,
-          xtick={ 1, 2, 3, 4, 5, 6},
-          xticklabels={$\frac{1\pi}{3}$, $\frac{2\pi}{3}$,$\pi$, $\frac{4\pi}{3}$, $\frac{5\pi}{3}$, $2\pi$},,
-          xticklabel style = {anchor=north,shift={(0.25cm,0.1cm)}},
-        %  grid=both,
-        ]
-     
-        \nextgroupplot[
-          ymin=-1.2, ymax=1.2,
-          samples=500,
-          ytick distance=2,
-          x label style={at={(axis description cs:1,0)},anchor=north},
-          y label style={at={(axis description cs:0,.97)},anchor=south},
-          height=0.2\textwidth,
-          xlabel={$\omega t$},             
-          ylabel={$u_\mathrm{2ab}(\omega t)/ \SI{}{\volt}$},             
-          ytick={-1, 0,1},
-          yticklabels={$-510$,, $510$},
-        ]
-        \addplot[color=signalalpha,mark=none,solid, thick] 
-          coordinates{
-            (0, 1)
-            (2, 1)
-            (2, 0)
-            (3, 0)
-            (3, -1)
-            (5, -1)
-            (5, 0)
-            (6, 0)
-            (6, 1)
-            (6.2,1)
-        };          
+	\centering
+	\begin{tikzpicture}
+		% groupplot begin
+		\begin{groupplot}[group style={
+						group size=1 by 7,
+						xlabels at=edge bottom,
+						y descriptions at=edge left,
+					},
+				width=16cm, height=10cm,
+				axis lines=middle,
+				enlargelimits,
+				axis line style={->}, % Pfeilspitzen an den Achsen
+				xmin=0, xmax=6.2,
+				ymin=-1, ymax=1,
+				extra x ticks=0,
+				xtick={ 1, 2, 3, 4, 5, 6},
+				xticklabels={$\frac{1\pi}{3}$, $\frac{2\pi}{3}$,$\pi$, $\frac{4\pi}{3}$, $\frac{5\pi}{3}$, $2\pi$},,
+				xticklabel style = {anchor=north,shift={(0.25cm,0.1cm)}},
+				%  grid=both,
+			]
 
-        \nextgroupplot[
-          ymin=-1.2, ymax=1.2,
-          samples=500,
-          ytick distance=2,
-          x label style={at={(axis description cs:1,0)},anchor=north},
-          y label style={at={(axis description cs:0,.97)},anchor=south},
-          height=0.2\textwidth,
-          xlabel={$\omega t$},             
-          ylabel={$u_\mathrm{2bc}(\omega t)/ \SI{}{\volt}$},             
-          ytick={-1, 0,1},
-          yticklabels={$-510$,,$510$},
-        ]
-        \addplot[color=signalalpha,mark=none,solid, thick] 
-          coordinates{
-            (0, -1)
-            (1, -1)
-            (1, 0)
-            (2, 0)
-            (2, 1)
-            (4, 1)
-            (4, 0)
-            (5, 0)
-            (5, -1)
-            (6.2,-1)
-        };                  
+			\nextgroupplot[
+				ymin=-1.2, ymax=1.2,
+				samples=500,
+				ytick distance=2,
+				x label style={at={(axis description cs:1,0)},anchor=north},
+				y label style={at={(axis description cs:0,.97)},anchor=south},
+				height=0.2\textwidth,
+				xlabel={$\omega t$},
+				ylabel={$u_\mathrm{2ab}(\omega t)/ \SI{}{\volt}$},
+				ytick={-1, 0,1},
+				yticklabels={$-510$,, $510$},
+			]
+			\addplot[color=signalalpha,mark=none,solid, thick]
+			coordinates{
+					(0, 1)
+					(2, 1)
+					(2, 0)
+					(3, 0)
+					(3, -1)
+					(5, -1)
+					(5, 0)
+					(6, 0)
+					(6, 1)
+					(6.2,1)
+				};
 
-        \nextgroupplot[
-          ymin=-430, ymax=430,
-          samples=500,
-          ytick distance=2,
-          x label style={at={(axis description cs:1,0)},anchor=north},
-          y label style={at={(axis description cs:0,.97)},anchor=south},
-          height=0.2\textwidth,
-          xlabel={$\omega t$},             
-          ylabel={$u_\mathrm{2a}(\omega t)/ \SI{}{\volt}$},             
-          ytick={-400,-200,0,200,400},
-          yticklabels={$-400$, $-200$,,$200$, $400$},
-        ]
-        \addplot[color=signalalpha,mark=none,solid, thick] 
-          coordinates{
-            (0, -170)
-            (0,  170)
-            (1,  170)
-            (1,  340)
-            (2,  340)
-            (2,  170)
-            (3,  170)
-            (3, -170)
-            (4, -170)
-            (4, -340)
-            (5, -340)
-            (5, -170)
-            (6, -170)
-            (6,  170)
-            (6.2,170)
-        };          
+			\nextgroupplot[
+				ymin=-1.2, ymax=1.2,
+				samples=500,
+				ytick distance=2,
+				x label style={at={(axis description cs:1,0)},anchor=north},
+				y label style={at={(axis description cs:0,.97)},anchor=south},
+				height=0.2\textwidth,
+				xlabel={$\omega t$},
+				ylabel={$u_\mathrm{2bc}(\omega t)/ \SI{}{\volt}$},
+				ytick={-1, 0,1},
+				yticklabels={$-510$,,$510$},
+			]
+			\addplot[color=signalalpha,mark=none,solid, thick]
+			coordinates{
+					(0, -1)
+					(1, -1)
+					(1, 0)
+					(2, 0)
+					(2, 1)
+					(4, 1)
+					(4, 0)
+					(5, 0)
+					(5, -1)
+					(6.2,-1)
+				};
 
-        \nextgroupplot[
-          ymin=-120, ymax=120,
-          samples=500,
-          ytick distance=2,
-          x label style={at={(axis description cs:1,0)},anchor=north},
-          y label style={at={(axis description cs:0,.97)},anchor=south},
-          height=0.2\textwidth,
-          xlabel={$\omega t$},             
-          ylabel={$u_\mathrm{n0}(\omega t)/ \SI{}{\volt}$},             
-          ytick={-100,50,0,50,100},
-          yticklabels={$-100$,,,,$100$},
-        ]
-        \addplot[color=signalalpha,mark=none,solid, thick] 
-          coordinates{
-            (0, -85)
-            (0, 85)
-            (1, 85)
-            (1, -85)
-            (2, -85)
-            (2,  85)
-            (3,  85)
-            (3, -85)
-            (4, -85)
-            (4,  85)
-            (5,  85)
-            (5, -85)
-            (6, -85)
-            (6,  85)
-            (6.2,85)
-        };          
+			\nextgroupplot[
+				ymin=-430, ymax=430,
+				samples=500,
+				ytick distance=2,
+				x label style={at={(axis description cs:1,0)},anchor=north},
+				y label style={at={(axis description cs:0,.97)},anchor=south},
+				height=0.2\textwidth,
+				xlabel={$\omega t$},
+				ylabel={$u_\mathrm{2a}(\omega t)/ \SI{}{\volt}$},
+				ytick={-400,-200,0,200,400},
+				yticklabels={$-400$, $-200$,,$200$, $400$},
+			]
+			\addplot[color=signalalpha,mark=none,solid, thick]
+			coordinates{
+					(0, -170)
+					(0,  170)
+					(1,  170)
+					(1,  340)
+					(2,  340)
+					(2,  170)
+					(3,  170)
+					(3, -170)
+					(4, -170)
+					(4, -340)
+					(5, -340)
+					(5, -170)
+					(6, -170)
+					(6,  170)
+					(6.2,170)
+				};
 
+			\nextgroupplot[
+				ymin=-120, ymax=120,
+				samples=500,
+				ytick distance=2,
+				x label style={at={(axis description cs:1,0)},anchor=north},
+				y label style={at={(axis description cs:0,.97)},anchor=south},
+				height=0.2\textwidth,
+				xlabel={$\omega t$},
+				ylabel={$u_\mathrm{n0}(\omega t)/ \SI{}{\volt}$},
+				ytick={-100,50,0,50,100},
+				yticklabels={$-100$,,,,$100$},
+			]
+			\addplot[color=signalalpha,mark=none,solid, thick]
+			coordinates{
+					(0, -85)
+					(0, 85)
+					(1, 85)
+					(1, -85)
+					(2, -85)
+					(2,  85)
+					(3,  85)
+					(3, -85)
+					(4, -85)
+					(4,  85)
+					(5,  85)
+					(5, -85)
+					(6, -85)
+					(6,  85)
+					(6.2,85)
+				};
 
-
-
-      \end{groupplot}
-    \end{tikzpicture}
-    \caption{Voltage signals of $u_\mathrm{2a}(\mathrm{\omega t})$, $u_\mathrm{2n0}(\mathrm{\omega t})$, $u_\mathrm{2ab}(\mathrm{\omega t})$ 
-             and $u_\mathrm{2bc}(\mathrm{\omega t})$.}
-    \label{sfig:voltage_u2ab_u2bc_u2a_u2n0}
+		\end{groupplot}
+	\end{tikzpicture}
+	\caption{Voltage signals of $u_\mathrm{2a}(\mathrm{\omega t})$, $u_\mathrm{2n0}(\mathrm{\omega t})$, $u_\mathrm{2ab}(\mathrm{\omega t})$
+		and $u_\mathrm{2bc}(\mathrm{\omega t})$.}
+	\label{sfig:voltage_u2ab_u2bc_u2a_u2n0}
 \end{solutionfigure}

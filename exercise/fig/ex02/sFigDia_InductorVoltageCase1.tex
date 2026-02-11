@@ -3,54 +3,51 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{solutionfigure}[htb]
-    \centering
-    \begin{tikzpicture}
-        \begin{axis}[
-                domain=0:15,
-                % x/y range adjustment
-                xmin=0, xmax=45,
-                ymin=-500, ymax=500,
-                samples=500,
-                axis y line=center,
-                axis x line=middle,
-                extra y ticks=0,
-                % Label text
-                xlabel={$t / \SI{}{\micro\second}$},,
-                ylabel={$u_\text{L}(t)/\mathrm{V}$},
-                % Label adjustment
-                x label style={at={(axis description cs:1,0.5)},anchor=west},
-                y label style={at={(axis description cs:-.05,.97)},anchor=south},
-                width=0.6\textwidth,
-                height=0.3\textwidth,
-                % x-Ticks
-                xtick={0,5,10,15,20,25,30,35,40},
-                xticklabels={0,,10,,20,,30,,40},
-                xticklabel style = {yshift=0.3cm,anchor=east},
-                % y-Ticks
-                ytick={400,200,0,-200,-400},
-                yticklabels={400,200,,-200,-400},
-                yticklabel style = {yshift=0.2cm,anchor=east},
-                % Grid layout
-                grid=both,
-                grid style={line width=.1pt, draw=gray!10},
-                major grid style={line width=.2pt,draw=gray!50},
-            ]
-            \addplot[color=signalalpha,mark=none,solid, thick] coordinates{
-                (0, 320)
-                (11, 320)
-                (11, -80)
-                (36, -80)
-                (36, -400)
-                (40, -400)
-                (40, 320)
-                (44, 320)
-                };                
-        \end{axis}
-    \end{tikzpicture}
-    \caption{Voltage at inductor in case 1.}
-    \label{fig:VoltageAtInductorInCase1}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				domain=0:15,
+				% x/y range adjustment
+				xmin=0, xmax=45,
+				ymin=-500, ymax=500,
+				samples=500,
+				axis y line=center,
+				axis x line=middle,
+				extra y ticks=0,
+				% Label text
+				xlabel={$t / \SI{}{\micro\second}$},,
+				ylabel={$u_\text{L}(t)/\mathrm{V}$},
+				% Label adjustment
+				x label style={at={(axis description cs:1,0.5)},anchor=west},
+				y label style={at={(axis description cs:-.05,.97)},anchor=south},
+				width=0.6\textwidth,
+				height=0.3\textwidth,
+				% x-Ticks
+				xtick={0,5,10,15,20,25,30,35,40},
+				xticklabels={0,,10,,20,,30,,40},
+				xticklabel style = {yshift=0.3cm,anchor=east},
+				% y-Ticks
+				ytick={400,200,0,-200,-400},
+				yticklabels={400,200,,-200,-400},
+				yticklabel style = {yshift=0.2cm,anchor=east},
+				% Grid layout
+				grid=both,
+				grid style={line width=.1pt, draw=gray!10},
+				major grid style={line width=.2pt,draw=gray!50},
+			]
+			\addplot[color=signalalpha,mark=none,solid, thick] coordinates{
+					(0, 320)
+					(11, 320)
+					(11, -80)
+					(36, -80)
+					(36, -400)
+					(40, -400)
+					(40, 320)
+					(44, 320)
+				};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Voltage at inductor in case 1.}
+	\label{fig:VoltageAtInductorInCase1}
 \end{solutionfigure}
-
-
-
 

@@ -3,49 +3,44 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{solutionfigure}[htb]
-    \centering
-    \begin{minipage}{0.8\textwidth}    
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[,
-                    % x/y range adjustment
-                    xmin=250, xmax=500,
-                    ymin=0.4, ymax=0.65,
-                    samples=500,
-                    axis y line=center,
-                    axis x line=middle,
-                    extra y ticks=0,
-                    % Label text
-                    xlabel={$U_\mathrm{2} \text{/V}$},
-                    ylabel={$D$},
-                    % Label adjustment
-                    x label style={at={(axis description cs:1,0)},anchor=west},
-                    y label style={at={(axis description cs:-.05,1)},anchor=south},
-                    width=0.6\textwidth,
-                    height=0.3\textwidth,
-                    % x-Ticks                
-                    xtick={250,300,350,400,450,800},
-                    xticklabels={250,300,350,400,450,800},
-                    xticklabel style = {anchor=north},
-                    % y-Ticks                
-                    ytick={0.4,0.45,0.5,0.55,0.6},
-                    yticklabels={0.4,0.45,0.5,0.55,0.6},
-                    yticklabel style = {anchor=east},
-                    % Grid layout                
-                    grid=both,
-                    grid style={line width=.1pt, draw=gray!10},
-                    major grid style={line width=.2pt,draw=gray!50},
-                ]
-                \addplot[signaldelta, domain=282:450, thick] {(x/380)/(1+x/380)};
-            \end{axis}
-        \end{tikzpicture}
-        \end{minipage}
-        \caption{Duty cycle versus output voltage.}
-    \label{fig:DutyCycleAtOutputVoltage}     
+	\centering
+	\begin{minipage}{0.8\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[,
+					% x/y range adjustment
+					xmin=250, xmax=500,
+					ymin=0.4, ymax=0.65,
+					samples=500,
+					axis y line=center,
+					axis x line=middle,
+					extra y ticks=0,
+					% Label text
+					xlabel={$U_\mathrm{2} \text{/V}$},
+					ylabel={$D$},
+					% Label adjustment
+					x label style={at={(axis description cs:1,0)},anchor=west},
+					y label style={at={(axis description cs:-.05,1)},anchor=south},
+					width=0.6\textwidth,
+					height=0.3\textwidth,
+					% x-Ticks                
+					xtick={250,300,350,400,450,800},
+					xticklabels={250,300,350,400,450,800},
+					xticklabel style = {anchor=north},
+					% y-Ticks                
+					ytick={0.4,0.45,0.5,0.55,0.6},
+					yticklabels={0.4,0.45,0.5,0.55,0.6},
+					yticklabel style = {anchor=east},
+					% Grid layout                
+					grid=both,
+					grid style={line width=.1pt, draw=gray!10},
+					major grid style={line width=.2pt,draw=gray!50},
+				]
+				\addplot[signaldelta, domain=282:450, thick] {(x/380)/(1+x/380)};
+			\end{axis}
+		\end{tikzpicture}
+	\end{minipage}
+	\caption{Duty cycle versus output voltage.}
+	\label{fig:DutyCycleAtOutputVoltage}
 \end{solutionfigure}
-
-
-
-
-
 

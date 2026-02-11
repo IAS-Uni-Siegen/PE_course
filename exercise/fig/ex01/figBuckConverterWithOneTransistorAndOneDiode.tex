@@ -3,24 +3,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[ht]
-    \begin{center}
-        \begin{circuitikz}[european currents,european resistors,american inductors]
-            \draw
-        (0,0) coordinate(N1) to [short] ++(1.5,0) coordinate(Ud)
-        ++(0,-1) node[nigfete](Trans){}
-        (Ud) to [short,i=$i_{\mathrm{c}}(t)$] (Trans.drain)
-        (Trans.source) to [short,-] ++(0,0) coordinate(U2p)
-        node[circ]{}
-        to [short,-] ++(0,0) to [L,l^=$L$] ++(3,0) coordinate(Lp) to [short,-] ++(0,-2) coordinate(Lp10)
-        (Lp) to [V, v_=$U_2$] (Lp10)
-        (Lp) to [open] (Lp10)
-        coordinate(Lp10) to  [short,-] ++(-3,0) coordinate(D)
-        to [D,l^=$D$, i=$i_{\mathrm{D}}(t)$] ++(0,2)
-        (0,-3.77) coordinate(Bw) to [short] ++(3,0) coordinate(U1)
-        %(N1) to [V] (Bw)
-        (N1) to [V,v_=$U_1$] (Bw)
-        ;
-        \end{circuitikz}
-    \end{center}
-    \caption{Buck converter with one transistor and one diode.}
+	\begin{center}
+		\begin{circuitikz}[european currents,european resistors,american inductors]
+			\draw
+			(0,0) coordinate(N1) to [short] ++(1.5,0) coordinate(Ud)
+			++(0,-1) node[nigfete](Trans){}
+			(Ud) to [short,i=$i_{\mathrm{c}}(t)$] (Trans.drain)
+			(Trans.source) to [short,-] ++(0,0) coordinate(U2p)
+			node[circ]{}
+			to [short,-] ++(0,0) to [L,l^=$L$] ++(3,0) coordinate(Lp) to [short,-] ++(0,-2) coordinate(Lp10)
+			(Lp) to [V, v_=$U_2$] (Lp10)
+			(Lp) to [open] (Lp10)
+			coordinate(Lp10) to  [short,-] ++(-3,0) coordinate(D)
+			to [D,l^=$D$, i=$i_{\mathrm{D}}(t)$] ++(0,2)
+			(0,-3.77) coordinate(Bw) to [short] ++(3,0) coordinate(U1)
+			%(N1) to [V] (Bw)
+			(N1) to [V,v_=$U_1$] (Bw)
+			;
+		\end{circuitikz}
+	\end{center}
+	\caption{Buck converter with one transistor and one diode.}
 \end{figure}

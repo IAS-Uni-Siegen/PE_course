@@ -1,121 +1,119 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- % Fig_ThreePhaseInverter_6StepMode
+% Fig_ThreePhaseInverter_6StepMode
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \begin{figure}[htb]
-        \begin{center}
-            \begin{circuitikz}
-                % Add voltage U1p
-                \draw (0,0) coordinate (U1p) to [open, o-o, v = $\frac{U_1}{2}$, voltage = straight] ++(0,-2.5) coordinate (Gnd)
-                (Gnd) ++ (-0.4,0) node[rground](){} coordinate (GndSymb)
-                (Gnd) to [short,-] (GndSymb)
-                (Gnd) to [open, -o, v = $\frac{U_1}{2}$, voltage = straight] ++(0,-2.5) coordinate (U1m)
-                % Add current
-                (U1p) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (jT1c)
-                % Add T1
-                (jT1c) to [Tnpn, n=T1, invert, bodydiode] ++(0,-2) coordinate (jT1e)
-                % Add connection to u2a
-                (jT1e) to [short, *-] ++(1,0) to [crossing] ++(2,0) to [crossing] ++(2,0) to [short,-] ++(3,0) coordinate (ju2a)          
-                % Add junction to T2
-                (jT1e) to [short] ++(0,-1) coordinate (jT2c)
-                % Add T2
-                (jT2c) to [Tnpn, n=T2, invert, bodydiode] ++(0,-2) coordinate (jT2e)
-                % Add connection to T3
-                (jT1c) to [short, *-] ++(2,0) coordinate (jT3c)
-                % Add T3
-                (jT3c) to [Tnpn, n=T3, invert, bodydiode] ++(0,-2) coordinate (jT3e)
-                % Add junction to ju2b
-                (jT3e) to [short] ++(0,-0.5) coordinate (jmu2b)
-                % Add connection to u1b
-                (jmu2b) to [short,*-] ++(1,0) to [crossing] ++(2,0) to [short,-] ++(3,0) coordinate (ju2b)
-                % Add junction to T4
-                (jmu2b) to [short] ++(0,-0.5) coordinate (jT4c)
-                % Add T4
-                (jT4c) to [Tnpn, n=T4, invert, bodydiode] ++(0,-2) coordinate (jT4e)
-                % Add connection to T5
-                (jT3c) to [short, *-] ++(2,0) coordinate (jT5c)
-                % Add T5
-                (jT5c) to [Tnpn, n=T5, invert, bodydiode] ++(0,-2) coordinate (jT5e)
-                % Add junction to T6
-                (jT5e) to [short] ++(0,-1) coordinate (jT6c)
-                % Add T6
-                (jT6c) to [Tnpn, n=T6, invert, bodydiode] ++(0,-2) coordinate (jT6e)
-                % Add connection to T4
-                (jT6e) to [short, -*] (jT4e)
-                % Add connection to T2
-                (jT4e) to [short, -*] (jT2e)
-                % Add connection to U1m
-                (jT2e) to [short, -] (U1m)
-                % Add 2. Ground symbol
-                (jmu2b) ++(4.7,-2.6) node[rground](){} coordinate (Gnd2)
-                % Add connection to u2c
-                (jT6c) to [short,*-] ++(4,0) coordinate (ju2c)
-                % Add connection to u2a inductor
-                (ju2a) to [short,-] ++(0,2) coordinate (ju2ax)
-                % Add u2a inductor
-                (ju2ax) to [L, l=$L$, name = L] ++(2,0) coordinate (ju2ae)
-                % Add u2ae
-                 (ju2ae) to [sV=$u_\mathrm{2ai}$] ++(1.5,0) coordinate (ju2an)
-                % Add u2b inductor
-                (ju2b) to [L, l=$L$, name = L] ++(2,0) coordinate (ju2be)
-                % Add u2be
-                 (ju2be) to [sV=$u_\mathrm{2bi}$] ++(1.5,0) coordinate (ju2bn)
-                % Add connection to u2c inductor
-                (ju2c) to [short,-] ++(0,-2) coordinate (ju2cx)
-                % Add u2a inductor
-                (ju2cx) to [L, l=$L$, name = L] ++(2,0) coordinate (ju2ce)
-                % Add u2ce
-                (ju2ce) to [sV=$u_\mathrm{2ci}$] ++(1.5,0) coordinate (ju2cn)
-                % Add connection of u2in
-                (ju2an) to [short,-*] (ju2bn) to [short,-] (ju2cn)
-                % Add connection point u2n
-                (ju2bn) to [short,-o] ++(0.6,0) coordinate (ju2n)
-                % Add 3. Ground symbol
-                (ju2n) ++(0,-2.6) node[rground](){} coordinate (Gnd3);
+\begin{figure}[htb]
+	\begin{center}
+		\begin{circuitikz}
+			% Add voltage U1p
+			\draw (0,0) coordinate (U1p) to [open, o-o, v = $\frac{U_1}{2}$, voltage = straight] ++(0,-2.5) coordinate (Gnd)
+			(Gnd) ++ (-0.4,0) node[rground](){} coordinate (GndSymb)
+			(Gnd) to [short,-] (GndSymb)
+			(Gnd) to [open, -o, v = $\frac{U_1}{2}$, voltage = straight] ++(0,-2.5) coordinate (U1m)
+			% Add current
+			(U1p) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (jT1c)
+			% Add T1
+			(jT1c) to [Tnpn, n=T1, invert, bodydiode] ++(0,-2) coordinate (jT1e)
+			% Add connection to u2a
+			(jT1e) to [short, *-] ++(1,0) to [crossing] ++(2,0) to [crossing] ++(2,0) to [short,-] ++(3,0) coordinate (ju2a)
+			% Add junction to T2
+			(jT1e) to [short] ++(0,-1) coordinate (jT2c)
+			% Add T2
+			(jT2c) to [Tnpn, n=T2, invert, bodydiode] ++(0,-2) coordinate (jT2e)
+			% Add connection to T3
+			(jT1c) to [short, *-] ++(2,0) coordinate (jT3c)
+			% Add T3
+			(jT3c) to [Tnpn, n=T3, invert, bodydiode] ++(0,-2) coordinate (jT3e)
+			% Add junction to ju2b
+			(jT3e) to [short] ++(0,-0.5) coordinate (jmu2b)
+			% Add connection to u1b
+			(jmu2b) to [short,*-] ++(1,0) to [crossing] ++(2,0) to [short,-] ++(3,0) coordinate (ju2b)
+			% Add junction to T4
+			(jmu2b) to [short] ++(0,-0.5) coordinate (jT4c)
+			% Add T4
+			(jT4c) to [Tnpn, n=T4, invert, bodydiode] ++(0,-2) coordinate (jT4e)
+			% Add connection to T5
+			(jT3c) to [short, *-] ++(2,0) coordinate (jT5c)
+			% Add T5
+			(jT5c) to [Tnpn, n=T5, invert, bodydiode] ++(0,-2) coordinate (jT5e)
+			% Add junction to T6
+			(jT5e) to [short] ++(0,-1) coordinate (jT6c)
+			% Add T6
+			(jT6c) to [Tnpn, n=T6, invert, bodydiode] ++(0,-2) coordinate (jT6e)
+			% Add connection to T4
+			(jT6e) to [short, -*] (jT4e)
+			% Add connection to T2
+			(jT4e) to [short, -*] (jT2e)
+			% Add connection to U1m
+			(jT2e) to [short, -] (U1m)
+			% Add 2. Ground symbol
+			(jmu2b) ++(4.7,-2.6) node[rground](){} coordinate (Gnd2)
+			% Add connection to u2c
+			(jT6c) to [short,*-] ++(4,0) coordinate (ju2c)
+			% Add connection to u2a inductor
+			(ju2a) to [short,-] ++(0,2) coordinate (ju2ax)
+			% Add u2a inductor
+			(ju2ax) to [L, l=$L$, name = L] ++(2,0) coordinate (ju2ae)
+			% Add u2ae
+			(ju2ae) to [sV=$u_\mathrm{2ai}$] ++(1.5,0) coordinate (ju2an)
+			% Add u2b inductor
+			(ju2b) to [L, l=$L$, name = L] ++(2,0) coordinate (ju2be)
+			% Add u2be
+			(ju2be) to [sV=$u_\mathrm{2bi}$] ++(1.5,0) coordinate (ju2bn)
+			% Add connection to u2c inductor
+			(ju2c) to [short,-] ++(0,-2) coordinate (ju2cx)
+			% Add u2a inductor
+			(ju2cx) to [L, l=$L$, name = L] ++(2,0) coordinate (ju2ce)
+			% Add u2ce
+			(ju2ce) to [sV=$u_\mathrm{2ci}$] ++(1.5,0) coordinate (ju2cn)
+			% Add connection of u2in
+			(ju2an) to [short,-*] (ju2bn) to [short,-] (ju2cn)
+			% Add connection point u2n
+			(ju2bn) to [short,-o] ++(0.6,0) coordinate (ju2n)
+			% Add 3. Ground symbol
+			(ju2n) ++(0,-2.6) node[rground](){} coordinate (Gnd3);
 
-
-                % Add component name of transistors
-                \draw let \p1 = (T1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
-                \draw let \p1 = (T2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
-                \draw let \p1 = (T3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
-                \draw let \p1 = (T4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
-                \draw let \p1 = (T5.B) in node[anchor=east] at (\x1,\y1) {$T_5$};
-                \draw let \p1 = (T6.B) in node[anchor=east] at (\x1,\y1) {$T_6$};
-                % Add current arrows i2a, i2b and i2c
-                \draw (jT1e) ++(1,0) node[currarrow](i2a){}
-                (i2a)  node[anchor=north,color=black]{$i_\mathrm{2a}(t)$}
-                (jmu2b) ++(1,0) node[currarrow](i2b){}
-                (i2b)  node[anchor=north,color=black]{$i_\mathrm{2b}(t)$}
-                (jT6c) ++(1,0) node[currarrow](i2c){}
-                (i2c)  node[anchor=north,color=black]{$i_\mathrm{2c}(t)$}
-                % Add voltage arrow u1
-                (U1p) ++(0.3,0.5) to [open,v^=$$,voltage = straight] ++(0,-6)coordinate (Uges)
-                (Uges) ++ (0.3,3) node[anchor=north,color=black]{$U_\mathrm{1}$}
-                % Add voltage arrow u2an, u2bn and u2cn
-                (ju2ax) ++(0,-0.8) to [open,v^=$u_\mathrm{2a}(t)$, voltage = straight] ++(3.8,0)
-                (ju2b) ++(0,-0.8) to [open,v^=$u_\mathrm{2b}(t)$,voltage = straight] ++(3.8,0)
-                (ju2cx) ++(0,-0.8) to [open,v^=$u_\mathrm{2c}(t)$,voltage = straight] ++(3.8,0)
-                % Add voltage arrow u2ab
-                (ju2ax) ++(0.2,0) to [open,v^=$$,voltage = straight] ++(0,-2.5)
-                (ju2ax) ++ (0.9,-1) node[anchor=north,color=black]{$u_\mathrm{2ab}(t)$}
-                % Add voltage arrow u2bc
-                (ju2b) ++(0.2,0) to [open,v^=$$,voltage = straight] ++(0,-2.5)
-                (ju2b) ++ (0.9,-1) node[anchor=north,color=black]{$u_\mathrm{2bc}(t)$}
-                % Add voltage arrow ua0
-                (Gnd2) ++(-0.7,3.4) to [open,v^=$$,voltage = straight] ++(0,-3.6)
-                (Gnd2) ++ (-1.4,1.2) node[anchor=north,color=black,rotate = 90]{$u_\mathrm{2a0}(t)$}
-                % Add voltage arrow ub0
-                (Gnd2) ++(0,2.9) to [open,v^=$$,voltage = straight] ++(0,-3.01)
-                (Gnd2) ++ (-0.7,1.2) node[anchor=north,color=black,rotate = 90]{$u_\mathrm{2b0}(t)$}
-                % Add voltage arrow uc0
-                (Gnd2) ++(0.7,2.4) to [open,v^=$$,voltage = straight] ++(0,-2.42)
-                (Gnd2) ++ (0,1.2) node[anchor=north,color=black,rotate = 90]{$u_\mathrm{2b0}(t)$}
-                % Add voltage arrow un0
-                (Gnd3) ++(0,2.8) to [open,v^=$$,voltage = straight] ++(0,-3.01)
-                (Gnd3) ++ (-0.7,1.2) node[anchor=north,color=black,rotate = 90]{$u_\mathrm{2n0}(t)$};
-            \end{circuitikz}
-        \end{center}
-        \caption{Three-phase inverter in six-step mode.}
-        \label{fig:Fig_ThreePhaseInverter_6StepMode}
-    \end{figure}
-
+			% Add component name of transistors
+			\draw let \p1 = (T1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+			\draw let \p1 = (T2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+			\draw let \p1 = (T3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
+			\draw let \p1 = (T4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
+			\draw let \p1 = (T5.B) in node[anchor=east] at (\x1,\y1) {$T_5$};
+			\draw let \p1 = (T6.B) in node[anchor=east] at (\x1,\y1) {$T_6$};
+			% Add current arrows i2a, i2b and i2c
+			\draw (jT1e) ++(1,0) node[currarrow](i2a){}
+			(i2a)  node[anchor=north,color=black]{$i_\mathrm{2a}(t)$}
+			(jmu2b) ++(1,0) node[currarrow](i2b){}
+			(i2b)  node[anchor=north,color=black]{$i_\mathrm{2b}(t)$}
+			(jT6c) ++(1,0) node[currarrow](i2c){}
+			(i2c)  node[anchor=north,color=black]{$i_\mathrm{2c}(t)$}
+			% Add voltage arrow u1
+			(U1p) ++(0.3,0.5) to [open,v^=$$,voltage = straight] ++(0,-6)coordinate (Uges)
+			(Uges) ++ (0.3,3) node[anchor=north,color=black]{$U_\mathrm{1}$}
+			% Add voltage arrow u2an, u2bn and u2cn
+			(ju2ax) ++(0,-0.8) to [open,v^=$u_\mathrm{2a}(t)$, voltage = straight] ++(3.8,0)
+			(ju2b) ++(0,-0.8) to [open,v^=$u_\mathrm{2b}(t)$,voltage = straight] ++(3.8,0)
+			(ju2cx) ++(0,-0.8) to [open,v^=$u_\mathrm{2c}(t)$,voltage = straight] ++(3.8,0)
+			% Add voltage arrow u2ab
+			(ju2ax) ++(0.2,0) to [open,v^=$$,voltage = straight] ++(0,-2.5)
+			(ju2ax) ++ (0.9,-1) node[anchor=north,color=black]{$u_\mathrm{2ab}(t)$}
+			% Add voltage arrow u2bc
+			(ju2b) ++(0.2,0) to [open,v^=$$,voltage = straight] ++(0,-2.5)
+			(ju2b) ++ (0.9,-1) node[anchor=north,color=black]{$u_\mathrm{2bc}(t)$}
+			% Add voltage arrow ua0
+			(Gnd2) ++(-0.7,3.4) to [open,v^=$$,voltage = straight] ++(0,-3.6)
+			(Gnd2) ++ (-1.4,1.2) node[anchor=north,color=black,rotate = 90]{$u_\mathrm{2a0}(t)$}
+			% Add voltage arrow ub0
+			(Gnd2) ++(0,2.9) to [open,v^=$$,voltage = straight] ++(0,-3.01)
+			(Gnd2) ++ (-0.7,1.2) node[anchor=north,color=black,rotate = 90]{$u_\mathrm{2b0}(t)$}
+			% Add voltage arrow uc0
+			(Gnd2) ++(0.7,2.4) to [open,v^=$$,voltage = straight] ++(0,-2.42)
+			(Gnd2) ++ (0,1.2) node[anchor=north,color=black,rotate = 90]{$u_\mathrm{2b0}(t)$}
+			% Add voltage arrow un0
+			(Gnd3) ++(0,2.8) to [open,v^=$$,voltage = straight] ++(0,-3.01)
+			(Gnd3) ++ (-0.7,1.2) node[anchor=north,color=black,rotate = 90]{$u_\mathrm{2n0}(t)$};
+		\end{circuitikz}
+	\end{center}
+	\caption{Three-phase inverter in six-step mode.}
+	\label{fig:Fig_ThreePhaseInverter_6StepMode}
+\end{figure}
 

@@ -3,33 +3,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{solutionfigure}[ht]
-    \centering
-    \begin{tabular}{cc}
-            transistor conducts & diode conducts\\
-        \begin{circuitikz}[european currents,european resistors,american inductors,]
-            \draw
-            (0,0) coordinate(u1o)
-            to [V,v^=$U_2$] ++(0,-3) coordinate(u1u)
-                (u1o) to [short,-,i^<=$i_2$] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}$,mirror,voltage=straight] ++(-3,0) to [short,-,i^<=$i_1$] ++(-1,0) coordinate(uqo)
-                (u1u) to [short,-] ++(-5,0) coordinate(uqu)
-                (uqo) to [V,v_=$U_1$] (uqu)
-                ;
-        \end{circuitikz}
-    &
-        \begin{circuitikz}[european currents,european resistors,american inductors,]
-            \draw
-            (0,0) coordinate(u2o)
-            to [V,v^=$U_2$, voltage=straight] ++(0,-3) coordinate(u2u)
-                (u2o) to [short,-,i^<=$i_2$] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}$,mirror,voltage=straight] ++(-3,0) coordinate(Ll) ++(-1,0) coordinate(uqo)
-                (u2u) to [short,-*] ++(-4,0) coordinate(Llu) to [short,-] ++(-1,0) coordinate(uqu)
-                (Llu) to [short,-,i_=$i_1$] (Ll)
-                (uqo) to [V,v_=$U_1$] (uqu)
-                ;
-        \end{circuitikz}
-    \end{tabular}
-    \caption{Circuits for different switching states.}
-    \label{fig:switching_states_step-down_converter}
+	\centering
+	\begin{tabular}{cc}
+		transistor conducts & diode conducts \\
+		\begin{circuitikz}[european currents,european resistors,american inductors,]
+			\draw
+			(0,0) coordinate(u1o)
+			to [V,v^=$U_2$] ++(0,-3) coordinate(u1u)
+			(u1o) to [short,-,i^<=$i_2$] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}$,mirror,voltage=straight] ++(-3,0) to [short,-,i^<=$i_1$] ++(-1,0) coordinate(uqo)
+			(u1u) to [short,-] ++(-5,0) coordinate(uqu)
+			(uqo) to [V,v_=$U_1$] (uqu)
+			;
+		\end{circuitikz}
+		                    &
+		\begin{circuitikz}[european currents,european resistors,american inductors,]
+			\draw
+			(0,0) coordinate(u2o)
+			to [V,v^=$U_2$, voltage=straight] ++(0,-3) coordinate(u2u)
+			(u2o) to [short,-,i^<=$i_2$] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}$,mirror,voltage=straight] ++(-3,0) coordinate(Ll) ++(-1,0) coordinate(uqo)
+			(u2u) to [short,-*] ++(-4,0) coordinate(Llu) to [short,-] ++(-1,0) coordinate(uqu)
+			(Llu) to [short,-,i_=$i_1$] (Ll)
+			(uqo) to [V,v_=$U_1$] (uqu)
+			;
+		\end{circuitikz}
+	\end{tabular}
+	\caption{Circuits for different switching states.}
+	\label{fig:switching_states_step-down_converter}
 \end{solutionfigure}
-
-
 

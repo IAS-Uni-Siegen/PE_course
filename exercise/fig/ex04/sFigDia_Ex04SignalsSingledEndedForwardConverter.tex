@@ -3,178 +3,175 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{solutionfigure}[htb]
-    \centering
-    \begin{tikzpicture}
-        \begin{axis}[
-                domain=0:15,
-                % x/y range adjustment
-                xmin=0, xmax=1.1,
-                ymin=-10, ymax=650,
-                samples=200,
-                axis y line=center,
-                axis x line=middle,
-                extra y ticks=0,
-                % Label text
-                xlabel={$t \cdot f_\mathrm{s}$},,
-                ylabel={$u_\text{T}(t)/\mathrm{V}$},
-                % Label adjustment
-                x label style={at={(axis description cs:1,0)},anchor=west},
-                y label style={at={(axis description cs:-.05,1)},anchor=south},
-                width=0.6\textwidth,
-                height=0.3\textwidth,
-                % x-Ticks
-                xtick={0,0.2,0.4,0.6,0.8,1},
-                xticklabels={0,0.2,0.4,0.6,0.8,1},
-                xticklabel style = {anchor=north},
-                % y-Ticks
-                ytick={600,500,400,300,200,100,0},
-                yticklabels={600,,400,,200,,0},
-                yticklabel style = {anchor=east},
-                % Grid layout
-                grid=both,
-                grid style={line width=.1pt, draw=gray!10},
-                major grid style={line width=.2pt,draw=gray!50},
-                thick
-            ]
-            %UT at U1=360V
-            \addplot[signalalpha,mark=none,solid] coordinates{
-                (0, 0)
-                (0.26, 0)
-                (0.26, 600)
-                (0.65, 600)
-                (0.65, 360)
-                (1,  360)
-                (1,0)
-                (1.05,0)
-                };            
-                \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,500) {$U_{\mathrm{1}}=\SI{360}{\volt}$};                    
-            %UT at U1=240V
-            \addplot[signalbeta,mark=none,solid] coordinates{
-                (0, 0)
-                (0.4, 0)
-                (0.4, 400)
-                (1,  400)
-                (1,0)
-                (1.05,0)
-                };                
-                \node[signalbeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.55,200) {$U_{\mathrm{1}}=\SI{240}{\volt}$};                    
-            \end{axis}     
-    \end{tikzpicture}
-    \caption{Voltage at the transistor.}
-    \label{fig:ex04_VoltageAtTransistor}
-    \begin{tikzpicture}
-        \begin{axis}[
-                domain=0:15,
-                % x/y range adjustment
-                xmin=0, xmax=1.1,
-                ymin=-50, ymax=1090,
-                samples=200,
-                axis y line=center,
-                axis x line=middle,
-                extra y ticks=0,
-                % Label text
-                xlabel={$t \cdot f_\mathrm{s}$},,
-                ylabel={$i_\text{m}(t)/\SI{}{\milli\ampere}$},
-                % Label adjustment
-                x label style={at={(axis description cs:1,0)},anchor=west},
-                y label style={at={(axis description cs:-.05,1)},anchor=south},
-                width=0.6\textwidth,
-                height=0.3\textwidth,
-                % x-Ticks
-                xtick={0,0.2,0.4,0.6,0.8,1},
-                xticklabels={0,0.2,0.4,0.6,0.8,1},
-                xticklabel style = {anchor=north},
-                % y-Ticks
-                ytick={1000,800,600,400,200,0},
-                yticklabels={1000,800,600,400,200,0},
-                yticklabel style = {anchor=east},
-                % Grid layout
-                grid=both,
-                grid style={line width=.1pt, draw=gray!10},
-                major grid style={line width=.2pt,draw=gray!50},
-                thick
-            ]
-            %im at U1=360V
-            \addplot[color=signaldelta,mark=none,solid] coordinates{
-                (0, 0)
-                (0.26, 0)
-                (0.26, 896)
-                (0.65, 0)
-                (1.05,0)
-                };                
-            \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.2,900) {$U_{\mathrm{1}}=\SI{360}{\volt}$};                    
-            %im at U1=240V
-            \addplot[signalzeta,mark=none,solid] coordinates{
-                (0, 0)
-                (0.4, 0)
-                (0.4, 890)
-                (1,0)
-                (1,0)
-                (1.05,0)
-                };                
-            \node[signalzeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.6,800) {$U_{\mathrm{1}}=\SI{240}{\volt}$};                    
-            \end{axis}     
-    \end{tikzpicture}
-    \caption{Demagnetization current of  $N_3$.}
-    \label{fig:ex04_DemagnetizationCurrentN3}
-    \begin{tikzpicture}
-        \begin{axis}[
-                domain=0:15,
-                % x/y range adjustment
-                xmin=0, xmax=1.1,
-                ymin=-0.5, ymax=30,
-                samples=200,
-                axis y line=center,
-                axis x line=middle,
-                extra y ticks=0,
-                % Label text
-                xlabel={$t \cdot f_\mathrm{s}$},,
-                ylabel={$i_\text{D2}(t)/\SI{}{\ampere}$},
-                % Label adjustment
-                x label style={at={(axis description cs:1,0)},anchor=west},
-                y label style={at={(axis description cs:-.05,1)},anchor=south},
-                width=0.6\textwidth,
-                height=0.3\textwidth,
-                % x-Ticks
-                xtick={0,0.2,0.4,0.6,0.8,1},
-                xticklabels={0,0.2,0.4,0.6,0.8,1},
-                xticklabel style = {anchor=north},
-                % y-Ticks
-                ytick={0,5,10,15,20,25},
-                yticklabels={0,,10,,20,},
-                yticklabel style = {anchor=east},
-                % Grid layout
-                grid=both,
-                grid style={line width=.1pt, draw=gray!10},
-                major grid style={line width=.2pt,draw=gray!50},
-                thick
-            ]
-            %im at U1=360V
-            \addplot[signaldelta,mark=none,solid] coordinates{
-                (0, 0)
-                (0.26, 0)
-                (0.26, 25)
-                (1,25.2)
-                (1,0.2)
-                (1.05,0)
-                };                
-            \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.15,25) {$U_{\mathrm{1}}=\SI{360}{\volt}$};                    
-            %im at U1=240V
-            \addplot[color=signalzeta,mark=none,dashdotted] coordinates{
-                (0, 0)
-                (0.4, 0)
-                (0.4, 25)
-                (1,25)
-                (1,0)
-                (1.05,0)
-                };                
-            \node[signalzeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.55,10) {$U_{\mathrm{1}}=\SI{240}{\volt}$};                    
-            \end{axis}     
-    \end{tikzpicture}
-    \caption{Current through $D_2$.}
-    \label{fig:ex04_D2FreewheelingCurrent}
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				domain=0:15,
+				% x/y range adjustment
+				xmin=0, xmax=1.1,
+				ymin=-10, ymax=650,
+				samples=200,
+				axis y line=center,
+				axis x line=middle,
+				extra y ticks=0,
+				% Label text
+				xlabel={$t \cdot f_\mathrm{s}$},,
+				ylabel={$u_\text{T}(t)/\mathrm{V}$},
+				% Label adjustment
+				x label style={at={(axis description cs:1,0)},anchor=west},
+				y label style={at={(axis description cs:-.05,1)},anchor=south},
+				width=0.6\textwidth,
+				height=0.3\textwidth,
+				% x-Ticks
+				xtick={0,0.2,0.4,0.6,0.8,1},
+				xticklabels={0,0.2,0.4,0.6,0.8,1},
+				xticklabel style = {anchor=north},
+				% y-Ticks
+				ytick={600,500,400,300,200,100,0},
+				yticklabels={600,,400,,200,,0},
+				yticklabel style = {anchor=east},
+				% Grid layout
+				grid=both,
+				grid style={line width=.1pt, draw=gray!10},
+				major grid style={line width=.2pt,draw=gray!50},
+				thick
+			]
+			%UT at U1=360V
+			\addplot[signalalpha,mark=none,solid] coordinates{
+					(0, 0)
+					(0.26, 0)
+					(0.26, 600)
+					(0.65, 600)
+					(0.65, 360)
+					(1,  360)
+					(1,0)
+					(1.05,0)
+				};
+			\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,500) {$U_{\mathrm{1}}=\SI{360}{\volt}$};
+			%UT at U1=240V
+			\addplot[signalbeta,mark=none,solid] coordinates{
+					(0, 0)
+					(0.4, 0)
+					(0.4, 400)
+					(1,  400)
+					(1,0)
+					(1.05,0)
+				};
+			\node[signalbeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.55,200) {$U_{\mathrm{1}}=\SI{240}{\volt}$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Voltage at the transistor.}
+	\label{fig:ex04_VoltageAtTransistor}
+	\begin{tikzpicture}
+		\begin{axis}[
+				domain=0:15,
+				% x/y range adjustment
+				xmin=0, xmax=1.1,
+				ymin=-50, ymax=1090,
+				samples=200,
+				axis y line=center,
+				axis x line=middle,
+				extra y ticks=0,
+				% Label text
+				xlabel={$t \cdot f_\mathrm{s}$},,
+				ylabel={$i_\text{m}(t)/\SI{}{\milli\ampere}$},
+				% Label adjustment
+				x label style={at={(axis description cs:1,0)},anchor=west},
+				y label style={at={(axis description cs:-.05,1)},anchor=south},
+				width=0.6\textwidth,
+				height=0.3\textwidth,
+				% x-Ticks
+				xtick={0,0.2,0.4,0.6,0.8,1},
+				xticklabels={0,0.2,0.4,0.6,0.8,1},
+				xticklabel style = {anchor=north},
+				% y-Ticks
+				ytick={1000,800,600,400,200,0},
+				yticklabels={1000,800,600,400,200,0},
+				yticklabel style = {anchor=east},
+				% Grid layout
+				grid=both,
+				grid style={line width=.1pt, draw=gray!10},
+				major grid style={line width=.2pt,draw=gray!50},
+				thick
+			]
+			%im at U1=360V
+			\addplot[color=signaldelta,mark=none,solid] coordinates{
+					(0, 0)
+					(0.26, 0)
+					(0.26, 896)
+					(0.65, 0)
+					(1.05,0)
+				};
+			\node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.2,900) {$U_{\mathrm{1}}=\SI{360}{\volt}$};
+			%im at U1=240V
+			\addplot[signalzeta,mark=none,solid] coordinates{
+					(0, 0)
+					(0.4, 0)
+					(0.4, 890)
+					(1,0)
+					(1,0)
+					(1.05,0)
+				};
+			\node[signalzeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.6,800) {$U_{\mathrm{1}}=\SI{240}{\volt}$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Demagnetization current of  $N_3$.}
+	\label{fig:ex04_DemagnetizationCurrentN3}
+	\begin{tikzpicture}
+		\begin{axis}[
+				domain=0:15,
+				% x/y range adjustment
+				xmin=0, xmax=1.1,
+				ymin=-0.5, ymax=30,
+				samples=200,
+				axis y line=center,
+				axis x line=middle,
+				extra y ticks=0,
+				% Label text
+				xlabel={$t \cdot f_\mathrm{s}$},,
+				ylabel={$i_\text{D2}(t)/\SI{}{\ampere}$},
+				% Label adjustment
+				x label style={at={(axis description cs:1,0)},anchor=west},
+				y label style={at={(axis description cs:-.05,1)},anchor=south},
+				width=0.6\textwidth,
+				height=0.3\textwidth,
+				% x-Ticks
+				xtick={0,0.2,0.4,0.6,0.8,1},
+				xticklabels={0,0.2,0.4,0.6,0.8,1},
+				xticklabel style = {anchor=north},
+				% y-Ticks
+				ytick={0,5,10,15,20,25},
+				yticklabels={0,,10,,20,},
+				yticklabel style = {anchor=east},
+				% Grid layout
+				grid=both,
+				grid style={line width=.1pt, draw=gray!10},
+				major grid style={line width=.2pt,draw=gray!50},
+				thick
+			]
+			%im at U1=360V
+			\addplot[signaldelta,mark=none,solid] coordinates{
+					(0, 0)
+					(0.26, 0)
+					(0.26, 25)
+					(1,25.2)
+					(1,0.2)
+					(1.05,0)
+				};
+			\node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.15,25) {$U_{\mathrm{1}}=\SI{360}{\volt}$};
+			%im at U1=240V
+			\addplot[color=signalzeta,mark=none,dashdotted] coordinates{
+					(0, 0)
+					(0.4, 0)
+					(0.4, 25)
+					(1,25)
+					(1,0)
+					(1.05,0)
+				};
+			\node[signalzeta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.55,10) {$U_{\mathrm{1}}=\SI{240}{\volt}$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Current through $D_2$.}
+	\label{fig:ex04_D2FreewheelingCurrent}
 \end{solutionfigure}
-
-
-
 

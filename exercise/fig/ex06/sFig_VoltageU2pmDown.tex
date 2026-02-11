@@ -3,147 +3,146 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{solutionfigure}[htb]
 
- %   \documentclass{standalone}
- %   \usepackage{pgfplots}
- %   \pgfplotsset{compat=1.18} % Kompatibilität für neuere Versionen
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                % x/y range adjustment
-                xmin=0, xmax=368,
-                ymin=-500, ymax=500,
-                samples=500,
-                axis y line=center,
-                axis x line=middle,
-                extra y ticks=0,
-                % Label text
-                xlabel={$\omega t / \text{rad}$},,
-                ylabel={$u/\mathrm{V}$},
-                % Label adjustment
-                x label style={at={(axis description cs:1,0.5)},anchor=west},
-                y label style={at={(axis description cs:-.05,.97)},anchor=south,yshift=0.2cm},
-                width=0.6\textwidth,
-                height=0.3\textwidth,
-                % x-Ticks
-                xtick={0,90,180,270,360},
-                xticklabels={,,$\pi$,,$2\pi$},
-                xticklabel style = {anchor=north},
-                % y-Ticks
-                ytick={400,200,0,-200,-400},
-                yticklabels={400,200,0,-200,-400},
-                yticklabel style = {anchor=east},
-                % Grid layout
-                grid,
-                thick,
-                %grid style={line width=.1pt, draw=gray!10},
-                %major grid style={line width=.2pt,draw=gray!90},
-            ]
-            % Voltage u1a(wt), u1b(wt) u1c(wt)
-            \addplot[black, domain= 0:360,dashed,name path = u1a] {325*cos(x)};                
-            \addplot[black, domain= 0:360,dashed,name path = u1b] {325*cos(x-120)};                
-            \addplot[black, domain= 0:360,dashed,name path = u1c] {325*cos(x-240)}; 
-            % Voltage u2p(wt)
-            \addplot[signalalpha, domain= 0:30] {325*cos(x)};                
-            \addplot[signalalpha, domain= 30:150] {325*cos(x-120)};
-            \addplot[signalalpha, domain= 150:270] {325*cos(x-240)};                
-            \addplot[signalalpha, domain= 270:360] {325*cos(x)};                
-            \addplot[color=signalalpha,solid] coordinates{
-                (30,0)
-                (30, 281.4)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (150,0)
-                (150, 281.4)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (270,0)
-                (270, 281.4)
-            };     
-    
-           % Average u1p 
-           \addplot[signalalpha,domain= 0:360,dashed, name path = u2pavg] {-233}; 
-            
-            % Voltage u2m(wt)
-            \addplot[signalalpha, domain= 0:90] {325*cos(x+120)};                
-            \addplot[signalalpha, domain= 90:210] {325*cos(x)};                
-            \addplot[signalalpha, domain= 210:330] {325*cos(x+240)};
-            \addplot[signalalpha, domain= 330:360] {325*cos(x+120)};
-            \addplot[color=signalalpha,solid] coordinates{
-                (90,0)
-                (90, -281.4)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (210,0)
-                (210, -281.4)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (330,0)
-                (330, -281.4)
-            };             
- 
-            % Average u1m 
-            \addplot[signalalpha,domain= 0:360,dashed, name path = u2mavg] {233}; 
+	%   \documentclass{standalone}
+	%   \usepackage{pgfplots}
+	%   \pgfplotsset{compat=1.18} % Kompatibilität für neuere Versionen
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				% x/y range adjustment
+				xmin=0, xmax=368,
+				ymin=-500, ymax=500,
+				samples=500,
+				axis y line=center,
+				axis x line=middle,
+				extra y ticks=0,
+				% Label text
+				xlabel={$\omega t / \text{rad}$},,
+				ylabel={$u/\mathrm{V}$},
+				% Label adjustment
+				x label style={at={(axis description cs:1,0.5)},anchor=west},
+				y label style={at={(axis description cs:-.05,.97)},anchor=south,yshift=0.2cm},
+				width=0.6\textwidth,
+				height=0.3\textwidth,
+				% x-Ticks
+				xtick={0,90,180,270,360},
+				xticklabels={,,$\pi$,,$2\pi$},
+				xticklabel style = {anchor=north},
+				% y-Ticks
+				ytick={400,200,0,-200,-400},
+				yticklabels={400,200,0,-200,-400},
+				yticklabel style = {anchor=east},
+				% Grid layout
+				grid,
+				thick,
+				%grid style={line width=.1pt, draw=gray!10},
+				%major grid style={line width=.2pt,draw=gray!90},
+			]
+			% Voltage u1a(wt), u1b(wt) u1c(wt)
+			\addplot[black, domain= 0:360,dashed,name path = u1a] {325*cos(x)};
+			\addplot[black, domain= 0:360,dashed,name path = u1b] {325*cos(x-120)};
+			\addplot[black, domain= 0:360,dashed,name path = u1c] {325*cos(x-240)};
+			% Voltage u2p(wt)
+			\addplot[signalalpha, domain= 0:30] {325*cos(x)};
+			\addplot[signalalpha, domain= 30:150] {325*cos(x-120)};
+			\addplot[signalalpha, domain= 150:270] {325*cos(x-240)};
+			\addplot[signalalpha, domain= 270:360] {325*cos(x)};
+			\addplot[color=signalalpha,solid] coordinates{
+					(30,0)
+					(30, 281.4)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(150,0)
+					(150, 281.4)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(270,0)
+					(270, 281.4)
+				};
 
-            % Shade areas of T1,T3,T5
-            \addplot[shadecolor, opacity=0.3] fill between[of=u1c and u2pavg, soft clip={domain=0:90}];
-            \addplot[shadecolor, opacity=0.3] fill between[of=u1a and u2pavg, soft clip={domain=90:210}];
-            \addplot[shadecolor, opacity=0.3] fill between[of=u1b and u2pavg, soft clip={domain=210:330}];
-            \addplot[shadecolor, opacity=0.3] fill between[of=u1c and u2pavg, soft clip={domain=330:360}];
+			% Average u1p 
+			\addplot[signalalpha,domain= 0:360,dashed, name path = u2pavg] {-233};
 
-            % Shade areas of T2,T4,T5
-            \addplot[shadecolor, opacity=0.3] fill between[of=u1a and u2mavg, soft clip={domain=0:30}];
-            \addplot[shadecolor, opacity=0.3] fill between[of=u1b and u2mavg, soft clip={domain=30:150}];
-            \addplot[shadecolor, opacity=0.3] fill between[of=u1c and u2mavg, soft clip={domain=150:270}];
-            \addplot[shadecolor, opacity=0.3] fill between[of=u1a and u2mavg, soft clip={domain=270:360}];            
-         
-            % Label of u1a
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,50) {$u_{\mathrm{1a}}(\omega t)$};
-            % Line to u1a
-            \draw[ black] (90,100) -- (80,80);            
-            % Label of u1b
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:240,50) {$u_{\mathrm{1b}}(\omega t)$};
-            % Line to u1b
-            \draw[ black] (210,100) -- (200,80);
-            % Label of u1c
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:295,-175) {$u_{\mathrm{1c}}(\omega t)$};
-            % Line to u1c
-            \draw[ black] (265,-120) -- (258,-115);              
-            % Label of u2,m
-            \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:50,310) {$u_{\mathrm{2,m}}(\omega t)$};
-            % Line to u2,m
-            \draw[signalalpha] (60,300) -- (70,250);
-            % Label of u2,p
-            \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:240,-410) {$u_{\mathrm{2,p}}(\omega t)$};
-            % Line to u2,p
-            \draw[signalalpha] (240,-300) -- (250,-230);
+			% Voltage u2m(wt)
+			\addplot[signalalpha, domain= 0:90] {325*cos(x+120)};
+			\addplot[signalalpha, domain= 90:210] {325*cos(x)};
+			\addplot[signalalpha, domain= 210:330] {325*cos(x+240)};
+			\addplot[signalalpha, domain= 330:360] {325*cos(x+120)};
+			\addplot[color=signalalpha,solid] coordinates{
+					(90,0)
+					(90, -281.4)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(210,0)
+					(210, -281.4)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(330,0)
+					(330, -281.4)
+				};
 
-            % Thyristor phases u2p
-            % Label of T1
-            \draw[<->,black, solid] (axis cs:90,-440) -- (axis cs:210,-440);
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:170,-500) {$\mathrm{T_1}$};
-            % Label of T3
-            \draw[<->,black, solid] (axis cs:210,-440) -- (axis cs:330,-440);
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:300,-500) {$\mathrm{T_3}$};
-            % Label of T5
-            \draw[<-,black, solid] (axis cs:330,-440) -- (axis cs:360,-440);
-            \draw[->,black, solid] (axis cs:0,-440) -- (axis cs:90,-440);
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:30,-500) {$\mathrm{T_5}$};
+			% Average u1m 
+			\addplot[signalalpha,domain= 0:360,dashed, name path = u2mavg] {233};
 
+			% Shade areas of T1,T3,T5
+			\addplot[shadecolor, opacity=0.3] fill between[of=u1c and u2pavg, soft clip={domain=0:90}];
+			\addplot[shadecolor, opacity=0.3] fill between[of=u1a and u2pavg, soft clip={domain=90:210}];
+			\addplot[shadecolor, opacity=0.3] fill between[of=u1b and u2pavg, soft clip={domain=210:330}];
+			\addplot[shadecolor, opacity=0.3] fill between[of=u1c and u2pavg, soft clip={domain=330:360}];
 
-            % Thyristor phases u2m
-            % Label of T4
-            \draw[<->,black, solid] (axis cs:30,460) -- (axis cs:150,460);
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:100,400) {$\mathrm{T_4}$};
-            % Label of T6
-            \draw[<->,black, solid] (axis cs:150,460) -- (axis cs:270,460);
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:200,400) {$\mathrm{T_6}$};
-            % Label of T2
-            \draw[<-,black, solid] (axis cs:270,460) -- (axis cs:360,460);
-            \draw[->,black, solid] (axis cs:0,460) -- (axis cs:30,460);
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:330,400) {$\mathrm{T_2}$};
+			% Shade areas of T2,T4,T5
+			\addplot[shadecolor, opacity=0.3] fill between[of=u1a and u2mavg, soft clip={domain=0:30}];
+			\addplot[shadecolor, opacity=0.3] fill between[of=u1b and u2mavg, soft clip={domain=30:150}];
+			\addplot[shadecolor, opacity=0.3] fill between[of=u1c and u2mavg, soft clip={domain=150:270}];
+			\addplot[shadecolor, opacity=0.3] fill between[of=u1a and u2mavg, soft clip={domain=270:360}];
 
-        \end{axis}     
-        \end{tikzpicture}
-        \caption{Output voltage $u_\mathrm{2,p}(t)$ and $u_\mathrm{2,m}(t)$ for lowering the load.}
-        \label{sfig:ex06_Voltage_u2pm_Down}
+			% Label of u1a
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,50) {$u_{\mathrm{1a}}(\omega t)$};
+			% Line to u1a
+			\draw[ black] (90,100) -- (80,80);
+			% Label of u1b
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:240,50) {$u_{\mathrm{1b}}(\omega t)$};
+			% Line to u1b
+			\draw[ black] (210,100) -- (200,80);
+			% Label of u1c
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:295,-175) {$u_{\mathrm{1c}}(\omega t)$};
+			% Line to u1c
+			\draw[ black] (265,-120) -- (258,-115);
+			% Label of u2,m
+			\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:50,310) {$u_{\mathrm{2,m}}(\omega t)$};
+			% Line to u2,m
+			\draw[signalalpha] (60,300) -- (70,250);
+			% Label of u2,p
+			\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:240,-410) {$u_{\mathrm{2,p}}(\omega t)$};
+			% Line to u2,p
+			\draw[signalalpha] (240,-300) -- (250,-230);
+
+			% Thyristor phases u2p
+			% Label of T1
+			\draw[<->,black, solid] (axis cs:90,-440) -- (axis cs:210,-440);
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:170,-500) {$\mathrm{T_1}$};
+			% Label of T3
+			\draw[<->,black, solid] (axis cs:210,-440) -- (axis cs:330,-440);
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:300,-500) {$\mathrm{T_3}$};
+			% Label of T5
+			\draw[<-,black, solid] (axis cs:330,-440) -- (axis cs:360,-440);
+			\draw[->,black, solid] (axis cs:0,-440) -- (axis cs:90,-440);
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:30,-500) {$\mathrm{T_5}$};
+
+			% Thyristor phases u2m
+			% Label of T4
+			\draw[<->,black, solid] (axis cs:30,460) -- (axis cs:150,460);
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:100,400) {$\mathrm{T_4}$};
+			% Label of T6
+			\draw[<->,black, solid] (axis cs:150,460) -- (axis cs:270,460);
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:200,400) {$\mathrm{T_6}$};
+			% Label of T2
+			\draw[<-,black, solid] (axis cs:270,460) -- (axis cs:360,460);
+			\draw[->,black, solid] (axis cs:0,460) -- (axis cs:30,460);
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:330,400) {$\mathrm{T_2}$};
+
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Output voltage $u_\mathrm{2,p}(t)$ and $u_\mathrm{2,m}(t)$ for lowering the load.}
+	\label{sfig:ex06_Voltage_u2pm_Down}
 \end{solutionfigure}
