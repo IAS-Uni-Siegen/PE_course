@@ -58,4 +58,12 @@ The covered topics are:
 
 ![simulation buck converter](https://github.com/user-attachments/assets/2f699cac-79b3-4c94-8332-6910e940948d)
 
+# Contributing
 
+- We recommend using [VSCode](https://code.visualstudio.com/) as code editor.
+- [Ruff](https://github.com/astral-sh/ruff) should be installed.
+
+    ```bash
+    pip install ruff
+    ```
+- It is expected that [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop) and [Ruff](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff) extensions are installed so that formatting of the code is achieved automatically.
