@@ -11,54 +11,54 @@ The circuit shown in \autoref{fig:Fig_Single-phase_DC_Inverter} is a single-phas
 It supplies the DC link of a locomotive, from which the traction motors are fed from the mains side. The converter uses PWM for modulation. All components are ideal, the voltage $U_\mathrm{1}$ is constant.
 
 \begin{germanblock}
-Gegegeben sei die in \autoref{fig:Fig_Single-phase_DC_Inverter} dargestellte Schaltung mit einem einphasigen Gleichspannungswechselrichter.
-Er verbindet die Netzseite mit dem Gleichspannungszwischenkreis
-einer Lokomotive, aus welchem die Fahrmotoren gespeist werden. Der Wechselrichter wird mit einer PWM angesteuert. Alle Bauelemente seien ideal, die Spannung $U_\mathrm{1}$ konstant.
+	Gegegeben sei die in \autoref{fig:Fig_Single-phase_DC_Inverter} dargestellte Schaltung mit einem einphasigen Gleichspannungswechselrichter.
+	Er verbindet die Netzseite mit dem Gleichspannungszwischenkreis
+	einer Lokomotive, aus welchem die Fahrmotoren gespeist werden. Der Wechselrichter wird mit einer PWM angesteuert. Alle Bauelemente seien ideal, die Spannung $U_\mathrm{1}$ konstant.
 \end{germanblock}
 \input{fig/Task04/Single-phase_DC_inverter}
 \begin{table}[htb]
-    \caption{Parameters of the single-phase AC-DC converter.}
-    \centering
-    \begin{tabular}{llll}
-    \toprule
-    DC-link voltage: & $U_{\mathrm{1}}=\SI{1400}{\volt}$ &
-    Grid voltage: & $u_{\mathrm{2i}}=\SI{1200}{\volt} \cdot \sin(\omega t)$ \\
-    Grid frequency: & $f=\SI{16\frac{2}{3}}{\hertz}$ &
-    Line filter: &$L=\SI{2.7}{\milli\henry}$\\
-    \bottomrule
-    \end{tabular}
-    \label{tab:para_ACDC-conv}
+	\caption{Parameters of the single-phase AC-DC converter.}
+	\centering
+	\begin{tabular}{llll}
+		\toprule
+		DC-link voltage: & $U_{\mathrm{1}}=\SI{1400}{\volt}$                       &
+		Grid voltage:    & $u_{\mathrm{2i}}=\SI{1200}{\volt} \cdot \sin(\omega t)$   \\
+		Grid frequency:  & $f=\SI{16\frac{2}{3}}{\hertz}$                          &
+		Line filter:     & $L=\SI{2.7}{\milli\henry}$                                \\
+		\bottomrule
+	\end{tabular}
+	\label{tab:para_ACDC-conv}
 \end{table}
- \subtask{Qualitatively add into \autoref{fig:subtask4.1_time} the fundamental components $u^\mathrm{(1)}_\mathrm{2}(t)$,
-$u^\mathrm{(1)}_\mathrm{L}(t)$, and $i^\mathrm{(1)}_\mathrm{2}(t)$ for different operating modes of the locomotive:}{3}
+\subtask{Qualitatively add into \autoref{fig:subtask4.1_time} the fundamental components $u^\mathrm{(1)}_\mathrm{2}(t)$,
+	$u^\mathrm{(1)}_\mathrm{L}(t)$, and $i^\mathrm{(1)}_\mathrm{2}(t)$ for different operating modes of the locomotive:}{3}
 \begin{itemize}
-    \item starting (locomotive draws pure active power from the grid),
-    \item rolling (locomotive draws neither active nor reactive power),
-    \item and braking (locomotive delivers pure active power).
-\end{itemize} 
+	\item starting (locomotive draws pure active power from the grid),
+	\item rolling (locomotive draws neither active nor reactive power),
+	\item and braking (locomotive delivers pure active power).
+\end{itemize}
 \subtaskGerman{Ergänzen Sie in \autoref{fig:subtask4.1_time} qualitativ die Größen $u^\mathrm{(1)}_\mathrm{2}(t)$,
-$u^\mathrm{(1)}_\mathrm{L}(t)$ sowie $i^\mathrm{(1)}_\mathrm{2}(t)$ für verschiedene Betriebsarten der Lokomotive:
+	$u^\mathrm{(1)}_\mathrm{L}(t)$ sowie $i^\mathrm{(1)}_\mathrm{2}(t)$ für verschiedene Betriebsarten der Lokomotive:
 
-\begin{itemize}
-    \item Anfahren (Lok bezieht reine Wirkleistung aus dem Netz),
-    \item Rollen (Lok bezieht weder Wirk- noch Blindleistung)
-    \item und Bremsen (Lok gibt reine Wirkleistung ab).
-\end{itemize}}
+	\begin{itemize}
+		\item Anfahren (Lok bezieht reine Wirkleistung aus dem Netz),
+		\item Rollen (Lok bezieht weder Wirk- noch Blindleistung)
+		\item und Bremsen (Lok gibt reine Wirkleistung ab).
+	\end{itemize}}
 \input{fig/Task04/Subtask4.1_time_plots}
 \begin{solutionblock}
-%The phasor diagram \ref{fig:converter_single_phase_transistor_phasors} illustrates the relation between $u_\mathrm{2i}$, $u^\mathrm{(1)}_\mathrm{2}(t)$, $u^\mathrm{(1)}_\mathrm{L}(t)$, and $i^\mathrm{(1)}_\mathrm{2}(t)$ and the corresponding plot in the time domain is shown in Fig. \ref{fig:Parameters_plots}.
-In starting case, since only active power is drawn current $i^\mathrm{(1)}_\mathrm{2}(t)$ will be in phase with $u_\mathrm{2i}$. Moreover, as inductors oppose changes in current (Lenz's law), the voltage across the inductor leads the current by $\SI{\frac{\pi}{2}}{\radian}$. Applying KVL at the inductor side leads to:
-$$ u^\mathrm{(1)}_\mathrm{2} = u^\mathrm{(1)}_\mathrm{L} +  u_\mathrm{2i}.$$
-Consequently, the resulting $u^\mathrm{(1)}_\mathrm{2}(t)$ will be leading $u_\mathrm{2i}$ by angle $0 < \varphi_2 < \SI{\frac{\pi}{2}}{\radian}$, as shown in Fig. \ref{sfig:phasor:Starting}.\\
+	%The phasor diagram \ref{fig:converter_single_phase_transistor_phasors} illustrates the relation between $u_\mathrm{2i}$, $u^\mathrm{(1)}_\mathrm{2}(t)$, $u^\mathrm{(1)}_\mathrm{L}(t)$, and $i^\mathrm{(1)}_\mathrm{2}(t)$ and the corresponding plot in the time domain is shown in Fig. \ref{fig:Parameters_plots}.
+	In starting case, since only active power is drawn current $i^\mathrm{(1)}_\mathrm{2}(t)$ will be in phase with $u_\mathrm{2i}$. Moreover, as inductors oppose changes in current (Lenz's law), the voltage across the inductor leads the current by $\SI{\frac{\pi}{2}}{\radian}$. Applying KVL at the inductor side leads to:
+	$$ u^\mathrm{(1)}_\mathrm{2} = u^\mathrm{(1)}_\mathrm{L} +  u_\mathrm{2i}.$$
+	Consequently, the resulting $u^\mathrm{(1)}_\mathrm{2}(t)$ will be leading $u_\mathrm{2i}$ by angle $0 < \varphi_2 < \SI{\frac{\pi}{2}}{\radian}$, as shown in Fig. \ref{sfig:phasor:Starting}.\\
 
-During rolling neither active nor reactive power is drawn by the locomotive. As a result, no current flows through the inductor $i^\mathrm{(1)}_\mathrm{2}(t) = 0$. From the inductor current-voltage equation
-$$ u^\mathrm{(1)}_\mathrm{L} = L \frac{\mathrm{d}i^\mathrm{(1)}_\mathrm{2}(t)}{\mathrm{d}t},$$
-we can see that the voltage $u^\mathrm{(1)}_\mathrm{L}$ will be zero as well. Observing $u^\mathrm{(1)}_\mathrm{2} = u^\mathrm{(1)}_\mathrm{L} +  u_\mathrm{2i}$, this would lead to $u^\mathrm{(1)}_\mathrm{2} = 0 +  u_\mathrm{2i} = u_\mathrm{2i}$.\\
+	During rolling neither active nor reactive power is drawn by the locomotive. As a result, no current flows through the inductor $i^\mathrm{(1)}_\mathrm{2}(t) = 0$. From the inductor current-voltage equation
+	$$ u^\mathrm{(1)}_\mathrm{L} = L \frac{\mathrm{d}i^\mathrm{(1)}_\mathrm{2}(t)}{\mathrm{d}t},$$
+	we can see that the voltage $u^\mathrm{(1)}_\mathrm{L}$ will be zero as well. Observing $u^\mathrm{(1)}_\mathrm{2} = u^\mathrm{(1)}_\mathrm{L} +  u_\mathrm{2i}$, this would lead to $u^\mathrm{(1)}_\mathrm{2} = 0 +  u_\mathrm{2i} = u_\mathrm{2i}$.\\
 
-Lastly, while braking the locomotive delivers pure active power. This means current direction is reversed, hence, shifted from $u_\mathrm{2i}$ by angle $\SI{\pi}{\radian}$. From Lenz's law, we can say that $u^\mathrm{(1)}_\mathrm{L}$ will be leading by $\SI{\frac{\pi}{2}}{\radian}$. As a result, $u^\mathrm{(1)}_\mathrm{2}(t)$ will be lagging by angle $0 < \varphi_2 < \SI{\frac{\pi}{2}}{\radian}$, see Fig. \ref{sfig:phasor:Braking}.\\
+	Lastly, while braking the locomotive delivers pure active power. This means current direction is reversed, hence, shifted from $u_\mathrm{2i}$ by angle $\SI{\pi}{\radian}$. From Lenz's law, we can say that $u^\mathrm{(1)}_\mathrm{L}$ will be leading by $\SI{\frac{\pi}{2}}{\radian}$. As a result, $u^\mathrm{(1)}_\mathrm{2}(t)$ will be lagging by angle $0 < \varphi_2 < \SI{\frac{\pi}{2}}{\radian}$, see Fig. \ref{sfig:phasor:Braking}.\\
 
-The corresponding time-domain plots are shown in Fig. \ref{sfig:subtask4.1_time}
-\input{fig/Task04/sFig_subtask4.1_time_plots}
+	The corresponding time-domain plots are shown in Fig. \ref{sfig:subtask4.1_time}
+	\input{fig/Task04/sFig_subtask4.1_time_plots}
 \end{solutionblock}
 
 \subtask{Draw the corresponding complex phasors for the same quantities in \autoref{fig:subtask4.1_phasors}.}{3}
@@ -66,48 +66,43 @@ The corresponding time-domain plots are shown in Fig. \ref{sfig:subtask4.1_time}
 \input{fig/Task04/Subtask4.1_phasor_diagrams}
 
 \begin{solutionblock}
-The solution is shown in \autoref{sfig:sfig:subtask4.1_phasors}.
-    \input{fig/Task04/sFig_subtask4.1_phasor_diagrams}
+	The solution is shown in \autoref{sfig:sfig:subtask4.1_phasors}.
+	\input{fig/Task04/sFig_subtask4.1_phasor_diagrams}
 \end{solutionblock}
 
 \subtask{How large must the amplitude of the mains fundamental current $\hat{i}^\mathrm{(1)}_\mathrm{2}$ be if pure
-fundamental active power of \SI{250}{\kilo\watt} is drawn from the grid?}{2}
+	fundamental active power of \SI{250}{\kilo\watt} is drawn from the grid?}{2}
 \subtaskGerman{Wie groß muss die Netzstromgrundschwingungsamplitude $\hat{i}^\mathrm{(1)}_\mathrm{2}$ sein, wenn reine
-Grund\-schwing\-ungs\-wirk\-leis\-tung von \SI{250}{\kilo\watt} bezogen wird?}
+	Grund\-schwing\-ungs\-wirk\-leis\-tung von \SI{250}{\kilo\watt} bezogen wird?}
 \begin{solutionblock}
-The fundamental active power can be calculated from the effective values of the mains voltage $U_\mathrm{2i}$ as well as fundamental current $I^\mathrm{(1)}_\mathrm{2}$ using:
+	The fundamental active power can be calculated from the effective values of the mains voltage $U_\mathrm{2i}$ as well as fundamental current $I^\mathrm{(1)}_\mathrm{2}$ using:
 
-   $$ P^\mathrm{(1)} = U_\mathrm{2i}\cdot I^\mathrm{(1)}_\mathrm{2} = \frac{\hat{u}_\mathrm{2i}\cdot \hat{i}^\mathrm{(1)}_\mathrm{2}}{2}.$$
-Solving with respect to $\hat{i}^\mathrm{(1)}_\mathrm{2}$ results in:
-   $$ \hat{i}^\mathrm{(1)}_\mathrm{2} = \frac{2P^\mathrm{(1)}}{\hat{u}_\mathrm{2i}} = \frac{2 \cdot \SI{250}{\kilo\watt}}{\SI{1200}{\volt}} \approx \SI{417}{\ampere}.$$
+	$$ P^\mathrm{(1)} = U_\mathrm{2i}\cdot I^\mathrm{(1)}_\mathrm{2} = \frac{\hat{u}_\mathrm{2i}\cdot \hat{i}^\mathrm{(1)}_\mathrm{2}}{2}.$$
+	Solving with respect to $\hat{i}^\mathrm{(1)}_\mathrm{2}$ results in:
+	$$ \hat{i}^\mathrm{(1)}_\mathrm{2} = \frac{2P^\mathrm{(1)}}{\hat{u}_\mathrm{2i}} = \frac{2 \cdot \SI{250}{\kilo\watt}}{\SI{1200}{\volt}} \approx \SI{417}{\ampere}.$$
 \end{solutionblock}
 \subtask{How large must the fundamental amplitude $\hat{u}^\mathrm{(1)}_\mathrm{2}$ of the inverter output voltage be in the same load case of \SI{250}{\kilo\watt}?
-Calculate the corresponding modulation index $m$.}{2}
+	Calculate the corresponding modulation index $m$.}{2}
 \subtaskGerman{Wie groß muss die Grundschwingungsamplitude $\hat{u}^\mathrm{(1)}_\mathrm{2}$ der Wechselrichterausgangsspannung im selben Lastfall von \SI{250}{\kilo\watt} sein? Berechnen Sie den zugehörigen Modulationsindex $m$.}
 
 \begin{solutionblock}
-Recalling:
-   $$ u^\mathrm{(1)}_\mathrm{2} = u^\mathrm{(1)}_\mathrm{L} +  u_\mathrm{2i}.$$
-The amplitude of the inductor fundamental voltage $\hat{u}^\mathrm{(1)}_\mathrm{L}$ can be calculated from $\hat{i}^\mathrm{(1)}_\mathrm{2}$ as:
+	Recalling:
+	$$ u^\mathrm{(1)}_\mathrm{2} = u^\mathrm{(1)}_\mathrm{L} +  u_\mathrm{2i}.$$
+	The amplitude of the inductor fundamental voltage $\hat{u}^\mathrm{(1)}_\mathrm{L}$ can be calculated from $\hat{i}^\mathrm{(1)}_\mathrm{2}$ as:
 
-    $$\hat{u}^\mathrm{(1)}_\mathrm{L} = \hat{i}^\mathrm{(1)}_\mathrm{2} \omega L = \SI{417}{\ampere} \cdot \SI{(2 \pi 16\frac{2}{3})}{\radian/\second} \cdot \SI{2.7}{\milli \henry} \approx \SI{118}{\volt}.$$
-Hence, the corresponding fundamental amplitude of the output voltage is: 
+	$$\hat{u}^\mathrm{(1)}_\mathrm{L} = \hat{i}^\mathrm{(1)}_\mathrm{2} \omega L = \SI{417}{\ampere} \cdot \SI{(2 \pi 16\frac{2}{3})}{\radian/\second} \cdot \SI{2.7}{\milli \henry} \approx \SI{118}{\volt}.$$
+	Hence, the corresponding fundamental amplitude of the output voltage is:
 
-   $$ \hat{u}^\mathrm{(1)}_\mathrm{2} = \sqrt{(\hat{u}^\mathrm{(1)}_\mathrm{L})^2 + (\hat{u}_\mathrm{2i})^2} = \sqrt{(\SI{118}{\volt})^2 + (\SI{1200}{\volt}})^2 \approx \SI{1205.8}{\volt}.$$
-   While the corresponding modulation index is 
-    $$m = \frac{\hat{u}^\mathrm{(1)}_\mathrm{2}}{U_{\mathrm{1}}} = \frac{\SI{1205.8}{\volt}}{\SI{1400}{\volt}} \approx 0.861.$$
+	$$ \hat{u}^\mathrm{(1)}_\mathrm{2} = \sqrt{(\hat{u}^\mathrm{(1)}_\mathrm{L})^2 + (\hat{u}_\mathrm{2i})^2} = \sqrt{(\SI{118}{\volt})^2 + (\SI{1200}{\volt}})^2 \approx \SI{1205.8}{\volt}.$$
+	While the corresponding modulation index is
+	$$m = \frac{\hat{u}^\mathrm{(1)}_\mathrm{2}}{U_{\mathrm{1}}} = \frac{\SI{1205.8}{\volt}}{\SI{1400}{\volt}} \approx 0.861.$$
 \end{solutionblock}
 \subtask{Due to a semiconductor defect, there is a short circuit in the inverter (all transistors
-conduct). What is the active and reactive power drawn from the grid in this case?}{2}
+	conduct). What is the active and reactive power drawn from the grid in this case?}{2}
 \subtaskGerman{Aufgrund eines Halbleiterdefektes gibt es einen Kurzschluss im Wechselrichter (alle Ventile
-leiten). Wie groß ist in diesem Fall die aus dem Netz bezogene Wirk- und Blindleistung?}
+	leiten). Wie groß ist in diesem Fall die aus dem Netz bezogene Wirk- und Blindleistung?}
 \begin{solutionblock}
-   $$ P = \SI{0}{\watt}, \quad
-    Q= \frac{U_\mathrm{2i}^2}{\omega L} = \frac{(\SI{\frac{1200}{\sqrt{2}}}{\volt})^2}{\SI{(2\pi \cdot16\frac{2}{3})}{\radian/\second} \cdot \SI{2.7}{\milli \henry}} \approx \SI{2.546}{\mega \volt \ampere}.$$
+	$$ P = \SI{0}{\watt}, \quad
+		Q= \frac{U_\mathrm{2i}^2}{\omega L} = \frac{(\SI{\frac{1200}{\sqrt{2}}}{\volt})^2}{\SI{(2\pi \cdot16\frac{2}{3})}{\radian/\second} \cdot \SI{2.7}{\milli \henry}} \approx \SI{2.546}{\mega \volt \ampere}.$$
 \end{solutionblock}
-
-
-
-
-
 

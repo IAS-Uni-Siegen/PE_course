@@ -1,69 +1,69 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- % B2U rectifier with capacitive output filtering
+% B2U rectifier with capacitive output filtering
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \begin{figure}[htb]
-        \begin{center}
-            \begin{circuitikz}
-                \def\vd{1.5cm} % vertical distance AC sources
-                \def\hd{1.5cm} % horizontal distance diode bridge
-                \def\h1d{5.0cm} % horizontal position first diode string
-                % Base point for voltage supplies
-                \coordinate (orig) at (0,0);
-                % Voltage sources and neutral connection
-                \draw 
-                % draw the neutral connection
-                (0,0) to [short, -*] ++(0,-1.5) to [short] ++(0,-1.5)
-                % draw first phase ua
-                (0,0) to [sinusoidal voltage source, v^<=$u_{1\mathrm{a}}(t)$] ++(1.5, 0) to [short, i=$i_{1\mathrm{a}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (A)
-                % draw second phase ub
-                (0,-1*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{b}}(t)$] ++(1.5, 0) to [short, i=$i_{1\mathrm{b}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (B)
-                % draw third phase uc
-                (0,-2*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{c}}(t)$] ++(1.5,0) to [short, i=$i_{1\mathrm{c}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (C)
-                %thyristor bridge
-                % Add thyristor T1
-                (\h1d,0) to [thyristor, l=$T_1$, name=D1] ++(0,1.25) coordinate (D1top)
-                % Add thyristor T2
-                (\h1d,-4.25) coordinate (D2bot) to [thyristor, l=$T_2$, name=D2] ++(0,1.25) to [short] (\h1d, 0)
-                % Add connection to junction A
-                (\h1d, 0) to [short, *-] (A)
-                % Add thyristor T3
-                (\h1d+\hd,0) to [thyristor, l=$T_3$, name=D3] ++(0,1.25) coordinate (D3top)
-                % Add thyristor T4
-                (\h1d+\hd,-4.25) coordinate (D4bot) to [thyristor, l=$T_4$, name=D4] ++(0,1.25) to [short] (\h1d+\hd, 0)
-                % Add thyristor T5
-                (\h1d+2*\hd,0) to [thyristor, l=$T_5$, name=D5] ++(0,1.25) coordinate (D5top)
-                % Add thyristor T6
-                (\h1d+2*\hd,-4.25) coordinate (D6bot) to [thyristor, l=$T_6$, name=D6] ++(0,1.25) to [short] (\h1d+2*\hd, 0)
-                % Add connection to junction B
-                (B -| D3) to [crossing, *-, mirror] ++(-2*\hd,0) -- (B)
-                % Add connection to junction C
-                (C -| D5) to [short, *-] ++(-\hd/2,0) to [crossing, mirror] ++(-\hd,0) to [crossing, mirror] ++(-\hd,0) -- (C)
-                % Add wire T1-T3-T5
-                (D1top) to [short, -*] (D3top) to [short, -*] (D5top) to [short, -] ++(0.5,0) coordinate (jL1)
-                % Add inductor L and motor current
-                (jL1) to [L, l=$L$, name = L] ++(2,0) to [short,i=$\overline{i}_\mathrm{mot}$] ++(0.5,0)  coordinate (jL2)
-                % Add DC-motor and motor voltage
-                (jL2) ++ (0,-3) node[elmech](motor){M}
-                (jL2) to (motor.north)
-                (motor.bottom) to (D6bot -| \tikztostart) to (D6bot)
-                % (jL2) to [R, l=$R$, name = R, v_>=$\overline{u}_\mathrm{mot}$, voltage = straight]  (D6bot -| \tikztostart) to (D6bot)
+\begin{figure}[htb]
+	\begin{center}
+		\begin{circuitikz}
+			\def\vd{1.5cm} % vertical distance AC sources
+			\def\hd{1.5cm} % horizontal distance diode bridge
+			\def\h1d{5.0cm} % horizontal position first diode string
+			% Base point for voltage supplies
+			\coordinate (orig) at (0,0);
+			% Voltage sources and neutral connection
+			\draw
+			% draw the neutral connection
+			(0,0) to [short, -*] ++(0,-1.5) to [short] ++(0,-1.5)
+			% draw first phase ua
+			(0,0) to [sinusoidal voltage source, v^<=$u_{1\mathrm{a}}(t)$] ++(1.5, 0) to [short, i=$i_{1\mathrm{a}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (A)
+			% draw second phase ub
+			(0,-1*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{b}}(t)$] ++(1.5, 0) to [short, i=$i_{1\mathrm{b}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (B)
+			% draw third phase uc
+			(0,-2*\vd) to [sinusoidal voltage source, v^<=$u_{1\mathrm{c}}(t)$] ++(1.5,0) to [short, i=$i_{1\mathrm{c}}(t)$]++(0.75,0) -- ++(0.25,0) coordinate (C)
+			%thyristor bridge
+			% Add thyristor T1
+			(\h1d,0) to [thyristor, l=$T_1$, name=D1] ++(0,1.25) coordinate (D1top)
+			% Add thyristor T2
+			(\h1d,-4.25) coordinate (D2bot) to [thyristor, l=$T_2$, name=D2] ++(0,1.25) to [short] (\h1d, 0)
+			% Add connection to junction A
+			(\h1d, 0) to [short, *-] (A)
+			% Add thyristor T3
+			(\h1d+\hd,0) to [thyristor, l=$T_3$, name=D3] ++(0,1.25) coordinate (D3top)
+			% Add thyristor T4
+			(\h1d+\hd,-4.25) coordinate (D4bot) to [thyristor, l=$T_4$, name=D4] ++(0,1.25) to [short] (\h1d+\hd, 0)
+			% Add thyristor T5
+			(\h1d+2*\hd,0) to [thyristor, l=$T_5$, name=D5] ++(0,1.25) coordinate (D5top)
+			% Add thyristor T6
+			(\h1d+2*\hd,-4.25) coordinate (D6bot) to [thyristor, l=$T_6$, name=D6] ++(0,1.25) to [short] (\h1d+2*\hd, 0)
+			% Add connection to junction B
+			(B -| D3) to [crossing, *-, mirror] ++(-2*\hd,0) -- (B)
+			% Add connection to junction C
+			(C -| D5) to [short, *-] ++(-\hd/2,0) to [crossing, mirror] ++(-\hd,0) to [crossing, mirror] ++(-\hd,0) -- (C)
+			% Add wire T1-T3-T5
+			(D1top) to [short, -*] (D3top) to [short, -*] (D5top) to [short, -] ++(0.5,0) coordinate (jL1)
+			% Add inductor L and motor current
+			(jL1) to [L, l=$L$, name = L] ++(2,0) to [short,i=$\overline{i}_\mathrm{mot}$] ++(0.5,0)  coordinate (jL2)
+			% Add DC-motor and motor voltage
+			(jL2) ++ (0,-3) node[elmech](motor){M}
+			(jL2) to (motor.north)
+			(motor.bottom) to (D6bot -| \tikztostart) to (D6bot)
+			% (jL2) to [R, l=$R$, name = R, v_>=$\overline{u}_\mathrm{mot}$, voltage = straight]  (D6bot -| \tikztostart) to (D6bot)
 
-                % Add wire T2-T3-T6
-                (D2bot) to [short, -*] (D4bot) to [short, -*] (D6bot)
-                % Add voltage arrow u2(t) between Dtop and Dbot
-                (jL1) to [open, v^>=$u_2(t)$, voltage = straight] (D6bot-|jL1)                
-                % Add voltage arrow u2+n(t) between Dtop and neutral
-                (D1top) ++(-0.2,0) to [open, v_>=$u_\mathrm{2,p}(t)$, voltage = straight] ++(-5.5,0)
-                % Add voltage arrow u2-n(t) between Dbot and neutral
-                (D2bot) ++(-0.2,0) to [open, v_>=$u_\mathrm{2,m}(t)$, voltage = straight] ++(-5.5,0)
-                % Add voltage arrow between AC source a and b
-                (A) to [open, v^>=$u_{1\mathrm{ab}}(t)$, voltage = straight] (B)
-                % Add voltage arrow between AC source b and c
-                (B) to [open, v^>=$u_{1\mathrm{bc}}(t)$, voltage = straight] (C)
-                % Add voltage arrow between AC source a and c
-                (-0.5,-2*\vd) to [open, v^>=$u_{1\mathrm{ca}}(t)$, voltage = straight] (-0.5,0);
-            \end{circuitikz}
-        \end{center}
-        \caption{B6C converter at a motor load.}
-        \label{fig:B6C_topology_WithMotor}
-    \end{figure}
+			% Add wire T2-T3-T6
+			(D2bot) to [short, -*] (D4bot) to [short, -*] (D6bot)
+			% Add voltage arrow u2(t) between Dtop and Dbot
+			(jL1) to [open, v^>=$u_2(t)$, voltage = straight] (D6bot-|jL1)
+			% Add voltage arrow u2+n(t) between Dtop and neutral
+			(D1top) ++(-0.2,0) to [open, v_>=$u_\mathrm{2,p}(t)$, voltage = straight] ++(-5.5,0)
+			% Add voltage arrow u2-n(t) between Dbot and neutral
+			(D2bot) ++(-0.2,0) to [open, v_>=$u_\mathrm{2,m}(t)$, voltage = straight] ++(-5.5,0)
+			% Add voltage arrow between AC source a and b
+			(A) to [open, v^>=$u_{1\mathrm{ab}}(t)$, voltage = straight] (B)
+			% Add voltage arrow between AC source b and c
+			(B) to [open, v^>=$u_{1\mathrm{bc}}(t)$, voltage = straight] (C)
+			% Add voltage arrow between AC source a and c
+			(-0.5,-2*\vd) to [open, v^>=$u_{1\mathrm{ca}}(t)$, voltage = straight] (-0.5,0);
+		\end{circuitikz}
+	\end{center}
+	\caption{B6C converter at a motor load.}
+	\label{fig:B6C_topology_WithMotor}
+\end{figure}
