@@ -1,31 +1,30 @@
 \begin{solutionfigure}[htb]
-    \begin{tikzpicture}
-        \pgfmathsetmacro{\D}{0.4} % duty cycle
-        \pgfmathsetmacro{\gain}{1} % current ripple
-        \begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom}, height=5cm, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
+	\begin{tikzpicture}
+		\pgfmathsetmacro{\D}{0.4} % duty cycle
+		\pgfmathsetmacro{\gain}{1} % current ripple
+		\begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom}, height=5cm, width=0.875\textwidth, xmin=0, xmax=4, grid,clip = false, ymin = 0, ymax =1.1]
 
-            % Top plot: voltage at the transistor
-            \nextgroupplot[ylabel = {$u_\mathrm{T}(t)$}, ytick = {-0.1, 0, 0.5, 1}, yticklabels = { , 0, , $U_1+U_2$}, ymin = -0.1]
-                \pgfplotsinvokeforeach{0,...,3}{
-                    \edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},\gain) ({0 + #1},0) ({\D + #1},0) ({\D + #1},\gain) ({1 + #1},\gain) ({1 + #1},0)};}
-                    \AddPlot
-                }
-                \draw [thick,<->]  (0,0.2) -- node[below]{$T_\mathrm{on}$}(\D, 0.2); % T_on
-                \draw [thick,<->]  (\D,0.2) -- node[below]{$T_\mathrm{off}$}(1.0, 0.2); % T_off
-                \draw [thick,<->]  (0.0,-0.5) -- node[below]{$T_\mathrm{s}$}(1.0, -.5); % T_s
+			% Top plot: voltage at the transistor
+			\nextgroupplot[ylabel = {$u_\mathrm{T}(t)$}, ytick = {-0.1, 0, 0.5, 1}, yticklabels = { , 0, , $U_1+U_2$}, ymin = -0.1]
+			\pgfplotsinvokeforeach{0,...,3}{
+				\edef\AddPlot{\noexpand\addplot[signalalpha, thick] coordinates {({0 + #1},\gain) ({0 + #1},0) ({\D + #1},0) ({\D + #1},\gain) ({1 + #1},\gain) ({1 + #1},0)};}
+				\AddPlot
+			}
+			\draw [thick,<->]  (0,0.2) -- node[below]{$T_\mathrm{on}$}(\D, 0.2); % T_on
+			\draw [thick,<->]  (\D,0.2) -- node[below]{$T_\mathrm{off}$}(1.0, 0.2); % T_off
+			\draw [thick,<->]  (0.0,-0.5) -- node[below]{$T_\mathrm{s}$}(1.0, -.5); % T_s
 
+			% Middle plot: diode current
+			\nextgroupplot[ylabel = {$i_\mathrm{D}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , },xlabel={$t/T_\mathrm{s}$}]
+			\pgfplotsinvokeforeach{0,...,3}{
+				\edef\AddPlot{\noexpand\addplot[signaldelta, thick] coordinates {({0 + #1},0) ({\D + #1},0) ({\D + #1},0.56) ({1 + #1},0)};}
+				\AddPlot
+			}
+			\draw[-{Latex[length=2mm]}, thin] (axis cs:\D+0.5,0.8) node[right=1mm, fill=white, inner sep = 1pt, anchor = south]{$\max\{i_\mathrm{D}\}$} -- (axis cs:\D+0.01,0.56+0.01); % indicate max current
+			\draw[-{Latex[length=2mm]}, thin] (axis cs:\D+0.6+0.1,0.5) node[right=1mm, fill=white, inner sep = 1pt, anchor = south]{$\min\{i_\mathrm{D}\}$} -- (axis cs:1,0.01); % indicate min current
 
-            % Middle plot: diode current
-            \nextgroupplot[ylabel = {$i_\mathrm{D}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {0, , },xlabel={$t/T_\mathrm{s}$}]
-                \pgfplotsinvokeforeach{0,...,3}{
-                    \edef\AddPlot{\noexpand\addplot[signaldelta, thick] coordinates {({0 + #1},0) ({\D + #1},0) ({\D + #1},0.56) ({1 + #1},0)};}
-                    \AddPlot
-                }
-                \draw[-{Latex[length=2mm]}, thin] (axis cs:\D+0.5,0.8) node[right=1mm, fill=white, inner sep = 1pt, anchor = south]{$\max\{i_\mathrm{D}\}$} -- (axis cs:\D+0.01,0.56+0.01); % indicate max current
-                \draw[-{Latex[length=2mm]}, thin] (axis cs:\D+0.6+0.1,0.5) node[right=1mm, fill=white, inner sep = 1pt, anchor = south]{$\min\{i_\mathrm{D}\}$} -- (axis cs:1,0.01); % indicate min current
-                
-        \end{groupplot}
-    \end{tikzpicture}
-    \caption{Visualization of the transistor blocking voltage (in the upper part) and diode current below.}
-    \label{fig:inverseCon_voltage_current}
+		\end{groupplot}
+	\end{tikzpicture}
+	\caption{Visualization of the transistor blocking voltage (in the upper part) and diode current below.}
+	\label{fig:inverseCon_voltage_current}
 \end{solutionfigure}

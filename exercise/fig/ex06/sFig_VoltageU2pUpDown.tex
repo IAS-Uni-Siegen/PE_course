@@ -3,143 +3,143 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{solutionfigure}[htb]
 
- %   \documentclass{standalone}
- %   \usepackage{pgfplots}
- %   \pgfplotsset{compat=1.18} % Kompatibilität für neuere Versionen
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                % x/y range adjustment
-                xmin=0, xmax=368,
-                ymin=-650, ymax=650,
-                samples=500,
-                axis y line=center,
-                axis x line=middle,
-                extra y ticks=0,
-                % Label text
-                xlabel={$\omega t / \text{rad}$},,
-                ylabel={$u/\mathrm{V}$},
-                % Label adjustment
-                x label style={at={(axis description cs:1,0.5)},anchor=west},
-                y label style={at={(axis description cs:-.05,.97)},anchor=south,yshift=0.2cm},
-                width=0.6\textwidth,
-                height=0.3\textwidth,
-                % x-Ticks
-                xtick={0,90,180,270,360},
-                xticklabels={,,$\pi$,,$2\pi$},
-                xticklabel style = {anchor=north},
-                % y-Ticks
-                ytick={600,400,200,0,-200,-400,-600},
-                yticklabels={600,400,200,0,-200,-400,-600},
-                yticklabel style = {anchor=east},
-                % Grid layout
-                grid,
-                thick
-                %grid style={line width=.1pt, draw=gray!10},
-                %major grid style={line width=.2pt,draw=gray!90},
-            ]
-            % Voltage u1ab(wt), u1bc(wt) u1ca(wt)
-            \addplot[black, domain= 0:360,dashed] {563*cos(x-30)};                
-            \addplot[black, domain= 0:360,dashed] {563*cos(x+90)};                
-            \addplot[black, domain= 0:360,dashed] {563*cos(x+210)}; 
-            % Voltage -u1ab(wt), -u1bc(wt) -u1ca(wt)
-            \addplot[black, domain= 0:360,dashed] {-563*cos(x-30)};                
-            \addplot[black, domain= 0:360,dashed] {-563*cos(x+90)};                
-            \addplot[black, domain= 0:360,dashed] {-563*cos(x+210)}; 
-            % Voltage u2(wt) up
-            \addplot[signalalpha, domain= 0:30] {-563*cos(x+210)};            
-            \addplot[signalalpha, domain= 30:90] {563*cos(x-30)};                
-            \addplot[signalalpha, domain= 270:330] {563*cos(x+90)};                
-            \addplot[signalalpha, domain= 150:210] {563*cos(x+210)}; 
-            \addplot[signalalpha, domain= 210:270] {-563*cos(x-30)};                
-            \addplot[signalalpha, domain= 90:150] {-563*cos(x+90)};                
-            \addplot[signalalpha, domain= 330:360] {-563*cos(x+210)};            
-            \addplot[color=signalalpha,solid] coordinates{
-                (30, 563)
-                (30, 282)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (90, 563)
-                (90, 282)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (150, 563)
-                (150, 282)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (210, 563)
-                (210, 282)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (270, 563)
-                (270, 282)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (330, 563)
-                (330, 282)
-            };     
-    
-            % Voltage u2(wt) down
-            \addplot[signalalpha, domain= 0:30] {-563*cos(x-30)};                
-            \addplot[signalalpha, domain= 150:210] {563*cos(x-30)};                
-            \addplot[signalalpha, domain= 30:90] {563*cos(x+90)};                
-            \addplot[signalalpha, domain= 270:330] {563*cos(x+210)};            
-            \addplot[signalalpha, domain= 330:360] {-563*cos(x-30)};                
-            \addplot[signalalpha, domain= 210:270] {-563*cos(x+90)};                
-            \addplot[signalalpha, domain= 90:150] {-563*cos(x+210)}; 
-            \addplot[color=signalalpha,solid] coordinates{
-                (30,-563)
-                (30,-282)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (90,-563)
-                (90,-282)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (150,-563)
-                (150,-282)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (210,-563)
-                (210,-282)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (270,-563)
-                (270,-282)
-            };     
-            \addplot[color=signalalpha,solid] coordinates{
-                (330,-563)
-                (330,-282)
-            };     
-         
-            % Label of +-u1ab
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:30,10) {$\pm u_{\mathrm{1ab}}$};
-            % Line to +u1ab
-            \draw[black] (30,140) -- (35,190);            
-            % Line to -u1ab
-            \draw[black] (30,-10) -- (35,-100);            
-            % Label of +-u1bc
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:150,10) {$\pm u_{\mathrm{1bc}}$};
-            % Line to +u1bc
-            \draw[black] (150,140) -- (155,190);            
-            % Line to -u1bc
-            \draw[black] (150,-10) -- (155,-100);   
-            % Label of +-u1ca
-            \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:270,10) {$\pm u_{\mathrm{1ca}}$};
-            % Line to +u1ca
-            \draw[black] (270,140) -- (275,190);            
-            % Line to -u1ca
-            \draw[black] (270,-10) -- (275,-100);               
-            % Label of u2up
-            \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,210) {$u_{\mathrm{2 up}}$};
-            % Line to u2,up
-            \draw[signalalpha] (120,370) -- (125,440);
-            % Label of u2down
-            \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:240,-380) {$u_{\mathrm{2 dn}}$};
-            % Line to u2,down
-            \draw[signalalpha] (240,-380) -- (235,-430);
-        \end{axis}     
-        \end{tikzpicture}
-        \caption{Output voltage $u_\mathrm{2 up}(\omega t)$ for raising and $u_\mathrm{2 dn}(\omega t)$ lowering the load.}
-        \label{sfig:ex06_Voltage_u2up_down}
+	%   \documentclass{standalone}
+	%   \usepackage{pgfplots}
+	%   \pgfplotsset{compat=1.18} % Kompatibilität für neuere Versionen
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				% x/y range adjustment
+				xmin=0, xmax=368,
+				ymin=-650, ymax=650,
+				samples=500,
+				axis y line=center,
+				axis x line=middle,
+				extra y ticks=0,
+				% Label text
+				xlabel={$\omega t / \text{rad}$},,
+				ylabel={$u/\mathrm{V}$},
+				% Label adjustment
+				x label style={at={(axis description cs:1,0.5)},anchor=west},
+				y label style={at={(axis description cs:-.05,.97)},anchor=south,yshift=0.2cm},
+				width=0.6\textwidth,
+				height=0.3\textwidth,
+				% x-Ticks
+				xtick={0,90,180,270,360},
+				xticklabels={,,$\pi$,,$2\pi$},
+				xticklabel style = {anchor=north},
+				% y-Ticks
+				ytick={600,400,200,0,-200,-400,-600},
+				yticklabels={600,400,200,0,-200,-400,-600},
+				yticklabel style = {anchor=east},
+				% Grid layout
+				grid,
+				thick
+				%grid style={line width=.1pt, draw=gray!10},
+				%major grid style={line width=.2pt,draw=gray!90},
+			]
+			% Voltage u1ab(wt), u1bc(wt) u1ca(wt)
+			\addplot[black, domain= 0:360,dashed] {563*cos(x-30)};
+			\addplot[black, domain= 0:360,dashed] {563*cos(x+90)};
+			\addplot[black, domain= 0:360,dashed] {563*cos(x+210)};
+			% Voltage -u1ab(wt), -u1bc(wt) -u1ca(wt)
+			\addplot[black, domain= 0:360,dashed] {-563*cos(x-30)};
+			\addplot[black, domain= 0:360,dashed] {-563*cos(x+90)};
+			\addplot[black, domain= 0:360,dashed] {-563*cos(x+210)};
+			% Voltage u2(wt) up
+			\addplot[signalalpha, domain= 0:30] {-563*cos(x+210)};
+			\addplot[signalalpha, domain= 30:90] {563*cos(x-30)};
+			\addplot[signalalpha, domain= 270:330] {563*cos(x+90)};
+			\addplot[signalalpha, domain= 150:210] {563*cos(x+210)};
+			\addplot[signalalpha, domain= 210:270] {-563*cos(x-30)};
+			\addplot[signalalpha, domain= 90:150] {-563*cos(x+90)};
+			\addplot[signalalpha, domain= 330:360] {-563*cos(x+210)};
+			\addplot[color=signalalpha,solid] coordinates{
+					(30, 563)
+					(30, 282)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(90, 563)
+					(90, 282)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(150, 563)
+					(150, 282)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(210, 563)
+					(210, 282)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(270, 563)
+					(270, 282)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(330, 563)
+					(330, 282)
+				};
+
+			% Voltage u2(wt) down
+			\addplot[signalalpha, domain= 0:30] {-563*cos(x-30)};
+			\addplot[signalalpha, domain= 150:210] {563*cos(x-30)};
+			\addplot[signalalpha, domain= 30:90] {563*cos(x+90)};
+			\addplot[signalalpha, domain= 270:330] {563*cos(x+210)};
+			\addplot[signalalpha, domain= 330:360] {-563*cos(x-30)};
+			\addplot[signalalpha, domain= 210:270] {-563*cos(x+90)};
+			\addplot[signalalpha, domain= 90:150] {-563*cos(x+210)};
+			\addplot[color=signalalpha,solid] coordinates{
+					(30,-563)
+					(30,-282)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(90,-563)
+					(90,-282)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(150,-563)
+					(150,-282)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(210,-563)
+					(210,-282)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(270,-563)
+					(270,-282)
+				};
+			\addplot[color=signalalpha,solid] coordinates{
+					(330,-563)
+					(330,-282)
+				};
+
+			% Label of +-u1ab
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:30,10) {$\pm u_{\mathrm{1ab}}$};
+			% Line to +u1ab
+			\draw[black] (30,140) -- (35,190);
+			% Line to -u1ab
+			\draw[black] (30,-10) -- (35,-100);
+			% Label of +-u1bc
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:150,10) {$\pm u_{\mathrm{1bc}}$};
+			% Line to +u1bc
+			\draw[black] (150,140) -- (155,190);
+			% Line to -u1bc
+			\draw[black] (150,-10) -- (155,-100);
+			% Label of +-u1ca
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:270,10) {$\pm u_{\mathrm{1ca}}$};
+			% Line to +u1ca
+			\draw[black] (270,140) -- (275,190);
+			% Line to -u1ca
+			\draw[black] (270,-10) -- (275,-100);
+			% Label of u2up
+			\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:120,210) {$u_{\mathrm{2 up}}$};
+			% Line to u2,up
+			\draw[signalalpha] (120,370) -- (125,440);
+			% Label of u2down
+			\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:240,-380) {$u_{\mathrm{2 dn}}$};
+			% Line to u2,down
+			\draw[signalalpha] (240,-380) -- (235,-430);
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Output voltage $u_\mathrm{2 up}(\omega t)$ for raising and $u_\mathrm{2 dn}(\omega t)$ lowering the load.}
+	\label{sfig:ex06_Voltage_u2up_down}
 \end{solutionfigure}

@@ -3,23 +3,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[h]
-    \begin{center}
-        \begin{circuitikz}[european currents,european resistors,american inductors]
-            \draw
-            (0,0) coordinate(N1) to [short] ++(1.5,0) coordinate(U1p)
-            ++(2,0) node[nigfete,rotate=90](Trans){}
-            (U1p) to [short,i=$i_1(t)$] (Trans.drain)
-            (Trans.source) to [short,i=$i_2(t)$] ++(1.5,0) coordinate(U2p)
-            to [short,-] ++(1,0) to [R,l^=$R_\text{L}$,  v=$u_2(t)$, voltage = straight ] ++(0,-3) to [short] ++(-1,0) coordinate(U2n) to [short] (1,-3) coordinate(U1n) to [short,-] ++(-1,0) coordinate(N10)
-             (N1) to [V,v=$U_1$, voltage = straight] (N10)
-            % (U1p) to [open,v^=$U_1$] (U1n)
-             %(U2p) to [open,v_=$u_2(t)$] (U2n)
-             (Trans.gate) to [short,o-] ++(0,-.3) to [sqV] ++(0,-1) 
-             (Trans.gate) ++(-0.3,0) node(T1){$\text{T}_\text{1}$}
-             
-            ;
-        \end{circuitikz}
-    \end{center}
-    \caption{Circuit with one transistor and one load resistor.}
-        \label{fig:transistor circuit}
-    \end{figure}
+	\begin{center}
+		\begin{circuitikz}[european currents,european resistors,american inductors]
+			\draw
+			(0,0) coordinate(N1) to [short] ++(1.5,0) coordinate(U1p)
+			++(2,0) node[nigfete,rotate=90](Trans){}
+			(U1p) to [short,i=$i_1(t)$] (Trans.drain)
+			(Trans.source) to [short,i=$i_2(t)$] ++(1.5,0) coordinate(U2p)
+			to [short,-] ++(1,0) to [R,l^=$R_\text{L}$,  v=$u_2(t)$, voltage = straight ] ++(0,-3) to [short] ++(-1,0) coordinate(U2n) to [short] (1,-3) coordinate(U1n) to [short,-] ++(-1,0) coordinate(N10)
+			(N1) to [V,v=$U_1$, voltage = straight] (N10)
+			% (U1p) to [open,v^=$U_1$] (U1n)
+			%(U2p) to [open,v_=$u_2(t)$] (U2n)
+			(Trans.gate) to [short,o-] ++(0,-.3) to [sqV] ++(0,-1)
+			(Trans.gate) ++(-0.3,0) node(T1){$\text{T}_\text{1}$}
+
+			;
+		\end{circuitikz}
+	\end{center}
+	\caption{Circuit with one transistor and one load resistor.}
+	\label{fig:transistor circuit}
+\end{figure}

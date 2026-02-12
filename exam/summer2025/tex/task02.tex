@@ -16,117 +16,114 @@
 % - change the nomenclature of the task to the usual definitions of our course
 
 In a modern industrial automation system, a central $\SI{12}{\volt}$ DC power supply is used to power distributed sensor units and actuators throughout a production area.
-While many actuators and some programmable logic controllers (PLC modules) operate directly on $\SI{12}{\volt}$, some sensors (e.g., proximity switches, temperature sensors, 
-camera modules) require a stable voltage of $\SI{5}{\volt}$ or $\SI{3.3}{\volt}$. Therefore, a multi-port (flyback) converter with the parameters according 
+While many actuators and some programmable logic controllers (PLC modules) operate directly on $\SI{12}{\volt}$, some sensors (e.g., proximity switches, temperature sensors,
+camera modules) require a stable voltage of $\SI{5}{\volt}$ or $\SI{3.3}{\volt}$. Therefore, a multi-port (flyback) converter with the parameters according
 \autoref{table:MultiportFlybackConverter} is used.
 
 \begin{germanblock}
-In einem modernen industriellen Automatisierungssystem wird eine zentrale Gleichstromversorgung mit $\SI{12}{\volt}$ verwendet, um verteilte Sensoreinheiten und Aktoren
- in einem Produktionsbereich mit Strom zu versorgen. Während viele Aktoren und einige kleine speicherprogrammierbare Steuerungen (SPS-Module) direkt mit $\SI{12}{\volt}$ arbeiten, 
-benötigen manche Sensoren (z. B. Näherungsschalter, Temperatursensoren, Kameramodule) eine stabile Spannung von $\SI{5}{\volt}$ oder $\SI{3.3}{\volt}$. Dazu wird ein Multi-Port Flybackkonverter
-mit den in \autoref{table:MultiportFlybackConverter} angegebenen Parametern verwendet.
+	In einem modernen industriellen Automatisierungssystem wird eine zentrale Gleichstromversorgung mit $\SI{12}{\volt}$ verwendet, um verteilte Sensoreinheiten und Aktoren
+	in einem Produktionsbereich mit Strom zu versorgen. Während viele Aktoren und einige kleine speicherprogrammierbare Steuerungen (SPS-Module) direkt mit $\SI{12}{\volt}$ arbeiten,
+	benötigen manche Sensoren (z. B. Näherungsschalter, Temperatursensoren, Kameramodule) eine stabile Spannung von $\SI{5}{\volt}$ oder $\SI{3.3}{\volt}$. Dazu wird ein Multi-Port Flybackkonverter
+	mit den in \autoref{table:MultiportFlybackConverter} angegebenen Parametern verwendet.
 \end{germanblock}
 
 % figure figStepDownConverterOutputFilter
 \input{fig/Task02/figMultiPortFlybackConverter}
 
 \begin{table}[ht]
-    \centering  % Zentriert die Tabelle
-    \begin{tabular}{llll}
-        \toprule
-        Input voltage: &  $U_{\mathrm{1}} = \SI{12}{\volt}$ & Switching frequency: & $f_\mathrm{s} = \SI{100}{\kilo\hertz}$\\ 
-        Output voltage: & $U_{\mathrm{2}} = \SI{5}{\volt}$  & Min. output current: & $I_{\mathrm{2,min}} = \SI{2}{\ampere}$ \\ 
-        Output voltage: &  $U_{\mathrm{3}} = \SI{3.3}{\volt}$ & Min. output current: & $I_{\mathrm{3,min}} = \SI{3}{\ampere}$ \\ 
-        Duty cycle: & 0.2 & Primary turns & $N_{\mathrm{1}} = 2040$\\ 
-        \midrule
-        \multicolumn{4}{l}{\quad All components are ideal. No losses need to be considered.}  \\ 
-        \bottomrule
-    \end{tabular}
-    \caption{Parameters of the multi-port flyback converter.}  % Beschriftung der Tabelle
-    \label{table:MultiportFlybackConverter}
+	\centering  % Zentriert die Tabelle
+	\begin{tabular}{llll}
+		\toprule
+		Input voltage:  & $U_{\mathrm{1}} = \SI{12}{\volt}$  & Switching frequency: & $f_\mathrm{s} = \SI{100}{\kilo\hertz}$ \\
+		Output voltage: & $U_{\mathrm{2}} = \SI{5}{\volt}$   & Min. output current: & $I_{\mathrm{2,min}} = \SI{2}{\ampere}$ \\
+		Output voltage: & $U_{\mathrm{3}} = \SI{3.3}{\volt}$ & Min. output current: & $I_{\mathrm{3,min}} = \SI{3}{\ampere}$ \\
+		Duty cycle:     & 0.2                                & Primary turns        & $N_{\mathrm{1}} = 2040$                \\
+		\midrule
+		\multicolumn{4}{l}{\quad All components are ideal. No losses need to be considered.}                                 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Parameters of the multi-port flyback converter.}  % Beschriftung der Tabelle
+	\label{table:MultiportFlybackConverter}
 \end{table}
-
 
 \subtask{Calculate the number of turns $N_\mathrm{2}$ and $N_\mathrm{3}$ for the two outputs.}{2}
 \subtaskGerman{Berechnen Sie die Anzahl der Windungen $N_\mathrm{2}$ und $N_\mathrm{3}$ für die beiden Ausgänge.}
- 
+
 % Solution of subtask
 \begin{solutionblock}
-  The voltage ratio depends on the duty cycle and turn ratio
-  \begin{equation*}
-      \frac{U_\mathrm{2}}{U_\mathrm{1}}=\frac{N_\mathrm{2}}{N_\mathrm{1}} \frac{D}{1-D}.
-  \end{equation*}
-  Solving the equation with respect to $N_\mathrm{2}$ yields
-  \begin{equation*}
-      N_\mathrm{2}=\frac{U_\mathrm{2}}{U_\mathrm{1}} N_\mathrm{1} \frac{1-D}{D} = \frac{\SI{5}{\volt}}{\SI{12}{\volt}} 2040 \frac{0.2}{1-0.2}=3400.
-  \end{equation*}
-  In the same $N_\mathrm{3}$ yields
-  \begin{equation*}
-      N_\mathrm{3}=\frac{U_\mathrm{3}}{U_\mathrm{1}} N_\mathrm{1} \frac{1-D}{D} = \frac{\SI{3.3}{\volt}}{\SI{12}{\volt}} 2040 \frac{1-0.2}{0.2}=2244.
-  \end{equation*}
+	The voltage ratio depends on the duty cycle and turn ratio
+	\begin{equation*}
+		\frac{U_\mathrm{2}}{U_\mathrm{1}}=\frac{N_\mathrm{2}}{N_\mathrm{1}} \frac{D}{1-D}.
+	\end{equation*}
+	Solving the equation with respect to $N_\mathrm{2}$ yields
+	\begin{equation*}
+		N_\mathrm{2}=\frac{U_\mathrm{2}}{U_\mathrm{1}} N_\mathrm{1} \frac{1-D}{D} = \frac{\SI{5}{\volt}}{\SI{12}{\volt}} 2040 \frac{0.2}{1-0.2}=3400.
+	\end{equation*}
+	In the same $N_\mathrm{3}$ yields
+	\begin{equation*}
+		N_\mathrm{3}=\frac{U_\mathrm{3}}{U_\mathrm{1}} N_\mathrm{1} \frac{1-D}{D} = \frac{\SI{3.3}{\volt}}{\SI{12}{\volt}} 2040 \frac{1-0.2}{0.2}=2244.
+	\end{equation*}
 \end{solutionblock}
 
 \subtask{Calculate the required magnetizing inductance $L_\mathrm{m}$ so that the multi-port flyback converter is in BCM at minimum current consumption.}{3}
 \begin{hintblock}
-    the input current $i_\mathrm{1}$ is composed of the transformed current components from the $\SI{5}{\volt}$ output and from the $\SI{3.3}{\volt}$ output according 
-    to $i_\mathrm{1}=i_\mathrm{1,port1} + i_\mathrm{1,port2}$.   
+	the input current $i_\mathrm{1}$ is composed of the transformed current components from the $\SI{5}{\volt}$ output and from the $\SI{3.3}{\volt}$ output according
+	to $i_\mathrm{1}=i_\mathrm{1,port1} + i_\mathrm{1,port2}$.
 \end{hintblock}
-\subtaskGerman{Berechnen Sie die erforderliche Magnetisierungsinduktivität $L_\mathrm{m}$, wenn sich der Multiport-Flyback-Konverter bei minimalem Stromverbrauch 
-im BCM befindet.}
-\begin{germanhintblock} 
-    Der Eingangsstrom $i_\mathrm{1}$ setzt sich aus den transformierten Stromanteilen vom $\SI{5}{\volt}$ Ausgang und vom $\SI{3.3}{\volt}$ Ausgang 
-    nach  $i_\mathrm{1}=i_\mathrm{1,port1} + i_\mathrm{1,port2}$ zusammen.
+\subtaskGerman{Berechnen Sie die erforderliche Magnetisierungsinduktivität $L_\mathrm{m}$, wenn sich der Multiport-Flyback-Konverter bei minimalem Stromverbrauch
+	im BCM befindet.}
+\begin{germanhintblock}
+	Der Eingangsstrom $i_\mathrm{1}$ setzt sich aus den transformierten Stromanteilen vom $\SI{5}{\volt}$ Ausgang und vom $\SI{3.3}{\volt}$ Ausgang
+	nach  $i_\mathrm{1}=i_\mathrm{1,port1} + i_\mathrm{1,port2}$ zusammen.
 \end{germanhintblock}
-
 
 % Solution of subtask
 \begin{solutionblock}
-    At boundary conduction mode the average of magnetizing current $i_\mathrm{Lm}$  corresponds to the half of its delta and 
-    and the magnetic current can be calculated with help of the input current.
-    The average input current is calculated by the sum of both output currents, which are to be transformed by the turn ratio and the duty cycle.
-    For boundary conduction mode the minimum output current of each port is to apply:
-    \begin{equation*}
-        \overline{i}_\mathrm{1,min}=\frac{N_\mathrm{2}}{N_\mathrm{1}} \frac{1-D}{D} \overline{i}_\mathrm{2,min} + \frac{N_\mathrm{3}}{N_\mathrm{1}} \frac{1-D}{D} \overline{i}_\mathrm{3,min}
-        = \frac{3400}{2040} \frac{1-0.2}{0.2} \SI{2}{\ampere} + \frac{2244}{2040} \frac{1-0.2}{0.2} \SI{3}{\ampere} = \SI{1.68}{\ampere}.
-    \end{equation*}
-    The relation between average of the magnetizing current $\overline{i}_\mathrm{Lm}$ and the average of the input current yields
-    \begin{equation*}
-        \overline{i}_\mathrm{L} \cdot T_\mathrm{on} = \overline{i}_\mathrm{1} \cdot T_\mathrm{s}.
-    \end{equation*}
-    The average of the magnetizing current $i_\mathrm{Lm}$ is calculated by
-    \begin{equation*}
-        \overline{i}_\mathrm{L} =  \frac{\overline{i}_\mathrm{1}}{D} =  \frac{\SI{1.68}{\ampere}}{0.2}= \SI{8.38}{\ampere}.
-    \end{equation*}
-    At boundary conduction mode the ripple of magnetizing current $i_\mathrm{Lm}$  results in
-    \begin{equation*}
-        \Delta i_\mathrm{Lm} =  2 \cdot \overline{i}_\mathrm{Lm} = 2 \cdot \SI{8.38}{\ampere} = \SI{16.75}{\ampere}.
-    \end{equation*}
-    The value of the inductance is calculate by
-    \begin{equation*}
-        \Delta i_\mathrm{Lm}= \frac{U_\mathrm{1}}{L} \cdot T_\mathrm{on} = \frac{U_\mathrm{1}}{L_\mathrm{m}} \cdot \frac{D}{f_\mathrm{s}}  .
-    \end{equation*}
-    Solving this equation with respect to $L_\mathrm{m}$ yields
-    \begin{equation*}
-        L_\mathrm{m}= \frac{U_\mathrm{1}}{\Delta i_\mathrm{Lm}} \cdot \frac{D}{f_\mathrm{s}} = \frac{\SI{12}{\volt}}{\SI{16.75}{\ampere}} \cdot \frac{0.2}{\SI{100}{\kilo\hertz}} = \SI{1.43}{\micro\henry}.
-    \end{equation*}
+	At boundary conduction mode the average of magnetizing current $i_\mathrm{Lm}$  corresponds to the half of its delta and
+	and the magnetic current can be calculated with help of the input current.
+	The average input current is calculated by the sum of both output currents, which are to be transformed by the turn ratio and the duty cycle.
+	For boundary conduction mode the minimum output current of each port is to apply:
+	\begin{equation*}
+		\overline{i}_\mathrm{1,min}=\frac{N_\mathrm{2}}{N_\mathrm{1}} \frac{1-D}{D} \overline{i}_\mathrm{2,min} + \frac{N_\mathrm{3}}{N_\mathrm{1}} \frac{1-D}{D} \overline{i}_\mathrm{3,min}
+		= \frac{3400}{2040} \frac{1-0.2}{0.2} \SI{2}{\ampere} + \frac{2244}{2040} \frac{1-0.2}{0.2} \SI{3}{\ampere} = \SI{1.68}{\ampere}.
+	\end{equation*}
+	The relation between average of the magnetizing current $\overline{i}_\mathrm{Lm}$ and the average of the input current yields
+	\begin{equation*}
+		\overline{i}_\mathrm{L} \cdot T_\mathrm{on} = \overline{i}_\mathrm{1} \cdot T_\mathrm{s}.
+	\end{equation*}
+	The average of the magnetizing current $i_\mathrm{Lm}$ is calculated by
+	\begin{equation*}
+		\overline{i}_\mathrm{L} =  \frac{\overline{i}_\mathrm{1}}{D} =  \frac{\SI{1.68}{\ampere}}{0.2}= \SI{8.38}{\ampere}.
+	\end{equation*}
+	At boundary conduction mode the ripple of magnetizing current $i_\mathrm{Lm}$  results in
+	\begin{equation*}
+		\Delta i_\mathrm{Lm} =  2 \cdot \overline{i}_\mathrm{Lm} = 2 \cdot \SI{8.38}{\ampere} = \SI{16.75}{\ampere}.
+	\end{equation*}
+	The value of the inductance is calculate by
+	\begin{equation*}
+		\Delta i_\mathrm{Lm}= \frac{U_\mathrm{1}}{L} \cdot T_\mathrm{on} = \frac{U_\mathrm{1}}{L_\mathrm{m}} \cdot \frac{D}{f_\mathrm{s}}  .
+	\end{equation*}
+	Solving this equation with respect to $L_\mathrm{m}$ yields
+	\begin{equation*}
+		L_\mathrm{m}= \frac{U_\mathrm{1}}{\Delta i_\mathrm{Lm}} \cdot \frac{D}{f_\mathrm{s}} = \frac{\SI{12}{\volt}}{\SI{16.75}{\ampere}} \cdot \frac{0.2}{\SI{100}{\kilo\hertz}} = \SI{1.43}{\micro\henry}.
+	\end{equation*}
 \end{solutionblock}
 
-\subtask{Calculate the output voltage $U_{\mathrm{2}}$ for the case, 
-  that all loads of the $\SI{3.3}{\volt}$-output are disconnected, while minimum current $I_{\mathrm{2,min}}$ at $\SI{5}{\volt}$ port.
-  What is the risk in this case?}{1}
+\subtask{Calculate the output voltage $U_{\mathrm{2}}$ for the case,
+	that all loads of the $\SI{3.3}{\volt}$-output are disconnected, while minimum current $I_{\mathrm{2,min}}$ at $\SI{5}{\volt}$ port.
+	What is the risk in this case?}{1}
 
-\subtaskGerman{Berechnen Sie die Ausgangsspannung $U_{\mathrm{2}}$ für den Fall, dass alle Lasten des $\SI{3.3}{\volt}$-Ausgangs getrennt sind, 
-während der minimale Strom $I_{\mathrm{2,min}}$ am $\SI{5}{\volt}$-Ausgang fließt. Was ist das Risiko in diesem Fall?}
-
+\subtaskGerman{Berechnen Sie die Ausgangsspannung $U_{\mathrm{2}}$ für den Fall, dass alle Lasten des $\SI{3.3}{\volt}$-Ausgangs getrennt sind,
+	während der minimale Strom $I_{\mathrm{2,min}}$ am $\SI{5}{\volt}$-Ausgang fließt. Was ist das Risiko in diesem Fall?}
 
 % Solution of subtasks
 \begin{solutionblock}
-    The voltage in DCM-mode for an flyback converter is calculated by
-    \begin{equation*}
-        U_\mathrm{2} = U_\mathrm{1}^2 \frac{D^2 T_\mathrm{s}}{2 L_\mathrm{m} \overline{i}_\mathrm{2,min}} = U_\mathrm{1}^2 \frac{D^2 }{2 L_\mathrm{m} \overline{i}_\mathrm{2,min} f_\mathrm{s}} 
-        = \SI{12}{\volt}^2 \frac{0.2^2 }{2 \cdot\SI{1.43}{\micro\henry} \cdot \SI{2}{\ampere} \cdot \SI{100}{\kilo\hertz} }  = \SI{10.05}{\volt}.
-    \end{equation*}
+	The voltage in DCM-mode for an flyback converter is calculated by
+	\begin{equation*}
+		U_\mathrm{2} = U_\mathrm{1}^2 \frac{D^2 T_\mathrm{s}}{2 L_\mathrm{m} \overline{i}_\mathrm{2,min}} = U_\mathrm{1}^2 \frac{D^2 }{2 L_\mathrm{m} \overline{i}_\mathrm{2,min} f_\mathrm{s}}
+		= \SI{12}{\volt}^2 \frac{0.2^2 }{2 \cdot\SI{1.43}{\micro\henry} \cdot \SI{2}{\ampere} \cdot \SI{100}{\kilo\hertz} }  = \SI{10.05}{\volt}.
+	\end{equation*}
 
-    The voltage increase may leads to the damage of the $\SI{5}{\volt}$ devices.
+	The voltage increase may leads to the damage of the $\SI{5}{\volt}$ devices.
 
 \end{solutionblock}
