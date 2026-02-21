@@ -1,0 +1,67 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Examtask 2: SEPIC converter as smart voltage stabilizer for bicycle dynamo %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\task{SEPIC converter as smart voltage stabilizer for bicycle dynamo}
+
+\taskGerman{SEPIC Konverter als intelligente Spannungsstabilisierung für Fahrraddynamos}
+
+A SEPIC converter is to be designed for voltage stabilization in a bicycle dynamo.
+A control circuit regulates the converter's duty cycle to ensure a stable output voltage.
+The dynamo provides a voltage of 3-10V. The output voltage is to be stabilized at 6V.
+
+\begin{germanblock}
+    Für ein Fahraddynamo soll ein SEPIC-Konverter als Spannungsstabilisierung dimensioniert werden.
+    Eine Reglungsschaltung regelt den dutycylce des Konverter für eine stabile Ausgangsspannung.
+    Der Dynamo liefert eine Spannung von 3-10V. Die Ausgangsspannung soll auf 6V stabilisiert werden.
+\end{germanblock}
+
+\input{fig/Task02/figSEPICConverter}
+
+\begin{table}[ht]
+    \centering  % Zentriert die Tabelle
+    \begin{tabular}{llll}
+        \toprule
+        \multicolumn{2}{l}{\textbf{General parameters:}} & \multicolumn{2}{l}{\textbf{IGBT and diode:}} \\ 
+        Input voltage: &  $U_{\mathrm{1}} = \SI{24}{\volt}$ & Drain-source voltage: & $U_{\mathrm{on},\mathrm{DS}} = \SI{1.2}{\volt}$ \\
+        Output voltage: & $U_2 = \SI{48}{\volt}$  & Output current range: & $I_2 = \SI{2}{\ampere} \ldots \SI{20}{\ampere}$  \\
+        Switching frequency: & $f_\mathrm{s} = \SI{100}{\kilo\hertz}$  & Diode forward voltage: & $U_{\mathrm{D},\mathrm{f}} = \SI{0.81}{\volt}$  \\
+        \midrule
+        \multicolumn{4}{l}{\quad The switching losses of the semiconductors are negligible.}  \\ 
+        \multicolumn{4}{l}{\quad The filter capacitor $C$ is to be considered only for subtask 1.2.}  \\ 
+        \bottomrule
+    \end{tabular}
+    \caption{Parameters of the circuit.}  % Beschriftung der Tabelle
+    \label{table:ex01_Parameters of the circuit}
+\end{table}
+
+
+\subtask{What are the minimum and maximum duty cycles that the control circuit has to request?}{0}
+\subtaskGerman{Was ist der minimale und der maximale Dutycycle, den die Reglungsschaltung vorgeben muss.}
+
+\begin{germanblock}
+    Die Stromannahme des Verbrauchers ist im Bereich von 50mA - 1A.
+\end{germanblock}
+
+\subtask{Determine the minimal required inductances L1 and L2 for the case of minimum input voltage and maximum output power.}{0}
+\subtaskGerman{Bestimmen sie die nötige Induktivitäten L1 und L2 für den Fall minimaler Eingangsspannung und maximaler Aussgangsleistung}
+
+\subtask{How does the voltage behave when unloaded? Does it increase or decrease? 
+        Explain using the formula for DCM mode.}{0}
+\subtaskGerman{Wie verhält sich die Spannung im unbelasteten Fall.
+    Wird sie größer oder kleiner? Begründe mit Hilfe der Formel für den DCM-Mode.}
+
+
+\subtask{A resistor is used to ensure a minimum load to prevent DCM mode. What should the required values 
+         of this resistor be (resistance value and power rating)?}{0}
+\subtaskGerman{Es wird ein Widerstand verwendet, um eine Mindestlast zu gewährleisten, damit der DCM-Mode verhindert wird. 
+               Wie muss der zugeschalteter Widerstand dimensioniert sein (Widerstandswert und Leistung)?}
+
+\subtask{A resistor is used to ensure a minimum load to prevent DCM mode. What should the required values 
+         of this resistor be (resistance value and power rating)?}{0}
+\subtaskGerman{Es wird ein Widerstand verwendet, um eine Mindestlast zu gewährleisten, damit der DCM-Mode verhindert wird. 
+               Wie muss der zugeschalteter Widerstand dimensioniert sein (Widerstandswert und Leistung)?}
+
+\subtask{How large must the filter capacitor be so that, in the worst case, the voltage fluctuation is $\pm \SI{10}{\percent}$ ?}{0}
+\subtaskGerman{Wie groß muss der Filterkondensator ausgelegt werden, damit im ungünstigsten Fall die Spannungsschwankung $\pm \SI{10}{\percent}$ ?}
+
