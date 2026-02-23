@@ -2,24 +2,70 @@
 %% Examtask 1: Step-up converter with output filter %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\task{Step-up converter}
+\task{Step-down converter}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\taskGerman{Hochsetzsteller}
-%%%%%%%%%%%
-% Combination of Tasks 1.2 + 1.3 from our exercises (little bit of steady state analysis plus losses / efficiency calculation)
-% Reduction to (at most) 5 or 6 subquestions, i.e. a subset of the original exercises limited to some core questions for the buck converter
-% Use a completely different set of parameter / signal values to change the setting compared to the exercise tasks, maybe also add a little 'pre story' for which application the buck converter should be used
-% However, the 'spirit' of this first exam task should be definitely entry friendly, i.e., provide the students with a good start into the PE exam enabling to gain confidence for the next tasks 
-%%%%%%%%%%%
+\taskGerman{Tiefsetzsteller}
 
-In an industrial control system, a stable voltage of $\SI{24}{\volt}$ is available.
-However, some devices require $\SI{48}{\volt}$. Hence, a step-up converter shall be designed for a load current according \autoref{table:ex01_Parameters of the circuit}.
+A drive system is powered by $\SI{60}{\volt}$ DC.
+The speed, position, and current sensors in the drive system require stable supply voltages
+of $\SI{5}{\volt}$. To transform the voltage down as efficiently as possible, a buck converter is used.
 
 \begin{germanblock}
-In einem industriellen Steuerungssystem steht eine stabile DC-Spannung von $\SI{24}{\volt}$ zur Verfügung. Einige Geräte benötigen allerdings $\SI{48}{\volt}$. Hierfür wird ein Hochsetztsteller eingesetzt, 
-der für einen Laststrom entsprechend .....
+Ein Antriebssystem wird mit $\SI{60}{\volt}$ Gleichstrom versorgt.
+Die Drehzahl-, Positions- und Stromsensoren im Antriebssystem benötigen stabile Versorgungsspannungen
+von $\SI{5}{\volt}$. Um die Spannung möglichst effizient herunterzutranformieren, wird ein Tiefsetzsteller verwendet.
+\end{germanblock}
+
+% figure figStepDownConverterOutputFilter 
+\input{fig/Task01/figStepDownConverterOutputFilter}
+
+\begin{table}[ht]
+    \centering  % Zentriert die Tabelle
+    \begin{tabular}{llll}
+        \toprule
+        \multicolumn{2}{l}{\textbf{General parameters:}} & \multicolumn{2}{l}{\textbf{IGBT:}} \\ 
+        Input voltage: &  $U_{\mathrm{1}} = \SI{60}{\volt}$ & Collector-emitter voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2}{\volt}$ \\
+        Output voltage: & $U_2 = \SI{5.1}{\volt}$  & &  \\
+        Output power: &$\SI{2.5}{\watt} \le p \le \SI{15}{\watt}$  & \multicolumn{2}{l}{\textbf{Diode:}} \\
+        Switching frequency: & $f_\mathrm{s} = \SI{100}{\kilo\hertz}$  & Forward voltage: &  $u_{\mathrm{fw}} = \SI{0.8}{\volt}$ \\
+        \bottomrule
+    \end{tabular}
+    \caption{Parameters of the circuit.}  % Beschriftung der Tabelle
+    \label{table:ex01_Parameters of the circuit}
+\end{table}
+
+
+\subtask{What duty cycle must be set, assuming ideal components?}{0}
+\subtaskGerman{Welches Tastverhältnis muss eingestellt werden unter der Annahme idealer Komponenten?}
+
+\subtask{What duty cycle is required when the voltage drops across the transistor and the diode are taken into account?}{0}
+\subtaskGerman{Welches Tastverhältnis ist erforderlich, wenn die Spannungsabfälle über den Transistor und die Diode berücksichtigt werden?}
+
+\subtask{The sensors have different power consumption depending on the operating point, so the buck converter delivers 
+         a maximum power of $\SI{15}{\watt}$  and a minimum power of $\SI{2.5}{\watt}$.
+        What inductance must be designed so that it does not operate in DCM mode within the specified power range, 
+        reaching BCM mode at 2.5 watts?}{1}
+\subtaskGerman{Die Sensoren haben je nach Arbeitspunkt eine unterschiedliche Leistungsaufnahme, so dass der Tiefsetzsteller 
+für einen maximalen Leistung von $\SI{15}{\watt}$ und eine minimale Leistung von $\SI{2.5}{\watt}$ liefert.
+Wie groß muss die Induktivität ausgelegt werden, damit er im angegebenen Leistungsbereich nicht im DCM-Mode arbeitet, wobei er bei $\SI{2.5}{\watt}$ den BCM-Mode erreicht.
+}
+
+The sensors are susceptible to voltage fluctuations, so the power supply must have a maximum ripple of
+$\pm \SI{2.5}{\percent}$ of the output voltage. To achieve this, a filter capacitor is added.
+
+\begin{germanblock}
+Die Sensoren sind gegenüber Spannungsschwankungen anfällig, so dass die Spannungsversorgung eine maximale Welligkeit von
+ $\pm \SI{2.5}{\percent}$ der Ausgangsspannung besitzen darf. Um dieses  zu erreichen, wird ein Filterkondensator eingebaut.
+\end{germanblock}
+
+\subtask{What value should be chosen for the capacitance of the filter capacitor?}{0}
+\subtaskGerman{Welche Größe muss für die Kapazität des Filterkondensators gewählt werden?}
+
+\begin{germanblock}Wie groß muss die Kapazität des Filterkondensators gewählt werden?
+In einem Störfall kommt es zum Ausfall der Drehzahl- und Positionssensoren. Dadurch fällt die abgenommene Leistung auf einen Wert von $\SI{1}{\watt}$.
 \end{germanblock}
 
 
-
+\subtask{How large must the filter capacitor be so that, in the worst case, the voltage fluctuation is $\pm \SI{10}{\percent}$ ?}{0}
+\subtaskGerman{ Wie hoch ist die Ausgangsspannung für diesen Störfall?}
