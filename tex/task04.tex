@@ -1,31 +1,69 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Task 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\task{B6C converter at a motor load}
+\task{Transistor-based AC/DC converter (single-phase AFE)}
 
-\taskGerman{B6C Umrichter bei Motorlast}
+\taskGerman{Transistorbasierter AC/DC-Umrichter (einphasiger AFE)}
 
-An industrial DC motor is used in a rolling mill drive, powered through a B6C six-pulse controlled rectifier, 
-shown in , from a three-phase $\SI{480}{\volt}$, $\SI{50}{Hz}$ grid. The motor has a rated terminal voltage of $\SI{400}{\volt}$
-and draws $\SI{50}{\ampere}$. A large smoothing inductor ($L \to \infty$) ensures constant output current. 
-The converter is utilized to operate in motoring mode by adjusting the firing angle $\alpha$.
+An electric-drive test bench is connected to a single-phase grid via a full-bridge transistor AFE rectifier.
+The converter should operate with approximately unity power factor and a stable DC-link voltage.
+During testing, increased DC-link ripple is observed and the PWM strategy is questioned.
 
 \begin{germanblock}
-    Ein industrieller Gleichstrommotor wird in einem Walzwerksantrieb verwendet, der über einen B6C-Sechs-Puls-Gleichrichter...
+Ein elektrischer Antriebsprüfstand ist über einen einphasigen Vollbrücken-Transistor-AFE-Gleichrichter
+an das Netz angeschlossen. Der Umrichter soll mit näherungsweise Leistungsfaktor 1 und stabiler
+DC-Zwischenkreisspannung betrieben werden. Während der Tests wird eine erhöhte Zwischenkreiswelligkeit
+beobachtet und die PWM-Strategie wird hinterfragt.
 \end{germanblock}
 
+\input{fig/Task04/Single-phase_DC_Inverter.tex}
 \begin{table}[ht]
-    \centering  % Zentriert die Tabelle
-    \begin{tabular}{ll}
+    \centering
+    \begin{tabular}{lll}
         \toprule
-        Input voltages ($i=\mathrm{a,b,c}$): & $U_{\mathrm{1},i}=\SI{277}{\volt}$ (phase voltage) \\
-                        & $U_{\mathrm{1,LL},i} = \SI{480}{\volt}$ (line-to-line voltage)\\
-        Nom. motor current: & $I_{\mathrm{mot}} = \SI{50}{\ampere}$ \\
-        Nom. motor terminal voltage: & $U_\mathrm{mot,term} = \SI{400}{\volt}$ \\ 
-        Grid frequency: & $f= \SI{50}{\hertz}$ \\ 
+        Parameter & Symbol & Value \\
+        \midrule
+        Grid voltage (RMS) & $U_g$ & $\SI{230}{\volt}$ \\
+        Grid frequency & $f$ & $\SI{50}{\hertz}$ \\
+        Grid-side inductance & $L$ & $\SI{2.5}{\milli\henry}$ \\
+        DC-link voltage & $U_{dc}$ & $\SI{450}{\volt}$ \\
+        Active power setpoint & $P$ & $\SI{3.0}{\kilo\watt}$ \\
+        DC-link capacitor & $C_{\mathrm{dc}}$ & $\SI{2.2}{\milli\farad}$ \\
+        Switching period & $T_s$ & $\SI{100}{\micro\second}$ \\
+        Reference value for PWM study & $s^*$ & $0.5$ \\
         \bottomrule
     \end{tabular}
-    \caption{Drive parameters.}  
-    \label{table:Task04_ParametersOfTheCircuit}
+    \caption{Task 4 parameters.}
+    \label{tab:task04_parameters}
 \end{table}
 
+\subtask{For approximately unity power factor operation, determine the required grid current RMS value and
+the corresponding grid current peak value.}{0}
+\subtaskGerman{Bestimmen Sie für den Betrieb mit näherungsweise Leistungsfaktor 1 den erforderlichen
+Effektivwert des Netzstroms sowie den zugehörigen Spitzenwert des Netzstroms.}
+
+\subtask{Calculate the required converter input-voltage amplitude $\hat{u}_2$ from the phasor relation and verify
+whether the DC-link voltage is sufficient for boost-type rectifier operation.}{0}
+\subtaskGerman{Berechnen Sie aus der Zeigerbeziehung die erforderliche Amplitude der Umrichtereingangsspannung $\hat{u}_2$
+und prüfen Sie, ob die DC-Zwischenkreisspannung für den Hochsetzbetrieb ausreicht.}
+
+\subtask{Classify the operating mode for each case below and justify using power-flow direction:}{0}
+\begin{itemize}
+    \item Case A: $P=+\SI{8}{\kilo\watt}$,
+    \item Case B: $P=-\SI{5}{\kilo\watt}$.
+\end{itemize}
+\subtaskGerman{Ordnen Sie für die folgenden Fälle die Betriebsart zu und begründen Sie mit der Leistungsflussrichtung:
+\begin{itemize}
+    \item Fall A: $P=+\SI{8}{\kilo\watt}$,
+    \item Fall B: $P=-\SI{5}{\kilo\watt}$.
+\end{itemize}}
+
+\subtask{Using the steady-state ripple model, estimate the DC-link voltage oscillation amplitude
+$\hat{u}_C$ and the peak-to-peak ripple $\Delta U_{dc,pp}\approx2\hat{u}_C$.}{0}
+\subtaskGerman{Schätzen Sie mit dem stationären Welligkeitsmodell die Amplitude der Zwischenkreisspannungsschwingung
+$\hat{u}_C$ und die Spitze-Spitze-Welligkeit $\Delta U_{dc,pp}\approx2\hat{u}_C$.}
+
+\subtask{For $s^*=0.5$, compare complementary PWM and interleaved PWM regarding current-ripple amplitude.
+Quantify the ratio and state which strategy is preferable.}{0}
+\subtaskGerman{Vergleichen Sie für $s^*=0.5$ komplementäre PWM und interleavte PWM hinsichtlich der Stromwelligkeitsamplitude.
+Quantifizieren Sie das Verhältnis und geben Sie an, welche Strategie vorzuziehen ist.}
