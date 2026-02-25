@@ -1,0 +1,32 @@
+
+\begin{figure}[h]
+        \centering
+    \begin{circuitikz}[baseline=(current bounding box.center)]
+        \draw (0,0) node[transformer core](T){$N_1:N_2$}
+        (T.inner dot A1) node[circ]{}
+        (T.inner dot B1) node[circ]{}
+        (T.A1) to [short] ++(0,1) to [short, -o, i<_=$i_1(t)$] ++(-1,0) coordinate (A1)
+        (T.A2) to [short] ++(0,-1) to [short, -o] ++(-1,0) coordinate (A2)
+        (T.B1) to [short] ++(0, 1) coordinate (B1)
+        (T.B2) to [short] ++(0,-1) coordinate (B2);
+        \draw (A1) to [open, v=$u_1(t)$, voltage = straight] (A2);
+        \draw (B1) to [thyristor, name=T1] ++(2.0,0) coordinate (C1)
+        (B2) to [thyristor, name=T2] ++(2.0,0)
+        to [crossing, -*, mirror] (C1)
+        to [short] ++(0.5,0) coordinate (us)
+        to [L, l=$L$] ++(2,0)
+        to [short] ++(0.5,0) coordinate (D)
+        to [short, i=$i_2(t)$] ++(1.5,0)
+        to [open, v^= $u_2(t)$, voltage = straight, o-o] (T-L2.midtap -| \tikztostart)
+        to [short] (\tikztostart -| D)
+        (D) to [C, voltage = straight, l=$C$, *-*] (T-L2.midtap -| D)
+        to [short] (T-L2.midtap);
+        \draw (us) to [open, v^=$u_\mathrm{s}(t)$, voltage = straight] (T-L2.midtap -| us);
+        \draw let \p1 = (B1), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v^=${u_\mathrm{s,1}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+        \draw let \p1 = (B2), \p2 = (T-L2.midtap) in (\x1 + 0.5cm, \y1) to [open, v=${u_\mathrm{s,2}(t)}$, voltage = straight] (\x1 + 0.5cm, \y2);
+        \node at (T1.gate) [above, xshift=-5mm, yshift=-2mm]{$T_1$};
+        \node at (T2.gate) [below, xshift=-5mm, yshift=-7mm]{$T_2$};
+    \end{circuitikz}%
+    \caption{M2C converter with an output filter assuming $u_2(t)=U_2=\mbox{const.}$}
+    \label{fig:M2C_output_filter}
+\end{figure}

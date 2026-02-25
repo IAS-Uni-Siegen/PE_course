@@ -1,26 +1,65 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Task 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\task{Line-commuted three-phase rectifier}
+\task{Thyristor-based AC/DC converter (M2C)}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\taskGerman{Netzgeführter dreiphasiger Gleichrichter}
+\taskGerman{Thyristorbasierter AC/DC-Umrichter (M2C)}
 
-An industrial conveyor system is powered by a DC motor that is supplied via a controlled three-phase 
-midpoint rectifier (M3C). The motor draws a steady current $I_\mathrm{2}$ and operates at a nominal induced  
-motor voltage $U_\mathrm{mot,ind}$. The motor has an internal armature resistance $R$. To smooth the output
-current, a large inductor ($L \to  \infty$) is placed such that CCM is 
-maintained. The input to the rectifier is a symmetrical three-phase grid connected via an ideal 
-transformer. On the secondary side, each phase has an effective voltage of 
-$U_\mathrm{1,i} = \SI{200}{\volt}$, $\forall i=\mathrm{a, b, c}$. All components (switches, transformer, 
-etc.) are ideal.\\
-\color{gray}
-Ein industrielles Fördersystem wird von einem Gleichstrommotor angetrieben, der über einen geregelten 
-Dreiphasen-Mittelpunktgleichrichter (M3C) versorgt wird. Der Motor zieht einen konstanten Strom 
-$I_\mathrm{2}$ und weist eine induzierte Spannung $U_\mathrm{mot,ind}$ im Nennpunkt auf. Der Motor hat einen internen 
-Ankerwiderstand $R$. Um den Ausgangsstrom zu glätten, wird eine große Induktivität ($L \to  \infty$) so 
-platziert, dass der CCM aufrechterhalten bleibt. Der Eingang des Gleichrichters 
-ist ein symmetrisches Dreiphasennetz, das über einen idealen Transformator angeschlossen ist. Auf
-der Sekundärseite hat jede Phase eine effektive Spannung von $U_\mathrm{1,i} = \SI{200}{\volt}$, 
-$\forall i=\mathrm{a, b, c}$. Alle Komponenten (Schalter, Transformator usw.) sind ideal.
+In an electroplating process, a single-phase two-pulse midpoint thyristor converter (M2C)
+with center-tapped transformer is used as a controllable DC source.
+After product quality issues, the engineering team must verify whether the converter is operated
+with suitable firing angles and acceptable grid impact.
 
+\begin{germanblock}
+In einem Galvanikprozess wird ein einphasiger, zweipulsiger Mittelpunkt-Thyristorumrichter (M2C)
+mit mittig angezapftem Transformator als einstellbare DC-Quelle eingesetzt.
+Nach Qualitätsproblemen muss das Engineering-Team prüfen, ob geeignete Zündwinkel eingestellt sind
+und ob die Netzbelastung innerhalb zulässiger Grenzen liegt.
+\end{germanblock}
+
+\input{fig/Task03/M2C_with_output_filter.tex}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lll}
+    \toprule
+    Parameter & Symbol & Value \\
+    \midrule
+    Primary grid voltage (RMS) & $U_1$ & $\SI{230}{\volt}$ \\
+    Grid frequency & $f_1$ & $\SI{50}{\hertz}$ \\
+    Transformer turns ratio & $N_2/N_1$ & $1.0$ \\
+    Firing angle (normal operation) & $\alpha_0$ & $\SI{70}{\degree}$ \\
+    DCM conduction angle (low-load case) & $\beta$ & $\SI{140}{\degree}$ \\
+    Average output current (CCM) & $I_2$ & $\SI{30}{\ampere}$ \\
+    Required plating voltage setpoint & $\overline{u}_{2,\mathrm{set}}$ & $\SI{75}{\volt}$ \\
+    \bottomrule
+    \end{tabular}
+    \caption{Task 3 parameters.}
+    \label{tab:task03_parameters}
+\end{table}
+
+\subtask{In normal production (CCM), calculate the average output voltage $\overline{u}_{2,\mathrm{CCM}}$ for $\alpha_0=\SI{70}{\degree}$.}{2}
+\subtaskGerman{Berechnen Sie im Normalbetrieb (CCM) die mittlere Ausgangsspannung $\overline{u}_{2,\mathrm{CCM}}$ für $\alpha_0=\SI{70}{\degree}$.}
+
+\subtask{During low-load operation the converter enters DCM with $\beta=\SI{140}{\degree}$.
+Calculate $\overline{u}_{2,\mathrm{DCM}}$ for $\alpha_0=\SI{70}{\degree}$ and compare it to the CCM value from subtask 1.
+Briefly explain why this difference can lead to quality deviations in the plating process.}{0}
+\subtaskGerman{Bei Teillast geht der Umrichter in den DCM mit $\beta=\SI{140}{\degree}$ über.
+Berechnen Sie $\overline{u}_{2,\mathrm{DCM}}$ für $\alpha_0=\SI{70}{\degree}$ und vergleichen Sie mit dem CCM-Wert aus Teilaufgabe 1.
+Erläutern Sie kurz, warum dieser Unterschied zu Qualitätsabweichungen im Galvanikprozess führen kann.}
+
+\subtask{To restore the required plating voltage, determine the firing angle $\alpha_\mathrm{set}$ in CCM for
+$\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}{0}
+\subtaskGerman{Bestimmen Sie zur Wiederherstellung der geforderten Galvanikspannung den Zündwinkel $\alpha_\mathrm{set}$ im CCM für
+$\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}
+
+\subtask{At this new operating point ($\alpha=\alpha_\mathrm{set}$, $I_2=\SI{30}{\ampere}$), calculate
+$I_1^{(1)}$, $P_1$, $Q_1^{(1)}$, and $S_1^{(1)}$ for the fundamental component.}{0}
+\subtaskGerman{Berechnen Sie für den neuen Betriebspunkt ($\alpha=\alpha_\mathrm{set}$, $I_2=\SI{30}{\ampere}$)
+$I_1^{(1)}$, $P_1$, $Q_1^{(1)}$ und $S_1^{(1)}$ der Grundschwingung.}
+
+\subtask{Including harmonics, calculate total apparent power $S_1$ and total reactive power $Q_1$,
+and briefly assess whether the harmonic share is significant for grid compliance.}{0}
+\subtaskGerman{Berechnen Sie unter Berücksichtigung der Oberschwingungen die gesamte Scheinleistung $S_1$ und die gesamte Blindleistung $Q_1$
+und bewerten Sie kurz, ob der Oberschwingungsanteil für die Netzkonformität relevant ist.}
