@@ -8,12 +8,12 @@
 
 A SEPIC converter is to be designed for voltage stabilization in a bicycle dynamo.
 A control circuit regulates the converter's duty cycle to ensure a stable output voltage.
-The dynamo provides a voltage of 3-10V. The output voltage is to be stabilized at 6V.
+The dynamo provides a voltage of $\SI{3}{\volt} \ldots \SI{10}{\volt}$. The output voltage is to be stabilized at $\SI{5.1}{\volt}$.
 
 \begin{germanblock}
     Für ein Fahraddynamo soll ein SEPIC-Konverter als Spannungsstabilisierung dimensioniert werden.
     Eine Reglungsschaltung regelt das Tastverhältnis des Konverter für eine stabile Ausgangsspannung.
-    Der Dynamo liefert eine Spannung von 3-10V. Die Ausgangsspannung soll auf 6V stabilisiert werden.
+    Der Dynamo liefert eine Spannung von $\SI{3}{\volt} \ldots \SI{10}{\volt}$. Die Ausgangsspannung soll auf $\SI{5.1}{\volt}$ stabilisiert werden.
 \end{germanblock}
 
 \input{fig/Task02/figSEPICConverter}
@@ -23,12 +23,13 @@ The dynamo provides a voltage of 3-10V. The output voltage is to be stabilized a
     \begin{tabular}{llll}
         \toprule
         \multicolumn{2}{l}{\textbf{General parameters:}} & \multicolumn{2}{l}{\textbf{IGBT and diode:}} \\ 
-        Input voltage: &  $U_{\mathrm{1}} = \SI{24}{\volt}$ & Drain-source voltage: & $U_{\mathrm{on},\mathrm{DS}} = \SI{1.2}{\volt}$ \\
-        Output voltage: & $U_2 = \SI{48}{\volt}$  & Output current range: & $I_2 = \SI{2}{\ampere} \ldots \SI{20}{\ampere}$  \\
+        Input voltage: &  $U_{\mathrm{1}} = \SI{3}{\volt} \ldots \SI{10}{\volt}$ & Drain-source voltage: & $U_{\mathrm{on},\mathrm{DS}} = \SI{1.2}{\volt}$ \\
+        Output voltage: & $U_{\mathrm{2}} = \SI{5.1}{\volt}$  & Output current range: & $I_2 = \SI{50}{\milli\ampere} \ldots \SI{1}{\ampere}$  \\
         Switching frequency: & $f_\mathrm{s} = \SI{100}{\kilo\hertz}$  & Diode forward voltage: & $U_{\mathrm{D},\mathrm{f}} = \SI{0.81}{\volt}$  \\
         \midrule
-        \multicolumn{4}{l}{\quad The switching losses of the semiconductors are negligible.}  \\ 
-        \multicolumn{4}{l}{\quad The filter capacitor $C$ is to be considered only for subtask 1.2.}  \\ 
+        \multicolumn{4}{l}{\quad The switching losses of the semiconductors are to taken in account.}  \\ 
+        \multicolumn{4}{l}{\quad The voltage of capacitor $C_{\mathrm{1}}$ can be considered as constant.}  \\ 
+        \multicolumn{4}{l}{\quad The filter capacitor $C_{\mathrm{1}}$ is to be considered only for subtask 1.2.}  \\ 
         \bottomrule
     \end{tabular}
     \caption{Parameters of the circuit.}  % Beschriftung der Tabelle
@@ -39,23 +40,13 @@ The dynamo provides a voltage of 3-10V. The output voltage is to be stabilized a
 \subtask{What are the minimum and maximum duty cycles that the control circuit has to request?}{0}
 \subtaskGerman{Was ist das minimale und maximale Tastverhältnis, den die Reglungsschaltung vorgeben muss.}
 
-\begin{germanblock}
-    Die Stromannahme des Verbrauchers ist im Bereich von 50mA - 1A.
-\end{germanblock}
-
 \subtask{Determine the minimal required inductances L1 and L2 for the case of minimum input voltage and maximum output power.}{0}
 \subtaskGerman{Bestimmen sie die nötige Induktivitäten L1 und L2 für den Fall minimaler Eingangsspannung und maximaler Aussgangsleistung}
 
 \subtask{How does the voltage behave when unloaded? Does it increase or decrease? 
         Explain using the formula for DCM mode.}{0}
 \subtaskGerman{Wie verhält sich die Spannung im unbelasteten Fall.
-    Wird sie größer oder kleiner? Begründe mit Hilfe der Formel für den DCM-Mode.}
-
-
-\subtask{A resistor is used to ensure a minimum load to prevent DCM mode. What should the required values 
-         of this resistor be (resistance value and power rating)?}{0}
-\subtaskGerman{Es wird ein Widerstand verwendet, um eine Mindestlast zu gewährleisten, damit der DCM-Mode verhindert wird. 
-               Wie muss der zugeschalteter Widerstand dimensioniert sein (Widerstandswert und Leistung)?}
+    Wird sie größer oder kleiner? Begründen Sie mit Hilfe der Formel für den DCM-Mode.}
 
 \subtask{A resistor is used to ensure a minimum load to prevent DCM mode. What should the required values 
          of this resistor be (resistance value and power rating)?}{0}

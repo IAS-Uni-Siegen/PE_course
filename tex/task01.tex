@@ -35,37 +35,38 @@ von $\SI{5}{\volt}$. Um die Spannung möglichst effizient herunterzutranformiere
     \label{table:ex01_Parameters of the circuit}
 \end{table}
 
-
 \subtask{What duty cycle must be set, assuming ideal components?}{0}
+
 \subtaskGerman{Welches Tastverhältnis muss eingestellt werden unter der Annahme idealer Komponenten?}
 
-\subtask{What duty cycle is required when the voltage drops across the transistor and the diode are taken into account?}{0}
-\subtaskGerman{Welches Tastverhältnis ist erforderlich, wenn die Spannungsabfälle über den Transistor und die Diode berücksichtigt werden?}
+\subtask{What duty cycle is required when the voltage drops across the transistor and the diode are taken into account?
+         (Output voltage $U_2$ is considered as constant)}{0}
+
+\subtaskGerman{Welches Tastverhältnis ist erforderlich, wenn die Spannungsabfälle über den Transistor und die Diode berücksichtigt werden?
+               Die Ausgangsspannung $U_2$ ist als konstant anzunehmen.}
 
 \subtask{The sensors have different power consumption depending on the operating point, so the buck converter delivers 
          a maximum power of $\SI{15}{\watt}$  and a minimum power of $\SI{2.5}{\watt}$.
         What inductance must be designed so that it does not operate in DCM mode within the specified power range, 
         reaching BCM mode at 2.5 watts?}{1}
+
 \subtaskGerman{Die Sensoren haben je nach Arbeitspunkt eine unterschiedliche Leistungsaufnahme, so dass der Tiefsetzsteller 
 für einen maximalen Leistung von $\SI{15}{\watt}$ und eine minimale Leistung von $\SI{2.5}{\watt}$ liefert.
 Wie groß muss die Induktivität ausgelegt werden, damit er im angegebenen Leistungsbereich nicht im DCM-Mode arbeitet, wobei er bei $\SI{2.5}{\watt}$ den BCM-Mode erreicht.
 }
 
-The sensors are susceptible to voltage fluctuations, so the power supply must have a maximum ripple of
-$\pm \SI{2.5}{\percent}$ of the output voltage. To achieve this, a filter capacitor is added.
+\subtask{The sensors are susceptible to voltage fluctuations, so the power supply must have a maximum ripple of
+    $\pm \SI{2.5}{\percent}$ of the output voltage. To achieve this, a filter capacitor is added.
+    What value should be chosen for the capacitance of the filter capacitor?}{0}
 
-\begin{germanblock}
-Die Sensoren sind gegenüber Spannungsschwankungen anfällig, so dass die Spannungsversorgung eine maximale Welligkeit von
- $\pm \SI{2.5}{\percent}$ der Ausgangsspannung besitzen darf. Um dieses  zu erreichen, wird ein Filterkondensator eingebaut.
+\subtaskGerman{Die Sensoren sind gegenüber Spannungsschwankungen anfällig, so dass die Spannungsversorgung eine maximale Welligkeit von
+   $\pm \SI{2.5}{\percent}$ der Ausgangsspannung besitzen darf. Um dieses  zu erreichen, wird ein Filterkondensator eingebaut. \\ 
+   Welche Größe muss für die Kapazität des Filterkondensators gewählt werden?}
+
+\begin{germanblock} In einem Störfall kommt es zum Ausfall der Drehzahl- und Positionssensoren. Dadurch fällt die abgenommene Leistung auf einen Wert von $\SI{1}{\watt}$.
 \end{germanblock}
 
-\subtask{What value should be chosen for the capacitance of the filter capacitor?}{0}
-\subtaskGerman{Welche Größe muss für die Kapazität des Filterkondensators gewählt werden?}
-
-\begin{germanblock}Wie groß muss die Kapazität des Filterkondensators gewählt werden?
-In einem Störfall kommt es zum Ausfall der Drehzahl- und Positionssensoren. Dadurch fällt die abgenommene Leistung auf einen Wert von $\SI{1}{\watt}$.
-\end{germanblock}
-
-
-\subtask{How large must the filter capacitor be so that, in the worst case, the voltage fluctuation is $\pm \SI{10}{\percent}$ ?}{0}
-\subtaskGerman{ Wie hoch ist die Ausgangsspannung für diesen Störfall?}
+\subtask{In the event of a malfunction, the speed and position sensors fail. As a result, the current $I_\mathrm{2}$ drops to a value of $\SI{0.25}{\ampere}$. \\
+         What is the output voltage for this fault condition, if you consider only the voltage drop of the transistor?}{0}
+\subtaskGerman{ In einem Störfall kommt es zum Ausfall der Drehzahl- und Positionssensoren. Dadurch fällt der Strom $I_\mathrm{2}$ auf einen Wert von $\SI{0.25}{\ampere}$. \\
+                 Wie hoch ist die Ausgangsspannung für diesen Störfall, wenn nur der Spannungsabfall über den Transistor berücksichtigt wird?}

@@ -1,63 +1,59 @@
-\begin{figure}[htb]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Single Ended Primary Inductance Converter Schematic
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[ht]
     \begin{center}
-        
-    %\begin{tikzpicture}
-    \begin{circuitikz}[european currents,european resistors,american inductors]
-        \draw
-
-        (1.5, 0.5) to [short,-, v^=$U_1$(t), voltage = straight] ++ (0, -4)
-        (0.5, 0.5) to [short,-] ++ (0, -4)
-        
-        (0.5,0) coordinate(u1o)
-        (1.5,-3) coordinate(u1u)
-        % Add points
-        (u1o) to [short,-*] ++ (0,0)
-        (u1u) to [short,-*] ++ (0,0)
-
-        (u1o) to  [short,-, crossing] ++ (2,0) coordinate (jPtg)
-
-        (2.5,0) to[L, l=${L}$, v_=$u_\mathrm{L}(t)$, voltage = straight] (4,0)
-
-        (2.5,0) to[L, l=${L}$] (4,0)
-
-        (4,0) coordinate(N1) to [short] ++(1.5,0) coordinate(Ud)
-        ++(0,-1.5) node[nigfete](Trans){}
-        (Ud) to [short] (Trans.drain)
-        (Trans.source) to [short,-*] ++(0,-0.73) coordinate(U2p) % Punkt unten beim Transistor
-
-        (Trans) ++(-1,0) node {$T$}
-
-        (4,0) to [short,-] (9.5,0)
-        (8,-3) to[short,*-] ++(0,0) 
-
-        (5.5,-1.5) to [short,-] ++(0,-1.5) 
-
-        % Current arrow for the diode
-        (6,0) to [short,-,i^>=$i_\mathrm{D}$(t)]  (6.8,0)
-
-        (6.5,0) to[D, l=$D$] (8,0)
-        (8,0) to[short,*-] ++(0,0) 
-
-        (8,0) to[C,l_=$C$] (8,-3)
-        % Current arrow for the capacitor
-        (8,-1.0) to [short,-,i^>=$i_\mathrm{C}$(t)] (8,-0.5)
-
-        (9.5,0) to [R,l_=$R$,v^=$U_\text{2}$,voltage shift=0.5, voltage=straight] (9.5,-3)
-
-        (9.5,-3) to [short,-] (1.5,-3)
-
-        (2.5,0) to [short,i_<=$i_1$(t)] (1.6,0)
-        (4.5,0) to [short,-*,i^>=$i_\mathrm{L}$(t)] (5.5,0)
-
-        (5.5,-0.5) to [short,i^<=$i_\mathrm{T}$(t)] (5.5,-1)
-
-        (9,0) to [short,i_<=$i_2$(t)] (8.5,0)
-        ;
-        \node[draw, dashed, minimum width=2cm, minimum height=2.5cm, anchor=west] at (8.75,-1.5) (dev) {};
-        \node[anchor=north] at (10.5,-2.75){$\text{Load}$};
-\end{circuitikz}
-    \caption{Step-up converter with filter capacitor.}
-     \label{fig:boost converter with filter capacitor}
-\end{center}
-%\end{tikzpicture}
+        \begin{circuitikz}[european currents,european resistors,american inductors]
+            \draw 
+                    % Base coordinates
+                    (0,0) coordinate (jU1v)
+                    (0,-3) coordinate (jU1g)
+                    % Add primary source U1
+                    (jU1v) to [V=$U_1$] (jU1g)
+                    % Add line to L1
+                    (jU1v) to [short,-] ++ (0.5,0) coordinate (jL1v)
+                    % Add Inductance L1
+                    (jL1v) to  [L, l=$L_1$] ++ (3,0) coordinate (jTv)
+                    % Add arrow and Text
+                    ++(-0.5,0) node[currarrow](IL){}
+                    (IL)  node[anchor=south,color=black]{$i_\mathrm{L}$}
+                    % Add junction for Transistor
+                    (jTv) ++(0,-3) coordinate (jTg)
+                    % Add junction point for Transistor
+                    (jTv) to [short,-*] ++(0,0)                    
+                    % Add transistor T2
+                    (jTv) ++ (0,-1.5) node[nigfete](Trans1){}
+                    % At transistor label T2
+                    (Trans1)  node[anchor=west,color=black]{$T$}                     
+                    % Connect Transistor
+                    (jTv) to [short,-] (Trans1.D)
+                    (jTg) to [short,-] (Trans1.S)
+                    (Trans1.G) to [sqV] ++(-1,0)
+                    % Add capacitor C
+                    (jTv) to  [C,l=$C$] ++ (2,0) coordinate (jL2v)
+                    % Add junction for L2
+                    (jL2v) to [short,-*] ++(0,0)
+                    % Add coordinate jL2v and jL2g
+                    (jL2v)  ++(0,-3) coordinate (jL2g)
+                    % Add  L2
+                    (jL2v)  to [L, l=$L_2$] (jL2g)
+                    % Add Diode
+                    (jL2v) to  [D-,l^=$D$] ++ (2,0) coordinate (jU2v) 
+                    % Add coordinate jU2v and jU2g
+                    (jU2v) to [short,-] ++(0,-3) coordinate (jU2g)
+                    % Add secondary source U2
+                    (jU2v) to [V=$U_2$] (jU2g)
+                    % Add Junction point for jL2g
+                    (jU2g) to [short,-*] (jL2g)
+                    % Add line and junction point for T1g
+                    (jL2g) to [short,-*] (jTg)
+                    % Add line to U1g
+                    (jTg) to [short,-] (jU1g)
+           ;
+        \end{circuitikz}
+    \end{center}
+    \caption{Single ended  primary inductance converter circuit.}
+    \label{fig:ex03_SEPIC}
 \end{figure}
+
