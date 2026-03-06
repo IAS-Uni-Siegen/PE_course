@@ -1,0 +1,76 @@
+\begin{solutionfigure}[htb]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            xmin=0, xmax=1,
+            ymin=-1.5, ymax=5.2,
+            width=0.92\textwidth,
+            height=0.38\textwidth,
+            axis x line=middle,
+            axis y line=left,
+            grid=major,
+            xlabel={$t/T_s$},
+            ylabel={},
+            xtick={0,0.25,0.5,0.75,1},
+            xticklabels={$0$,$0.25$,$0.5$,$0.75$,$1$},
+            ytick={0,1.5,2.6,4},
+            yticklabels={$s_{\mathrm{is}}(t)$,$s_\mathrm{2}(t)$,$s_\mathrm{1}(t)$,{$c(t)$ / $\pm s^*(t)$}},
+            ticklabel style={font=\small},
+            label style={font=\small},
+            samples=200,
+            clip=false
+        ]
+            % Given carrier and references (lecture convention)
+            \addplot[blue, thick, domain=0:1, samples=1200] {4 + 0.5*(1 - 4*abs(mod(8*x,1)-0.5))};
+            \addplot[red, thick, domain=0:1, samples=250] {4+0.5*sin(360*x)};
+            \addplot[red, dashed, thick, domain=0:1, samples=250] {4-0.5*sin(360*x)};
+            \node[anchor=west, font=\small, text=blue] at (axis cs:0.03,4.95) {$c(t)$ carrier};
+            \node[anchor=west, font=\small, text=red] at (axis cs:0.2,4.95) {$s^*(t)$ reference};
+
+            % Comparator-consistent switching traces (normalized comparison)
+            % s_norm(x)=0.5 sin(360x), s_norm_b(x)=-s_norm(x)
+            % c_norm(x)=0.5*(1 - 4*abs(mod(8x,1)-0.5))
+            \addplot[black, ultra thick, domain=0:1, samples=2400] {ifthenelse(0.5*sin(360*x) > 0.5*(1 - 4*abs(mod(8*x,1)-0.5)),2.95,2.25)};
+            \addplot[black, ultra thick, domain=0:1, samples=2400] {ifthenelse(-0.5*sin(360*x) > 0.5*(1 - 4*abs(mod(8*x,1)-0.5)),1.85,1.15)};
+            \addplot[black, ultra thick, domain=0:1, samples=2400] {
+                0.7*(
+                    ifthenelse(0.5*sin(360*x) > 0.5*(1 - 4*abs(mod(8*x,1)-0.5)),1,0)
+                    - ifthenelse(-0.5*sin(360*x) > 0.5*(1 - 4*abs(mod(8*x,1)-0.5)),1,0)
+                )
+            };
+
+            % Exact +1/-1 level lines for each signal row
+            \addplot[gray!55, densely dashed] coordinates {(0,4.5) (1,4.5)};
+            \addplot[gray!55, densely dashed] coordinates {(0,3.5) (1,3.5)};
+            \addplot[gray!45, densely dotted] coordinates {(0,4.0) (1,4.0)};
+            \addplot[gray!55, densely dashed] coordinates {(0,2.95) (1,2.95)};
+            \addplot[gray!55, densely dashed] coordinates {(0,2.25) (1,2.25)};
+            \addplot[gray!45, densely dotted] coordinates {(0,2.6) (1,2.6)};
+            \addplot[gray!55, densely dashed] coordinates {(0,1.85) (1,1.85)};
+            \addplot[gray!55, densely dashed] coordinates {(0,1.15) (1,1.15)};
+            \addplot[gray!45, densely dotted] coordinates {(0,1.5) (1,1.5)};
+            \addplot[gray!55, densely dashed] coordinates {(0,0.7) (1,0.7)};
+            \addplot[gray!55, densely dashed] coordinates {(0,-0.7) (1,-0.7)};
+            \addplot[gray!45, densely dotted] coordinates {(0,0.0) (1,0.0)};
+
+            % +1/-1 markers for each signal row
+            \node[anchor=west, font=\scriptsize] at (axis cs:1.005,4.5) {$+1$};
+            \node[anchor=west, font=\scriptsize] at (axis cs:1.005,3.5) {$-1$};
+            \node[anchor=west, font=\scriptsize] at (axis cs:1.005,4.0) {$0$};
+            \node[anchor=west, font=\scriptsize] at (axis cs:1.005,2.95) {$+1$};
+            \node[anchor=west, font=\scriptsize] at (axis cs:1.005,2.25) {$-1$};
+            \node[anchor=west, font=\scriptsize] at (axis cs:1.005,2.6) {$0$};
+            \node[anchor=west, font=\scriptsize] at (axis cs:1.005,1.85) {$+1$};
+            \node[anchor=west, font=\scriptsize] at (axis cs:1.005,1.15) {$-1$};
+            \node[anchor=west, font=\scriptsize] at (axis cs:1.005,1.5) {$0$};
+            \node[anchor=west, font=\scriptsize] at (axis cs:1.005,0.7) {$+1$};
+            \node[anchor=west, font=\scriptsize] at (axis cs:1.005,-0.7) {$-1$};
+            \node[anchor=west, font=\scriptsize] at (axis cs:1.005,0.0) {$0$};
+          %  \node[anchor=west, font=\small] at (axis cs:1.02,4.5) {$s^*(t)$};
+          %  \node[anchor=west, font=\small] at (axis cs:1.02,2.5) {$D_{g_\mathrm{a}}=D$};
+          %  \node[anchor=west, font=\small] at (axis cs:1.02,1.5) {$D_{g_\mathrm{b}}=1-D$};
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Solution plot: interleaved PWM and equivalent switching state.}
+    \label{fig:task04_pwm_solution_is}
+\end{solutionfigure}

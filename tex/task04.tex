@@ -30,7 +30,7 @@ beobachtet und die PWM-Strategie wird hinterfragt.
         Active power setpoint & $P$ & $\SI{3.0}{\kilo\watt}$ \\
         DC-link capacitor & $C_{\mathrm{dc}}$ & $\SI{2.2}{\milli\farad}$ \\
         Switching period & $T_s$ & $\SI{100}{\micro\second}$ \\
-        Reference value for PWM study & $s^*$ & $0.5$ \\
+        PWM reference signal & $s^*(t)$ & sinusoidal \\
         \bottomrule
     \end{tabular}
     \caption{Task 4 parameters.}
@@ -41,12 +41,26 @@ beobachtet und die PWM-Strategie wird hinterfragt.
 the corresponding grid current peak value.}{0}
 \subtaskGerman{Bestimmen Sie für den Betrieb mit näherungsweise Leistungsfaktor 1 den erforderlichen
 Effektivwert des Netzstroms sowie den zugehörigen Spitzenwert des Netzstroms.}
+\begin{solutionblock}
+    \textbf{Auxiliary quantities}
+    $$\hat{u}_g=\sqrt{2}U_g=\SI{325.27}{\volt},\qquad
+    \omega=2\pi f=\SI{314.16}{\per\second}. $$
 
+    \textbf{Grid current at unity power factor}
+    $$P=U_g I_g \Rightarrow I_g=\frac{\SI{3000}{\watt}}{\SI{230}{\volt}}=\SI{13.04}{\ampere}.$$
+    $$\hat{i}_g=\sqrt{2}I_g=\SI{18.44}{\ampere}. $$
+\end{solutionblock}
 \subtask{Calculate the required converter input-voltage amplitude $\hat{u}_2$ from the phasor relation and verify
 whether the DC-link voltage is sufficient for boost-type rectifier operation.}{0}
 \subtaskGerman{Berechnen Sie aus der Zeigerbeziehung die erforderliche Amplitude der Umrichtereingangsspannung $\hat{u}_2$
 und prüfen Sie, ob die DC-Zwischenkreisspannung für den Hochsetzbetrieb ausreicht.}
-
+\begin{solutionblock}
+    \textbf{Required converter input-voltage amplitude}
+    $$\hat{u}_2=\sqrt{\hat{u}_g^2+(\omega L\hat{i}_g)^2}
+    =\sqrt{(325.27)^2+(314.16\cdot2.5\cdot10^{-3}\cdot18.44)^2}
+    =\SI{325.59}{\volt}. $$
+    With $U_{dc}=\SI{450}{\volt}>\hat{u}_2$, the boost rectifier condition is fulfilled.
+\end{solutionblock}
 \subtask{Classify the operating mode for each case below and justify using power-flow direction:}{0}
 \begin{itemize}
     \item Case A: $P=+\SI{8}{\kilo\watt}$,
@@ -57,13 +71,75 @@ und prüfen Sie, ob die DC-Zwischenkreisspannung für den Hochsetzbetrieb ausrei
     \item Fall A: $P=+\SI{8}{\kilo\watt}$,
     \item Fall B: $P=-\SI{5}{\kilo\watt}$.
 \end{itemize}}
-
+\begin{solutionblock}
+    \textbf{Operating mode classification}
+    \begin{itemize}
+        \item Case A ($P=+\SI{8}{\kilo\watt}$): \textbf{Rectifier mode}, power flows from AC grid to DC link/load.
+        \item Case B ($P=-\SI{5}{\kilo\watt}$): \textbf{Inverter mode}, power flows from DC side back to AC grid.
+    \end{itemize}
+\end{solutionblock}
 \subtask{Using the steady-state ripple model, estimate the DC-link voltage oscillation amplitude
 $\hat{u}_C$ and the peak-to-peak ripple $\Delta U_{dc,pp}\approx2\hat{u}_C$.}{0}
 \subtaskGerman{Schätzen Sie mit dem stationären Welligkeitsmodell die Amplitude der Zwischenkreisspannungsschwingung
 $\hat{u}_C$ und die Spitze-Spitze-Welligkeit $\Delta U_{dc,pp}\approx2\hat{u}_C$.}
+\begin{solutionblock}
+    \textbf{DC-link ripple estimate}
+    $$Q_2=\omega L I_g^2=314.16\cdot2.5\cdot10^{-3}\cdot(13.04)^2=\SI{133.7}{\volt\ampere}.$$
+    $$S_2=\sqrt{P^2+Q_2^2}=\sqrt{(3000)^2+(133.7)^2}=\SI{3003}{\volt\ampere}. $$
+    From lecture Eq. (6.23), the DC-link current ripple amplitude is approximately
+    $$\hat{i}_C\approx\frac{S_2}{U_{dc}}=\frac{3003}{450}=\SI{6.67}{\ampere}. $$
+    Hence (Eq. (6.26))
+    $$\hat{u}_C\approx\frac{\hat{i}_C}{2\omega C_{dc}}=\frac{6.67}{2\cdot314.16\cdot2.2\cdot10^{-3}}=\SI{4.82}{\volt},$$
+    $$\Delta U_{dc,pp}\approx2\hat{u}_C=\SI{9.64}{\volt}. $$
+\end{solutionblock}
+\subtask{Use a sinusoidal reference $s^*(t)$ and plot the PWM signals for both Complementary PWM and Interleaved PWM, and plot the corresponding switching states over one switching period $T_s$ in the provided templates.
+Use the following givings:
+\begin{itemize}
+    \item Reference signal: $s^*(t)=\hat{s}\sin(\omega_1 t)$,
+    \item Triangular carrier $c(t)$ with amplitude range $[-1,1]$.
+\end{itemize}
+    For the shown switching interval, denote the local modulation value by $m=s^*(t_0)$ and determine the sequence of converter switching states within $T_s$.}{0}
+\subtaskGerman{Verwenden Sie ein sinusförmiges Referenzsignal $s^*(t)$ und stellen Sie die PWM-Signale beider Strategien sowie die zugehörigen Schaltzustände über eine Schaltperiode $T_s$ in den bereitgestellten Vorlagen dar.
+Verwenden Sie folgende Angaben:
+\begin{itemize}
+    \item Referenzsignal: $s^*(t)=\hat{s}\sin(\omega_1 t)$,
+    \item Dreiecksträger mit Amplitudenbereich $[-1,1]$.
+\end{itemize}
+    Bezeichnen Sie für das gezeigte Schaltintervall den lokalen Modulationswert mit $m=s^*(t_0)$ und geben Sie die Tastgrade sowie die Folge der Schaltzustände innerhalb von $T_s$ an.}
+\input{fig/Task04/Fig_subtask4.5_pwm_template_complementary.tex}
+\input{fig/Task04/Fig_subtask4.5_pwm_template_interleaved.tex}
+\begin{solutionblock}
+    \textbf{Given}
+    The modulation reference is sinusoidal, $s^*(t)=\hat{s}\sin(\omega_1 t)$. For the plotted switching interval, denote the local value as $m=s^*(t_0)$.
 
-\subtask{For $s^*=0.5$, compare complementary PWM and interleaved PWM regarding current-ripple amplitude.
-Quantify the ratio and state which strategy is preferable.}{0}
-\subtaskGerman{Vergleichen Sie für $s^*=0.5$ komplementäre PWM und interleavte PWM hinsichtlich der Stromwelligkeitsamplitude.
-Quantifizieren Sie das Verhältnis und geben Sie an, welche Strategie vorzuziehen ist.}
+    \textbf{1) Complementary PWM}
+    $$s_1(t)=\begin{cases}
+        +1, & m>c(t)\\
+        -1, & m\le c(t)
+    \end{cases},\qquad s_2(t)=-s_1(t).$$
+    The equivalent converter state is
+    $$s_{\mathrm{cs}}(t)=\frac{s_1(t)-s_2(t)}{2}=s_1(t)\in\{+1,-1\}. $$
+
+    \textbf{2) Interleaved PWM}
+    $$s_1(t)=\begin{cases}
+        +1, & m>c(t)\\
+        -1, & m\le c(t)
+    \end{cases},\qquad
+    s_2(t)=\begin{cases}
+        +1, & -m>c(t)\\
+        -1, & -m\le c(t)
+    \end{cases}. $$
+    The equivalent three-level state is
+    $$s_{\mathrm{is}}(t)=\frac{s_1(t)-s_2(t)}{2}\in\{+1,0,-1\}. $$
+    A correct sketch over one $T_s$ shows transition instants at the intersections of $c(t)$ with $s^*(t)$ and $-s^*(t)$.
+
+    \textbf{What must be visible in the plots}
+    \begin{itemize}
+        \item Complementary PWM: one carrier $c(t)$, one reference $s^*(t)$, states $s_1,s_2$, and resulting $s_{\mathrm{cs}}\in\{+1,-1\}$.
+        \item Interleaved PWM: one carrier $c(t)$, both references $s^*(t)$ and $-s^*(t)$, states $s_1,s_2$, and resulting $s_{\mathrm{is}}\in\{+1,0,-1\}$.
+    \end{itemize}
+
+    \input{fig/Task04/sFig_subtask4.5_pwm_solution_complementary.tex}
+    \input{fig/Task04/sFig_subtask4.5_pwm_solution_interleaved.tex}
+    \vfill
+\end{solutionblock}
