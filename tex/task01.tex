@@ -14,7 +14,8 @@ of $\SI{5}{\volt}$. To transform the voltage down as efficiently as possible, a 
 \begin{germanblock}
 Ein Antriebssystem wird mit $\SI{60}{\volt}$ Gleichstrom versorgt.
 Die Drehzahl-, Positions- und Stromsensoren im Antriebssystem benötigen stabile Versorgungsspannungen
-von $\SI{5}{\volt}$. Um die Spannung möglichst effizient herunterzutranformieren, wird ein Tiefsetzsteller verwendet.
+von $\SI{5}{\volt}$. Um die Spannung möglichst effizient herunterzutranformieren, wird ein Tiefsetzsteller 
+entsprechend den Daten aus \autoref{table:ex01_Parameters of the circuit} verwendet.
 \end{germanblock}
 
 % figure figStepDownConverterOutputFilter 
@@ -39,34 +40,157 @@ von $\SI{5}{\volt}$. Um die Spannung möglichst effizient herunterzutranformiere
 
 \subtaskGerman{Welches Tastverhältnis muss eingestellt werden unter der Annahme idealer Komponenten?}
 
+% Solution of subtask
+\begin{solutionblock}
+    The duty cycle corresponds to
+    \begin{equation*}
+        D=\frac{U_\mathrm{2}}{U_\mathrm{1}}=\frac{\SI{60}{\volt}}{\SI{5.1}{\volt}}=0.085.
+    \end{equation*}
+\end{solutionblock}
+
 \subtask{What duty cycle is required when the voltage drops across the transistor and the diode are taken into account?
          (Output voltage $U_2$ is considered as constant)}{0}
 
 \subtaskGerman{Welches Tastverhältnis ist erforderlich, wenn die Spannungsabfälle über den Transistor und die Diode berücksichtigt werden?
                Die Ausgangsspannung $U_2$ ist als konstant anzunehmen.}
 
+
+% Solution of subtask
+\begin{solutionblock}
+    In steady state, the inductor current balance is to apply:
+    \begin{equation*}
+        \Delta i_\mathrm{L,T_on} \cdot T_\mathrm{on}=\Delta i_\mathrm{L-T_off} \cdot T_\mathrm{off}
+        \label{eq:delta_current_balance}
+    \end{equation*}
+    If the transistor conducts $\Delta i_\mathrm{L,T_on}$ results in:
+
+    \begin{equation*}
+        \Delta i_\mathrm{L,T_on}=\frac{U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}}{L \cdot T_\mathrm{on}}
+        \label{eq:delta_current_on}
+    \end{equation*}
+
+    If the transistor is blocking $\Delta i_\mathrm{L,T_off}$ is calculated by:
+    \begin{equation*}
+        \Delta i_\mathrm{L,T_off}=\frac{U_\mathrm{2}+U_\mathrm{fw}}{L \cdot T_\mathrm{off}}
+        \label{eq:delta_current_off}
+    \end{equation*}
+
+     By substituting \autoref{eq:delta_current_on} and \autoref{eq:delta_current_off} into
+    \autoref{eq:delta_current_balance}, we obtain
+    \begin{equation*}
+        \frac{U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}}{L \cdot T_\mathrm{on}}=\frac{U_\mathrm{2}+U_\mathrm{fw}}{L \cdot T_\mathrm{off}}
+        \label{eq:delta_current_balance}
+    \end{equation*}
+
+    Replacing $T_\mathrm{on}$ and $T_\mathrm{off}$ by the switching period yields to
+    \begin{equation*}
+        \frac{U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}}{L \cdot T_\mathrm{s} \cdot D} =
+        \frac{U_\mathrm{2}+U_\mathrm{fw}}{L \cdot (1-D) \cdot T_\mathrm{s}}
+        \label{eq:delta_current_balance}
+    \end{equation*}
+
+    Removing the switching period leads to
+    \begin{equation*}
+        \frac{U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}}{L \cdot D}  =
+        \frac{U_\mathrm{2}+U_\mathrm{fw}}{L \cdot (1-D)}
+        \label{eq:delta_current_balance}
+    \end{equation*}
+    Solving this equation with respect to $D$ yields
+    \begin{equation*}
+        D = \frac{U_\mathrm{2}+U_\mathrm{fw}}{U_\mathrm{1}-U_\mathrm{T}+U_\mathrm{fw}} =
+        \frac{\SI{5.1}{\volt}+\SI{0.8}{\volt}}{\SI{60}{\volt} - \SI{2}{\volt}+\SI{0.8}{\volt}}  = 0.1.
+        \label{eq:duty cycle step down}
+    \end{equation*}
+
+\end{solutionblock}
+
+
 \subtask{The sensors have different power consumption depending on the operating point, so the buck converter delivers 
-         a maximum power of $\SI{15}{\watt}$  and a minimum power of $\SI{2.5}{\watt}$.
-        What inductance must be designed so that it does not operate in DCM mode within the specified power range, 
-        reaching BCM mode at 2.5 watts?}{1}
+         a maximum power of $\SI{15}{\watt}$  and a minimum power of $\SI{2.5}{\watt}$. \\
+         Which operation point is to consider, for the calculation of minimal $L$, to avoid DCM mode within the specified operating range? \\
+         Calculate the minimal required inductances $L$ for this case.}{0}
 
 \subtaskGerman{Die Sensoren haben je nach Arbeitspunkt eine unterschiedliche Leistungsaufnahme, so dass der Tiefsetzsteller 
-für einen maximalen Leistung von $\SI{15}{\watt}$ und eine minimale Leistung von $\SI{2.5}{\watt}$ liefert.
-Wie groß muss die Induktivität ausgelegt werden, damit er im angegebenen Leistungsbereich nicht im DCM-Mode arbeitet, wobei er bei $\SI{2.5}{\watt}$ den BCM-Mode erreicht.
-}
+               für einen maximalen Leistung von $\SI{15}{\watt}$ und eine minimale Leistung von $\SI{2.5}{\watt}$ liefert. \\
+               Welcher Arbeitspunkt ist bei der Berechnung der minimalen Induktivität $L{\mathrm{2}}$ zu berücksichtigen, 
+               um den DCM-Betrieb innerhalb des definierten Arbeitsbereichs zu vermeiden?}
+
+               % Solution of subtask
+\begin{solutionblock}
+    The BCM mode occurs when the minimum average inductor current equals the half of the inductor current ripple.
+    This leads to the operation point with minimal power consumption, which corresponds to the minimal current.
+    The minimal average current $\overline{i}_\mathrm{1}$ is expressed by
+    \begin{equation*}
+        \overline{i}_\mathrm{2,min} = \frac{P_\mathrm{2}}{U_\mathrm{2}} = \SI{2.5}{\watt} - \SI{5.1}{\volt} = \SI{0.49}{\ampere}.
+    \end{equation*}
+    In case of boundary conduction mode following equation is to apply:
+    \begin{equation*}
+        \Delta i_\mathrm{L}= 2 \cdot \overline{i}_\mathrm{1,min} = 2 \cdot \SI{0.49}{\ampere} = \SI{0.98}{\ampere}.
+    \end{equation*}
+    The ripple current $\Delta i_\mathrm{L}$ yields
+    \begin{equation*}
+        \Delta i_\mathrm{L}=\frac{U_\mathrm{L,on} \cdot T_\mathrm{on}}{L} 
+        =\frac{(U_\mathrm{1} - U_\mathrm{T} - U_\mathrm{2}) \cdot D}{L \cdot f_\mathrm{s}}.
+    \end{equation*}
+    Solving this equation with respect to $L$ yields
+    \begin{equation*}
+        L= \frac{(U_\mathrm{1} -U_\mathrm{T} - U_\mathrm{2}) \cdot D}{\Delta i_\mathrm{L} \cdot f_\mathrm{s}} 
+         = \frac{(\SI{60}{\volt} - \SI{0.8}{\volt} - \SI{2}{\volt}) \cdot 0.1} {\SI{0.98}{\ampere} \cdot \SI{100}{\kilo\hertz}}
+         = \SI{54}{\micro\henry}.
+    \end{equation*}
+\end{solutionblock}
+
 
 \subtask{The sensors are susceptible to voltage fluctuations, so the power supply must have a maximum ripple of
     $\pm \SI{2.5}{\percent}$ of the output voltage. To achieve this, a filter capacitor is added.
     What value should be chosen for the capacitance of the filter capacitor?}{0}
-
 \subtaskGerman{Die Sensoren sind gegenüber Spannungsschwankungen anfällig, so dass die Spannungsversorgung eine maximale Welligkeit von
    $\pm \SI{2.5}{\percent}$ der Ausgangsspannung besitzen darf. Um dieses  zu erreichen, wird ein Filterkondensator eingebaut. \\ 
    Welche Größe muss für die Kapazität des Filterkondensators gewählt werden?}
 
-\begin{germanblock} In einem Störfall kommt es zum Ausfall der Drehzahl- und Positionssensoren. Dadurch fällt die abgenommene Leistung auf einen Wert von $\SI{1}{\watt}$.
-\end{germanblock}
 
-\subtask{In the event of a malfunction, the speed and position sensors fail. As a result, the current $I_\mathrm{2}$ drops to a value of $\SI{0.25}{\ampere}$. \\
-         What is the output voltage for this fault condition, if you consider only the voltage drop of the transistor?}{0}
+   % Solution of subtask
+\begin{solutionblock}
+    The output voltage ripple is calculated by
+    \begin{equation*}
+        \Delta u_\mathrm{2} = U_\mathrm{2} \cdot 2 \cdot \SI{2.5}{\percent} = \SI{5.1}{\volt} \cdot 2  \cdot \SI{2.5}{\percent}= \SI{0.26}{\volt}.
+    \end{equation*}
+    The output current at maximal output voltage ripple is obtained at maximal power consumption.
+    \begin{equation*}
+        I_\mathrm{2,max} = \frac{P_\mathrm{2}}{U_\mathrm{2}} = \frac{\SI{15}{\watt}}{\SI{5.1}{\volt}} = \SI{2.94}{\ampere}.
+    \end{equation*}
+    The capacitor will be discharged with the constant current $I_\mathrm{2}$ while the blocking time of the transistor.
+    The output ripple current depends on the capacitor according
+    \begin{equation*}
+        \Delta u_\mathrm{2} =  \frac{ C \cdot I_\mathrm{2,max} \cdot D}{f_\mathrm{s}} 
+    \end{equation*}
+    Solving this equation with respect to $C$ yields  
+    \begin{equation*}
+        C = \frac{f_\mathrm{s} \cdot  \Delta u_\mathrm{2}} {I_\mathrm{2,max} \cdot D}
+          = \frac{\SI{100}{\kilo\hertz} \cdot  \SI{0.26}{\volt}} {\SI{2.94}{\ampere} \cdot 0.1} = \SI{11.6}{\micro\farad}.
+    \end{equation*}
+\end{solutionblock}
+
+
+
+\subtask{In the event of a malfunction, the speed and position sensors fail. As a result, the current $I_\mathrm{2,fault}$ drops to a value of $\SI{0.25}{\ampere}$. \\
+         Which conduction mode will the converter enter, and what are the resulting consequences?
+         Calculate the output voltage for this fault condition, if you consider only the voltage drop of the transistor?}{0}
 \subtaskGerman{ In einem Störfall kommt es zum Ausfall der Drehzahl- und Positionssensoren. Dadurch fällt der Strom $I_\mathrm{2}$ auf einen Wert von $\SI{0.25}{\ampere}$. \\
-                 Wie hoch ist die Ausgangsspannung für diesen Störfall, wenn nur der Spannungsabfall über den Transistor berücksichtigt wird?}
+                Welchen Modus  Wie hoch ist die Ausgangsspannung für diesen Störfall, wenn nur der Spannungsabfall über den Transistor berücksichtigt wird?}
+% Solution of subtask
+\begin{solutionblock}
+    The output current is less than the minimal current in BCM-mode. This leads to DCM-mode, which causes an overvoltage.
+    The output voltage is to calculate by the formula of DCM-mode:
+    %\begin{equation*}
+        \begin{align*}
+        U_\mathrm{2} &= \frac{D^\mathrm{2} \cdot T_\mathrm{s} \cdot U_\mathrm{1}^\mathrm{2}} {D^\mathrm{2} \cdot T_\mathrm{s} \cdot U_\mathrm{1}^\mathrm{2} 
+                         + 2 \cdot L \cdot  \overline{i}_\mathrm{2,fault}}   \\
+             &= \frac{D^\mathrm{2} \cdot U_\mathrm{1}^\mathrm{2}} {D^\mathrm{2} \cdot U_\mathrm{1}^\mathrm{2}
+                + 2 \cdot \frac{ L \cdot  \overline{i}_\mathrm{2,fault}}{f_\mathrm{s}}}   \\
+             &= \frac{0.1^\mathrm{2} \cdot (\SI{60}{\volt}-\SI{2}{\volt})^\mathrm{2}} {0.1^\mathrm{2} \cdot (\SI{60}{\volt}-\SI{2}{\volt})^\mathrm{2} 
+                + 2 \cdot \frac{\SI{54}{\micro\henry} \cdot  \SI{0.25}{\ampere}}{\SI{100}{\kilo\hertz}}}         \\
+             &= \SI{10.9}{\volt}         
+        \end{align*}
+    %\end{equation*}
+\end{solutionblock}
