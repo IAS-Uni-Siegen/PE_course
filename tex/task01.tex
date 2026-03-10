@@ -60,46 +60,38 @@ entsprechend den Daten aus \autoref{table:ex01_Parameters of the circuit} verwen
     In steady state, the inductor current balance is to apply:
     \begin{equation*}
         \Delta i_\mathrm{L,T_on} \cdot T_\mathrm{on}=\Delta i_\mathrm{L-T_off} \cdot T_\mathrm{off}
-        \label{eq:delta_current_balance}
     \end{equation*}
     If the transistor conducts $\Delta i_\mathrm{L,T_on}$ results in:
 
     \begin{equation*}
         \Delta i_\mathrm{L,T_on}=\frac{U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}}{L \cdot T_\mathrm{on}}
-        \label{eq:delta_current_on}
     \end{equation*}
 
     If the transistor is blocking $\Delta i_\mathrm{L,T_off}$ is calculated by:
     \begin{equation*}
         \Delta i_\mathrm{L,T_off}=\frac{U_\mathrm{2}+U_\mathrm{fw}}{L \cdot T_\mathrm{off}}
-        \label{eq:delta_current_off}
     \end{equation*}
 
-     By substituting \autoref{eq:delta_current_on} and \autoref{eq:delta_current_off} into
-    \autoref{eq:delta_current_balance}, we obtain
+     By substituting the currents within the inductor current balance equation, we obtain
     \begin{equation*}
         \frac{U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}}{L \cdot T_\mathrm{on}}=\frac{U_\mathrm{2}+U_\mathrm{fw}}{L \cdot T_\mathrm{off}}
-        \label{eq:delta_current_balance}
     \end{equation*}
 
     Replacing $T_\mathrm{on}$ and $T_\mathrm{off}$ by the switching period yields to
     \begin{equation*}
         \frac{U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}}{L \cdot T_\mathrm{s} \cdot D} =
         \frac{U_\mathrm{2}+U_\mathrm{fw}}{L \cdot (1-D) \cdot T_\mathrm{s}}
-        \label{eq:delta_current_balance}
     \end{equation*}
 
     Removing the switching period leads to
     \begin{equation*}
         \frac{U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}}{L \cdot D}  =
         \frac{U_\mathrm{2}+U_\mathrm{fw}}{L \cdot (1-D)}
-        \label{eq:delta_current_balance}
     \end{equation*}
     Solving this equation with respect to $D$ yields
     \begin{equation*}
         D = \frac{U_\mathrm{2}+U_\mathrm{fw}}{U_\mathrm{1}-U_\mathrm{T}+U_\mathrm{fw}} =
         \frac{\SI{5.1}{\volt}+\SI{0.8}{\volt}}{\SI{60}{\volt} - \SI{2}{\volt}+\SI{0.8}{\volt}}  = 0.1.
-        \label{eq:duty cycle step down}
     \end{equation*}
 
 \end{solutionblock}
@@ -162,12 +154,12 @@ entsprechend den Daten aus \autoref{table:ex01_Parameters of the circuit} verwen
     The capacitor will be discharged with the constant current $I_\mathrm{2}$ while the blocking time of the transistor.
     The output ripple current depends on the capacitor according
     \begin{equation*}
-        \Delta u_\mathrm{2} =  \frac{ C \cdot I_\mathrm{2,max} \cdot D}{f_\mathrm{s}} 
+        \Delta u_\mathrm{2} =  \frac{I_\mathrm{2,max} \cdot D}{ C \cdot f_\mathrm{s}} 
     \end{equation*}
     Solving this equation with respect to $C$ yields  
     \begin{equation*}
-        C = \frac{f_\mathrm{s} \cdot  \Delta u_\mathrm{2}} {I_\mathrm{2,max} \cdot D}
-          = \frac{\SI{100}{\kilo\hertz} \cdot  \SI{0.26}{\volt}} {\SI{2.94}{\ampere} \cdot 0.1} = \SI{11.6}{\micro\farad}.
+        C = \frac {I_\mathrm{2,max} \cdot D} {f_\mathrm{s} \cdot  \Delta u_\mathrm{2}}
+          = \frac{\SI{2.94}{\ampere} \cdot 0.1} {\SI{100}{\kilo\hertz} \cdot \SI{0.26}{\volt}} = \SI{11.6}{\micro\farad}.
     \end{equation*}
 \end{solutionblock}
 

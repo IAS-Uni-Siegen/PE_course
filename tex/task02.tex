@@ -24,7 +24,7 @@ The dynamo provides a voltage of $\SI{3}{\volt} \ldots \SI{10}{\volt}$. The outp
         \toprule
         \multicolumn{2}{l}{\textbf{General parameters:}} \\ 
         Input voltage: &  $U_{\mathrm{1}} = \SI{3}{\volt} \ldots \SI{10}{\volt}$ & Diode forward voltage: & $U_{\mathrm{D},\mathrm{f}} = \SI{0.8}{\volt}$ \\
-        Output voltage: & $U_{\mathrm{2}} = \SI{5}{\volt}$  & Output current range: & $I_2 = \SI{50}{\milli\ampere} \ldots \SI{1}{\ampere}$  \\
+        Output voltage: & $U_{\mathrm{2}} = \SI{5}{\volt}$  & Output current range: & $I_{\mathrm{2}} = \SI{50}{\milli\ampere} \ldots \SI{1}{\ampere}$  \\
         Switching frequency: & $f_\mathrm{s} = \SI{100}{\kilo\hertz}$  &  &   \\
         \midrule
         \multicolumn{4}{l}{\quad The diode forward voltage must be taken into account.}  \\ 
@@ -40,12 +40,29 @@ The dynamo provides a voltage of $\SI{3}{\volt} \ldots \SI{10}{\volt}$. The outp
 \subtask{What are the minimum and maximum duty cycles that the control circuit has to request?}{0}
 \subtaskGerman{Was ist das minimale und maximale Tastverhältnis, den die Reglungsschaltung vorgeben muss.}
 
-\subtask{Which operation point is to consider, for the calculation of minimal $L_{\mathrm{1}}$, 
-         to avoid DCM mode within the specified operating range? \\
-         Determine the minimal required inductances $L{\mathrm{1}}$ for this case.}{0}
-\subtaskGerman{Welcher Arbeitspunkt ist bei der Berechnung der minimalen Induktivität $L{\mathrm{1}}$ zu berücksichtigen, 
-               um den DCM-Betrieb innerhalb des definierten Arbeitsbereichs zu vermeiden? \\
-               Berechnen Sie die minimal erforderliche Induktivität $L{\mathrm{1}}$ für diesen Fall.}
+% Solution of subtask
+\begin{solutionblock}
+    The duty cycle  for the SEPIC-converter is calculated by
+    \begin{equation*}
+        \frac{U_\mathrm{out}}{U_\mathrm{in}}=\frac{D}{1-D}.
+    \end{equation*}
+    Solving this equation with respect to $D$ leads to
+    \begin{equation*}
+        D=\frac{U_\mathrm{out}}{U_\mathrm{in}+U_\mathrm{out}}
+    \end{equation*}
+    For the circuit the voltages are like follow:
+    \begin{align*}
+        U_\mathrm{out}&=U_\mathrm{2}+U_\mathrm{D} \\
+        U_\mathrm{in}&=U_\mathrm{1}
+    \end{align*}
+    Takein this in accournt the duty cycles yields
+    For the circuit the voltages are like follow:
+    \begin{align*}
+        D&=\frac{U_\mathrm{2}+U_\mathrm{D}}{U_\mathrm{in}+U_\mathrm{2}+U_\mathrm{D}} \\ 
+        D_\mathrm{min}&=\frac{\SI{5}{\volt}+\SI{0.8}{\volt}}{\SI{3}{\volt}+\SI{5}{\volt}+\SI{0.8}{\volt}}= 0.37 \\
+        D_\mathrm{max}&=\frac{\SI{5}{\volt}+\SI{0.8}{\volt}}{\SI{10}{\volt}+\SI{5}{\volt}+\SI{0.8}{\volt}}= 0.66.
+    \end{align*}
+\end{solutionblock}
 
 \subtask{Which operation point is to consider, for the calculation of minimal $L_{\mathrm{2}}$, 
          to avoid DCM mode within the specified operating range? \\
@@ -54,5 +71,104 @@ The dynamo provides a voltage of $\SI{3}{\volt} \ldots \SI{10}{\volt}$. The outp
                um den DCM-Betrieb innerhalb des definierten Arbeitsbereichs zu vermeiden? \\
                Berechnen Sie die minimal erforderliche Induktivität $L{\mathrm{1}}$ für diesen Fall.}
 
+% Solution of subtask
+\begin{solutionblock}
+    The inductance $L_\mathrm{2}$ provide the energy to the load while transistor is blocking.
+    The maximum $\Delta i_\mathrm{L2}$ occurs at the maximum transistor off-time, which corresponds to the minimum duty cycle. 
+    At this duty cycle, the converter first enters BCM mode. It means for all larger duty cycles the converter are in CCM mode.
+    In general BCM mode occurs when the minimum average inductor current equals the half of the inductor current ripple within the considered time range.
+    The critical operation point for $L_\mathrm{2}$ is at minimum duty cycle $D_\mathrm{max}$ and minimum load current at $I_\mathrm{2,min} = \SI{50}{\milli\ampere}$.
+    If the transistor is on, no current is supplied to the output. Therefore, the correspondent average current flowing during $T_\mathrm{off, max}$ must be taken into account.
+    \begin{equation*}
+        \overline{i}_\mathrm{L2,off} = \frac{I_\mathrm{2,min}}{1-D_\mathrm{min}}
+    \end{equation*}
+    Using this current $\Delta i_\mathrm{L2}$ is calculated by
+    \begin{equation*}
+        \Delta i_\mathrm{L2}= 2 \cdot \overline{i}_\mathrm{L2,off} = 2 \cdot \frac{I_\mathrm{2,min}}{1-D_\mathrm{min}}
+    \end{equation*}
+    The ripple current $\Delta i_\mathrm{L2}$ yields
+    \begin{equation*}
+        \Delta i_\mathrm{L2}=\frac{U_\mathrm{L2,off} \cdot T_\mathrm{off, max}}{L2} 
+        =\frac{(U_\mathrm{2} + U_\mathrm{D}) \cdot (1-D_\mathrm{min})}{L_\mathrm{2} \cdot f_\mathrm{s}}.
+    \end{equation*}
+    This leads to
+    \begin{equation*}
+        2 \cdot \frac{I_\mathrm{2,min}}{1-D_\mathrm{min}}=\frac{(U_\mathrm{2} + U_\mathrm{D}) \cdot (1-D_\mathrm{min})}{L_\mathrm{2} \cdot f_\mathrm{s}}.
+    \end{equation*}
+    Solving this equation with respect to $L$ yields
+    \begin{equation*}
+        L_\mathrm{2} = \frac{(U_\mathrm{2} + U_\mathrm{D}) \cdot (1-D_\mathrm{min})^2}{2 \cdot \Delta i_\mathrm{L2} \cdot f_\mathrm{s}} 
+         = \frac{(\SI{5}{\volt} + \SI{0.8}{\volt}) \cdot (1-0.37 )^2} {2 \cdot \SI{0.1}{\ampere} \cdot \SI{100}{\kilo\hertz}}
+         = \SI{230}{\micro\henry}.
+    \end{equation*}
+\end{solutionblock}
+
+
+\subtask{To avoid operation in DCM mode within the defined operating range, the minimum inductance  $L_{\mathrm{1}}$ must be calculated.
+         For this purpose, the duty cycle at which the maximum ripple current occurs should be chosen.
+         Calculate the minimum required inductance $L{\mathrm{1}}$ for this case.}{0}
+\subtaskGerman{Um den DCM mode innerhalb des definierten Arbeitsbereichs zu vermeiden, soll die minimalen Induktivität $L{\mathrm{1}}$ berechnen werden.
+               Dazu ist das Tastverhältnis zu wählen, bei dem der maximale Ripplestrom auftritt.\\
+               Berechnen Sie die minimal erforderliche Induktivität $L{\mathrm{1}}$ für diesen Fall.}
+
+% Solution of subtask
+\begin{solutionblock}
+    The maximal ripple current occurs at $D=0.5$.
+    The input voltage $U_\mathrm{1}$ is calculated by  
+    \begin{equation*}
+        \frac{U_\mathrm{out}}{U_\mathrm{in}}=\frac{D}{1-D}.
+    \end{equation*}
+    Solving this equation with respect to $U_\mathrm{in}$ yields
+    \begin{equation*}
+        U_\mathrm{in}=\frac{(1-D) \cdot U_\mathrm{out}}{D} = \frac{(1 - 0.5) \cdot (\SI{5}{\volt}+\SI{0.8}{\volt})}{0.5}= \SI{5.8}{\volt}
+    \end{equation*}
+    If the transistor is on, no current is supplied to the output. Therefore, the correspondent average current flowing during $T_\mathrm{on}$ must be taken into account.
+     \begin{equation*}
+        \overline{i}_\mathrm{L1,on} = \frac{I_\mathrm{2,min}}{D}
+    \end{equation*}
+    Using this current $\Delta i_\mathrm{L1}$ is calculated by
+    \begin{equation*}
+        \Delta i_\mathrm{L1}= 2 \cdot \overline{i}_\mathrm{L1,on} = 2 \cdot \frac{I_\mathrm{2,min}}{D}
+    \end{equation*}
+    The ripple current $\Delta i_\mathrm{L2}$ yields
+    \begin{equation*}
+        \Delta i_\mathrm{L1}=\frac{U_\mathrm{in} \cdot T_\mathrm{on}}{L1} 
+        =\frac{U_\mathrm{in} \cdot D}{L_\mathrm{1} \cdot f_\mathrm{s}}.
+    \end{equation*}
+    This leads to
+    \begin{equation*}
+        2 \cdot \frac{I_\mathrm{2,min}}{D}=\frac{U_\mathrm{in} \cdot D}{L_\mathrm{1} \cdot f_\mathrm{s}}.
+    \end{equation*}
+    Solving this equation with respect to $L$ yields
+    \begin{equation*}
+        L_\mathrm{1} = \frac{U_\mathrm{in} \cdot D^2} {2 \cdot \Delta i_\mathrm{L2} \cdot f_\mathrm{s}} 
+         = \frac{\SI{5.8}{\volt} \cdot 0.5^2} {2 \cdot \SI{0.1}{\ampere} \cdot \SI{100}{\kilo\hertz}}
+         = \SI{145}{\micro\henry}.
+    \end{equation*}
+\end{solutionblock}
+
 \subtask{How large must the filter capacitor be so that, in the worst case, the voltage fluctuation is $\pm \SI{5}{\percent}$ ?}{0}
 \subtaskGerman{Wie groß muss der Filterkondensator ausgelegt werden, damit im ungünstigsten Fall die Spannungsschwankung $\pm \SI{5}{\percent}$ ?}
+
+   % Solution of subtask
+\begin{solutionblock}
+    The defined maximum voltage drop is calculated by
+    \begin{equation*}
+        \Delta u_\mathrm{2} = U_\mathrm{2} \cdot 2 \cdot \SI{5}{\percent} = \SI{5}{\volt} \cdot 2  \cdot \SI{5}{\percent}= \SI{0.5}{\volt}.
+    \end{equation*}
+    The voltage drop occurs during the time when no current is supplied to the output. This happens while the transistor is off.
+    The capacitor will be discharged with the constant current $I_\mathrm{2}$ while the transistor conducts.
+    The voltage drop is calculated by
+    \begin{equation*}
+        \Delta u_\mathrm{2} =  \frac{I_\mathrm{2} \cdot D}{ C \cdot f_\mathrm{s}} 
+    \end{equation*}
+    The longer the transistor conducts and the higher the output current, the greater the voltage drop.
+    This corresponds to the maximum duty cycle and maximum output current.
+    Solving this equation with respect to $C$ yields  
+    \begin{equation*}
+        C = \frac{I_\mathrm{2,max} \cdot D_\mathrm{2,max}}{f_\mathrm{s} \cdot  \Delta u_\mathrm{2,max}}
+          = \frac{\SI{1}{\ampere} \cdot 0.66} {\SI{100} {\kilo\hertz} \cdot  \SI{0.5}{\volt}} = \SI{13}{\micro\farad} .
+    \end{equation*}
+\end{solutionblock}
+
+
