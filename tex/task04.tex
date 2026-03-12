@@ -92,20 +92,14 @@ $\hat{u}_C$ und die Spitze-Spitze-Welligkeit $\Delta U_{dc,pp}\approx2\hat{u}_C$
     $$\hat{u}_C\approx\frac{\hat{i}_C}{2\omega C_{dc}}=\frac{6.67}{2\cdot314.16\cdot2.2\cdot10^{-3}}=\SI{4.82}{\volt},$$
     $$\Delta U_{dc,pp}\approx2\hat{u}_C=\SI{9.64}{\volt}. $$
 \end{solutionblock}
-\subtask{Use a sinusoidal reference $s^*(t)$ and plot the PWM signals for both Complementary PWM and Interleaved PWM, and plot the corresponding switching states over one switching period $T_s$ in the provided templates.
-Use the following givings:
-\begin{itemize}
-    \item Reference signal: $s^*(t)=\hat{s}\sin(\omega_1 t)$,
-    \item Triangular carrier $c(t)$ with amplitude range $[-1,1]$.
-\end{itemize}
-    For the shown switching interval, denote the local modulation value by $m=s^*(t_0)$ and determine the sequence of converter switching states within $T_s$.}{0}
-\subtaskGerman{Verwenden Sie ein sinusförmiges Referenzsignal $s^*(t)$ und stellen Sie die PWM-Signale beider Strategien sowie die zugehörigen Schaltzustände über eine Schaltperiode $T_s$ in den bereitgestellten Vorlagen dar.
-Verwenden Sie folgende Angaben:
-\begin{itemize}
-    \item Referenzsignal: $s^*(t)=\hat{s}\sin(\omega_1 t)$,
-    \item Dreiecksträger mit Amplitudenbereich $[-1,1]$.
-\end{itemize}
-    Bezeichnen Sie für das gezeigte Schaltintervall den lokalen Modulationswert mit $m=s^*(t_0)$ und geben Sie die Tastgrade sowie die Folge der Schaltzustände innerhalb von $T_s$ an.}
+\subtask{The engineering team suspects that the choice of PWM strategy contributes to the observed DC-link ripple.
+Using a sinusoidal reference $s^*(t)=\hat{s}\sin(\omega_1 t)$ and a triangular carrier $c(t)\in[-1,1]$, sketch the switching states of both Complementary PWM and Interleaved PWM over one switching period $T_s$ in the provided templates.
+For the shown switching interval, denote the local modulation value by $m=s^*(t_0)$ and identify the sequence of converter output states within $T_s$.
+Finally, explain which strategy produces a lower AC-side current ripple in $L$ and why this reduces stress on the DC-link capacitor $C_{\mathrm{dc}}$.}{0}
+\subtaskGerman{Das Engineering-Team vermutet, dass die Wahl der PWM-Strategie zur beobachteten DC-Zwischenkreiswelligkeit beiträgt.
+Verwenden Sie ein sinusförmiges Referenzsignal $s^*(t)=\hat{s}\sin(\omega_1 t)$ und einen Dreiecksträger $c(t)\in[-1,1]$, und skizzieren Sie die Schaltzustände beider Strategien (Komplementär-PWM und Überlagerungs-PWM) über eine Schaltperiode $T_s$ in den bereitgestellten Vorlagen.
+Bezeichnen Sie für das gezeigte Schaltintervall den lokalen Modulationswert mit $m=s^*(t_0)$ und geben Sie die Folge der Umrichterausgangszustände innerhalb von $T_s$ an.
+Erläutern Sie abschließend, welche Strategie eine geringere netzstromseitige Stromwelligkeit in $L$ erzeugt und warum dies die Belastung des DC-Zwischenkreiskondensators $C_{\mathrm{dc}}$ verringert.}
 \input{fig/Task04/Fig_subtask4.5_pwm_template_complementary.tex}
 \input{fig/Task04/Fig_subtask4.5_pwm_template_interleaved.tex}
 \begin{solutionblock}
@@ -141,5 +135,17 @@ Verwenden Sie folgende Angaben:
 
     \input{fig/Task04/sFig_subtask4.5_pwm_solution_complementary.tex}
     \input{fig/Task04/sFig_subtask4.5_pwm_solution_interleaved.tex}
+
+    \textbf{Comparison and impact on DC-link ripple}
+
+    The worst cases are
+    $$\max_m \Delta i_{L,\mathrm{cs},pp}=\frac{U_{dc}T_s}{2L} \quad \text{at } m=0,$$
+    $$\max_m \Delta i_{L,\mathrm{is},pp}=\frac{U_{dc}T_s}{8L} \quad \text{at } |m|=\tfrac{1}{2},$$
+    so the worst-case interleaved ripple is only one quarter of the worst-case complementary ripple.
+
+    Since the high-frequency capacitor current is caused by the switching ripple power of the converter,
+    the smaller inductor current ripple of interleaved PWM reduces the current stress of $C_{\mathrm{dc}}$
+    and therefore lowers the DC-link voltage ripple $\Delta U_{dc,pp}$ observed in subtask~4.4.
+    Interleaved PWM is therefore the preferable strategy.
     \vfill
 \end{solutionblock}
