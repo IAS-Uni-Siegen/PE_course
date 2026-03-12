@@ -1,5 +1,5 @@
 \begin{figure}[h]
-        \centering  
+    \centering
     \begin{circuitikz}
         \draw (0,0) node[cute spdt up arrow] (Sw1) {};
         \draw (-2,-1.5) node[cute spdt down arrow] (Sw2) {};
@@ -20,6 +20,6 @@
         \draw (c1) to [capacitor, *-*, l=$C$, i_=$i_\mathrm{C}(t)$] (c1 |- int2);
         \draw (out1) to [inductor, v<=$u_{\mathrm{L}}(t)$, voltage = straight, l=$L$, mirror, o-] ++(-2.5,0) to [sinusoidal voltage source, v_=$u_{\mathrm{g}}(t)$] (\tikztostart |- out2) to [short,-o] (out2);
     \end{circuitikz}
-    \caption{Single-phase grid rectification. Also known as \hl{active front end (AFE) rectifier}.}
+    \caption{Single-phase grid rectification. Also known as active front end (AFE) rectifier.}
     \label{fig:recitifier_single_phase_transistor_bridge_converter}
 \end{figure}

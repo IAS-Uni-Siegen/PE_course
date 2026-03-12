@@ -2,24 +2,24 @@
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-            xmin=0, xmax=1,
-            ymin=-1.5, ymax=5.2,
-            width=0.92\textwidth,
-            height=0.34\textwidth,
-            axis x line=middle,
-            axis y line=left,
-            grid=major,
-            xlabel={$t/T_s$},
-            ylabel={},
-            xtick={0,0.25,0.5,0.75,1},
-            xticklabels={$0$,$0.25$,$0.5$,$0.75$,$1$},
-            ytick={0,1.5,2.6,4},
-            yticklabels={$s_{\mathrm{cs}}(t)$,$s_2(t)$,$s_1(t)$,{$c(t)$ / $s^*(t)$}},
-            ticklabel style={font=\small},
-            label style={font=\small},
-            samples=200,
-            clip=false
-        ]
+                xmin=0, xmax=1,
+                ymin=-1.5, ymax=5.2,
+                width=0.92\textwidth,
+                height=0.34\textwidth,
+                axis x line=middle,
+                axis y line=left,
+                grid=major,
+                xlabel={$t/T_s$},
+                ylabel={},
+                xtick={0,0.25,0.5,0.75,1},
+                xticklabels={$0$,$0.25$,$0.5$,$0.75$,$1$},
+                ytick={0,1.5,2.6,4},
+                yticklabels={$s(t)$,$s_2(t)$,$s_1(t)$,{$c(t)$ / $s^*(t)$}},
+                ticklabel style={font=\small},
+                label style={font=\small},
+                samples=200,
+                clip=false
+            ]
             % Given carrier and reference
             \addplot[blue, thick, domain=0:1, samples=1200] {4 + 0.5*(1 - 4*abs(mod(8*x,1)-0.5))};
             \addplot[red, solid, thick, domain=0:1, samples=250] {4+0.5*sin(360*x)};
