@@ -69,11 +69,19 @@ with suitable firing angles and acceptable grid impact.
     so a fixed firing angle can no longer guarantee a constant plating voltage.
 \end{solutionblock}
 \subtask{Assuming low-load operation, the converter enters DCM with $\beta=\SI{140}{\degree}$.
+<<<<<<< HEAD
     Calculate $\overline{u}_{2,\mathrm{DCM}}$ for $\alpha_0=\SI{70}{\degree}$ and compare both the CCM and DCM values to the required setpoint $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
     Briefly explain why this operating behavior can lead to quality deviations and why closed-loop voltage control is required.}{0}
 \subtaskGerman{Bei Teillast geht der Umrichter in den Lückbetrieb mit $\beta=\SI{140}{\degree}$ über.
     Berechnen Sie $\overline{u}_{2,\mathrm{DCM}}$ für $\alpha_0=\SI{70}{\degree}$ und vergleichen Sie die Werte aus lückfreien und lückenden Betrueb mit dem Sollwert $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
     Erläutern Sie kurz, warum dieses Betriebsverhalten zu Qualitätsabweichungen führen kann und warum eine geschlossene Spannungsregelung erforderlich ist.}
+=======
+Calculate $\overline{u}_{2,\mathrm{DCM}}$ for $\alpha_0=\SI{70}{\degree}$ and compare both the CCM and DCM values to the required setpoint $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
+Briefly explain why this operating behavior can lead to quality deviations and how to address it}{0}
+\subtaskGerman{Bei Teillast geht der Umrichter in den DCM mit $\beta=\SI{140}{\degree}$ über.
+Berechnen Sie $\overline{u}_{2,\mathrm{DCM}}$ für $\alpha_0=\SI{70}{\degree}$ und vergleichen Sie die Werte aus CCM und DCM mit dem Sollwert $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
+Erläutern Sie kurz, warum dieses Betriebsverhalten zu Qualitätsabweichungen führen kann und wie man es adressieren kann.}
+>>>>>>> e763311e87654732e55ad1e63440c3257807d2ba
 \begin{solutionblock}
     \textbf{Average output voltage in DCM, at $\alpha_0$, $\beta$}
     $$\overline{u}_{2,\mathrm{DCM}}=\hat{u}_s\frac{2}{\pi}\sin\!\left(\frac{\beta}{2}\right)\sin\!\left(\alpha_0+\frac{\beta}{2}\right)
@@ -81,7 +89,8 @@ with suitable firing angles and acceptable grid impact.
     Neither value reaches the required setpoint of $\SI{75}{\volt}$: in CCM the output is only $\SI{35.41}{\volt}$,
     far below target, and although DCM raises it to $\SI{62.50}{\volt}$, this is still below the setpoint
     and load-dependent, causing unpredictable plating conditions and inconsistent product quality.
-    Therefore, closed-loop voltage control (adjusting $\alpha$ online) is required to maintain the setpoint under load variations.
+    Either, choose higher inductance to avoid DCM at low load, or implement closed-loop control to adjust $\alpha$ and maintain the setpoint regardless of load variations.
+  %  Therefore, closed-loop voltage control (adjusting $\alpha$ online) is required to maintain the setpoint under load variations.
 \end{solutionblock}
 \subtask{At this new operating point ($\alpha=\alpha_\mathrm{set}$, $I_2=\SI{30}{\ampere}$), calculate the fundamental current and power components
     $I_1^{(1)}$, $P_1$, $Q_1^{(1)}$, and $S_1^{(1)}$. If you did not find $\alpha_\mathrm{set}$, use $\alpha_\mathrm{0}$ instead.}{0}
