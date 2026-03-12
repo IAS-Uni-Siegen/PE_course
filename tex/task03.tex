@@ -50,32 +50,43 @@ und ob die Netzbelastung innerhalb zulässiger Grenzen liegt.
     \textbf{Average output voltage in CCM, at $\alpha_0$}
     $$\overline{u}_{2,\mathrm{CCM}}=\hat{u}_s\frac{2}{\pi}\cos\alpha_0=\SI{103.54}{\volt}\cdot\cos(70^\circ)=\SI{35.41}{\volt}.$$
 \end{solutionblock}
-\subtask{During low-load operation the converter enters DCM with $\beta=\SI{140}{\degree}$.
-Calculate $\overline{u}_{2,\mathrm{DCM}}$ for $\alpha_0=\SI{70}{\degree}$ and compare it to the CCM value from subtask 1.
-Briefly explain why this difference can lead to quality deviations in the plating process.}{0}
-\subtaskGerman{Bei Teillast geht der Umrichter in den DCM mit $\beta=\SI{140}{\degree}$ über.
-Berechnen Sie $\overline{u}_{2,\mathrm{DCM}}$ für $\alpha_0=\SI{70}{\degree}$ und vergleichen Sie mit dem CCM-Wert aus Teilaufgabe 1.
-Erläutern Sie kurz, warum dieser Unterschied zu Qualitätsabweichungen im Galvanikprozess führen kann.}
-\begin{solutionblock}
-    \textbf{Average output voltage in DCM, at $\alpha_0$, $\beta$}
-    $$\overline{u}_{2,\mathrm{DCM}}=\hat{u}_s\frac{2}{\pi}\sin\!\left(\frac{\beta}{2}\right)\sin\!\left(\alpha_0+\frac{\beta}{2}\right)
-    =\SI{103.54}{\volt}\cdot\sin(70^\circ)\sin(140^\circ)=\SI{62.50}{\volt}.$$
-    The DCM average is higher than CCM, which shifts the plating current and can cause quality deviations.
-\end{solutionblock}
-\subtask{To restore the required plating voltage, determine the firing angle $\alpha_\mathrm{set}$ in CCM for
+\subtask{To correctly set the firing angle in nominal CCM operation, determine $\alpha_\mathrm{set}$ for
 $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}{0}
-\subtaskGerman{Bestimmen Sie zur Wiederherstellung der geforderten Galvanikspannung den Zündwinkel $\alpha_\mathrm{set}$ im CCM für
+\subtaskGerman{Bestimmen Sie zur Einstellung des korrekten Zündwinkels im nominellen CCM-Betrieb den Winkel $\alpha_\mathrm{set}$ für
 $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}
 \begin{solutionblock}
-    \textbf{Firing angle for $\overline{u}_{2,\mathrm{set}}$}
+    \textbf{Firing angle for $\overline{u}_{2,\mathrm{set}}$ in CCM}
     $$\overline{u}_{2,\mathrm{set}}=\hat{u}_s\frac{2}{\pi}\cos\alpha_{\mathrm{set}}\Rightarrow
     \cos\alpha_{\mathrm{set}}=\frac{\SI{75}{\volt}}{\SI{103.54}{\volt}}=0.7244,
     \quad \alpha_{\mathrm{set}}\approx\SI{43.6}{\degree}.$$
 \end{solutionblock}
+\subtask{In open-loop operation with fixed firing angle $\alpha_0$, explain why the converter can enter DCM at low load and why this complicates maintaining a constant plating voltage.}{0}
+\subtaskGerman{Erläutern Sie beim offenen Betrieb mit festem Zündwinkel $\alpha_0$, warum der Umrichter bei kleiner Last in den DCM übergehen kann und warum dadurch eine konstante Galvanikspannung schwieriger einzuhalten ist.}
+\begin{solutionblock}
+    At low load, the demanded output current decreases and can reach zero before the next thyristor pair is triggered.
+    This interrupts conduction and the converter changes from CCM to DCM.
+    In DCM, the average output voltage depends not only on $\alpha$ but also on the load-dependent conduction interval ($\beta$),
+    so a fixed firing angle can no longer guarantee a constant plating voltage.
+\end{solutionblock}
+\subtask{Assuming low-load operation, the converter enters DCM with $\beta=\SI{140}{\degree}$.
+Calculate $\overline{u}_{2,\mathrm{DCM}}$ for $\alpha_0=\SI{70}{\degree}$ and compare both the CCM and DCM values to the required setpoint $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
+Briefly explain why this operating behavior can lead to quality deviations and why closed-loop voltage control is required.}{0}
+\subtaskGerman{Bei Teillast geht der Umrichter in den DCM mit $\beta=\SI{140}{\degree}$ über.
+Berechnen Sie $\overline{u}_{2,\mathrm{DCM}}$ für $\alpha_0=\SI{70}{\degree}$ und vergleichen Sie die Werte aus CCM und DCM mit dem Sollwert $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
+Erläutern Sie kurz, warum dieses Betriebsverhalten zu Qualitätsabweichungen führen kann und warum eine geschlossene Spannungsregelung erforderlich ist.}
+\begin{solutionblock}
+    \textbf{Average output voltage in DCM, at $\alpha_0$, $\beta$}
+    $$\overline{u}_{2,\mathrm{DCM}}=\hat{u}_s\frac{2}{\pi}\sin\!\left(\frac{\beta}{2}\right)\sin\!\left(\alpha_0+\frac{\beta}{2}\right)
+    =\SI{103.54}{\volt}\cdot\sin(70^\circ)\sin(140^\circ)=\SI{62.50}{\volt}.$$
+    Neither value reaches the required setpoint of $\SI{75}{\volt}$: in CCM the output is only $\SI{35.41}{\volt}$,
+    far below target, and although DCM raises it to $\SI{62.50}{\volt}$, this is still below the setpoint
+    and load-dependent, causing unpredictable plating conditions and inconsistent product quality.
+    Therefore, closed-loop voltage control (adjusting $\alpha$ online) is required to maintain the setpoint under load variations.
+\end{solutionblock}
 \subtask{At this new operating point ($\alpha=\alpha_\mathrm{set}$, $I_2=\SI{30}{\ampere}$), calculate
-$I_1^{(1)}$, $P_1$, $Q_1^{(1)}$, and $S_1^{(1)}$ for the fundamental component. If $\alpha_\mathrm{set}$ is unknown, use $\alpha_\mathrm{0}$ in subtask 3.2}{0}
+$I_1^{(1)}$, $P_1$, $Q_1^{(1)}$, and $S_1^{(1)}$ for the fundamental component. If $\alpha_\mathrm{set}$ is unknown, use $\alpha_\mathrm{0}$ instead.}{0}
 \subtaskGerman{Berechnen Sie für den neuen Betriebspunkt ($\alpha=\alpha_\mathrm{set}$, $I_2=\SI{30}{\ampere}$)
-$I_1^{(1)}$, $P_1$, $Q_1^{(1)}$ und $S_1^{(1)}$ der Grundschwingung. Falls $\alpha_\mathrm{set}$ unbekannt ist, verwenden Sie $\alpha_\mathrm{0}$ in Teilaufgabe 3.2}
+$I_1^{(1)}$, $P_1$, $Q_1^{(1)}$ und $S_1^{(1)}$ der Grundschwingung. Falls $\alpha_\mathrm{set}$ unbekannt ist, verwenden Sie stattdessen $\alpha_\mathrm{0}$.}
 \begin{solutionblock}
     \textbf{Fundamental complex power at $\alpha_{\mathrm{set}}$}
     $$I_1^{(1)}=\frac{\sqrt{2}}{\pi}I_2=\SI{13.50}{\ampere}.$$
