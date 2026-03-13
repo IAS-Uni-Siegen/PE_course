@@ -42,11 +42,7 @@ During testing, increased DC-link ripple is observed and the PWM strategy is que
 \subtaskGerman{Bestimmen Sie für den Betrieb mit näherungsweise Leistungsfaktor Eins den erforderlichen
     Effektivwert des Netzstroms sowie den zugehörigen Spitzenwert des Netzstroms.}
 \begin{solutionblock}
-    \textbf{Auxiliary quantities}
-    $$\hat{u}_g=\sqrt{2}U_g=\SI{325.27}{\volt},\qquad
-        \omega=2\pi f=\SI{314.16}{\per\second}. $$
-
-    \textbf{Grid current at unity power factor}
+    Grid current at unity power factor:
     $$P=U_g I_g \Rightarrow I_g=\frac{\SI{3000}{\watt}}{\SI{230}{\volt}}=\SI{13.04}{\ampere}.$$
     $$\hat{i}_g=\sqrt{2}I_g=\SI{18.44}{\ampere}. $$
 \end{solutionblock}
@@ -55,23 +51,22 @@ During testing, increased DC-link ripple is observed and the PWM strategy is que
 \subtaskGerman{Berechnen Sie aus der komplexen Zeigerbeziehung die erforderliche Amplitude der Umrichtereingangsspannung $\hat{u}_2$
     und prüfen Sie, ob die nominelle DC-Zwischenkreisspannung ausreicht.}
 \begin{solutionblock}
-    \textbf{Required converter input-voltage amplitude}
+    Required converter input-voltage amplitude:
     $$\hat{u}_2=\sqrt{\hat{u}_g^2+(\omega L\hat{i}_g)^2}
-        =\sqrt{(325.27)^2+(314.16\cdot2.5\cdot10^{-3}\cdot18.44)^2}
+        =\sqrt{(\SI{325.27}{\volt})^2+\bigl(\SI{314.16}{\per\second}\cdot\SI{2.5}{\milli\henry}\cdot\SI{18.44}{\ampere}\bigr)^2}
         =\SI{325.59}{\volt}. $$
     With $U_{dc}=\SI{450}{\volt}>\hat{u}_2$, the boost rectifier condition is fulfilled.
 \end{solutionblock}
 \subtask{Determine the DC-link voltage oscillation amplitude $\hat{u}_C$.}{0}
 \subtaskGerman{Bestimmen Sie die Amplitude der DC-Zwischenkreis-Spannungsoszillation $\hat{u}_C$.}
 \begin{solutionblock}
-    \textbf{DC-link ripple estimate}
-    $$Q_2=\omega L I_g^2=314.16\cdot2.5\cdot10^{-3}\cdot(13.04)^2=\SI{133.7}{\volt\ampere}.$$
-    $$S_2=\sqrt{P^2+Q_2^2}=\sqrt{(3000)^2+(133.7)^2}=\SI{3003}{\volt\ampere}. $$
+    DC-link ripple estimate:
+    $$Q_2=\omega L I_g^2=\SI{314.16}{\per\second}\cdot\SI{2.5}{\milli\henry}\cdot(\SI{13.04}{\ampere})^2=\SI{133.7}{\volt\ampere}.$$
+    $$S_2=\sqrt{P^2+Q_2^2}=\sqrt{(\SI{3000}{\watt})^2+(\SI{133.7}{\volt\ampere})^2}=\SI{3003}{\volt\ampere}. $$
     From lecture Eq. (6.23), the DC-link current ripple amplitude is approximately
     $$\hat{i}_C\approx\frac{S_2}{U_{dc}}=\frac{3003}{450}=\SI{6.67}{\ampere}. $$
     Hence (Eq. (6.26))
-    $$\hat{u}_C\approx\frac{\hat{i}_C}{2\omega C_{dc}}=\frac{6.67}{2\cdot314.16\cdot2.2\cdot10^{-3}}=\SI{4.82}{\volt},$$
-    $$\Delta U_{dc,pp}\approx2\hat{u}_C=\SI{9.64}{\volt}. $$
+    $$\hat{u}_C\approx\frac{\hat{i}_C}{2\omega C_{dc}}=\frac{\SI{6.67}{\ampere}}{2\cdot\SI{314.16}{\per\second}\cdot\SI{2.2}{\milli\farad}}=\SI{4.82}{\volt}.$$
 \end{solutionblock}
 \subtask{The engineering team suspects that the choice of PWM strategy contributes to the observed DC-link ripple.
     Using a sinusoidal reference $s^*(t)=\hat{s}\sin(\omega_1 t)$ and a triangular carrier $c(t)\in[-1,1]$, sketch the switching states of both complementary PWM and interleaved PWM over one fundamental electrical period ($\omega_1 t\in[0,2\pi]$) in the provided templates.
@@ -82,10 +77,10 @@ During testing, increased DC-link ripple is observed and the PWM strategy is que
 \input{fig/Task04/Fig_subtask4.5_pwm_template_complementary.tex}
 \input{fig/Task04/Fig_subtask4.5_pwm_template_interleaved.tex}
 \begin{solutionblock}
-    \textbf{Given}
+    Given:
     The modulation reference is sinusoidal, $s^*(t)=\hat{s}\sin(\omega_1 t)$. The sketches are shown over one fundamental electrical period ($\omega_1 t\in[0,2\pi]$).
 
-    \textbf{1) Complementary PWM}
+    1) Complementary PWM
     $$s_1(t)=\begin{cases}
             +1, & s^*(t)>c(t)    \\
             -1, & s^*(t)\le c(t)
@@ -93,7 +88,7 @@ During testing, increased DC-link ripple is observed and the PWM strategy is que
     The equivalent converter state is
     $$s_{\mathrm{cs}}(t)=\frac{s_1(t)-s_2(t)}{2}=s_1(t)\in\{+1,-1\}. $$
 
-    \textbf{2) Interleaved PWM}
+    2) Interleaved PWM
     $$s_1(t)=\begin{cases}
             +1, & s^*(t)>c(t)    \\
             -1, & s^*(t)\le c(t)
@@ -106,7 +101,7 @@ During testing, increased DC-link ripple is observed and the PWM strategy is que
     $$s_{\mathrm{is}}(t)=\frac{s_1(t)-s_2(t)}{2}\in\{+1,0,-1\}. $$
     A correct sketch over one electrical period shows transition instants at the intersections of $c(t)$ with $s^*(t)$ and $-s^*(t)$.
 
-    \textbf{What must be visible in the plots}
+    What must be visible in the plots:
     \begin{itemize}
         \item Complementary PWM: one carrier $c(t)$, one reference $s^*(t)$, states $s_1,s_2$, and resulting $s\in\{+1,-1\}$.
         \item Interleaved PWM: one carrier $c(t)$, both references $s^*(t)$ and $-s^*(t)$, states $s_1,s_2$, and resulting $s\in\{+1,0,-1\}$.
@@ -115,7 +110,7 @@ During testing, increased DC-link ripple is observed and the PWM strategy is que
     \input{fig/Task04/sFig_subtask4.5_pwm_solution_complementary.tex}
     \input{fig/Task04/sFig_subtask4.5_pwm_solution_interleaved.tex}
 
-    \textbf{Comparison and impact on DC-link ripple}
+    Comparison and impact on DC-link ripple:
 
     Complementary PWM produces a two-level converter output state ($\pm1$), while interleaved PWM produces a three-level output state ($+1,0,-1$).
     The additional zero level in interleaved PWM reduces the effective voltage steps across $L$ and therefore reduces the AC-side current ripple.
