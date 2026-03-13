@@ -42,45 +42,46 @@ with suitable firing angles and acceptable grid impact.
 \subtask{In continuous conduction mode (CCM), calculate the average output voltage $\overline{u}_{2,\mathrm{CCM}}$ for $\alpha_0=\SI{70}{\degree}$.}{2}
 \subtaskGerman{Berechnen Sie im lückfreien Betrieb die mittlere Ausgangsspannung $\overline{u}_{2,\mathrm{CCM}}$ für $\alpha_0=\SI{70}{\degree}$.}
 \begin{solutionblock}
-    \textbf{Given:} $U_1=\SI{230}{\volt}$, $N_2/N_1=1$, $\alpha_0=\SI{70}{\degree}$.
-
-    \textbf{Auxiliary values:}
+    Calculate the peak voltage using:
     $$\hat{u}_1=\sqrt{2}U_1=\SI{325.27}{\volt},\qquad \hat{u}_s=\frac{1}{2}\hat{u}_1=\SI{162.63}{\volt}.$$
 
-    \textbf{Average output voltage in CCM, at $\alpha_0$}
+    Then the output voltage in CCM at $\alpha_0$ is:
     $$\overline{u}_{2,\mathrm{CCM}}=\hat{u}_s\frac{2}{\pi}\cos\alpha_0=\SI{103.54}{\volt}\cdot\cos(70^\circ)=\SI{35.41}{\volt}.$$
 \end{solutionblock}
 \subtask{To correctly set the firing angle in CCM, determine $\alpha_\mathrm{set}$ for
-    $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}{0}
+    $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}{1}
 \subtaskGerman{Bestimmen Sie zur Einstellung des korrekten Zündwinkels im lückfreien Betrieb den Winkel $\alpha_\mathrm{set}$ für
     $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}
 \begin{solutionblock}
-    \textbf{Firing angle for $\overline{u}_{2,\mathrm{set}}$ in CCM}
+    Firing angle for $\overline{u}_{2,\mathrm{set}}$ in CCM:
     $$\overline{u}_{2,\mathrm{set}}=\hat{u}_s\frac{2}{\pi}\cos\alpha_{\mathrm{set}}\Rightarrow
         \cos\alpha_{\mathrm{set}}=\frac{\SI{75}{\volt}}{\SI{103.54}{\volt}}=0.7244,
         \quad \alpha_{\mathrm{set}}\approx\SI{43.6}{\degree}.$$
 \end{solutionblock}
-\subtask{In open-loop operation with fixed firing angle $\alpha_0$, explain why the converter can enter DCM at low load and why this complicates maintaining a constant plating voltage.}{0}
+\subtask{In open-loop operation with fixed firing angle $\alpha_0$, explain why the converter can enter DCM at low load, why this complicates maintaining a constant plating voltage, and how this affects the final quality.}{2}
 \subtaskGerman{Erläutern Sie beim gesteuerten Betrieb mit festem Zündwinkel $\alpha_0$, warum der Umrichter bei kleiner Last in den Lückbetrieb übergehen kann und warum dadurch eine konstante Galvanikspannung schwieriger einzuhalten ist.}
 \begin{solutionblock}
     At low load, the demanded output current decreases and can reach zero before the next thyristor pair is triggered.
     This interrupts conduction and the converter changes from CCM to DCM.
-    In DCM, the average output voltage depends not only on $\alpha$ but also on the load-dependent conduction interval ($\beta$),
-    so a fixed firing angle can no longer guarantee a constant plating voltage.
+    In DCM, the average output voltage depends not only on $\alpha$ but also on the load-dependent conduction interval ($\beta$).
+    So a fixed firing angle can no longer guarantee a constant plating voltage, causing unpredictable plating conditions and inconsistent product quality.
 \end{solutionblock}
 \subtask{Assuming low-load operation, the converter enters DCM with $\beta=\SI{140}{\degree}$.
-    Calculate $\overline{u}_{2,\mathrm{DCM}}$ for $\alpha_0=\SI{70}{\degree}$ and compare both the CCM and DCM values to the required setpoint $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
-    Briefly explain why this operating behavior can lead to quality deviations and why closed-loop voltage control is required.}{0}
+    Calculate $\overline{u}_{2,\mathrm{DCM}}$ for $\alpha_\mathrm{set}$ from subtask 3.2, and compare it to the required setpoint $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
+    Briefly explain how to address this issue.}{0}
+    \begin{hintblock}
+	If you did not find $\alpha_\mathrm{set}$ in subtask 3.2, use $\alpha_0$ instead.
+\end{hintblock}
 \subtaskGerman{Bei Teillast geht der Umrichter in den Lückbetrieb mit $\beta=\SI{140}{\degree}$ über.
-    Berechnen Sie $\overline{u}_{2,\mathrm{DCM}}$ für $\alpha_0=\SI{70}{\degree}$ und vergleichen Sie die Werte aus lückfreien und lückenden Betrueb mit dem Sollwert $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
+    Berechnen Sie $\overline{u}_{2,\mathrm{DCM}}$ für $\alpha_0=\SI{70}{\degree}$ und vergleichen Sie die Werte aus lückfreien und lückenden Betrieb mit dem Sollwert $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
     Erläutern Sie kurz, warum dieses Betriebsverhalten zu Qualitätsabweichungen führen kann und warum eine geschlossene Spannungsregelung erforderlich ist.}
 \begin{solutionblock}
-    \textbf{Average output voltage in DCM, at $\alpha_0$, $\beta$}
+    Average output voltage in DCM, at $\alpha_0$, $\beta$:
     $$\overline{u}_{2,\mathrm{DCM}}=\hat{u}_s\frac{2}{\pi}\sin\!\left(\frac{\beta}{2}\right)\sin\!\left(\alpha_0+\frac{\beta}{2}\right)
         =\SI{103.54}{\volt}\cdot\sin(70^\circ)\sin(140^\circ)=\SI{62.50}{\volt}.$$
     Neither value reaches the required setpoint of $\SI{75}{\volt}$: in CCM the output is only $\SI{35.41}{\volt}$,
     far below target, and although DCM raises it to $\SI{62.50}{\volt}$, this is still below the setpoint
-    and load-dependent, causing unpredictable plating conditions and inconsistent product quality.
+    and load-dependent.
     Either, choose higher inductance to avoid DCM at low load, or implement closed-loop control to adjust $\alpha$ and maintain the setpoint regardless of load variations.
     %  Therefore, closed-loop voltage control (adjusting $\alpha$ online) is required to maintain the setpoint under load variations.
 \end{solutionblock}
@@ -89,7 +90,7 @@ with suitable firing angles and acceptable grid impact.
 \subtaskGerman{Berechnen Sie für den neuen Betriebspunkt ($\alpha=\alpha_\mathrm{set}$, $I_2=\SI{30}{\ampere}$) den Grundanteil der Strom- und Leistungsgrößen
     $I_1^{(1)}$, $P_1$, $Q_1^{(1)}$ und $S_1^{(1)}$. Falls Sie zuvor $\alpha_\mathrm{set}$ nicht berechnen konnten, verwenden Sie stattdessen $\alpha_\mathrm{0}$.}
 \begin{solutionblock}
-    \textbf{Fundamental complex power at $\alpha_{\mathrm{set}}$}
+    Fundamental complex power at $\alpha_{\mathrm{set}}$:
     $$I_1^{(1)}=\frac{\sqrt{2}}{\pi}I_2=\SI{13.50}{\ampere}.$$
     $$S_1^{(1)}=I_2\hat{u}_{s0}=\SI{3106}{\volt\ampere}.$$
     $$P_1=I_2\hat{u}_{s0}\cos\alpha_{\mathrm{set}}=\SI{2250}{\watt},\qquad
@@ -100,7 +101,7 @@ with suitable firing angles and acceptable grid impact.
 \subtaskGerman{Berechnen Sie unter Berücksichtigung der Oberschwingungen die gesamte Scheinleistung $S_1$ und die gesamte Blindleistung $Q_1$
     und bewerten Sie kurz, ob der Oberschwingungsanteil für die Netzkonformität relevant ist.}
 \begin{solutionblock}
-    \textbf{Including harmonics}
+    Including harmonics:
     $$S_1=\frac{\pi}{2\sqrt{2}}S_1^{(1)}=\SI{3450}{\volt\ampere},$$
     $$Q_1=\sqrt{S_1^2-P_1^2}=\SI{2615}{\volt\ampere}.$$
 \end{solutionblock}
