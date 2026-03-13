@@ -1,170 +1,258 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Examtask 2: SEPIC converter as smart voltage stabilizer for bicycle dynamo %%
+%% Examtask 2: buck-boost converter as smart voltage stabilizer for bicycle dynamo %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\task{SEPIC as smart voltage stabilizer for bicycle dynamo}
+\task{buck-boost converter as smart voltage stabilizer for bicycle dynamo}
 
-\taskGerman{SEPIC als intelligente Spannungsstabilisierung für Fahrraddynamos}
+\taskGerman{Tief-Hochsetzsteller als intelligente Spannungsstabilisierung für Fahrraddynamos}
 
-A SEPIC is to be designed for voltage stabilization in a bicycle dynamo.
-A control circuit regulates the converter's duty cycle to ensure a stable output voltage.
-The dynamo provides a voltage of $\SI{3}{\volt} \ldots \SI{10}{\volt}$. The output voltage is to be stabilized at $\SI{5.1}{\volt}$.
+A buck-boost converter is to be designed for voltage stabilization in a bicycle dynamo.
+The dynamo supplies a variable voltage. A control circuit adjusts the converter's duty cycle 
+so that the buck-boost converter provides a stable output voltage.
 
 \begin{germanblock}
-    Für ein Fahraddynamo soll ein SEPIC als Spannungsstabilisierung dimensioniert werden.
-    Eine Reglungsschaltung regelt das Tastverhältnis des Konverter für eine stabile Ausgangsspannung.
-    Der Dynamo liefert eine Spannung von $\SI{3}{\volt} \ldots \SI{10}{\volt}$. Die Ausgangsspannung soll auf $\SI{5.1}{\volt}$ stabilisiert werden.
+    Für ein Fahraddynamo soll ein Tief-Hochsetzsteller als Spannungsstabilisierung dimensioniert werden.
+    Der Dynamo liefert eine variable Spannung. Eine Reglungsschaltung steuert das Tastverhältnis des Konverters,
+    so das der Tief-Hochsetzsteller eine stabile Ausgangsspannung liefert.
 \end{germanblock}
 
-\input{fig/Task02/figSEPICConverter}
+\input{fig/Task02/figbuckboostConverter}
+
+
 
 \begin{table}[ht]
     \centering  % Zentriert die Tabelle
     \begin{tabular}{llll}
         \toprule
-        \multicolumn{2}{l}{\textbf{General parameters:}}                                                                                                                          \\
-        Input voltage:       & $U_{\mathrm{1}} = \SI{3}{\volt} \ldots \SI{10}{\volt}$ & Diode forward voltage: & $U_{\mathrm{D},\mathrm{f}} = \SI{0.8}{\volt}$                    \\
-        Output voltage:      & $U_{\mathrm{2}} = \SI{5}{\volt}$                       & Output current range:  & $I_{\mathrm{2}} = \SI{50}{\milli\ampere} \ldots \SI{1}{\ampere}$ \\
-        Switching frequency: & $f_\mathrm{s} = \SI{100}{\kilo\hertz}$                 &                        &                                                                  \\
+        \multicolumn{2}{l}{\textbf{General parameters:}} & \multicolumn{2}{l}{\textbf{MOSFET:}} \\
+        Input voltage: &  $U_{\mathrm{1}} = \SI{3}{\volt} \ldots \SI{10}{\volt}$ & Transistor drain source voltage: & $u_\mathrm{ds,on} = \SI{0.5}{\volt}$ \\
+        Output voltage: & $U_{\mathrm{2}} = \SI{5}{\volt}$  &  & \\
+        Output current range: & $I_{\mathrm{2}} = \SI{50}{\milli\ampere} \ldots \SI{1}{\ampere}$  & \multicolumn{2}{l}{\textbf{Diode:}} \\
+        Switching frequency: & $f_\mathrm{s} = \SI{100}{\kilo\hertz}$ & Diode forward voltage: & $u_\mathrm{fw} = \SI{0.8}{\volt}$  \\
         \midrule
-        \multicolumn{4}{l}{\quad The diode forward voltage must be taken into account.}                                                                                           \\
-        \multicolumn{4}{l}{\quad The voltage of capacitor $C_{\mathrm{1}}$ can be considered as constant for the specific duty cycles.}                                           \\
-        \multicolumn{4}{l}{\quad The output voltage can be considered as constant except of subtask 2.4.}                                                                         \\
+        \multicolumn{4}{l}{\quad The diode forward voltage and transistor voltage loss must be taken into account.}  \\ 
+        \multicolumn{4}{l}{\quad The drain-source voltage is valid for both transistors in conduct case..}  \\ 
+        \multicolumn{4}{l}{\quad The output voltage can be considered as constant except of subtask 2.4.}  \\ 
         \bottomrule
     \end{tabular}
     \caption{Parameters of the circuit.}  % Beschriftung der Tabelle
-    \label{table:ex02_Parameters of the circuit}
+    \label{table:ex01_Parameters of the circuit}
 \end{table}
 
 
-\subtask{What are the minimum and maximum duty cycles that the control circuit has to command to maintain the desired output voltage given the varying input voltage?}{0}
-\subtaskGerman{Welche minimalen und maximalen Tastverhältnisse muss die Regelungsschaltung vorgeben, um die gewünschte Ausgangsspannung bei der variierenden Eingangsspannung zu halten?}
+\subtask{What are the minimum and maximum duty cycles that the control circuit has to request in case of $D = D_1 = D_2$?}{3}
+\subtaskGerman{Welches minimale und maximale Tastverhältnis muss die Reglungsschaltung für den Fall $D = D_1 = D_2$ vorgeben.}
 
 % Solution of subtask
 \begin{solutionblock}
-    The duty cycle  for the SEPIC is calculated by
+    The synchronized duty cycle for the buck-boost converter is calculated using the inductor current balance equation.
     \begin{equation*}
-        \frac{U_\mathrm{out}}{U_\mathrm{in}}=\frac{D}{1-D}.
+        \Delta i_\mathrm{L,T_\mathrm{on}} \cdot T_\mathrm{on}=\Delta i_\mathrm{L,T_\mathrm{off}} \cdot T_\mathrm{off}
     \end{equation*}
-    Solving this equation with respect to $D$ leads to
+    If the transistors conduct $\Delta i_\mathrm{L,T_\mathrm{on}}$ results in:
     \begin{equation*}
-        D=\frac{U_\mathrm{out}}{U_\mathrm{in}+U_\mathrm{out}}
+        \Delta i_\mathrm{L,T_\mathrm{on}}=\frac{(U_\mathrm{1}-2u_\mathrm{ds,on}) \cdot T_\mathrm{on} }{L}
     \end{equation*}
-    For the circuit the voltages are like follow:
+    If the transistors are blocking $\Delta i_\mathrm{L,T_\mathrm{off}}$ is calculated by:
+    \begin{equation*}
+        \Delta i_\mathrm{L,T_\mathrm{off}}=\frac{(U_\mathrm{2}+ 2u_\mathrm{fw}) \cdot T_\mathrm{off}}{L}
+    \end{equation*}
+
+    By substituting the currents within the inductor current balance equation, we obtain
+    \begin{equation*}
+        \frac{(U_\mathrm{1}-2u_\mathrm{ds,on}) \cdot T_\mathrm{on}}{L}=\frac{(U_\mathrm{2}+2u_\mathrm{fw}) \cdot T_\mathrm{off}}{L}
+    \end{equation*}
+
+    Replacing $T_\mathrm{on}$ and $T_\mathrm{off}$ by the switching period yields to
+    \begin{equation*}
+        \frac{(U_\mathrm{1}-2u_\mathrm{ds,on}) \cdot T_\mathrm{s} \cdot D}{L} =
+        \frac{(U_\mathrm{2}+2u_\mathrm{fw}) \cdot (1-D) \cdot T_\mathrm{s}}{L}
+    \end{equation*}
+
+    After simplifying by canceling $T_\mathrm{s}$ and $L$, we obtain
+    \begin{equation*}
+        (U_\mathrm{1}-2u_\mathrm{ds,on}) \cdot D =
+        (U_\mathrm{2}+2u_\mathrm{fw}) \cdot (1-D)
+    \end{equation*}
+    Solving this equation with respect to $D$ yields
+    \begin{equation*}
+        D = \frac{U_\mathrm{2}+2u_\mathrm{fw}}{U_\mathrm{1}-2u_\mathrm{ds,on}+U_\mathrm{2}+2u_\mathrm{fw}}
+    \end{equation*}
+    Entering the minimum and maximum input voltage leads yields
     \begin{align*}
-        U_\mathrm{out} & =U_\mathrm{2}+U_\mathrm{D} \\
-        U_\mathrm{in}  & =U_\mathrm{1}
-    \end{align*}
-    Takein this in accournt the duty cycles yields
-    For the circuit the voltages are like follow:
-    \begin{align*}
-        D              & =\frac{U_\mathrm{2}+U_\mathrm{D}}{U_\mathrm{in}+U_\mathrm{2}+U_\mathrm{D}}                 \\
-        D_\mathrm{min} & =\frac{\SI{5}{\volt}+\SI{0.8}{\volt}}{\SI{3}{\volt}+\SI{5}{\volt}+\SI{0.8}{\volt}}= 0.37   \\
-        D_\mathrm{max} & =\frac{\SI{5}{\volt}+\SI{0.8}{\volt}}{\SI{10}{\volt}+\SI{5}{\volt}+\SI{0.8}{\volt}}= 0.66.
+        D_\mathrm{max} &= \frac{\SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}{\SI{3}{\volt} - 2 \cdot \SI{0.5}{\volt}+\SI{0.8}{\volt + \SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}}  
+                        = 0.77 \\
+        D_\mathrm{min} &= \frac{\SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}{\SI{10}{\volt} - 2 \cdot \SI{0.5}{\volt}+\SI{0.8}{\volt + \SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}}  
+                        = 0.42
     \end{align*}
 \end{solutionblock}
 
-\subtask{Which operation point is decisive for the calculation of minimal $L_{\mathrm{2}}$,
-    to avoid discontinuous conduction mode (DCM) within the specified operating range? Calculate the minimal required inductances $L_2$ for this case.}{0}
-\subtaskGerman{Welcher Arbeitspunkt ist bei der Berechnung der minimalen Induktivität $L{\mathrm{2}}$ ausschlaggebend,
-    um den Lückebetrieb innerhalb des definierten Arbeitsbereichs zu vermeiden? Berechnen Sie die minimal erforderliche Induktivität $L_2$ für diesen Fall.}
+\subtask{Calculate the efficiency of the converter at the operation points $U_\mathrm{1}=\SI{3}{\volt}$, $U_\mathrm{1}=\SI{7.5}{\volt}$, and $U_\mathrm{1}=\SI{10}{\volt}$
+         at maximum output power. Consider only the losses cause be the constant voltage drop of the semiconductors. All other losses must me ignored.}{3}
+\subtaskGerman{Berechne den Wirkungsgrand des Konverters an den Arbeitspunkten $U_\mathrm{1}=\SI{3}{\volt}$, $U_\mathrm{1}=\SI{7.5}{\volt}$, und $U_\mathrm{1}=\SI{10}{\volt}$
+               bei maximaler Ausgangsleistung. Betrachten Sie nur die Verluste durch die Spannungsabfälle über die Halbleiter. Alle anderen Verluste sind zu vernachlässigen.}
 
 % Solution of subtask
 \begin{solutionblock}
-    The inductance $L_\mathrm{2}$ provide the energy to the load while transistor is blocking.
-    The maximum $\Delta i_\mathrm{L2}$ occurs at the maximum transistor off-time, which corresponds to the minimum duty cycle.
-    At this duty cycle, the converter first enters BCM mode. It means for all larger duty cycles the converter are in CCM mode.
-    In general BCM mode occurs when the minimum average inductor current equals the half of the inductor current ripple within the considered time range.
-    The critical operation point for $L_\mathrm{2}$ is at minimum duty cycle $D_\mathrm{min}$ and minimum load current at $I_\mathrm{2,min} = \SI{50}{\milli\ampere}$.
-    If the transistor is on, no current is supplied to the output. Therefore, the correspondent average current flowing during $T_\mathrm{off, max}$ must be taken into account:
+    The power loss are be separated in 2 parts: Power loss of the transistors while $T_\mathrm{on}$-phase and power loss of the diodes while $T_\mathrm{off}$-phase.
+    The average current of the inductance is the same for both parts and yields
     \begin{equation*}
-        \overline{i}_\mathrm{L2,off} = \frac{I_\mathrm{2,min}}{1-D_\mathrm{min}}.
+        \overline{i}_\mathrm{L} = \frac{I_\mathrm{2}}{1-D}
     \end{equation*}
-    Using this current $\Delta i_\mathrm{L_2}$ is calculated by
+    The duty cycle of operation point $U_\mathrm{1}=\SI{7.5}{\volt}$ results in
     \begin{equation*}
-        \Delta i_\mathrm{L_2}= 2 \cdot \overline{i}_\mathrm{L2,off} = 2 \cdot \frac{I_\mathrm{2,min}}{1-D_\mathrm{min}}
+        D = \frac{U_\mathrm{2}+2u_\mathrm{fw}}{U_\mathrm{1}-2u_\mathrm{ds,on}+U_\mathrm{2}+2u_\mathrm{fw}}
+          = \frac{\SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}{\SI{7.5}{\volt} - 2 \cdot \SI{0.5}{\volt}+\SI{0.8}{\volt + \SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}}  
+                    = 0.5
     \end{equation*}
-    The ripple current $\Delta i_\mathrm{L_2}$ yields
+
+    The power loss is calculated by
     \begin{equation*}
-        \Delta i_\mathrm{L2}=\frac{U_\mathrm{L2,off} \cdot T_\mathrm{off, max}}{L2}
-        =\frac{(U_\mathrm{2} + U_\mathrm{D}) \cdot (1-D_\mathrm{min})}{L_\mathrm{2} \cdot f_\mathrm{s}}.
+        P_\mathrm{loss}= P_\mathrm{loss, on}+P_\mathrm{loss, off}=\overline{i}_\mathrm{L} (2u_\mathrm{ds,on} \cdot D  + 2u_\mathrm{fw} \cdot (1-D))
+    \end{equation*}
+    For the operation points we obtain
+    \begin{align*}
+        P_\mathrm{loss,U_\mathrm{1}=\SI{3}{\volt}}= \frac{\SI{1}{\ampere}}{1-0.77} (2 \cdot \SI{0.5}{\volt} \cdot 0.77  + 2 \cdot \SI{0.5}{\volt} \cdot (1-0.77))
+        = \SI{4.9}{\watt} \\
+        P_\mathrm{loss,U_\mathrm{1}=\SI{7.5}{\volt}}= \frac{\SI{1}{\ampere}}{1-0.5} (2 \cdot \SI{0.5}{\volt} \cdot 0.5  + 2 \cdot \SI{0.5}{\volt} \cdot (1-0.5))
+        = \SI{2.6}{\watt} \\
+        P_\mathrm{loss,U_\mathrm{1}=\SI{10}{\volt}}= \frac{\SI{1}{\ampere}}{1-0.42} (2 \cdot \SI{0.5}{\volt} \cdot 0.42  + 2 \cdot \SI{0.5}{\volt} \cdot (1-0.42))
+        = \SI{2.3}{\watt} \\
+    \end{align*}
+    The effciency is calculated by
+    \begin{equation*}
+        \eta = \frac{P_\mathrm{2}}{U_\mathrm{2}+P_\mathrm{loss}} = \frac{U_\mathrm{1} I_\mathrm{2}} {U_\mathrm{1} I_\mathrm{2}+P_\mathrm{loss}}
+    \end{equation*}
+    For the operation points we obtain
+    \begin{align*}
+        \eta_\mathrm{U_\mathrm{1}=\SI{3}{\volt}} = \frac{\SI{0.5}{\volt} \cdot \SI{1}{\ampere}} {\SI{0.5}{\volt} \cdot \SI{1}{\ampere} + \SI{4.9}{\watt}} = 0.51\\
+        \eta_\mathrm{U_\mathrm{1}=\SI{7.5}{\volt}} = \frac{\SI{0.5}{\volt} \cdot \SI{1}{\ampere}} {\SI{0.5}{\volt} \cdot \SI{1}{\ampere} + \SI{4.9}{\watt}} = 0.66\\
+        \eta_\mathrm{U_\mathrm{1}=\SI{10}{\volt}} = \frac{\SI{0.5}{\volt} \cdot \SI{1}{\ampere}} {\SI{0.5}{\volt} \cdot \SI{1}{\ampere} + \SI{4.9}{\watt}} = 0.68\\
+    \end{align*}
+\end{solutionblock}
+
+
+\subtask{To avoid operation in discontinuous conduction mode (DCM) within the defined operating range, the minimum inductance  $L$ must be calculated.
+         Evaluate the general equation for boundary conduction mode (BCM) to indicate, at which operation point the discontinuous conduction mode occurs?
+         Calculate the minimum required inductance $L{\mathrm{1}}$ for boundary conduction mode (BCM) at this operation point.
+         $D = D_1 = D_2$ is still valid.}{3}
+\subtaskGerman{ Um den Betrieb im diskontinuierlichen Leitungsmodus (DCM) innerhalb des definierten Arbeitsbereichs zu vermeiden, soll die minimale Induktivität 
+                $L$ berechnet werden.\\
+                Werten Sie die allgemeine Gleichung für den boundary conduction mode (BCM) her, um den Arbeitspunkt zu bestimmen, an dem der Übergang in den discontinuous conduction mode (DCM) auftritt.
+                Berechnen Sie für diesen Arbeitspunkt die minimal erforderliche Induktivität für den boundary conduction mode (BCM). $D = D_1 = D_2$ ist noch gültig.}
+
+% Solution of subtask
+\begin{solutionblock}
+    The ripple current is calculated by
+    \begin{equation*}
+        \Delta i_\mathrm{L}=\frac{U_\mathrm{L,off} \cdot T_\mathrm{off}}{L} 
+        =\frac{(U_\mathrm{2}+2u_\mathrm{fw}) \cdot (1-D)}{L \cdot f_\mathrm{s}}.
+    \end{equation*}
+    Remark: The duty cycle depends on input voltage $U_\mathrm{1}$. Therefore the fix output voltage $U_\mathrm{2}$ is utilized. 
+    At boundary conduction mode (BCM) the ripple current yields
+    \begin{equation*}
+        \Delta i_\mathrm{L} = \frac{2 I_\mathrm{2}}{1-D}.
     \end{equation*}
     This leads to
     \begin{equation*}
-        2 \cdot \frac{I_\mathrm{2,min}}{1-D_\mathrm{min}}=\frac{(U_\mathrm{2} + U_\mathrm{D}) \cdot (1-D_\mathrm{min})}{L_\mathrm{2} \cdot f_\mathrm{s}}.
+        \frac{(U_\mathrm{2}+2u_\mathrm{fw}) \cdot (1-D)}{L \cdot f_\mathrm{s}} = \frac{2 I_\mathrm{2}}{1-D}.
     \end{equation*}
-    Solving this equation with respect to $L$ yields
+    Solving the equation with respect to $L$ leads to
     \begin{equation*}
-        L_\mathrm{2} = \frac{(U_\mathrm{2} + U_\mathrm{D}) \cdot (1-D_\mathrm{min})^2}{2 \cdot \Delta i_\mathrm{L2} \cdot f_\mathrm{s}}
-        = \frac{(\SI{5}{\volt} + \SI{0.8}{\volt}) \cdot (1-0.37 )^2} {2 \cdot \SI{0.1}{\ampere} \cdot \SI{100}{\kilo\hertz}}
-        = \SI{230}{\micro\henry}.
+        L = \frac{(U_\mathrm{2}+2u_\mathrm{fw}) \cdot (1-D)^2}{2 I_\mathrm{2} \cdot f_\mathrm{s}}.
     \end{equation*}
+    The term $(1-D_\mathrm)^2$ express, that at minimum duty cycle the highest inductance is needed, to prevent discontinuous conduction mode.
+    Therefore $D_\mathrm{min}$ is used.
+    \begin{equation*}
+        L = \frac{(\SI{5}{\volt}+2 \cdot \SI{0.8}{\volt}) \cdot (1-0.42)^2}{2 \SI{50}{\milli\ampere} \cdot \SI{100}{\kilo\hertz}} 
+         = \SI{219}{\micro\henry}
+    \end{equation*}
+
 \end{solutionblock}
 
+\subtask{ Now the control circuit regulates the transistors independent. It means, for low input voltage he boost mode is used and for high input voltage the buck mode is uses.
+          How are the duty cycles $D_\mathrm{1}$ of transistor $T_\mathrm{1}$ and $D_\mathrm{2}$ of transistor $T_\mathrm{2}$ for the operating points?}{3}
+\subtaskGerman{Nun regelt die Steuerung die Transistoren unabhängig voneinander. Das bedeutet, bei niedriger Eingangsspannung wird der Hochsetzsteller-Modus verwendet, 
+               bei hoher Eingangsspannung der Tiefsetzsteller-Modus. Wie lauten die Tastverhältnisse $D_\mathrm{1}$ des Transistors $T_\mathrm{1}$  und $D_\mathrm{2}$
+               des Transistors $T_\mathrm{2}$ für die jeweiligen Betriebspunkte?}
 
-\subtask{To further avoid operation in DCM mode within the defined operating range, the minimum inductance  $L_{\mathrm{1}}$ must be calculated.
-    For this purpose, the duty cycle at which the maximum ripple current occurs should be considered.
-    Calculate the minimum required inductance $L_{\mathrm{1}}$ for this case.}{0}
-\subtaskGerman{Um weiterhin den Lückbetrieb innerhalb des definierten Arbeitsbereichs zu vermeiden, soll die minimalen Induktivität $L_{\mathrm{1}}$ berechnet werden.  Dazu ist das Tastverhältnis zu betrachten, bei dem der maximale Ripplestrom auftritt.  Berechnen Sie die minimal erforderliche Induktivität $L_{\mathrm{1}}$ für diesen Fall.}
-
-% Solution of subtask
 \begin{solutionblock}
-    The maximal ripple current occurs at $D=0.5$.
-    The input voltage $U_\mathrm{1}$ is calculated by
+    In boost mode the duty cycle $D_\mathrm{1}=1$ so that $T_\mathrm{1}$ always conducts. 
+    The boost mode is active if $U_\mathrm{1}-u_\mathrm{ds,on}$ is less equal $U_\mathrm{2}+2u_\mathrm{fw}$. The break-even point is calculated by
     \begin{equation*}
-        \frac{U_\mathrm{out}}{U_\mathrm{in}}=\frac{D}{1-D}.
+        U_\mathrm{1}=U_\mathrm{2}+ u_\mathrm{fw} + u_\mathrm{ds,on}=\SI{5}{\volt}+\SI{0.8}{\volt}+ \SI{0.5}{\volt}=\SI{6.3}{\volt}
     \end{equation*}
-    Solving this equation with respect to $U_\mathrm{in}$ yields
+    The duty cycle for the boost mode is calculated using the inductor current balance equation.
     \begin{equation*}
-        U_\mathrm{in}=\frac{(1-D) \cdot U_\mathrm{out}}{D} = \frac{(1 - 0.5) \cdot (\SI{5}{\volt}+\SI{0.8}{\volt})}{0.5}= \SI{5.8}{\volt}
+        \Delta i_\mathrm{L,T_\mathrm{on}} \cdot T_\mathrm{on}=\Delta i_\mathrm{L,T_\mathrm{off}} \cdot T_\mathrm{off}
     \end{equation*}
-    If the transistor is on, no current is supplied to the output. Therefore, the correspondent average current flowing during $T_\mathrm{on}$ must be taken into account.
+    If the transistors conduct $\Delta i_\mathrm{L,T_\mathrm{on}}$ results in:
     \begin{equation*}
-        \overline{i}_\mathrm{L1,on} = \frac{I_\mathrm{2,min}}{D}
+        \Delta i_\mathrm{L,T_\mathrm{on}}=\frac{(U_\mathrm{1}-2u_\mathrm{ds,on}) \cdot T_\mathrm{on} }{L}
     \end{equation*}
-    Using this current $\Delta i_\mathrm{L1}$ is calculated by
+    If the transistor $T_\mathrm{2}$ is blocking $\Delta i_\mathrm{L,T_\mathrm{off}}$ is calculated by:
     \begin{equation*}
-        \Delta i_\mathrm{L1}= 2 \cdot \overline{i}_\mathrm{L1,on} = 2 \cdot \frac{I_\mathrm{2,min}}{D}
+        \Delta i_\mathrm{L,T_\mathrm{off}}=\frac{(U_\mathrm{2}+ u_\mathrm{fw} + u_\mathrm{ds,on}-U_\mathrm{1} ) \cdot T_\mathrm{off}}{L}
     \end{equation*}
-    The ripple current $\Delta i_\mathrm{L2}$ yields
+    By substituting the currents within the inductor current balance equation we obtain
     \begin{equation*}
-        \Delta i_\mathrm{L1}=\frac{U_\mathrm{in} \cdot T_\mathrm{on}}{L1}
-        =\frac{U_\mathrm{in} \cdot D}{L_\mathrm{1} \cdot f_\mathrm{s}}.
+        \frac{(U_\mathrm{1}-2u_\mathrm{ds,on}) \cdot T_\mathrm{on} }{L}=\frac{(U_\mathrm{2}+ u_\mathrm{fw} + u_\mathrm{ds,on}-U_\mathrm{1} ) \cdot T_\mathrm{off}}{L}
     \end{equation*}
-    This leads to
+    Replacing $T_\mathrm{on}$ and $T_\mathrm{off}$ by the switching period yields to
     \begin{equation*}
-        2 \cdot \frac{I_\mathrm{2,min}}{D}=\frac{U_\mathrm{in} \cdot D}{L_\mathrm{1} \cdot f_\mathrm{s}}.
+        \frac{(U_\mathrm{1}-2u_\mathrm{ds,on}) \cdot T_\mathrm{s} \cdot D}{L} =
+        \frac{(U_\mathrm{2}+ u_\mathrm{fw} + u_\mathrm{ds,on}-U_\mathrm{1}) \cdot (1-D) \cdot T_\mathrm{s}}{L}
     \end{equation*}
-    Solving this equation with respect to $L$ yields
+    After simplifying by canceling $T_\mathrm{s}$ and $L$ we obtain
     \begin{equation*}
-        L_\mathrm{1} = \frac{U_\mathrm{in} \cdot D^2} {2 \cdot \Delta i_\mathrm{L2} \cdot f_\mathrm{s}}
-        = \frac{\SI{5.8}{\volt} \cdot 0.5^2} {2 \cdot \SI{0.1}{\ampere} \cdot \SI{100}{\kilo\hertz}}
-        = \SI{145}{\micro\henry}.
+        (U_\mathrm{1}-2u_\mathrm{ds,on}) \cdot D =
+        (U_\mathrm{2}+ u_\mathrm{fw} + u_\mathrm{ds,on}-U_\mathrm{1}) \cdot (1-D)
     \end{equation*}
+    Solving this equation with respect to $D$ yields
+    \begin{equation*}
+        D = \frac{U_\mathrm{2}+ u_\mathrm{fw} + u_\mathrm{ds,on}-U_\mathrm{1}}{U_\mathrm{2}+ u_\mathrm{fw} - u_\mathrm{ds,on}}
+    \end{equation*}
+    For the operation point $U_\mathrm{1}=\SI{3}{\volt}$ we obtain
+    \begin{equation*}
+        D_\mathrm{U_\mathrm{1}=\SI{3}{\volt}}=\frac{\SI{5}{\volt}+ \SI{0.8}{\volt} + \SI{0.5}{\volt}-\SI{3}{\volt}}{\SI{5}{\volt} + \SI{0.8}{\volt} - \SI{0.5}{\volt}}
+        = 0.52
+    \end{equation*}
+    In buck mode the duty cycle $D_\mathrm{2}=0$ so that $T_\mathrm{2}$ always blocks. 
+    The duty cycle for the buck mode is calculated using the inductor current balance equation.
+    \begin{equation*}
+        \Delta i_\mathrm{L,T_\mathrm{on}} \cdot T_\mathrm{on}=\Delta i_\mathrm{L,T_\mathrm{off}} \cdot T_\mathrm{off}
+    \end{equation*}
+    If the transistor $T_\mathrm{1}$ conducts $\Delta i_\mathrm{L,T_\mathrm{on}}$ results in:
+    \begin{equation*}
+        \Delta i_\mathrm{L,T_\mathrm{on}}=\frac{(U_\mathrm{1}-u_\mathrm{ds,on} - u_\mathrm{fw} - U_\mathrm{2}) \cdot T_\mathrm{on} }{L}
+    \end{equation*}
+    If the transistor $T_\mathrm{1}$ is blocking $\Delta i_\mathrm{L,T_\mathrm{off}}$ is calculated by:
+    \begin{equation*}
+        \Delta i_\mathrm{L,T_\mathrm{off}}=\frac{(U_\mathrm{2} + 2 u_\mathrm{fw}) \cdot T_\mathrm{off}}{L}
+    \end{equation*}
+    By substituting the currents within the inductor current balance equation, we obtain
+    \begin{equation*}
+        \frac{(U_\mathrm{1}-u_\mathrm{ds,on} - u_\mathrm{fw} - U_\mathrm{2}) \cdot T_\mathrm{on} }{L}=\frac{(U_\mathrm{2} + 2 u_\mathrm{fw}) \cdot T_\mathrm{off}}{L}
+    \end{equation*}
+    Replacing $T_\mathrm{on}$ and $T_\mathrm{off}$ by the switching period yields to
+    \begin{equation*}
+        \frac{(U_\mathrm{1}-u_\mathrm{ds,on} - u_\mathrm{fw} - U_\mathrm{2}) \cdot T_\mathrm{s} \cdot D}{L} =
+        \frac{(U_\mathrm{2} + 2 u_\mathrm{fw}) \cdot (1-D) \cdot T_\mathrm{s}}{L}
+    \end{equation*}
+    After simplifying by canceling $T_\mathrm{s}$ and $L$, we obtain
+    \begin{equation*}
+        (U_\mathrm{1}-u_\mathrm{ds,on} - u_\mathrm{fw} - U_\mathrm{2}) \cdot D =
+        (U_\mathrm{2} + 2 u_\mathrm{fw}) \cdot (1-D)
+    \end{equation*}
+    Solving this equation with respect to $D$ yields
+    \begin{equation*}
+        D = \frac{U_\mathrm{2}+ 2 u_\mathrm{fw}}{U_\mathrm{1}-u_\mathrm{ds,on} + u_\mathrm{fw}}
+    \end{equation*}
+    For the operation points $U_\mathrm{1}=\SI{7.5}{\volt}$ and $U_\mathrm{1}=\SI{10}{\volt}$ we obtain
+    \begin{align*}
+        D_\mathrm{U_\mathrm{1} = \SI{7.5}{\volt}}&=\frac{\SI{5}{\volt} + 2 \cdot \SI{0.8}{\volt}}{\SI{7.5}{\volt} - \SI{0.5}{\volt} + \SI{0.8}{\volt}} = 0.85 \\
+        D_\mathrm{U_\mathrm{1} = \SI{10}{\volt}}&=\frac{\SI{5}{\volt} + 2 \cdot \SI{0.8}{\volt}} {\SI{10}{\volt} - \SI{0.5}{\volt} + \SI{0.8}{\volt}} = 0.64
+    \end{align*}
+
 \end{solutionblock}
-
-\subtask{How large must the filter capacitor be so that, in the worst case, the voltage fluctuation is $\pm \SI{5}{\percent}$ ?}{0}
-\subtaskGerman{Wie groß muss der Filterkondensator ausgelegt werden, damit im ungünstigsten Fall die Spannungsschwankung $\pm \SI{5}{\percent}$ ?}
-
-% Solution of subtask
-\begin{solutionblock}
-    The defined maximum voltage drop is calculated by
-    \begin{equation*}
-        \Delta u_\mathrm{2} = U_\mathrm{2} \cdot 2 \cdot \SI{5}{\percent} = \SI{5}{\volt} \cdot 2  \cdot \SI{5}{\percent}= \SI{0.5}{\volt}.
-    \end{equation*}
-    The voltage drop occurs during the time when no current is supplied to the output. This happens while the transistor is off.
-    The capacitor will be discharged with the constant current $I_\mathrm{2}$ while the transistor conducts.
-    The voltage drop is calculated by
-    \begin{equation*}
-        \Delta u_\mathrm{2} =  \frac{I_\mathrm{2} \cdot D}{ C \cdot f_\mathrm{s}}
-    \end{equation*}
-    The longer the transistor conducts and the higher the output current, the greater the voltage drop.
-    This corresponds to the maximum duty cycle and maximum output current.
-    Solving this equation with respect to $C$ yields
-    \begin{equation*}
-        C = \frac{I_\mathrm{2,max} \cdot D_\mathrm{2,max}}{f_\mathrm{s} \cdot  \Delta u_\mathrm{2,max}}
-        = \frac{\SI{1}{\ampere} \cdot 0.66} {\SI{100} {\kilo\hertz} \cdot  \SI{0.5}{\volt}} = \SI{13}{\micro\farad} .
-    \end{equation*}
-\end{solutionblock}
-
 
