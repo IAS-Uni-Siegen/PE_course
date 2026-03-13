@@ -59,7 +59,7 @@ with suitable firing angles and acceptable grid impact.
         \quad \alpha_{\mathrm{set}}\approx\SI{43.6}{\degree}.$$
 \end{solutionblock}
 \subtask{In open-loop operation with fixed firing angle $\alpha_0$, explain why the converter can enter DCM at low load, why this complicates maintaining a constant plating voltage, and how this affects the final quality.}{2}
-\subtaskGerman{Erläutern Sie beim gesteuerten Betrieb mit festem Zündwinkel $\alpha_0$, warum der Umrichter bei kleiner Last in den Lückbetrieb übergehen kann und warum dadurch eine konstante Galvanikspannung schwieriger einzuhalten ist.}
+\subtaskGerman{Erläutern Sie beim gesteuerten Betrieb mit festem Zündwinkel $\alpha_0$, warum der Umrichter bei kleiner Last in den Lückbetrieb übergehen kann, warum dadurch eine konstante Galvanikspannung schwieriger einzuhalten ist und wie sich dies auf die Endqualität auswirkt.}
 \begin{solutionblock}
     At low load, the demanded output current decreases and can reach zero before the next thyristor pair is triggered.
     This interrupts conduction and the converter changes from CCM to DCM.
@@ -68,27 +68,36 @@ with suitable firing angles and acceptable grid impact.
 \end{solutionblock}
 \subtask{Assuming low-load operation, the converter enters DCM with $\beta=\SI{140}{\degree}$.
     Calculate $\overline{u}_{2,\mathrm{DCM}}$ for $\alpha_\mathrm{set}$ from subtask 3.2, and compare it to the required setpoint $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
-    Briefly explain how to address this issue.}{0}
+    Briefly explain how to address this issue.}{2}
     \begin{hintblock}
 	If you did not find $\alpha_\mathrm{set}$ in subtask 3.2, use $\alpha_0$ instead.
 \end{hintblock}
 \subtaskGerman{Bei Teillast geht der Umrichter in den Lückbetrieb mit $\beta=\SI{140}{\degree}$ über.
-    Berechnen Sie $\overline{u}_{2,\mathrm{DCM}}$ für $\alpha_0=\SI{70}{\degree}$ und vergleichen Sie die Werte aus lückfreien und lückenden Betrieb mit dem Sollwert $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
-    Erläutern Sie kurz, warum dieses Betriebsverhalten zu Qualitätsabweichungen führen kann und warum eine geschlossene Spannungsregelung erforderlich ist.}
+    Berechnen Sie $\overline{u}_{2,\mathrm{DCM}}$ für $\alpha_\mathrm{set}$ aus Teilaufgabe 3.2 und vergleichen Sie den Wert mit dem Sollwert $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
+    Erläutern Sie kurz, wie dieses Problem adressiert werden kann.}
+
+\begin{germanhintblock}
+    Falls Sie $\alpha_\mathrm{set}$ in Teilaufgabe 3.2 nicht bestimmt haben, verwenden Sie stattdessen $\alpha_0$.
+\end{germanhintblock}
 \begin{solutionblock}
-    Average output voltage in DCM, at $\alpha_0$, $\beta$:
-    $$\overline{u}_{2,\mathrm{DCM}}=\hat{u}_s\frac{2}{\pi}\sin\!\left(\frac{\beta}{2}\right)\sin\!\left(\alpha_0+\frac{\beta}{2}\right)
-        =\SI{103.54}{\volt}\cdot\sin(70^\circ)\sin(140^\circ)=\SI{62.50}{\volt}.$$
-    Neither value reaches the required setpoint of $\SI{75}{\volt}$: in CCM the output is only $\SI{35.41}{\volt}$,
-    far below target, and although DCM raises it to $\SI{62.50}{\volt}$, this is still below the setpoint
-    and load-dependent.
+    Average output voltage in DCM, at $\alpha_{\mathrm{set}}$, $\beta$:
+    $$\overline{u}_{2,\mathrm{DCM}}=\hat{u}_s\frac{2}{\pi}\sin\!\left(\frac{\beta}{2}\right)\sin\!\left(\alpha_{\mathrm{set}}+\frac{\beta}{2}\right)
+        =\SI{103.54}{\volt}\cdot\sin(70^\circ)\sin(113.6^\circ)=\SI{89.06}{\volt}.$$
+    The DCM value exceeds the required setpoint of $\SI{75}{\volt}$ and is load-dependent.
     Either, choose higher inductance to avoid DCM at low load, or implement closed-loop control to adjust $\alpha$ and maintain the setpoint regardless of load variations.
     %  Therefore, closed-loop voltage control (adjusting $\alpha$ online) is required to maintain the setpoint under load variations.
 \end{solutionblock}
 \subtask{At this new operating point ($\alpha=\alpha_\mathrm{set}$, $I_2=\SI{30}{\ampere}$), calculate the fundamental current and power components
-    $I_1^{(1)}$, $P_1$, $Q_1^{(1)}$, and $S_1^{(1)}$. If you did not find $\alpha_\mathrm{set}$, use $\alpha_\mathrm{0}$ instead.}{0}
+    $I_1^{(1)}$, $P_1$, $Q_1^{(1)}$, and $S_1^{(1)}$.}{4}
+        \begin{hintblock}
+	If you did not find $\alpha_\mathrm{set}$ in subtask 3.2, use $\alpha_0$ instead.
+\end{hintblock}
 \subtaskGerman{Berechnen Sie für den neuen Betriebspunkt ($\alpha=\alpha_\mathrm{set}$, $I_2=\SI{30}{\ampere}$) den Grundanteil der Strom- und Leistungsgrößen
     $I_1^{(1)}$, $P_1$, $Q_1^{(1)}$ und $S_1^{(1)}$. Falls Sie zuvor $\alpha_\mathrm{set}$ nicht berechnen konnten, verwenden Sie stattdessen $\alpha_\mathrm{0}$.}
+
+\begin{germanhintblock}
+Falls Sie $\alpha_\mathrm{set}$ in Teilaufgabe 3.2 nicht bestimmt haben, verwenden Sie stattdessen $\alpha_0$.
+\end{germanhintblock}
 \begin{solutionblock}
     Fundamental complex power at $\alpha_{\mathrm{set}}$:
     $$I_1^{(1)}=\frac{\sqrt{2}}{\pi}I_2=\SI{13.50}{\ampere}.$$
@@ -97,7 +106,7 @@ with suitable firing angles and acceptable grid impact.
         Q_1^{(1)}=I_2\hat{u}_{s0}\sin\alpha_{\mathrm{set}}=\SI{2142}{\volt\ampere}.$$
 \end{solutionblock}
 \subtask{Including harmonics, calculate total apparent power $S_1$ and total reactive power $Q_1$,
-    and briefly assess whether the harmonic share is significant for grid compliance.}{0}
+    and briefly assess whether the harmonic share is significant for grid compliance.}{3}
 \subtaskGerman{Berechnen Sie unter Berücksichtigung der Oberschwingungen die gesamte Scheinleistung $S_1$ und die gesamte Blindleistung $Q_1$
     und bewerten Sie kurz, ob der Oberschwingungsanteil für die Netzkonformität relevant ist.}
 \begin{solutionblock}
