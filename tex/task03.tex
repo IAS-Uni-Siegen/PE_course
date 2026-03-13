@@ -58,7 +58,7 @@ with suitable firing angles and acceptable grid impact.
         \cos\alpha_{\mathrm{set}}=\frac{\SI{75}{\volt}}{\SI{103.54}{\volt}}=0.7244,
         \quad \alpha_{\mathrm{set}}\approx\SI{43.6}{\degree}.$$
 \end{solutionblock}
-\subtask{In open-loop operation with fixed firing angle $\alpha_0$, explain why the converter can enter DCM at low load, why this complicates maintaining a constant plating voltage, and how this affects the final quality.}{2}
+\subtask{In open-loop operation with fixed firing angle $\alpha$, explain why the converter can enter DCM at low load, why this complicates maintaining a constant plating voltage, and how this affects the final quality.}{2}
 \subtaskGerman{Erläutern Sie beim gesteuerten Betrieb mit festem Zündwinkel $\alpha_0$, warum der Umrichter bei kleiner Last in den Lückbetrieb übergehen kann, warum dadurch eine konstante Galvanikspannung schwieriger einzuhalten ist und wie sich dies auf die Endqualität auswirkt.}
 \begin{solutionblock}
     At low load, the demanded output current decreases and can reach zero before the next thyristor pair is triggered.
@@ -68,7 +68,7 @@ with suitable firing angles and acceptable grid impact.
 \end{solutionblock}
 \subtask{Assuming low-load operation, the converter enters DCM with $\beta=\SI{140}{\degree}$.
     Calculate $\overline{u}_{2,\mathrm{DCM}}$ for $\alpha_\mathrm{set}$ from subtask 3.2, and compare it to the required setpoint $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
-    Briefly explain how to address this issue.}{2}
+    Briefly explain how to avoid load-dependent output voltage.}{2}
     \begin{hintblock}
 	If you did not find $\alpha_\mathrm{set}$ in subtask 3.2, use $\alpha_0$ instead.
 \end{hintblock}
@@ -87,8 +87,8 @@ with suitable firing angles and acceptable grid impact.
     Either, choose higher inductance to avoid DCM at low load, or implement closed-loop control to adjust $\alpha$ and maintain the setpoint regardless of load variations.
     %  Therefore, closed-loop voltage control (adjusting $\alpha$ online) is required to maintain the setpoint under load variations.
 \end{solutionblock}
-\subtask{At this new operating point ($\alpha=\alpha_\mathrm{set}$, $I_2=\SI{30}{\ampere}$), calculate the fundamental current and power components
-    $I_1^{(1)}$, $P_1$, $Q_1^{(1)}$, and $S_1^{(1)}$.}{4}
+\subtask{At this new operating point ($\alpha=\alpha_\mathrm{set}$, $I_2=\SI{30}{\ampere}$), calculate the fundamental current $I_1^{(1)}$ and power components
+    $P_1$, $Q_1^{(1)}$, and $S_1^{(1)}$.}{4}
         \begin{hintblock}
 	If you did not find $\alpha_\mathrm{set}$ in subtask 3.2, use $\alpha_0$ instead.
 \end{hintblock}
@@ -99,9 +99,11 @@ with suitable firing angles and acceptable grid impact.
 Falls Sie $\alpha_\mathrm{set}$ in Teilaufgabe 3.2 nicht bestimmt haben, verwenden Sie stattdessen $\alpha_0$.
 \end{germanhintblock}
 \begin{solutionblock}
-    Fundamental complex power at $\alpha_{\mathrm{set}}$:
+    Fundamental complex power at $\alpha_{\mathrm{set}}$:\\
+    Given that $$\frac{N2}{N1} = 1.$$
+    Then
     $$I_1^{(1)}=\frac{\sqrt{2}}{\pi}I_2=\SI{13.50}{\ampere}.$$
-    $$S_1^{(1)}=I_2\hat{u}_{s0}=\SI{3106}{\volt\ampere}.$$
+    $$S_1^{(1)}=I_2\hat{u}_{s0}=\SI{3106}{\volt\ampere}, \qquad \text{where} \hat{u}_{s0} = \hat{u}_{s}\frac{2}{\pi}$$
     $$P_1=I_2\hat{u}_{s0}\cos\alpha_{\mathrm{set}}=\SI{2250}{\watt},\qquad
         Q_1^{(1)}=I_2\hat{u}_{s0}\sin\alpha_{\mathrm{set}}=\SI{2142}{\volt\ampere}.$$
 \end{solutionblock}
