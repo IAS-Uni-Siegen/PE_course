@@ -42,16 +42,16 @@ During testing, increased DC-link ripple is observed and the PWM strategy is que
 \subtaskGerman{Bestimmen Sie für den Betrieb mit näherungsweise Leistungsfaktor Eins den erforderlichen
     Effektivwert des Netzstroms sowie den zugehörigen Spitzenwert des Netzstroms.}
 \begin{solutionblock}
-    Grid current at unity power factor:
+    Grid current at unity power factor is:
     $$P=U_g I_g \Rightarrow I_g=\frac{\SI{3000}{\watt}}{\SI{230}{\volt}}=\SI{13.04}{\ampere}.$$
     $$\hat{i}_g=\sqrt{2}I_g=\SI{18.44}{\ampere}. $$
 \end{solutionblock}
 \subtask{Calculate the required converter input-voltage amplitude $\hat{u}_2$ and verify
-    whether the nominal DC-link voltage is feasible.}{2}
+    whether the nominal DC-link voltage is feasible.}{1}
 \subtaskGerman{Berechnen Sie aus der komplexen Zeigerbeziehung die erforderliche Amplitude der Umrichtereingangsspannung $\hat{u}_2$
     und prüfen Sie, ob die nominelle DC-Zwischenkreisspannung ausreicht.}
 \begin{solutionblock}
-    Required converter input-voltage amplitude:
+    Required converter input-voltage amplitude yields:
     $$\hat{u}_2=\sqrt{\hat{u}_g^2+(\omega L\hat{i}_g)^2}
         =\sqrt{(\SI{325.27}{\volt})^2+\bigl(\SI{314.16}{\per\second}\cdot\SI{2.5}{\milli\henry}\cdot\SI{18.44}{\ampere}\bigr)^2}
         =\SI{325.59}{\volt}. $$
@@ -60,12 +60,12 @@ During testing, increased DC-link ripple is observed and the PWM strategy is que
 \subtask{Determine the DC-link voltage oscillation amplitude $\hat{u}_C$.}{4}
 \subtaskGerman{Bestimmen Sie die Amplitude der DC-Zwischenkreis-Spannungsoszillation $\hat{u}_C$.}
 \begin{solutionblock}
-    DC-link ripple estimate:
+    Calculating the DC-link ripple requires the apparent power at the converter input:
     $$Q_2=\omega L I_g^2=\SI{314.16}{\per\second}\cdot\SI{2.5}{\milli\henry}\cdot(\SI{13.04}{\ampere})^2=\SI{133.7}{\volt\ampere}.$$
     $$S_2=\sqrt{P^2+Q_2^2}=\sqrt{(\SI{3000}{\watt})^2+(\SI{133.7}{\volt\ampere})^2}=\SI{3003}{\volt\ampere}. $$
     From lecture Eq. (6.23), the DC-link current ripple amplitude is approximately
     $$\hat{i}_C\approx\frac{S_2}{U_{dc}}=\frac{3003}{450}=\SI{6.67}{\ampere}. $$
-    Hence (Eq. (6.26))
+    Hence, the DC-link voltage ripple amplitude results in
     $$\hat{u}_C\approx\frac{\hat{i}_C}{2\omega C_{dc}}=\frac{\SI{6.67}{\ampere}}{2\cdot\SI{314.16}{\per\second}\cdot\SI{2.2}{\milli\farad}}=\SI{4.82}{\volt}.$$
 \end{solutionblock}
 \subtask{The engineering team suspects that the choice of PWM strategy contributes to the observed DC-link ripple.
@@ -73,7 +73,7 @@ During testing, increased DC-link ripple is observed and the PWM strategy is que
     Finally, explain which strategy produces a lower AC-side current ripple in $L$ and why this reduces stress on the DC-link capacitor $C_{\mathrm{dc}}$.}{4}
 \subtaskGerman{Das Engineering-Team vermutet, dass die Wahl der PWM-Strategie zur beobachteten DC-Zwischenkreiswelligkeit beiträgt.
     Verwenden Sie ein sinusförmiges Referenzsignal $s^*(t)=\hat{s}\sin(\omega t)$ und einen Dreiecksträger $c(t)\in[-1,1]$, und skizzieren Sie die Schaltzustände beider Strategien (Komplementär-PWM und Überlagerungs-PWM) über eine elektrische Grundperiode ($\omega t\in[0,2\pi]$) in den bereitgestellten Vorlagen.
-    Erläutern Sie abschließend, welche Strategie eine geringere netzstromseitige Stromwelligkeit in $L$ erzeugt und warum dies die Belastung des DC-Zwischenkreiskondensators $C_{\mathrm{dc}}$ verringert.}
+    Erläutern Sie abschließend, welche Strategie eine geringere netzstromseitige Stromwelligkeit in $L$ erzeugt und warum dies die Belastung des DC-Zwischen\-kreis\-kon\-den\-sa\-tors $C_{\mathrm{dc}}$ verringert.}
 \input{fig/Task04/Fig_subtask4.5_pwm_template_complementary.tex}
 \input{fig/Task04/Fig_subtask4.5_pwm_template_interleaved.tex}
 \begin{solutionblock}

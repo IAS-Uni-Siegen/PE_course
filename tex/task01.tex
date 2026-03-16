@@ -9,12 +9,12 @@
 
 A drive system is powered by DC-voltage.
 The speed, position, and current sensors in the drive system require stable lower voltage.
-To transform the voltage down as efficiently as possible, a buck converter is used.
+To transform the voltage down efficiently, a buck converter is used.
 
 \begin{germanblock}
     Ein Antriebssystem wird mit Gleichstrom versorgt.
-    Die Drehzahl-, Positions- und Stromsensoren im Antriebssystem benötigen niederige, stabile Versorgungsspannung.
-    Um die Spannung möglichst effizient herunterzutranformieren, wird ein Tiefsetzsteller verwendet.
+    Die Drehzahl-, Positions- und Stromsensoren im Antriebssystem benötigen eine niederigere, stabile Versorgungsspannung.
+    Um die Spannung effizient herunterzutranformieren, wird ein Tiefsetzsteller verwendet.
 \end{germanblock}
 
 % figure figStepDownConverterOutputFilter 
@@ -28,10 +28,10 @@ To transform the voltage down as efficiently as possible, a buck converter is us
         Input voltage:                                   & $U_{\mathrm{1}} = \SI{60}{\volt}$          & Collector-emitter voltage:          & $u_{\mathrm{on},\mathrm{CE}} = \SI{2}{\volt}$ \\
         Output voltage:                                  & $U_2 = \SI{5.1}{\volt}$                    &                                     &                                               \\
         Output power:                                    & $\SI{2.5}{\watt} \le p \le \SI{15}{\watt}$ & \multicolumn{2}{l}{\textbf{Diode:}}                                                 \\
-        Switching frequency:                             & $f_\mathrm{s} = \SI{100}{\kilo\hertz}$     & Forward voltage:                    & $u_\mathrm{fw} = \SI{0.8}{\volt}$           \\
+        Switching frequency:                             & $f_\mathrm{s} = \SI{100}{\kilo\hertz}$     & Forward voltage:                    & $u_\mathrm{fw} = \SI{0.8}{\volt}$             \\
         \bottomrule
     \end{tabular}
-    \caption{Parameters of the circuit.}  % Beschriftung der Tabelle
+    \caption{Parameters of the step-down converter.}  % Beschriftung der Tabelle
     \label{table:ex01_Parameters of the circuit}
 \end{table}
 
@@ -47,7 +47,7 @@ To transform the voltage down as efficiently as possible, a buck converter is us
     \end{equation*}
 \end{solutionblock}
 
-\subtask{What duty cycle is required when the voltage drops across the transistor and the diode are taken into account?}{2}
+\subtask{What duty cycle is required when the voltage drops across the transistor and the diode are taken into account?}{3}
 
 \subtaskGerman{Welches Tastverhältnis ist erforderlich, wenn die Spannungsabfälle über dem Transistor und der Diode berücksichtigt werden?}
 
@@ -56,34 +56,34 @@ To transform the voltage down as efficiently as possible, a buck converter is us
 \begin{solutionblock}
     In steady state, the inductor current balance is to apply:
     \begin{equation*}
-        \Delta i_\mathrm{L,T_\mathrm{on}} \cdot T_\mathrm{on}=\Delta i_\mathrm{L,T_\mathrm{off}} \cdot T_\mathrm{off}
+        \Delta i_\mathrm{L,T_\mathrm{on}} \cdot T_\mathrm{on}=\Delta i_\mathrm{L,T_\mathrm{off}} \cdot T_\mathrm{off}.
     \end{equation*}
     If the transistor conducts $\Delta i_\mathrm{L,T_\mathrm{on}}$ results in:
 
     \begin{equation*}
-        \Delta i_\mathrm{L,T_\mathrm{on}}=\frac{(U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}) \cdot T_\mathrm{on} }{L}
+        \Delta i_\mathrm{L,T_\mathrm{on}}=\frac{(U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}) \cdot T_\mathrm{on} }{L}.
     \end{equation*}
 
     If the transistor is blocking $\Delta i_\mathrm{L,T_\mathrm{off}}$ is calculated by:
     \begin{equation*}
-        \Delta i_\mathrm{L,T_\mathrm{off}}=\frac{(U_\mathrm{2}+u_\mathrm{fw}) \cdot T_\mathrm{off}}{L}
+        \Delta i_\mathrm{L,T_\mathrm{off}}=\frac{(U_\mathrm{2}+u_\mathrm{fw}) \cdot T_\mathrm{off}}{L}.
     \end{equation*}
 
     By substituting the currents within the inductor current balance equation, we obtain
     \begin{equation*}
-        \frac{(U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}) \cdot T_\mathrm{on}}{L}=\frac{(U_\mathrm{2}+u_\mathrm{fw}) \cdot T_\mathrm{off}}{L}
+        \frac{(U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}) \cdot T_\mathrm{on}}{L}=\frac{(U_\mathrm{2}+u_\mathrm{fw}) \cdot T_\mathrm{off}}{L}.
     \end{equation*}
 
     Replacing $T_\mathrm{on}$ and $T_\mathrm{off}$ by the switching period yields to
     \begin{equation*}
         \frac{(U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}) \cdot T_\mathrm{s} \cdot D}{L} =
-        \frac{(U_\mathrm{2}+u_\mathrm{fw}) \cdot (1-D) \cdot T_\mathrm{s}}{L}
+        \frac{(U_\mathrm{2}+u_\mathrm{fw}) \cdot (1-D) \cdot T_\mathrm{s}}{L}.
     \end{equation*}
 
     After simplifying by canceling $T_\mathrm{s}$ and $L$, we obtain
     \begin{equation*}
         (U_\mathrm{1}-U_\mathrm{T}-U_\mathrm{2}) \cdot D =
-        (U_\mathrm{2}+u_\mathrm{fw}) \cdot (1-D)
+        (U_\mathrm{2}+u_\mathrm{fw}) \cdot (1-D).
     \end{equation*}
     Solving this equation with respect to $D$ yields
     \begin{equation*}
@@ -94,9 +94,9 @@ To transform the voltage down as efficiently as possible, a buck converter is us
 \end{solutionblock}
 
 
-\subtask{The sensors have different power consumption depending on the operating point, i.e., $P_2 \in [\SI{2.5}{\watt}, \SI{15}{\watt}]$ is given.  
-         Which load operating point is the relevant one to design the inductance value $L$ such that discontinuous conduction mode (DCM) is always avoided? 
-         Calculate the minimal required inductances $L$ for this case.}{2}
+\subtask{The sensors have different power consumption depending on the operating point, i.e., $P_2 \in [\SI{2.5}{\watt}, \SI{15}{\watt}]$ is given.
+    Which load operating point is the relevant one to design the inductance value $L$ such that discontinuous conduction mode (DCM) is always avoided?
+    Calculate the minimal required inductances $L$ for this case.}{2}
 
 \subtaskGerman{Die Sensoren haben je nach Betriebspunkt einen unterschiedlichen Leistungsbedarf, d.h. es gilt $P_2 \in [\SI{2.5}{\watt}, \SI{15}{\watt}]$. Welcher Lastbetriebspunkt ist für die Auslegung der Induktivität $L$ relevant, um den Betrieb im Lückbetrieb zu vermeiden? Berechnen Sie die minimal erforderliche Induktivität $L$ für diesen Fall.}
 
@@ -126,14 +126,14 @@ To transform the voltage down as efficiently as possible, a buck converter is us
 \end{solutionblock}
 
 
-\subtask{In the event of a malfunction, the speed and position sensors fail. As a result, the current $I_\mathrm{2,fault}$ drops to a value of $\SI{0.25}{\ampere}$. Which conduction mode will the converter enter, and what are the resulting consequences?     
-Calculate the output voltage for this fault condition? The voltage losses off the diode and transistor shall not be considered}{2}
-\subtaskGerman{ In einem Störfall kommt es zum Ausfall der Drehzahl- und Positionssensoren. Dadurch fällt der Strom $I_\mathrm{2}$ auf einen Wert von $\SI{0.25}{\ampere}$.  
-Wie hoch ist die Ausgangsspannung für diesen Störfall? Die Spannungsabfälle über den Transistor und die Diode sollen nicht berücksichtigt werden.}
+\subtask{In the event of a malfunction, the speed and position sensors fail. As a result, the current $I_\mathrm{2,fault}$ drops to a value of $\SI{0.25}{\ampere}$. Which conduction mode will the converter enter, and what are the resulting consequences?
+    Calculate the output voltage for this fault condition. The voltage losses off the diode and transistor shall not be considered}{2}
+\subtaskGerman{ In einem Störfall kommt es zum Ausfall der Drehzahl- und Positionssensoren. Dadurch fällt der Strom $I_\mathrm{2}$ auf einen Wert von $\SI{0.25}{\ampere}$.
+    Wie hoch ist die Ausgangsspannung für diesen Störfall? Die Spannungsabfälle über den Transistor und die Diode sollen nicht berücksichtigt werden.}
 % Solution of subtask
 \begin{solutionblock}
-    The output current is less than the minimal current in BCM-mode. This leads to DCM-mode, which causes an overvoltage.
-    The output voltage is to calculate by the formula of DCM-mode:
+    The output current is less than the minimal current in BCM. This leads to DCM, which causes an overvoltage.
+    The output voltage is to be calculated by the formula of DCM:
     %\begin{equation*}
     \begin{align*}
         U_\mathrm{2} & = \frac{D^\mathrm{2} \cdot T_\mathrm{s} \cdot U_\mathrm{1}^\mathrm{2}} {D^\mathrm{2} \cdot T_\mathrm{s} \cdot U_\mathrm{1}^\mathrm{2}
@@ -142,7 +142,7 @@ Wie hoch ist die Ausgangsspannung für diesen Störfall? Die Spannungsabfälle �
         + 2 \cdot \frac{ L \cdot  \overline{i}_\mathrm{2,fault}}{f_\mathrm{s}}}                                                                                \\
                      & = \frac{0.1^\mathrm{2} \cdot (\SI{60}{\volt}-\SI{2}{\volt})^\mathrm{2}} {0.1^\mathrm{2} \cdot (\SI{60}{\volt}-\SI{2}{\volt})^\mathrm{2}
         + 2 \cdot \frac{\SI{54}{\micro\henry} \cdot  \SI{0.25}{\ampere}}{\SI{100}{\kilo\hertz}}}                                                               \\
-                     & = \SI{10.9}{\volt}
+                     & = \SI{10.9}{\volt}.
     \end{align*}
     %\end{equation*}
 \end{solutionblock}
