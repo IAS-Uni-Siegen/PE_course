@@ -23,54 +23,54 @@ Induktionsfilter $L$ wird zur Glättung des Ausgangsstroms $I_\mathrm{2}$ verwen
 \subtaskGerman{Zeichnen Sie der Ausgangsspannung $u_2(t)$ für den Steuerwinkel $\alpha=\frac{\pi}{3}$ in \autoref{fig:Task03_M3C_with_RLE}.}
 \input{fig/Task03/Three-phase_secondary_voltage}
 \begin{solutionblock}
-\input{fig/Task03/sFig_subtask3.1_output_voltage}
+	\input{fig/Task03/sFig_subtask3.1_output_voltage}
 \end{solutionblock}
 \subtask{For the same $\alpha$, calculate the average output voltage $\bar{u}_\mathrm{2}$.}{2}
 \subtaskGerman{ Berechnen Sie für dasselbe $\alpha$ die mittlere Ausgangsspannung $\bar{u}_\mathrm{2}$}
 \begin{solutionblock}
-Recalling the average output voltage equation in CCM:
-$$\bar{u}_\mathrm{2}(\alpha) = \frac{3\sqrt{3}}{2\pi}\hat{u}_\mathrm{1}\cos(\alpha),$$            
-where the peak value $\hat{u}_\mathrm{1}$ can be calculated as:
-$$ \hat{u}_\mathrm{1} = \sqrt{2}U_\mathrm{1}= \sqrt{2}\cdot\SI{230}{\volt} \approx \SI{325.27}{\volt}.$$
-Hence, the average output voltage is:
-$$ \bar{u}_\mathrm{2}(\alpha=\frac{\pi}{3}) = \frac{3\sqrt{3}}{2\pi}\cdot \SI{325.27}{\volt}\cdot\cos(\frac{\pi}{3}) \approx \SI{134.5}{\volt}.$$
+	Recalling the average output voltage equation in CCM:
+	$$\bar{u}_\mathrm{2}(\alpha) = \frac{3\sqrt{3}}{2\pi}\hat{u}_\mathrm{1}\cos(\alpha),$$
+	where the peak value $\hat{u}_\mathrm{1}$ can be calculated as:
+	$$ \hat{u}_\mathrm{1} = \sqrt{2}U_\mathrm{1}= \sqrt{2}\cdot\SI{230}{\volt} \approx \SI{325.27}{\volt}.$$
+	Hence, the average output voltage is:
+	$$ \bar{u}_\mathrm{2}(\alpha=\frac{\pi}{3}) = \frac{3\sqrt{3}}{2\pi}\cdot \SI{325.27}{\volt}\cdot\cos(\frac{\pi}{3}) \approx \SI{134.5}{\volt}.$$
 \end{solutionblock}
 \subtask{Calculate the corresponding average load current $I_\mathrm{2}$.}{1}
 \subtaskGerman{Berechnen Sie den entsprechenden mittleren Laststrom $I_2$.}
 \begin{solutionblock}
-The average output voltage can be written as:
-$$ \bar{u}_\mathrm{2}(\alpha) = I_\mathrm{2}R + U_\mathrm{batt}.$$
-Accordingly, the average output current can be calculated as:
-$$  I_\mathrm{2} =  \frac{\bar{u}_\mathrm{2}(\alpha) - U_\mathrm{batt}}{R}=  \frac{\SI{134.5}{\volt} - \SI{125}{\volt}}{\SI{0.1}{\Omega}} = \SI{95}{\ampere}.$$
+	The average output voltage can be written as:
+	$$ \bar{u}_\mathrm{2}(\alpha) = I_\mathrm{2}R + U_\mathrm{batt}.$$
+	Accordingly, the average output current can be calculated as:
+	$$  I_\mathrm{2} =  \frac{\bar{u}_\mathrm{2}(\alpha) - U_\mathrm{batt}}{R}=  \frac{\SI{134.5}{\volt} - \SI{125}{\volt}}{\SI{0.1}{\Omega}} = \SI{95}{\ampere}.$$
 \end{solutionblock}
 \subtask{Calculate the power loss in the resistor and the power delivered to the battery $U_\mathrm{batt}$.}{2}
 \subtaskGerman{Berechnen Sie die an die Batterie $U_\mathrm{batt}$ abgegebene Leistung und die Verluste im Widerstand.}
 \begin{solutionblock}
-The power dissipated by the resistor can be calculated by:
-            $$ P_\mathrm{resistor} = I^2_\mathrm{2} \cdot R = (\SI{95}{\ampere})^2 \cdot \SI{0.1}{\Omega} = \SI{902.5}{\watt},$$
-            or using the voltage across the resistor by:
-           $$ P_\mathrm{resistor} = (\bar{u}_\mathrm{2}(\alpha=\frac{\pi}{3}) - U_\mathrm{batt})\cdot I_\mathrm{2} = (\SI{134.5}{\volt} - \SI{125}{\volt}) \cdot \SI{95}{\ampere} = \SI{902.5}{\watt},$$
-while the power delivered to $U_\mathrm{batt}$ is:
-           $$ P_\mathrm{batt} =U_\mathrm{batt}\cdot I_\mathrm{2} = \SI{125}{\volt} \cdot \SI{95}{\ampere} = \SI{11.875}{\kilo\watt}.$$
+	The power dissipated by the resistor can be calculated by:
+	$$ P_\mathrm{resistor} = I^2_\mathrm{2} \cdot R = (\SI{95}{\ampere})^2 \cdot \SI{0.1}{\Omega} = \SI{902.5}{\watt},$$
+	or using the voltage across the resistor by:
+	$$ P_\mathrm{resistor} = (\bar{u}_\mathrm{2}(\alpha=\frac{\pi}{3}) - U_\mathrm{batt})\cdot I_\mathrm{2} = (\SI{134.5}{\volt} - \SI{125}{\volt}) \cdot \SI{95}{\ampere} = \SI{902.5}{\watt},$$
+	while the power delivered to $U_\mathrm{batt}$ is:
+	$$ P_\mathrm{batt} =U_\mathrm{batt}\cdot I_\mathrm{2} = \SI{125}{\volt} \cdot \SI{95}{\ampere} = \SI{11.875}{\kilo\watt}.$$
 \end{solutionblock}
 \subtask{Consider the case where the inductance $L$ is finite, such that the converter operates in DCM. For an output voltage $u_\mathrm{2}$ where $\alpha = \frac{\pi}{3}$ and $\beta = \frac{\pi}{2}$, as shown in \autoref{fig:M3C_dcm}, calculate the average output voltage $\bar{u}_\mathrm{2}$.}{3}
 \begin{hintblock}
-In this question, the DCM is directly influenced by the presence of the battery voltage, which is different from having a capacitive filter at the output.
+	In this question, the DCM is directly influenced by the presence of the battery voltage, which is different from having a capacitive filter at the output.
 \end{hintblock}
 \subtaskGerman{Betrachten Sie den Fall, dass die Induktivität $L$ nun nur noch endlich groß ist, so dass der Wandler im Lückebetrieb arbeitet,
-wie in \autoref{fig:M3C_dcm} dargestellt. Für $\alpha = \frac{\pi}{3}$ und $\beta = \frac{\pi}{2}$ ist die mittlere Ausgangsspannung zu berechnen.}
+	wie in \autoref{fig:M3C_dcm} dargestellt. Für $\alpha = \frac{\pi}{3}$ und $\beta = \frac{\pi}{2}$ ist die mittlere Ausgangsspannung zu berechnen.}
 \begin{germanhintblock}
-In dieser Frage wird der DCM direkt von der Batteriespannung beeinflusst, was sich von einem kapazitiven Filter am Ausgang unterscheidet.
+	In dieser Frage wird der DCM direkt von der Batteriespannung beeinflusst, was sich von einem kapazitiven Filter am Ausgang unterscheidet.
 \end{germanhintblock}
 
 \input{fig/Task03/DCM_scenario}
 \begin{solutionblock}
-In DCM mode, the inductor's current falls below the thyristors holding current, resulting in all thyristors stop conducting during certain intervals within the cycle. Since the output voltage during the non-conducting intervals is $u_\mathrm{2}(t) = U_\mathrm{batt}$, the average output voltage can be calculated as:
+	In DCM mode, the inductor's current falls below the thyristors holding current, resulting in all thyristors stop conducting during certain intervals within the cycle. Since the output voltage during the non-conducting intervals is $u_\mathrm{2}(t) = U_\mathrm{batt}$, the average output voltage can be calculated as:
 
-            $$\bar{u}_\mathrm{2}(\beta) = \frac{3}{2\pi} \left[\int_{0}^{\beta} \hat{u}_\mathrm{1}\cos(\omega t) \mathrm{d}\omega t +  \int_{\beta}^{\frac{2\pi}{3}} U_\mathrm{batt} \mathrm{d}\omega t \right].$$
-            After integration, we get
-           $$  \bar{u}_\mathrm{2}(\beta) = \frac{3}{2\pi} \left[ \hat{u}_\mathrm{1}(\sin(\beta)-\sin(0))  + U_\mathrm{batt} (\frac{2\pi}{3} - \beta)\right].$$
-            So, for the given $\beta =\frac{\pi}{2}$, the average output voltage is
-           $$  \bar{u}_\mathrm{2}(\beta) = \frac{3}{2\pi} \left[ \SI{325.27}{\volt}\cdot(\sin(\frac{\pi}{2})-\sin(0))  + \SI{125}{\volt} \cdot (\frac{2\pi}{3} - \frac{\pi}{2})\right] \approx \SI{186.55}{\volt}.$$
+	$$\bar{u}_\mathrm{2}(\beta) = \frac{3}{2\pi} \left[\int_{0}^{\beta} \hat{u}_\mathrm{1}\cos(\omega t) \mathrm{d}\omega t +  \int_{\beta}^{\frac{2\pi}{3}} U_\mathrm{batt} \mathrm{d}\omega t \right].$$
+	After integration, we get
+	$$  \bar{u}_\mathrm{2}(\beta) = \frac{3}{2\pi} \left[ \hat{u}_\mathrm{1}(\sin(\beta)-\sin(0))  + U_\mathrm{batt} (\frac{2\pi}{3} - \beta)\right].$$
+	So, for the given $\beta =\frac{\pi}{2}$, the average output voltage is
+	$$  \bar{u}_\mathrm{2}(\beta) = \frac{3}{2\pi} \left[ \SI{325.27}{\volt}\cdot(\sin(\frac{\pi}{2})-\sin(0))  + \SI{125}{\volt} \cdot (\frac{2\pi}{3} - \frac{\pi}{2})\right] \approx \SI{186.55}{\volt}.$$
 
 \end{solutionblock}

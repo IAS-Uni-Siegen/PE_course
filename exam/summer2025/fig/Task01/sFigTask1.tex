@@ -2,120 +2,119 @@
 % SolutionFigure
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{solutionfigure}[htb]  
-    \begin{center}
-        \definecolor{orange}{rgb}{1.0,0.5,0}
-        \begin{tikzpicture}
-            % groupplot begin
-            \begin{groupplot}[group style={
-                group size=1 by 2,
-                xlabels at=edge bottom,
-                y descriptions at=edge left,
-                },
-                domain=0:15,
-                % x/y range adjustment
-                xmin=0, xmax=20.5,
-                samples=500,
-                axis y line=center,
-                axis x line=middle,
-                extra y ticks=0,
-                % Label text
-                xlabel={$t / \SI{}{\micro\second}$},,
-                % Label adjustment
-                x label style={at={(axis description cs:1,0.5)},anchor=west},
-                y label style={at={(axis description cs:-.05,.97)},anchor=south},
-                width=0.95\textwidth,
-                height=0.3\textwidth,
-                % x-Ticks
-                xtick={0,2.5,5,7.5,10,12.5,15,17.5,20},
-                xticklabels={0,2.5,5,7.5,10,12.5,15,17.5,20},
-                xticklabel style = {yshift=0.1cm, xshift=0.15cm,anchor=north},
-                % Grid layout
-                grid=both,
-                grid style={line width=.1pt, draw=gray!10},
-                major grid style={line width=.2pt,draw=gray!50},
-                ]
-                % Ul
-                \nextgroupplot[
-                    ymin=-28, ymax=28,
-                    samples=500,
-                    extra y ticks=0,
-                    % x-Label text
-                    xlabel={$t / \SI{}{\micro\second}$},,                    
-                    % y-Label
-                    y label style={at={(axis description cs:-.05,1)},anchor=south},
-                    height=0.25\textwidth,
-                    ylabel={\color{black}$u_\mathrm{L}(t)/\mathrm{V}$},
-                    % y-Ticks
-                    ytick={-25,-20,-15,-10,-5,0,5,10,15,20,25},
-                    yticklabels={,-20,,10,,0,,10,,20},
-                    yticklabel style = {anchor=east},
-                ]
+\begin{solutionfigure}[htb]
+	\begin{center}
+		\definecolor{orange}{rgb}{1.0,0.5,0}
+		\begin{tikzpicture}
+			% groupplot begin
+			\begin{groupplot}[group style={
+							group size=1 by 2,
+							xlabels at=edge bottom,
+							y descriptions at=edge left,
+						},
+					domain=0:15,
+					% x/y range adjustment
+					xmin=0, xmax=20.5,
+					samples=500,
+					axis y line=center,
+					axis x line=middle,
+					extra y ticks=0,
+					% Label text
+					xlabel={$t / \SI{}{\micro\second}$},,
+					% Label adjustment
+					x label style={at={(axis description cs:1,0.5)},anchor=west},
+					y label style={at={(axis description cs:-.05,.97)},anchor=south},
+					width=0.95\textwidth,
+					height=0.3\textwidth,
+					% x-Ticks
+					xtick={0,2.5,5,7.5,10,12.5,15,17.5,20},
+					xticklabels={0,2.5,5,7.5,10,12.5,15,17.5,20},
+					xticklabel style = {yshift=0.1cm, xshift=0.15cm,anchor=north},
+					% Grid layout
+					grid=both,
+					grid style={line width=.1pt, draw=gray!10},
+					major grid style={line width=.2pt,draw=gray!50},
+				]
+				% Ul
+				\nextgroupplot[
+					ymin=-28, ymax=28,
+					samples=500,
+					extra y ticks=0,
+					% x-Label text
+					xlabel={$t / \SI{}{\micro\second}$},,
+					% y-Label
+					y label style={at={(axis description cs:-.05,1)},anchor=south},
+					height=0.25\textwidth,
+					ylabel={\color{black}$u_\mathrm{L}(t)/\mathrm{V}$},
+					% y-Ticks
+					ytick={-25,-20,-15,-10,-5,0,5,10,15,20,25},
+					yticklabels={,-20,,10,,0,,10,,20},
+					yticklabel style = {anchor=east},
+				]
 
-
-                \addplot[color=blue,mark=none,solid,line width=1pt] coordinates{
-                    (0, 22.8)
-                    (5.3, 22.8)
-                    (5.3, -24.81)
-                    (10, -24.81)
-                    (10, 22.8)
-                    (15.3, 22.8)
-                    (15.3, -24.81)
-                    (20, -24.81)
-                    (20, 22.8)
-                    (20.2, 22.8)
-                };
-                % il
-                \nextgroupplot[
-                    ymin=0, ymax=47,
-                    % ymin=0, ymax=94,
-                    samples=500,
-                    % x-Label text
-                    xlabel={$t / \SI{}{\micro\second}$},,
-                    x label style={at={(axis description cs:1,0)},anchor=west},                    
-                    % y-Label
-                    y label style={at={(axis description cs:-.05,1)},anchor=south},
-                    height=0.25\textwidth,
-                    ylabel={\color{black}$i(t)/\mathrm{A}$},
-                    ytick={0,5,10,15,20,25,30,35,40,45},
-                    yticklabels={0,,10,,20,,30,,40,},
-                    yticklabel style = {anchor=east},                        
-                    %ytick={0,10,20,30,40,50,60,70,80,90},
-                    %yticklabels={0,,20,,40,,60,,80,},
-                    %yticklabel style = {anchor=east},                        
-                    xticklabel style = {xshift=0cm,anchor=north},
-                    ];                
-                    % Current il(wt)
-                    \addplot[red, domain= 0:5.3,solid,line width=1pt] {37.6+x*8.35/5.3};        
-                    \addplot[red, domain= 5.3:10,solid,line width=1pt] {46-(x-5.3)*8.35/4.7};
-                    \addplot[red, domain= 10:15.3,solid,line width=1pt] {37.6+(x-10)*8.35/5.3};
-                    \addplot[red, domain= 15.3:20,solid,line width=1pt] {46-(x-15.3)*8.35/4.7};
-                    % Current Id(wt)
-                    \addplot[black, domain= 5.3:10,dashed,line width=1.3pt] {46-(x-5.3)*8.35/4.7};
-                    \addplot[black, domain= 15.3:20,dashed,line width=1.3pt] {46-(x-15.3)*8.35/4.7};
-                    \addplot[color=black,mark=none,dashed,line width=1pt] coordinates{
-                        (0,37.6)
-                        (0, 0)
-                        (5.3, 0)
-                        (5.3, 46)
-                    };
-                    \addplot[color=black,mark=none,dashed,line width=1pt] coordinates{
-                        (10, 37.6)
-                        (10, 0)
-                        (15.3, 0)
-                        (15.3, 46)
-                    };
-                    \addplot[color=black,mark=none,dashed,line width=1pt] coordinates{
-                        (20, 37.6)
-                        (20, 0)
-                        (20.3, 0)
-                    };
-                     \node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:2.5,15) {$i_\mathrm{L}(t)$};
-                     \draw[thin, red] (1.8,28) -- (1.5,35);
-                     \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:6,20) {$i_\mathrm{D}(t)$};
-            \end{groupplot}
-        \end{tikzpicture}
-    \end{center}
-    \caption{Relevant voltage and current signals.}
-    \label{fig:transistor_circuit}
-\end{solutionfigure}       
+				\addplot[color=blue,mark=none,solid,line width=1pt] coordinates{
+						(0, 22.8)
+						(5.3, 22.8)
+						(5.3, -24.81)
+						(10, -24.81)
+						(10, 22.8)
+						(15.3, 22.8)
+						(15.3, -24.81)
+						(20, -24.81)
+						(20, 22.8)
+						(20.2, 22.8)
+					};
+				% il
+				\nextgroupplot[
+					ymin=0, ymax=47,
+					% ymin=0, ymax=94,
+					samples=500,
+					% x-Label text
+					xlabel={$t / \SI{}{\micro\second}$},,
+					x label style={at={(axis description cs:1,0)},anchor=west},
+					% y-Label
+					y label style={at={(axis description cs:-.05,1)},anchor=south},
+					height=0.25\textwidth,
+					ylabel={\color{black}$i(t)/\mathrm{A}$},
+					ytick={0,5,10,15,20,25,30,35,40,45},
+					yticklabels={0,,10,,20,,30,,40,},
+					yticklabel style = {anchor=east},
+					%ytick={0,10,20,30,40,50,60,70,80,90},
+					%yticklabels={0,,20,,40,,60,,80,},
+					%yticklabel style = {anchor=east},                        
+					xticklabel style = {xshift=0cm,anchor=north},
+				];
+				% Current il(wt)
+				\addplot[red, domain= 0:5.3,solid,line width=1pt] {37.6+x*8.35/5.3};
+				\addplot[red, domain= 5.3:10,solid,line width=1pt] {46-(x-5.3)*8.35/4.7};
+				\addplot[red, domain= 10:15.3,solid,line width=1pt] {37.6+(x-10)*8.35/5.3};
+				\addplot[red, domain= 15.3:20,solid,line width=1pt] {46-(x-15.3)*8.35/4.7};
+				% Current Id(wt)
+				\addplot[black, domain= 5.3:10,dashed,line width=1.3pt] {46-(x-5.3)*8.35/4.7};
+				\addplot[black, domain= 15.3:20,dashed,line width=1.3pt] {46-(x-15.3)*8.35/4.7};
+				\addplot[color=black,mark=none,dashed,line width=1pt] coordinates{
+						(0,37.6)
+						(0, 0)
+						(5.3, 0)
+						(5.3, 46)
+					};
+				\addplot[color=black,mark=none,dashed,line width=1pt] coordinates{
+						(10, 37.6)
+						(10, 0)
+						(15.3, 0)
+						(15.3, 46)
+					};
+				\addplot[color=black,mark=none,dashed,line width=1pt] coordinates{
+						(20, 37.6)
+						(20, 0)
+						(20.3, 0)
+					};
+				\node[red, fill=white, inner sep = 1pt, anchor = south] at (axis cs:2.5,15) {$i_\mathrm{L}(t)$};
+				\draw[thin, red] (1.8,28) -- (1.5,35);
+				\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:6,20) {$i_\mathrm{D}(t)$};
+			\end{groupplot}
+		\end{tikzpicture}
+	\end{center}
+	\caption{Relevant voltage and current signals.}
+	\label{fig:transistor_circuit}
+\end{solutionfigure}

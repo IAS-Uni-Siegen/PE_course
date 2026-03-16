@@ -1,68 +1,67 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- % Boost converter with single-phase diode bridge Schematic
+% Boost converter with single-phase diode bridge Schematic
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    \begin{figure}[htb]
-        \begin{center}
-            \begin{circuitikz}[european currents,european resistors,american inductors]
-         % Input rectifier
-         \draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
-         (0,0) to [short, i>^=$i_1(t)$] ++(0.75,0) to [short, -*] ++(0.75,0)
-         to [diode, l=$D_1$]  ++(0,1.5)
-         to [short, -*] ++(1.5,0) coordinate (C)
-         to [diode, l=$D_3$, invert]  ++(0,-1.5)
-         to [short] ++(0, -2) coordinate (B)
-         to [diode, l=$D_2$, invert, -*]  ++(0, -1.5) coordinate (D)
-         to [short] ++(-1.5,0)
-         to [diode, l=$D_4$]  ++(0, 1.5)
-         to [short] ++(0, 2)
-         (B) to [short, *-]++(-0.5,0) to [crossing, mirror] ++(-2,0)
-         to [short] (A);
+\begin{figure}[htb]
+	\begin{center}
+		\begin{circuitikz}[european currents,european resistors,american inductors]
+			% Input rectifier
+			\draw (0,0) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-2) coordinate (A)
+			(0,0) to [short, i>^=$i_1(t)$] ++(0.75,0) to [short, -*] ++(0.75,0)
+			to [diode, l=$D_1$]  ++(0,1.5)
+			to [short, -*] ++(1.5,0) coordinate (C)
+			to [diode, l=$D_3$, invert]  ++(0,-1.5)
+			to [short] ++(0, -2) coordinate (B)
+			to [diode, l=$D_2$, invert, -*]  ++(0, -1.5) coordinate (D)
+			to [short] ++(-1.5,0)
+			to [diode, l=$D_4$]  ++(0, 1.5)
+			to [short] ++(0, 2)
+			(B) to [short, *-]++(-0.5,0) to [crossing, mirror] ++(-2,0)
+			to [short] (A);
 
-         % DC/DC converter
-         \draw node[fourport, circuitikz/quadpoles/fourport/width=2.25, circuitikz/quadpoles/fourport/height=2.8] (DCDC) at (7.75,-1) {DC/DC}; 
-         \draw (C) to [short] ++(1.5,0) coordinate (G)
-         to [short] (DCDC.port4 -| G) 
-         to [short,-*] ++(0.5,0) coordinate (voltin)
-         to [short, i=$i'(t)$] (DCDC.port4)
-         (D) to [short] ++(1.5,0) coordinate (H)
-         to [short] (DCDC.port1 -| H) -- ++(0.5,0)
-         to [currtap, name=ct1] (DCDC.port1)
-         (DCDC.port4 -| G) to [open,v = $u'(t)$, voltage = straight] (DCDC.port1 -| G);
+			% DC/DC converter
+			\draw node[fourport, circuitikz/quadpoles/fourport/width=2.25, circuitikz/quadpoles/fourport/height=2.8] (DCDC) at (7.75,-1) {DC/DC};
+			\draw (C) to [short] ++(1.5,0) coordinate (G)
+			to [short] (DCDC.port4 -| G)
+			to [short,-*] ++(0.5,0) coordinate (voltin)
+			to [short, i=$i'(t)$] (DCDC.port4)
+			(D) to [short] ++(1.5,0) coordinate (H)
+			to [short] (DCDC.port1 -| H) -- ++(0.5,0)
+			to [currtap, name=ct1] (DCDC.port1)
+			(DCDC.port4 -| G) to [open,v = $u'(t)$, voltage = straight] (DCDC.port1 -| G);
 
-         % Inner part
-         \draw (DCDC.port4) to [L, l=$L$] ++(1.75,0) coordinate (boostup)
-         to [diode, l=$D_5$] (DCDC.port3)
-         (boostup) to [Tnpn, n=npn, invert,*-*, l=$\hspace{0.5cm}T$] (DCDC.port2 -| boostup)
-         (DCDC.port2) -- (DCDC.port1); 
+			% Inner part
+			\draw (DCDC.port4) to [L, l=$L$] ++(1.75,0) coordinate (boostup)
+			to [diode, l=$D_5$] (DCDC.port3)
+			(boostup) to [Tnpn, n=npn, invert,*-*, l=$\hspace{0.5cm}T$] (DCDC.port2 -| boostup)
+			(DCDC.port2) -- (DCDC.port1);
 
+			% Output filter and load
+			\draw (DCDC.port3) to [short, i=$i_2(t)$] ++(0.9,0) coordinate (I)
+			to [short] (C -| I)
+			to [short] ++(1,0) coordinate (E)
+			to [short] ++(0,-1.5)
+			to [C, v= $u_2(t)$, voltage = straight, l=$C$, i=${i_\mathrm{C}(t)}$] ++(0,-2)
+			to [short] ++(0,-1.5) coordinate (F)
+			to [short] (D -| I)
+			to [short] (DCDC.port2 -| I) -- (DCDC.port2)
+			(E) to [short, *-*] ++(1.25,0) coordinate (currout) -- ++(0.75,0)
+			to [short] ++(0,-1.5)
+			to [R,  l=$R$, i=${i_\mathrm{R}(t)}$] ++(0,-2)
+			to [short] ++(0,-1.5)
+			to [short, -*] (F);
 
-         % Output filter and load
-         \draw (DCDC.port3) to [short, i=$i_2(t)$] ++(0.9,0) coordinate (I)
-         to [short] (C -| I)
-         to [short] ++(1,0) coordinate (E)
-         to [short] ++(0,-1.5)
-         to [C, v= $u_2(t)$, voltage = straight, l=$C$, i=${i_\mathrm{C}(t)}$] ++(0,-2)
-         to [short] ++(0,-1.5) coordinate (F)
-         to [short] (D -| I)
-         to [short] (DCDC.port2 -| I) -- (DCDC.port2)
-         (E) to [short, *-*] ++(1.25,0) coordinate (currout) -- ++(0.75,0)
-         to [short] ++(0,-1.5)
-         to [R,  l=$R$, i=${i_\mathrm{R}(t)}$] ++(0,-2)
-         to [short] ++(0,-1.5)
-          to [short, -*] (F);
+			% Controller
+			\draw let \p1 = (DCDC.south) in node[draw, minimum width=1.2cm, minimum height=0.9cm] (ctrl) at (\x1,-4.1) {Controller};
+			\coordinate (ctrl1) at ($(ctrl.north west)!.5!(ctrl.west)$);
+			\coordinate (ctrl2) at ($(ctrl.south west)!.5!(ctrl.west)$);
+			\draw[dashed] (ctrl.north) -- (DCDC.south) node[midway, right] {$d(t)$} -- ++(0,0.5) coordinate (ctrl3)
+			to [short] (ctrl3 -| npn.B) -- (npn.B);
+			\draw[->, dashed] (ct1.tap) -- (ctrl1 -| ct1.tap) -- (ctrl1) node[right, above, anchor = south east] {$i'(t)$};
+			\draw[->, dashed] (voltin) -- (ctrl2 -| voltin) -- (ctrl2) node[right, below, anchor = north east] {$u'(t)$};
+			\draw[->, dashed] (currout) -- (ctrl.east -| currout) -- (ctrl.east) node[left, above, anchor = south west] {$u_2(t)$};
 
-         % Controller
-         \draw let \p1 = (DCDC.south) in node[draw, minimum width=1.2cm, minimum height=0.9cm] (ctrl) at (\x1,-4.1) {Controller};
-         \coordinate (ctrl1) at ($(ctrl.north west)!.5!(ctrl.west)$);
-         \coordinate (ctrl2) at ($(ctrl.south west)!.5!(ctrl.west)$);
-         \draw[dashed] (ctrl.north) -- (DCDC.south) node[midway, right] {$d(t)$} -- ++(0,0.5) coordinate (ctrl3)
-         to [short] (ctrl3 -| npn.B) -- (npn.B);
-         \draw[->, dashed] (ct1.tap) -- (ctrl1 -| ct1.tap) -- (ctrl1) node[right, above, anchor = south east] {$i'(t)$};
-         \draw[->, dashed] (voltin) -- (ctrl2 -| voltin) -- (ctrl2) node[right, below, anchor = north east] {$u'(t)$};
-         \draw[->, dashed] (currout) -- (ctrl.east -| currout) -- (ctrl.east) node[left, above, anchor = south west] {$u_2(t)$};
-         
-        \end{circuitikz}
-    \end{center}
-        \caption{PFC rectifier with single-phase diode bridge and a cascaded DC/DC boost converter.}
-        \label{fig:Boost converter with single-phase diode bridge_topology}
-    \end{figure}
+		\end{circuitikz}
+	\end{center}
+	\caption{PFC rectifier with single-phase diode bridge and a cascaded DC/DC boost converter.}
+	\label{fig:Boost converter with single-phase diode bridge_topology}
+\end{figure}

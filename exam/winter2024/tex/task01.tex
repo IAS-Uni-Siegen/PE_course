@@ -19,146 +19,143 @@ For this purpose an efficient step-down (buck) converter is required to provide 
 especially when multiple servo motors or actuators are operating simultaneously.
 
 \begin{germanblock}
-In industriellen Steuerungssystemen wird häufig eine $\SI{50}{\volt}$ DC-Stromversorgung verwendet,
-um verschiedene Komponenten zu versorgen. Zusätzlich benötigen mehrere Sensoren und Servomotoren
-eine stabile $\SI{12}{\volt}$ DC-Spannung. Dafür wird ein effizienter Tiefsetzsteller benötigt,
-der hohe Ströme liefern kann – insbesondere, wenn mehrere Servomotoren oder Aktoren gleichzeitig 
-in Betrieb sind.    
+	In industriellen Steuerungssystemen wird häufig eine $\SI{50}{\volt}$ DC-Stromversorgung verwendet,
+	um verschiedene Komponenten zu versorgen. Zusätzlich benötigen mehrere Sensoren und Servomotoren
+	eine stabile $\SI{12}{\volt}$ DC-Spannung. Dafür wird ein effizienter Tiefsetzsteller benötigt,
+	der hohe Ströme liefern kann – insbesondere, wenn mehrere Servomotoren oder Aktoren gleichzeitig
+	in Betrieb sind.
 \end{germanblock}
-
 
 % figure figStepDownConverterOutputFilter
 \input{fig/Task01/figStepDownConverterOutputFilter}
 
 \begin{table}[ht]
-    \centering  % Zentriert die Tabelle
-    \begin{tabular}{llll}
-        \toprule
-        \multicolumn{2}{l}{\textbf{General parameters:}} & \multicolumn{2}{l}{\textbf{IGBT:}} \\ 
-        Input voltage: &  $U_{\mathrm{1}} = \SI{50}{\volt}$ & Collector-emitter voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2}{\volt}$ \\
-        Output voltage: & $U_2 = \SI{12}{\volt}$  & Switch-on losses: & $E_{\text{on},\mathrm{D}} = \SI{20}{\micro\joule}$ \\
-        Output current: & $I_2 = \SI{70}{\ampere}$  & Switch-off losses: &  $E_{\text{off},\mathrm{D}} = \SI{40}{\micro\joule}$ \\
-        Switching frequency: & $f_\mathrm{s} = \SI{100}{\kilo\hertz}$  & &  \\
-        \midrule
-        \textbf{Inductance:} & $L = \SI{20}{\micro\henry}$ & & \\
-        \multicolumn{4}{c}{The diode is considered as ideal and the filter capacitor is $C \rightarrow \infty$.}  \\ 
-        \bottomrule
-    \end{tabular}
-    \caption{Parameters of the circuit.}  % Beschriftung der Tabelle
-    \label{table:ex01_Parameters of the circuit}
+	\centering  % Zentriert die Tabelle
+	\begin{tabular}{llll}
+		\toprule
+		\multicolumn{2}{l}{\textbf{General parameters:}} & \multicolumn{2}{l}{\textbf{IGBT:}}                                                                                        \\
+		Input voltage:                                   & $U_{\mathrm{1}} = \SI{50}{\volt}$      & Collector-emitter voltage: & $u_{\mathrm{on},\mathrm{CE}} = \SI{2}{\volt}$       \\
+		Output voltage:                                  & $U_2 = \SI{12}{\volt}$                 & Switch-on losses:          & $E_{\text{on},\mathrm{D}} = \SI{20}{\micro\joule}$  \\
+		Output current:                                  & $I_2 = \SI{70}{\ampere}$               & Switch-off losses:         & $E_{\text{off},\mathrm{D}} = \SI{40}{\micro\joule}$ \\
+		Switching frequency:                             & $f_\mathrm{s} = \SI{100}{\kilo\hertz}$ &                            &                                                     \\
+		\midrule
+		\textbf{Inductance:}                             & $L = \SI{20}{\micro\henry}$            &                            &                                                     \\
+		\multicolumn{4}{c}{The diode is considered as ideal and the filter capacitor is $C \rightarrow \infty$.}                                                                     \\
+		\bottomrule
+	\end{tabular}
+	\caption{Parameters of the circuit.}  % Beschriftung der Tabelle
+	\label{table:ex01_Parameters of the circuit}
 \end{table}
 
 \subtask{At what duty cycle $D$ should the step-down converter be operated?
-         Calculate and sketch the voltage $u_\mathrm{L}(t)$ and  current $i_\mathrm{L}(t)$ over 2 periods.}{4}%
+	Calculate and sketch the voltage $u_\mathrm{L}(t)$ and  current $i_\mathrm{L}(t)$ over 2 periods.}{4}%
 \begin{hintblock}
-    The voltage drop across the transistor must be taken into account.
+	The voltage drop across the transistor must be taken into account.
 \end{hintblock}
 
 \subtaskGerman{Bei welchem Tastverhältnis $D$ sollte der Tiefsetzsteller betrieben werden?
-Skizzieren Sie die Spannung $u_\mathrm{L}(t)$ und den Strom $i_\mathrm{L}(t)$ über zwei Perioden.}
+	Skizzieren Sie die Spannung $u_\mathrm{L}(t)$ und den Strom $i_\mathrm{L}(t)$ über zwei Perioden.}
 \begin{germanhintblock}
-    Der Spannungsabfall über den Transistor ist zu berücksichtigen.
+	Der Spannungsabfall über den Transistor ist zu berücksichtigen.
 \end{germanhintblock}
 
 % Solution of subtask
 \begin{solutionblock}
-    The duty cycle corresponds to
-    \begin{equation*}
-        \begin{aligned}
-            D&=\frac{U_\mathrm{out}}{U_\mathrm{in}}=\frac{U_\mathrm{2}}{U_\mathrm{1}-u_\mathrm{on,CE}} \\
-            &=\frac{\SI{12}{\volt}}{\SI{50}{\volt}-\SI{2}{\volt}}=0.25.
-        \end{aligned}
-        \label{eq:dutycycle}
-    \end{equation*}
-    If the transistor conducts, the voltage $u_\mathrm{s}$ results in
-    \begin{equation*}
-        u_\mathrm{s,on}=U_\mathrm{1}-u_\mathrm{on,CE}=\SI{50}{\volt}-\SI{2}{\volt}=\SI{48}{\volt}.
-        \label{eq:u_on}
-    \end{equation*}
+	The duty cycle corresponds to
+	\begin{equation*}
+		\begin{aligned}
+			D & =\frac{U_\mathrm{out}}{U_\mathrm{in}}=\frac{U_\mathrm{2}}{U_\mathrm{1}-u_\mathrm{on,CE}} \\
+			  & =\frac{\SI{12}{\volt}}{\SI{50}{\volt}-\SI{2}{\volt}}=0.25.
+		\end{aligned}
+		\label{eq:dutycycle}
+	\end{equation*}
+	If the transistor conducts, the voltage $u_\mathrm{s}$ results in
+	\begin{equation*}
+		u_\mathrm{s,on}=U_\mathrm{1}-u_\mathrm{on,CE}=\SI{50}{\volt}-\SI{2}{\volt}=\SI{48}{\volt}.
+		\label{eq:u_on}
+	\end{equation*}
 
-    If the transistor does not conduct, the diode conducts and $u_\mathrm{s}$ yielding
-    \begin{equation*}
-        u_\mathrm{s,off}=\SI{0}{\volt}.
-        \label{eq:u_off}
-    \end{equation*}
+	If the transistor does not conduct, the diode conducts and $u_\mathrm{s}$ yielding
+	\begin{equation*}
+		u_\mathrm{s,off}=\SI{0}{\volt}.
+		\label{eq:u_off}
+	\end{equation*}
 
-    This leads to the result
-    \begin{equation*}
-        u_\mathrm{L}= u_\mathrm{s}-U_\mathrm{2}
-        \begin{cases}
-            u_\mathrm{L,on}= \SI{48}{\volt}-\SI{12}{\volt} = \SI{36}{\volt}, \quad  &\text{if $T_1$ conducts}, \\
-            u_\mathrm{L,off}= -\SI{12}{\volt}, \quad &\text{if $T_1$ does not conduct}.
-        \end{cases}
-    \end{equation*}
+	This leads to the result
+	\begin{equation*}
+		u_\mathrm{L}= u_\mathrm{s}-U_\mathrm{2}
+		\begin{cases}
+			u_\mathrm{L,on}= \SI{48}{\volt}-\SI{12}{\volt} = \SI{36}{\volt}, \quad & \text{if $T_1$ conducts},         \\
+			u_\mathrm{L,off}= -\SI{12}{\volt}, \quad                               & \text{if $T_1$ does not conduct}.
+		\end{cases}
+	\end{equation*}
 
-    Using the voltage at the inductor while the transistor conducts, the current ripple yields:
-    \begin{equation*}
-            i_\mathrm{L,ripple}= \frac{u_\mathrm{L,on}}{L} \cdot T_\mathrm{on} 
-            =\frac{u_\mathrm{L,on} \cdot D}{L f_\mathrm{s}}
-            =\frac{ \SI{36}{\volt} \cdot 0.25} {\SI{20}{\micro\henry} 
-            \cdot \SI{100}{\kilo\hertz}} = \SI{4.5}{\ampere}.
-    \end{equation*}
-    The maximum and minimum inductor current result in:
-    \begin{equation*}
-        \begin{aligned}
-            i_\mathrm{L,max}&= I_\mathrm{2} + 0.5 \cdot i_\mathrm{L,ripple} = \SI{70}{\ampere} + \SI{2.25}{\ampere} = \SI{72.25}{\ampere} \\
-            i_\mathrm{L,min}&= I_\mathrm{2} - 0.5 \cdot i_\mathrm{L,ripple} = \SI{70}{\ampere} - \SI{2.25}{\ampere} = \SI{67.75}{\ampere}.
-        \end{aligned}
-    \end{equation*}
-        
-    % solutionfigure
-    \input{fig/Task01/sFigTask1}
+	Using the voltage at the inductor while the transistor conducts, the current ripple yields:
+	\begin{equation*}
+		i_\mathrm{L,ripple}= \frac{u_\mathrm{L,on}}{L} \cdot T_\mathrm{on}
+		=\frac{u_\mathrm{L,on} \cdot D}{L f_\mathrm{s}}
+		=\frac{ \SI{36}{\volt} \cdot 0.25} {\SI{20}{\micro\henry}
+			\cdot \SI{100}{\kilo\hertz}} = \SI{4.5}{\ampere}.
+	\end{equation*}
+	The maximum and minimum inductor current result in:
+	\begin{equation*}
+		\begin{aligned}
+			i_\mathrm{L,max} & = I_\mathrm{2} + 0.5 \cdot i_\mathrm{L,ripple} = \SI{70}{\ampere} + \SI{2.25}{\ampere} = \SI{72.25}{\ampere}  \\
+			i_\mathrm{L,min} & = I_\mathrm{2} - 0.5 \cdot i_\mathrm{L,ripple} = \SI{70}{\ampere} - \SI{2.25}{\ampere} = \SI{67.75}{\ampere}.
+		\end{aligned}
+	\end{equation*}
+
+	% solutionfigure
+	\input{fig/Task01/sFigTask1}
 
 \end{solutionblock}
 
 \subtask{ How large is the power demand of the load, if the step-down converter operates
-          in boundary conduction mode (BCM)?}{2}
+	in boundary conduction mode (BCM)?}{2}
 
-\subtaskGerman{Wie groß ist die aufgenommene Leistung der Last, wenn der Tiefsetzsteller 
-                im Lückgrenzbetrieb arbeitet?}
-
-% Solution of subtask
-\begin{solutionblock}
-    The current at boundary conduction mode depends on the current ripple according
-    \begin{equation*}
-       I_\mathrm{2,BCM}=\frac{i_\mathrm{L,ripple}}{2} =\frac{\SI{4.5}{\ampere}}{2}=\SI{2.25}{\ampere}.
-       \label{eq:i_bcm}
-    \end{equation*}
-    Using the current at boundary conduction mode, the power of the load is obtained by 
-    \begin{equation*}
-        P_\mathrm{load,BCM}=U_\mathrm{2} \cdot I_\mathrm{2}=\SI{12}{\volt} \cdot \SI{2.25}{\ampere}=\SI{27}{\watt}.
-        \label{eq:p_bcm}
-    \end{equation*}
-\end{solutionblock}
-    
-\subtask{ In which case the step-down converter operates in discontinous conduction mode (DCM) and what is the effect 
-          and the potential risk of this mode?}{1}%
-\subtaskGerman{In welchem Fall arbeitet der Tiefsetzsteller im Lückbetrieb 
-               und welche Auswirkungen sowie potenziellen Risiken hat dieser Betriebsmodus?}
+\subtaskGerman{Wie groß ist die aufgenommene Leistung der Last, wenn der Tiefsetzsteller
+	im Lückgrenzbetrieb arbeitet?}
 
 % Solution of subtask
 \begin{solutionblock}
-    If the power demand is less than $P_\mathrm{load,BCM}$ the output voltage increases. 
-    The step-down converter operated in DCM-mode, if the power consumption is less than $P_\mathrm{load,BCM}$. In this case the current through the inductor is $\SI{0}{\ampere}$ for a certain time at the end of a switching period.
-    Risk: compared to CCM, this leads to a voltage increase, which could lead to the damage of overvoltage sensitive components.
+	The current at boundary conduction mode depends on the current ripple according
+	\begin{equation*}
+		I_\mathrm{2,BCM}=\frac{i_\mathrm{L,ripple}}{2} =\frac{\SI{4.5}{\ampere}}{2}=\SI{2.25}{\ampere}.
+		\label{eq:i_bcm}
+	\end{equation*}
+	Using the current at boundary conduction mode, the power of the load is obtained by
+	\begin{equation*}
+		P_\mathrm{load,BCM}=U_\mathrm{2} \cdot I_\mathrm{2}=\SI{12}{\volt} \cdot \SI{2.25}{\ampere}=\SI{27}{\watt}.
+		\label{eq:p_bcm}
+	\end{equation*}
 \end{solutionblock}
-    
+
+\subtask{ In which case the step-down converter operates in discontinous conduction mode (DCM) and what is the effect
+	and the potential risk of this mode?}{1}%
+\subtaskGerman{In welchem Fall arbeitet der Tiefsetzsteller im Lückbetrieb
+	und welche Auswirkungen sowie potenziellen Risiken hat dieser Betriebsmodus?}
+
+% Solution of subtask
+\begin{solutionblock}
+	If the power demand is less than $P_\mathrm{load,BCM}$ the output voltage increases.
+	The step-down converter operated in DCM-mode, if the power consumption is less than $P_\mathrm{load,BCM}$. In this case the current through the inductor is $\SI{0}{\ampere}$ for a certain time at the end of a switching period.
+	Risk: compared to CCM, this leads to a voltage increase, which could lead to the damage of overvoltage sensitive components.
+\end{solutionblock}
+
 \subtask{Calculate the switching power loss and the total power loss of the IGBT.}{1}%
 
 \subtaskGerman{Berechnen Sie die Schaltverluste sowie die Gesamtleistungsverluste des IGBTs.}
 
 % Solution of subtask
 \begin{solutionblock}
-    The power loss of the transistor consists of the power loss while conducting the current and the switching losses.
-    \begin{equation*}
-        P_\mathrm{T_1}=u_\mathrm{on,CE} I_\mathrm{2} D + \left( E_\mathrm{on}+E_\mathrm{off} \right) \cdot f_\mathrm{s}
-        = \SI{2}{\volt} \cdot \SI{70}{\ampere} \cdot 0.25 + \left( \SI{20}{\micro\joule} + \SI{40}{\micro\joule} \right) 
-        \cdot \SI{100}{\kilo\hertz} = \SI{41}{\watt}.
-        \label{eq:p_IGBT}
-    \end{equation*}
+	The power loss of the transistor consists of the power loss while conducting the current and the switching losses.
+	\begin{equation*}
+		P_\mathrm{T_1}=u_\mathrm{on,CE} I_\mathrm{2} D + \left( E_\mathrm{on}+E_\mathrm{off} \right) \cdot f_\mathrm{s}
+		= \SI{2}{\volt} \cdot \SI{70}{\ampere} \cdot 0.25 + \left( \SI{20}{\micro\joule} + \SI{40}{\micro\joule} \right)
+		\cdot \SI{100}{\kilo\hertz} = \SI{41}{\watt}.
+		\label{eq:p_IGBT}
+	\end{equation*}
 \end{solutionblock}
-
-
 
 \subtask{Calculate the efficiency $\eta$ of the step-down converter.}{2}
 
@@ -166,16 +163,16 @@ Skizzieren Sie die Spannung $u_\mathrm{L}(t)$ und den Strom $i_\mathrm{L}(t)$ ü
 
 % Solution of subtask
 \begin{solutionblock}
-    The efficiency is calculated by the power demand of the load divided by the total input power.
-    The power demand of the load is
-    \begin{equation*}
-        P_\mathrm{load}= U_\mathrm{2} \cdot I_\mathrm{2} = \SI{12}{\volt} \cdot \SI{70}{\ampere} = \SI{840}{\watt}.
-        \label{eq:P_load}
-    \end{equation*}
-    Taking into account the power demand, the efficiency is calculated by:
-    \begin{equation*}
-        \eta=\frac{P_\mathrm{load}}{P_\mathrm{total}} = \frac{P_\mathrm{load}}{P_\mathrm{load} + P_\mathrm{T_1}}
-            = \frac{\SI{840}{\watt}}{\SI{840}{\watt} + \SI{41}{\watt}}= 0.95.
-        \label{eq:eta}
-    \end{equation*}
+	The efficiency is calculated by the power demand of the load divided by the total input power.
+	The power demand of the load is
+	\begin{equation*}
+		P_\mathrm{load}= U_\mathrm{2} \cdot I_\mathrm{2} = \SI{12}{\volt} \cdot \SI{70}{\ampere} = \SI{840}{\watt}.
+		\label{eq:P_load}
+	\end{equation*}
+	Taking into account the power demand, the efficiency is calculated by:
+	\begin{equation*}
+		\eta=\frac{P_\mathrm{load}}{P_\mathrm{total}} = \frac{P_\mathrm{load}}{P_\mathrm{load} + P_\mathrm{T_1}}
+		= \frac{\SI{840}{\watt}}{\SI{840}{\watt} + \SI{41}{\watt}}= 0.95.
+		\label{eq:eta}
+	\end{equation*}
 \end{solutionblock}

@@ -1,31 +1,31 @@
 \begin{solutionfigure}[htb]
-\centering
-\begin{tikzpicture}
-    % Achsen zeichnen
-    \draw[->] (0,0) -- (14,0) node[right] {$k$}; % x-Achse
-    \draw[->] (0,0) -- (0,5) node[above] {$\frac{\hat{u}_\mathrm{2a}^\mathrm{(k)}}{\hat{u}_\mathrm{2a}^\mathrm{(1)}}$}; % y-Achse
+	\centering
+	\begin{tikzpicture}
+		% Achsen zeichnen
+		\draw[->] (0,0) -- (14,0) node[right] {$k$}; % x-Achse
+		\draw[->] (0,0) -- (0,5) node[above] {$\frac{\hat{u}_\mathrm{2a}^\mathrm{(k)}}{\hat{u}_\mathrm{2a}^\mathrm{(1)}}$}; % y-Achse
 
-    % Ticks und Beschriftungen auf der x-Achse
-    \foreach \x in {1, 5, 7, 11, 13} {
-        \draw (\x,0.05) -- (\x,-0.05) node[below] {\x};
-    }
-    \foreach \x in {2, 3, 4, 6, 8, 9, 10, 12} {
-        \draw (\x,0.02) -- (\x,-0.02); % kleinere Ticks
-    }
+		% Ticks und Beschriftungen auf der x-Achse
+		\foreach \x in {1, 5, 7, 11, 13} {
+				\draw (\x,0.05) -- (\x,-0.05) node[below] {\x};
+			}
+		\foreach \x in {2, 3, 4, 6, 8, 9, 10, 12} {
+				\draw (\x,0.02) -- (\x,-0.02); % kleinere Ticks
+			}
 
-    % Ticks und Beschriftung auf der y-Achse
-    \draw (-0.05,4.5) -- (0.05,4.5) node[left] {1};
-    \draw (-0.05,3.6)  node[left] {0.8};
-     \draw (-0.05,2.7)  node[left] {0.6};
-    \draw (-0.05,1.8) node[left] {0.4};
-    \draw (-0.05,0.9) node[left] {0.2};
-    \draw (-0.05,0) node[left] {0};
-    % Balken zeichnen
-    \foreach \x/\y in {1/4.5, 5/0.9, 7/0.6, 11/0.5, 13/0.4} {
-        \draw[thick, signalalpha] (\x,0) -- (\x,\y); % Balken
-        \draw[thick, signalalpha] (\x-0.1,\y) -- (\x+0.1,\y); % Querstrich oben
-    }
-\end{tikzpicture}
-\caption{Normalization to the amplitude of the fundamental oscillation.}
-\label{sfig:NormalizationToTheAmplitude}
+		% Ticks und Beschriftung auf der y-Achse
+		\draw (-0.05,4.5) -- (0.05,4.5) node[left] {1};
+		\draw (-0.05,3.6)  node[left] {0.8};
+		\draw (-0.05,2.7)  node[left] {0.6};
+		\draw (-0.05,1.8) node[left] {0.4};
+		\draw (-0.05,0.9) node[left] {0.2};
+		\draw (-0.05,0) node[left] {0};
+		% Balken zeichnen
+		\foreach \x/\y in {1/4.5, 5/0.9, 7/0.6, 11/0.5, 13/0.4} {
+				\draw[thick, signalalpha] (\x,0) -- (\x,\y); % Balken
+				\draw[thick, signalalpha] (\x-0.1,\y) -- (\x+0.1,\y); % Querstrich oben
+			}
+	\end{tikzpicture}
+	\caption{Normalization to the amplitude of the fundamental oscillation.}
+	\label{sfig:NormalizationToTheAmplitude}
 \end{solutionfigure}

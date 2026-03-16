@@ -3,50 +3,48 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[ht]
-    \centering
-    \begin{tikzpicture}
-        \draw (-0.5,2) to[inductor, name=l1] ++(0,-2)
-        (-0.5,2) to [short, -*, i<_=$i'_1(t)$] ++(-1,0) coordinate (A1)
-        (-0.5,0) to [short, -*] ++(-1,0) coordinate (A2)
-        (A1) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$] (A2)
-        (A1) to [short, -o, i<_=$i_1(t)$] ++(-1.5,0) coordinate (A11)
-        % Add transistor
-        (A2) to [Tnpn, n=npn1, invert] ++(0,-3) coordinate (Agnd)
-        (Agnd) to [short, -o] ++(-1.5,0) coordinate (Aggnd)
-        (A11) to [open, v=$u_1$, voltage = straight] (Aggnd);
+	\centering
+	\begin{tikzpicture}
+		\draw (-0.5,2) to[inductor, name=l1] ++(0,-2)
+		(-0.5,2) to [short, -*, i<_=$i'_1(t)$] ++(-1,0) coordinate (A1)
+		(-0.5,0) to [short, -*] ++(-1,0) coordinate (A2)
+		(A1) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$] (A2)
+		(A1) to [short, -o, i<_=$i_1(t)$] ++(-1.5,0) coordinate (A11)
+		% Add transistor
+		(A2) to [Tnpn, n=npn1, invert] ++(0,-3) coordinate (Agnd)
+		(Agnd) to [short, -o] ++(-1.5,0) coordinate (Aggnd)
+		(A11) to [open, v=$u_1$, voltage = straight] (Aggnd);
 
+		\draw (0.5,2) to[inductor, name=l2, mirror] ++(0,-2)
+		(0.5,2) to [short, -o, i=$i_2(t)$] ++(1,0) coordinate (B1)
+		(0.5,0) to [short, -o] ++(1,0) coordinate (B2)
+		(B1) to [open, v^=$u_2$, voltage = straight] (B2);
+		\draw (0.5,-1) to[inductor, name=l3, mirror] ++(0,-2)
+		(0.5,-1) to [short, -o, i=$i_3(t)$] ++(1,0) coordinate (C1)
+		(0.5,-3) to [short, -o] ++(1,0) coordinate (C2)
+		(C1) to [open, v^=$u_3$, voltage = straight] (C2);
+		\draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l3.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
+		\path (l1.ul dot) node[circ]{}
+		(l2.ul dot) node[circ]{}
+		(l3.ul dot) node[circ]{};
+		\draw (l1.midtap) node[left]{$N_1$}
+		(l2.midtap) node[right]{$N_2$}
+		(l3.midtap) node[right]{$N_3$};
 
-        \draw (0.5,2) to[inductor, name=l2, mirror] ++(0,-2)
-        (0.5,2) to [short, -o, i=$i_2(t)$] ++(1,0) coordinate (B1)
-        (0.5,0) to [short, -o] ++(1,0) coordinate (B2)
-        (B1) to [open, v^=$u_2$, voltage = straight] (B2);
-        \draw (0.5,-1) to[inductor, name=l3, mirror] ++(0,-2)
-        (0.5,-1) to [short, -o, i=$i_3(t)$] ++(1,0) coordinate (C1)
-        (0.5,-3) to [short, -o] ++(1,0) coordinate (C2)
-        (C1) to [open, v^=$u_3$, voltage = straight] (C2);
-        \draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l3.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
-        \path (l1.ul dot) node[circ]{}
-        (l2.ul dot) node[circ]{}
-        (l3.ul dot) node[circ]{};
-        \draw (l1.midtap) node[left]{$N_1$}
-        (l2.midtap) node[right]{$N_2$}
-        (l3.midtap) node[right]{$N_3$};
+		% Add 5V devices on the right side
+		\draw (B1) to [short, o-] ++(2 ,0) coordinate (devp5V)
+		(B2) to [short, o-] ++(2,0) coordinate (devm5V)
+		(devp5V) to [R,l_=$R$,v^=$U_\text{2}$,voltage shift=0.5, voltage=straight] (devm5V)
+		(B2) ++(1.2,1) coordinate (rectdevm5V);
+		\node[draw, dashed, minimum width=2cm, minimum height=2.3cm, anchor=west, label=below:$\SI{5}{\volt}$-Devices] at (rectdevm5V) (dev) {};
+		% Add 3.3V devices on the right side
+		\draw (C1) to [short, o-] ++(2 ,0) coordinate (devp3_3V)
+		(C2) to [short, o-] ++(2,0) coordinate (devm3_3V)
+		(devp3_3V) to [R,l_=$R$,v^=$U_\text{3}$,voltage shift=0.5, voltage=straight] (devm3_3V)
+		(C2) ++(1.2,1) coordinate (rectdevm3_3V);
+		\node[draw, dashed, minimum width=2cm, minimum height=2.3cm, anchor=west, label=below:$\SI{3.3}{\volt}$-Devices] at (rectdevm3_3V) (dev) {};
 
-        % Add 5V devices on the right side
-        \draw (B1) to [short, o-] ++(2 ,0) coordinate (devp5V)
-        (B2) to [short, o-] ++(2,0) coordinate (devm5V)
-        (devp5V) to [R,l_=$R$,v^=$U_\text{2}$,voltage shift=0.5, voltage=straight] (devm5V)
-        (B2) ++(1.2,1) coordinate (rectdevm5V);
-        \node[draw, dashed, minimum width=2cm, minimum height=2.3cm, anchor=west, label=below:$\SI{5}{\volt}$-Devices] at (rectdevm5V) (dev) {};
-        % Add 3.3V devices on the right side
-        \draw (C1) to [short, o-] ++(2 ,0) coordinate (devp3_3V)
-        (C2) to [short, o-] ++(2,0) coordinate (devm3_3V)
-        (devp3_3V) to [R,l_=$R$,v^=$U_\text{3}$,voltage shift=0.5, voltage=straight] (devm3_3V)
-        (C2) ++(1.2,1) coordinate (rectdevm3_3V);
-        \node[draw, dashed, minimum width=2cm, minimum height=2.3cm, anchor=west, label=below:$\SI{3.3}{\volt}$-Devices] at (rectdevm3_3V) (dev) {};
-
-
-    \end{tikzpicture}
-    \caption{Multi-port (flyback) converter.}
-    \label{fig:MultiPortFlybackConverter}
+	\end{tikzpicture}
+	\caption{Multi-port (flyback) converter.}
+	\label{fig:MultiPortFlybackConverter}
 \end{figure}

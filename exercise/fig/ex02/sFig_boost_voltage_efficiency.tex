@@ -1,58 +1,58 @@
 \begin{solutionfigure}[htb]
-    \centering
-    \begin{subfigure}{0.45\textwidth}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                xlabel={$D$},
-                ylabel={$U_{\mathrm{1}}/U_{\mathrm{2}}$},
-                axis lines=left,
-                ymin=0, ymax=10,
-                xmin=0, xmax=1,
-                xtick={0,0.2,0.4,0.6,0.8,1.0},
-                ytick={0,1,2,3,4,5,6,7,8,9,10},
-                xticklabels={0,0.2,0.4,0.6,0.8,1.0},
-                yticklabels={0,1,2,3,4,5,6,7,8,9,10},
-                thick,
-                smooth,
-                no markers,
-                height=7cm,
-                width = 0.99\textwidth,
-                grid
-                ]
-                \addplot[signalalpha, domain=0:0.95] {(1-x)/((1-x)^2)};
-                \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,8) {ideal converter};
-                \addplot[signaldelta, domain=0:1.0] {(1-x)/((1-x)^2+0.2/30)};
-                \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,7) {converter with losses};
-                \end{axis}
-        \end{tikzpicture}
-    \end{subfigure}%
-    \begin{subfigure}{0.45\textwidth}
-        \begin{tikzpicture}
-            \begin{axis}[
-                xlabel={$D$},
-                ylabel={$\eta$},
-                axis lines=left,
-                ymin=0, ymax=1.1,
-                xmin=0, xmax=1,
-                xtick={0,0.2,0.4,0.6,0.8,1.0},
-                ytick={0,0.2,0.4,0.6,0.8,1.0},
-                xticklabels={0,0.2,0.4,0.6,0.8,1.0},
-                yticklabels={0,0.2,0.4,0.6,0.8,1.0},
-                thick,
-                smooth,
-                no markers,
-                height=7cm,
-                width = 0.99\textwidth,
-                grid
-                ]
-                \addplot[signalalpha, domain=0:1] {1};
-                \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0.4) {ideal converter};
-                \addplot[signaldelta, domain=0:1] {1/(1+(0.2/30)/(1-x)^2)};
-                \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0.3) {converter with losses};
-            \end{axis}
-        \end{tikzpicture}
-    \end{subfigure}
-    \caption{Voltage ratio (on the left) and the efficiency function (on the right) are visualized. Both functions are dependent on the duty cycle $D$.}
-    \label{fig:voltageRatioAndEfficiency}
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xlabel={$D$},
+				ylabel={$U_{\mathrm{1}}/U_{\mathrm{2}}$},
+				axis lines=left,
+				ymin=0, ymax=10,
+				xmin=0, xmax=1,
+				xtick={0,0.2,0.4,0.6,0.8,1.0},
+				ytick={0,1,2,3,4,5,6,7,8,9,10},
+				xticklabels={0,0.2,0.4,0.6,0.8,1.0},
+				yticklabels={0,1,2,3,4,5,6,7,8,9,10},
+				thick,
+				smooth,
+				no markers,
+				height=7cm,
+				width = 0.99\textwidth,
+				grid
+				]
+				\addplot[signalalpha, domain=0:0.95] {(1-x)/((1-x)^2)};
+				\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,8) {ideal converter};
+				\addplot[signaldelta, domain=0:1.0] {(1-x)/((1-x)^2+0.2/30)};
+				\node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,7) {converter with losses};
+			\end{axis}
+		\end{tikzpicture}
+	\end{subfigure}%
+	\begin{subfigure}{0.45\textwidth}
+		\begin{tikzpicture}
+			\begin{axis}[
+					xlabel={$D$},
+					ylabel={$\eta$},
+					axis lines=left,
+					ymin=0, ymax=1.1,
+					xmin=0, xmax=1,
+					xtick={0,0.2,0.4,0.6,0.8,1.0},
+					ytick={0,0.2,0.4,0.6,0.8,1.0},
+					xticklabels={0,0.2,0.4,0.6,0.8,1.0},
+					yticklabels={0,0.2,0.4,0.6,0.8,1.0},
+					thick,
+					smooth,
+					no markers,
+					height=7cm,
+					width = 0.99\textwidth,
+					grid
+				]
+				\addplot[signalalpha, domain=0:1] {1};
+				\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0.4) {ideal converter};
+				\addplot[signaldelta, domain=0:1] {1/(1+(0.2/30)/(1-x)^2)};
+				\node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0.3) {converter with losses};
+			\end{axis}
+		\end{tikzpicture}
+	\end{subfigure}
+	\caption{Voltage ratio (on the left) and the efficiency function (on the right) are visualized. Both functions are dependent on the duty cycle $D$.}
+	\label{fig:voltageRatioAndEfficiency}
 \end{solutionfigure}

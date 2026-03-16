@@ -3,82 +3,82 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}[htb]
 
-    %   \documentclass{standalone}
-    %   \usepackage{pgfplots}
-    %   \pgfplotsset{compat=1.18} % Kompatibilität für neuere Versionen
-           \centering
-           \begin{tikzpicture}
-                \pgfplotsset{set layers}
-               \begin{axis}[
-                   % x/y range adjustment
-                   scale only axis,
-                   xmin=-150, xmax=150,
-                   ymin=-40, ymax=40,
-                   samples=500,
-                   axis y line=center,
-                   axis x line=middle,
-                   extra y ticks=0,
-                   % Label text
-                   xlabel={$\omega t / \text{rad}$},
-                   ylabel={$u/\mathrm{V}$},
-                   % Label adjustment
-                   x label style={at={(axis description cs:1,0.5)},anchor=west},
-                   y label style={at={(axis description cs:0.5,.97)},anchor=south,yshift=0.2cm},
-                   width=0.6\textwidth,
-                   height=0.3\textwidth,
-                   % x-Ticks
-                   xtick={-150,-60,0,60,150},
-                   xticklabels={,$-\frac{\pi}{3}$,0,$\frac{\pi}{3}$,,},
-                   xticklabel style = {anchor=north},
-                   % y-Ticks
-                   ytick={40,20,0,-20,-40},
-                   yticklabels={400,200,0,-200,-400},
-                   yticklabel style = {anchor=east},
-                   % Grid layout
-                   grid,
-                   %grid style={line width=.1pt, draw=gray!10},
-                   %major grid style={line width=.2pt,draw=gray!90},
-               ]
-               % Voltage u1a(wt)
-               \addplot[black, domain= -150:150,dashed] {28.3*cos(x)};
-               
-                %Label alpha
-               \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:-50,30){$\alpha$};
-               % Line for alpha
-               \draw[->](-60,29) -- (-30,29);
-                % Label of u1a           
-               \node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:100,20) {$u_{\mathrm{1a}}(\omega t)$}; 
-               % Line for u1a
-               \draw[thin, black] (78,22) -- (56,20);
-           
-           \end{axis}
-           \begin{axis}[
-            % x/y range adjustment
-            scale only axis,
-            ymin=-60, ymax=60,
-            xmin=-150, xmax=150,
-            axis x line=none, 
-            samples=500,
-            axis y line=left,
-            axis x line=middle,
-            extra y ticks=0,
-            % Label text
-            ylabel={$i/\mathrm{A}$},
-            % Label adjustment
-            y label style={rotate = -90,at={(axis description cs:-0.01,.97)},anchor=south,yshift=0.2cm},
-            width=0.6\textwidth,
-            height=0.3\textwidth,
-            % y-Ticks
-            ytick={60,30,0,-30,-60},
-            yticklabels={60,30,0,-30,-60},
-            yticklabel style = {anchor=east},
-            % Grid layout
-            grid,
-            %grid style={line width=.1pt, draw=gray!10},
-            %major grid style={line width=.2pt,draw=gray!90},
-        ]   
-           \end{axis}    
-           \end{tikzpicture}
-           \caption{Input current $i_\mathrm{1a}(\omega t)$ and $u_\mathrm{1a}(\omega t)$.}
-           \label{sfig:task03_current_signal_3_5}
-   \end{figure}
+	%   \documentclass{standalone}
+	%   \usepackage{pgfplots}
+	%   \pgfplotsset{compat=1.18} % Kompatibilität für neuere Versionen
+	\centering
+	\begin{tikzpicture}
+		\pgfplotsset{set layers}
+		\begin{axis}[
+				% x/y range adjustment
+				scale only axis,
+				xmin=-150, xmax=150,
+				ymin=-40, ymax=40,
+				samples=500,
+				axis y line=center,
+				axis x line=middle,
+				extra y ticks=0,
+				% Label text
+				xlabel={$\omega t / \text{rad}$},
+				ylabel={$u/\mathrm{V}$},
+				% Label adjustment
+				x label style={at={(axis description cs:1,0.5)},anchor=west},
+				y label style={at={(axis description cs:0.5,.97)},anchor=south,yshift=0.2cm},
+				width=0.6\textwidth,
+				height=0.3\textwidth,
+				% x-Ticks
+				xtick={-150,-60,0,60,150},
+				xticklabels={,$-\frac{\pi}{3}$,0,$\frac{\pi}{3}$,,},
+				xticklabel style = {anchor=north},
+				% y-Ticks
+				ytick={40,20,0,-20,-40},
+				yticklabels={400,200,0,-200,-400},
+				yticklabel style = {anchor=east},
+				% Grid layout
+				grid,
+				%grid style={line width=.1pt, draw=gray!10},
+				%major grid style={line width=.2pt,draw=gray!90},
+			]
+			% Voltage u1a(wt)
+			\addplot[black, domain= -150:150,dashed] {28.3*cos(x)};
+
+			%Label alpha
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:-50,30){$\alpha$};
+			% Line for alpha
+			\draw[->](-60,29) -- (-30,29);
+			% Label of u1a           
+			\node[black, fill=white, inner sep = 1pt, anchor = south] at (axis cs:100,20) {$u_{\mathrm{1a}}(\omega t)$};
+			% Line for u1a
+			\draw[thin, black] (78,22) -- (56,20);
+
+		\end{axis}
+		\begin{axis}[
+				% x/y range adjustment
+				scale only axis,
+				ymin=-60, ymax=60,
+				xmin=-150, xmax=150,
+				axis x line=none,
+				samples=500,
+				axis y line=left,
+				axis x line=middle,
+				extra y ticks=0,
+				% Label text
+				ylabel={$i/\mathrm{A}$},
+				% Label adjustment
+				y label style={rotate = -90,at={(axis description cs:-0.01,.97)},anchor=south,yshift=0.2cm},
+				width=0.6\textwidth,
+				height=0.3\textwidth,
+				% y-Ticks
+				ytick={60,30,0,-30,-60},
+				yticklabels={60,30,0,-30,-60},
+				yticklabel style = {anchor=east},
+				% Grid layout
+				grid,
+				%grid style={line width=.1pt, draw=gray!10},
+				%major grid style={line width=.2pt,draw=gray!90},
+			]
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Input current $i_\mathrm{1a}(\omega t)$ and $u_\mathrm{1a}(\omega t)$.}
+	\label{sfig:task03_current_signal_3_5}
+\end{figure}

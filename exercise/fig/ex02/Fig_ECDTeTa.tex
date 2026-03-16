@@ -1,54 +1,54 @@
 \begin{solutionfigure}[ht]
-    \centering
-    \begin{tabular}{cc}
-               \begin{circuitikz}[european currents,european resistors,american inductors]
-                    \draw 
-                            % Base coordinates
-                            (0,0) coordinate (jU1v)
-                            (0,-3) coordinate (jU1g)
-                            % Add components
-                            % Add primary source U1
-                            (jU1v) to [V,v_=$U_1$] (jU1g)
-                            % Add current symbole
-                         %   (jU1v) to [short,i^>=$i_\mathrm{1}$(t)] (1,0)
-                                       
-                            (jU1v) ++(3,0) coordinate (jLv)
-                            % Add inductance
-                            (jU1v) to  [L=$L$] (jLv)
-                           % Add current IL symbole
-                            (2.2,0)  to [short,i_>=$i_\mathrm{L}$(t)] (3.5,0)
-                            % Continue horisontal line
-                            (jLv) to  [short,-*] ++ (0.5,0) coordinate (jPtv)
-                            % Add vertical line
-                            (jLv) ++ (0.5,0) coordinate  (jUv)
-                            (jUv) ++ (0,-3) coordinate  (jLg)
-                            (jUv)  to [short,-*] (jLg)
-                            % Add horizontal line
-                            (jLg) ++ (1,0) coordinate  (jU2g)
-                            (jLg)  to [short,-] (jU2g)
-                            % Add second source
-                            (jU2g) ++ (0,3) coordinate (jU2v)
-                            (jU2v)  to [V=$U_2$] (jU2g)
-                            % Add horizontal line
-                            (jLg) to [short,-] (jU1g)
-                            % Continue horizontal lines
-                            (jU2v) to [short,-] (4.2,0)
-                            (jLv) to [short,-] (3.8,0)
-                      
-                   ;
-                \end{circuitikz}
-            &
-    
-        \begin{circuitikz}[european currents,european resistors,american inductors,]
-            \draw
-            (0,0) coordinate(u2o)
-            to [V,v^=$U_2$, voltage=straight] ++(0,-3) coordinate(u2u)
-                (u2o) to [short,-,i^<=$i_\mathrm{L}$(t)] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}(t)$,mirror,voltage=straight] ++(-3,0) coordinate(Ll) ++(-1,0) coordinate(uqo)
-                (-4,0) to [V,v_=$U_1$] ++(0,-3) coordinate(u2u)
-                (-4,-3)  to [short,-] ++(4,0) coordinate(r)
-                ;
-        \end{circuitikz}
-    \end{tabular}
-    \caption{ECD of the boost converter for different switching states.}
-    \label{fig:switching_states_step-down_converter-Ex02}
+	\centering
+	\begin{tabular}{cc}
+		\begin{circuitikz}[european currents,european resistors,american inductors]
+			\draw
+			% Base coordinates
+			(0,0) coordinate (jU1v)
+			(0,-3) coordinate (jU1g)
+			% Add components
+			% Add primary source U1
+			(jU1v) to [V,v_=$U_1$] (jU1g)
+			% Add current symbole
+			%   (jU1v) to [short,i^>=$i_\mathrm{1}$(t)] (1,0)
+
+			(jU1v) ++(3,0) coordinate (jLv)
+			% Add inductance
+			(jU1v) to  [L=$L$] (jLv)
+			% Add current IL symbole
+			(2.2,0)  to [short,i_>=$i_\mathrm{L}$(t)] (3.5,0)
+			% Continue horisontal line
+			(jLv) to  [short,-*] ++ (0.5,0) coordinate (jPtv)
+			% Add vertical line
+			(jLv) ++ (0.5,0) coordinate  (jUv)
+			(jUv) ++ (0,-3) coordinate  (jLg)
+			(jUv)  to [short,-*] (jLg)
+			% Add horizontal line
+			(jLg) ++ (1,0) coordinate  (jU2g)
+			(jLg)  to [short,-] (jU2g)
+			% Add second source
+			(jU2g) ++ (0,3) coordinate (jU2v)
+			(jU2v)  to [V=$U_2$] (jU2g)
+			% Add horizontal line
+			(jLg) to [short,-] (jU1g)
+			% Continue horizontal lines
+			(jU2v) to [short,-] (4.2,0)
+			(jLv) to [short,-] (3.8,0)
+
+			;
+		\end{circuitikz}
+		 &
+
+		\begin{circuitikz}[european currents,european resistors,american inductors,]
+			\draw
+			(0,0) coordinate(u2o)
+			to [V,v^=$U_2$, voltage=straight] ++(0,-3) coordinate(u2u)
+			(u2o) to [short,-,i^<=$i_\mathrm{L}$(t)] ++(-1,0) to [L,l_=$L$,v^<=$u_\text{L}(t)$,mirror,voltage=straight] ++(-3,0) coordinate(Ll) ++(-1,0) coordinate(uqo)
+			(-4,0) to [V,v_=$U_1$] ++(0,-3) coordinate(u2u)
+			(-4,-3)  to [short,-] ++(4,0) coordinate(r)
+			;
+		\end{circuitikz}
+	\end{tabular}
+	\caption{ECD of the boost converter for different switching states.}
+	\label{fig:switching_states_step-down_converter-Ex02}
 \end{solutionfigure}

@@ -3,57 +3,52 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{solutionfigure}[htb]
-    \centering
-    \begin{tikzpicture}
-        \begin{axis}[
-                % x/y range adjustment
-                xmin=300, xmax=820,
-                ymin=0.975, ymax=1.005,
-                samples=500,
-                axis y line=center,
-                axis x line=middle,
-                extra y ticks=0,
-                % Label text
-                xlabel={$U_\mathrm{1} \text{/V}$},
-                ylabel={$\eta$},
-                % Label adjustment                                
-                x label style={at={(axis description cs:1,0)},anchor=west},
-                y label style={at={(axis description cs:-.05,.97)},anchor=south},
-                % ylabel style = {yshift=0.2cm},
-                width=0.6\textwidth,
-                height=0.3\textwidth,
-                % x-Ticks 
-                xtick={300,400,500,600,700,800},
-                xticklabels={300,400,500,600,700,800},
-                xticklabel style = {anchor=north},                
-                % y-Ticks
-                ytick={0.975,0.98,0.985,0.99,0.995,1},
-                yticklabels={0.975,0.98,0.985,0.99,0.995,1},                                 
-                yticklabel style = {anchor=east},
-                % Grid layout 
-                grid=both,
-                grid style={line width=.1pt, draw=gray!10},
-                major grid style={line width=.2pt,draw=gray!50},
-                thick
-            ]
-            % Eta-Sync plot
-            \addplot[signaldelta, domain=320:720] {1/(1+(2.5*2/x))};
-            % label of Eta-Sync
-            \node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:750,0.992) {$\eta_{\mathrm{sync}}$};
-            % Eta-opt plot boost
-            \addplot[signalalpha, domain=320:400] {1/(1+(2.5*((2/x)-(1/400))))};
-            % Eta-opt plot buck
-            \addplot[signalalpha, domain=400:720] {1/(1+(2.5*(1/x)))};
-            % label of Eta-Sync
-            \node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:750,0.997) {$\eta_{\mathrm{opt}}$};
-        \end{axis}
-    \end{tikzpicture}
-    \caption{Efficiency $\eta_{\mathrm{opt}}$ and $\eta_{\mathrm{sync}}$ versus input voltage.}
-    \label{fig:EfficiencyAtInputVoltage}     
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				% x/y range adjustment
+				xmin=300, xmax=820,
+				ymin=0.975, ymax=1.005,
+				samples=500,
+				axis y line=center,
+				axis x line=middle,
+				extra y ticks=0,
+				% Label text
+				xlabel={$U_\mathrm{1} \text{/V}$},
+				ylabel={$\eta$},
+				% Label adjustment                                
+				x label style={at={(axis description cs:1,0)},anchor=west},
+				y label style={at={(axis description cs:-.05,.97)},anchor=south},
+				% ylabel style = {yshift=0.2cm},
+				width=0.6\textwidth,
+				height=0.3\textwidth,
+				% x-Ticks 
+				xtick={300,400,500,600,700,800},
+				xticklabels={300,400,500,600,700,800},
+				xticklabel style = {anchor=north},
+				% y-Ticks
+				ytick={0.975,0.98,0.985,0.99,0.995,1},
+				yticklabels={0.975,0.98,0.985,0.99,0.995,1},
+				yticklabel style = {anchor=east},
+				% Grid layout 
+				grid=both,
+				grid style={line width=.1pt, draw=gray!10},
+				major grid style={line width=.2pt,draw=gray!50},
+				thick
+			]
+			% Eta-Sync plot
+			\addplot[signaldelta, domain=320:720] {1/(1+(2.5*2/x))};
+			% label of Eta-Sync
+			\node[signaldelta, fill=white, inner sep = 1pt, anchor = south] at (axis cs:750,0.992) {$\eta_{\mathrm{sync}}$};
+			% Eta-opt plot boost
+			\addplot[signalalpha, domain=320:400] {1/(1+(2.5*((2/x)-(1/400))))};
+			% Eta-opt plot buck
+			\addplot[signalalpha, domain=400:720] {1/(1+(2.5*(1/x)))};
+			% label of Eta-Sync
+			\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:750,0.997) {$\eta_{\mathrm{opt}}$};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Efficiency $\eta_{\mathrm{opt}}$ and $\eta_{\mathrm{sync}}$ versus input voltage.}
+	\label{fig:EfficiencyAtInputVoltage}
 \end{solutionfigure}
-
-
-
-
-
 

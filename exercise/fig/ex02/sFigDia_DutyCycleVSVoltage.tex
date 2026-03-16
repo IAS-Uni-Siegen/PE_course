@@ -3,45 +3,40 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{solutionfigure}[htb]
-    \centering
-    \begin{tikzpicture}
-        \begin{axis}[
-                % x/y range adjustment            
-                xmin=300, xmax=820,
-                ymin=0.3, ymax=0.65,
-                samples=500,
-                axis y line=center,
-                axis x line=middle,
-                % xtick distance=10,
-                % ytick distance=100,
-                extra y ticks=0,
-                % Label text                
-                xlabel={$U_\mathrm{1} \text{/V}$},
-                ylabel={$D(U_\mathrm{1})$},
-                % Label adjustment                
-                x label style={at={(axis description cs:1,0)},anchor=west},
-                y label style={at={(axis description cs:-.05,.97)},anchor=south},
-                width=0.6\textwidth,
-                height=0.3\textwidth,
-                % x-Ticks
-                xtick={300,400,500,600,700,800},
-                xticklabels={300,400,500,600,700,800},
-                % y-Ticks
-                yticklabel style = {anchor=east,yshift=-0.2cm},
-                % Grid layout
-                grid=both,
-                grid style={line width=.1pt, draw=gray!10},
-                major grid style={line width=.2pt,draw=gray!50},
-            ]
-            \addplot[signaldelta, domain=300:750, thick] {400/(x+400)};
-        \end{axis}
-    \end{tikzpicture}
-    \caption{Duty cycle versus input voltage.}
-    \label{fig:DutyCycleSyncAtInputVoltage}     
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+				% x/y range adjustment            
+				xmin=300, xmax=820,
+				ymin=0.3, ymax=0.65,
+				samples=500,
+				axis y line=center,
+				axis x line=middle,
+				% xtick distance=10,
+				% ytick distance=100,
+				extra y ticks=0,
+				% Label text                
+				xlabel={$U_\mathrm{1} \text{/V}$},
+				ylabel={$D(U_\mathrm{1})$},
+				% Label adjustment                
+				x label style={at={(axis description cs:1,0)},anchor=west},
+				y label style={at={(axis description cs:-.05,.97)},anchor=south},
+				width=0.6\textwidth,
+				height=0.3\textwidth,
+				% x-Ticks
+				xtick={300,400,500,600,700,800},
+				xticklabels={300,400,500,600,700,800},
+				% y-Ticks
+				yticklabel style = {anchor=east,yshift=-0.2cm},
+				% Grid layout
+				grid=both,
+				grid style={line width=.1pt, draw=gray!10},
+				major grid style={line width=.2pt,draw=gray!50},
+			]
+			\addplot[signaldelta, domain=300:750, thick] {400/(x+400)};
+		\end{axis}
+	\end{tikzpicture}
+	\caption{Duty cycle versus input voltage.}
+	\label{fig:DutyCycleSyncAtInputVoltage}
 \end{solutionfigure}
-
-
-
-
-
 

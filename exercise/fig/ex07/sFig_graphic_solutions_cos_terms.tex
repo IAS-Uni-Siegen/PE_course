@@ -3,132 +3,131 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{solutionfigure}[htb]
-    \centering
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        \begin{tikzpicture}
-            \begin{axis}[
-                % x/y range adjustment
-                xmin=-20, xmax=420,
-                ymin=-160, ymax=180,
-                width=7cm, height=7cm,
-                axis lines=middle, 
-                xlabel={$\cos(\varphi)$},
-                ylabel={$\sin(\varphi)$},
-                major grid style={line width=.2pt,draw=gray!50},
-                minor grid style={line width=.1pt,draw=gray!20},
-                xmin=-1.5, xmax=1.5,
-                ymin=-1.5, ymax=1.5,
-                % Label adjustment
-                x label style={at={(axis description cs:1,0.5)},anchor=west},
-                % x-Ticks
-                xtick={-1,0,1},
-                xticklabels={-1,,1},
-                xticklabel style = {anchor=north,shift={(0.25cm,0.1cm)}},
-                % y-Ticks
-                ytick={-1,0,1},
-                yticklabels={-1,,1},
-                yticklabel style = {anchor=east,shift={(0.1cm,0.2cm)}},
-              ]
-              
-              \draw[thick, ->] (0,0) -- ({cos(40)}, {sin(40)}) node[above right] {};
-              \node at ({0.5*cos(40)}, {0.5*sin(40)}) [below] {$\varphi$};
+	\centering
+	\begin{minipage}[t]{0.45\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+					% x/y range adjustment
+					xmin=-20, xmax=420,
+					ymin=-160, ymax=180,
+					width=7cm, height=7cm,
+					axis lines=middle,
+					xlabel={$\cos(\varphi)$},
+					ylabel={$\sin(\varphi)$},
+					major grid style={line width=.2pt,draw=gray!50},
+					minor grid style={line width=.1pt,draw=gray!20},
+					xmin=-1.5, xmax=1.5,
+					ymin=-1.5, ymax=1.5,
+					% Label adjustment
+					x label style={at={(axis description cs:1,0.5)},anchor=west},
+					% x-Ticks
+					xtick={-1,0,1},
+					xticklabels={-1,,1},
+					xticklabel style = {anchor=north,shift={(0.25cm,0.1cm)}},
+					% y-Ticks
+					ytick={-1,0,1},
+					yticklabels={-1,,1},
+					yticklabel style = {anchor=east,shift={(0.1cm,0.2cm)}},
+				]
 
-              \addplot[
-                  domain=0:360, 
-                  samples=200,  
-                  thick,
-                  color=signalalpha,
-              ]
-              ({cos(x)}, {sin(x)}); 
-            \end{axis}
-        \end{tikzpicture}
-    \end{minipage}
-    \hspace{0.5cm}
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        \begin{tikzpicture}
-            \draw[->] (-2,0) -- (2,0) node[right] {}; 
-            \draw[->] (0,-2) -- (0,2) node[above] {}; 
-            \node at (-1.5,1.5) {$\cos\left(k \frac{\pi}{2}\right)$};
-            \node at (-2,0) [left] {$k=2,6,\ldots$}; 
-            \node at (2,0) [right] {$k=0,4,\ldots$}; 
-            \node at (0,2) [above] {$k=1,5,9,13,\ldots$}; 
-            \node at (0,-2) [below] {$k=3,7,11,15,\ldots$}; 
+				\draw[thick, ->] (0,0) -- ({cos(40)}, {sin(40)}) node[above right] {};
+				\node at ({0.5*cos(40)}, {0.5*sin(40)}) [below] {$\varphi$};
 
-            % Kreuz bei jedem markierten Punkt
-            \foreach \x/\y in {-1.5/0, 1.5/0, 0/1.5, 0/-1.5} {
-                \draw[thick]
-                    (\x,\y) +(-0.1,0.1) -- +(0.1,-0.1) % Diagonale des Kreuzes
-                             +(-0.1,-0.1) -- +(0.1,0.1); % Andere Diagonale des Kreuzes
-            }
-        \end{tikzpicture}
-    \end{minipage}
-        
-    \begin{tikzpicture}
-        \draw[->] (-2,0) -- (2,0) node[right] {}; 
-        \draw[->] (0,-2) -- (0,2) node[above] {}; 
-        \node at (-2.7,1.8) {$\cos\left(k \frac{\pi}{3}\right)$};
-        \node at (-0.3,0.4) [left] {$k=3,9,15,21\ldots$}; 
-        \node at (1,0.4) [right] {$k=0,6\ldots$}; 
-        \node at (2,1) [above] {$k=1,7,13,19\ldots$}; 
-        \node at (-1.2,1.6) [below] {$k=2,8\ldots$};
-        \node at (-1.2,-1.1) [below] {$k=4,10\ldots$}; 
-        \node at (2,-1.1) [below] {$k=5,11,17,23\ldots$};
-        \node at (-0.75,-0.3) [left] {-1};
-        \node at (1,-0.3) [left] {0.5};
-        % Kreuz bei jedem markierten Punkt
-        \foreach \x/\y in {-1/0, 1/0, 0.5/1, -0.5/-1, 0.5/-1, -0.5/1} {
-            \draw[thick]
-                (\x,\y) +(-0.1,0.1) -- +(0.1,-0.1) % Diagonale des Kreuzes
-                         +(-0.1,-0.1) -- +(0.1,0.1); % Andere Diagonale des Kreuzes
-        }
-        \draw[thick, color=signalalpha!70!black]
-        (-0.5,1) -- (0.5,-1) -- cycle;
-        \draw[thick, color=signalalpha!70!black]
-        (0.5,1) -- (-0.5,-1) -- cycle;
-        \node[shift={(0.1,0)}, anchor=west] at ({0.5*cos(60)}, {0.5*sin(60)}) [below] {\tiny $60^\circ$};
-        \def\drawArc#1#2#3{
-        \draw[thick] (#1:0) -- (#1:#3) arc (#1:#2:#3) -- cycle;
-    }
-        % Beispiel: Kreissegment von 0 bis 60 Grad mit Radius 0.6
-    \drawArc{0}{63}{0.6}{thick, color=signalalpha!70!black};
+				\addplot[
+					domain=0:360,
+					samples=200,
+					thick,
+					color=signalalpha,
+				]
+				({cos(x)}, {sin(x)});
+			\end{axis}
+		\end{tikzpicture}
+	\end{minipage}
+	\hspace{0.5cm}
+	\begin{minipage}[t]{0.45\textwidth}
+		\centering
+		\begin{tikzpicture}
+			\draw[->] (-2,0) -- (2,0) node[right] {};
+			\draw[->] (0,-2) -- (0,2) node[above] {};
+			\node at (-1.5,1.5) {$\cos\left(k \frac{\pi}{2}\right)$};
+			\node at (-2,0) [left] {$k=2,6,\ldots$};
+			\node at (2,0) [right] {$k=0,4,\ldots$};
+			\node at (0,2) [above] {$k=1,5,9,13,\ldots$};
+			\node at (0,-2) [below] {$k=3,7,11,15,\ldots$};
 
-    \end{tikzpicture}
-    \hspace{2.3cm} % Abstand zwischen den beiden Diagrammen
-    \begin{tikzpicture}
-        % Koordinatensystem zeichnen
-        \draw[->] (-2,0) -- (2,0) node[right] {}; 
-        \draw[->] (0,-2) -- (0,2) node[above] {}; 
-        % \node at (-1.5,1.5) {$\cos\left(k \frac{\pi}{3}\right)+1$};
-        \node at (-1.7,1.8) {$\cos\left(k \frac{\pi}{3}\right)+1$};
-        % Bemerkung
-        \node at (-1.5, -0.6) {Values of};
-        \node at (-1.5, -1.0) {$k=$ even};
-        \node at (-1.5, -1.4) {are omitted.};
-    
-        % Beschriftungen an der x-Achse
-        \node at (-0.00009,-0.2) [left] {0};
-        \foreach \x in { 1, 1.5} {
-            \node at (\x, 0) [below] {\x};
-        }
-    
-        % Beschriftungen an spezifischen Punkten
-        \node at (2,1.1) [above] {$k=1,7,13,19,\ldots$}; 
-        \node at (2,-1.1) [below] {$k=5,11,17,23,\ldots$}; 
-        
-        
-        % Kreuz bei jedem markierten Punkt
-        \foreach \x/\y in {0/0, 1.5/1, 1.5/-1} {
-            \draw[thick]
-                (\x,\y) +(-0.1,0.1) -- +(0.1,-0.1) % Diagonale des Kreuzes
-                         +(-0.1,-0.1) -- +(0.1,0.1); % Andere Diagonale des Kreuzes
-        }
-    
-        % Verbindungslinien zwischen den Punkten
-        \draw[thick, color=signalalpha!70!black]
-            (0,0) -- (1.5,1) -- (1.5,-1) -- cycle;
-    \end{tikzpicture}
-    \caption{Graphical solution of the cos terms within complex plane.}
-    \label{sfig:GraphicalSolutionOfInComplexPlane}
+			% Kreuz bei jedem markierten Punkt
+			\foreach \x/\y in {-1.5/0, 1.5/0, 0/1.5, 0/-1.5} {
+					\draw[thick]
+					(\x,\y) +(-0.1,0.1) -- +(0.1,-0.1) % Diagonale des Kreuzes
+					+(-0.1,-0.1) -- +(0.1,0.1); % Andere Diagonale des Kreuzes
+				}
+		\end{tikzpicture}
+	\end{minipage}
+
+	\begin{tikzpicture}
+		\draw[->] (-2,0) -- (2,0) node[right] {};
+		\draw[->] (0,-2) -- (0,2) node[above] {};
+		\node at (-2.7,1.8) {$\cos\left(k \frac{\pi}{3}\right)$};
+		\node at (-0.3,0.4) [left] {$k=3,9,15,21\ldots$};
+		\node at (1,0.4) [right] {$k=0,6\ldots$};
+		\node at (2,1) [above] {$k=1,7,13,19\ldots$};
+		\node at (-1.2,1.6) [below] {$k=2,8\ldots$};
+		\node at (-1.2,-1.1) [below] {$k=4,10\ldots$};
+		\node at (2,-1.1) [below] {$k=5,11,17,23\ldots$};
+		\node at (-0.75,-0.3) [left] {-1};
+		\node at (1,-0.3) [left] {0.5};
+		% Kreuz bei jedem markierten Punkt
+		\foreach \x/\y in {-1/0, 1/0, 0.5/1, -0.5/-1, 0.5/-1, -0.5/1} {
+				\draw[thick]
+				(\x,\y) +(-0.1,0.1) -- +(0.1,-0.1) % Diagonale des Kreuzes
+				+(-0.1,-0.1) -- +(0.1,0.1); % Andere Diagonale des Kreuzes
+			}
+		\draw[thick, color=signalalpha!70!black]
+		(-0.5,1) -- (0.5,-1) -- cycle;
+		\draw[thick, color=signalalpha!70!black]
+		(0.5,1) -- (-0.5,-1) -- cycle;
+		\node[shift={(0.1,0)}, anchor=west] at ({0.5*cos(60)}, {0.5*sin(60)}) [below] {\tiny $60^\circ$};
+		\def\drawArc#1#2#3{
+			\draw[thick] (#1:0) -- (#1:#3) arc (#1:#2:#3) -- cycle;
+		}
+		% Beispiel: Kreissegment von 0 bis 60 Grad mit Radius 0.6
+		\drawArc{0}{63}{0.6}{thick, color=signalalpha!70!black};
+
+	\end{tikzpicture}
+	\hspace{2.3cm} % Abstand zwischen den beiden Diagrammen
+	\begin{tikzpicture}
+		% Koordinatensystem zeichnen
+		\draw[->] (-2,0) -- (2,0) node[right] {};
+		\draw[->] (0,-2) -- (0,2) node[above] {};
+		% \node at (-1.5,1.5) {$\cos\left(k \frac{\pi}{3}\right)+1$};
+		\node at (-1.7,1.8) {$\cos\left(k \frac{\pi}{3}\right)+1$};
+		% Bemerkung
+		\node at (-1.5, -0.6) {Values of};
+		\node at (-1.5, -1.0) {$k=$ even};
+		\node at (-1.5, -1.4) {are omitted.};
+
+		% Beschriftungen an der x-Achse
+		\node at (-0.00009,-0.2) [left] {0};
+		\foreach \x in { 1, 1.5} {
+				\node at (\x, 0) [below] {\x};
+			}
+
+		% Beschriftungen an spezifischen Punkten
+		\node at (2,1.1) [above] {$k=1,7,13,19,\ldots$};
+		\node at (2,-1.1) [below] {$k=5,11,17,23,\ldots$};
+
+		% Kreuz bei jedem markierten Punkt
+		\foreach \x/\y in {0/0, 1.5/1, 1.5/-1} {
+				\draw[thick]
+				(\x,\y) +(-0.1,0.1) -- +(0.1,-0.1) % Diagonale des Kreuzes
+				+(-0.1,-0.1) -- +(0.1,0.1); % Andere Diagonale des Kreuzes
+			}
+
+		% Verbindungslinien zwischen den Punkten
+		\draw[thick, color=signalalpha!70!black]
+		(0,0) -- (1.5,1) -- (1.5,-1) -- cycle;
+	\end{tikzpicture}
+	\caption{Graphical solution of the cos terms within complex plane.}
+	\label{sfig:GraphicalSolutionOfInComplexPlane}
 \end{solutionfigure}

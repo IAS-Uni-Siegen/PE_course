@@ -3,59 +3,58 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[htb]
-    \begin{center}
-        \begin{circuitikz}
-            % Add voltage U1p
-            \draw (0,0) coordinate (U1) to [open, o-o, v = $U_1$, voltage = straight] ++(0,-5.5) coordinate (Gnd)
-            % Add current
-            (U1) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (jT1c)
-            % Add T1
-            (jT1c) to [Tnpn, n=T1, invert, bodydiode] ++(0,-2) coordinate (jT1e)
-            % Add connection to u2
-            (jT1e) to [short, *-] ++(1,0) to [crossing] ++(2,0) coordinate (ju2)
-            % Add u2 inductor
-            (ju2) to [L, l=$L$, name = L] ++(2,0)  to [short] ++(0.1,0) coordinate (ju2e)          
-            % Add junction to T2
-            (jT1e) to [short] ++(0,-1.5) coordinate (jT2c)
-            % Add T2
-            (jT2c) to [Tnpn, n=T2, invert, bodydiode] ++(0,-2) coordinate (jT2e)
-            % Add connection to T3
-            (jT1c) to [short, *-] ++(2,0) coordinate (jT3c)
-            % Add T3
-            (jT3c) to [Tnpn, n=T3, invert, bodydiode] ++(0,-2) coordinate (jT3e)
-            % Add junction to ju2
-            (jT3e) to [short] ++(0,-0.5) coordinate (jmu2)
-            % Add junction to T4
-            (jmu2) to [short] ++(0,-1) coordinate (jT4c)
-            % Add T4
-            (jT4c) to [Tnpn, n=T4, invert, bodydiode] ++(0,-2) coordinate (jT4e)
-            % Add connection to T2
-            (jT4e) to [short, -*] (jT2e)
-            % Add connection to Gnd U1
-            (jT2e) to [short, -] (Gnd)
-            % Add connection to u2 inductor
-            (jmu2) to [short,-] ++(0,2) coordinate (ju2x)
-            % Add u2ae
-            (ju2e) to [sV=$u_{2\mathrm{i}}(t)$] ++(0,-1.5) coordinate (ju2n)
-            % Add connection of u2in
-            (ju2n) to [short,-*] (jT4c);
+	\begin{center}
+		\begin{circuitikz}
+			% Add voltage U1p
+			\draw (0,0) coordinate (U1) to [open, o-o, v = $U_1$, voltage = straight] ++(0,-5.5) coordinate (Gnd)
+			% Add current
+			(U1) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (jT1c)
+			% Add T1
+			(jT1c) to [Tnpn, n=T1, invert, bodydiode] ++(0,-2) coordinate (jT1e)
+			% Add connection to u2
+			(jT1e) to [short, *-] ++(1,0) to [crossing] ++(2,0) coordinate (ju2)
+			% Add u2 inductor
+			(ju2) to [L, l=$L$, name = L] ++(2,0)  to [short] ++(0.1,0) coordinate (ju2e)
+			% Add junction to T2
+			(jT1e) to [short] ++(0,-1.5) coordinate (jT2c)
+			% Add T2
+			(jT2c) to [Tnpn, n=T2, invert, bodydiode] ++(0,-2) coordinate (jT2e)
+			% Add connection to T3
+			(jT1c) to [short, *-] ++(2,0) coordinate (jT3c)
+			% Add T3
+			(jT3c) to [Tnpn, n=T3, invert, bodydiode] ++(0,-2) coordinate (jT3e)
+			% Add junction to ju2
+			(jT3e) to [short] ++(0,-0.5) coordinate (jmu2)
+			% Add junction to T4
+			(jmu2) to [short] ++(0,-1) coordinate (jT4c)
+			% Add T4
+			(jT4c) to [Tnpn, n=T4, invert, bodydiode] ++(0,-2) coordinate (jT4e)
+			% Add connection to T2
+			(jT4e) to [short, -*] (jT2e)
+			% Add connection to Gnd U1
+			(jT2e) to [short, -] (Gnd)
+			% Add connection to u2 inductor
+			(jmu2) to [short,-] ++(0,2) coordinate (ju2x)
+			% Add u2ae
+			(ju2e) to [sV=$u_{2\mathrm{i}}(t)$] ++(0,-1.5) coordinate (ju2n)
+			% Add connection of u2in
+			(ju2n) to [short,-*] (jT4c);
 
-
-            % Add component name of transistors
-            \draw let \p1 = (T1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
-            \draw let \p1 = (T2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
-            \draw let \p1 = (T3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
-            \draw let \p1 = (T4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
-            % Add current arrows i2
-            \draw (jT1e) ++(3,0) node[currarrow](i2){}
-            (i2)  node[anchor=south,color=black]{$i_\mathrm{2}(t)$}
-            % Add voltage arrows u2
-            (ju2) ++(-0.5,0) to [open,v^=$$,voltage = straight] ++(0,-1.5)
-            (ju2) ++ (0.1,-0.5) node[anchor=north,color=black]{$u_\mathrm{2}(t)$};
-           % (ju2x) ++(0,-0.8) to [open,v^=$u_\mathrm{2}(t)$,voltage = straight] ++(3.8,0);
-        \end{circuitikz}
-    \end{center}
-    \caption{Single-phase AC-DC converter.}
-    \label{fig:Fig_Single-phase_DC_Inverter}
+			% Add component name of transistors
+			\draw let \p1 = (T1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
+			\draw let \p1 = (T2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
+			\draw let \p1 = (T3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
+			\draw let \p1 = (T4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
+			% Add current arrows i2
+			\draw (jT1e) ++(3,0) node[currarrow](i2){}
+			(i2)  node[anchor=south,color=black]{$i_\mathrm{2}(t)$}
+			% Add voltage arrows u2
+			(ju2) ++(-0.5,0) to [open,v^=$$,voltage = straight] ++(0,-1.5)
+			(ju2) ++ (0.1,-0.5) node[anchor=north,color=black]{$u_\mathrm{2}(t)$};
+			% (ju2x) ++(0,-0.8) to [open,v^=$u_\mathrm{2}(t)$,voltage = straight] ++(3.8,0);
+		\end{circuitikz}
+	\end{center}
+	\caption{Single-phase AC-DC converter.}
+	\label{fig:Fig_Single-phase_DC_Inverter}
 \end{figure}
 
