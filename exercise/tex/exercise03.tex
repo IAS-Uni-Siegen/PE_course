@@ -440,11 +440,12 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
 	For the inductor $L_1$ the power is the product of output voltage
 	$U_\mathrm{2}$ and average current calculated by using \eqref{eq:Boostripple}:
 	\begin{equation}
-		P_\mathrm{min}=U_\mathrm{1}\frac{\Delta i_\mathrm{L1}}{2}.
+		P_\mathrm{min}=U_\mathrm{2}\frac{\Delta i_\mathrm{L1}}{2}.
 		\label{eq:PowerL1ripplesepic}
 	\end{equation}
 	\input{./fig/ex03/sFigTab_PowerminSepic} %Solution table Minimal Power 
-	Entering the values in \eqref{eq:PowerL1ripplesepic} leads to \autoref{table:PowerminSepic}. The minimal power, which ensures continuous operation across the entire output voltage range yields $\SI{849}{\watt}$.
+	Entering the values in \eqref{eq:PowerL1ripplesepic} leads to \autoref{table:PowerminSepic}. Similar to the boost-buck converter the minimal power,
+	which ensures continuous operation across the entire output voltage range yields $\SI{1854}{\watt}$.
 
 \end{solutionblock}
 
