@@ -139,10 +139,10 @@ To transform the voltage down efficiently, a buck converter is used.
         U_\mathrm{2} & = \frac{D^\mathrm{2} \cdot T_\mathrm{s} \cdot U_\mathrm{1}^\mathrm{2}} {D^\mathrm{2} \cdot T_\mathrm{s} \cdot U_\mathrm{1}^\mathrm{2}
         + 2 \cdot L \cdot  \overline{i}_\mathrm{2,fault}}                                                                                                      \\
                      & = \frac{D^\mathrm{2} \cdot U_\mathrm{1}^\mathrm{2}} {D^\mathrm{2} \cdot U_\mathrm{1}^\mathrm{2}
-        + 2 \cdot \frac{ L \cdot  \overline{i}_\mathrm{2,fault}}{f_\mathrm{s}}}                                                                                \\
-                     & = \frac{0.1^\mathrm{2} \cdot (\SI{60}{\volt}-\SI{2}{\volt})^\mathrm{2}} {0.1^\mathrm{2} \cdot (\SI{60}{\volt}-\SI{2}{\volt})^\mathrm{2}
-        + 2 \cdot \frac{\SI{54}{\micro\henry} \cdot  \SI{0.25}{\ampere}}{\SI{100}{\kilo\hertz}}}                                                               \\
-                     & = \SI{10.9}{\volt}.
+        + 2 \cdot L \cdot  \overline{i}_\mathrm{2,fault} \cdot f_\mathrm{s}}                                                                                \\
+                     & = \frac{0.085^\mathrm{2} \cdot \SI{60}{\volt}^\mathrm{2}} {0.085^\mathrm{2} \cdot \SI{60}{\volt}^\mathrm{2}
+        + 2 \cdot \SI{54}{\micro\henry} \cdot  \SI{0.25}{\ampere} \cdot \SI{100}{\kilo\hertz}}                                                                 \\
+                     & = \SI{8.3}{\volt}.
     \end{align*}
     %\end{equation*}
 \end{solutionblock}
