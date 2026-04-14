@@ -23,13 +23,13 @@ During testing, increased DC-link ripple is observed and the PWM strategy is que
         \toprule
         Parameter             & Symbol            & Value                     \\
         \midrule
-        Grid voltage (RMS)    & $U_g$             & $\SI{230}{\volt}$         \\
+        Grid voltage (RMS)    & $U_\mathrm{g}$             & $\SI{230}{\volt}$         \\
         Grid frequency        & $f$               & $\SI{50}{\hertz}$         \\
         Grid-side inductance  & $L$               & $\SI{2.5}{\milli\henry}$  \\
-        DC-link voltage       & $U_{dc}$          & $\SI{450}{\volt}$         \\
+        DC-link voltage       & $U_\mathrm{dc}$          & $\SI{450}{\volt}$         \\
         Active power setpoint & $P$               & $\SI{3.0}{\kilo\watt}$    \\
-        DC-link capacitor     & $C_{\mathrm{dc}}$ & $\SI{2.2}{\milli\farad}$  \\
-        Switching period      & $T_s$             & $\SI{100}{\micro\second}$ \\
+        DC-link capacitor     & $C_\mathrm{dc}$ & $\SI{2.2}{\milli\farad}$  \\
+        Switching period      & $T_\mathrm{s}$             & $\SI{100}{\micro\second}$ \\
         PWM reference signal  & $s^*(t)$          & sinusoidal                \\
         \bottomrule
     \end{tabular}
@@ -43,8 +43,8 @@ During testing, increased DC-link ripple is observed and the PWM strategy is que
     Effektivwert des Netzstroms sowie den zugehörigen Spitzenwert des Netzstroms.}
 \begin{solutionblock}
     Grid current at unity power factor is:
-    $$P=U_g I_g \Rightarrow I_g=\frac{\SI{3000}{\watt}}{\SI{230}{\volt}}=\SI{13.04}{\ampere}.$$
-    $$\hat{i}_g=\sqrt{2}I_g=\SI{18.44}{\ampere}. $$
+    $$P=U_\mathrm{g} I_\mathrm{g} \Rightarrow I_\mathrm{g}=\frac{\SI{3000}{\watt}}{\SI{230}{\volt}}=\SI{13.04}{\ampere}.$$
+    $$\hat{i}_\mathrm{g}=\sqrt{2}I_\mathrm{g}=\SI{18.44}{\ampere}. $$
 \end{solutionblock}
 \subtask{Calculate the required converter input-voltage amplitude $\hat{u}_2$ and verify
     whether the nominal DC-link voltage is feasible.}{1}
@@ -52,21 +52,29 @@ During testing, increased DC-link ripple is observed and the PWM strategy is que
     und prüfen Sie, ob die nominelle DC-Zwischenkreisspannung ausreicht.}
 \begin{solutionblock}
     Required converter input-voltage amplitude yields:
-    $$\hat{u}_2=\sqrt{\hat{u}_g^2+(\omega L\hat{i}_g)^2}
+    $$\hat{u}_2=\sqrt{\hat{u}_\mathrm{g}^2+(\omega L\hat{i}_\mathrm{g})^2}
         =\sqrt{(\SI{325.27}{\volt})^2+\bigl(\SI{314.16}{\per\second}\cdot\SI{2.5}{\milli\henry}\cdot\SI{18.44}{\ampere}\bigr)^2}
         =\SI{325.59}{\volt}. $$
-    With $U_{dc}=\SI{450}{\volt}>\hat{u}_2$, the boost rectifier condition is fulfilled.
+    With $U_{\mathrm{dc}}=\SI{450}{\volt}>\hat{u}_2$, the boost rectifier condition is fulfilled.
 \end{solutionblock}
-\subtask{Determine the DC-link voltage oscillation amplitude $\hat{u}_C$.}{4}
-\subtaskGerman{Bestimmen Sie die Amplitude der DC-Zwischenkreis-Spannungsoszillation $\hat{u}_C$.}
+\subtask{Determine the DC-link voltage oscillation amplitude $\hat{u}_\mathrm{C}$.}{4}
+\subtaskGerman{Bestimmen Sie die Amplitude der DC-Zwischenkreis-Spannungsoszillation $\hat{u}_\mathrm{C}$.}
 \begin{solutionblock}
     Calculating the DC-link ripple requires the apparent power at the converter input:
-    $$Q_2=\omega L I_g^2=\SI{314.16}{\per\second}\cdot\SI{2.5}{\milli\henry}\cdot(\SI{13.04}{\ampere})^2=\SI{133.7}{\volt\ampere}.$$
+    $$Q_2=\omega L I_\mathrm{g}^2=\SI{314.16}{\per\second}\cdot\SI{2.5}{\milli\henry}\cdot(\SI{13.04}{\ampere})^2=\SI{133.7}{\volt\ampere}.$$
     $$S_2=\sqrt{P^2+Q_2^2}=\sqrt{(\SI{3000}{\watt})^2+(\SI{133.7}{\volt\ampere})^2}=\SI{3003}{\volt\ampere}. $$
     From lecture Eq. (6.23), the DC-link current ripple amplitude is approximately
-    $$\hat{i}_C\approx\frac{S_2}{U_{dc}}=\frac{3003}{450}=\SI{6.67}{\ampere}. $$
+    $$\hat{i}_\mathrm{C}\approx\frac{S_2}{U_\mathrm{dc}}=\frac{3003}{450}=\SI{6.67}{\ampere}. $$
     Hence, the DC-link voltage ripple amplitude results in
-    $$\hat{u}_C\approx\frac{\hat{i}_C}{2\omega C_{dc}}=\frac{\SI{6.67}{\ampere}}{2\cdot\SI{314.16}{\per\second}\cdot\SI{2.2}{\milli\farad}}=\SI{4.82}{\volt}.$$
+    $$\hat{u}_\mathrm{C}\approx\frac{\hat{i}_\mathrm{C}}{2\omega C_\mathrm{dc}}=\frac{\SI{6.67}{\ampere}}{2\cdot\SI{314.16}{\per\second}\cdot\SI{2.2}{\milli\farad}}=\SI{4.82}{\volt}.$$
+    Alternatively,
+    The average DC-link current follows from the active power balance:
+    $$I_{0}=\frac{P}{U_\mathrm{dc}}=\frac{\SI{3000}{\watt}}{\SI{450}{\volt}}=\SI{6.67}{\ampere}. $$
+    The DC-link voltage ripple amplitude is
+    $$\hat{u}_\mathrm{C} = \hat{u}_1 \approx \frac{\hat{i}_\mathrm{C}}{2\omega C_\mathrm{dc}} = \frac{I_0}{2\omega C_\mathrm{dc}}\sqrt{1 + \left(\frac{\omega L U_\mathrm{dc}}{U^2_\mathrm{g}}\right)^2}.$$
+    Substituting the values yields
+    $$\hat{u}_\mathrm{C} = \frac{\SI{6.67}{\ampere}}{2\cdot\SI{314.16}{\per\second}\cdot\SI{2.2}{\milli\farad}}\sqrt{1 + \left(\frac{\SI{314.16}{\per\second}\cdot\SI{2.5}{\milli\henry}\cdot\SI{450}{\volt}}{\SI{230}{\volt}^2}\right)^2}=\SI{4.82}{\volt}.$$
+
 \end{solutionblock}
 \subtask{The engineering team suspects that the choice of PWM strategy contributes to the observed DC-link ripple.
     Using a sinusoidal reference $s^*(t)=\hat{s}\sin(\omega t)$ and a triangular carrier $c(t)\in[-1,1]$, sketch the switching states of both complementary PWM and interleaved PWM over one fundamental electrical period ($\omega t\in[0,2\pi]$) in the provided templates.
