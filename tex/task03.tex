@@ -43,10 +43,10 @@ with suitable firing angles and acceptable grid impact.
 \subtaskGerman{Berechnen Sie im lückfreien Betrieb die mittlere Ausgangsspannung $\overline{u}_{2,\mathrm{CCM}}$ für $\alpha_0=\SI{70}{\degree}$.}
 \begin{solutionblock}
     Calculate the peak voltage using:
-    $$\hat{u}_1=\sqrt{2}U_1=\SI{325.27}{\volt},\qquad \hat{u}_s=\frac{1}{2}\hat{u}_1=\SI{162.63}{\volt}.$$
+    $$\hat{u}_1=\sqrt{2}U_1=\SI{325.27}{\volt},\qquad \hat{u}_\mathrm{s}=\frac{1}{2}\hat{u}_1=\SI{162.63}{\volt}.$$
 
     Then the output voltage in CCM at $\alpha_0$ is:
-    $$\overline{u}_{2,\mathrm{CCM}}=\hat{u}_s\frac{2}{\pi}\cos\alpha_0=\SI{103.54}{\volt}\cdot\cos(70^\circ)=\SI{35.41}{\volt}.$$
+    $$\overline{u}_{2,\mathrm{CCM}}=\hat{u}_\mathrm{s}\frac{2}{\pi}\cos\alpha_0=\SI{103.54}{\volt}\cdot\cos(70^\circ)=\SI{35.41}{\volt}.$$
 \end{solutionblock}
 \subtask{To correctly set the firing angle in CCM, determine $\alpha_\mathrm{set}$ for
     $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}{1}
@@ -54,7 +54,7 @@ with suitable firing angles and acceptable grid impact.
     $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}
 \begin{solutionblock}
     Firing angle for $\overline{u}_{2,\mathrm{set}}$ in CCM:
-    $$\overline{u}_{2,\mathrm{set}}=\hat{u}_s\frac{2}{\pi}\cos\alpha_{\mathrm{set}}\Rightarrow
+    $$\overline{u}_{2,\mathrm{set}}=\hat{u}_\mathrm{s}\frac{2}{\pi}\cos\alpha_{\mathrm{set}}\Rightarrow
         \cos\alpha_{\mathrm{set}}=\frac{\SI{75}{\volt}}{\SI{103.54}{\volt}}=0.7244,
         \quad \alpha_{\mathrm{set}}\approx\SI{43.6}{\degree}.$$
 \end{solutionblock}
@@ -81,7 +81,7 @@ with suitable firing angles and acceptable grid impact.
 \end{germanhintblock}
 \begin{solutionblock}
     Average output voltage in DCM, at $\alpha_{\mathrm{set}}$, $\beta$:
-    $$\overline{u}_{2,\mathrm{DCM}}=\hat{u}_s\frac{2}{\pi}\sin\!\left(\frac{\beta}{2}\right)\sin\!\left(\alpha_{\mathrm{set}}+\frac{\beta}{2}\right)
+    $$\overline{u}_{2,\mathrm{DCM}}=\hat{u}_\mathrm{s}\frac{2}{\pi}\sin\!\left(\frac{\beta}{2}\right)\sin\!\left(\alpha_{\mathrm{set}}+\frac{\beta}{2}\right)
         =\SI{103.54}{\volt}\cdot\sin(70^\circ)\cdot\sin(113.6^\circ)=\SI{89.06}{\volt}.$$
     The DCM value exceeds the required setpoint of $\SI{75}{\volt}$ and is load-dependent.
     Either, choose higher inductance to avoid DCM at low load, or implement closed-loop control to adjust $\alpha$ and maintain the setpoint regardless of load variations.
