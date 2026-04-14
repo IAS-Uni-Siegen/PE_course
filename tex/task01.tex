@@ -120,7 +120,7 @@ To transform the voltage down efficiently, a buck converter is used.
     Solving this equation with respect to $L$ yields
     \begin{equation*}
         L= \frac{(U_\mathrm{1} -U_\mathrm{T} - U_\mathrm{2}) \cdot D}{\Delta i_\mathrm{L} \cdot f_\mathrm{s}}
-        = \frac{(\SI{60}{\volt} - \SI{0.8}{\volt} - \SI{5.1}{\volt}) \cdot 0.1} {\SI{0.98}{\ampere} \cdot \SI{100}{\kilo\hertz}}
+        = \frac{(\SI{60}{\volt} - \SI{2}{\volt} - \SI{5.1}{\volt}) \cdot 0.1} {\SI{0.98}{\ampere} \cdot \SI{100}{\kilo\hertz}}
         = \SI{54}{\micro\henry}.
     \end{equation*}
 \end{solutionblock}
@@ -133,7 +133,7 @@ To transform the voltage down efficiently, a buck converter is used.
 % Solution of subtask
 \begin{solutionblock}
     The output current is less than the minimal current in BCM. This leads to DCM, which causes an overvoltage.
-    The output voltage is to be calculated by the formula of DCM:
+    The output voltage is to be calculated by the equation for DCM:
     %\begin{equation*}
     \begin{align*}
         U_\mathrm{2} & = \frac{D^\mathrm{2} \cdot T_\mathrm{s} \cdot U_\mathrm{1}^\mathrm{2}} {D^\mathrm{2} \cdot T_\mathrm{s} \cdot U_\mathrm{1}^\mathrm{2}

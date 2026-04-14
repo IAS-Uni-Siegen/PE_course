@@ -80,9 +80,9 @@ so that the buck-boost converter provides a stable output voltage.
     \end{equation*}
     Entering the minimum and maximum input voltage leads yields
     \begin{align*}
-        D_\mathrm{max} & = \frac{\SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}{\SI{3}{\volt} - 2 \cdot \SI{0.5}{\volt}+\SI{0.8}{\volt + \SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}}
+        D_\mathrm{max} & = \frac{\SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}{\SI{3}{\volt} - 2 \cdot \SI{0.5}{\volt} + \SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}
         = 0.77                                                                                                                                                              \\
-        D_\mathrm{min} & = \frac{\SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}{\SI{10}{\volt} - 2 \cdot \SI{0.5}{\volt}+\SI{0.8}{\volt + \SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}}
+        D_\mathrm{min} & = \frac{\SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}{\SI{10}{\volt} - 2 \cdot \SI{0.5}{\volt} + \SI{5}{\volt}+ 2 \cdot \SI{0.8}{\volt}}
         = 0.42.
     \end{align*}
 \end{solutionblock}
@@ -162,7 +162,7 @@ so that the buck-boost converter provides a stable output voltage.
     The term $(1-D)^2$ express, that at minimum duty cycle the highest inductance is needed, to prevent discontinuous conduction mode.
     Therefore $D_\mathrm{min}$ is used delivering
     \begin{equation*}
-        L = \frac{(\SI{5}{\volt}+2 \cdot \SI{0.8}{\volt}) \cdot (1-0.42)^2}{2 \SI{50}{\milli\ampere} \cdot \SI{100}{\kilo\hertz}}
+        L = \frac{(\SI{5}{\volt}+2 \cdot \SI{0.8}{\volt}) \cdot (1-0.42)^2}{2 \cdot \SI{50}{\milli\ampere} \cdot \SI{100}{\kilo\hertz}}
         = \SI{219}{\micro\henry}.
     \end{equation*}
 
@@ -198,22 +198,22 @@ so that the buck-boost converter provides a stable output voltage.
     \end{equation*}
     Replacing $T_\mathrm{on}$ and $T_\mathrm{off}$ by the switching period yields to
     \begin{equation*}
-        \frac{(U_\mathrm{1}-2u_\mathrm{ds,on}) \cdot T_\mathrm{s} \cdot D}{L} =
-        \frac{(U_\mathrm{2}+ u_\mathrm{fw} + u_\mathrm{ds,on}-U_\mathrm{1}) \cdot (1-D) \cdot T_\mathrm{s}}{L}.
+        \frac{(U_\mathrm{1}-2u_\mathrm{ds,on}) \cdot T_\mathrm{s} \cdot D_\mathrm{2}}{L} =
+        \frac{(U_\mathrm{2}+ u_\mathrm{fw} + u_\mathrm{ds,on}-U_\mathrm{1}) \cdot (1-D_\mathrm{2}) \cdot T_\mathrm{s}}{L}.
     \end{equation*}
     After simplifying by canceling $T_\mathrm{s}$ and $L$ we obtain
     \begin{equation*}
-        (U_\mathrm{1}-2u_\mathrm{ds,on}) \cdot D =
-        (U_\mathrm{2}+ u_\mathrm{fw} + u_\mathrm{ds,on}-U_\mathrm{1}) \cdot (1-D).
+        (U_\mathrm{1}-2u_\mathrm{ds,on}) \cdot D_\mathrm{2} =
+        (U_\mathrm{2}+ u_\mathrm{fw} + u_\mathrm{ds,on}-U_\mathrm{1}) \cdot (1-D_\mathrm{2}).
     \end{equation*}
-    Solving this equation with respect to $D$ yields
+    Solving this equation with respect to $D_\mathrm{2}$ yields
     \begin{equation*}
-        D = \frac{U_\mathrm{2}+ u_\mathrm{fw} + u_\mathrm{ds,on}-U_\mathrm{1}}{U_\mathrm{2}+ u_\mathrm{fw} - u_\mathrm{ds,on}}.
+        D_\mathrm{2} = \frac{U_\mathrm{2}+ u_\mathrm{fw} + u_\mathrm{ds,on}-U_\mathrm{1}}{U_\mathrm{2}+ u_\mathrm{fw} - u_\mathrm{ds,on}}.
     \end{equation*}
     For the operation point $U_\mathrm{1}=\SI{3}{\volt}$ we obtain
     \begin{equation*}
-        D_\mathrm{U_\mathrm{1}=\SI{3}{\volt}}=\frac{\SI{5}{\volt}+ \SI{0.8}{\volt} + \SI{0.5}{\volt}-\SI{3}{\volt}}{\SI{5}{\volt} + \SI{0.8}{\volt} - \SI{0.5}{\volt}}
-        = 0.52.
+        D_\mathrm{2,U_\mathrm{1}=\SI{3}{\volt}}=\frac{\SI{5}{\volt}+ \SI{0.8}{\volt} + \SI{0.5}{\volt}-\SI{3}{\volt}}{\SI{5}{\volt} + \SI{0.8}{\volt} - \SI{0.5}{\volt}}
+        = 0.62.
     \end{equation*}
     In buck mode the duty cycle $D_\mathrm{2}=0$ so that $T_\mathrm{2}$ always blocks.
     The duty cycle for the buck mode is calculated using the inductor current balance equation
@@ -234,22 +234,22 @@ so that the buck-boost converter provides a stable output voltage.
     \end{equation*}
     Replacing $T_\mathrm{on}$ and $T_\mathrm{off}$ by the switching period yields to
     \begin{equation*}
-        \frac{(U_\mathrm{1}-u_\mathrm{ds,on} - u_\mathrm{fw} - U_\mathrm{2}) \cdot T_\mathrm{s} \cdot D}{L} =
-        \frac{(U_\mathrm{2} + 2 u_\mathrm{fw}) \cdot (1-D) \cdot T_\mathrm{s}}{L}.
+        \frac{(U_\mathrm{1}-u_\mathrm{ds,on} - u_\mathrm{fw} - U_\mathrm{2}) \cdot T_\mathrm{s} \cdot D_\mathrm{1}}{L} =
+        \frac{(U_\mathrm{2} + 2 u_\mathrm{fw}) \cdot (1-D_\mathrm{1}) \cdot T_\mathrm{s}}{L}.
     \end{equation*}
     After simplifying by canceling $T_\mathrm{s}$ and $L$, we obtain
     \begin{equation*}
-        (U_\mathrm{1}-u_\mathrm{ds,on} - u_\mathrm{fw} - U_\mathrm{2}) \cdot D =
-        (U_\mathrm{2} + 2 u_\mathrm{fw}) \cdot (1-D).
+        (U_\mathrm{1}-u_\mathrm{ds,on} - u_\mathrm{fw} - U_\mathrm{2}) \cdot D_\mathrm{1} =
+        (U_\mathrm{2} + 2 u_\mathrm{fw}) \cdot (1-D_\mathrm{1}).
     \end{equation*}
-    Solving this equation with respect to $D$ yields
+    Solving this equation with respect to $D_\mathrm{1}$ yields
     \begin{equation*}
-        D = \frac{U_\mathrm{2}+ 2 u_\mathrm{fw}}{U_\mathrm{1}-u_\mathrm{ds,on} + u_\mathrm{fw}}.
+        D_\mathrm{1} = \frac{U_\mathrm{2}+ 2 u_\mathrm{fw}}{U_\mathrm{1}-u_\mathrm{ds,on} + u_\mathrm{fw}}.
     \end{equation*}
     For the operation points $U_\mathrm{1}=\SI{7.5}{\volt}$ and $U_\mathrm{1}=\SI{10}{\volt}$ we obtain
     \begin{align*}
-        D_\mathrm{U_\mathrm{1} = \SI{7.5}{\volt}} & =\frac{\SI{5}{\volt} + 2 \cdot \SI{0.8}{\volt}}{\SI{7.5}{\volt} - \SI{0.5}{\volt} + \SI{0.8}{\volt}} = 0.85, \\
-        D_\mathrm{U_\mathrm{1} = \SI{10}{\volt}}  & =\frac{\SI{5}{\volt} + 2 \cdot \SI{0.8}{\volt}} {\SI{10}{\volt} - \SI{0.5}{\volt} + \SI{0.8}{\volt}} = 0.64.
+        D_\mathrm{1, U_\mathrm{1} = \SI{7.5}{\volt}} & =\frac{\SI{5}{\volt} + 2 \cdot \SI{0.8}{\volt}}{\SI{7.5}{\volt} - \SI{0.5}{\volt} + \SI{0.8}{\volt}} = 0.85, \\
+        D_\mathrm{1, U_\mathrm{1} = \SI{10}{\volt}}  & =\frac{\SI{5}{\volt} + 2 \cdot \SI{0.8}{\volt}} {\SI{10}{\volt} - \SI{0.5}{\volt} + \SI{0.8}{\volt}} = 0.64.
     \end{align*}
 
 \end{solutionblock}
