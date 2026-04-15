@@ -1,0 +1,130 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Task 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\task{Transistor-based AC/DC converter (single-phase AFE)}
+
+\taskGerman{Transistorbasierter AC/DC-Umrichter}
+
+An electric-drive test bench is connected to a single-phase grid via a full-bridge transistor AFE rectifier.
+The converter should operate with approximately unity power factor and a stable DC-link voltage.
+During testing, increased DC-link ripple is observed and the PWM strategy is questioned.
+
+\begin{germanblock}
+    Ein elektrischer Antriebsprüfstand ist über einen einphasigen Vollbrücken-Transistor-Gleichrichter
+    an das Netz angeschlossen. Der Umrichter soll mit näherungsweise Leistungsfaktor Eins und stabiler
+    DC-Zwischenkreisspannung betrieben werden. Während der Tests wird eine erhöhte Zwischenkreiswelligkeit
+    beobachtet und die PWM-Strategie wird hinterfragt.
+\end{germanblock}
+
+\input{fig/Task04/Single-phase_DC_Inverter.tex}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{lll}
+        \toprule
+        Parameter             & Symbol            & Value                     \\
+        \midrule
+        Grid voltage (RMS)    & $U_\mathrm{g}$             & $\SI{230}{\volt}$         \\
+        Grid frequency        & $f$               & $\SI{50}{\hertz}$         \\
+        Grid-side inductance  & $L$               & $\SI{2.5}{\milli\henry}$  \\
+        DC-link voltage       & $U_\mathrm{dc}$          & $\SI{450}{\volt}$         \\
+        Active power setpoint & $P$               & $\SI{3.0}{\kilo\watt}$    \\
+        DC-link capacitor     & $C_\mathrm{dc}$ & $\SI{2.2}{\milli\farad}$  \\
+        Switching period      & $T_\mathrm{s}$             & $\SI{100}{\micro\second}$ \\
+        PWM reference signal  & $s^*(t)$          & sinusoidal                \\
+        \bottomrule
+    \end{tabular}
+    \caption{Nominal operating parameters of the single-phase AFE rectifier.}
+    \label{tab:task04_parameters}
+\end{table}
+
+\subtask{For approximately unity power factor operation, determine the required grid current RMS value and
+    the corresponding grid current peak value.}{2}
+\subtaskGerman{Bestimmen Sie für den Betrieb mit näherungsweise Leistungsfaktor Eins den erforderlichen
+    Effektivwert des Netzstroms sowie den zugehörigen Spitzenwert des Netzstroms.}
+\begin{solutionblock}
+    Grid current at unity power factor is:
+    $$P=U_\mathrm{g} I_\mathrm{g} \Rightarrow I_\mathrm{g}=\frac{\SI{3000}{\watt}}{\SI{230}{\volt}}=\SI{13.04}{\ampere}.$$
+    $$\hat{i}_\mathrm{g}=\sqrt{2}I_\mathrm{g}=\SI{18.44}{\ampere}. $$
+\end{solutionblock}
+\subtask{Calculate the required converter input-voltage amplitude $\hat{u}_2$ and verify
+    whether the nominal DC-link voltage is feasible.}{1}
+\subtaskGerman{Berechnen Sie aus der komplexen Zeigerbeziehung die erforderliche Amplitude der Umrichtereingangsspannung $\hat{u}_2$
+    und prüfen Sie, ob die nominelle DC-Zwischenkreisspannung ausreicht.}
+\begin{solutionblock}
+    Required converter input-voltage amplitude yields:
+    $$\hat{u}_2=\sqrt{\hat{u}_\mathrm{g}^2+(\omega L\hat{i}_\mathrm{g})^2}
+        =\sqrt{(\SI{325.27}{\volt})^2+\bigl(\SI{314.16}{\per\second}\cdot\SI{2.5}{\milli\henry}\cdot\SI{18.44}{\ampere}\bigr)^2}
+        =\SI{325.59}{\volt}. $$
+    With $U_{\mathrm{dc}}=\SI{450}{\volt}>\hat{u}_2$, the boost rectifier condition is fulfilled.
+\end{solutionblock}
+\subtask{Determine the DC-link voltage oscillation amplitude $\hat{u}_\mathrm{C}$.}{4}
+\subtaskGerman{Bestimmen Sie die Amplitude der DC-Zwischenkreis-Spannungsoszillation $\hat{u}_\mathrm{C}$.}
+\begin{solutionblock}
+    Calculating the DC-link ripple requires the apparent power at the converter input:
+    $$Q_2=\omega L I_\mathrm{g}^2=\SI{314.16}{\per\second}\cdot\SI{2.5}{\milli\henry}\cdot(\SI{13.04}{\ampere})^2=\SI{133.7}{\volt\ampere}.$$
+    $$S_2=\sqrt{P^2+Q_2^2}=\sqrt{(\SI{3000}{\watt})^2+(\SI{133.7}{\volt\ampere})^2}=\SI{3003}{\volt\ampere}. $$
+    From lecture Eq. (6.23), the DC-link current ripple amplitude is approximately
+    $$\hat{i}_\mathrm{C}\approx\frac{S_2}{U_\mathrm{dc}}=\frac{3003}{450}=\SI{6.67}{\ampere}. $$
+    Hence, the DC-link voltage ripple amplitude results in
+    $$\hat{u}_\mathrm{C}\approx\frac{\hat{i}_\mathrm{C}}{2\omega C_\mathrm{dc}}=\frac{\SI{6.67}{\ampere}}{2\cdot\SI{314.16}{\per\second}\cdot\SI{2.2}{\milli\farad}}=\SI{4.82}{\volt}.$$
+    Alternatively,
+    The average DC-link current follows from the active power balance:
+    $$I_{0}=\frac{P}{U_\mathrm{dc}}=\frac{\SI{3000}{\watt}}{\SI{450}{\volt}}=\SI{6.67}{\ampere}. $$
+    The DC-link voltage ripple amplitude is
+    $$\hat{u}_\mathrm{C} = \hat{u}_1 \approx \frac{\hat{i}_\mathrm{C}}{2\omega C_\mathrm{dc}} = \frac{I_0}{2\omega C_\mathrm{dc}}\sqrt{1 + \left(\frac{\omega L U_\mathrm{dc}}{U^2_\mathrm{g}}\right)^2}.$$
+    Substituting the values yields
+    $$\hat{u}_\mathrm{C} = \frac{\SI{6.67}{\ampere}}{2\cdot\SI{314.16}{\per\second}\cdot\SI{2.2}{\milli\farad}}\sqrt{1 + \left(\frac{\SI{314.16}{\per\second}\cdot\SI{2.5}{\milli\henry}\cdot\SI{450}{\volt}}{\SI{230}{\volt}^2}\right)^2}=\SI{4.82}{\volt}.$$
+
+\end{solutionblock}
+\subtask{The engineering team suspects that the choice of PWM strategy contributes to the observed DC-link ripple.
+    Using a sinusoidal reference $s^*(t)=\hat{s}\sin(\omega t)$ and a triangular carrier $c(t)\in[-1,1]$, sketch the switching states of both complementary PWM and interleaved PWM over one fundamental electrical period ($\omega t\in[0,2\pi]$) in the provided templates.
+    Finally, explain which strategy produces a lower AC-side current ripple in $L$ and why this reduces stress on the DC-link capacitor $C_{\mathrm{dc}}$.}{4}
+\subtaskGerman{Das Engineering-Team vermutet, dass die Wahl der PWM-Strategie zur beobachteten DC-Zwischenkreiswelligkeit beiträgt.
+    Verwenden Sie ein sinusförmiges Referenzsignal $s^*(t)=\hat{s}\sin(\omega t)$ und einen Dreiecksträger $c(t)\in[-1,1]$, und skizzieren Sie die Schaltzustände beider Strategien (Komplementär-PWM und Überlagerungs-PWM) über eine elektrische Grundperiode ($\omega t\in[0,2\pi]$) in den bereitgestellten Vorlagen.
+    Erläutern Sie abschließend, welche Strategie eine geringere netzstromseitige Stromwelligkeit in $L$ erzeugt und warum dies die Belastung des DC-Zwischen\-kreis\-kon\-den\-sa\-tors $C_{\mathrm{dc}}$ verringert.}
+\input{fig/Task04/Fig_subtask4.5_pwm_template_complementary.tex}
+\input{fig/Task04/Fig_subtask4.5_pwm_template_interleaved.tex}
+\begin{solutionblock}
+    Given:
+    The modulation reference is sinusoidal, $s^*(t)=\hat{s}\sin(\omega t)$. The sketches are shown over one fundamental electrical period ($\omega t\in[0,2\pi]$).
+
+    1) Complementary PWM
+    $$s_1(t)=\begin{cases}
+            +1, & s^*(t)>c(t)    \\
+            -1, & s^*(t)\le c(t)
+        \end{cases},\qquad s_2(t)=-s_1(t).$$
+    The equivalent converter state is
+    $$s_{\mathrm{cs}}(t)=\frac{s_1(t)-s_2(t)}{2}=s_1(t)\in\{+1,-1\}. $$
+
+    2) Interleaved PWM
+    $$s_1(t)=\begin{cases}
+            +1, & s^*(t)>c(t)    \\
+            -1, & s^*(t)\le c(t)
+        \end{cases},\qquad
+        s_2(t)=\begin{cases}
+            +1, & -s^*(t)>c(t)    \\
+            -1, & -s^*(t)\le c(t)
+        \end{cases}. $$
+    The equivalent three-level state is
+    $$s_{\mathrm{is}}(t)=\frac{s_1(t)-s_2(t)}{2}\in\{+1,0,-1\}. $$
+    A correct sketch over one electrical period shows transition instants at the intersections of $c(t)$ with $s^*(t)$ and $-s^*(t)$.
+
+    What must be visible in the plots:
+    \begin{itemize}
+        \item Complementary PWM: one carrier $c(t)$, one reference $s^*(t)$, states $s_1,s_2$, and resulting $s\in\{+1,-1\}$.
+        \item Interleaved PWM: one carrier $c(t)$, both references $s^*(t)$ and $-s^*(t)$, states $s_1,s_2$, and resulting $s\in\{+1,0,-1\}$.
+    \end{itemize}
+
+    \input{fig/Task04/sFig_subtask4.5_pwm_solution_complementary.tex}
+    \input{fig/Task04/sFig_subtask4.5_pwm_solution_interleaved.tex}
+
+    Comparison and impact on DC-link ripple:
+
+    Complementary PWM produces a two-level converter output state ($\pm1$), while interleaved PWM produces a three-level output state ($+1,0,-1$).
+    The additional zero level in interleaved PWM reduces the effective voltage steps across $L$ and therefore reduces the AC-side current ripple.
+    Since the high-frequency capacitor current is caused by the switching ripple power of the converter,
+    the smaller inductor current ripple of interleaved PWM reduces the current stress of $C_{\mathrm{dc}}$
+    and therefore lowers the DC-link voltage ripple $\Delta U_{dc,pp}$ observed in the previous subtask.
+    Interleaved PWM is therefore the preferable strategy.
+    \vfill
+\end{solutionblock}

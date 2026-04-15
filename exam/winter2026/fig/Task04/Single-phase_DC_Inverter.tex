@@ -1,0 +1,25 @@
+\begin{figure}[h]
+    \centering
+    \begin{circuitikz}
+        \draw (0,0) node[cute spdt up arrow] (Sw1) {};
+        \draw (-2,-1.5) node[cute spdt down arrow] (Sw2) {};
+        \draw (Sw2.in) to [short, -o] ++(-1,0) coordinate (out2);
+        \draw (Sw1.in) to [short] ++(-1.75,0) to [short, -o, i_<=$i_2(t)$] (Sw1.in -| out2) coordinate (out1);
+        \draw (out1) to [open, v^=$u_2(t)$, voltage = straight, voltage shift=1.5] (out2);
+        \draw (Sw1-out 1.n) to [short, -*] ++(0,0.5) coordinate (int1);
+        \draw (Sw2-out 2.s) to [short] ++(0,-0.5) coordinate (int2);
+        \draw (int2) to [short] (int2 -| Sw1-out 2.s) coordinate (int3) to [short, *-] (Sw1-out 2.s);
+        \draw node[crossingshape, name=x1, rotate=-90] at (out1 -| Sw2-out 1.n) {};
+        \draw (x1.west) to [short] (int1 -| x1.west) to [short] (int1);
+        \draw (x1.east) to [short] (Sw2-out 1.n);
+        \draw (int1) to [short,i=$i_1(t)$] ++(1.5,0) coordinate (c1) to [short, i={$I_0$}, -o] ++(1,0) coordinate (in1);
+        \draw (int3) to [short, -o] ++(2.5,0) coordinate (in2);
+        \draw (in1) to [open, v^=$u_1(t)$, voltage = straight, voltage shift=1.5] (in2);
+        \draw node[anchor = west, xshift=0.3cm] at (Sw1) {$s_1(t)$};
+        \draw node[anchor = west, xshift=0.3cm] at (Sw2) {$s_2(t)$};
+        \draw (c1) to [capacitor, *-*, l=$C$, i_=$i_\mathrm{C}(t)$] (c1 |- int2);
+        \draw (out1) to [inductor, v<=$u_{\mathrm{L}}(t)$, voltage = straight, l=$L$, mirror, o-] ++(-2.5,0) to [sinusoidal voltage source, v_=$u_{\mathrm{g}}(t)$] (\tikztostart |- out2) to [short,-o] (out2);
+    \end{circuitikz}
+    \caption{Single-phase grid rectification. Also known as active front end (AFE) rectifier.}
+    \label{fig:recitifier_single_phase_transistor_bridge_converter}
+\end{figure}
