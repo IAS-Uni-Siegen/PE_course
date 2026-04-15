@@ -12,108 +12,108 @@ After product quality issues, the engineering team must verify whether the conve
 with suitable firing angles and acceptable grid impact.
 
 \begin{germanblock}
-    In einem Galvanikprozess wird ein einphasiger, zweipulsiger Mittelpunkt-Thyristorumrichter (M2C)
-    mit mittig angezapftem Transformator als einstellbare DC-Quelle eingesetzt.
-    Nach Qualitätsproblemen muss das Engineering-Team prüfen, ob geeignete Zündwinkel eingestellt sind
-    und ob die Netzbelastung innerhalb zulässiger Grenzen liegt.
+	In einem Galvanikprozess wird ein einphasiger, zweipulsiger Mittelpunkt-Thyristorumrichter (M2C)
+	mit mittig angezapftem Transformator als einstellbare DC-Quelle eingesetzt.
+	Nach Qualitätsproblemen muss das Engineering-Team prüfen, ob geeignete Zündwinkel eingestellt sind
+	und ob die Netzbelastung innerhalb zulässiger Grenzen liegt.
 \end{germanblock}
 
 \input{fig/Task03/M2C_with_output_filter.tex}
 
 \begin{table}[ht]
-    \centering
-    \begin{tabular}{lll}
-        \toprule
-        Parameter                            & Symbol                          & Value               \\
-        \midrule
-        Primary grid voltage (RMS)           & $U_1$                           & $\SI{230}{\volt}$   \\
-        Grid frequency                       & $f_1$                           & $\SI{50}{\hertz}$   \\
-        Transformer turns ratio              & $N_2/N_1$                       & $1.0$               \\
-        Firing angle (normal operation)      & $\alpha_0$                      & $\SI{70}{\degree}$  \\
-        DCM conduction angle (low-load case) & $\beta$                         & $\SI{140}{\degree}$ \\
-        Average output current (CCM)         & $I_2$                           & $\SI{30}{\ampere}$  \\
-        Required plating voltage setpoint    & $\overline{u}_{2,\mathrm{set}}$ & $\SI{75}{\volt}$    \\
-        \bottomrule
-    \end{tabular}
-    \caption{M2C operation parameters.}
-    \label{tab:task03_parameters}
+	\centering
+	\begin{tabular}{lll}
+		\toprule
+		Parameter                            & Symbol                          & Value               \\
+		\midrule
+		Primary grid voltage (RMS)           & $U_1$                           & $\SI{230}{\volt}$   \\
+		Grid frequency                       & $f_1$                           & $\SI{50}{\hertz}$   \\
+		Transformer turns ratio              & $N_2/N_1$                       & $1.0$               \\
+		Firing angle (normal operation)      & $\alpha_0$                      & $\SI{70}{\degree}$  \\
+		DCM conduction angle (low-load case) & $\beta$                         & $\SI{140}{\degree}$ \\
+		Average output current (CCM)         & $I_2$                           & $\SI{30}{\ampere}$  \\
+		Required plating voltage setpoint    & $\overline{u}_{2,\mathrm{set}}$ & $\SI{75}{\volt}$    \\
+		\bottomrule
+	\end{tabular}
+	\caption{M2C operation parameters.}
+	\label{tab:task03_parameters}
 \end{table}
 
 \subtask{In continuous conduction mode (CCM), calculate the average output voltage $\overline{u}_{2,\mathrm{CCM}}$ for the firing angle $\alpha_0=\SI{70}{\degree}$.}{2}
 \subtaskGerman{Berechnen Sie im lückfreien Betrieb die mittlere Ausgangsspannung $\overline{u}_{2,\mathrm{CCM}}$ für $\alpha_0=\SI{70}{\degree}$.}
 \begin{solutionblock}
-    Calculate the peak voltage using:
-    $$\hat{u}_1=\sqrt{2}U_1=\SI{325.27}{\volt},\qquad \hat{u}_\mathrm{s}=\frac{1}{2}\hat{u}_1=\SI{162.63}{\volt}.$$
+	Calculate the peak voltage using:
+	$$\hat{u}_1=\sqrt{2}U_1=\SI{325.27}{\volt},\qquad \hat{u}_\mathrm{s}=\frac{1}{2}\hat{u}_1=\SI{162.63}{\volt}.$$
 
-    Then the output voltage in CCM at $\alpha_0$ is:
-    $$\overline{u}_{2,\mathrm{CCM}}=\hat{u}_\mathrm{s}\frac{2}{\pi}\cos\alpha_0=\SI{103.54}{\volt}\cdot\cos(70^\circ)=\SI{35.41}{\volt}.$$
+	Then the output voltage in CCM at $\alpha_0$ is:
+	$$\overline{u}_{2,\mathrm{CCM}}=\hat{u}_\mathrm{s}\frac{2}{\pi}\cos\alpha_0=\SI{103.54}{\volt}\cdot\cos(70^\circ)=\SI{35.41}{\volt}.$$
 \end{solutionblock}
 \subtask{To correctly set the firing angle in CCM, determine $\alpha_\mathrm{set}$ for
-    $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}{1}
+	$\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}{1}
 \subtaskGerman{Bestimmen Sie zur Einstellung des korrekten Zündwinkels im lückfreien Betrieb den Winkel $\alpha_\mathrm{set}$ für
-    $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}
+	$\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.}
 \begin{solutionblock}
-    Firing angle for $\overline{u}_{2,\mathrm{set}}$ in CCM:
-    $$\overline{u}_{2,\mathrm{set}}=\hat{u}_\mathrm{s}\frac{2}{\pi}\cos\alpha_{\mathrm{set}}\Rightarrow
-        \cos\alpha_{\mathrm{set}}=\frac{\SI{75}{\volt}}{\SI{103.54}{\volt}}=0.7244,
-        \quad \alpha_{\mathrm{set}}\approx\SI{43.6}{\degree}.$$
+	Firing angle for $\overline{u}_{2,\mathrm{set}}$ in CCM:
+	$$\overline{u}_{2,\mathrm{set}}=\hat{u}_\mathrm{s}\frac{2}{\pi}\cos\alpha_{\mathrm{set}}\Rightarrow
+		\cos\alpha_{\mathrm{set}}=\frac{\SI{75}{\volt}}{\SI{103.54}{\volt}}=0.7244,
+		\quad \alpha_{\mathrm{set}}\approx\SI{43.6}{\degree}.$$
 \end{solutionblock}
 \subtask{In open-loop operation with fixed firing angle $\alpha$, explain why the converter can enter discontinuous conduction mode (DCM) at low load, why this complicates maintaining a constant plating voltage, and how this affects the final quality.}{2}
 \subtaskGerman{Erläutern Sie beim gesteuerten Betrieb mit festem Zündwinkel $\alpha_0$, warum der Umrichter bei kleiner Last in den Lückbetrieb übergehen kann, warum dadurch eine konstante Galvanikspannung schwieriger einzuhalten ist und wie sich dies auf die Endqualität auswirkt.}
 \begin{solutionblock}
-    At low load, the demanded output current decreases and can reach zero before the next thyristor pair is triggered.
-    This interrupts conduction and the converter changes from CCM to DCM.
-    In DCM, the average output voltage depends not only on $\alpha$ but also on the load-dependent conduction interval ($\beta$).
-    So a fixed firing angle can no longer guarantee a constant plating voltage, causing unpredictable plating conditions and inconsistent product quality.
+	At low load, the demanded output current decreases and can reach zero before the next thyristor pair is triggered.
+	This interrupts conduction and the converter changes from CCM to DCM.
+	In DCM, the average output voltage depends not only on $\alpha$ but also on the load-dependent conduction interval ($\beta$).
+	So a fixed firing angle can no longer guarantee a constant plating voltage, causing unpredictable plating conditions and inconsistent product quality.
 \end{solutionblock}
 \subtask{Assuming low-load operation, the converter enters DCM with $\beta=\SI{140}{\degree}$.
-    Calculate $\overline{u}_{2,\mathrm{DCM}}$ for $\alpha_\mathrm{set}$ from subtask 3.2, and compare it to the required setpoint $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
-    Briefly explain how to avoid load-dependent output voltage.}{2}
+	Calculate $\overline{u}_{2,\mathrm{DCM}}$ for $\alpha_\mathrm{set}$ from subtask 3.2, and compare it to the required setpoint $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
+	Briefly explain how to avoid load-dependent output voltage.}{2}
 \begin{hintblock}
-    If you did not find $\alpha_\mathrm{set}$ in subtask 3.2, use $\alpha_0$ instead.
+	If you did not find $\alpha_\mathrm{set}$ in subtask 3.2, use $\alpha_0$ instead.
 \end{hintblock}
 \subtaskGerman{Bei Teillast geht der Umrichter in den Lückbetrieb mit $\beta=\SI{140}{\degree}$ über.
-    Berechnen Sie $\overline{u}_{2,\mathrm{DCM}}$ für $\alpha_\mathrm{set}$ aus Teilaufgabe 3.2 und vergleichen Sie den Wert mit dem Sollwert $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
-    Erläutern Sie kurz, wie dieses Problem adressiert werden kann.}
+	Berechnen Sie $\overline{u}_{2,\mathrm{DCM}}$ für $\alpha_\mathrm{set}$ aus Teilaufgabe 3.2 und vergleichen Sie den Wert mit dem Sollwert $\overline{u}_{2,\mathrm{set}}=\SI{75}{\volt}$.
+	Erläutern Sie kurz, wie dieses Problem adressiert werden kann.}
 
 \begin{germanhintblock}
-    Falls Sie $\alpha_\mathrm{set}$ in Teilaufgabe 3.2 nicht bestimmt haben, verwenden Sie stattdessen $\alpha_0$.
+	Falls Sie $\alpha_\mathrm{set}$ in Teilaufgabe 3.2 nicht bestimmt haben, verwenden Sie stattdessen $\alpha_0$.
 \end{germanhintblock}
 \begin{solutionblock}
-    Average output voltage in DCM, at $\alpha_{\mathrm{set}}$, $\beta$:
-    $$\overline{u}_{2,\mathrm{DCM}}=\hat{u}_\mathrm{s}\frac{2}{\pi}\sin\!\left(\frac{\beta}{2}\right)\sin\!\left(\alpha_{\mathrm{set}}+\frac{\beta}{2}\right)
-        =\SI{103.54}{\volt}\cdot\sin(70^\circ)\cdot\sin(113.6^\circ)=\SI{89.06}{\volt}.$$
-    The DCM value exceeds the required setpoint of $\SI{75}{\volt}$ and is load-dependent.
-    Either, choose higher inductance to avoid DCM at low load, or implement closed-loop control to adjust $\alpha$ and maintain the setpoint regardless of load variations.
-    %  Therefore, closed-loop voltage control (adjusting $\alpha$ online) is required to maintain the setpoint under load variations.
+	Average output voltage in DCM, at $\alpha_{\mathrm{set}}$, $\beta$:
+	$$\overline{u}_{2,\mathrm{DCM}}=\hat{u}_\mathrm{s}\frac{2}{\pi}\sin\!\left(\frac{\beta}{2}\right)\sin\!\left(\alpha_{\mathrm{set}}+\frac{\beta}{2}\right)
+		=\SI{103.54}{\volt}\cdot\sin(70^\circ)\cdot\sin(113.6^\circ)=\SI{89.06}{\volt}.$$
+	The DCM value exceeds the required setpoint of $\SI{75}{\volt}$ and is load-dependent.
+	Either, choose higher inductance to avoid DCM at low load, or implement closed-loop control to adjust $\alpha$ and maintain the setpoint regardless of load variations.
+	%  Therefore, closed-loop voltage control (adjusting $\alpha$ online) is required to maintain the setpoint under load variations.
 \end{solutionblock}
 \subtask{At this new operating point ($\alpha=\alpha_\mathrm{set}$, $I_2=\SI{30}{\ampere}$), calculate the fundamental current $I_1^{(1)}$ and power components
-    $P_1$, $Q_1^{(1)}$, and $S_1^{(1)}$.}{3}
+	$P_1$, $Q_1^{(1)}$, and $S_1^{(1)}$.}{3}
 \begin{hintblock}
-    If you did not find $\alpha_\mathrm{set}$ in subtask 3.2, use $\alpha_0$ instead.
+	If you did not find $\alpha_\mathrm{set}$ in subtask 3.2, use $\alpha_0$ instead.
 \end{hintblock}
 \subtaskGerman{Berechnen Sie für den neuen Betriebspunkt ($\alpha=\alpha_\mathrm{set}$, $I_2=\SI{30}{\ampere}$) den Grundanteil der Strom- und Leistungsgrößen
-    $I_1^{(1)}$, $P_1$, $Q_1^{(1)}$ und $S_1^{(1)}$. Falls Sie zuvor $\alpha_\mathrm{set}$ nicht berechnen konnten, verwenden Sie stattdessen $\alpha_\mathrm{0}$.}
+	$I_1^{(1)}$, $P_1$, $Q_1^{(1)}$ und $S_1^{(1)}$. Falls Sie zuvor $\alpha_\mathrm{set}$ nicht berechnen konnten, verwenden Sie stattdessen $\alpha_\mathrm{0}$.}
 
 \begin{germanhintblock}
-    Falls Sie $\alpha_\mathrm{set}$ in Teilaufgabe 3.2 nicht bestimmt haben, verwenden Sie stattdessen $\alpha_0$.
+	Falls Sie $\alpha_\mathrm{set}$ in Teilaufgabe 3.2 nicht bestimmt haben, verwenden Sie stattdessen $\alpha_0$.
 \end{germanhintblock}
 \begin{solutionblock}
-    Fundamental complex power at $\alpha_{\mathrm{set}}$:\\
-    Given that $$\frac{N2}{N1} = 1.$$
-    Then
-    $$I_1^{(1)}=\frac{\sqrt{2}}{\pi}I_2=\SI{13.50}{\ampere}.$$
-    $$S_1^{(1)}=I_2\hat{u}_{s0}=\SI{3106}{\volt\ampere}, \qquad \text{where} \quad \hat{u}_{s0} = \hat{u}_{s}\frac{2}{\pi}$$
-    $$P_1=I_2\hat{u}_{s0}\cos\alpha_{\mathrm{set}}=\SI{2250}{\watt},\qquad
-        Q_1^{(1)}=I_2\hat{u}_{s0}\sin\alpha_{\mathrm{set}}=\SI{2142}{\volt\ampere}.$$
+	Fundamental complex power at $\alpha_{\mathrm{set}}$:\\
+	Given that $$\frac{N2}{N1} = 1.$$
+	Then
+	$$I_1^{(1)}=\frac{\sqrt{2}}{\pi}I_2=\SI{13.50}{\ampere}.$$
+	$$S_1^{(1)}=I_2\hat{u}_{s0}=\SI{3106}{\volt\ampere}, \qquad \text{where} \quad \hat{u}_{s0} = \hat{u}_{s}\frac{2}{\pi}$$
+	$$P_1=I_2\hat{u}_{s0}\cos\alpha_{\mathrm{set}}=\SI{2250}{\watt},\qquad
+		Q_1^{(1)}=I_2\hat{u}_{s0}\sin\alpha_{\mathrm{set}}=\SI{2142}{\volt\ampere}.$$
 \end{solutionblock}
 \subtask{Including harmonics, calculate total apparent power $S_1$ and total reactive power $Q_1$,
-    and briefly assess whether the harmonic share is significant for grid compliance.}{3}
+	and briefly assess whether the harmonic share is significant for grid compliance.}{3}
 \subtaskGerman{Berechnen Sie unter Berücksichtigung der Oberschwingungen die gesamte Scheinleistung $S_1$ und die gesamte Blindleistung $Q_1$
-    und bewerten Sie kurz, ob der Oberschwingungsanteil für die Netzkonformität relevant ist.}
+	und bewerten Sie kurz, ob der Oberschwingungsanteil für die Netzkonformität relevant ist.}
 \begin{solutionblock}
-    Including harmonics we receive:
-    $$S_1=\frac{\pi}{2\sqrt{2}}S_1^{(1)}=\SI{3450}{\volt\ampere},$$
-    $$Q_1=\sqrt{S_1^2-P_1^2}=\SI{2615}{\volt\ampere}.$$
-    Since the harmonic share is $S_1/S_1^{(1)}=\pi/(2\sqrt{2})\approx 1.11$, the harmonics contribute about 11\% to the total apparent power, which is significant and must be considered relevant for grid compliance.
+	Including harmonics we receive:
+	$$S_1=\frac{\pi}{2\sqrt{2}}S_1^{(1)}=\SI{3450}{\volt\ampere},$$
+	$$Q_1=\sqrt{S_1^2-P_1^2}=\SI{2615}{\volt\ampere}.$$
+	Since the harmonic share is $S_1/S_1^{(1)}=\pi/(2\sqrt{2})\approx 1.11$, the harmonics contribute about 11\% to the total apparent power, which is significant and must be considered relevant for grid compliance.
 \end{solutionblock}
