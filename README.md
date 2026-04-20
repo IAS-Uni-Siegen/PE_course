@@ -60,7 +60,20 @@ The covered topics are:
 
 ![simulation buck converter](https://github.com/user-attachments/assets/2f699cac-79b3-4c94-8332-6910e940948d)
 
-# Contributing
+## Citation
+See "Cite this repository" info box on the top-right or use the following BibTeX entry for citing it:
+```
+@misc{Wallscheid_Fundamentals_of_power_electronics_2026,
+    author = {Wallscheid, Oliver and Sack, Adreas and Abdelwanis, Ali and Elter, Silas and Hölsch, Lukas and Pradyumna, Alkolkar and Mezler, David and Haider, Arslan},
+    doi = {10.5281/zenodo.19662908},
+    title = {{Fundamentals of power electronics}},
+    url = {https://github.com/IAS-Uni-Siegen/PE_course},
+    year = {2026}
+}
+```
+
+
+## Contributing
 
 - We recommend using [VSCode](https://code.visualstudio.com/) as code editor.
 - [Ruff](https://github.com/astral-sh/ruff) should be installed.
