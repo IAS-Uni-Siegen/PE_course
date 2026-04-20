@@ -1,5 +1,5 @@
 # Fundamentals of power electronics course
-[![Build LaTeX PDFs](https://github.com/IAS-Uni-Siegen/PE_course/actions/workflows/buildPDFs.yml/badge.svg?event=workflow_dispatch)](https://github.com/IAS-Uni-Siegen/PE_course/actions/workflows/buildPDFs.yml)
+[![Build LaTeX PDFs](https://github.com/IAS-Uni-Siegen/PE_course/actions/workflows/buildPDFs.yml/badge.svg)](https://github.com/IAS-Uni-Siegen/PE_course/actions/workflows/buildPDFs.yml)
 [![CC BY 4.0][cc-by-shield]][cc-by]
 [![made-with-latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg)](https://www.latex-project.org/)
 
