@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: If you use this repository, please cite it using the metadata below.
+title: Fundamentals of power electronics course
+abstract: Fundamentals of power electronics course
+type: software
+authors:
+  - family-names: Wallscheid
+    given-names: Oliver
+    affiliation: University of Siegen
+    orcid: https://orcid.org/0000-0001-9362-8777
+  - name: SevenOfNinePE
+  - family-names: Abdelwanis
+    given-names: Ali Hassan Ali
+    affiliation: University of Siegen
+    orcid: https://orcid.org/0009-0001-5853-5900
+  - family-names: Elter
+    given-names: Silas
+  - family-names: Hölsch
+    given-names: Lukas
+    affiliation: University of Siegen
+    orcid: https://orcid.org/0009-0006-4112-2444
+  - family-names: Akolkar
+    given-names: Pradyumna
+  - family-names: Mezler
+    given-names: David
+  - family-names: Haider
+    given-names: Arslan
+doi: 10.5281/zenodo.19662908
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.19662909
+    description: Version-specific DOI for the Winter term 2025/26 release archived on Zenodo.
+repository-code: https://github.com/IAS-Uni-Siegen/PE_course
+url: https://github.com/IAS-Uni-Siegen/PE_course
+license: CC-BY-4.0
+version: winter_2025_26_version
+date-released: 2026-04-20
