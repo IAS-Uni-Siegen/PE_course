@@ -844,6 +844,7 @@
 \begin{frame}[c]
 	\frametitle{M2C: reactive power diagram (cont.)}
 	\begin{figure}
+		% Note: Ensure \usepackage{pgfplots} and \usetikzlibrary{math} are in your preamble
 		\begin{tikzpicture}
 			\tikzmath{
 				real \ac, \i2, \ic;
@@ -880,8 +881,9 @@
 				\draw[thin] (axis cs:0.6,0.6) -- (axis cs:1.15,0.75) node[anchor = west, align=left, font=\small] {Achievable operation\\range};
 				\draw[thin] (axis cs:-0.88,0.125) -- (axis cs:-1.15,0.25) node[anchor = east, align=right, font=\small] {Commutation\\ margin};
 				\draw[thin] (axis cs:0.88,0.125) -- (axis cs:1.15,0.25) node[anchor = west, align=right, font=\small] {Overlap voltage loss};
-				\draw[->, dashed, thick] (axis cs:{cos(65)},{sin(65)}) -- (axis cs:{cos(65)},0);
-				\draw[->, dashed, thick] (axis cs:{cos(65)},{sin(65)}) -- (axis cs:,{sin(65)});
+				\draw[->, dashed, thick] (axis cs:{cos(65)},{sin(65)}) -- (axis cs:{cos(65)},{0});
+				\draw[->, dashed, thick] (axis cs:{cos(65)},{sin(65)}) -- (axis cs:{0},{sin(65)});
+
 				\draw[thick] (axis cs:0,0) -- (axis cs:{cos(65)},{sin(65)});
 				\draw [<->] (axis cs:0.25,0) arc [radius=0.25,start angle=0,end angle=65];
 				\node at (axis cs:0.21,0.21) {$\alpha$};
