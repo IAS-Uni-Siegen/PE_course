@@ -4,21 +4,21 @@
 		\centering
 		\begin{tikzpicture}
 			\begin{axis}[
-				xlabel={$D$},
-				ylabel={$U_{\mathrm{1}}/U_{\mathrm{2}}$},
-				axis lines=left,
-				ymin=0, ymax=10,
-				xmin=0, xmax=1,
-				xtick={0,0.2,0.4,0.6,0.8,1.0},
-				ytick={0,1,2,3,4,5,6,7,8,9,10},
-				xticklabels={0,0.2,0.4,0.6,0.8,1.0},
-				yticklabels={0,1,2,3,4,5,6,7,8,9,10},
-				thick,
-				smooth,
-				no markers,
-				height=7cm,
-				width = 0.99\textwidth,
-				grid
+					xlabel={$D$},
+					ylabel={$U_{\mathrm{1}}/U_{\mathrm{2}}$},
+					axis lines=left,
+					ymin=0, ymax=10,
+					xmin=0, xmax=1,
+					xtick={0,0.2,0.4,0.6,0.8,1.0},
+					ytick={0,1,2,3,4,5,6,7,8,9,10},
+					xticklabels={0,0.2,0.4,0.6,0.8,1.0},
+					yticklabels={0,1,2,3,4,5,6,7,8,9,10},
+					thick,
+					smooth,
+					no markers,
+					height=7cm,
+					width = 0.99\textwidth,
+					grid
 				]
 				\addplot[signalalpha, domain=0:0.95] {(1-x)/((1-x)^2)};
 				\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,8) {ideal converter};

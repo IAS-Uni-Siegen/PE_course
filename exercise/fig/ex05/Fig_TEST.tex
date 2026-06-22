@@ -20,7 +20,7 @@
 
 			% bottom plot: current response 
 			\nextgroupplot[ylabel = {$i_1(t)/{A}$}, xlabel={$t/\text{ms}$},
-			ytick = {-1, 0, 0.5, 1}, yticklabels = {}, legend columns=2, ylabel shift = 0.2cm]
+				ytick = {-1, 0, 0.5, 1}, yticklabels = {}, legend columns=2, ylabel shift = 0.2cm]
 			\addplot[signalred, thick] table[x=wt, y=i1, col sep=comma] {PWM_PFC_example.csv};
 			\addplot[thick, dashed] table[x=wt, y=i1ref, col sep=comma] {PWM_PFC_example.csv};
 			% \addplot[domain=0:pi, samples=100, signalgreen, dashed, thick]{1.22*sin(deg(x))-0.7*sin(deg(x))*(1-sin(deg(x))/1.3)};
