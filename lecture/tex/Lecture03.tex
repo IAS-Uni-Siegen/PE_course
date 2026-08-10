@@ -34,10 +34,10 @@
 						\ctikzset{blocks/scale=2, block lateral anchors pos=0.7}
 						\path (0,0) node[twoportsplitshape](dcdc){} ;
 						\draw (dcdc.left up) -- ++(-1,0) coordinate (A1)
-						(dcdc.left down) to [short, -*] ++(-1,0) coordinate (A2)
-						(A1) to [V, v_=$u_1$] (A2)
-						(dcdc.right up) to [short, -o]  ++(1,0) coordinate (B1)
-						(dcdc.right down) to [short, -o] ++(1,0) coordinate (B2);
+							(dcdc.left down) to [short, -*] ++(-1,0) coordinate (A2)
+							(A1) to [V, v_=$u_1$] (A2)
+							(dcdc.right up) to [short, -o]  ++(1,0) coordinate (B1)
+							(dcdc.right down) to [short, -o] ++(1,0) coordinate (B2);
 						\draw (B1) to [open, v^=$u_2$, voltage = straight] (B2);
 						\path (3.25,0) node[graduate,mirrored,sword,minimum size=1.5cm, stripes = uniblue] (human){};
 						\draw (human.south) node[ground](G2){}
@@ -49,26 +49,26 @@
 					\caption{Lack of galvanic isolation}
 				\end{subfigure}
 				\onslide<2->{%
-					\begin{subfigure}{\textwidth}
-						\begin{circuitikz}
-							\ctikzset{blocks/scale=2, block lateral anchors pos=0.7}
-							\path (0,0) node[twoportsplitshape](dcdc){} ;
-							\draw (dcdc.left up) -- ++(-1,0) coordinate (A1)
-							(dcdc.left down) to [short, -*] ++(-1,0) coordinate (A2)
-							(A1) to [V, v_=$u_1$] (A2)
-							(dcdc.right up) to ++(0.15,0) node[transformer, anchor=A1, scale=0.655](T){}
-							(T.A2) -- (dcdc.right down)
-							(T.B1) to [open, v^=$u_2$, voltage = straight, o-o] (T.B2);
-							\path (3.7,0) node[graduate,mirrored,sword,minimum size=1.5cm, stripes = uniblue] (human){};
-							\draw (human.south) node[ground](G2){}
-							let \p1 = (G2), \p2 = (A2) in (\x2, \y1) node[ground](G1){}
-							(G1) -- (A2);
-							\draw [signalbeta, ultra thick, latex-latex, dashed] (G1.south) (G2.south) -- (G1.south);
-							\draw let \p1 = (G2), \p2 = (A2)  in (\x2/2+\x1/2, \y1) node[signalbeta, below] {output $u_2$ can 'float'};
-						\end{circuitikz}
-						\caption{Galvanic isolation via inductive separation}
-					\end{subfigure}
-				}%
+						\begin{subfigure}{\textwidth}
+							\begin{circuitikz}
+								\ctikzset{blocks/scale=2, block lateral anchors pos=0.7}
+								\path (0,0) node[twoportsplitshape](dcdc){} ;
+								\draw (dcdc.left up) -- ++(-1,0) coordinate (A1)
+									(dcdc.left down) to [short, -*] ++(-1,0) coordinate (A2)
+									(A1) to [V, v_=$u_1$] (A2)
+									(dcdc.right up) to ++(0.15,0) node[transformer, anchor=A1, scale=0.655](T){}
+									(T.A2) -- (dcdc.right down)
+									(T.B1) to [open, v^=$u_2$, voltage = straight, o-o] (T.B2);
+								\path (3.7,0) node[graduate,mirrored,sword,minimum size=1.5cm, stripes = uniblue] (human){};
+								\draw (human.south) node[ground](G2){}
+								let \p1 = (G2), \p2 = (A2) in (\x2, \y1) node[ground](G1){}
+								(G1) -- (A2);
+								\draw [signalbeta, ultra thick, latex-latex, dashed] (G1.south) (G2.south) -- (G1.south);
+								\draw let \p1 = (G2), \p2 = (A2)  in (\x2/2+\x1/2, \y1) node[signalbeta, below] {output $u_2$ can 'float'};
+							\end{circuitikz}
+							\caption{Galvanic isolation via inductive separation}
+						\end{subfigure}
+					}%
 				\caption{Why galvanic isolation can be useful}
 				\label{fig:galvanic-isolation}
 			\end{figure}
@@ -87,26 +87,26 @@
 			\onslide<1->{Capacative} & \onslide<2->{Optical} & \onslide<3->{Inductive} \\[1em]
 
 			\onslide<1->{
-				\begin{circuitikz}
-					\draw (0,-0.5) to [capacitor] (2,-0.5)
-					(0,0.5) to [capacitor] (2,0.5);
-				\end{circuitikz}
-			}
+					           \begin{circuitikz}
+						           \draw (0,-0.5) to [capacitor] (2,-0.5)
+						           (0,0.5) to [capacitor] (2,0.5);
+					           \end{circuitikz}
+				           }
 
 			                         &
 			\onslide<2->{
-				\begin{circuitikz}
-					\draw (0,0.5) to [empty photodiode, mirror] (2,0.5)
-					(0,-0.5) to [empty led] (2,-0.5);
-				\end{circuitikz}
-			}
+					           \begin{circuitikz}
+						           \draw (0,0.5) to [empty photodiode, mirror] (2,0.5)
+						           (0,-0.5) to [empty led] (2,-0.5);
+					           \end{circuitikz}
+				           }
 
 			                         &
 			\onslide<3->{
-				\begin{circuitikz}
-					\draw (0,0) node[transformer](){};
-				\end{circuitikz}
-			}
+					           \begin{circuitikz}
+						           \draw (0,0) node[transformer](){};
+					           \end{circuitikz}
+				           }
 
 			\\[1em]
 
@@ -117,18 +117,18 @@
 			                         &
 
 			\onslide<2->{
-				\includegraphics[height=0.25\textheight]{fig/lec03/Optocoupler_example.jpg}
+					           \includegraphics[height=0.25\textheight]{fig/lec03/Optocoupler_example.jpg}
 
-				{\small source: \href{https://en.wikipedia.org/wiki/File:Philips_BDP3280-12_-_Everlight_EL817_on_power_board-1779.jpg}{Wikimedia Commons}, R.~Spekking, \href{https://creativecommons.org/licenses/by-sa/4.0/deed.en}{CC~BY-SA~4.0}}
-			}
+					           {\small source: \href{https://en.wikipedia.org/wiki/File:Philips_BDP3280-12_-_Everlight_EL817_on_power_board-1779.jpg}{Wikimedia Commons}, R.~Spekking, \href{https://creativecommons.org/licenses/by-sa/4.0/deed.en}{CC~BY-SA~4.0}}
+				           }
 
 			                         &
 
 			\onslide<3->{
-				\includegraphics[height=0.25\textheight]{fig/lec03/Transformer_example.jpg}
+					           \includegraphics[height=0.25\textheight]{fig/lec03/Transformer_example.jpg}
 
-				{\small source: \href{https://commons.wikimedia.org/wiki/File:Trafo-innenleben.jpg}{Wikimedia Commons}, S.~Riepl, public domain}
-			}
+					           {\small source: \href{https://commons.wikimedia.org/wiki/File:Trafo-innenleben.jpg}{Wikimedia Commons}, S.~Riepl, public domain}
+				           }
 
 		\end{tabular}
 	\end{table}
@@ -155,7 +155,7 @@
 		\begin{column}{0.6\textwidth}
 			\begin{figure}
 				\begin{tikzpicture}[global scale/.style={scale=1.0}, rotate=-5, xslant=-0.1, thick, every
-					node/.style={transform shape, scale=0.8}, decoration={markings, mark=at position 0.5 with {\arrow{latex}}}]
+						node/.style={transform shape, scale=0.8}, decoration={markings, mark=at position 0.5 with {\arrow{latex}}}]
 					\tikzmath{
 						real \a, \b, \dx, \dy, \lx, \ly, \dr;
 						\a = 3.0;
@@ -224,40 +224,40 @@
 				(T.inner dot A1) node[circ]{}
 				(T.inner dot B1) node[circ]{}
 				(T.A1) to [short, -o, i<_=$i_1(t)$] ++(-1,0) coordinate (A1)
-				(T.A2) to [short, -o] ++(-1,0) coordinate (A2)
-				(T.B1) to [short, -o, i=$i_2(t)$] ++(1,0) coordinate (B1)
-				(T.B2) to [short, -o] ++(1,0) coordinate (B2);
+					(T.A2) to [short, -o] ++(-1,0) coordinate (A2)
+					(T.B1) to [short, -o, i=$i_2(t)$] ++(1,0) coordinate (B1)
+					(T.B2) to [short, -o] ++(1,0) coordinate (B2);
 				\draw (A1) to [open, v=$u_1$, voltage = straight] (A2)
 				(B1) to [open, v^=$u_2$, voltage = straight] (B2);
 				\draw[dashed, thin] let \p1=(T.A1), \p2=(T.B2) in (\x1 + 2mm,\y1 + 10mm) rectangle (\x2 - 2mm,\y2 - 12.5mm)
-				(\x1/2 + \x2/2,\y1 + 10mm) node[above] {Transformer};
+					(\x1/2 + \x2/2,\y1 + 10mm) node[above] {Transformer};
 			\end{tikzpicture}
 			\caption{Schematic symbol representation}
 		\end{subfigure}
 		\onslide<2->{%
-			\begin{subfigure}{0.4\textwidth}
-				\centering
-				\begin{tikzpicture}
-					\draw (0,0) node[transformer core](T){$N_1:N_2$}
-					(T.inner dot A1) node[circ]{}
-					(T.inner dot B1) node[circ]{}
-					(T.A1) to [short, -*, i<_=$i'_1(t)$] ++(-1,0) coordinate (A1)
-					(T.A2) to [short, -*] ++(-1,0) coordinate (A2)
-					(A1) to [inductor, l=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$] (A2)
-					(A1) to [short, -o, i<_=$i_1(t)$] ++(-1.5,0) coordinate (A11)
-					(A2) to [short, -o] ++(-1.5,0) coordinate (A22)
-					(T.B1) to [short, -o, i=$i_2(t)$] ++(1,0) coordinate (B1)
-					(T.B2) to [short, -o] ++(1,0) coordinate (B2);
-					\draw (A11) to [open, v=$u_1$, voltage = straight] (A22)
-					(B1) to [open, v^=$u_2$, voltage = straight] (B2);
-					\draw[dashed, thin] let \p1=(A1), \p2=(T.B2) in (\x1 - 3mm,\y1 + 10mm) rectangle (\x2,\y2 - 12.5mm)
-					(\x1/2 + \x2/2 -2.5mm,\y1 + 10mm) node[above] {Transformer};
-					\draw[dashed, thin] let \p1=(T.A1), \p2=(T.B2) in (\x1 + 2mm,\y1 + 5mm) rectangle (\x2 - 2mm,\y2 - 2.5mm)
-					(\x1/2 + \x2/2,\y2 - 2.5mm) node[below, align=center] {Ideal\\ transformer};
-				\end{tikzpicture}
-				\caption{Equivalent circuit model}
-			\end{subfigure}
-		}%
+				\begin{subfigure}{0.4\textwidth}
+					\centering
+					\begin{tikzpicture}
+						\draw (0,0) node[transformer core](T){$N_1:N_2$}
+						(T.inner dot A1) node[circ]{}
+						(T.inner dot B1) node[circ]{}
+						(T.A1) to [short, -*, i<_=$i'_1(t)$] ++(-1,0) coordinate (A1)
+							(T.A2) to [short, -*] ++(-1,0) coordinate (A2)
+							(A1) to [inductor, l=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$] (A2)
+							(A1) to [short, -o, i<_=$i_1(t)$] ++(-1.5,0) coordinate (A11)
+							(A2) to [short, -o] ++(-1.5,0) coordinate (A22)
+							(T.B1) to [short, -o, i=$i_2(t)$] ++(1,0) coordinate (B1)
+							(T.B2) to [short, -o] ++(1,0) coordinate (B2);
+						\draw (A11) to [open, v=$u_1$, voltage = straight] (A22)
+						(B1) to [open, v^=$u_2$, voltage = straight] (B2);
+						\draw[dashed, thin] let \p1=(A1), \p2=(T.B2) in (\x1 - 3mm,\y1 + 10mm) rectangle (\x2,\y2 - 12.5mm)
+							(\x1/2 + \x2/2 -2.5mm,\y1 + 10mm) node[above] {Transformer};
+						\draw[dashed, thin] let \p1=(T.A1), \p2=(T.B2) in (\x1 + 2mm,\y1 + 5mm) rectangle (\x2 - 2mm,\y2 - 2.5mm)
+							(\x1/2 + \x2/2,\y2 - 2.5mm) node[below, align=center] {Ideal\\ transformer};
+					\end{tikzpicture}
+					\caption{Equivalent circuit model}
+				\end{subfigure}
+			}%
 		\caption{Transformer model}
 		\label{fig:transformer_model}
 	\end{figure}
@@ -299,12 +299,12 @@
 			to [diode, l=$D$, invert]  ++(1.0,0)
 			to [short, -o, i=$i_2(t)$] ++(1.0,0)
 			to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
-			(0,0) to [short, *-] ++(-1.0,0)
-			to [Tnpn, n=npn1] ++(-1.0,0)
-			to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
-			to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2)
-			to [short, o-o] (A)
-			(0,0) to [inductor, *-*] ++(0,-2);
+				(0,0) to [short, *-] ++(-1.0,0)
+				to [Tnpn, n=npn1] ++(-1.0,0)
+				to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
+				to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2)
+				to [short, o-o] (A)
+				(0,0) to [inductor, *-*] ++(0,-2);
 			\draw let \p1 = (npn1.B) in node[anchor=north] at (\x1,\y1) {$T$};
 			\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=0.5cm},yshift=0pt] (-3,-2.0) -- (3,-2.0) node [black,midway,yshift=-0.6cm] {};
 		\end{circuitikz}
@@ -313,13 +313,13 @@
 			to [diode, l=$D$, invert]  ++(1.0,0)
 			to [short, -o, i=$i_2(t)$] ++(1.0,0)
 			to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
-			(0,0) to [short] ++(-1.0,0)
-			to [Tnpn, n=npn1] ++(-1.0,0)
-			to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
-			to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2)
-			to [short, o-o] (A)
-			(-0.5,0) to [inductor, *-*, n=l1] ++(0,-2)
-			(0.5,0) to [inductor, *-*, n=l2, mirror] ++(0,-2);
+				(0,0) to [short] ++(-1.0,0)
+				to [Tnpn, n=npn1] ++(-1.0,0)
+				to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
+				to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2)
+				to [short, o-o] (A)
+				(-0.5,0) to [inductor, *-*, n=l1] ++(0,-2)
+				(0.5,0) to [inductor, *-*, n=l2, mirror] ++(0,-2);
 			\draw let \p1 = (npn1.B) in node[anchor=north] at (\x1,\y1) {$T$};
 			\path (l1.ul dot) node[circ]{}
 			(l2.ul dot) node[circ]{};
@@ -341,13 +341,13 @@
 			to [diode, l=$D$, invert]  ++(1.0,0)
 			to [short, -o, i=$i_2(t)$] ++(1.0,0)
 			to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
-			(0,0) to [short] ++(-1.0,0)
-			to [Tnpn, n=npn1] ++(-1.0,0)
-			to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
-			to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2)
-			to [short, o-o] (A)
-			(-0.5,0) to [inductor, *-*, n=l1] ++(0,-2)
-			(0.5,0) to [inductor, *-*, n=l2, mirror] ++(0,-2);
+				(0,0) to [short] ++(-1.0,0)
+				to [Tnpn, n=npn1] ++(-1.0,0)
+				to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
+				to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2)
+				to [short, o-o] (A)
+				(-0.5,0) to [inductor, *-*, n=l1] ++(0,-2)
+				(0.5,0) to [inductor, *-*, n=l2, mirror] ++(0,-2);
 			\draw let \p1 = (npn1.B) in node[anchor=north] at (\x1,\y1) {$T$};
 			\path (l1.ul dot) node[circ]{}
 			(l2.ul dot) node[circ]{};
@@ -361,14 +361,14 @@
 			to [diode, l=$D$, invert]  ++(1.0,0)
 			to [short, -o, i=$i_2(t)$] ++(1.0,0)
 			to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
-			(-0.5,0) to [short] ++(-0.5,0)
-			to [Tnpn, n=npn1] ++(-1.0,0)
-			to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
-			to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2) coordinate (B)
-			(-0.5,0) to [inductor, n=l1] ++(0,-2) coordinate (C)
-			(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
-			(D) to [short, -o] (A)
-			(C) to [short, -o] (B);
+				(-0.5,0) to [short] ++(-0.5,0)
+				to [Tnpn, n=npn1] ++(-1.0,0)
+				to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
+				to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2) coordinate (B)
+				(-0.5,0) to [inductor, n=l1] ++(0,-2) coordinate (C)
+				(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
+				(D) to [short, -o] (A)
+				(C) to [short, -o] (B);
 			\draw let \p1 = (npn1.B) in node[anchor=north] at (\x1,\y1) {$T$};
 			\path (l1.ul dot) node[circ]{}
 			(l2.ul dot) node[circ]{};
@@ -401,13 +401,13 @@
 					to [diode, l=$D$]  ++(1.0,0)
 					to [short, -o, i=$i_2(t)$] ++(1.0,0)
 					to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
-					(-0.5,0) to [short, -o, i_<=$i_1(t)$] ++(-1.5,0)
-					to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-3.75) coordinate (B)
-					(-0.5,0) to [inductor, n=l1] ++(0,-2)
-					to [Tnpn, n=npn1, invert] ++(0,-1.75) coordinate (C)
-					(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
-					(D) to [short, -o] (A)
-					(C) to [short, -o] (B);
+						(-0.5,0) to [short, -o, i_<=$i_1(t)$] ++(-1.5,0)
+						to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-3.75) coordinate (B)
+						(-0.5,0) to [inductor, n=l1] ++(0,-2)
+						to [Tnpn, n=npn1, invert] ++(0,-1.75) coordinate (C)
+						(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
+						(D) to [short, -o] (A)
+						(C) to [short, -o] (B);
 					\draw let \p1 = (npn1.B) in node[anchor=south] at (\x1,\y1) {$T$};
 					\path (l1.ul dot) node[circ]{}
 					(l2.ur dot) node[circ]{};
@@ -440,15 +440,15 @@
 				to [short, -o, i={$i_2(t)=0$}] ++(1.0,0)
 				to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
 				(-0.5,0) to ++(-1,0) coordinate (E)
-				to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
-				to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-3) coordinate (B)
-				(-0.5,0) to [inductor, n=l1] ++(0,-2)
-				to [short] ++(0,-1) coordinate (C)
-				(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
-				(D) to [short, -o] (A)
-				(C) to [short, -o] (B)
-				(E) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-] ++(0,-2)
-				to [short, -*] ++(1.0,0);
+					to [short, -o, i_<=$i_1(t)$] ++(-1.0,0)
+					to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-3) coordinate (B)
+					(-0.5,0) to [inductor, n=l1] ++(0,-2)
+					to [short] ++(0,-1) coordinate (C)
+					(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
+					(D) to [short, -o] (A)
+					(C) to [short, -o] (B)
+					(E) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-] ++(0,-2)
+					to [short, -*] ++(1.0,0);
 				\path (l1.ul dot) node[circ]{}
 				(l2.ur dot) node[circ]{};
 				\draw (l1.midtap) node[left]{$N_1$}
@@ -459,31 +459,31 @@
 		\end{subfigure}
 		\hspace{0.75cm}
 		\onslide<2->{%
-			\begin{subfigure}{0.45\textwidth}
-				\centering
-				\begin{circuitikz}[]
-					\draw (0.5,0) to [short] ++(0.5,0)
-					to [short, -o, i={$i_2(t)$}] ++(0.75,0)
-					to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
-					(-0.5,0) to ++(-1,0) coordinate (E)
-					to [short, -o, i_<={$i_1(t)=0$}] ++(-1.0,0)
-					to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-3) coordinate (B)
-					(-0.5,0) to [inductor, n=l1] ++(0,-2)
-					to [open] ++(0,-1) coordinate (C)
-					(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
-					(D) to [short, -o] (A)
-					(C) to [short, -o] (B)
-					(E) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-] ++(0,-2)
-					to [short] ++(1.0,0);;
-					\path (l1.ul dot) node[circ]{}
-					(l2.ur dot) node[circ]{};
-					\draw (l1.midtap) node[left]{$N_1$}
-					(l2.midtap) node[right]{$N_2$};
-					\draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
-				\end{circuitikz}
-				\caption{Switch-off time}
-			\end{subfigure}
-		}%
+				\begin{subfigure}{0.45\textwidth}
+					\centering
+					\begin{circuitikz}[]
+						\draw (0.5,0) to [short] ++(0.5,0)
+						to [short, -o, i={$i_2(t)$}] ++(0.75,0)
+						to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (A)
+						(-0.5,0) to ++(-1,0) coordinate (E)
+							to [short, -o, i_<={$i_1(t)=0$}] ++(-1.0,0)
+							to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-3) coordinate (B)
+							(-0.5,0) to [inductor, n=l1] ++(0,-2)
+							to [open] ++(0,-1) coordinate (C)
+							(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
+							(D) to [short, -o] (A)
+							(C) to [short, -o] (B)
+							(E) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-] ++(0,-2)
+							to [short] ++(1.0,0);;
+						\path (l1.ul dot) node[circ]{}
+						(l2.ur dot) node[circ]{};
+						\draw (l1.midtap) node[left]{$N_1$}
+						(l2.midtap) node[right]{$N_2$};
+						\draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
+					\end{circuitikz}
+					\caption{Switch-off time}
+				\end{subfigure}
+			}%
 		\centering
 		\caption{Switch states of the flyback converter}
 		\label{fig:flyback-converter-switch-states}
@@ -570,12 +570,12 @@
 			\end{equation*}
 			i.e., the output side may carry significantly different peak currents than the input.
 			\onslide<2->{
-				Also, when the transistor blocks it must withstand the voltage
-				\begin{equation*}
-					u_\mathrm{T}(t) = u_1 (t) + \frac{N_1}{N_2}u_2 (t), \quad t\in [T_\mathrm{on}, T_\mathrm{s}].
-				\end{equation*}
-				Hence, the turn ratio has a significant impact on components' stress factors.
-			}%
+					Also, when the transistor blocks it must withstand the voltage
+					\begin{equation*}
+						u_\mathrm{T}(t) = u_1 (t) + \frac{N_1}{N_2}u_2 (t), \quad t\in [T_\mathrm{on}, T_\mathrm{s}].
+					\end{equation*}
+					Hence, the turn ratio has a significant impact on components' stress factors.
+				}%
 		\end{column}
 		%
 		\begin{column}{0.5\textwidth}
@@ -620,13 +620,13 @@
 \begin{frame}
 	\frametitle{Flyback converter: voltage transfer ratio in CCM}
 	\onslide<1->{
-		In CCM, the voltage balance of the magnetizing inductor $L_\mathrm{m}$ delivers:
-		\begin{equation}
-			u_\mathrm{L_\mathrm{m}}(t) = \begin{cases}
-				U_1,                & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],     \\
-				-\frac{N_1}{N_2}U_2 & t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].
-			\end{cases}
-		\end{equation}}%
+			In CCM, the voltage balance of the magnetizing inductor $L_\mathrm{m}$ delivers:
+			\begin{equation}
+				u_\mathrm{L_\mathrm{m}}(t) = \begin{cases}
+					U_1,                & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],     \\
+					-\frac{N_1}{N_2}U_2 & t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}].
+				\end{cases}
+			\end{equation}}%
 	\onslide<2->{In steady state, the average inductor voltage per period must be zero, yielding}%
 	\begin{equation}
 		\onslide<2->{U_1 T_\mathrm{on} = \frac{N_1}{N_2} U_2 T_\mathrm{off}  \quad}\onslide<3->{ \Leftrightarrow \quad  U_1 D T_\mathrm{s} = \frac{N_1}{N_2}U_2 (1-D) T_\mathrm{s} \quad}\onslide<4->{ \Leftrightarrow \quad \frac{U_2}{U_1} = \frac{N_2}{N_1}\frac{D}{1-D}.}
@@ -653,86 +653,86 @@
 	\begin{figure}
 		\centering
 		\onslide<1->{%	
-			\begin{subfigure}{0.33\textwidth}
-				\centering
-				\begin{circuitikz}[scale=0.8, transform shape]
-					\draw (0.5,0) to [short] ++(0.5,0)
-					to [open]  ++(1.0,0)
-					to [short, -o, i={$i_2=0$}] ++(0.75,0)
-					to [open, o-o, v= $u_2$, voltage = straight] ++(0,-2) coordinate (A)
-					(-0.5,0) to ++(-1,0) coordinate (E)
-					to [short, -o, i_<=$i_1$] ++(-1.0,0)
-					to [open, o-o, v^=$u_1$, voltage = straight] ++(0,-3) coordinate (B)
-					(-0.5,0) to [inductor, n=l1] ++(0,-2)
-					to [short] ++(0,-1) coordinate (C)
-					(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
-					(D) to [short, -o] (A)
-					(C) to [short, -o] (B)
-					(E) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}$, *-] ++(0,-2)
-					to [short, -*] ++(1.0,0);
-					\path (l1.ul dot) node[circ]{}
-					(l2.ur dot) node[circ]{};
-					\draw (l1.midtap) node[left]{$N_1$}
-					(l2.midtap) node[right]{$N_2$};
-					\draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
-				\end{circuitikz}
-				\caption{Switch-on time $T_\mathrm{on}$}
-			\end{subfigure}%
-		}%
+				\begin{subfigure}{0.33\textwidth}
+					\centering
+					\begin{circuitikz}[scale=0.8, transform shape]
+						\draw (0.5,0) to [short] ++(0.5,0)
+						to [open]  ++(1.0,0)
+						to [short, -o, i={$i_2=0$}] ++(0.75,0)
+						to [open, o-o, v= $u_2$, voltage = straight] ++(0,-2) coordinate (A)
+						(-0.5,0) to ++(-1,0) coordinate (E)
+							to [short, -o, i_<=$i_1$] ++(-1.0,0)
+							to [open, o-o, v^=$u_1$, voltage = straight] ++(0,-3) coordinate (B)
+							(-0.5,0) to [inductor, n=l1] ++(0,-2)
+							to [short] ++(0,-1) coordinate (C)
+							(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
+							(D) to [short, -o] (A)
+							(C) to [short, -o] (B)
+							(E) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}$, *-] ++(0,-2)
+							to [short, -*] ++(1.0,0);
+						\path (l1.ul dot) node[circ]{}
+						(l2.ur dot) node[circ]{};
+						\draw (l1.midtap) node[left]{$N_1$}
+						(l2.midtap) node[right]{$N_2$};
+						\draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
+					\end{circuitikz}
+					\caption{Switch-on time $T_\mathrm{on}$}
+				\end{subfigure}%
+			}%
 		\onslide<2->{%
-			\begin{subfigure}{0.33\textwidth}
-				\centering
-				\hspace{-0.6cm}
-				\begin{circuitikz}[scale=0.8, transform shape]
-					\draw (0.5,0) to [short] ++(0.5,0)
-					to [short, -o, i={$i_2$}] ++(0.75,0)
-					to [open, o-o, v = $u_2$, voltage = straight] ++(0,-2) coordinate (A)
-					(-0.5,0) to ++(-1,0) coordinate (E)
-					to [short, -o, i_<={$i_1=0$}] ++(-1.0,0)
-					to [open, o-o, v^= $u_1$, voltage = straight] ++(0,-3) coordinate (B)
-					(-0.5,0) to [inductor, n=l1] ++(0,-2)
-					to [open] ++(0,-1) coordinate (C)
-					(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
-					(D) to [short, -o] (A)
-					(C) to [short, -o] (B)
-					(E) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}$, *-] ++(0,-2)
-					to [short] ++(1.0,0);;
-					\path (l1.ul dot) node[circ]{}
-					(l2.ur dot) node[circ]{};
-					\draw (l1.midtap) node[left]{$N_1$}
-					(l2.midtap) node[right]{$N_2$};
-					\draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
-				\end{circuitikz}
-				\caption{Switch-off time $T'_\mathrm{off}$}
-			\end{subfigure}
-		}%
+				\begin{subfigure}{0.33\textwidth}
+					\centering
+					\hspace{-0.6cm}
+					\begin{circuitikz}[scale=0.8, transform shape]
+						\draw (0.5,0) to [short] ++(0.5,0)
+						to [short, -o, i={$i_2$}] ++(0.75,0)
+						to [open, o-o, v = $u_2$, voltage = straight] ++(0,-2) coordinate (A)
+						(-0.5,0) to ++(-1,0) coordinate (E)
+							to [short, -o, i_<={$i_1=0$}] ++(-1.0,0)
+							to [open, o-o, v^= $u_1$, voltage = straight] ++(0,-3) coordinate (B)
+							(-0.5,0) to [inductor, n=l1] ++(0,-2)
+							to [open] ++(0,-1) coordinate (C)
+							(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
+							(D) to [short, -o] (A)
+							(C) to [short, -o] (B)
+							(E) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}$, *-] ++(0,-2)
+							to [short] ++(1.0,0);;
+						\path (l1.ul dot) node[circ]{}
+						(l2.ur dot) node[circ]{};
+						\draw (l1.midtap) node[left]{$N_1$}
+						(l2.midtap) node[right]{$N_2$};
+						\draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
+					\end{circuitikz}
+					\caption{Switch-off time $T'_\mathrm{off}$}
+				\end{subfigure}
+			}%
 		\onslide<3->{%
-			\begin{subfigure}{0.33\textwidth}
-				\centering
-				\begin{circuitikz}[scale=0.8, transform shape]
-					\draw (0.5,0) to [short] ++(0.5,0)
-					to [open]  ++(1.0,0)
-					to [short, -o, i={$i_2=0$}] ++(0.75,0)
-					to [open, o-o, v= $u_2$, voltage = straight] ++(0,-2) coordinate (A)
-					(-0.5,0) to ++(-1,0) coordinate (E)
-					to [short, -o, i_<={$i_1=0$}] ++(-1.0,0)
-					to [open, o-o, v^=$u_1$, voltage = straight] ++(0,-3) coordinate (B)
-					(-0.5,0) to [inductor, n=l1] ++(0,-2)
-					to [open] ++(0,-1) coordinate (C)
-					(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
-					(D) to [short, -o] (A)
-					(C) to [short, -o] (B)
-					(E) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}$, *-] ++(0,-2)
-					to [short, -] ++(1.0,0);
-					\path (l1.ul dot) node[circ]{}
-					(l2.ur dot) node[circ]{};
-					\draw (l1.midtap) node[left]{$N_1$}
-					(l2.midtap) node[right]{$N_2$};
-					\draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
-				\end{circuitikz}
-				\caption{Switch-off time $T''_\mathrm{off}$}
-			\end{subfigure}
-		}%
+				\begin{subfigure}{0.33\textwidth}
+					\centering
+					\begin{circuitikz}[scale=0.8, transform shape]
+						\draw (0.5,0) to [short] ++(0.5,0)
+						to [open]  ++(1.0,0)
+						to [short, -o, i={$i_2=0$}] ++(0.75,0)
+						to [open, o-o, v= $u_2$, voltage = straight] ++(0,-2) coordinate (A)
+						(-0.5,0) to ++(-1,0) coordinate (E)
+							to [short, -o, i_<={$i_1=0$}] ++(-1.0,0)
+							to [open, o-o, v^=$u_1$, voltage = straight] ++(0,-3) coordinate (B)
+							(-0.5,0) to [inductor, n=l1] ++(0,-2)
+							to [open] ++(0,-1) coordinate (C)
+							(0.5,0) to [inductor, n=l2, mirror] ++(0,-2) coordinate (D)
+							(D) to [short, -o] (A)
+							(C) to [short, -o] (B)
+							(E) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}$, *-] ++(0,-2)
+							to [short, -] ++(1.0,0);
+						\path (l1.ul dot) node[circ]{}
+						(l2.ur dot) node[circ]{};
+						\draw (l1.midtap) node[left]{$N_1$}
+						(l2.midtap) node[right]{$N_2$};
+						\draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l2.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
+					\end{circuitikz}
+					\caption{Switch-off time $T''_\mathrm{off}$}
+				\end{subfigure}
+			}%
 		\caption{Switch states of the flyback converter including DCM}
 		\label{fig:flyback-switch-states-DCM}
 	\end{figure}
@@ -812,18 +812,18 @@
 \begin{frame}
 	\frametitle{Flyback converter: DCM operation characteristics}
 	\onslide<1->{In DCM operation
-		$$  \overline{i}_\mathrm{m} < \frac{\Delta i_\mathrm{\mathrm{m}}}{2} \quad \Rightarrow \quad U_2 \neq U_1 \frac{N_2}{N_1}\frac{D}{1-D}$$
-		applies due to the non-conducting diode during  $T''_\mathrm{off}$.} \onslide<2->{To find the input-to-output voltage ratio in DCM, we again utilize the current ripple balance:}
+			$$  \overline{i}_\mathrm{m} < \frac{\Delta i_\mathrm{\mathrm{m}}}{2} \quad \Rightarrow \quad U_2 \neq U_1 \frac{N_2}{N_1}\frac{D}{1-D}$$
+			applies due to the non-conducting diode during  $T''_\mathrm{off}$.} \onslide<2->{To find the input-to-output voltage ratio in DCM, we again utilize the current ripple balance:}
 	\begin{equation}
 		\begin{alignedat}{2}
-			\onslide<2->{\Delta i_\mathrm{m}          & = \frac{U_1}{L_\mathrm{m}}T_\mathrm{on} = \frac{U_1}{L_\mathrm{m}}DT_\mathrm{s} \quad                                  &  & \mbox{(rising edge)},}  \\
+			\onslide<2->{\Delta i_\mathrm{m}          & = \frac{U_1}{L_\mathrm{m}}T_\mathrm{on} = \frac{U_1}{L_\mathrm{m}}DT_\mathrm{s} \quad                                  &  & \mbox{(rising edge)},} \\
 			\onslide<3->{\Delta i_\mathrm{\mathrm{m}} & = \frac{N_1}{N_2}\frac{U_2}{L_\mathrm{m}}T'_\mathrm{off} = \frac{N_1}{N_2}\frac{U_2}{L_\mathrm{m}}D'T_\mathrm{s} \quad &  & \mbox{(falling edge)}.}
 		\end{alignedat}
 	\end{equation}
 	\onslide<4->{Solving for $D'$ yields
-		\begin{equation}
-			D' = \frac{N_2}{N_1}\frac{U_1}{U_2}D.
-		\end{equation}}
+			\begin{equation}
+				D' = \frac{N_2}{N_1}\frac{U_1}{U_2}D.
+			\end{equation}}
 	\onslide<5->{The average load current is }
 	\begin{equation}
 		\onslide<5->{\overline{i}_2 = \frac{N_1}{N_2}\frac{\Delta i_\mathrm{m}}{2}\frac{T'_\mathrm{off}}{T_\mathrm{s}}} \onslide<6->{= \frac{N_1}{N_2}\frac{\Delta i_\mathrm{m,max}D}{2}D'}\onslide<7->{= \frac{N_1}{N_2}\frac{\Delta i_\mathrm{m,max}}{2}\frac{U_1}{U_2}D^2 \frac{N_2}{N_1}}\onslide<8->{= \frac{\Delta i_\mathrm{m,max}}{2}\frac{U_1}{U_2}D^2.}
@@ -864,20 +864,20 @@
 			\begin{tikzpicture}
 				\draw (-0.5,2) to[inductor, name=l1] ++(0,-2)
 				(-0.5,2) to [short, -o, i<_=$i_1(t)$] ++(-1,0) coordinate (A1)
-				(-0.5,0) to [short, -o] ++(-1,0) coordinate (A2)
-				(A1) to [open, v=$u_1$, voltage = straight] (A2);
+					(-0.5,0) to [short, -o] ++(-1,0) coordinate (A2)
+					(A1) to [open, v=$u_1$, voltage = straight] (A2);
 				\draw (0.5,2) to[inductor, name=l2, mirror] ++(0,-2)
 				(0.5,2) to [short, -o, i=$i_2(t)$] ++(1,0) coordinate (B1)
-				(0.5,0) to [short, -o] ++(1,0) coordinate (B2)
-				(B1) to [open, v^=$u_2$, voltage = straight] (B2);
+					(0.5,0) to [short, -o] ++(1,0) coordinate (B2)
+					(B1) to [open, v^=$u_2$, voltage = straight] (B2);
 				\draw (0.5,-1) to[inductor, name=l3, mirror] ++(0,-2)
 				(0.5,-1) to [short, -o, i=$i_3(t)$] ++(1,0) coordinate (C1)
-				(0.5,-3) to [short, -o] ++(1,0) coordinate (C2)
-				(C1) to [open, v^=$u_3$, voltage = straight] (C2);
+					(0.5,-3) to [short, -o] ++(1,0) coordinate (C2)
+					(C1) to [open, v^=$u_3$, voltage = straight] (C2);
 				\draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l3.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
 				\path (l1.ul dot) node[circ]{}
-				(l2.ul dot) node[circ]{}
-				(l3.ul dot) node[circ]{};
+				(l2.ur dot) node[circ]{}
+				(l3.ur dot) node[circ]{};
 				\draw (l1.midtap) node[left]{$N_1$}
 				(l2.midtap) node[right]{$N_2$}
 				(l3.midtap) node[right]{$N_3$};
@@ -889,23 +889,23 @@
 			\begin{tikzpicture}
 				\draw (-0.5,2) to[inductor, name=l1] ++(0,-2)
 				(-0.5,2) to [short, -*, i<_=$i'_1(t)$] ++(-1,0) coordinate (A1)
-				(-0.5,0) to [short, -*] ++(-1,0) coordinate (A2)
-				(A1) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$] (A2)
-				(A1) to [short, -o, i<_=$i_1(t)$] ++(-1.5,0) coordinate (A11)
-				(A2) to [short, -o] ++(-1.5,0) coordinate (A22)
-				(A11) to [open, v=$u_1$, voltage = straight] (A22);
+					(-0.5,0) to [short, -*] ++(-1,0) coordinate (A2)
+					(A1) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$] (A2)
+					(A1) to [short, -o, i<_=$i_1(t)$] ++(-1.5,0) coordinate (A11)
+					(A2) to [short, -o] ++(-1.5,0) coordinate (A22)
+					(A11) to [open, v=$u_1$, voltage = straight] (A22);
 				\draw (0.5,2) to[inductor, name=l2, mirror] ++(0,-2)
 				(0.5,2) to [short, -o, i=$i_2(t)$] ++(1,0) coordinate (B1)
-				(0.5,0) to [short, -o] ++(1,0) coordinate (B2)
-				(B1) to [open, v^=$u_2$, voltage = straight] (B2);
+					(0.5,0) to [short, -o] ++(1,0) coordinate (B2)
+					(B1) to [open, v^=$u_2$, voltage = straight] (B2);
 				\draw (0.5,-1) to[inductor, name=l3, mirror] ++(0,-2)
 				(0.5,-1) to [short, -o, i=$i_3(t)$] ++(1,0) coordinate (C1)
-				(0.5,-3) to [short, -o] ++(1,0) coordinate (C2)
-				(C1) to [open, v^=$u_3$, voltage = straight] (C2);
+					(0.5,-3) to [short, -o] ++(1,0) coordinate (C2)
+					(C1) to [open, v^=$u_3$, voltage = straight] (C2);
 				\draw[double, double distance=3pt, thick] let \p1=(l1.core west), \p2=(l3.core east) in (\x1/2+\x2/2, \y1) -- (\x1/2+\x2/2, \y2);
 				\path (l1.ul dot) node[circ]{}
-				(l2.ul dot) node[circ]{}
-				(l3.ul dot) node[circ]{};
+				(l2.ur dot) node[circ]{}
+				(l3.ur dot) node[circ]{};
 				\draw (l1.midtap) node[left]{$N_1$}
 				(l2.midtap) node[right]{$N_2$}
 				(l3.midtap) node[right]{$N_3$};
@@ -931,13 +931,13 @@
 		\begin{circuitikz}[]
 			\draw (0,0) to [short, i=$i_1(t)$] ++(0.75,0)
 			to [short] ++(2.0,0) coordinate (A)
-			to [inductor, l=$L$] ++(2.0,0)
-			to [short, i=$i_2(t)$] ++(0.75,0)
-			to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (B)
-			(0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2.0) coordinate (D)
-			(A) to [diode, l=$D$, invert, *-*]  ++(0,-2) coordinate (C)
-			(C) to [short, -o]  (B)
-			(C) to [Tnpn, n=npn1, invert] (D);
+				to [inductor, l=$L$] ++(2.0,0)
+				to [short, i=$i_2(t)$] ++(0.75,0)
+				to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2) coordinate (B)
+				(0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2.0) coordinate (D)
+				(A) to [diode, l=$D$, invert, *-*]  ++(0,-2) coordinate (C)
+				(C) to [short, -o]  (B)
+				(C) to [Tnpn, n=npn1, invert] (D);
 			\draw let \p1 = (npn1.B) in node[anchor=south] at (\x1,\y1) {$T$};
 			\draw [decorate,decoration={brace,amplitude=10pt,mirror,raise=0.5cm},yshift=0pt] (0,-2.0) -- (5.5,-2.0) node [black,midway,yshift=-0.6cm] {};
 		\end{circuitikz}
@@ -950,12 +950,12 @@
 			(0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-2.0);
 			\draw  (3.75,0) to [inductor, n=l2, mirror] ++(0,-2)
 			to [short] ++(2,0) coordinate (A)
-			to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
-			to [inductor, l=$L$] ++(2,0)
-			to [short, i=$i_2(t)$] ++(0.75,0)
-			to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
-			to [short] (A)
-			(3.75,0) to [diode, l=$D_1$] (B);
+				to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
+				to [inductor, l=$L$] ++(2,0)
+				to [short, i=$i_2(t)$] ++(0.75,0)
+				to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
+				to [short] (A)
+				(3.75,0) to [diode, l=$D_1$] (B);
 			\draw (2,-0.25) to [open, v = $u_\mathrm{p}$, voltage = straight] ++(0,-1.5);
 			\draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T$};
 			\path (l1.ul dot) node[circ]{}
@@ -1000,12 +1000,12 @@
 					(0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-4.0);
 					\draw  (2.5,0) to [inductor, n=l2, mirror] ++(0,-2)
 					to [short] ++(2,0) coordinate (A)
-					to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
-					to [inductor, l=$L$] ++(2,0)
-					to [short, i=$i_2(t)$] ++(0.75,0)
-					to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
-					to [short] (A)
-					(2.5,0) to [diode, l=$D_1$] (B);
+						to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
+						to [inductor, l=$L$] ++(2,0)
+						to [short, i=$i_2(t)$] ++(0.75,0)
+						to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
+						to [short] (A)
+						(2.5,0) to [diode, l=$D_1$] (B);
 					\draw (0.75,-0.25) to [open, v = $u_\mathrm{p}$, voltage = straight] ++(0,-1.5);
 					\draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T$};
 					\path (l1.ul dot) node[circ]{}
@@ -1127,20 +1127,20 @@
 			\begin{figure}
 				\begin{circuitikz}[]
 					\draw (0,0) to [short, i=$i_1(t)$] ++(0.75,0) coordinate (A1)
-					to [short] ++(1,0)
-					to [inductor, n=l1] ++(0,-2) coordinate (A2)
-					to [Tnpn, n=npn1, invert] ++(0,-2)   -- (0,-4.0)
-					(0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-4.0);
+						to [short] ++(1,0)
+						to [inductor, n=l1] ++(0,-2) coordinate (A2)
+						to [Tnpn, n=npn1, invert] ++(0,-2)   -- (0,-4.0)
+						(0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-4.0);
 					\draw  (2.5,0) to [inductor, n=l2, mirror] ++(0,-2)
 					to [short] ++(2,0) coordinate (A)
-					to [diode, l_=$D_2$, *-*] ++(0,2) coordinate (B)
-					to [inductor, l=$L$] ++(2,0)
-					to [short, i=$i_2(t)$] ++(0.75,0)
-					to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
-					to [short] (A)
-					(2.5,0) to [diode, l=$D_1$] (B)
-					(A1) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-] ++(-0,-2)
-					to [short, -*] (A2);
+						to [diode, l_=$D_2$, *-*] ++(0,2) coordinate (B)
+						to [inductor, l=$L$] ++(2,0)
+						to [short, i=$i_2(t)$] ++(0.75,0)
+						to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
+						to [short] (A)
+						(2.5,0) to [diode, l=$D_1$] (B)
+						(A1) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-] ++(-0,-2)
+						to [short, -*] (A2);
 					\draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T$};
 					\path (l1.ul dot) node[circ]{}
 					(l2.ul dot) node[circ]{};
@@ -1165,38 +1165,38 @@
 		\begin{circuitikz}[]
 			%Asym. half-bridge
 			\draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-6) coordinate (B)
-			(A) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (E)
-			to [Tnpn, n=npn1, invert] ++(0,-2) coordinate (C)
-			to [short,*-] ++(2,0)
-			to [short] ++(1,0) coordinate (J)
-			to [short] ++(1,0) coordinate (G)
-			(C) to [short] ++(0,-2)
-			to [diode, l_=$D_1$, invert] ++(0,-2) coordinate (D)
-			(E) to [short, *-] ++(2,0)
-			to [diode, l_=$D_2$, invert] ++(0,-2)
-			to [short] ++(0,-2) coordinate (F)
-			to [Tnpn, n=npn2, invert] ++(0,-2)
-			to [short, -*] ++(-2,0)
-			to [short, -o] (B)
-			(F) to [short,*-] ++(1,0) coordinate (I)
-			to [short] ++(1,0) coordinate (H)
-			(J) to [open,v_= $u_\mathrm{p}(t)$, voltage = straight] (I);
+				(A) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (E)
+				to [Tnpn, n=npn1, invert] ++(0,-2) coordinate (C)
+				to [short,*-] ++(2,0)
+				to [short] ++(1,0) coordinate (J)
+				to [short] ++(1,0) coordinate (G)
+				(C) to [short] ++(0,-2)
+				to [diode, l_=$D_1$, invert] ++(0,-2) coordinate (D)
+				(E) to [short, *-] ++(2,0)
+				to [diode, l_=$D_2$, invert] ++(0,-2)
+				to [short] ++(0,-2) coordinate (F)
+				to [Tnpn, n=npn2, invert] ++(0,-2)
+				to [short, -*] ++(-2,0)
+				to [short, -o] (B)
+				(F) to [short,*-] ++(1,0) coordinate (I)
+				to [short] ++(1,0) coordinate (H)
+				(J) to [open,v_= $u_\mathrm{p}(t)$, voltage = straight] (I);
 			\draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
 			\draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
 
 			% Transformer + buck filter
 			\draw (G) to [short] ++(1,0) coordinate (A1)
-			to [inductor, n=l1] ++(0,-2) coordinate (B1)
-			(A1) to [open] ++(0.75,0) to [inductor, n=l2, mirror] ++(0,-2)
-			to [short] ++(2,0) coordinate (C1)
-			to [diode, l_=$D_4$, *-*, v^<= $u_\mathrm{s}(t)$, voltage = straight] ++(0,2) coordinate (D1)
-			to [inductor, l=$L$] ++(2,0)
-			to [short, i=$i_2(t)$] ++(0.75,0)
-			to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
-			to [short] (C1)
-			(A1) to [open] ++(0.75,0) to [diode, l=$D_3$] (D1)
-			(G) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-*] ++(-0,-2)
-			to [short] (B1);
+				to [inductor, n=l1] ++(0,-2) coordinate (B1)
+				(A1) to [open] ++(0.75,0) to [inductor, n=l2, mirror] ++(0,-2)
+				to [short] ++(2,0) coordinate (C1)
+				to [diode, l_=$D_4$, *-*, v^<= $u_\mathrm{s}(t)$, voltage = straight] ++(0,2) coordinate (D1)
+				to [inductor, l=$L$] ++(2,0)
+				to [short, i=$i_2(t)$] ++(0.75,0)
+				to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
+				to [short] (C1)
+				(A1) to [open] ++(0.75,0) to [diode, l=$D_3$] (D1)
+				(G) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-*] ++(-0,-2)
+				to [short] (B1);
 			\path (l1.ul dot) node[circ]{}
 			(l2.ul dot) node[circ]{};
 			\draw (l1.midtap) node[left]{$N_1$}
@@ -1285,22 +1285,22 @@
 		\begin{circuitikz}[]
 			%full-bridge
 			\draw (0,4) coordinate (A) to [open, o-o, v = $u_1(t)$, voltage = straight] ++(0,-6) coordinate (B)
-			(A) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (E)
-			to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
-			to [short,*-] ++(2,0)
-			to [short] ++(1,0) coordinate (J)
-			to [short] ++(1,0) coordinate (G)
-			(C) to [short] ++(0,-2)
-			to [Tnpn, n=npn2, invert, bodydiode] ++(0,-2) coordinate (D)
-			(E) to [short, *-] ++(2,0)
-			to [Tnpn, n=npn3, invert, bodydiode] ++(0,-2)
-			to [short] ++(0,-2) coordinate (F)
-			to [Tnpn, n=npn4, invert, bodydiode] ++(0,-2)
-			to [short, -*] ++(-2,0)
-			to [short, -o] (B)
-			(F) to [short,*-] ++(1,0) coordinate (I)
-			to [short] ++(1,0) coordinate (H)
-			(J) to [open,v_= $u_\mathrm{p}(t)$, voltage = straight] (I);
+				(A) to [short, o-, i=$i_1(t)$] ++(2,0) coordinate (E)
+				to [Tnpn, n=npn1, invert, bodydiode] ++(0,-2) coordinate (C)
+				to [short,*-] ++(2,0)
+				to [short] ++(1,0) coordinate (J)
+				to [short] ++(1,0) coordinate (G)
+				(C) to [short] ++(0,-2)
+				to [Tnpn, n=npn2, invert, bodydiode] ++(0,-2) coordinate (D)
+				(E) to [short, *-] ++(2,0)
+				to [Tnpn, n=npn3, invert, bodydiode] ++(0,-2)
+				to [short] ++(0,-2) coordinate (F)
+				to [Tnpn, n=npn4, invert, bodydiode] ++(0,-2)
+				to [short, -*] ++(-2,0)
+				to [short, -o] (B)
+				(F) to [short,*-] ++(1,0) coordinate (I)
+				to [short] ++(1,0) coordinate (H)
+				(J) to [open,v_= $u_\mathrm{p}(t)$, voltage = straight] (I);
 			\draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
 			\draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
 			\draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
@@ -1308,17 +1308,17 @@
 
 			% Transformer + buck filter
 			\draw (G) to [short] ++(1,0) coordinate (A1)
-			to [inductor, n=l1] ++(0,-2) coordinate (B1)
-			(A1) to [open] ++(0.75,0) to [inductor, n=l2, mirror] ++(0,-2)
-			to [short] ++(2,0) coordinate (C1)
-			to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}(t)$, voltage = straight] ++(0,2) coordinate (D1)
-			to [inductor, l=$L$] ++(2,0)
-			to [short, i=$i_2(t)$] ++(0.75,0)
-			to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
-			to [short] (C1)
-			(A1) to [open] ++(0.75,0) to [diode, l=$D_1$] (D1)
-			(G) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-*] ++(-0,-2)
-			to [short] (B1);
+				to [inductor, n=l1] ++(0,-2) coordinate (B1)
+				(A1) to [open] ++(0.75,0) to [inductor, n=l2, mirror] ++(0,-2)
+				to [short] ++(2,0) coordinate (C1)
+				to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}(t)$, voltage = straight] ++(0,2) coordinate (D1)
+				to [inductor, l=$L$] ++(2,0)
+				to [short, i=$i_2(t)$] ++(0.75,0)
+				to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
+				to [short] (C1)
+				(A1) to [open] ++(0.75,0) to [diode, l=$D_1$] (D1)
+				(G) to [inductor, l_=$L_\mathrm{m}$, i=$i_\mathrm{m}(t)$, *-*] ++(-0,-2)
+				to [short] (B1);
 			\path (l1.ul dot) node[circ]{}
 			(l2.ul dot) node[circ]{};
 			\draw (l1.midtap) node[left]{$N_1$}
@@ -1492,16 +1492,16 @@
 			\draw (0,0) to [short, i=$i_1(t)$] ++(1.5,0) -- ++(1.0,0)
 			to [inductor, n=l1] ++(0,-2)
 			to [Tnpn, n=npn1, invert] ++(0,-2) coordinate (C) -- (0,-4.0)
-			(0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-4.0);
+				(0,0) to [open, o-o, v_= $u_1(t)$, voltage = straight] ++(0,-4.0);
 			%secondary side
 			\draw  (4.25,0) to [inductor, n=l2, mirror] ++(0,-2)
 			to [short] ++(2,0) coordinate (A)
-			to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
-			to [inductor, l=$L$] ++(2,0)
-			to [short, i=$i_2(t)$] ++(0.75,0)
-			to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
-			to [short] (A)
-			(4.25,0) to [diode, l=$D_1$] (B);
+				to [diode, l_=$D_2$, *-*, v^<= $u_\mathrm{s}$, voltage = straight] ++(0,2) coordinate (B)
+				to [inductor, l=$L$] ++(2,0)
+				to [short, i=$i_2(t)$] ++(0.75,0)
+				to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
+				to [short] (A)
+				(4.25,0) to [diode, l=$D_1$] (B);
 			%demag winding
 			\draw  (3.5,0) to [inductor, n=l3, mirror] ++(0,-2)
 			to [short, i<=$i_3(t)$] ++(0,-2.0)

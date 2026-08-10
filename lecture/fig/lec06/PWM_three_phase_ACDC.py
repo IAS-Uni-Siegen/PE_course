@@ -45,8 +45,8 @@ def s_comp(d, c):
 
 
 # calculate the integrated / summed error between the reference and the switching signal
-def e(d, s, xn):
-    return np.cumsum(d - s) / xn * 2 * np.pi
+def e(d, s, xn, N):
+    return N * np.cumsum(d - s) / xn
 
 
 ###################################################
@@ -61,7 +61,7 @@ s_a_example = s_comp(d_a_example, c_example)
 s_b_example = s_comp(d_b_example, c_example)
 s_c_example = s_comp(d_c_example, c_example)
 
-# e_comp_example = e(d_comp_example, (s_comp_example[0] - s_comp_example[1])/2, xn)
+# e_comp_example = e(d_comp_example, (s_comp_example[0] - s_comp_example[1])/2, xn, N)
 
 # Compute the derivative of the signal
 s_diff = np.diff(s_a_example)

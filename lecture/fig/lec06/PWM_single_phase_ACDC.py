@@ -50,8 +50,8 @@ def s_int(d, c):
 
 
 # calculate the integrated / summed error between the reference and the switching signal
-def e(d, s, xn):
-    return np.cumsum(d - s) / xn * 2 * np.pi
+def e(d, s, xn, N):
+    return N * np.cumsum(d - s) / xn
 
 
 ###################################################
@@ -61,7 +61,7 @@ def e(d, s, xn):
 c_comp_example = c_tri(x, N)
 d_comp_example = d_sin(x)
 s_comp_example = s_comp(d_comp_example, c_comp_example)
-e_comp_example = e(d_comp_example, (s_comp_example[0] - s_comp_example[1]) / 2, xn)
+e_comp_example = e(d_comp_example, (s_comp_example[0] - s_comp_example[1]) / 2, xn, N)
 
 # Compute the derivative of the signal
 s_diff = np.diff((s_comp_example[0] - s_comp_example[1]) / 2)
@@ -130,7 +130,9 @@ np.savetxt(
 c_int_example = c_tri(x, N)
 d_int_example = d_sin(x)
 s_overmod_example = s_int(d_int_example, c_int_example)
-e_int_example = e(d_int_example, (s_overmod_example[0] - s_overmod_example[1]) / 2, xn)
+e_int_example = e(
+    d_int_example, (s_overmod_example[0] - s_overmod_example[1]) / 2, xn, N
+)
 
 # Compute the derivative of the signal
 s_diff = np.diff((s_overmod_example[0] - s_overmod_example[1]) / 2)
@@ -201,7 +203,7 @@ c_overmod_example = c_tri(x, N)
 d_overmod_example = d_sin_overmod(x)
 s_overmod_example = s_int(d_overmod_example, c_overmod_example)
 e_overmod_example = e(
-    d_overmod_example, (s_overmod_example[0] - s_overmod_example[1]) / 2, xn
+    d_overmod_example, (s_overmod_example[0] - s_overmod_example[1]) / 2, xn, N
 )
 
 # Compute the derivative of the signal
@@ -301,6 +303,7 @@ plt.plot(
         )
         / 2,
         xn,
+        N,
     ),
 )
 plt.xlabel(r"$\omega t$")
