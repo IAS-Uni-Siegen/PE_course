@@ -91,9 +91,9 @@ However, some devices require $\SI{48}{\volt}$. Hence, a step-up converter shall
 
 % Solution of subtask
 \begin{solutionblock}
-	The maximum allowed voltage ripple results in:
+	The maximum allowed voltage, which corresponds to the maximal voltage at the capacitor results in:
 	\begin{equation*}
-		\Delta u_\mathrm{c}=0.05 \cdot U_\mathrm{2} =0.05 \cdot \SI{48}{\volt} = \SI{2.4}{\volt}.
+		U_\mathrm{C,max} = U_\mathrm{2,max} = 1.05 \cdot U_\mathrm{2} = 1.05 \cdot \SI{48}{\volt} = \SI{50.4}{\volt}.
 	\end{equation*}
 	The voltage drop of the capacitor corresponds to the integral of the capacitor current and the time, when the transistor is active:
 	\begin{equation*}
@@ -102,16 +102,39 @@ However, some devices require $\SI{48}{\volt}$. Hence, a step-up converter shall
 	The highest load current of the capacitor corresponds to the highest negative output current, when the transistor is active.
 	This leads to:
 	\begin{equation*}
-		\Delta u_\mathrm{c}= \frac{I_\mathrm{2,max} D}{C f_\mathrm{s}}.
+		\Delta u_\mathrm{c,max}= \frac{I_\mathrm{2,max} D}{C f_\mathrm{s}}.
 	\end{equation*}
-	Solving the previous equation to C yields
+	The average voltage of the capacitor is calculated by
 	\begin{equation*}
-		C = \frac{I_\mathrm{2,max} D}{\Delta u_\mathrm{c} f_\mathrm{s}} = \frac{\SI{20}{\ampere} \cdot 0.5}{\SI{2.4}{\volt} \cdot \SI{100}{\kilo\hertz}}=\SI{41}{\micro\farad}.
+		\overline u_\mathrm{c,max}= U_\mathrm{c,min} + \frac{\Delta u_\mathrm{c,max}}{2} + \frac{\Delta i_\mathrm{L}(1-D)^2}{12f_\mathrm{s}C}.
 	\end{equation*}
-	The maximal voltage is calculated by
+	The last term accounts for the fact that the charging current of the capacitor, supplied by the inductor $L_1$, is not constant.
+	The average voltage corresponds to $U_2$.
+	Solving the equation with respect to $U_\mathrm{c,min}$ yields
 	\begin{equation*}
-		u_\mathrm{c, max} = U_\mathrm{2} + \frac{\Delta u_\mathrm{c}}{2}  = \SI{48}{\volt} + \frac{\SI{2.4}{\volt}}{2}=\SI{49.2}{\volt}.
+		U_\mathrm{c,min} = U_\mathrm{2} - \frac{\Delta u_\mathrm{c,max}}{2} - \frac{\Delta i_\mathrm{L}(1-D)^2}{12f_\mathrm{s}C}.
 	\end{equation*}
+	The maximum voltage is calculated by
+	\begin{equation*}
+		U_\mathrm{2,max} = U_\mathrm{c,min} + \Delta u_\mathrm{c,max}.
+	\end{equation*}
+	This leads to
+	\begin{equation*}
+		U_\mathrm{2,max} = U_\mathrm{2} + \frac{\Delta u_\mathrm{c,max}}{2} - \frac{\Delta i_\mathrm{L}(1-D)^2}{12f_\mathrm{s}C}.
+	\end{equation*}
+	Replacing $\Delta u_\mathrm{c,max}$ and $\Delta i_\mathrm{L}$ and so we obtain
+	\begin{equation*}
+		U_\mathrm{2,max} = U_\mathrm{2} + \frac{I_\mathrm{2,max} D}{2C f_\mathrm{s}} - \frac{U_\mathrm{1}(1-D)^2}{12f_\mathrm{s}^2LC}.
+	\end{equation*}
+	Solving equation to C yields
+	\begin{equation*}
+		C = \frac{D}{f_\mathrm{s}(U_\mathrm{2,max} - U_\mathrm{2})} \left(\frac{I_\mathrm{2}}{2} - \frac{U_\mathrm{1}(1-D)^2}{12 L f_\mathrm{s}}\right)
+	\end{equation*}
+	\begin{equation*}
+		C = \frac{0.5}{\SI{100}{\kilo\hertz} \cdot (\SI{50.4}{\volt} - \SI{48}{\volt})} \left(\frac{\SI{20}{\ampere}}{2} -
+		\frac{\SI{24}{\volt} \cdot 0.5^2}{12 \cdot  \SI{15}{\micro\henry} \cdot \SI{100}{\kilo\hertz}}\right)=\SI{20}{\micro\farad}
+	\end{equation*}
+
 \end{solutionblock}
 
 \subtask{Calculate the duty cycle and the minimal inductance in case of ideal components, but consider the voltage drop over the transistor and the diode.

@@ -30,10 +30,10 @@
 				\begin{circuitikz}
 					\node[twoportsplitshape, scale = 1.5](tp){};
 					\draw (tp.left up) to [short, -o, i_<= $i_1$] ++(-0.75,0) coordinate(tpin1)
-					(tp.left down) to [short, -o] ++(-0.75,0) coordinate(tpin2);
+						(tp.left down) to [short, -o] ++(-0.75,0) coordinate(tpin2);
 					\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{$u_1$} ([xshift=-0.9cm]tp.left down);
 					\draw (tp.right up) to [short, -o, i= $i_2$] ++(0.75,0) coordinate(tpout1)
-					(tp.right down) to [short, -o] ++(+0.75,0) coordinate(tpout2);
+						(tp.right down) to [short, -o] ++(+0.75,0) coordinate(tpout2);
 					\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_2$} ([xshift=1cm]tp.right down);
 				\end{circuitikz}
 			};
@@ -42,10 +42,10 @@
 		\label{fig:power_electronics_block_diagram}
 	\end{figure}
 	\onslide<3->{
-		\begin{varblock}[0.9\textwidth]{Power electronics -- a definition}
-			Power electronics is a multidisciplinary branch of electrical engineering. It focuses on processing, controlling, and converting electric power. Power electronics manipulate voltages and currents to deliver a defined power to electrical equipment and devices.
-		\end{varblock}
-	}
+			\begin{varblock}[0.9\textwidth]{Power electronics -- a definition}
+				Power electronics is a multidisciplinary branch of electrical engineering. It focuses on processing, controlling, and converting electric power. Power electronics manipulate voltages and currents to deliver a defined power to electrical equipment and devices.
+			\end{varblock}
+		}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -57,28 +57,28 @@
 	\begin{figure}
 		\begin{tikzpicture}[auto, node distance=1cm and 2cm]
 			\matrix[column sep=0.03\textwidth, row sep=0.5cm]{
-			\onslide<1->{
-			\draw
-			node [input, name = input, label=left:{Input power}] {}
-			node [block, right = of input, minimum width = 3.5cm] (pc) {Power electronics}
-			node [output, right = of pc, name = output, label=right:{Output power}] {}
-			node [input, above = of pc, name = control, label=above:{Control signals}] {};
-			\draw [->] (input) --  (pc);
-			\draw [->] (pc) -- (output);
-			\draw [->] (control) -- (pc);
-			}
-			\\
-			\onslide<2->{
-			\draw
-			node [input, name = input, label=left:{Input signals}] {}
-			node [block, right = of input, minimum width = 3.5cm] (pc) {Microelectronics}
-			node [output, right = of pc, name = output, label=right:{Output signals}] {}
-			node [input, below = of pc, name = control, label=below:{Power supply}] {};
-			\draw [->] (input) --  (pc);
-			\draw [->] (pc) -- (output);
-			\draw [->] (control) -- (pc);
-			}
-			\\
+				\onslide<1->{
+						           \draw
+						           node [input, name = input, label=left:{Input power}] {}
+						           node [block, right = of input, minimum width = 3.5cm] (pc) {Power electronics}
+						           node [output, right = of pc, name = output, label=right:{Output power}] {}
+						           node [input, above = of pc, name = control, label=above:{Control signals}] {};
+						           \draw [->] (input) --  (pc);
+						           \draw [->] (pc) -- (output);
+						           \draw [->] (control) -- (pc);
+					           }
+				\\
+				\onslide<2->{
+						           \draw
+						           node [input, name = input, label=left:{Input signals}] {}
+						           node [block, right = of input, minimum width = 3.5cm] (pc) {Microelectronics}
+						           node [output, right = of pc, name = output, label=right:{Output signals}] {}
+						           node [input, below = of pc, name = control, label=below:{Power supply}] {};
+						           \draw [->] (input) --  (pc);
+						           \draw [->] (pc) -- (output);
+						           \draw [->] (control) -- (pc);
+					           }
+				\\
 			};
 		\end{tikzpicture}
 		\onslide<2->\caption{Power electronics vs. microelectronics}
@@ -96,184 +96,184 @@
 		\begin{tikzpicture}[ampersand replacement=\&]
 			\matrix[column sep=0.03\textwidth, row sep=0.5cm]{
 				\onslide<1->{
-					\begin{axis}[
-							width=0.3\textwidth,
-							height=0.4\textheight,
-							axis lines=middle,
-							xlabel={$\omega t$},
-							ylabel={$u(\omega t)$},
-							xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
-									anchor=west,
-									inner xsep=0pt,
-									xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
-							ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
-									anchor=north west,
-									inner ysep=0pt},
-							xmin=0, xmax=2*pi,
-							ymin=-1.5, ymax=1.5,
-							xtick={0,1.57,3.14,4.71,6.28},
-							xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
-							ytick={-1,0,1},
-							yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
-							grid=both,
-						]
-						\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{1};
-					\end{axis}
-				}
+						           \begin{axis}[
+								           width=0.3\textwidth,
+								           height=0.4\textheight,
+								           axis lines=middle,
+								           xlabel={$\omega t$},
+								           ylabel={$u(\omega t)$},
+								           xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+										           anchor=west,
+										           inner xsep=0pt,
+										           xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+								           ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+										           anchor=north west,
+										           inner ysep=0pt},
+								           xmin=0, xmax=2*pi,
+								           ymin=-1.5, ymax=1.5,
+								           xtick={0,1.57,3.14,4.71,6.28},
+								           xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
+								           ytick={-1,0,1},
+								           yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
+								           grid=both,
+							           ]
+							           \addplot[domain=0:2*pi, samples=100, signalalpha, thick]{1};
+						           \end{axis}
+					           }
 				\&
 				\onslide<4->{
-					\begin{axis}[
-							width=0.3\textwidth,
-							height=0.4\textheight,
-							axis lines=middle,
-							xlabel={$\omega t$},
-							ylabel={$u(\omega t)$},
-							xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
-									anchor=west,
-									inner xsep=0pt,
-									xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
-							ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
-									anchor=north west,
-									inner ysep=0pt},
-							xmin=0, xmax=2*pi,
-							ymin=-1.5, ymax=1.5,
-							xtick={0,1.57,3.14,4.71,6.28},
-							xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
-							ytick={-1,0,1},
-							yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
-							grid=both,
-						]
-						\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{sin(deg(x))};
-					\end{axis}
-				}
+						           \begin{axis}[
+								           width=0.3\textwidth,
+								           height=0.4\textheight,
+								           axis lines=middle,
+								           xlabel={$\omega t$},
+								           ylabel={$u(\omega t)$},
+								           xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+										           anchor=west,
+										           inner xsep=0pt,
+										           xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+								           ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+										           anchor=north west,
+										           inner ysep=0pt},
+								           xmin=0, xmax=2*pi,
+								           ymin=-1.5, ymax=1.5,
+								           xtick={0,1.57,3.14,4.71,6.28},
+								           xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
+								           ytick={-1,0,1},
+								           yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
+								           grid=both,
+							           ]
+							           \addplot[domain=0:2*pi, samples=100, signalalpha, thick]{sin(deg(x))};
+						           \end{axis}
+					           }
 				\&
 				\onslide<6->{
-					\begin{axis}[
-							width=0.3\textwidth,
-							height=0.4\textheight,
-							axis lines=middle,
-							xlabel={$\omega t$},
-							ylabel={$u(\omega t)$},
-							xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
-									anchor=west,
-									inner xsep=0pt,
-									xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
-							ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
-									anchor=north west,
-									inner ysep=0pt},
-							xmin=0, xmax=2*pi,
-							ymin=-1.5, ymax=1.5,
-							xtick={0,1.57,3.14,4.71,6.28},
-							xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
-							ytick={-1,0,1},
-							yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
-							grid=both,
-						]
-						\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{sin(deg(x))};
-					\end{axis}
-				}
+						           \begin{axis}[
+								           width=0.3\textwidth,
+								           height=0.4\textheight,
+								           axis lines=middle,
+								           xlabel={$\omega t$},
+								           ylabel={$u(\omega t)$},
+								           xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+										           anchor=west,
+										           inner xsep=0pt,
+										           xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+								           ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+										           anchor=north west,
+										           inner ysep=0pt},
+								           xmin=0, xmax=2*pi,
+								           ymin=-1.5, ymax=1.5,
+								           xtick={0,1.57,3.14,4.71,6.28},
+								           xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
+								           ytick={-1,0,1},
+								           yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
+								           grid=both,
+							           ]
+							           \addplot[domain=0:2*pi, samples=100, signalalpha, thick]{sin(deg(x))};
+						           \end{axis}
+					           }
 				\\
 				% add two arrows: one pointing up with a label "rectifier" and one pointing down with a label "inverter"
 				\onslide<3->{
-					\draw[->, thick] (1,0) -- (1,1);
-					\node[anchor=east] at (1,0.5) {rectifier};
-				}
+						           \draw[->, thick] (1,0) -- (1,1);
+						           \node[anchor=east] at (1,0.5) {rectifier};
+					           }
 				\onslide<2->{
-					\draw[->, thick] (2,1) -- (2,0);
-					\node[anchor=west] at (2,0.5) {inverter};
-				}
+						           \draw[->, thick] (2,1) -- (2,0);
+						           \node[anchor=west] at (2,0.5) {inverter};
+					           }
 				\&
 				\onslide<5->{
-					\draw[<->, thick] (1,0) -- (1,1);
-					\node[anchor=east,  align=right] at (1,0.5) 	{frequency\\phase};
-					\draw[<->, thick] (2,1) -- (2,0);
-					\node[anchor=west] at (2,0.5) {amplitude};
-				}
+						           \draw[<->, thick] (1,0) -- (1,1);
+						           \node[anchor=east,  align=right] at (1,0.5) 	{frequency\\phase};
+						           \draw[<->, thick] (2,1) -- (2,0);
+						           \node[anchor=west] at (2,0.5) {amplitude};
+					           }
 				\&
 				\onslide<7->{
-					\draw[<->, thick] (1.5,0) -- (1.5,1);
-					\node[anchor=east,  align=right] at (1.5,0.5) {number of\\phases};
-				}
+						           \draw[<->, thick] (1.5,0) -- (1.5,1);
+						           \node[anchor=east,  align=right] at (1.5,0.5) {number of\\phases};
+					           }
 				\\
 				\onslide<2->{
-					\begin{axis}[
-							width=0.3\textwidth,
-							height=0.4\textheight,
-							axis lines=middle,
-							xlabel={$\omega t$},
-							ylabel={$u(\omega t)$},
-							xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
-									anchor=west,
-									inner xsep=0pt,
-									xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
-							ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
-									anchor=north west,
-									inner ysep=0pt},
-							xmin=0, xmax=2*pi,
-							ymin=-1.5, ymax=1.5,
-							xtick={0,1.57,3.14,4.71,6.28},
-							xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
-							ytick={-1,0,1},
-							yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
-							grid=both,
-						]
-						\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{sin(deg(x))};
-					\end{axis}
-				}
+						           \begin{axis}[
+								           width=0.3\textwidth,
+								           height=0.4\textheight,
+								           axis lines=middle,
+								           xlabel={$\omega t$},
+								           ylabel={$u(\omega t)$},
+								           xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+										           anchor=west,
+										           inner xsep=0pt,
+										           xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+								           ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+										           anchor=north west,
+										           inner ysep=0pt},
+								           xmin=0, xmax=2*pi,
+								           ymin=-1.5, ymax=1.5,
+								           xtick={0,1.57,3.14,4.71,6.28},
+								           xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
+								           ytick={-1,0,1},
+								           yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
+								           grid=both,
+							           ]
+							           \addplot[domain=0:2*pi, samples=100, signalalpha, thick]{sin(deg(x))};
+						           \end{axis}
+					           }
 				\&
 				\onslide<5->{
-					\begin{axis}[
-							width=0.3\textwidth,
-							height=0.4\textheight,
-							axis lines=middle,
-							xlabel={$\omega t$},
-							ylabel={$u(\omega t)$},
-							xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
-									anchor=west,
-									inner xsep=0pt,
-									xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
-							ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
-									anchor=north west,
-									inner ysep=0pt},
-							xmin=0, xmax=2*pi,
-							ymin=-1.5, ymax=1.5,
-							xtick={0,1.57,3.14,4.71,6.28},
-							xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
-							ytick={-1,0,1},
-							yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
-							grid=both,
-						]
-						\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{0.5*sin(deg(2*x+pi/2))};
-					\end{axis}
-				}
+						           \begin{axis}[
+								           width=0.3\textwidth,
+								           height=0.4\textheight,
+								           axis lines=middle,
+								           xlabel={$\omega t$},
+								           ylabel={$u(\omega t)$},
+								           xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+										           anchor=west,
+										           inner xsep=0pt,
+										           xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+								           ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+										           anchor=north west,
+										           inner ysep=0pt},
+								           xmin=0, xmax=2*pi,
+								           ymin=-1.5, ymax=1.5,
+								           xtick={0,1.57,3.14,4.71,6.28},
+								           xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
+								           ytick={-1,0,1},
+								           yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
+								           grid=both,
+							           ]
+							           \addplot[domain=0:2*pi, samples=100, signalalpha, thick]{0.5*sin(deg(2*x+pi/2))};
+						           \end{axis}
+					           }
 				\&
 				\onslide<7->{
-					\begin{axis}[
-							width=0.3\textwidth,
-							height=0.4\textheight,
-							axis lines=middle,
-							xlabel={$\omega t$},
-							ylabel={$u(\omega t)$},
-							xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
-									anchor=west,
-									inner xsep=0pt,
-									xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
-							ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
-									anchor=north west,
-									inner ysep=0pt},
-							xmin=0, xmax=2*pi,
-							ymin=-1.5, ymax=1.5,
-							xtick={0,1.57,3.14,4.71,6.28},
-							xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
-							ytick={-1,0,1},
-							yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
-							grid=both,
-						]
-						\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{sin(deg(x))};
-						\addplot[domain=0:2*pi, samples=100, signalbeta, thick]{sin(deg(x-2*pi/3))};
-						\addplot[domain=0:2*pi, samples=100, signalgamma, thick]{sin(deg(x+2*pi/3))};
-					\end{axis}
-				}
+						           \begin{axis}[
+								           width=0.3\textwidth,
+								           height=0.4\textheight,
+								           axis lines=middle,
+								           xlabel={$\omega t$},
+								           ylabel={$u(\omega t)$},
+								           xlabel style={yshift=.0*\pgfkeysvalueof{/pgfplots/major tick length},
+										           anchor=west,
+										           inner xsep=0pt,
+										           xshift=0.5*\pgfkeysvalueof{/pgfplots/major tick length}},
+								           ylabel style={yshift=1.5*\pgfkeysvalueof{/pgfplots/major tick length},
+										           anchor=north west,
+										           inner ysep=0pt},
+								           xmin=0, xmax=2*pi,
+								           ymin=-1.5, ymax=1.5,
+								           xtick={0,1.57,3.14,4.71,6.28},
+								           xticklabels={$0$,$\frac{\pi}{2}$,$\pi$,$\frac{3\pi}{2}$,$2\pi$},
+								           ytick={-1,0,1},
+								           yticklabels={$-\hat{u}$,$0$,$\hat{u}$},
+								           grid=both,
+							           ]
+							           \addplot[domain=0:2*pi, samples=100, signalalpha, thick]{sin(deg(x))};
+							           \addplot[domain=0:2*pi, samples=100, signalbeta, thick]{sin(deg(x-2*pi/3))};
+							           \addplot[domain=0:2*pi, samples=100, signalgamma, thick]{sin(deg(x+2*pi/3))};
+						           \end{axis}
+					           }
 				\\
 			};
 		\end{tikzpicture}
@@ -498,17 +498,17 @@
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\onslide<2->{
-				\begin{varblock}{Work}
-					Work is the integral of the power over a time integral (or force over distance) and is a measure of the energy transfer.
-				\end{varblock}
-			}
+					\begin{varblock}{Work}
+						Work is the integral of the power over a time integral (or force over distance) and is a measure of the energy transfer.
+					\end{varblock}
+				}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\onslide<1->{
-				\begin{varblock}{Energy}
-					Energy is the capacity to do work, that is, a quantity depending on the state of a system at a given point of time.
-				\end{varblock}
-			}
+					\begin{varblock}{Energy}
+						Energy is the capacity to do work, that is, a quantity depending on the state of a system at a given point of time.
+					\end{varblock}
+				}
 		\end{column}
 	\end{columns}
 	\vspace{0.5cm}
@@ -516,16 +516,16 @@
 		\begin{tikzpicture}
 			\onslide<1->{\node[draw, bubble, minimum width = 8em, minimum height = 5em] (energy) at (0,0) {\large Energy};}
 			\onslide<3->{
-				\coordinate (loss) at (4.5,-1.25);
-				\node[draw, bubble] (energy2) at (6,0) {\large Energy};
-			}
+					\coordinate (loss) at (4.5,-1.25);
+					\node[draw, bubble] (energy2) at (6,0) {\large Energy};
+				}
 			\begin{scope}[on background layer]
 				\onslide<2->\draw[-{Latex[length=4mm, width=8mm]}, line width=4mm] (energy.mid) -- node[above, midway, name = work] {Work} (energy2);
 				\onslide<3->{
-				\draw[-{Latex[length=4mm, width=8mm]}, line width=2mm, color=signaldelta, transform canvas={yshift=-3mm}] (energy.mid) --  (3,0) to [out=0,in=120] (loss.south) ;
-				\node[below, transform canvas={yshift=-3mm}] at (loss) {\color{signaldelta} \large Heat};
-				\node[below=of work, yshift = 6mm, color=signaldelta] {Losses};
-				}
+						\draw[-{Latex[length=4mm, width=8mm]}, line width=2mm, color=signaldelta, transform canvas={yshift=-3mm}] (energy.mid) --  (3,0) to [out=0,in=120] (loss.south) ;
+						\node[below, transform canvas={yshift=-3mm}] at (loss) {\color{signaldelta} \large Heat};
+						\node[below=of work, yshift = 6mm, color=signaldelta] {Losses};
+					}
 			\end{scope}
 		\end{tikzpicture}
 		\vspace{0.75cm}
@@ -612,24 +612,24 @@
 		\begin{column}{0.5\textwidth}
 			\justifying
 			\onslide<1->{%
-				Depending on the current and voltage signs, the power $P$ can be positive or negative. This leads to four \hl{quadrants} of operation:%
-			}%
+					Depending on the current and voltage signs, the power $P$ can be positive or negative. This leads to four \hl{quadrants} of operation:%
+				}%
 			\begin{itemize}
 				\item<2-> Quadrants I \& III: $P \geq 0$,\newline (Power transfer from input to output)
 				\item<3-> Quadrants II \& IV: $P \leq 0$. \newline (Power transfer from output to input)
 			\end{itemize}
 			\onslide<4->{
-				How many quadrants a power converter can operate in depends on the topology and control strategy, i.e., is an important design criterion.
-			}
+					How many quadrants a power converter can operate in depends on the topology and control strategy, i.e., is an important design criterion.
+				}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{figure}
 				\centering
 				\begin{tikzpicture}
 					\onslide<1->{
-						\draw[<->] (-2,0) -- (2,0) node[anchor=west] {$i$};
-						\draw[<->] (0,-2) -- (0,2) node[anchor=south] {$u$};
-					}
+							\draw[<->] (-2,0) -- (2,0) node[anchor=west] {$i$};
+							\draw[<->] (0,-2) -- (0,2) node[anchor=south] {$u$};
+						}
 					\onslide<2->{\node[anchor=center, align = center] at (1.0,1.0) {$\mathrm{I}$\\$P \geq 0$};}
 					\onslide<3->{\node[anchor=center, align = center] at (-1.0,1.0) {$\mathrm{II}$\\$P \leq 0$};}
 					\onslide<2->{\node[anchor=center, align = center] at (-1.0,-1.0) {$\mathrm{III}$\\$P \geq 0$};}
@@ -638,10 +638,10 @@
 						\begin{circuitikz}
 							\node[twoportsplitshape, scale = 1.5](tp){};
 							\draw (tp.left up) to [short, -o, i_<= $i_1$] ++(-0.75,0) coordinate(tpin1)
-							(tp.left down) to [short, -o] ++(-0.75,0) coordinate(tpin2);
+								(tp.left down) to [short, -o] ++(-0.75,0) coordinate(tpin2);
 							\draw[->] ([xshift=-0.9cm]tp.left up) to node[anchor = east]{$u_1$} ([xshift=-0.9cm]tp.left down);
 							\draw (tp.right up) to [short, -o, i= $i_2$] ++(0.75,0) coordinate(tpout1)
-							(tp.right down) to [short, -o] ++(+0.75,0) coordinate(tpout2);
+								(tp.right down) to [short, -o] ++(+0.75,0) coordinate(tpout2);
 							\draw[->] ([xshift=1cm]tp.right up) to node[anchor = west]{$u_2$} ([xshift=1cm]tp.right down);
 						\end{circuitikz}
 					} ;
@@ -756,69 +756,69 @@
 		\begin{column}{0.55\textwidth}
 			\begin{figure}
 				\onslide<1->{
-					\begin{circuitikz}[]
-						\draw (0,2) to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
-						to ++(-5.5,0)
-						to [open, o-o, v^<= $u_1(t)$, voltage = straight] ++(0,2)
-						(-5.5,2) to ++(1.25,0) node [nigbt, anchor=C, rotate=90](nigbt1){}
-						(nigbt1.E) to [short, i=$i_2(t)$] (0,2);
-						\draw node[rectangle, draw, anchor = north] (r) at (nigbt1.B) {Linear amplifier}
-						(r.east)[<-] to ++(0.5,0) node [anchor = west](a){$u^*_2(t)$};
-						\draw [->] ([yshift = 0.2cm, xshift = 0.1cm]nigbt1.C) -- node [yshift = 0.3cm] {$u_\mathrm{CE}(t)$} ([yshift = 0.2cm, xshift = -0.1cm]nigbt1.E) ;
-					\end{circuitikz}
-					\caption{Transistor-based step-down converter}
-					\label{fig:linear_power_conversion_transistor}
-				}
+						\begin{circuitikz}[]
+							\draw (0,2) to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2)
+							to ++(-5.5,0)
+							to [open, o-o, v^<= $u_1(t)$, voltage = straight] ++(0,2)
+							(-5.5,2) to ++(1.25,0) node [nigbt, anchor=C, rotate=90](nigbt1){}
+							(nigbt1.E) to [short, i=$i_2(t)$] (0,2);
+							\draw node[rectangle, draw, anchor = north] (r) at (nigbt1.B) {Linear amplifier}
+							(r.east)[<-] to ++(0.5,0) node [anchor = west](a){$u^*_2(t)$};
+							\draw [->] ([yshift = 0.2cm, xshift = 0.1cm]nigbt1.C) -- node [yshift = 0.3cm] {$u_\mathrm{CE}(t)$} ([yshift = 0.2cm, xshift = -0.1cm]nigbt1.E) ;
+						\end{circuitikz}
+						\caption{Transistor-based step-down converter}
+						\label{fig:linear_power_conversion_transistor}
+					}
 			\end{figure}
 			\onslide<3->{
-				For a transistor-based step-down converter, the output voltage  is $u_2(t)= u_1(t) - u_\mathrm{CE}(t)$	leading to the power losses
-				\begin{equation}
-					P_\mathrm{l}(t) = u_\mathrm{CE}(t)  i_2(t) .
-				\end{equation}
-			}
+					For a transistor-based step-down converter, the output voltage  is $u_2(t)= u_1(t) - u_\mathrm{CE}(t)$	leading to the power losses
+					\begin{equation}
+						P_\mathrm{l}(t) = u_\mathrm{CE}(t)  i_2(t) .
+					\end{equation}
+				}
 		\end{column}
 		\begin{column}{0.45\textwidth}
 			\centering
 			\begin{figure}
 				\onslide<2->{
-					\begin{tikzpicture}
-						% plot IGBT output characteristics V_CE = f(I_C)
-						\begin{axis}[
-								xlabel={$U_{\mathrm{CE}}$},
-								ylabel={$I_\mathrm{C}$},
-								axis lines=left,
-								ymin=0, ymax=6,
-								xmin=0, xmax=5,
-								xtick={0,1,2,3,4},
-								ytick={0,1,2,3,4,5},
-								xticklabels={},
-								yticklabels={},
-								domain=0:5,
-								samples=50,
-								thick,
-								smooth,
-								no markers,
-								width = 0.95\textwidth,
-								grid
-							]
-							\addplot[signalalpha, domain=0:0.3]{0.01};
-							\addplot[signalalpha, domain=0.3:5]{11.5 / (1+exp(-2*(x-0.3)))-6};
-							\addplot[signalalpha, domain=0.3:5]{7.7 / (1+exp(-2.5*(x-0.3)))-4};
-							\addplot[signalalpha, domain=0.3:5]{4 / (1+exp(-3*(x-0.3)))-2};
-							\addplot[signalalpha, domain=0.3:5]{2 / (1+exp(-3.25*(x-0.3)))-1};
-							\addplot[signalalpha, domain=0.3:5]{1 / (1+exp(-3.5*(x-0.325)))-0.5};
-							\addplot[signalalpha, domain=0.3:5]{0.25 / (1+exp(-3.5*(x-0.325)))-0.125};
-							\draw[->, signaldelta, thick, dashed] (axis cs:1.5,0.25) -- (axis cs:1.5,5.2);
-							\node[signaldelta, anchor = west] at (axis cs:1.5,2.75) {$U_\mathrm{GE}$};
-							\draw[signalgamma, thick, dashed, rotate=-10] (axis cs:0.5,1) ellipse (0.35cm and 3.0cm);
-							\node[signalgamma, anchor = south] at (axis cs:1.1,5.1) {\small Linear region};
-							\draw[signalbeta, thick, dashed, rounded corners] (axis cs:2.5,0.2) rectangle (axis cs:4.75,5.9);
-							\node[signalbeta, anchor = south, ,  align=center] at (axis cs:3.6,3.7) {\small Saturation\\region};
-						\end{axis}
-					\end{tikzpicture}
-					\caption{Output characteristics of an insulated-gate bipolar transistor (IGBT)}
-					\label{fig:output_characteristics_IGBT}
-				}
+						\begin{tikzpicture}
+							% plot IGBT output characteristics V_CE = f(I_C)
+							\begin{axis}[
+									xlabel={$U_{\mathrm{CE}}$},
+									ylabel={$I_\mathrm{C}$},
+									axis lines=left,
+									ymin=0, ymax=6,
+									xmin=0, xmax=5,
+									xtick={0,1,2,3,4},
+									ytick={0,1,2,3,4,5},
+									xticklabels={},
+									yticklabels={},
+									domain=0:5,
+									samples=50,
+									thick,
+									smooth,
+									no markers,
+									width = 0.95\textwidth,
+									grid
+								]
+								\addplot[signalalpha, domain=0:0.3]{0.01};
+								\addplot[signalalpha, domain=0.3:5]{11.5 / (1+exp(-2*(x-0.3)))-6};
+								\addplot[signalalpha, domain=0.3:5]{7.7 / (1+exp(-2.5*(x-0.3)))-4};
+								\addplot[signalalpha, domain=0.3:5]{4 / (1+exp(-3*(x-0.3)))-2};
+								\addplot[signalalpha, domain=0.3:5]{2 / (1+exp(-3.25*(x-0.3)))-1};
+								\addplot[signalalpha, domain=0.3:5]{1 / (1+exp(-3.5*(x-0.325)))-0.5};
+								\addplot[signalalpha, domain=0.3:5]{0.25 / (1+exp(-3.5*(x-0.325)))-0.125};
+								\draw[->, signaldelta, thick, dashed] (axis cs:1.5,0.25) -- (axis cs:1.5,5.2);
+								\node[signaldelta, anchor = west] at (axis cs:1.5,2.75) {$U_\mathrm{GE}$};
+								\draw[signalgamma, thick, dashed, rotate=-10] (axis cs:0.5,1) ellipse (0.35cm and 3.0cm);
+								\node[signalgamma, anchor = south] at (axis cs:1.1,5.1) {\small Linear region};
+								\draw[signalbeta, thick, dashed, rounded corners] (axis cs:2.5,0.2) rectangle (axis cs:4.75,5.9);
+								\node[signalbeta, anchor = south, ,  align=center] at (axis cs:3.6,3.7) {\small Saturation\\region};
+							\end{axis}
+						\end{tikzpicture}
+						\caption{Output characteristics of an insulated-gate bipolar transistor (IGBT)}
+						\label{fig:output_characteristics_IGBT}
+					}
 			\end{figure}
 		\end{column}
 	\end{columns}
@@ -830,28 +830,28 @@
 \begin{frame}[b]
 	\frametitle{Switching power conversion}
 	\onslide<1->{Alternative idea: \hl{switch either fully on or off}.} \onslide<3->{The average output voltage $\overline{u}_2$ is controlled by the \hl{duty cycle} (assuming that $u_1(t)=\overline{u}_1$ is constant)
-	\begin{equation}
-		D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \qquad \overline{u}_2 = \frac{1}{T_\mathrm{s}} \int_0^{T_\mathrm{s}} u_2(t) t = D \overline{u}_1.
-	\end{equation}}
+			\begin{equation}
+				D = \frac{T_\mathrm{on}}{T_\mathrm{s}}, \qquad \overline{u}_2 = \frac{1}{T_\mathrm{s}} \int_0^{T_\mathrm{s}} u_2(t) t = D \overline{u}_1.
+			\end{equation}}
 	\onslide<4->{%
-		As the switching losses are typically small, the overall efficiency is (much) higher compared to linear power conversion.}
+			As the switching losses are typically small, the overall efficiency is (much) higher compared to linear power conversion.}
 	\vspace{-0.5cm}
 	\begin{columns}[b]
 		\begin{column}{0.5\textwidth}
 			\begin{figure}
 				\onslide<1->{
-					\begin{circuitikz}[]
-						\draw (0,2) to [open, o-o, v^=$u_2(t)$, voltage = straight] ++(0,-2)
-						to ++(-5,0)
-						to [open, o-o, v^<= $u_1(t)$, voltage = straight] ++(0,2)
-						(-5,2) to ++(1.25,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
-						let \p1 = (S.mid) in (S.in) to (0,2)
-						([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
-					\end{circuitikz}
-					\vspace{0.6cm}
-					\caption{Ideal switch-based step-down converter}
-					\label{fig:Switched_power_conversion}
-				}
+						\begin{circuitikz}[]
+							\draw (0,2) to [open, o-o, v^=$u_2(t)$, voltage = straight] ++(0,-2)
+							to ++(-5,0)
+							to [open, o-o, v^<= $u_1(t)$, voltage = straight] ++(0,2)
+							(-5,2) to ++(1.25,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
+							let \p1 = (S.mid) in (S.in) to (0,2)
+								([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
+						\end{circuitikz}
+						\vspace{0.6cm}
+						\caption{Ideal switch-based step-down converter}
+						\label{fig:Switched_power_conversion}
+					}
 			\end{figure}
 			\vspace{0pt}
 		\end{column}
@@ -859,28 +859,28 @@
 			\centering
 			\begin{figure}
 				\onslide<2->{
-					\begin{tikzpicture}
-						\begin{axis}[
-								xlabel={$t/T_\mathrm{s}$},
-								ylabel={$u_2(t)/u_1(t)$},
-								ymin=-0.05, ymax=1.05,
-								xmin=-0.1, xmax=1.1,
-								width = 0.95\textwidth,
-								height = 0.4\textheight,
-								grid,
-								thick,
-								clip = false,
-							]
-							% plt u_out = 1 for t = 0 to D*Ts and u_out = 0 for t = D*Ts to Ts in a single plot
-							\addplot[signalalpha] coordinates {(-0.1,0) (0,0) (0,1) (0.4,1) (0.4,0) (1,0) (1,1) (1.1,1)};
-							\draw [thick,<->]  (0,0.5) -- node[above,fill=white]{$T_\mathrm{on}$}(0.4, 0.5);
-							\draw [thick,<->]  (0.4,0.5) -- node[above]{$T_\mathrm{off}$}(1.0, 0.5);
-							\draw [thick,<->]  (0.0,1.2) -- node[above]{$T_\mathrm{s}$}(1.0, 1.2);
-						\end{axis}
-					\end{tikzpicture}
-					\caption{Switching voltage from \figref{fig:Switched_power_conversion}}
-					\label{fig:Switched_power_conversion_output}
-				}
+						\begin{tikzpicture}
+							\begin{axis}[
+									xlabel={$t/T_\mathrm{s}$},
+									ylabel={$u_2(t)/u_1(t)$},
+									ymin=-0.05, ymax=1.05,
+									xmin=-0.1, xmax=1.1,
+									width = 0.95\textwidth,
+									height = 0.4\textheight,
+									grid,
+									thick,
+									clip = false,
+								]
+								% plt u_out = 1 for t = 0 to D*Ts and u_out = 0 for t = D*Ts to Ts in a single plot
+								\addplot[signalalpha] coordinates {(-0.1,0) (0,0) (0,1) (0.4,1) (0.4,0) (1,0) (1,1) (1.1,1)};
+								\draw [thick,<->]  (0,0.5) -- node[above,fill=white]{$T_\mathrm{on}$}(0.4, 0.5);
+								\draw [thick,<->]  (0.4,0.5) -- node[above]{$T_\mathrm{off}$}(1.0, 0.5);
+								\draw [thick,<->]  (0.0,1.2) -- node[above]{$T_\mathrm{s}$}(1.0, 1.2);
+							\end{axis}
+						\end{tikzpicture}
+						\caption{Switching voltage from \figref{fig:Switched_power_conversion}}
+						\label{fig:Switched_power_conversion_output}
+					}
 			\end{figure}
 			\vspace{0pt}
 		\end{column}
@@ -904,9 +904,9 @@
 					to ++(0,0.5) node [cspstshape, anchor = right, rotate = -90] (S) {};
 					\draw (S.left) to ++(0,0.5)  [short, -*] coordinate (S1);
 					\draw (S1) to [diode] ++(0,2) coordinate (S3)
-					to ++(1,0) [short]	coordinate (S2)
-					to  [isource, i=$i_0$] ++(0, -2.0)
-					to  [short, -*] (S1);
+						to ++(1,0) [short]	coordinate (S2)
+						to  [isource, i=$i_0$] ++(0, -2.0)
+						to  [short, -*] (S1);
 					\draw (S3) to [short, *-] ++(-1.5,0)
 					to (vs) [short];
 					\draw (S.right) to [short, i=$i_\mathrm{s}$] ++(0,-0.5);
@@ -973,81 +973,81 @@
 	\frametitle{Switching power conversion: soft switching}
 	\begin{figure}
 		\onslide<1->{
-			\begin{subfigure}[b]{0.44\textwidth}
-				\hspace{-0.7cm}
-				\begin{tikzpicture}
-					\begin{groupplot}[group style={group size=1 by 2}, height=0.34\textheight, width=\textwidth, xmin=0, xmax=1, grid, ymin = -0.1, ymax =1.1]
+				\begin{subfigure}[b]{0.44\textwidth}
+					\hspace{-0.7cm}
+					\begin{tikzpicture}
+						\begin{groupplot}[group style={group size=1 by 2}, height=0.34\textheight, width=\textwidth, xmin=0, xmax=1, grid, ymin = -0.1, ymax =1.1]
 
-						% Top-left plot: switch control signal for ZVS
+							% Top-left plot: switch control signal for ZVS
 
-						\nextgroupplot[ylabel = {$u_\mathrm{ctrl}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {off, , on}]
-						\addplot[signalalpha, thick] coordinates {(-0.1,0) (0.3,0) (0.3,1) (0.7,1) (0.7,0) (1.1,0)};
-						\coordinate (a) at (0.3,0);
-						\coordinate (b) at (0.7,0);
+							\nextgroupplot[ylabel = {$u_\mathrm{ctrl}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {off, , on}]
+							\addplot[signalalpha, thick] coordinates {(-0.1,0) (0.3,0) (0.3,1) (0.7,1) (0.7,0) (1.1,0)};
+							\coordinate (a) at (0.3,0);
+							\coordinate (b) at (0.7,0);
 
-						% Bottom-left plot: voltage and current through a switch for ZVS
-						\nextgroupplot[ylabel = {$u_\mathrm{s}(t)/u_0$}]
-						\addplot[signalalpha, thick] coordinates {(0,1) (0.2,1) (0.3,0) (0.7,0) (0.8,1) (1,1)};
-						\node[signaldelta, fill=white, inner sep = 1pt, anchor = north] at (axis cs:0.5,1) {$i_\mathrm{s}(t)$};
-						\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0) {$u_\mathrm{s}(t)$};
-						\coordinate (c) at (0.3,0);
-						\coordinate (d) at (0.7,0);
-					\end{groupplot}
+							% Bottom-left plot: voltage and current through a switch for ZVS
+							\nextgroupplot[ylabel = {$u_\mathrm{s}(t)/u_0$}]
+							\addplot[signalalpha, thick] coordinates {(0,1) (0.2,1) (0.3,0) (0.7,0) (0.8,1) (1,1)};
+							\node[signaldelta, fill=white, inner sep = 1pt, anchor = north] at (axis cs:0.5,1) {$i_\mathrm{s}(t)$};
+							\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0) {$u_\mathrm{s}(t)$};
+							\coordinate (c) at (0.3,0);
+							\coordinate (d) at (0.7,0);
+						\end{groupplot}
 
-					% second y-axis for the bottom plot
-					\begin{groupplot}[group style={group size=1 by 2, y descriptions at = edge right}, height=0.34\textheight, width=\textwidth, xmin=0, xmax=1, grid, xtick=\empty, axis line style=transparent, ymin = -0.1, ymax =1.1]
-						\nextgroupplot[ytick = \empty]
-						%
-						\nextgroupplot[ylabel = {$i_\mathrm{s}(t)/i_0$}, ytick = {}, yticklabels = {}]
-						\addplot[signaldelta, thick] coordinates {(0,0) (0.25,0) (0.35,1) (0.65,1) (0.75,0) (1,0)};
-						\addplot[signalalpha, thick] coordinates {(0,1) (0.2,1) (0.3,0) (0.7,0) (0.8,1) (1,1)};
-					\end{groupplot}
-					\draw [dashed] (a) -- (c);
-					\draw [dashed] (b) -- (d);
-				\end{tikzpicture}
-				\caption{Zero-voltage switching (ZVS)}
-			\end{subfigure}
-		}
+						% second y-axis for the bottom plot
+						\begin{groupplot}[group style={group size=1 by 2, y descriptions at = edge right}, height=0.34\textheight, width=\textwidth, xmin=0, xmax=1, grid, xtick=\empty, axis line style=transparent, ymin = -0.1, ymax =1.1]
+							\nextgroupplot[ytick = \empty]
+							%
+							\nextgroupplot[ylabel = {$i_\mathrm{s}(t)/i_0$}, ytick = {}, yticklabels = {}]
+							\addplot[signaldelta, thick] coordinates {(0,0) (0.25,0) (0.35,1) (0.65,1) (0.75,0) (1,0)};
+							\addplot[signalalpha, thick] coordinates {(0,1) (0.2,1) (0.3,0) (0.7,0) (0.8,1) (1,1)};
+						\end{groupplot}
+						\draw [dashed] (a) -- (c);
+						\draw [dashed] (b) -- (d);
+					\end{tikzpicture}
+					\caption{Zero-voltage switching (ZVS)}
+				\end{subfigure}
+			}
 		%
 		\hspace{0.5cm}
 		%
 		\onslide<2->{
-			\begin{subfigure}[b]{0.44\textwidth}
-				\begin{tikzpicture}
-					\begin{groupplot}[group style={group size=1 by 2}, height=0.34\textheight, width=\textwidth, xmin=0, xmax=1, grid, ymin = -0.1, ymax =1.1]
+				\begin{subfigure}[b]{0.44\textwidth}
+					\begin{tikzpicture}
+						\begin{groupplot}[group style={group size=1 by 2}, height=0.34\textheight, width=\textwidth, xmin=0, xmax=1, grid, ymin = -0.1, ymax =1.1]
 
-						% Top-right plot: switch control signal for ZVS
-						\nextgroupplot[ylabel = {$u_\mathrm{ctrl}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {off, , on}]
-						\addplot[signalalpha, thick] coordinates {(-0.1,0) (0.3,0) (0.3,1) (0.7,1) (0.7,0) (1.1,0)};
-						\coordinate (a) at (0.3,0);
-						\coordinate (b) at (0.7,0);
+							% Top-right plot: switch control signal for ZVS
+							\nextgroupplot[ylabel = {$u_\mathrm{ctrl}(t)$}, ytick = {0, 0.5, 1}, yticklabels = {off, , on}]
+							\addplot[signalalpha, thick] coordinates {(-0.1,0) (0.3,0) (0.3,1) (0.7,1) (0.7,0) (1.1,0)};
+							\coordinate (a) at (0.3,0);
+							\coordinate (b) at (0.7,0);
 
-						% Bottom-right plot: voltage and current through a switch for ZCS
-						\nextgroupplot[ylabel = {$u_\mathrm{s}(t)/u_0$}]
-						\addplot[signalalpha, thick] coordinates {(0,1) (0.25,1) (0.35,0) (0.65,0) (0.75,1) (1,1)};
-						\node[signaldelta, fill=white, inner sep = 1pt, anchor = north] at (axis cs:0.5,1) {$i_\mathrm{s}(t)$};
-						\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0) {$u_\mathrm{s}(t)$};
-						\coordinate (c) at (0.3,0);
-						\coordinate (d) at (0.7,0);
-					\end{groupplot}
+							% Bottom-right plot: voltage and current through a switch for ZCS
+							\nextgroupplot[ylabel = {$u_\mathrm{s}(t)/u_0$}]
+							\addplot[signalalpha, thick] coordinates {(0,1) (0.25,1) (0.35,0) (0.65,0) (0.75,1) (1,1)};
+							\node[signaldelta, fill=white, inner sep = 1pt, anchor = north] at (axis cs:0.5,1) {$i_\mathrm{s}(t)$};
+							\node[signalalpha, fill=white, inner sep = 1pt, anchor = south] at (axis cs:0.5,0) {$u_\mathrm{s}(t)$};
+							\coordinate (c) at (0.3,0);
+							\coordinate (d) at (0.7,0);
+						\end{groupplot}
 
-					% second y-axis for the bottom plot
-					\begin{groupplot}[group style={group size=1 by 2, y descriptions at = edge right}, height=0.34\textheight, width=\textwidth, xmin=0, xmax=1, grid, xtick=\empty, axis line style=transparent, ymin = -0.1, ymax =1.1]
-						\nextgroupplot[ytick = \empty]
-						%
-						\nextgroupplot[ylabel = {$i_\mathrm{s}(t)/i_0$}, ytick = {}, yticklabels = {}]
-						\addplot[signaldelta, thick] coordinates {(0,0) (0.3,0) (0.4,1) (0.6,1) (0.7,0) (1,0)};
-						\addplot[signalalpha, thick] coordinates {(0,1) (0.25,1) (0.35,0) (0.65,0) (0.75,1) (1,1)};
-						%
-					\end{groupplot}
-					\draw [dashed] (a) -- (c);
-					\draw [dashed] (b) -- (d);
-				\end{tikzpicture}
-				\caption{Zero-current switching (ZCS)}
-			\end{subfigure}
+						% second y-axis for the bottom plot
+						\begin{groupplot}[group style={group size=1 by 2, y descriptions at = edge right}, height=0.34\textheight, width=\textwidth, xmin=0, xmax=1, grid, xtick=\empty, axis line style=transparent, ymin = -0.1, ymax =1.1]
+							\nextgroupplot[ytick = \empty]
+							%
+							\nextgroupplot[ylabel = {$i_\mathrm{s}(t)/i_0$}, ytick = {}, yticklabels = {}]
+							\addplot[signaldelta, thick] coordinates {(0,0) (0.3,0) (0.4,1) (0.6,1) (0.7,0) (1,0)};
+							\addplot[signalalpha, thick] coordinates {(0,1) (0.25,1) (0.35,0) (0.65,0) (0.75,1) (1,1)};
+							%
+						\end{groupplot}
+						\draw [dashed] (a) -- (c);
+						\draw [dashed] (b) -- (d);
+					\end{tikzpicture}
+					\caption{Zero-current switching (ZCS)}
+				\end{subfigure}
 
-			\caption{Soft switching: reducing switching losses by turning on or off the switch when it does not transfer any power (note: above's voltage and current shapes are heavily idealized and require an appropriate circuit design besides the actual switch to enable soft switching)}
-			\label{fig:soft_switching}}
+				\caption{Soft switching: reducing switching losses by turning on or off the switch when it does not transfer any power (note: above's voltage and current shapes are heavily idealized and require an appropriate circuit design besides the actual switch to enable soft switching)}
+				\label{fig:soft_switching}}
 	\end{figure}
 \end{frame}
 
@@ -1068,7 +1068,7 @@
 					to [open, o-o, v^<= $u_1(t)$, voltage = straight] ++(0,2)
 					(-6,2) to ++(1.25,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
 					let \p1 = (S.mid) in (S.in) to [inductor, l_=$L$] (0,2)
-					([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
+						([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
 					\draw (-0.75,2) to [capacitor, *-*, l_=$C$] (-0.75,0);
 					\draw (-3.5,2) to [open, v^= $u_\mathrm{s}(t)$, voltage = straight] ++(0,-2);
 				\end{circuitikz}
@@ -1143,7 +1143,7 @@
 				to [open, o-o, v<= $ $, voltage = straight] ++(0,2)
 				(-5,2) to ++(2,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
 				let \p1 = (S.mid) in (S.in) to [inductor] (0,2)
-				([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
+					([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
 				\draw (-4,2) to [capacitor, *-*] (-4,0);
 			\end{circuitikz}
 			\caption{Feasible filter topology}
@@ -1157,7 +1157,7 @@
 				to [open, o-o, v<= $ $, voltage = straight] ++(0,2)
 				(-5,2) to [inductor, name = L1] ++(2,0) node [cuteopenswitchshape, anchor = out, rotate=180] (S) {}
 				let \p1 = (S.mid) in (S.in) to [short] (0,2)
-				([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
+					([yshift = -0.3cm]S.mid) to [short, o-*](\x1,0);
 				\draw (-1,2) to [capacitor, *-*, name = C1] (-1,0);
 				\node[correct forbidden sign, line width = 0.6ex, draw = signaldelta, minimum size = 1.3cm] at (C1){};
 				\node[correct forbidden sign, line width = 0.65ex, draw = signaldelta, minimum size = 1.3cm] at (L1){};
@@ -1191,143 +1191,143 @@
 			\onslide<1->{Diode} & \onslide<2->{Thyristor} & \onslide<3->{TRIAC (triode for alternating current)} & \onslide<4->{GTO (gate turn-off thyristor)} \\
 
 			\onslide<1->{
-				\begin{circuitikz}
-					\draw (0,0) to [diode, v=$u$, i=$i$, voltage = straight] (2,0);
-				\end{circuitikz}
-			}
+					           \begin{circuitikz}
+						           \draw (0,0) to [diode, v=$u$, i=$i$, voltage = straight] (2,0);
+					           \end{circuitikz}
+				           }
 
 			                    &
 			\onslide<2->{
-				\begin{circuitikz}
-					\draw (0,0) to [thyristor, v=$u$, i=$i$, voltage = straight] (2,0);
-				\end{circuitikz}
-			}
+					           \begin{circuitikz}
+						           \draw (0,0) to [thyristor, v=$u$, i=$i$, voltage = straight] (2,0);
+					           \end{circuitikz}
+				           }
 
 			                    &
 			\onslide<3->{
-				\begin{circuitikz}
-					\draw (0,0) to [triac, v=$u$, i=$i$, voltage = straight] (2,0);
-				\end{circuitikz}
-			}
+					           \begin{circuitikz}
+						           \draw (0,0) to [triac, v=$u$, i=$i$, voltage = straight] (2,0);
+					           \end{circuitikz}
+				           }
 
 			                    &
 
 			\onslide<4->{
-				\begin{circuitikz}
-					\draw (0,0) to [gto, v=$u$, i=$i$, voltage = straight] (2,0);
-				\end{circuitikz}
-			}
+					           \begin{circuitikz}
+						           \draw (0,0) to [gto, v=$u$, i=$i$, voltage = straight] (2,0);
+					           \end{circuitikz}
+				           }
 
 			\\
 			\onslide<1->{
-				\begin{tikzpicture} % Diode
-					\begin{axis}[
-							xmin=-1, xmax=1,
-							ymin=-1, ymax=1,
-							width=0.25\textwidth,
-							height=0.5\textheight,
-							axis lines=middle,
-							clip = false,
-							thick,
-							xlabel = {$u$},
-							ylabel = {$i$},
-							xticklabels=\empty,
-							xlabel style={anchor = west},
-							ylabel style={anchor = north east},
-							yticklabels=\empty,
-							anchor = center
-						]
-						\addplot[signaldelta, very thick] coordinates {(-1,0) (0,0) (0,1)};
-					\end{axis}
-				\end{tikzpicture}
-			}
+					           \begin{tikzpicture} % Diode
+						           \begin{axis}[
+								           xmin=-1, xmax=1,
+								           ymin=-1, ymax=1,
+								           width=0.25\textwidth,
+								           height=0.5\textheight,
+								           axis lines=middle,
+								           clip = false,
+								           thick,
+								           xlabel = {$u$},
+								           ylabel = {$i$},
+								           xticklabels=\empty,
+								           xlabel style={anchor = west},
+								           ylabel style={anchor = north east},
+								           yticklabels=\empty,
+								           anchor = center
+							           ]
+							           \addplot[signaldelta, very thick] coordinates {(-1,0) (0,0) (0,1)};
+						           \end{axis}
+					           \end{tikzpicture}
+				           }
 
 			                    &
 
 			\onslide<2->{
-				\begin{tikzpicture} % Thyristor
-					\begin{axis}[
-							xmin=-1, xmax=1,
-							ymin=-1, ymax=1,
-							width=0.25\textwidth,
-							height=0.5\textheight,
-							axis lines=middle,
-							clip = false,
-							thick,
-							xlabel = {$u$},
-							ylabel = {$i$},
-							xticklabels=\empty,
-							xlabel style={anchor = west},
-							ylabel style={anchor = north east},
-							yticklabels=\empty,
-							anchor = center
-						]
-						\addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
-						\addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
-						\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
-						\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
-						\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
-					\end{axis}
-				\end{tikzpicture}
-			}
+					           \begin{tikzpicture} % Thyristor
+						           \begin{axis}[
+								           xmin=-1, xmax=1,
+								           ymin=-1, ymax=1,
+								           width=0.25\textwidth,
+								           height=0.5\textheight,
+								           axis lines=middle,
+								           clip = false,
+								           thick,
+								           xlabel = {$u$},
+								           ylabel = {$i$},
+								           xticklabels=\empty,
+								           xlabel style={anchor = west},
+								           ylabel style={anchor = north east},
+								           yticklabels=\empty,
+								           anchor = center
+							           ]
+							           \addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
+							           \addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
+							           \draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+							           \draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
+							           \draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+						           \end{axis}
+					           \end{tikzpicture}
+				           }
 
 			                    &
 
 			\onslide<3->{
-				\begin{tikzpicture} % Triac
-					\begin{axis}[
-							xmin=-1, xmax=1,
-							ymin=-1, ymax=1,
-							width=0.25\textwidth,
-							height=0.5\textheight,
-							axis lines=middle,
-							clip = false,
-							thick,
-							xlabel = {$u$},
-							ylabel = {$i$},
-							xticklabels=\empty,
-							xlabel style={anchor = west},
-							ylabel style={anchor = north east},
-							yticklabels=\empty,
-							anchor = center
-						]
-						\addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
-						\addplot[signalbeta, very thick] coordinates {(0,-1) (0,1)};
-						\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
-						\draw [pin] (axis cs:0.25,-0.05) -- +(10pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
-						\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
-					\end{axis}
-				\end{tikzpicture}
-			}
+					           \begin{tikzpicture} % Triac
+						           \begin{axis}[
+								           xmin=-1, xmax=1,
+								           ymin=-1, ymax=1,
+								           width=0.25\textwidth,
+								           height=0.5\textheight,
+								           axis lines=middle,
+								           clip = false,
+								           thick,
+								           xlabel = {$u$},
+								           ylabel = {$i$},
+								           xticklabels=\empty,
+								           xlabel style={anchor = west},
+								           ylabel style={anchor = north east},
+								           yticklabels=\empty,
+								           anchor = center
+							           ]
+							           \addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
+							           \addplot[signalbeta, very thick] coordinates {(0,-1) (0,1)};
+							           \draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+							           \draw [pin] (axis cs:0.25,-0.05) -- +(10pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+							           \draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
+						           \end{axis}
+					           \end{tikzpicture}
+				           }
 
 			                    &
 
 			\onslide<4->{
-				\begin{tikzpicture} % gto
-					\begin{axis}[
-							xmin=-1, xmax=1,
-							ymin=-1, ymax=1,
-							width=0.25\textwidth,
-							height=0.5\textheight,
-							axis lines=middle,
-							clip = false,
-							thick,
-							xlabel = {$u$},
-							ylabel = {$i$},
-							xticklabels=\empty,
-							xlabel style={anchor = west},
-							ylabel style={anchor = north east},
-							yticklabels=\empty,
-							anchor = center
-						]
-						\addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
-						\addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
-						\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
-						\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {costly\\turn off};
-						\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
-					\end{axis}
-				\end{tikzpicture}
-			}
+					           \begin{tikzpicture} % gto
+						           \begin{axis}[
+								           xmin=-1, xmax=1,
+								           ymin=-1, ymax=1,
+								           width=0.25\textwidth,
+								           height=0.5\textheight,
+								           axis lines=middle,
+								           clip = false,
+								           thick,
+								           xlabel = {$u$},
+								           ylabel = {$i$},
+								           xticklabels=\empty,
+								           xlabel style={anchor = west},
+								           ylabel style={anchor = north east},
+								           yticklabels=\empty,
+								           anchor = center
+							           ]
+							           \addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
+							           \addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
+							           \draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+							           \draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {costly\\turn off};
+							           \draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+						           \end{axis}
+					           \end{tikzpicture}
+				           }
 
 		\end{tabular}
 	\end{table}
@@ -1345,161 +1345,161 @@
 			\onslide<1->{Bipolar junction transistor} & \onslide<2->{MOSFET \footnote{metal-oxide-semiconductor field-effect transistor} (with body diode)} & \onslide<3->{IGBT} & \onslide<4->{IGBT (with series diode)} \\
 
 			\onslide<1->{
-				\begin{circuitikz} % Bipolar
-					\draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0)
-					to ++(0.01,0)  node [npn, anchor=C, rotate=90](npn1){}
-					(npn1.E) to [short] (2,0);
-					\draw [->] ([yshift = 0.2cm, xshift = 0.1cm]npn1.C) -- node [yshift = 0.25cm] {$u$} ([yshift = 0.2cm, xshift = -0.1cm]npn1.E) ;
-				\end{circuitikz}
-			}
+					           \begin{circuitikz} % Bipolar
+						           \draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0)
+						           to ++(0.01,0)  node [npn, anchor=C, rotate=90](npn1){}
+						           (npn1.E) to [short] (2,0);
+						           \draw [->] ([yshift = 0.2cm, xshift = 0.1cm]npn1.C) -- node [yshift = 0.25cm] {$u$} ([yshift = 0.2cm, xshift = -0.1cm]npn1.E) ;
+					           \end{circuitikz}
+				           }
 
 			                                          &
 
 			\onslide<2->{
-				\begin{circuitikz} %MOSFET
-					\draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0)
-					to ++(0.01,0)  node [nigfete, anchor=D, rotate=90, bodydiode](fet1){}
-					(fet1.S) to [short] (2,0);
-					\draw [->] ([yshift = 0.6cm, xshift = 0.1cm]fet1.D) -- node [yshift = 0.3cm] {$u$} ([yshift = 0.6cm, xshift = -0.1cm]fet1.S) ;
-				\end{circuitikz}
-			}
+					           \begin{circuitikz} %MOSFET
+						           \draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0)
+						           to ++(0.01,0)  node [nigfete, anchor=D, rotate=90, bodydiode](fet1){}
+						           (fet1.S) to [short] (2,0);
+						           \draw [->] ([yshift = 0.6cm, xshift = 0.1cm]fet1.D) -- node [yshift = 0.3cm] {$u$} ([yshift = 0.6cm, xshift = -0.1cm]fet1.S) ;
+					           \end{circuitikz}
+				           }
 
 			                                          &
 
 			\onslide<3->{
-				\begin{circuitikz} % IGBT
-					\draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0)
-					to ++(0.01,0)  node [Lnigbt, anchor=C, rotate=90](igbt1){}
-					(igbt1.E) to [short] (2,0);
-					\draw [->] ([yshift = 0.2cm, xshift = 0.1cm]igbt1.C) -- node [yshift = 0.25cm] {$u$} ([yshift = 0.2cm, xshift = -0.1cm]igbt1.E) ;
-				\end{circuitikz}
-			}
+					           \begin{circuitikz} % IGBT
+						           \draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0)
+						           to ++(0.01,0)  node [Lnigbt, anchor=C, rotate=90](igbt1){}
+						           (igbt1.E) to [short] (2,0);
+						           \draw [->] ([yshift = 0.2cm, xshift = 0.1cm]igbt1.C) -- node [yshift = 0.25cm] {$u$} ([yshift = 0.2cm, xshift = -0.1cm]igbt1.E) ;
+					           \end{circuitikz}
+				           }
 
 			                                          &
 
 			\onslide<4->{
-				\begin{circuitikz} % IGBT + diode
-					\draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0)
-					to ++(0.01,0)  node [Lnigbt, anchor=C, rotate=90](igbt1){}
-					(igbt1.E) to [diode] (2.75,0);
-					\draw [->] ([yshift = 0.5cm, xshift = 0.1cm]igbt1.C) -- node [yshift = 0.25cm] {$u$} ([yshift = 0.5cm, xshift = 1cm]igbt1.E) ;
-				\end{circuitikz}
-			}
+					           \begin{circuitikz} % IGBT + diode
+						           \draw (0,0) to [short, i=$i$, xshift = 0.1cm] ++(0.25,0)
+						           to ++(0.01,0)  node [Lnigbt, anchor=C, rotate=90](igbt1){}
+						           (igbt1.E) to [diode] (2.75,0);
+						           \draw [->] ([yshift = 0.5cm, xshift = 0.1cm]igbt1.C) -- node [yshift = 0.25cm] {$u$} ([yshift = 0.5cm, xshift = 1cm]igbt1.E) ;
+					           \end{circuitikz}
+				           }
 
 			\\
 
 			\onslide<1->{
-				\begin{tikzpicture} % Bipolar
-					\begin{axis}[
-							xmin=-1, xmax=1,
-							ymin=-1, ymax=1,
-							width=0.25\textwidth,
-							height=0.5\textheight,
-							axis lines=middle,
-							clip = false,
-							thick,
-							xlabel = {$u$},
-							ylabel = {$i$},
-							xticklabels=\empty,
-							xlabel style={anchor = west},
-							ylabel style={anchor = north east},
-							yticklabels=\empty,
-							anchor = center
-						]
-						\addplot[signaldelta, very thick] coordinates {(0,0) (1,0)};
-						\addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
-						\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
-						\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
-					\end{axis}
-				\end{tikzpicture}
-			}
+					           \begin{tikzpicture} % Bipolar
+						           \begin{axis}[
+								           xmin=-1, xmax=1,
+								           ymin=-1, ymax=1,
+								           width=0.25\textwidth,
+								           height=0.5\textheight,
+								           axis lines=middle,
+								           clip = false,
+								           thick,
+								           xlabel = {$u$},
+								           ylabel = {$i$},
+								           xticklabels=\empty,
+								           xlabel style={anchor = west},
+								           ylabel style={anchor = north east},
+								           yticklabels=\empty,
+								           anchor = center
+							           ]
+							           \addplot[signaldelta, very thick] coordinates {(0,0) (1,0)};
+							           \addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
+							           \draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+							           \draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+						           \end{axis}
+					           \end{tikzpicture}
+				           }
 
 			                                          &
 
 			\onslide<2->{
-				\begin{tikzpicture} %Mosfet
-					\begin{axis}[
-							xmin=-1, xmax=1,
-							ymin=-1, ymax=1,
-							width=0.25\textwidth,
-							height=0.5\textheight,
-							axis lines=middle,
-							clip = false,
-							thick,
-							xlabel = {$u$},
-							ylabel = {$i$},
-							xticklabels=\empty,
-							xlabel style={anchor = west},
-							ylabel style={anchor = north east},
-							yticklabels=\empty,
-							anchor = center
-						]
-						\addplot[signaldelta, very thick] coordinates {(0.025,-1) (0.025,0) (1,0)};
-						\addplot[signalbeta, very thick] coordinates {(0,-1) (0,1)};
-						\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
-						\draw [pin] (axis cs:0.25,-0.05) -- +(10pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
-						\draw [pin] (axis cs:-0.05,-0.5) -- +(-12pt,5pt) node[left, align=center, font=\footnotesize ] {body\\ diode};
-					\end{axis}
-				\end{tikzpicture}
-			}
+					           \begin{tikzpicture} %Mosfet
+						           \begin{axis}[
+								           xmin=-1, xmax=1,
+								           ymin=-1, ymax=1,
+								           width=0.25\textwidth,
+								           height=0.5\textheight,
+								           axis lines=middle,
+								           clip = false,
+								           thick,
+								           xlabel = {$u$},
+								           ylabel = {$i$},
+								           xticklabels=\empty,
+								           xlabel style={anchor = west},
+								           ylabel style={anchor = north east},
+								           yticklabels=\empty,
+								           anchor = center
+							           ]
+							           \addplot[signaldelta, very thick] coordinates {(0.025,-1) (0.025,0) (1,0)};
+							           \addplot[signalbeta, very thick] coordinates {(0,-1) (0,1)};
+							           \draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+							           \draw [pin] (axis cs:0.25,-0.05) -- +(10pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+							           \draw [pin] (axis cs:-0.05,-0.5) -- +(-12pt,5pt) node[left, align=center, font=\footnotesize ] {body\\ diode};
+						           \end{axis}
+					           \end{tikzpicture}
+				           }
 
 			                                          &
 
 			\onslide<3->{
-				\begin{tikzpicture} % IGBT
-					\begin{axis}[
-							xmin=-1, xmax=1,
-							ymin=-1, ymax=1,
-							width=0.25\textwidth,
-							height=0.5\textheight,
-							axis lines=middle,
-							clip = false,
-							thick,
-							xlabel = {$u$},
-							ylabel = {$i$},
-							xticklabels=\empty,
-							xlabel style={anchor = west},
-							ylabel style={anchor = north east},
-							yticklabels=\empty,
-							anchor = center
-						]
-						\addplot[signaldelta, very thick] coordinates {(0,0) (1,0)};
-						\addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
-						\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
-						\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
-						\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
-					\end{axis}
-				\end{tikzpicture}
-			}
+					           \begin{tikzpicture} % IGBT
+						           \begin{axis}[
+								           xmin=-1, xmax=1,
+								           ymin=-1, ymax=1,
+								           width=0.25\textwidth,
+								           height=0.5\textheight,
+								           axis lines=middle,
+								           clip = false,
+								           thick,
+								           xlabel = {$u$},
+								           ylabel = {$i$},
+								           xticklabels=\empty,
+								           xlabel style={anchor = west},
+								           ylabel style={anchor = north east},
+								           yticklabels=\empty,
+								           anchor = center
+							           ]
+							           \addplot[signaldelta, very thick] coordinates {(0,0) (1,0)};
+							           \addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
+							           \draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+							           \draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
+							           \draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+						           \end{axis}
+					           \end{tikzpicture}
+				           }
 
 			                                          &
 
 			\onslide<4->{
-				\begin{tikzpicture} % IGBT + diode
-					\begin{axis}[
-							xmin=-1, xmax=1,
-							ymin=-1, ymax=1,
-							width=0.25\textwidth,
-							height=0.5\textheight,
-							axis lines=middle,
-							clip = false,
-							thick,
-							xlabel = {$u$},
-							ylabel = {$i$},
-							xticklabels=\empty,
-							xlabel style={anchor = west},
-							ylabel style={anchor = north east},
-							yticklabels=\empty,
-							anchor = center
-						]
-						\addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
-						\addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
-						\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
-						\draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
-						\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
-					\end{axis}
-				\end{tikzpicture}
-			}
+					           \begin{tikzpicture} % IGBT + diode
+						           \begin{axis}[
+								           xmin=-1, xmax=1,
+								           ymin=-1, ymax=1,
+								           width=0.25\textwidth,
+								           height=0.5\textheight,
+								           axis lines=middle,
+								           clip = false,
+								           thick,
+								           xlabel = {$u$},
+								           ylabel = {$i$},
+								           xticklabels=\empty,
+								           xlabel style={anchor = west},
+								           ylabel style={anchor = north east},
+								           yticklabels=\empty,
+								           anchor = center
+							           ]
+							           \addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
+							           \addplot[signalbeta, very thick] coordinates {(0,0) (0,1)};
+							           \draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+							           \draw [pin] (axis cs:0.05,0.5) -- +(10pt,-5pt) node[right, align=center, font=\footnotesize ] {no turn\\off};
+							           \draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+						           \end{axis}
+					           \end{tikzpicture}
+				           }
 		\end{tabular}
 	\end{table}
 	\vspace{-1cm}
@@ -1516,95 +1516,95 @@
 			\onslide<1->{4Q switch} & \onslide<2->{Capacitor} & \onslide<3->{Inductor} & \onslide<4->{Transformer} \\
 
 			\onslide<1->{
-				\begin{circuitikz} % 4Q switch
-					\draw (0,0) to [short, xshift = 0.1cm] ++(0.25,0) coordinate (A)
-					to ++(0.01,0)  node [Lnigbt, anchor=C, rotate=90](igbt1){}
-					(igbt1.E) to [diode] (3,0) coordinate (B);
-					\draw (B) to [short] ++(0,-0.75)  coordinate (C)
-					to [short] ++(0,-0.75)
-					to ++(-0.01,0)  node [Lnigbt, anchor=C, rotate=-90](igbt2){}
-					(igbt2.E) to [diode] (0,-1.5)
-					to [short] (0,0);
-					\draw (-0.5,-0.75) to [short, i=$i$, -*](0,-0.75);
-					\draw (C) to [short, *-] ++(0.5,0);
-					\draw [->] ([yshift = -2cm, xshift = -0.4cm]igbt1.C) -- node [yshift = -0.25cm] {$u$} ([yshift = -2cm, xshift = 1.5cm]igbt1.E) ;
-				\end{circuitikz}
-			}
+					           \begin{circuitikz} % 4Q switch
+						           \draw (0,0) to [short, xshift = 0.1cm] ++(0.25,0) coordinate (A)
+							           to ++(0.01,0)  node [Lnigbt, anchor=C, rotate=90](igbt1){}
+							           (igbt1.E) to [diode] (3,0) coordinate (B);
+						           \draw (B) to [short] ++(0,-0.75)  coordinate (C)
+							           to [short] ++(0,-0.75)
+							           to ++(-0.01,0)  node [Lnigbt, anchor=C, rotate=-90](igbt2){}
+							           (igbt2.E) to [diode] (0,-1.5)
+							           to [short] (0,0);
+						           \draw (-0.5,-0.75) to [short, i=$i$, -*](0,-0.75);
+						           \draw (C) to [short, *-] ++(0.5,0);
+						           \draw [->] ([yshift = -2cm, xshift = -0.4cm]igbt1.C) -- node [yshift = -0.25cm] {$u$} ([yshift = -2cm, xshift = 1.5cm]igbt1.E) ;
+					           \end{circuitikz}
+				           }
 
 			                        &
 			\onslide<2->{
-				\begin{circuitikz}
-					\draw (0,0) to [capacitor, v=$u$, i=$i$, voltage = straight] (2,0);
-				\end{circuitikz}
-			}
+					           \begin{circuitikz}
+						           \draw (0,0) to [capacitor, v=$u$, i=$i$, voltage = straight] (2,0);
+					           \end{circuitikz}
+				           }
 
 			                        &
 
 			\onslide<3->{
-				\begin{circuitikz}
-					\draw (0,0) to [inductor, v=$u$, i=$i$, voltage = straight] (2,0);
-				\end{circuitikz}
-			}
+					           \begin{circuitikz}
+						           \draw (0,0) to [inductor, v=$u$, i=$i$, voltage = straight] (2,0);
+					           \end{circuitikz}
+				           }
 
 			                        &
 			\onslide<4->{
-				\begin{circuitikz} % Transformer
-					\draw node[transformer core, name=T] {};
-					\draw [->] ([yshift = -0.2cm, xshift = 0cm]T.A1) -- node [xshift = 0.25cm] {$u_1$} ([yshift = 0.2cm, xshift = 0.0cm]T.A2) ;
-					\draw (T.A1) to [short, i=$i_1$, xshift = 0.1cm] ++(0.25,0);
-					\draw (T.B1) to [short, i_=$i_2$, xshift = -0.1cm] ++(-0.25,0);
-					\draw [->] ([yshift = -0.2cm, xshift = 0cm]T.B1) -- node [xshift = -0.25cm] {$u_2$} ([yshift = 0.2cm, xshift = 0.0cm]T.B2) ;
-				\end{circuitikz}
-			}
+					           \begin{circuitikz} % Transformer
+						           \draw node[transformer core, name=T] {};
+						           \draw [->] ([yshift = -0.2cm, xshift = 0cm]T.A1) -- node [xshift = 0.25cm] {$u_1$} ([yshift = 0.2cm, xshift = 0.0cm]T.A2) ;
+						           \draw (T.A1) to [short, i=$i_1$, xshift = 0.1cm] ++(0.25,0);
+						           \draw (T.B1) to [short, i_=$i_2$, xshift = -0.1cm] ++(-0.25,0);
+						           \draw [->] ([yshift = -0.2cm, xshift = 0cm]T.B1) -- node [xshift = -0.25cm] {$u_2$} ([yshift = 0.2cm, xshift = 0.0cm]T.B2) ;
+					           \end{circuitikz}
+				           }
 
 			\\
 
 			\onslide<1->{
-				\begin{tikzpicture} % 4Q switch
-					\begin{axis}[
-							xmin=-1, xmax=1,
-							ymin=-1, ymax=1,
-							width=0.25\textwidth,
-							height=0.5\textheight,
-							axis lines=middle,
-							clip = false,
-							thick,
-							xlabel = {$u$},
-							ylabel = {$i$},
-							xticklabels=\empty,
-							xlabel style={anchor = west},
-							ylabel style={anchor = north east},
-							yticklabels=\empty,
-							anchor = center
-						]
-						\addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
-						\addplot[signalbeta, very thick] coordinates {(0,-1) (0,1)};
-						\draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
-						\draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
-					\end{axis}
-				\end{tikzpicture}
-			}
+					           \begin{tikzpicture} % 4Q switch
+						           \begin{axis}[
+								           xmin=-1, xmax=1,
+								           ymin=-1, ymax=1,
+								           width=0.25\textwidth,
+								           height=0.5\textheight,
+								           axis lines=middle,
+								           clip = false,
+								           thick,
+								           xlabel = {$u$},
+								           ylabel = {$i$},
+								           xticklabels=\empty,
+								           xlabel style={anchor = west},
+								           ylabel style={anchor = north east},
+								           yticklabels=\empty,
+								           anchor = center
+							           ]
+							           \addplot[signaldelta, very thick] coordinates {(-1,0) (1,0)};
+							           \addplot[signalbeta, very thick] coordinates {(0,-1) (0,1)};
+							           \draw [pin] (axis cs:-0.05,0.5) -- +(-10pt,-5pt) node[left, align=center, font=\footnotesize ] {active\\ gate};
+							           \draw [pin] (axis cs:0.25,-0.05) -- +(12pt,-10pt) node[below, align=center, font=\footnotesize ] {disabled\\ gate};
+						           \end{axis}
+					           \end{tikzpicture}
+				           }
 
 			                        &
 			\onslide<2->{
-				{\large
-						$ i(t) =C \frac{\mathrm{d}}{\mathrm{d}t}u(t)$
-					}
-			}
+					           {\large
+						           $ i(t) =C \frac{\mathrm{d}}{\mathrm{d}t}u(t)$
+					           }
+				           }
 			\vspace{0.5cm}
 			                        &
 			\onslide<3->{
-				{\large
-						$u(t) =L \frac{\mathrm{d}}{\mathrm{d}t}i(t)$
-					}
-			}
+					           {\large
+						           $u(t) =L \frac{\mathrm{d}}{\mathrm{d}t}i(t)$
+					           }
+				           }
 			\vspace{0.5cm}
 			                        &
 			\onslide<4->{
-				{\large
-						$\bm{u}(t) =\bm{L} \frac{\mathrm{d}}{\mathrm{d}t}\bm{i}(t)$
-					}
-			}
+					           {\large
+						           $\bm{u}(t) =\bm{L} \frac{\mathrm{d}}{\mathrm{d}t}\bm{i}(t)$
+					           }
+				           }
 			\vspace{0.5cm}
 		\end{tabular}
 	\end{table}
