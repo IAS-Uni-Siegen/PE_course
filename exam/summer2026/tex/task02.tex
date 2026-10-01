@@ -1,0 +1,173 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Examtask 2: Comparison between 2 types of buck converter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\task{Comparison between two types of buck converter}
+
+\taskGerman{Vergleich zweier Typen von Tiefsetztstellern}
+Compare two buck converter designs: Design 1 (asynchronous buck converter) uses a conventional buck converter with a diode for the freewheeling path. Design 2 (synchronous buck converter) replaces the diode with a transistor that is actively controlled to emulate the diode’s function. The parameters for both types are listed in \autoref{table:BuckConverter}.
+
+\begin{germanblock}
+	Vergleiche zwei Tiefsetzstellerdesigns: Design 1 (asynchroner Tiefsetzsteller): Nutzt einen herkömmlichen Tiefsetzsteller mit einer Diode im Freilaufzweig und Design 2 (synchroner Tiefsetzsteller) ersetzt die Diode durch einen aktiv angesteuerten Transistor, der die Diodenfunktion übernimmt. Die Parameter für beide Typen sind in	\autoref{table:BuckConverter}  aufgeführt.
+\end{germanblock}
+
+% figure figStepDownConverterOutputFilter
+\input{fig/Task02/figAsyncSyncBuckConverter}
+
+\begin{table}[ht]
+	\centering  % Zentriert die Tabelle
+	\begin{tabular}{llll}
+		\toprule
+		Input voltage:         & $U_\mathrm{1} = \SI{12}{\volt}$     & Switching frequency:     & $f_\mathrm{s} = \SI{50}{\kilo\hertz}$                  \\
+		Output voltage:        & $U_\mathrm{2} = \SI{3.3}{\volt}$    & Output current:          & $\overline{i}_\mathrm{2} = \SI{50}{\ampere}$           \\
+		Diode forward voltage: & $U_\mathrm{Dfwd} = \SI{0.8}{\volt}$ & Transistor voltage drop: & $U_\mathrm{T1,on} = U_\mathrm{T2,on} =\SI{0.2}{\volt}$ \\
+		Inductivity:           & $L = \SI{20}{\micro\henry}$         &                          &                                                        \\
+		\midrule
+		\multicolumn{4}{l}{\quad Switching power loss shall not be considered.}                                                                          \\
+		\bottomrule
+	\end{tabular}
+	\caption{Parameters of the two types of buck converter.}  % Beschriftung der Tabelle
+	\label{table:BuckConverter}
+\end{table}
+
+\subtask{Calculate the duty cycle $D$ for the ideal case, assuming no voltage drops across the semiconductors.
+	Furthermore determine the average of minimum output current $\overline{i}_\mathrm{2,min}$ at which the asynchronous buck converter does not
+	operate in discontinuous conduction mode (DCM).}{2}
+
+\subtaskGerman{Berechne das Tastverhältnis $D$ für den idealen Fall, in dem keine Spannungsabfälle an den Halbleitern auftreten.
+	Bestimme den minimalen mittleren Ausgangsstrom  $\overline{i}_\mathrm{2,min}$, bei dem der asynchrone Tiefsetzesteller nicht
+	im Lückbetrieb arbeitet.}
+
+% Solution of subtask
+\begin{solutionblock}
+	The duty cycle reflects the ratio of output and input voltage:
+	\begin{equation*}
+		D=\frac{U_\mathrm{2}}{U_\mathrm{1}} = \frac{\SI{3.3}{\volt}}{\SI{12}{\volt}}  = 0.275.
+	\end{equation*}
+	In boundary conduction mode (BCM), the boundary current corresponds to half of the ripple in the inductor during the on-time.
+	\begin{equation*}
+		\Delta i_\mathrm{L}=2  \overline{i}_\mathrm{2,min} = \frac{U_\mathrm{2} \cdot T_\mathrm{off}}{L}
+		= \frac{U_\mathrm{2} \cdot (1-D)}{f_\mathrm{s} \cdot L} = \frac{\SI{3.3}{\volt} \cdot (1-0.275)}{\SI{50}{\kilo\hertz} \cdot \SI{20}{\micro\henry}}
+		= \SI{2.4}{\ampere}.
+	\end{equation*}
+	The minimum output current to prevent DCM is therefore
+	\begin{equation*}
+		\overline{i}_\mathrm{2,min}  = \frac{\Delta i_\mathrm{L}}{2}=\SI{1.2}{\ampere}.
+	\end{equation*}
+
+\end{solutionblock}
+
+\subtask{Why can DCM be problematic for an unregulated (asynchronous) buck converter?}{1}
+
+\subtaskGerman{Warum kann der Lückbetrieb für einen unregulierten (asynchronen) Tiefsetzsteller problematisch sein?
+}
+
+% Solution of subtasks
+\begin{solutionblock}
+	In DCM, the voltage transfer ratio becomes load dependent. This means that the output voltage is no longer proportional to the duty cycle, which can lead to errors between the desired and actual output voltage.
+\end{solutionblock}
+
+\subtask{Calculate the necessary duty cycles $D_\mathrm{d1}$ for design 1 and  $D_\mathrm{d2}$ for design 2 considering the voltage drops
+	$U_\mathrm{T1}$ and $U_\mathrm{Dfwd}$ / $U_\mathrm{T1}$ and $U_\mathrm{T2}$ across the components at output current $\overline{i}_\mathrm{2}$ to achieve the requested input-to-output voltage ratio.}{4}
+
+\subtaskGerman{Berechne die notwendigen Tastverhältnisse $D_\mathrm{d1}$ für Design 1 und $D_\mathrm{d2}$ für Design 2
+	unter Berücksichtigung der jeweiligen Spannungsabfälle $U_\mathrm{T1}$ and $U_\mathrm{Dfwd}$ / $U_\mathrm{T1}$ and $U_\mathrm{T2}$ für den Ausgangsstrom $\overline{i}_\mathrm{2}$, um das gewünschte Eingangsausgangsspannungsverhältnis zu erreichen.}
+
+% Solution of subtask
+\begin{solutionblock}
+	In steady state, the inductor current balance is:
+	\begin{equation*}
+		\Delta i_\mathrm{L,T_\mathrm{on}} =\Delta i_\mathrm{L,T_\mathrm{off}} .
+	\end{equation*}
+	If the transistor $T_\mathrm{1}$ conducts $\Delta i_\mathrm{L,T_\mathrm{on}}$ results in:
+
+	\begin{equation*}
+		\Delta i_\mathrm{L,T_\mathrm{on}}=\frac{(U_\mathrm{1}-U_\mathrm{T1,on}-U_\mathrm{2}) \cdot T_\mathrm{on} }{L}.
+	\end{equation*}
+
+	If the transistor $T_\mathrm{1}$ is blocking the diode $D_\mathrm{1}$ conducts in design 1.
+	The inductor current ripple $\Delta i_\mathrm{L,T_\mathrm{off}}$ is calculated by:
+	\begin{equation*}
+		\Delta i_\mathrm{L,T_\mathrm{off}}=\frac{(U_\mathrm{2}+U_\mathrm{Dfw}) \cdot T_\mathrm{off}}{L}.
+	\end{equation*}
+
+	By substituting the currents within the inductor current balance equation, we obtain
+	\begin{equation*}
+		\frac{(U_\mathrm{1}-U_\mathrm{T1,on}-U_\mathrm{2}) \cdot T_\mathrm{on}}{L}=\frac{(U_\mathrm{2}+U_\mathrm{Dfwd}) \cdot T_\mathrm{off}}{L}.
+	\end{equation*}
+
+	Replacing $T_\mathrm{on}$ and $T_\mathrm{off}$ by the switching period yields to
+	\begin{equation*}
+		\frac{(U_\mathrm{1}-U_\mathrm{T1,on}-U_\mathrm{2}) \cdot T_\mathrm{s} \cdot D_\mathrm{d1}}{L} =
+		\frac{(U_\mathrm{2}+U_\mathrm{Dfwd}) \cdot (1-D_\mathrm{d1}) \cdot T_\mathrm{s}}{L}.
+	\end{equation*}
+
+	After simplifying by canceling $T_\mathrm{s}$ and $L$, we obtain
+	\begin{equation*}
+		(U_\mathrm{1}-U_\mathrm{T1,on}-U_\mathrm{2}) \cdot D_\mathrm{d1} =
+		(U_\mathrm{2}+U_\mathrm{Dfwd}) \cdot (1-D_\mathrm{d1}).
+	\end{equation*}
+	Solving this equation with respect to $D$ yields
+	\begin{equation*}
+		D_\mathrm{d1} = \frac{U_\mathrm{2}+U_\mathrm{Dfwd}}{U_\mathrm{1}-U_\mathrm{T1,on}+U_\mathrm{Dfwd}} =
+		\frac{\SI{3.3}{\volt}+\SI{0.8}{\volt}}{\SI{12}{\volt} - \SI{0.2}{\volt}+\SI{0.8}{\volt}}  = 0.33.
+	\end{equation*}
+
+	For design 2 the voltage drop of the diode $U_\mathrm{Dfwd}$ is replaced by $U_\mathrm{T2,on}$.
+	This yields
+	\begin{equation*}
+		D_\mathrm{d2} = \frac{U_\mathrm{2}+U_\mathrm{T2,on}}{U_\mathrm{1}-U_\mathrm{T1,on}+U_\mathrm{T2,on}}
+		= \frac{U_\mathrm{2}+U_\mathrm{T2,on}}{U_\mathrm{1}} = \frac{\SI{3.3}{\volt}+\SI{0.2}{\volt}}{\SI{12}{\volt}}  = 0.29.
+	\end{equation*}
+\end{solutionblock}
+
+\subtask{Calculate the efficiencies $\eta_\mathrm{1}$ and $\eta_\mathrm{2}$ for both designs considering
+	the voltage drops of the semiconductor for the output current $\overline{i}_\mathrm{2}$.
+	Which design achieves the higher efficiency, and what are the primary reasons for the observed difference?}{3}
+
+\subtaskGerman{Berechnen Sie den Wirkungsgrad $\eta_\mathrm{1}$ und $\eta_\mathrm{2}$ für beide Konverterdesigns
+	unter Berücksichtigung der Halbleiterspannungsabfälle bei gegebenen Ausgangsstrom $\overline{i}_\mathrm{2}$.
+	Welches Design weist den höheren Wirkungsgrad auf, und worauf ist dieser Unterschied primär zurückzuführen?}
+
+% Solution of subtasks
+\begin{solutionblock}
+	The efficiency depends on the power loss of the converter, which is caused by the transistor and diode for design 1.
+	The power loss in $T_\mathrm{1}$ occurs only during its conduction phase. The average power loss is calculated with the duty cycle.
+	\begin{equation*}
+		P_\mathrm{T1,design1} = D_\mathrm{d1} \cdot U_\mathrm{T1,on} \cdot \overline{i}_\mathrm{2}
+		= 0.33 \cdot \SI{0.2}{\volt}  \cdot \SI{50}{\ampere} = \SI{3.3}{\watt}.
+	\end{equation*}
+	The power loss in $D_\mathrm{1}$ occurs only during $T_\mathrm{1}$ blocking phase. The average power loss is calculated with the duty cycle too:
+	\begin{equation*}
+		P_\mathrm{D} = (1-D_\mathrm{d1}) \cdot U_\mathrm{Dfwd} \cdot \overline{i}_\mathrm{2}
+		= 0.67 \cdot \SI{0.8}{\volt}  \cdot \SI{50}{\ampere} = \SI{26.8}{\watt}.
+	\end{equation*}
+	The output power is calculated by
+	\begin{equation*}
+		P_\mathrm{out} = U_\mathrm{2} \cdot \overline{i}_\mathrm{2} = \SI{3.3}{\volt}  \cdot \SI{50}{\ampere} = \SI{165}{\watt}.
+	\end{equation*}
+	This leads to the efficiency for design 1 according
+	\begin{equation*}
+		\eta_\mathrm{1}=\frac{P_\mathrm{out}}{P_\mathrm{out}+P_\mathrm{T1,design1}+P_\mathrm{D}}
+		=\frac{\SI{165}{\watt}}{\SI{165}{\watt}+\SI{3.3}{\watt}+\SI{27.0}{\watt}} = 0.85
+	\end{equation*}
+
+	For design 2 the duty cycle $D_\mathrm{d2}$ applies. The average power loss in $T_\mathrm{1}$ is calculated by
+	\begin{equation*}
+		P_\mathrm{T1,design2} = D_\mathrm{d2} \cdot U_\mathrm{T1,on} \cdot \overline{i}_\mathrm{2}
+		= 0.29 \cdot \SI{0.2}{\volt}  \cdot \SI{50}{\ampere} = \SI{2.9}{\watt}.
+	\end{equation*}
+	The average  power loss in $T_\mathrm{2}$ yields
+	\begin{equation*}
+		P_\mathrm{T2} = (1-D_\mathrm{d2}) \cdot U_\mathrm{T2,on}  \cdot \overline{i}_\mathrm{2}
+		= 0.71 \cdot \SI{0.2}{\volt}  \cdot \SI{50}{\ampere} = \SI{7.1}{\watt}.
+	\end{equation*}
+	The efficiency for design 2 results in
+	\begin{equation*}
+		\eta_\mathrm{2}=\frac{P_\mathrm{out}}{P_\mathrm{out}+P_\mathrm{T1,design2}+P_\mathrm{T2}}
+		=\frac{\SI{165}{\watt}}{\SI{165}{\watt}+\SI{2.9}{\watt}+\SI{7.1}{\watt}} = 0.94.
+	\end{equation*}
+	Design 2 is the most efficient design based on the low voltage drop at $T_\mathrm{2}$ compared to the voltage drop at $D$.
+
+\end{solutionblock}
+

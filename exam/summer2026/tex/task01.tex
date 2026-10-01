@@ -1,0 +1,179 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Task 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\task{Transistor-based AC/DC converters}
+
+\taskGerman{Transistorbasierter AC/DC-Umrichter}
+A city transport company has installed a \SI{500}{\kilo\watt} charging station for electric buses.
+The charger uses a three-phase active front-end (AFE) converter, shown in Fig. \ref{fig:Three-phase_AFE}, to convert power from the
+utility grid into a controlled DC supply for the bus battery.
+The charging station is connected to a three-phase \SI{400}{\volt} RMS line-to-line, \SI{50}{\hertz} utility
+supply. Assume an average DC link voltage of \SI{700}{\volt}, that the efficiency is \SI{96}{\percent}, and that the pulse width modulated switching frequency is set to \SI{10}{\kilo\hertz} .
+
+\begin{germanblock}
+	Ein städtisches Verkehrsunternehmen hat eine \SI{500}{\kilo\watt} Ladestation für Elektrobusse installiert.
+	Das Ladegerät verwendet einen dreiphasigen AFE-Stromrichter (Active Front-End), um die Energie
+	aus dem Versorgungsnetz in eine geregelte Gleichstromversorgung für die Busbatterie umzuwandeln. Die Ladestation ist an ein dreiphasiges Versorgungsnetz mit \SI{400}{\volt}
+	(Effektivwert der verketteten Spannung) und \SI{50}{\hertz} angeschlossen. Nehmen Sie an, dass die Spannung am DC-Link bei \SI{700}{\volt} im Mittel liegt, dass der Wirkungsgrad des Stromrichters \SI{96}{\percent} beträgt und dass die Schaltfrequenz der Pulsweitenmodulationauf \SI{10}{\kilo\hertz} eingestellt ist.
+\end{germanblock}
+\input{fig/Task01/Three-phase_AFE.tex}
+\subtask{During commissioning, you observed that the PWM controller currently operates with a modulation index of 0.90.
+	Check if the present modulation is sufficient to generate the required AC voltage for grid-connected operation.}{2}
+\subtaskGerman{Während der Inbetriebnahme haben Sie festgestellt, dass der PWM-Regler derzeit mit einem Modulationsgrad von 0,90 arbeitet. Prüfen Sie, ob die vorliegende Modulation ausreicht, um die für den Netzparallelbetrieb erforderliche Wechselspannung zu erzeugen.}
+\begin{solutionblock}
+	For the two-level converter, the fundamental peak phase voltage is given by:
+	$$\hat{u}_1^{(1)} = \frac{mU_2}{2}.$$
+	The required AC phase-voltage peak is obtained from the line-to-line RMS voltage $U_{1,\mathrm{LL}}$:
+	$$\hat{u}_1 = \sqrt{2}\,\frac{U_{1,\mathrm{LL}}}{\sqrt{3}}.$$
+	Hence, the modulation index required is:
+	$$m = \frac{2\sqrt{2}U_{1,\mathrm{LL}}}{\sqrt{3}U_2}
+		\approx \frac{2\sqrt{2}\cdot \SI{400}{\volt}}{\sqrt{3}\cdot \SI{700}{\volt}}
+		\approx 0.933 > 0.90.$$
+	Therefore, the present modulation is not sufficient for grid-connected operation.
+\end{solutionblock}
+\subtask{Briefly explain how increasing the switching frequency $f_\mathrm{s}$ affects the grid current harmonic distortion and switching losses.}{1}
+\subtaskGerman{Erläutern Sie kurz, wie sich eine Erhöhung der Schaltfrequenz auf die Oberschwingungsverzerrung der Netzströme und die Schaltverluste auswirkt.}
+\begin{solutionblock}
+	The higher $f_\mathrm{s}$ the better the approximation of a sine wave, the lower the current harmonic distortion, but the higher the switching losses.
+
+\end{solutionblock}
+\subtask{Assume $E_\mathrm{on} = \SI{2.8}{\milli\joule}, E_\mathrm{off} = \SI{3.6}{\milli\joule}$ for the loss work per on/off switch instant.
+	Calculate the average switching losses at a switching frequency of  $f_\mathrm{s}=\SI{10}{\kilo\hertz}$.}{1}
+\subtaskGerman{Unter der Annahme von $E_\mathrm{on} = \SI{2.8}{\milli\joule}, E_\mathrm{off} = \SI{3.6}{\milli\joule}$ pro Schaltvorgang sind die mittleren Schaltverluste bei einer Schaltfrequenz von $f_\mathrm{s}=\SI{10}{\kilo\hertz}$ zu berechnen.}
+\begin{solutionblock}
+	The power loss per switch is given by
+	$$P_\mathrm{sw} = f_\mathrm{s} \cdot (E_\mathrm{on} + E_\mathrm{off}),$$
+	and the total switching loss is
+	$$P_\mathrm{total} = 6\cdot P_\mathrm{sw} = \SI{384}{\watt}.$$
+
+\end{solutionblock}
+\subtask{For nominal operation at \SI{500}{\kilo\watt} battery charging, assess the following:
+	\renewcommand{\labelenumi}{\alph{enumi})}
+	\begin{enumerate}
+		\item Calculate the RMS grid current assuming unity power factor.
+		\item What is the effect on the RMS grid current when the power factor reduces to 0.95 (lagging)?
+		\item Determine the reactive power exchanged with the grid for a power factor of 0.95 (lagging). State whether the converter is absorbing or supplying reactive power.
+	\end{enumerate}}{3}
+\subtaskGerman{Für den Nennbetrieb bei \SI{500}{\kilo\watt} Batterieladeleistung sind die folgenden Punkte zu bewerten:
+	\renewcommand{\labelenumi}{\alph{enumi})}
+	\begin{enumerate}
+		\item Berechnen Sie den Effektivwert des Netzstroms  unter der Annahme eines Leistungsfaktors von eins.
+		\item Welchen Einfluss hat eine Reduzierung des Leistungsfaktors auf 0,95 (induktiv) auf den Effektivwert des Netzstroms?
+		\item Bestimmen Sie die mit dem Netz ausgetauschte Blindleistung für einen Leistungsfaktor von 0,95 (induktiv). Geben Sie an, ob der Stromrichter Blindleistung aufnimmt oder abgibt.
+	\end{enumerate}}
+\begin{solutionblock}
+	\renewcommand{\labelenumi}{\alph{enumi})}
+	\begin{enumerate}
+		\item The active power drawn from the grid is
+		      $$P_{\mathrm{g}} = \frac{P_{\mathrm{dc}}}{\eta} = \frac{\SI{500}{\kilo\watt}}{0.96} = \SI{520.83}{\kilo\watt}.$$
+		      For unity power factor, the three-phase power equation is
+		      $$P_{\mathrm{g}} = \sqrt{3}U_{1,\mathrm{LL}}I_1\cos\phi,$$
+		      with $\cos\phi = 1$. Therefore,
+		      $$I_{1,\mathrm{PF}=1} = \frac{P_{\mathrm{g}}}{\sqrt{3}U_{1,\mathrm{LL}}}
+			      = \frac{\SI{520.83}{\kilo\watt}}{\sqrt{3}\cdot \SI{400}{\volt}}
+			      = \SI{751.8}{\ampere}.$$
+		\item For a lagging power factor of $0.95$,
+		      $$\phi = \cos^{-1}(0.95) = \SI{18.19}{\degree}.$$
+		      The line current becomes
+		      $$I_{1,\mathrm{PF}=0.95} = \frac{P_{\mathrm{g}}}{\sqrt{3}U_{1,\mathrm{LL}}\cos\phi}
+			      = \SI{791.3}{\ampere}.$$
+		      Thus, a lower power factor increases the RMS current drawn from the grid.
+		\item The reactive power is
+		      $$Q_1 = \sqrt{3}U_{1,\mathrm{LL}}I_{1,\mathrm{PF}=0.95}\sin\phi
+			      = \SI{171.4}{\kilo\volt\ampere}.$$
+		      Because the power factor is lagging, the converter absorbs reactive power from the grid.
+	\end{enumerate}
+\end{solutionblock}
+\subtask{The charger's DC-link has a total of \SI{90}{\milli\farad} capacitance and its DC voltage ripple needs to be checked. Hence, derive an (approximate) worst-case expression for the peak-to-peak voltage ripple across the DC-link capacitor assuming a constant load.}{4}
+\subtaskGerman{Der DC-Link des Ladegeräts verfügt über eine Gesamtkapazität von \SI{90}{\milli\farad} und dessen Spannungsschwankung muss überprüft werden. Leiten Sie daher eine (ungefähre) Worst-Case-Abschätzung für die Spitzenspannungsschwankung über dem DC-Link-Kondensator ab unter der Annahme einer konstanten Last.}
+\begin{solutionblock}
+	Compared to a single-phase AFE rectifier, the three-phase AFE has no voltage ripple due to the fundamental frequency grid voltage zero-crossings since the fundamental power flow is continuous. Hence, the DC-link voltage ripple is due to the PWM switching only. The DC-side converter current of a three-phase two-level converter can be written as
+	\begin{equation*}
+		i_{\mathrm{conv}}(t)
+		=
+		q_\mathrm{a}(t)i_\mathrm{a}(t)+q_\mathrm{b}(t)i_\mathrm{b}(t)+q_\mathrm{c}(t)i_\mathrm{c}(t),
+		\qquad q_{\mathrm{a},\mathrm{b},\mathrm{c}}\in\{0,1\}.
+	\end{equation*}
+	Since the three-phase currents satisfy
+	\begin{equation*}
+		i_\mathrm{a}(t)+i_\mathrm{b}(t)+i_\mathrm{c}(t)=0,
+	\end{equation*}
+	the possible DC-side currents are
+	\begin{equation*}
+		i_{\mathrm{conv}}(t)
+		\in
+		\{0,\pm i_\mathrm{a}(t),\pm i_\mathrm{b}(t),\pm i_\mathrm{c}(t)\}.
+	\end{equation*}
+	Hence, a conservative upper bound is
+	\begin{equation*}
+		\left|i_{\mathrm{conv}}(t)\right|
+		\leq \hat i_{\mathrm{1}}.
+	\end{equation*}
+	The average DC-link load current is
+	\begin{equation*}
+		I_{\mathrm{2}}
+		=
+		\frac{P_{\mathrm{dc}}}{U_{\mathrm{2}}}
+		=
+		\frac{500\,\mathrm{kW}}{700\,\mathrm{V}}
+		\approx \SI{714.3}{\ampere}.
+	\end{equation*}
+	Using the result from Task 1.4 for unity power factor,
+	\begin{equation*}
+		I_{\mathrm{1}}
+		=
+		\frac{P_{\mathrm{dc}}/\eta}
+		{\sqrt{3}U_{\mathrm{1,LL}}}
+		\approx \SI{751.8}{\ampere},
+	\end{equation*}
+	and therefore
+	\begin{equation*}
+		\hat i_{\mathrm{1}}
+		=
+		\sqrt{2}I_{\mathrm{1}}
+		\approx \SI{1063.1}{\ampere}.
+	\end{equation*}
+	The capacitor current is
+	\begin{equation*}
+		i_\mathrm{C}(t)=i_{\mathrm{conv}}(t)-I_{\mathrm{2}},
+	\end{equation*}
+	such that the worst-case magnitude can be bounded by
+	\begin{equation*}
+		|i_\mathrm{C}(t)|
+		\leq
+		\hat i_{\mathrm{1}}+I_{\mathrm{2}}
+		\approx \SI{1777.4}{\ampere}.
+	\end{equation*}
+	For a worst-case estimate, assume that this current acts over one complete switching period
+	\begin{equation*}
+		T_\mathrm{s}=\frac{1}{f_\mathrm{s}}.
+	\end{equation*}
+	With
+	\begin{equation*}
+		i_\mathrm{C}=C\frac{\mathrm{d}u_{\mathrm{2}}}{\mathrm{d}t},
+	\end{equation*}
+	the peak-to-peak switching ripple is therefore bounded by
+	\begin{equation*}
+		\Delta U_{\mathrm{2,pp}}
+		\leq
+		\frac{|i_C|_{\max}T_\mathrm{s}}{C}
+		=
+		\frac{\hat i_{\mathrm{1}}+I_{\mathrm{2}}}
+		{C f_\mathrm{s}}.
+	\end{equation*}
+	Insertion of the given values yields
+	\begin{equation*}
+		\Delta U_{\mathrm{2,pp}}
+		\leq
+		\frac{\SI{1777.4}{\ampere}}
+		{\SI{90}{\milli\farad}\cdot \SI{10}{\kHz}}
+		\approx \SI{1.97}{\volt}.
+	\end{equation*}
+	Thus, the relative peak-to-peak ripple is bounded by
+	\begin{equation*}
+		\frac{\Delta U_{\mathrm{2,pp}}}{U_{\mathrm{2}}}\,100\%
+		\leq
+		\frac{\SI{1.97}{\volt}}{\SI{700}{\volt}}\,100\%
+		\approx 0.28\%.
+	\end{equation*}
+\end{solutionblock}

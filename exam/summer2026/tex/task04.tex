@@ -1,0 +1,84 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Task 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\task{Emergency power for a hospital}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\taskGerman{Notstromversorgung für ein Krankenhaus}
+
+A hospital is upgrading its emergency power system. During normal operation, the critical care units
+are supplied from the utility grid. During outages, a diesel generator forms a three-phase line-to-line
+\SI{400}{\volt}, \SI{50}{\hertz} AC grid. A dedicated AC/DC converter is used to supply the DC input of a
+specific piece of emergency medical equipment. The engineering team is considering the AC/DC converter
+topologies shown in Fig. \ref{fig:M3U_vs_M3C} to supply a regulated DC bus.
+Assume that the DC load current is continuous and that all semiconductor devices are ideal.
+The equipment is approximated by a constant current load.
+
+\begin{germanblock}
+	Ein Krankenhaus rüstet seine Notstromversorgung auf. Im Normalbetrieb werden die Intensivstationen aus
+	dem öffentlichen Stromnetz versorgt. Bei einem Stromausfall erzeugt ein Dieselgenerator ein Drehstromnetz
+	(Leiterspannung \SI{400}{\volt}, \SI{50}{\hertz}). Zur Versorgung medizinischer Notfallgeräte benötigt
+	das Krankenhaus einen stabilen Gleichspannungszwischenkreis. Das Entwicklungsteam prüft die in Abb. \ref{fig:M3U_vs_M3C}
+	dargestellten AC/DC-Wandlertopologien zur Versorgung eines geregelten Gleichspannungszwischenkreises.
+	Es wird angenommen, dass der Gleichstrom lastseitig lückenlos fließt und alle Halbleiterbauelemente ideal
+	sind. Die zu versorgende medizinische Ausrüstung wird durch eine konstante Stromlast angenähert.
+\end{germanblock}
+\input{fig/Task04/M3U_vs_M3C.tex}
+\subtask{During emergency operation, the generator terminal voltage may vary by $\pm \SI{15}{\percent}$
+	due to operating conditions. Which converter topology (M3U or M3C) is more suitable for maintaining a desired
+	DC output voltage?}{2}
+
+%
+\subtaskGerman{Im Notbetrieb kann die Klemmenspannung des Generators aufgrund der Betriebsbedingungen um $\pm \SI{15}{\percent}$
+	schwanken. Welche Umrichtertopologie (M3U oder M3C) eignet sich besser, um eine gewünschte Gleichausgangsspannung aufrechtzuerhalten?}
+\begin{solutionblock}
+	The preferred converter is the three-phase controlled mid-point rectifier: the M3C uses thyristors whose firing angle ($\alpha$) can be adjusted, allowing
+	control of the average DC output voltage. If the generator voltage changes, the output voltage can be adjusted
+	by changing the firing angle (within the converter's operating limits). In contrast, the M3U cannot actively control the output voltage, which might be problematic when supplying critical medical equipment.
+\end{solutionblock}
+%
+\subtask{Assuming the team selected the M3C converter and initially operates it with a firing angle of $\alpha=\SI{25}{\degree}$. Calculate the average DC output voltage.}{2}
+\subtaskGerman{Angenommen, das Team hat sich für den M3C-Stromrichter entschieden und betreibt diesen zunächst
+	mit einem Zündwinkel von $\alpha=\SI{25}{\degree}$. Berechnen Sie die mittlere Gleichausgangsspannung.}
+\begin{solutionblock}
+	For a three-phase fully controlled mid-point rectifier,
+	$$\hat{u}_\mathrm{1,normal} = \sqrt{2}\frac{U_{1\mathrm{LL}}}{\sqrt{3}}
+		= \sqrt{2}\frac{\SI{400}{\volt}}{\sqrt{3}} = \SI{326.6}{\volt},$$
+	the average DC output voltage is given by:
+	$$U_\mathrm{2,normal}=\frac{3\sqrt{3}}{2\pi}\hat{u}_\mathrm{1,normal}\cos{\alpha}
+		= \SI{244.79}{\volt}.$$
+\end{solutionblock}
+%
+\subtask{During an emergency, the generator terminal voltage suddenly drops by $\SI{15}{\percent}$.
+	\begin{enumerate}
+		\renewcommand{\labelenumi}{\alph{enumi})}
+		\item Calculate the new average DC output voltage, while the firing angle remains unchanged.
+		\item Can the original DC output voltage be restored only by changing the firing angle?
+		\item Suggest an alternative converter/topology to restore the original output voltage in
+		      such emergency cases, and justify your answer with calculations.
+	\end{enumerate}}{3}
+\subtaskGerman{Im Notfall sinkt die Klemmenspannung des Generators schlagartig um $\SI{15}{\percent}$.
+	\begin{enumerate}
+		\renewcommand{\labelenumi}{\alph{enumi})}
+		\item Berechnen Sie die neue mittlere Gleichausgangsspannung, während der Zündwinkel unverändert bleibt.
+		\item Kann die ursprüngliche Gleichausgangsspannung nur durch Änderung des Zündwinkels wiederhergestellt werden?
+		\item Schlagen Sie einen alternativen Wandler bzw. eine alternative Topologie vor, um die ursprüngliche
+		      Ausgangsspannung in solchen Notfällen wiederherzustellen, und begründen Sie Ihre Antwort mit
+		      Berechnungen.
+	\end{enumerate}}
+\begin{solutionblock}
+	\begin{enumerate}
+		\renewcommand{\labelenumi}{\alph{enumi})}
+		\item $$U_{2,\mathrm{reduced}}=(1-0.15) \cdot U_\mathrm{2,normal} = (1-0.15) \cdot \SI{245}{\volt} = \SI{208.3}{\volt}.$$
+		\item The new peak phase input voltage is:
+		      $$\hat{u}_{1,\mathrm{reduced}} = (1-0.15) \cdot \hat{u}_\mathrm{1,normal} = (1-0.15)\cdot \SI{326.6}{\volt} = \SI{277.6}{\volt},$$
+		      The maximum DC voltage obtainable occurs at $\alpha=\SI{0}{\degree}$. Therefore, the original DC output voltage cannot be restored only by changing the firing angle:
+		      $$U_{2,\mathrm{max}} = \frac{3\sqrt{3}}{2\pi}\hat{u}_{1,\mathrm{reduced}}
+			      = \SI{229.58}{\volt} < \SI{244.79}{\volt}.$$
+		\item B6C (six-pulse fully controlled bridge rectifier) can be used to restore the original output voltage.
+		      $$U_2 = \hat{u}_{1,\mathrm{LL},\mathrm{reduced}}\frac{6}{\pi}\sin{\frac{\pi}{6}}\cos{\alpha},$$
+		      $$\Leftrightarrow \quad \SI{244.79}{\volt} = \sqrt{2}\cdot0.85\cdot\SI{400}{\volt}\cdot\frac{6}{\pi}\sin{\frac{\pi}{6}}\cos{\alpha},$$
+		      $$\Leftrightarrow \quad \alpha = \arccos\left(\frac{\SI{244.79}{\volt}}{\SI{459.16}{\volt}}\right) = \SI{57.8}{\degree}.$$
+	\end{enumerate}
+\end{solutionblock}
+

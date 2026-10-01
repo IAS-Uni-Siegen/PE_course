@@ -1,0 +1,54 @@
+\begin{figure}[ht]
+	\begin{center}
+		\begin{circuitikz}[european currents,european resistors,american inductors]
+			\draw
+			(0,0) coordinate(N1) to [short] ++(2,0) coordinate(Ud)
+			++(0,-1) node[nigfete](Trans){}
+			% At transistor label T1
+			(Trans) ++(-0.7,0.1) node[anchor=east,color=black]{$T_\mathrm{1}$}
+			% Add voltage arrow
+			(Trans.drain) ++(0.25, 0) coordinate(UT)
+			(UT) to [open, v^=$U_\mathrm{T1,on}$, voltage shift=2, voltage=straight] ++ (0, -1.5)
+			(Ud) to [short] (Trans.drain)
+			(Trans.source) to [short,-*] ++(0,0) coordinate(U2p)
+			to [short,-] ++(0,0) to [L,l^=$L$, label distance=-2pt, i=$i_\mathrm{2}(t)$] ++(3,0) coordinate(Lp) to [short,-] ++(0,-2) coordinate(Lp10)
+			(Lp) to [V, v_=$U_2$] (Lp10)
+			(Lp) to [open] (Lp10)
+			coordinate(Lp10) to  [short,-*] ++(-3,0) coordinate(D)
+			to [D,l^=$D_\mathrm{1}$, v_=$U_\mathrm{D1fwd}$, voltage shift=2, voltage=straight] ++(0,2)
+			% (D) ++(0,2) [D,l^=$D_\mathrm{1}$, v_=$U_\mathrm{D1}$, voltage shift=2, voltage=straight] (D)
+			(0,-3.77) coordinate(Bw) to [short] ++(3,0) coordinate(U1)
+			%(N1) to [V] (Bw)
+			(N1) to [V,v_=$U_1$] (Bw)
+			;
+			\draw
+			(8,0) coordinate(N2) to [short] ++(2,0) coordinate(Ud)
+			++(0,-1) node[nigfete](Trans1){}
+			% At transistor label T1
+			(Trans1) ++(-0.7,0.1) node[anchor=east,color=black]{$T_\mathrm{1}$}
+			% Add voltage arrow
+			(Trans1.drain) ++(0.25, 0) coordinate(UT1)
+			(UT1) to [open, v^=$U_\mathrm{T1,on}$, voltage shift=2, voltage=straight] ++ (0, -1.5)
+			(Ud) to [short] (Trans1.drain)
+			(Trans1.source) to [short,-*] ++(0,0) coordinate(U2p)
+			to [short,-] ++(0,0) to [L,l^=$L$, label distance=-2pt, i=$i_\mathrm{2}(t)$] ++(3,0) coordinate(Lp) to [short,-] ++(0,-2) coordinate(Lp10)
+			(Lp) to [V, v_=$U_2$] (Lp10)
+			(Lp) to [open] (Lp10)
+			coordinate(Lp10) to  [short,-*] ++(-3,0) coordinate(T2)
+			++(0,1) node[nigfete](Trans2){}
+			% At transistor label T2
+			(Trans2) ++(-0.7,0.1) node[anchor=east,color=black]{$T_\mathrm{2}$}
+			(U2p) to [short] (Trans2.drain)
+			(T2) to [short] (Trans2.source)
+			(Trans1.source) to [short,-] ++(0,0)
+			(8,-3.77) coordinate(Bw) to [short] ++(3,0) coordinate(U1)
+			%(N1) to [V] (Bw)
+			% Add voltage arrow
+			(Trans2.drain) ++(0.25, 0) coordinate(UT2)
+			(UT2) to [open, v^<=$U_\mathrm{T2,on}$, voltage shift=2, voltage=straight] ++ (0, -1.5)
+			(N2) to [V,v^=$U_1$] (Bw)
+			;
+		\end{circuitikz}
+	\end{center}
+	\caption{Asynchronous buck converter (left) and synchronous buck converter (right).}
+\end{figure}

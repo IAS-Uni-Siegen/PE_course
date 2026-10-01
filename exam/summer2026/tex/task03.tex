@@ -1,0 +1,153 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Task 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\task{Fly back converter as PC-power supply}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\taskGerman{Sperrwandler als PC-Netzteil}
+
+Flyback converters are commonly used in computer power supplies. Typically, these converters are designed as
+multi-port flyback converters and can generate multiple output voltages.
+For simplicity, this task focuses on analyzing only one output voltage port.
+
+\begin{germanblock}
+	In Computernetzteilen werden häufig Sperrwandler eingesetzt. Dieser Konvertertyp ist meist als Multi-Port-Sperrwandler ausgelegt, um mehrere Ausgangsspannungen bereitzustellen.
+	Für diese Aufgabe wird zur Vereinfachung nur ein Ausgangsport betrachtet.
+\end{germanblock}
+
+\color{black}
+\input{fig/Task03/figFlybackConverter}
+\begin{table}[ht]
+	\centering  % Zentriert die Tabelle
+	\begin{tabular}{llll}
+		\toprule
+		Input voltage:  & $U_\mathrm{1} = \SI{400}{\volt}$      & Duty cycle:     & $D = 0.2$                                    \\
+		Output voltage: & $U_\mathrm{2} = \SI{12}{\volt}$       & Output current: & $\overline{i}_\mathrm{2} = \SI{25}{\ampere}$ \\
+		Inductivity:    & $L_\mathrm{m} = \SI{1}{\milli\henry}$ &                 &                                              \\
+		\midrule
+		\multicolumn{4}{l}{\quad All components shall be considered as ideal.}                                                   \\
+		\bottomrule
+	\end{tabular}
+	\caption{Parameters of the fly back converter.}  % Beschriftung der Tabelle
+	\label{table:FlybackConverter}
+\end{table}
+
+\subtask{Compare the asynchronous buck converter (previous task) with the fly back converter and describe two main conceptual differences.}{2}
+
+\subtaskGerman{Vergleiche den asynchronen Tiefsetzsteller (vorherige Aufgabe) mit dem Sperrwandler und nenne mindestens zwei wesentliche Unterschiede.}
+
+\begin{solutionblock}
+	The differences are:
+	\begin{itemize}
+		\setlength{\itemsep}{-0.5pt} % Distance between the points (Part1)
+		      \setlength{\parskip}{-0.5pt} % Distance between the points (Part2)     		
+		\item The flyback converter provides galvanic isolation between the primary and secondary voltages in opposite to buck converter.
+		\item The output voltage of the flyback converter can be higher or lower than the input voltage depending on the turns ratio of the transformer (and the duty cycle). The buck converter can only reduce the input voltage.
+		\item The flyback output current pulsates discontinuously, while the buck converter output current is continuous (at least in CCM).
+	\end{itemize}
+\end{solutionblock}
+
+\subtask{Calculate the turns ratio $N2/N1$ of the transformer to achieve the required output voltage $U_{\mathrm{2}}$ at the given
+	duty cycle of $D$.}{2}
+\subtaskGerman{Berechne das Windungsverhältnis $N2/N1$ des Transformators, um bei einem Tastverhältnis von $D$ die geforderte Ausgangsspannung $U_{\mathrm{2}}$ zu erreichen.}
+
+\begin{solutionblock}
+	The the duty cycle causes a voltage transformation to an output voltage, which is calculated by
+	\begin{equation*}
+		\frac{U_\mathrm{2}'}{U_\mathrm{1}} = \frac{D}{1-D}.
+	\end{equation*}
+	An additional voltage transformation is required to achieve the desired output voltage of $\SI{12}{\volt}$.
+	This is accomplished by an appropriate transformer turns ratio according to:
+	\begin{equation*}
+		\frac{N_\mathrm{2}}{N_\mathrm{1}} = \frac{U_\mathrm{2}}{U_\mathrm{2}'} =  \frac{(1-D)U_\mathrm{2}}{D \cdot U_\mathrm{1}}
+		=  \frac{(1-0.2)\SI{12}{\volt}}{0.2 \cdot \SI{400}{\volt}} = 0.12.
+	\end{equation*}
+\end{solutionblock}
+
+\subtask{Determine the required switching frequency $f_\mathrm{s}$ such that the magnetizing current ripple $\Delta i_\mathrm{m}$
+	corresponds to $\SI{8}{\percent}$ of the average magnetizing current $\overline{i}_\mathrm{m}$ at the given operating point.}{4}
+
+\begin{hintblock}
+	The magnetizing current $i_\mathrm{m}(t)$ corresponds to the input current $i_\mathrm{1}(t)$ while on-phase of the transistor
+	and the transformed output current $i_\mathrm{2}(t)$ during the off-phase of the transistor.
+\end{hintblock}
+
+\subtaskGerman{Bestimme die erforderliche Schaltfrequenz $f_\mathrm{s}$, damit die Magnetisierungsstromänderung $\Delta i_\mathrm{m}$ $\SI{8}{\percent}$
+	des mittleren Magnetisierungsstroms $\overline{i}_\mathrm{m}$ für den gegebenen Arbeitspunkt beträgt.}
+
+\begin{germanhintblock}
+	Der Magnetisierungsstrom $i_\mathrm{m}(t)$ entspricht dem Eingangsstrom $i_\mathrm{1}(t)$ während der Einschaltphase des Transistors
+	und dem tranformierten Ausgangsstrom $i_\mathrm{2}(t)$ während der Auschaltphase des Transistors.
+\end{germanhintblock}
+
+\begin{solutionblock}
+	The magnetization current corresponds to the average input current $\overline{i}_\mathrm{1,on}$ at on-phase.
+	The average input current is calculated by transformation of the output current.
+	\begin{equation*}
+		\overline{i}_\mathrm{1} = \overline{i}_\mathrm{2} \cdot \frac{U_\mathrm{2}}{U_\mathrm{1}} =   \SI{25}{\ampere}  \cdot \frac{\SI{12}{\volt}}{\SI{400}{\volt}} = \SI{0.75}{\ampere}.
+	\end{equation*}
+	The average input current $\overline{i}_\mathrm{1}$ represents the mean value over the entire switching period. However, the average magnetization current
+	$\overline{i}_\mathrm{1,on}$ is defined as the mean current during the on-phase only and $\overline{i}_\mathrm{1}$ is zero while off-phase.
+	So the average magnetization current yields
+	\begin{equation*}
+		\overline{i}_\mathrm{m} = \frac{\overline{i}_\mathrm{1}}{D} =   \frac{\SI{0.75}{\ampere}}{0.2} = \SI{3.75}{\ampere}.
+	\end{equation*}
+	This result leads to the ripple current $\Delta i_\mathrm{m}$:
+	\begin{equation*}
+		\Delta i_\mathrm{m}= 0.08 \cdot \overline{i}_\mathrm{m} = 0.08 \cdot \SI{3.75}{\ampere} = \SI{0.3}{\ampere}.
+	\end{equation*}
+	The ripple in the magnetizing current arises from the voltage applied to the magnetizing inductance during the on-phase.
+	\begin{equation*}
+		\Delta i_\mathrm{m} =\frac{U_\mathrm{1}T_\mathrm{on}}{L_\mathrm{m}}
+		= \frac{U_\mathrm{1}T_\mathrm{s} D }{L_\mathrm{m}} = \frac{U_\mathrm{1} D }{L_\mathrm{m} f_\mathrm{s}} .
+	\end{equation*}
+	Solving the equation with respect to $f_\mathrm{s}$ leads to
+	\begin{equation*}
+		f_\mathrm{s} = \frac{U_\mathrm{1} D }{L_\mathrm{m} \Delta i_\mathrm{m}} = \frac{\SI{400}{\volt} \cdot 0.2}{\SI{1}{\milli\henry} \cdot \SI{0.3}{\ampere}} = \SI{267}{\kilo\hertz}.
+	\end{equation*}
+\end{solutionblock}
+
+\subtask{Sketch the signals of the following quantities for the given operating point in the provided template \autoref{fig:sketch_template} assuming a steady state: voltage $u_\mathrm{Lm}(t)$ across the magnetizing inductance $L_{\mathrm{m}}$, magnetizing current $i_\mathrm{m}(t)$ as well as primary current $i_\mathrm{1}(t)$, and secondary current $i_\mathrm{2}(t)$.
+}{6}
+\begin{hintblock}
+	You may first want to calculate characteristic points of the waveforms before sketching. Also note that the diagram for the primary current and secondary current features two different y-axis scale: 	The left y-axis scale applies to the primary current $i_\mathrm{1}(t)$ and the right y-axis scale applies to the secondary current $i_\mathrm{2}(t)$.
+\end{hintblock}
+
+\subtaskGerman{Skizziere die Signale der folgenden Größen für den gegebenen Arbeitspunkt in der bereitgestellten Vorlage \autoref{fig:sketch_template} unter der Annahme eines stationären Zustands: Spannung $u_\mathrm{Lm}(t)$ über der Magnetisierungsinduktivität $L_{\mathrm{m}}$, Magnetisierungsstrom $i_\mathrm{m}(t)$ sowie Primärstrom $i_\mathrm{1}(t)$ und Sekundärstrom $i_\mathrm{2}(t)$.
+}
+
+\begin{germanhintblock}
+	Zunächst empfiehlt es sich charakteristische Punkte der Signale zu berechnen, bevor die Skizzen erstellt werden. Beachten Sie auch, dass das Diagramm für den Primärstrom und den Sekundärstrom zwei verschiedene y-Achsen-Skalen aufweist: Die linke y-Achse gilt für den Primärstrom $i_\mathrm{1}(t)$ und die rechte y-Achse gilt für den Sekundärstrom $i_\mathrm{2}(t)$.
+\end{germanhintblock}
+\input{fig/Task03/Fig_subtask3_template.tex}
+
+\begin{solutionblock}
+	The voltage $u_\mathrm{Lm}$ in on-phase is equal to $U_\mathrm{1}$:
+	\begin{equation*}
+		U_\mathrm{Lm,on}= U_\mathrm{1} = \SI{400}{\volt}.
+	\end{equation*}
+	The voltage $u_\mathrm{Lm}$ in off-phase corresponds to the transformed secondary voltage $U_\mathrm{2}$ and results in:
+	\begin{equation*}
+		U_\mathrm{Lm,off}= -U_\mathrm{2} \frac{N_\mathrm{1}}{N_\mathrm{2}} = - \frac{- \SI{12}{\volt}}{0.12} = -\SI{100}{\volt}.
+	\end{equation*}
+	The maximal magnetization current is calculated by:
+	\begin{equation*}
+		I_\mathrm{m,max} = \overline{i}_\mathrm{m} + \frac{\Delta i_\mathrm{m}}{2}  = \SI{3.75}{\ampere} + \frac{\SI{0.3}{\ampere}}{2}  = \SI{3.9}{\ampere}.
+	\end{equation*}
+	The minimum magnetization current is calculated by:
+	\begin{equation*}
+		I_\mathrm{m,min} = \overline{i}_\mathrm{m} - \frac{\Delta i_\mathrm{m}}{2}  = \SI{3.75}{\ampere} - \frac{\SI{0.3}{\ampere}}{2}  = \SI{3.6}{\ampere}.
+	\end{equation*}
+	The input current $i_\mathrm{1}(t)$ is equal to the magnetization current, if the transistor conducts.
+	The output current $i_\mathrm{2}(t)$ is equal to the transformed magnetization current, it the transistor blocks.
+	The transformation value is equal to the turn ration.
+	\begin{equation*}
+		I_\mathrm{2,max} = \frac{I_\mathrm{m,max} \cdot N_\mathrm{1}}{N_\mathrm{2}} = \frac{\SI{3.9}{\ampere}}{0.12} = \SI{32.5}{\ampere}.
+	\end{equation*}
+	and
+	\begin{equation*}
+		I_\mathrm{2,min} = \frac{I_\mathrm{m,min} \cdot N_\mathrm{1}}{N_\mathrm{2}} = \frac{\SI{3.6}{\ampere}}{0.12} = \SI{30.0}{\ampere}.
+	\end{equation*}
+	\input{fig/Task03/sFig_subtask3.tex}
+\end{solutionblock}
+

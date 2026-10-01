@@ -35,6 +35,7 @@ The covered topics are:
 
 | Exam       | Only tasks                                  | Tasks with solutions                            |
 |------------|---------------------------------------------|-------------------------------------------------|
+| Summer 2026       | [Only tasks](https://ias-uni-siegen.github.io/PE_course/summer2026.pdf)   | [Tasks with solutions](https://ias-uni-siegen.github.io/PE_course/summer2026_with_solution.pdf) |
 | Winter 2025       | [Only tasks](https://ias-uni-siegen.github.io/PE_course/winter2025.pdf)   | [Tasks with solutions](https://ias-uni-siegen.github.io/PE_course/winter2025_with_solution.pdf) |
 | Summer 2025       | [Only tasks](https://ias-uni-siegen.github.io/PE_course/summer2025.pdf)   | [Tasks with solutions](https://ias-uni-siegen.github.io/PE_course/summer2025_with_solution.pdf) |
 | Winter 2024       | [Only tasks](https://ias-uni-siegen.github.io/PE_course/winter2024.pdf)   | [Tasks with solutions](https://ias-uni-siegen.github.io/PE_course/winter2024_with_solution.pdf) |
