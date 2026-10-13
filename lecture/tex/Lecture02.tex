@@ -19,7 +19,7 @@
 		\item<2-> The switch is ideal, that is, infinitely fast.
 		\item<3-> The input voltage is constant: $u_1(t) = U_1$.
 		\item<3-> The output voltage is constant: $u_2(t) = U_2$.
-		\item<4-> The input voltage is greater than the output voltage: $U_1 > U_2$.
+		\item<4-> The input voltage is greater than the output voltage: $U_1 > U_2 > 0$.
 	\end{itemize}
 	\begin{figure}
 		\begin{circuitikz}[]
@@ -49,8 +49,8 @@
 			The voltage at the switch is given by
 			\begin{equation}
 			u_\mathrm{s}(t) = \begin{cases}
-			U_1,            & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],\\}
-	\onslide<2->{0, & t\in [k T_\mathrm{s}+ T_\mathrm{on}, (k+1) T_\mathrm{s}]
+				U_1,            & t\in ]k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}],\\}
+				\onslide<2->{0, & t\in ]k T_\mathrm{s}+ T_\mathrm{on}, (k+1) T_\mathrm{s}]
 			\end{cases}}
 	\end{equation}%
 	\onslide<1->{with $k\in\mathbb{N}$ being the $k$-th switching period, $T_\mathrm{s}$ the switching period time interval, and $T_\mathrm{on}$ the switch-on time.}
