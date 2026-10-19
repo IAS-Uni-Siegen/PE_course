@@ -14,14 +14,15 @@
 				to [short,-*] ++(-2,0) coordinate(junc3) to [short,-*] ++(-3,0) coordinate(junc4) to [short] ++(-2,0)
 			coordinate(junc5) to [short,-] ++(-2,0) coordinate(U-)
 				(junc2) to [C,l_=$C$](junc3)
-				(junc4) to [short]  ++(0,0.5) coordinate(Db) to[D-,l^=$D$]  ++(0,2) coordinate(Dt) to [short] (junc1)
+				(junc4) to [short]  ++(0,0.5) coordinate(Db) to[D-,l^=$D$, v<=$u_\text{D}$, voltage=straight]  ++(0,2) coordinate(Dt) to [short] (junc1)
 				(Trans.G)  to [sqV] ++(0,-1)(junc5)
 
 				(U+) to [V=$U_1$] (U-)
 
-				(Trans)  node[anchor=south,color=black]{$T_1$}
+				([xshift=0.5cm]Trans)  node[anchor=north west,color=black]{$T$}
 				(Tl)  node[anchor=south,color=black]{$i_\text{1}$}
 			;
+			\draw ([yshift=0.75cm]Trans.north) to [open,v^=$u_\text{T}$,voltage=straight] ([yshift=0.75cm]Trans.south);
 		\end{circuitikz}
 	\end{center}
 	\caption{Circuit with one transistor, filter and one load resistor.}

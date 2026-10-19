@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% RelevantVoltageAndCurrentSignals
+% RelevantVoltageAndCurrentSignals (D = 1/3, T_s = 3 units, t_on = 1 unit)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{solutionfigure}[htb]
@@ -15,7 +15,7 @@
 					xmin=0, xmax=13.5,
 					domain=0:13,
 					width=0.6\textwidth,
-					xtick={0,1,4,5,8,9,12,13},
+					xtick={0,1,3,4,6,7,9,10,12,13},
 					xticklabels={{},{},{},{},{},{},{},{},{},{}},
 					grid=both,
 					grid style={line width=.1pt, draw=gray!10},
@@ -42,16 +42,20 @@
 						(0, 0)
 						(1, 0)
 						(1, 1)
-						(4, 1)
+						(3, 1)
+						(3, 0)
 						(4, 0)
-						(5, 0)
-						(5, 1)
-						(8, 1)
-						(8, 0)
-						(9, 0)
+						(4, 1)
+						(6, 1)
+						(6, 0)
+						(7, 0)
+						(7, 1)
 						(9, 1)
-						(12,1)
-						(12,0)
+						(9, 0)
+						(10, 0)
+						(10, 1)
+						(12, 1)
+						(12, 0)
 						(13, 0)
 					};
 
@@ -66,23 +70,27 @@
 					height=0.2\textwidth,
 					xlabel={$t$},
 					ylabel={{\color{signalalpha}$u_\text{D}$}},
-					ytick={0,.33,1},
+					ytick={0,.3333,1},
 					yticklabels={0,$U_2$,$U_1$},
 				]
 				\addplot[color=signalalpha,mark=none,solid] coordinates{
 						(0, 1)
 						(1, 1)
 						(1, 0)
-						(4, 0)
+						(3, 0)
+						(3, 1)
 						(4, 1)
-						(5, 1)
-						(5, 0)
-						(8, 0)
-						(8, 1)
-						(9, 1)
+						(4, 0)
+						(6, 0)
+						(6, 1)
+						(7, 1)
+						(7, 0)
 						(9, 0)
-						(12,0)
-						(12,1)
+						(9, 1)
+						(10, 1)
+						(10, 0)
+						(12, 0)
+						(12, 1)
 						(13, 1)
 						(13, 0)
 					};
@@ -98,30 +106,34 @@
 					height=0.25\textwidth,
 					xlabel={$t$},
 					ylabel={{\color{signalalpha}$u_\text{L}$}},
-					ytick={-.333,0,1},
+					ytick={-.3333,0,.6667},
 					yticklabels={$-U_2$,0,$U_1-U_2$},
 				]
-				\draw [fill=shadecolor] (axis cs:4,0) rectangle (axis cs:5,1);
-				\draw [fill=shadecolor] (axis cs:5,0) rectangle (axis cs:8,-.3333);
+				\draw [fill=shadecolor] (axis cs:3,0) rectangle (axis cs:4,.6667);
+				\draw [fill=shadecolor] (axis cs:4,0) rectangle (axis cs:6,-.3333);
 				\addplot[color=signalalpha,mark=none,solid] coordinates{
-						(0, 1)
-						(1, 1)
-						(1, -.333)
-						(4, -.333)
-						(4, 1)
-						(5, 1)
-						(5, -.333)
-						(8, -.333)
-						(8, 1)
-						(9, 1)
-						(9, -.333)
-						(12, -.333)
-						(12, 1)
-						(13, 1)
-						(13, -.333)
+						(0, .6667)
+						(1, .6667)
+						(1, -.3333)
+						(3, -.3333)
+						(3, .6667)
+						(4, .6667)
+						(4, -.3333)
+						(6, -.3333)
+						(6, .6667)
+						(7, .6667)
+						(7, -.3333)
+						(9, -.3333)
+						(9, .6667)
+						(10, .6667)
+						(10, -.3333)
+						(12, -.3333)
+						(12, .6667)
+						(13, .6667)
+						(13, -.3333)
 					};
-				\node[anchor=center] at (axis cs:4.5,0.5){\tiny $ A_\text{off}$};
-				\node[anchor=center] at (axis cs:6.5,-0.1667){\tiny $ A_\text{on}$};
+				\node[anchor=center] at (axis cs:3.5,0.3333){\tiny $ A_\text{on}$};
+				\node[anchor=center] at (axis cs:5,-0.1667){\tiny $ A_\text{off}$};
 
 				\nextgroupplot[
 					ymin=0, ymax=1.2,
@@ -140,12 +152,14 @@
 				\addplot[color=signaldelta,mark=none,solid] coordinates{
 						(0, 0.5)
 						(1, 1)
-						(4, 0.5)
-						(5, 1)
-						(8, 0.5)
-						(9, 1)
-						(12,0.5)
-						(13,1)
+						(3, 0.5)
+						(4, 1)
+						(6, 0.5)
+						(7, 1)
+						(9, 0.5)
+						(10, 1)
+						(12, 0.5)
+						(13, 1)
 					};
 
 				\nextgroupplot[
@@ -163,78 +177,98 @@
 					yticklabels={0,,,},
 				]
 				\addplot[color=signaldelta,mark=none,solid] coordinates{
-						(0,0)
+						(0, 0)
 						(0, 0.5)
 						(1, 1)
 						(1, 0)
-						(4,0)
-						(4,0.5)
-						(5, 1)
-						(5,0)
-						(8,0)
-						(8, 0.5)
-						(9, 1)
-						(9,0)
-						(12,0)
-						(12,0.5)
-						(13,1)
-						(13,0)
+						(3, 0)
+						(3, 0.5)
+						(4, 1)
+						(4, 0)
+						(6, 0)
+						(6, 0.5)
+						(7, 1)
+						(7, 0)
+						(9, 0)
+						(9, 0.5)
+						(10, 1)
+						(10, 0)
+						(12, 0)
+						(12, 0.5)
+						(13, 1)
+						(13, 0)
 					};
 				\addplot[color=signalzeta,mark=none,solid] coordinates{
-						(1,1)
-						(4, 0.5)
+						(1, 1)
+						(3, 0.5)
 					};
 				\addplot[color=signalzeta,mark=none,solid] coordinates{
-						(5,1)
-						(8, 0.5)
+						(4, 1)
+						(6, 0.5)
 					};
 				\addplot[color=signalzeta,mark=none,solid] coordinates{
-						(9,1)
+						(7, 1)
+						(9, 0.5)
+					};
+				\addplot[color=signalzeta,mark=none,solid] coordinates{
+						(10, 1)
 						(12, 0.5)
 					};
 				\addplot[color=signalzeta,mark=none,solid] coordinates{
-						(0,0)
+						(0, 0)
 						(1, 0)
 					};
 				\addplot[color=signalzeta,mark=none,solid] coordinates{
-						(4,0)
-						(5,0)
+						(3, 0)
+						(4, 0)
 					};
 				\addplot[color=signalzeta,mark=none,solid] coordinates{
-						(8,0)
-						(9,0)
+						(6, 0)
+						(7, 0)
 					};
 				\addplot[color=signalzeta,mark=none,solid] coordinates{
-						(12,0)
-						(13,0)
+						(9, 0)
+						(10, 0)
+					};
+				\addplot[color=signalzeta,mark=none,solid] coordinates{
+						(12, 0)
+						(13, 0)
 					};
 				\addplot[color=signalzeta,mark=none,dashed] coordinates{
-						(1,0)
-						(1,1)
+						(1, 0)
+						(1, 1)
 					};
 				\addplot[color=signalzeta,mark=none,dashed] coordinates{
-						(4,0)
-						(4,0.5)
+						(3, 0)
+						(3, 0.5)
 					};
 				\addplot[color=signalzeta,mark=none,dashed] coordinates{
-						(5,0)
-						(5,1)
+						(4, 0)
+						(4, 1)
 					};
 				\addplot[color=signalzeta,mark=none,dashed] coordinates{
-						(8,0)
-						(8,0.5)
+						(6, 0)
+						(6, 0.5)
 					};
 				\addplot[color=signalzeta,mark=none,dashed] coordinates{
-						(9,0)
-						(9,1)
+						(7, 0)
+						(7, 1)
 					};
 				\addplot[color=signalzeta,mark=none,dashed] coordinates{
-						(12,0)
-						(12,0.5)
+						(9, 0)
+						(9, 0.5)
 					};
 				\addplot[color=signalzeta,mark=none,dashed] coordinates{
-						(13,0)
-						(13,1)
+						(10, 0)
+						(10, 1)
+					};
+				\addplot[color=signalzeta,mark=none,dashed] coordinates{
+						(12, 0)
+						(12, 0.5)
+					};
+				\addplot[color=signalzeta,mark=none,dashed] coordinates{
+						(13, 0)
+						(13, 1)
 					};
 			\end{groupplot}
 		\end{tikzpicture}
@@ -242,4 +276,3 @@
 	\caption{Relevant voltage and current signals.}
 	\label{fig:transistor_circuit}
 \end{solutionfigure}
-
