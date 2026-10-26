@@ -481,17 +481,16 @@ Next, the impact of power losses on the above's converter behavior is investigat
 \task{Buck-boost converter}
 A wide input-to-output voltage range can be realized by the cascade of buck and boost converters with a common inductance.
 With this topology the output voltage can be adjusted to a value which is higher or lower than the input voltage.
-\par
-% Schematic of Buck Boost Converter cascade
-\input{./fig/ex02/Fig_BuckBoostConverterCascade}
-\par
-%Table of parameter values 
-\input{./fig/ex02/FigTab_BuckBoostConverterCascade}
-
 The output voltage is kept at the specified constant value by adjusting the duty cycles $D_1$
 (of transistor  $T_1$) and $D_2$ (of transistor $T_2$) using a control system. Both transistors operate at the same switching frequency.
 The ripple of the output voltage and of the current in the inductor can be ignored. The current in $L$ is continuous.
 Initially, both transistors operate with the same duty cycle $D_1 = D_2 = D$ and their switching patterns are synchronized.
+
+% Schematic of Buck Boost Converter cascade
+\input{./fig/ex02/Fig_BuckBoostConverterCascade}
+%
+%Table of parameter values 
+\input{./fig/ex02/FigTab_BuckBoostConverterCascade}
 
 \subtask{Calculate the duty cycle of the transistors $T_1$ and $T_2$ depending on the voltage transformation ratio $U_\mathrm{2}/U_\mathrm{1}$.}
 
