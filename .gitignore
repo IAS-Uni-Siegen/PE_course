@@ -324,3 +324,4 @@ simulations/*/*backups*
 *.equ
 *.eqn
 *.ruff_cache
+.*serena

@@ -18,7 +18,7 @@
 				extra y ticks=0,
 				% Label text
 				xlabel={$U_\mathrm{1} \text{/V}$},
-				ylabel={$I_\mathrm{L}(U_\mathrm{1})/\mathrm{A}$},
+				ylabel={$\overline{i}_\mathrm{L}(U_\mathrm{1})/\mathrm{A}$},
 				% Label adjustment                                 
 				x label style={at={(axis description cs:1,0)},anchor=west},
 				y label style={at={(axis description cs:-.05,1)},anchor=south},
@@ -37,7 +37,7 @@
 			\addplot[signaldelta, domain=300:750, thick] {12.5*(1+(400/x))};
 		\end{axis}
 	\end{tikzpicture}
-	\caption{Inductor current versus input voltage.}
+	\caption{Average inductor current versus input voltage.}
 	\label{fig:InductorCurrentAtInputVoltage}
 \end{solutionfigure}
 

@@ -21,7 +21,7 @@
 			% Add junction point for P-buck diode
 			(jDBuckM) ++(0,-3) coordinate (jDBuckP)
 				% Add Inductance
-				(jDBuckM) to  [L, l=$L$] ++ (3,0) coordinate (jT2v)
+				(jDBuckM) to  [L, l=$L$] ++ (3.5,0) coordinate (jT2v)
 				% Add arrow and Text
 				++(-0.5,0) node[currarrow](IL){}
 				(IL)  node[anchor=south,color=black]{$i_\mathrm{L}$}
@@ -30,7 +30,7 @@
 			% Add junction for Transistor
 			(jT2v) ++(0,-3) coordinate (jT2g)
 				% Add Diode
-				(jT2v) to  [D-,l^=$D_{\mathrm{boost}}$] ++ (2,0) coordinate (jU2v)
+				(jT2v) to  [D-,l^=$D_2$] ++ (2,0) coordinate (jU2v)
 				% Add coordinate jU2v and jU2g
 				(jU2v) to [short,-] ++(0,-3) coordinate (jU2g)
 				% Add secondary source U2
@@ -49,12 +49,12 @@
 				(jT2g) to [short,-*] (jDBuckP)
 				% Add diode D2g
 				% (jDBuckP) to  [D-,l^=$D_{buck}$,v =$U$,voltage shift=0, voltage=straight] (jDBuckM)
-				(jDBuckP) to  [D-, l^=$D_{\mathrm{buck}}$, v_<=$U_0$, voltage=straight]  (jDBuckM)
+				(jDBuckP) to  [D-, l^=$D_1$]  (jDBuckM)
 				% Connect U1
 				(jDBuckP) to [short,-] (jU1g)
 			;
 		\end{circuitikz}
 	\end{center}
-	\caption{Buck-boost converter circuit.}
+	\caption{Buck-boost converter equivalent circuit diagram.}
 	\label{fig:ex02_step_down_with_load_resistor}
 \end{figure}

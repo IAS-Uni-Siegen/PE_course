@@ -26,7 +26,7 @@
 
 				(5,0) to[R, l=$R_\mathrm{D}$] (7.8,0)
 				(7.5,0) to[L, l=$L_\mathrm{c}$] (9.3,0)
-				(9,0) to[D, l=$D$] (12,0)
+				(9,0) to[D, l=$D$, v=$u_\mathrm{D}$, voltage=straight] (11,0)
 
 				(11,0) to[short,*-] ++(0,0) % Punkt direkt hinter der Diode
 
@@ -39,12 +39,12 @@
 				(0.70,0) to [short,i_<=$i_1$(t)] (u1o)
 				(4.5,0) to [short,-*,i^>=$i_\mathrm{L}$(t)] (5.5,0)
 
-				(5.5,-3) to [short,i^>=$i_\mathrm{T}$(t)] (5.5,-2)
+				(5.5,-3) to [short,i^<=$i_\mathrm{T}$(t)] (5.5,-2)
 
 				(11,0) to [short,i^>=$i_2$(t)] (12.5,0)
 			;
 		\end{circuitikz}
-		\caption{Boost converter with losses.}
+		\caption{Boost converter circuit diagram with internal resistances.}
 		\label{fig:boost converter with losses}
 	\end{center}
 	%\end{tikzpicture}

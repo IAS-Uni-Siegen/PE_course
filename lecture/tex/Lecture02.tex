@@ -643,7 +643,7 @@
 			Inserting \eqref{eq:capacitor-current-switch-off-step-down-converter} in \eqref{eq:capacitor-voltage-differential-equation-step-down-converter} and integrating the differential equation delivers the \hl{capacitor voltage during the switch-off period} as}
 	\begin{equation}
 		\begin{split}
-			\onslide<1->{u_\mathrm{C}(t) & = u_\mathrm{C}(k T_\mathrm{s}+T_\mathrm{on}) + \frac{1}{C}\int_{k T_\mathrm{s}+T_\mathrm{on}}^t i_\mathrm{C}(\tau) \mathrm{d}\tau, \quad t\in [k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}]}        \\
+			\onslide<1->{u_\mathrm{C}(t) & = u_\mathrm{C}(k T_\mathrm{s}+T_\mathrm{on}) + \frac{1}{C}\int_{k T_\mathrm{s}+T_\mathrm{on}}^t i_\mathrm{C}(\tau) \mathrm{d}\tau, \quad t\in ]k T_\mathrm{s} + T_\mathrm{on}, (k+1) T_\mathrm{s}]}        \\
 			\onslide<2->{                & = u_\mathrm{C}(k T_\mathrm{s}) + \frac{1}{C}\int_{k T_\mathrm{s}+T_\mathrm{on}}^t \frac{\Delta i_\mathrm{L}}{2} - \frac{U_2}{L} (\tau - k T_\mathrm{s} - T_\mathrm{on}) \mathrm{d}\tau}                    \\
 			\onslide<3->{                & = u_\mathrm{C}(k T_\mathrm{s}) + \frac{1}{C}\left[\frac{\Delta i_\mathrm{L}}{2}\tau - \frac{U_2}{L} (\frac{1}{2}\tau^2 - k T_\mathrm{s}\tau - T_\mathrm{on}\tau) \right]_{k T_\mathrm{s}+T_\mathrm{on}}^t} \\
 			\onslide<4->{                & = u_\mathrm{C}(k T_\mathrm{s}) + \frac{\Delta i_\mathrm{L}}{2 C}(t - k T_\mathrm{s} - T_\mathrm{on}) - \frac{U_2}{LC} \left[t(\frac{t}{2} - k T_\mathrm{s} - T_\mathrm{on}) + \frac{(k T_\mathrm{s} + T_\mathrm{on})^2}{2}\right].}
@@ -2439,7 +2439,7 @@
 	\onslide<2->{With the usual \hl{simplifying assumptions} (cf. \figref{fig:step-up-converter-simple-output-cap}), in particular, a constant output current $i_2(t)=I_2,$ the capacitor's current during the switch-on time is given by
 	\begin{equation*}
 		i_\mathrm{C}(t) = -i_2(t) = -I_2, \quad t \in ]k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{on}].
-	\end{equation*}}
+	\end{equation*}}%
 	\onslide<3->{This is \hl{identical to the step-up converter}, leading to the same voltage ripple
 			\begin{equation*}
 				\Delta u_\mathrm{C} = \frac{I_2}{C}T_\mathrm{on}= \frac{I_2}{C}DT_\mathrm{s}.
@@ -2703,7 +2703,7 @@
 				to [inductor, l=$L$] ++(1.75,0)
 				to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
 				to [short, -*] ++(0,-2);
-				\draw (0,2) to [short, i_<=${i_2=0}$, -o] ++(-1.0,0);
+				\draw (0,2) to [short, i_<=${i_2=0}$, o-o] ++(-1.0,0);
 				\draw (-1.8,2) to [open, v_>=${U_{\mathrm{s}_2}}$, voltage = straight] ++(0,-2);
 				\draw (-4.4,2) to [open, v^= ${U_{\mathrm{s}_1}}$, voltage = straight] ++(0,-2);
 			\end{circuitikz}
@@ -2781,7 +2781,7 @@
 				to [short] ++(0.25,0)
 				to [short, i=$i_\mathrm{L}(t)$] ++(0.75,0)
 				to [short, -*] ++(0,-2);
-				\draw (0,2) to [short, i_=${i_2=0}$, -o] ++(-1.0,0);
+				\draw (0,2) to [short, i_=${i_2=0}$, o-o] ++(-1.0,0);
 			\end{circuitikz}
 			\caption{Switch-on time}
 		\end{subfigure}%
@@ -3497,7 +3497,7 @@
 	\begin{equation}
 		L_1:\quad U_\mathrm{C}=\frac{U_1}{1-D}, \qquad L_2:\quad U_\mathrm{C}=-\frac{U_2}{D}.
 	\end{equation}\pause
-	Combining both equations delivers the voltage gain of the Ćuk converter:
+	Combining both equations delivers the \hl{voltage gain} of the Ćuk converter:
 	\begin{equation}
 		\frac{U_2}{U_1} = -\frac{D}{1-D}.
 	\end{equation}\pause
@@ -3619,7 +3619,7 @@
 	\begin{equation}
 		L_1:\quad U_\mathrm{C}=\frac{U_1}{1-D}-U_2, \qquad L_2:\quad U_\mathrm{C}=\left(\frac{1}{D}-1\right)U_2.
 	\end{equation}\pause
-	Combining both equations delivers the voltage gain of the SEPIC:
+	Combining both equations delivers the \hl{voltage gain} of the SEPIC:
 	\begin{equation}
 		\frac{U_2}{U_1} = \frac{D}{1-D}.
 	\end{equation}\pause
