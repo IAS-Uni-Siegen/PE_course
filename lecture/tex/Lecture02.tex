@@ -3659,7 +3659,7 @@
 					\draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
 					\draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
 				\end{circuitikz}
-				\caption{DC-DC converter realization for both current polarities (w/o filter components, aka \hl{half-bridge})}
+				\caption{DC-DC converter realization for both current polarities (w/o filter components, aka \hl{half bridge})}
 				\label{fig:DCDC-switch-two-current-polarities}
 			\end{figure}
 		\end{column}
@@ -3717,7 +3717,7 @@
 					\draw let \p1 = (npn1.B) in node[anchor=east] at (\x1,\y1) {$T_1$};
 					\draw let \p1 = (npn2.B) in node[anchor=east] at (\x1,\y1) {$T_2$};
 				\end{circuitikz}
-				\caption{DC-DC converter realization for both voltage polarities (w/o filter components, aka \hl{asymmetrical full-bridge})}
+				\caption{DC-DC converter realization for both voltage polarities (w/o filter components, aka \hl{asymmetrical full~bridge})}
 				\label{fig:DCDC-switch-two-voltage-polarities}
 			\end{figure}
 		\end{column}
@@ -3732,7 +3732,7 @@
 	\begin{columns}
 		\begin{column}{0.45\textwidth}
 			\begin{itemize}
-				\item For achieving full \hl{four quadrant operation (4Q)}, we combine the previous half-bridge variants.
+				\item For achieving full \hl{four quadrant operation (4Q)}, we combine the previous  variants.
 				\item<2-> Also requires complementary switching of $\{T_1, T_2\}$ and $\{T_3, T_4\}$ to prevent a DC-link short-circuit.
 				\item<3-> Possible (allowed) switching states:
 			\end{itemize}
@@ -3773,7 +3773,7 @@
 					\draw let \p1 = (npn3.B) in node[anchor=east] at (\x1,\y1) {$T_3$};
 					\draw let \p1 = (npn4.B) in node[anchor=east] at (\x1,\y1) {$T_4$};
 				\end{circuitikz}
-				\caption{DC-DC converter realization for both current and voltage polarities (w/o filter components, aka \hl{full-bridge})}
+				\caption{DC-DC converter realization for both current and voltage polarities (w/o filter components, aka \hl{full~bridge})}
 				\label{fig:DCDC-4Q-switch}
 			\end{figure}
 		\end{column}
