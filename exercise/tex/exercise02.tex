@@ -157,15 +157,14 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
 	\end{equation}
 	For the switch-off period, the capacitor current is
 	\begin{equation}
-		i_\mathrm{C}(t)=I_2 - i_\mathrm{L}(t) = I_2 + \frac{\Delta i_\mathrm{L}}{2} -(t-T_\mathrm{on})\frac{\Delta i_\mathrm{L}}{T_\mathrm{off}}, \quad t \in [DT_\mathrm{s},T_\mathrm{s}]
+		i_\mathrm{C}(t)= i_\mathrm{L}(t) - I_2 = \overline{i}_\mathrm{L} + \frac{\Delta i_\mathrm{L}}{2} -\frac{\Delta i_\mathrm{L}}{T_\mathrm{off}}(t-T_\mathrm{on})- I_2, \quad t \in [DT_\mathrm{s},T_\mathrm{s}]
 	\end{equation}
-	representing a linear decrease of the inductor current from its maximum value to its minimum value. Inserting $i_\mathrm{C}(t)=I_\mathrm{2}-i_\mathrm{L}(t)$ into the integral gives
+	representing a linear decrease of the inductor current from its maximum value to its minimum value. Inserting $i_\mathrm{C}(t)=i_\mathrm{L}(t) - I_\mathrm{2}$ into the integral gives
 	\begin{equation}
 		\begin{aligned}
 			\frac{1}{T_\mathrm{s}}\int_{DT_\mathrm{s}}^{T_\mathrm{s}}i_\mathrm{C}^2(t)\,\mathrm{d}t
 			 & =\frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{off}}
-			\left(I_\mathrm{2}-\overline{i}_\mathrm{L}-\frac{\Delta i_\mathrm{L}}{2}
-			+\frac{\Delta i_\mathrm{L}}{T_\mathrm{off}}t\right)^2\mathrm{d}t  \\
+			\left(\overline{i}_\mathrm{L} + \frac{\Delta i_\mathrm{L}}{2} -\frac{\Delta i_\mathrm{L}}{T_\mathrm{off}}t- I_2\right)^2\mathrm{d}t \\
 			 & =(1-D)\left[\left(\overline{i}_\mathrm{L}-I_\mathrm{2}\right)^2
 				         +\frac{(\Delta i_\mathrm{L})^2}{12}\right].
 		\end{aligned}
