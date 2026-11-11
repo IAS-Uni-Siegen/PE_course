@@ -157,15 +157,14 @@ The specification of the boost converter is given in \autoref{table:ex02_Paramet
 	\end{equation}
 	For the switch-off period, the capacitor current is
 	\begin{equation}
-		i_\mathrm{C}(t)=I_2 - i_\mathrm{L}(t) = I_2 + \frac{\Delta i_\mathrm{L}}{2} -(t-T_\mathrm{on})\frac{\Delta i_\mathrm{L}}{T_\mathrm{off}}, \quad t \in [DT_\mathrm{s},T_\mathrm{s}]
+		i_\mathrm{C}(t)= i_\mathrm{L}(t) - I_2 = \overline{i}_\mathrm{L} + \frac{\Delta i_\mathrm{L}}{2} -\frac{\Delta i_\mathrm{L}}{T_\mathrm{off}}(t-T_\mathrm{on})- I_2, \quad t \in [DT_\mathrm{s},T_\mathrm{s}]
 	\end{equation}
-	representing a linear decrease of the inductor current from its maximum value to its minimum value. Inserting $i_\mathrm{C}(t)=I_\mathrm{2}-i_\mathrm{L}(t)$ into the integral gives
+	representing a linear decrease of the inductor current from its maximum value to its minimum value. Inserting $i_\mathrm{C}(t)=i_\mathrm{L}(t) - I_\mathrm{2}$ into the integral gives
 	\begin{equation}
 		\begin{aligned}
 			\frac{1}{T_\mathrm{s}}\int_{DT_\mathrm{s}}^{T_\mathrm{s}}i_\mathrm{C}^2(t)\,\mathrm{d}t
 			 & =\frac{1}{T_\mathrm{s}}\int_{0}^{T_\mathrm{off}}
-			\left(I_\mathrm{2}-\overline{i}_\mathrm{L}-\frac{\Delta i_\mathrm{L}}{2}
-			+\frac{\Delta i_\mathrm{L}}{T_\mathrm{off}}t\right)^2\mathrm{d}t  \\
+			\left(\overline{i}_\mathrm{L} + \frac{\Delta i_\mathrm{L}}{2} -\frac{\Delta i_\mathrm{L}}{T_\mathrm{off}}t- I_2\right)^2\mathrm{d}t \\
 			 & =(1-D)\left[\left(\overline{i}_\mathrm{L}-I_\mathrm{2}\right)^2
 				         +\frac{(\Delta i_\mathrm{L})^2}{12}\right].
 		\end{aligned}
@@ -389,7 +388,7 @@ Next, the impact of power losses on the above's converter behavior is investigat
 		Q_2 = \frac{1}{2} T_{21} \hat{i}_{\mathrm{rr}} = \frac{\SI{13.3}{\nano\second}}{2} \cdot \SI{4}{\ampere} = \SI{26.6}{\nano\coulomb}.
 	\end{equation}
 
-	Reverse breakdown voltage is determined form the ECD (\autoref{fig:DiodeSwitchOff}) shortly after $t_1$ with the second Kirchhoff's law:
+	Reverse breakdown voltage is determined from the ECD (\autoref{fig:DiodeSwitchOff}) shortly after $t_1$ with the second Kirchhoff's law:
 	\begin{equation}
 		U_{\mathrm{RB}} = U_2 + L_{\mathrm{c}} \frac{\mathrm{d}i_{\mathrm{rr}}(t)}{\mathrm{d}t} = U_2 + L_{\mathrm{c}} \gamma = \SI{60}{\volt} + \SI{500}{\nano\henry} \frac{\SI{4}{\ampere}}{\SI{13.3}{\nano\second}} = \SI{210.4}{\volt}.
 		\label{eq:reverseBreakdownVoltage}
@@ -670,7 +669,7 @@ regardless of the current. All other components are considered ideal and loss-fr
 		\label{eq:ploss2}
 	\end{equation}
 	Considering the optimal efficiency the $D_1=1$ and $D_2=f(U_\mathrm{1})$ for $\SI{320}{\volt} \leq U_\mathrm{1} \leq \SI{400}{\volt}$
-	(boost mode) and $D_2=0$ and $D_1=f(U_\mathrm{1})$ for $\SI{400}{\volt} \le U_\mathrm{2} \leq \SI{720}{\volt}$ (buck mode). \\
+	(boost mode) and $D_2=0$ and $D_1=f(U_\mathrm{1})$ for $\SI{400}{\volt} \le U_\mathrm{1} \leq \SI{720}{\volt}$ (buck mode). \\
 	For $\SI{320}{\volt} \leq U_\mathrm{1} \leq \SI{400}{\volt}$ (boost mode)
 	\begin{equation}
 		\overline{i}_\mathrm{L}=\frac{P_\mathrm{2}}{U_\mathrm{1}}
