@@ -1004,7 +1004,7 @@
 	\frametitle{B2U uncontrolled rectifier circuit with capacitive output filtering (cont.)}
 	\onslide<1->{The \hl{conduction phase} lasts until $\omega t_1 = \alpha$ which can be determined from \eqref{eq:i2_B2U_cap_filt_conduct}:
 			\begin{equation}
-				\alpha = \arccos\left(-\frac{I_0}{C\omega \hat{u}_1}\right) \quad \mbox{assuming} \quad I_0 \leq C \omega \hat{u}_1.
+				\alpha = \arccos\left(-\frac{I_0}{C\omega \hat{u}_1}\right) \quad \mbox{assuming} \quad 0 < I_0 < C \omega \hat{u}_1.
 				\label{eq:omega_t1_B2U_cap_filt}
 			\end{equation}}
 	\onslide<2->{For $\alpha < \omega t < \omega t_2$ the capacitor discharges via the load:}
@@ -1202,7 +1202,7 @@
 		\onslide<1->{\overline{i}'_2 = \frac{\overline{i}_2}{\frac{2}{\pi}\frac{\hat{u}_1}{\omega L}}} \onslide<2->{= \frac{1}{2} \left(\frac{\hat{u}_1}{U_2}(1-\cos(\beta))-\frac{U_2}{\hat{u}_1}\frac{\beta^2}{2}\right).}
 		\label{eq:i2_avg_norm_B2U_cap_filt_grid_DCM}
 	\end{equation}
-	\onslide<1->{Here, the denominator $\nicefrac{2}{\pi}\cdot\nicefrac{\hat{u}_1}{\omega L}$ is the absolute average value of the inductor current in case of a grid short circuit.\\[1em]}
+	\onslide<1->{Here, the denominator $\nicefrac{2}{\pi}\cdot\nicefrac{\hat{u}_1}{\omega L}$ is the average absolute value of the inductor current in case of a grid short circuit.\\[1em]}
 
 	\onslide<3->{Based on the correlations found, the operating characteristics in DCM of the rectifier can be visualized, which has been implemented in \figref{fig:B2U_load_curve} (left part):}
 	\begin{itemize}
@@ -2012,7 +2012,7 @@
 			\draw[->, dashed] (voltin) -- (ctrl2 -| voltin) -- (ctrl2) node[right, below, anchor = north east] {$u'(t)$};
 			\draw[->, dashed] (currout) -- (ctrl.east -| currout) -- (ctrl.east) node[left, above, anchor = south west] {$u_2(t)$};
 		\end{circuitikz}%
-		\caption{Power factor correction (PFC) PFC rectifier: diode bridge and cascaded DC/DC converter with quasi-steady-state, lossless transfer ratios $m(t)$}%
+		\caption{Power factor correction (PFC) rectifier: diode bridge and cascaded DC/DC converter with quasi-steady-state, lossless transfer ratios $m(t)$}%
 		\label{fig:PFC_general_circuit_structure}%
 	\end{figure}
 \end{frame}
@@ -2409,7 +2409,7 @@
 				\legend{$i_1(t)$, $\overline{i}_1(t)$}
 
 				% bottom plot: ripple current
-				\nextgroupplot[ylabel = {$\Delta i_1(t)$}, ytick = {-1, -0.5, 0, 0.5, 1}, yticklabels = {}, ymin = -0.6, ymax =0.6, xlabel={$\omega t$}]
+				\nextgroupplot[ylabel = {$i_1(t)-\overline{i}_1(t)$}, ytick = {-1, -0.5, 0, 0.5, 1}, yticklabels = {}, ymin = -0.6, ymax =0.6, xlabel={$\omega t$}]
 				\addplot[signaldelta, thick, dashed] table[x=wt, y=i1delta, col sep=comma] {PWM_PFC_example.csv};
 				\addplot[domain=0:pi, samples=100, signaldelta, thick]{0.9*sin(deg(x))*(1-sin(deg(x))/1.3)};
 				\addplot[domain=0:pi, samples=100, signaldelta, thick]{-0.9*sin(deg(x))*(1-sin(deg(x))/1.3)};
@@ -2478,7 +2478,7 @@
 			\draw[->, dashed](currout) -- (DCDC.port3 -|currout) -- ++(3.5,0) coordinate (Z) -- node[left, above, anchor = south west] {$u_2$} (add1.north -| Z) node[adder, anchor = north, solid, name=add2]{} node[left, above, anchor = south east] {$-$};
 			\draw[<-, dashed] (add2.east) -- node[midway, above] {$u_2^*$} ++(1,0);
 			\draw node[ctrlblock, fill=white, solid](vctrl1) at ($(add1.east)!.5!(add2.west)$) {$u_2$ ctrl};
-			\draw[->, dashed](add2.west) -- (vctrl1.east) node[midway, above]{$\Delta u_2$};
+			\draw[->, dashed](add2.west) -- (vctrl1.east) node[midway, above]{$e_{u}$};
 			\draw[->, dashed] (vctrl1.west) -- node[midway, above] {$i_\mathrm{C}^*$}(add1.east);
 			\draw let \p1 = (DCDC.south) in node[ctrlblock, solid] (pwm) at (\x1,-3.6) {PWM};
 			\draw[<-, dashed] (pwm.south) -- node[ctrlblock, name=ictrl1, fill=white, solid, anchor=north]{$\overline{i}'$ ctrl} ++(0,-1.2) node[midway, right, anchor = south west ]{$d(t)$};
@@ -2488,7 +2488,7 @@
 			\draw node[lowpass2shape](lp) at ($(ct1.tap)!.5!(add3.center)$) {};
 			\draw[->, dashed] (ct1.tap) -- (lp.north) node[right, midway]{$i'$};
 			\draw[->, dashed](lp.south) -- (add3.north) node[left, above, anchor = south west]{$\overline{i}'$} node[left, above, anchor = south east] {$-$};
-			\draw[->, dashed](add3.east) -- (ictrl1.west) node[midway, above]{$\Delta \overline{i}'$};
+			\draw[->, dashed](add3.east) -- (ictrl1.west) node[midway, above]{$e_{i}$};
 			\draw node[mixer, anchor = center](mult3) at (add1.center -| lp.center){};
 			\draw[->, dashed] (voltin) -- (mult3.center -| voltin) -- (mult3.w) node[right, above, anchor = south east]{$u'$};
 			\draw[->, dashed] (mult3.n) -- (add3.south) node[midway, right, anchor = south west]{$\overline{i}'*$};
@@ -2606,20 +2606,20 @@
 	\frametitle{PFC rectifier with boost converter: capacitor sizing (cont.)}
 	\begin{figure}
 		\begin{tikzpicture}
-			\begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi, 2.5*pi, 3*pi, 3.5*pi, 4*pi}, xticklabels = {0, $\frac{1}{2}\pi$,$\pi$, $\frac{3}{2}\pi$,$2\pi$, ,$3\pi$, ,$4\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, }]
+			\begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=2*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi, 2.5*pi, 3*pi, 3.5*pi, 4*pi}, xticklabels = {$0$, $\frac{1}{2}\pi$,$\pi$, $\frac{3}{2}\pi$,$2\pi$, ,$3\pi$, ,$4\pi$}, ytick = {-1, 0, 1}, yticklabels = {, $0$, }]
 
 				% Top plot: power
-				\nextgroupplot[ylabel = {$p_1(t)$}, ytick = {-1, -0.5, 0, 0.5, 1}, yticklabels = {$-2\overline{p}_1$, $-\overline{p}_1$, 0, $\overline{p}_1$, $2\overline{p}_1$}]
+				\nextgroupplot[ylabel = {$\overline{p}_1(t)$}, ytick = {-1, -0.5, 0, 0.5, 1}, yticklabels = {$-2\overline{p}_1$, $-\overline{p}_1$, $0$, $\overline{p}_1$, $2\overline{p}_1$}]
 				\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{0.5 - 0.5*cos(deg(2*x))};
 				\addplot[domain=0:2*pi, samples=100, signalalpha, thick, dashed]{0.5};
-				\draw node[signalalpha, anchor = center, fill = white] at (axis cs: 5*pi/4+0.1, -0.5) {$p_1^{(\mathrm{h})}(t)$};
+				\draw node[signalalpha, anchor = center, fill = white] at (axis cs: 5*pi/4+0.1, -0.5) {$p_1^{(2)}(t)$};
 				\addplot[domain=0:2*pi, samples=100, signalalpha, thick, dotted]{- 0.5*cos(deg(2*x))};
 
 				% bottom plot: voltage
-				\nextgroupplot[ylabel = {$u_2(t)$}, ymin = 0, ymax =1.1, xlabel = {$\omega t$}, ytick = {0, 0.25, 0.5, 0.75, 1}, yticklabels = {0, , , $\overline{u}_2$, }]
+				\nextgroupplot[ylabel = {$\overline{u}_2(t)$}, ymin = 0, ymax =1.1, xlabel = {$\omega t$}, ytick = {0, 0.25, 0.5, 0.75, 1}, yticklabels = {$0$, , , $\overline{u}_2$, }]
 				\addplot[domain=0:2*pi, samples=100, signalalpha, thick]{0.75 - 0.2*sin(deg(2*x))};
 				\addplot[domain=0:2*pi, samples=100, signalalpha, thick, dashed]{0.75};
-				\draw [thin, <->]  (axis cs: pi, 0.95) -- (axis cs: pi, 0.55) node[below,fill=white, anchor = north,inner sep = 1pt]{$2\Delta \hat{u}_2$};
+				\draw [thin, <->]  (axis cs: pi, 0.95) -- (axis cs: pi, 0.55) node[below,fill=white, anchor = north,inner sep = 1pt]{$\Delta \hat{u}_2$};
 
 			\end{groupplot}
 		\end{tikzpicture}
