@@ -379,8 +379,8 @@
 	\frametitle{Transformer input filtering}
 	To reduce the input side distortion, a transformer can be used to dampen the harmonics:
 	\begin{itemize}
-		\item Impedance of magnetizing inductance $L_\mathrm{m}$ is zero for DC components, i.e., the (idealized) transformer blocks the DC current from the input (cf. dotted red line for $\overline{i}_2$ below).
-		\item<2-> With higher frequency harmonics, the impedance of $L_\mathrm{m}$ increases, i.e., filtering out the harmonics less effectively.
+		\item The impedance of magnetizing inductance $L_\mathrm{m}$ is zero for DC components, i.e., the (idealized) transformer blocks the DC current from the input (cf. dotted red line for $\overline{i}_2$ below).
+		\item<2-> With higher frequency harmonics, the impedance of $L_\mathrm{m}$ increases, i.e., filtering of the harmonics becomes less effective.
 	\end{itemize}
 	\begin{figure}
 		\begin{circuitikz}[]
@@ -710,7 +710,7 @@
 	\begin{equation}
 		u_\mathrm{s,1}(t) = \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \sin(\omega t) \quad \text{and} \quad u_\mathrm{s,2}(t) = -\frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \sin(\omega t).
 	\end{equation}
-	Here, it should be noted that both $u_\mathrm{s,1}(t)$ and $u_\mathrm{s,2}(t)$ are utilizing only half of the secondary winding turns due to the central tapping.\pause The \hl{output voltage} results in
+	Here, it should be noted that both $u_\mathrm{s,1}(t)$ and $u_\mathrm{s,2}(t)$ are utilizing only half of the secondary winding turns due to the central tapping. \pause The \hl{output voltage} results in
 	\begin{equation}
 		u_2(t) = \frac{1}{2}\frac{N_2}{N_1}\left|u_1(t)\right| = \frac{1}{2}\frac{N_2}{N_1}\hat{u}_1 \left|\sin(\omega t)\right|.
 		\label{eq:u2_M2U}
@@ -1155,7 +1155,7 @@
 	\frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
 	\onslide<1->{In periodic \hl{steady-state DCM} the output current is zero for
 			\begin{equation}
-				i_2(\omega t) = 0, \quad 0 \leq \omega t < \omega t_1.
+				i_2(\omega t) = 0, \quad  \alpha + \beta - \pi \leq \omega t < \alpha.
 			\end{equation}
 			Until then the diode bridge is in blocking mode and disconnects the input from the output.}\onslide<2->{ \hl{At $\omega t_1 = \alpha$ the diodes start conducting} since the input voltage exceeds the output voltage:}
 	\begin{equation}
@@ -1369,13 +1369,16 @@
 	\frametitle{B2U rectifier with capacitive output filtering and grid impedance (cont.)}
 	\onslide<1->{Assuming DCM, the \hl{input current} of the B2U rectifier is
 			\begin{equation}
-				i_1(t) = \begin{cases}
-					i_2(t),  & \alpha \leq \omega t < \alpha+\beta,         \\
-					-i_2(t), & \pi+\alpha \leq \omega t < \pi+\alpha+\beta, \\
-					0,       & \mbox{otherwise}.
+				i_1(t) =
+				\begin{cases}
+					(-1)^k i_2(t), &
+					\alpha + k\pi \leq \omega t
+					< \alpha + \beta + k\pi,           \\
+					0,             & \text{otherwise},
 				\end{cases}
+				\quad k \in \mathbb{Z}.
 			\end{equation}}%
-	\onslide<2->{The minus sign during the second half-cycle results from the conducting diodes D3/D4 reversing the current direction in the inductor -- cf. \figref{fig:B2U_topology_capacitive_filter_grid}.}\onslide<3->{ The input current can be decomposed via the Fourier series into its \hl{fundamental and harmonic components}:
+	\onslide<2->{The alternating sign results from the alternating conduction of the diode pairs $D_1/D_2$ and $D_3/D_4$, reversing the input current direction every half period -- cf. \figref{fig:B2U_topology_capacitive_filter_grid}.}\onslide<3->{ The input current can be decomposed via the Fourier series into its \hl{fundamental and harmonic components}:
 			\begin{equation}
 				i_1(t) = \underbrace{a^{(1)} \cos(\omega t) + b^{(1)} \sin(\omega t)\vphantom{\sum_{k=2}^{\infty}}}_{=i_1^{(1)}(t)} + \underbrace{\sum_{k=2}^{\infty} \left( a^{(k)} \cos(k\omega t) + b^{(k)} \sin(k\omega t) \right)}_{i_1^{(\mathrm{h})}(t)}, \quad k\in \mathbb{N}.
 				\label{eq:input_current_decomposition_B2U}
@@ -1894,6 +1897,63 @@
 \subsection{Power factor correction (PFC)}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Dynamic averaging %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\frametitle{Dynamic averaging over a switching period}
+
+	In contrast to the previously considered stationary DC/DC
+	converter operation, the local average of a switched signal
+	may vary over time. To separate the switching-induced ripple
+	from the slower signal dynamics, we introduce the
+	\hl{dynamic switching-period average}:
+	\begin{equation}
+		\overline{x}(t) :=
+		\langle x(t) \rangle_{T_\mathrm{s}}
+		=
+		\frac{1}{T_\mathrm{s}}
+		\int_{t-T_\mathrm{s}/2}^{t+T_\mathrm{s}/2}
+		x(\tau)\,\mathrm{d}\tau.
+	\end{equation}
+	Here, $\overline{x}(t)$ denotes the short notation
+	used throughout this course.
+
+	\begin{figure}
+		\begin{tikzpicture}
+			\begin{axis}[
+					width=0.85\textwidth,
+					height=0.4\textheight,
+					xlabel={$t/T_\mathrm{s}$},
+					ylabel={$x(t)$},
+					xmin=0, xmax=10,
+					ymin=-1.25, ymax=1.25,
+					xtick={0,2,...,10},
+					ytick={-1,0,1},
+					grid=both,
+					domain=0:10,
+					samples=601,
+					legend columns=2,
+					legend style={
+							at={(axis description cs:0.98,0.98)},
+							anchor=north east,
+							draw=none,
+						},
+				]
+				\addplot[signalalpha, thick]
+				{sin(deg(2*pi*x/10))
+					+0.2*asin(sin(deg(2*pi*x)))/90};
+				\addlegendentry{$x(t)$}
+
+				\addplot[signaldelta, thick]
+				{sin(deg(pi/10))/(pi/10)
+					*sin(deg(2*pi*x/10))};
+				\addlegendentry{$\overline{x}(t)$}
+			\end{axis}
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% General PFC circuit structure %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
@@ -1915,9 +1975,9 @@
 				to [short] (A);
 
 			% DC/DC converter
-			\draw node[fourport, circuitikz/quadpoles/fourport/width=2.25, circuitikz/quadpoles/fourport/height=2.8, t=${\begin{aligned}
-							\frac{u_2}{u'} & = m(d(t))      \\
-							\frac{i_2}{i'} & = m(d(t))^{-1}
+			\draw node[fourport, circuitikz/quadpoles/fourport/width=2.4, circuitikz/quadpoles/fourport/height=2.8, t=${\begin{aligned}
+							\frac{\overline{u}_2(t)}{u'(t)}            & \approx m(d(t))      \\
+							\frac{\overline{i}_2(t)}{\overline{i}'(t)} & \approx m(d(t))^{-1}
 						\end{aligned}}$] (DCDC) at (7.75,-1) {DC/DC};
 			\draw (C) to [short] ++(1.5,0) coordinate (G)
 				to [short] (DCDC.port4 -| G)
@@ -1952,34 +2012,31 @@
 			\draw[->, dashed] (voltin) -- (ctrl2 -| voltin) -- (ctrl2) node[right, below, anchor = north east] {$u'(t)$};
 			\draw[->, dashed] (currout) -- (ctrl.east -| currout) -- (ctrl.east) node[left, above, anchor = south west] {$u_2(t)$};
 		\end{circuitikz}%
-		\caption{Rectifier with power factor correction (PFC) realized as a combination of a single-phase diode bridge and a cascaded DC/DC converter with voltage / current transfer ratio $m(t)$}%
+		\caption{Power factor correction (PFC) PFC rectifier: diode bridge and cascaded DC/DC converter with quasi-steady-state, lossless transfer ratios $m(t)$}%
 		\label{fig:PFC_general_circuit_structure}%
 	\end{figure}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Idealized PFC signals in the time domain (steady state) %%
+%% Idealized PFC rectifier signals in the time domain (steady state) %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{Idealized PFC rectifier signals in the time domain (steady state)}
 	\begin{figure}
 		\begin{tikzpicture}
-			\begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.375\textheight, width=0.875\textwidth, xmin=0, xmax=4*pi, grid,clip = false, ymin = -1.1, ymax =1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi, 2.5*pi, 3*pi, 3.5*pi, 4*pi}, xticklabels = {0, ,$\pi$, ,$2\pi$, ,$3\pi$, ,$4\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, }]
-
-				% Top plot: input voltage and current 
-				\nextgroupplot[ylabel = {$u_\mathrm{1}(t)/i_\mathrm{1}(t)$}]
+			\begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.35\textheight, width=0.875\textwidth, xmin=0, xmax=4*pi, grid,clip = false, ymin = -1.1, ymax=1.1, xtick = {0, pi/2, pi, 3/2*pi, 2*pi, 2.5*pi, 3*pi, 3.5*pi, 4*pi}, xticklabels = {$0$, ,$\pi$, ,$2\pi$, ,$3\pi$, ,$4\pi$}, ytick = {-1, 0, 1}, yticklabels = {, $0$, }]
+				% Top plot: input voltage and averaged current
+				\nextgroupplot[ylabel = {$u_1(t)/\overline{i}_1(t)$}]
 				\addplot[domain=0:4*pi, samples=100, signalalpha, thick]{sin(deg(x))};
 				\addplot[domain=0:4*pi, samples=100, signaldelta, thick]{0.8*sin(deg(x))};
-				\legend{$u_\mathrm{1}(t)$, $i_\mathrm{1}(t)$}
-
-				% middle plot: rectified voltage and current (before DCDC) 
-				\nextgroupplot[ylabel = {$u'(t)/i'(t)$}]
+				\legend{$u_1(t)$, $\overline{i}_1(t)$}
+				% Middle plot: rectified voltage and averaged current
+				\nextgroupplot[ylabel = {$u'(t)/\overline{i}'(t)$}]
 				\addplot[domain=0:4*pi, samples=100, signalalpha, thick]{abs(sin(deg(x)))};
 				\addplot[domain=0:4*pi, samples=100, signaldelta, thick]{abs(0.8*sin(deg(x)))};
-				\legend{$u'(t)$, $i'(t)$}
-
-				% Bottom plot: voltage transfer ratio
-				\nextgroupplot[ylabel = {$m(t)$}, ytick = {0, 0.25, 1}, yticklabels = {0, $M$, }, xlabel={$\omega t$}, clip = true, ymin = 0]
+				\legend{$u'(t)$, $\overline{i}'(t)$}
+				% Bottom plot: required voltage transfer ratio (clipped for display)
+				\nextgroupplot[ylabel = {$m(t)$}, ytick = {0, 0.25, 1}, yticklabels = {$0$, $M$, }, xlabel={$\omega t$}, clip = true, ymin = 0]
 				\addplot[domain=0:4*pi, samples=100, signalalpha, thick]{0.25/max(abs(sin(deg(x))), 0.1)};
 			\end{groupplot}
 		\end{tikzpicture}
@@ -1991,23 +2048,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{Operation concept and assumptions for the PFC rectifier}
-	\hl{Main idea}: utilize a DC/DC converter to control the input current $i_1(t)$ such that it follows the input voltage $u_1(t)$ in phase:
+	\hl{Main idea}: control the local average of the input current such that it follows the input voltage in phase:
 	\begin{equation}
-		i_1(t) = \hat{i}_1 \sin(\omega t) \sim  \hat{u}_1 \sin(\omega t) = u_1(t).
+		\overline{i}_1(t) \approx \overline{i}_1^*(t)=\hat{i}_1\sin(\omega t)
+		\quad \sim \quad \hat{u}_1\sin(\omega t)=u_1(t).
 		\label{eq:PFC_current_voltage_proportionality}
 	\end{equation}\pause
 	\hl{Assumptions} for the following PFC rectifier analysis:
 	\begin{itemize}
-		\item The input voltage $u_1(t)$ is an ideal sinusoidal signal with amplitude $\hat{u}_1$ and frequency $\omega$.\pause
-		\item The output voltage is considered constant: $u_2(t)\approx U_2$.\pause
-		\item The grid impedance is neglected for the sake of simplicity.
-		      \begin{itemize}
-			      \item The grid impedance as in \figref{fig:B2U_topology_capacitive_filter_grid} would (mainly) introduce a phase shift between $|u_1(t)|$ and $u'(t)$ which can be compensated by the control setup.
-		      \end{itemize}
+		\item The input voltage $u_1(t)$ is sinusoidal with amplitude $\hat{u}_1$ and angular frequency $\omega$.\pause
+		\item The output voltage is approximately constant: $\overline{u}_2(t)\approx U_2$.\pause
+		\item Neglect grid impedance: $u'(t)=|u_1(t)|$ (otherwise its voltage drop must be considered in the control).
+		\item $T_\mathrm{s}\ll 2\pi/\omega$, such that $\overline{u}_1(t)\approx u_1(t)$ and $\overline{u}'(t)\approx u'(t)$.
 	\end{itemize}\pause
-	Based on these assumptions and the objective \eqref{eq:PFC_current_voltage_proportionality}, the voltages and currents in front of the DC/DC converter must be proportional to each other (to achieve unity power factor):
+	With ideal current tracking, the average currents are proportional to the respective voltages (unity power factor in the averaged model):
 	\begin{equation}
-		\frac{u_1(t)}{i_1(t)} = \frac{u'(t)}{i'(t)}.
+		\overline{i}_1(t)\approx g\,u_1(t),\qquad \overline{i}'(t)\approx g\,u'(t),\qquad g=\frac{\hat{i}_1}{\hat{u}_1}.
 	\end{equation}
 \end{frame}
 
@@ -2016,25 +2072,22 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{Voltage transfer ratio}
-	Considering an ideal DC/DC converter with a \hl{voltage transfer ratio} $m(t)$, the converter must provide the required conversion ratio from the rectified sinusoidal input $u'(t)$  to the (approximately) constant output  $U_2$:
+	For an ideal DC/DC converter with quasi-steady-state \hl{voltage transfer ratio} $m(t)$ and $\overline{u}_2(t)\approx U_2$, the required conversion ratio satisfies:
 	\begin{equation}
-		u'(t) = \frac{U_2}{m(t)} \quad \Leftrightarrow \quad \hat{u}_1|\sin(\omega t)| = \frac{U_2}{m(t)}.
+		\overline{u}'(t) \approx \frac{U_2}{m(t)} \quad \Rightarrow \quad \hat{u}_1|\sin(\omega t)| \approx \frac{U_2}{m(t)}.
 	\end{equation}\pause
-	Hence, the voltage transfer ratio $m(t)$ is given by
+	Hence, the required voltage transfer ratio (away from the zero crossings) is
 	\begin{equation}
-		m(t) = \frac{U_2}{u'(t)}=\frac{U_2}{\hat{u}_1|\sin(\omega t)|}
+		m(t)\approx \frac{U_2}{\overline{u}'(t)}\approx \frac{U_2}{\hat{u}_1|\sin(\omega t)|}.
 	\end{equation}\pause
-	which varies between
+	For the quasi-steady-state approximation, this yields
 	\begin{equation}
 		\begin{alignedat}{2}
-			\max_{u'}\{m(t)\} & = \infty, \quad                  &  & \argmax_{u'}\{m(t)\} = 0,         \\
-			\min_{u'}\{m(t)\} & = \frac{U_2}{\hat{u}_1}=M, \quad &  & \argmin_{u'}\{m(t)\} = \hat{u}_1.
+			\lim_{u'\to0^+}m(t) & =\infty,\qquad                  &  & \text{at the grid voltage zero crossings}, \\
+			\min_{u'}\{m(t)\}   & =\frac{U_2}{\hat{u}_1}=M,\qquad &  & \text{at }u'(t)=\hat{u}_1.
 		\end{alignedat}
 	\end{equation}\pause
-	One can conclude that the DC/DC converter must be able to deliver a voltage transfer ratio of
-	$$
-		m(t)\in[M,\ldots,\infty].
-	$$
+	The required idealized range is $m(t)\in[M,\infty)$ while the actual gain is limited.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2045,15 +2098,15 @@
 	The above voltage transfer ratio range restricts the possible topologies accordingly, e.g.:
 	\begin{itemize}
 		\item Standard boost converter: $m(t)=\nicefrac{1}{(1-d(t))}$,
-		\item Buck-boost converter or SEPIC: $m(t)=\nicefrac{d(t)}{(1-d(t))}$.
+		\item Non-inverting buck-boost converter or SEPIC: $m(t)=\nicefrac{d(t)}{(1-d(t))}$.
 	\end{itemize}\pause
-	Due to its simplicity and low component count, the \hl{boost converter is the most common choice for PFC} applications leading to the reference duty cycle (assuming CCM operation):
+	Due to its simplicity and low component count, the \hl{boost converter is the most common choice for PFC} applications, leading to the quasi-steady-state duty cycle (assuming CCM operation):
 	\begin{equation}
-		d(t) = \frac{U_2-\hat{u}_1|\sin(\omega t)|}{U_2} = 1 - \frac{1}{M}|\sin(\omega t)|.
+		d(t)\approx 1-\frac{\overline{u}'(t)}{U_2}\approx 1-\frac{1}{M}|\sin(\omega t)|.
 		\label{eq:PFC_duty_cycle_feed_forward}
 	\end{equation}\pause
 	\begin{varblock}{Remark on nomenclature and steady state}
-		In contrast to the previous DC/DC converter section, the duty cycle $d(t)$ is a function of time and not a constant (small $d$ instead of capital $D$) now. However, the voltage transfer to duty cycle ratio was derived in steady state, i.e., \eqref{eq:PFC_duty_cycle_feed_forward} only holds approximately for $f_\mathrm{s}>> f=\nicefrac{\omega}{2\pi}$ (so-called \hl{quasi steady state}).
+		In contrast to the previous DC/DC converter section, the duty cycle $d(t)$ varies with time (small $d$ instead of capital $D$). The transfer ratio is a \hl{quasi-steady-state} approximation: $f_\mathrm{s}\gg f=\nicefrac{\omega}{2\pi}$, with the low-frequency change of the stored energy neglected for now.
 	\end{varblock}
 \end{frame}
 
@@ -2130,23 +2183,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{PFC rectifier with boost converter (cont.)}
-	\onslide<1->{The duty cycle from \eqref{eq:PFC_duty_cycle_feed_forward} does not consider the \hl{inner voltage demand} of the boost converter, in particular of its filter inductor $L$\footnote{We consider only the averaged voltage demand of the fundamental current, i.e., neglect the switching ripple.}:}
+	\onslide<1->{The duty cycle from \eqref{eq:PFC_duty_cycle_feed_forward} does not consider the \hl{inner voltage demand} of the boost converter, in particular of its filter inductor $L$. For ideal current tracking (away from zero crossings) the voltage across the inductor is:}
 	\begin{equation}
 		\begin{split}
-			\onslide<1->{u_\mathrm{L}(t) & = L \frac{\mathrm{d}}{\mathrm{d}t}i'(t)}\onslide<2->{ = L \frac{\mathrm{d}}{\mathrm{d}t} \left(\hat{i}_1 |\sin(\omega t)|\right)} \\
-			 & \onslide<3->{= \hat{i}_1\omega L\cos(\omega t) \mathrm{sgn}(\sin(\omega t)).}
+			\onslide<1->{\overline{u}_\mathrm{L}(t)&=L\frac{\mathrm{d}\overline{i}'(t)}{\mathrm{d}t}}\onslide<2->{\approx L\frac{\mathrm{d}}{\mathrm{d}t}\left(\hat{i}_1|\sin(\omega t)|\right)} \\
+			 & \onslide<3->{=\hat{i}_1\omega L\cos(\omega t)\mathrm{sgn}(\sin(\omega t)).}
 		\end{split}
 	\end{equation}
-	\onslide<4->{Within one switching period of the boost converter the voltage balance must hold:}
+	\onslide<4->{The switching-period averaged voltage balance in CCM is approximately:}
 	\begin{equation}
 		\begin{split}
-			\onslide<4->{u'(t)                                            & = u_\mathrm{L}(t)+ U_2(1-d(t))} \\
-			\onslide<5->{\Leftrightarrow \quad \hat{u}_1 |\sin(\omega t)| & = \hat{i}_1\omega L \cos(\omega t) \mathrm{sgn}(\sin(\omega t)) + M\hat{u}_1 (1-d(t)).}
+			\onslide<4->{\overline{u}'(t)&\approx\overline{u}_\mathrm{L}(t)+(1-d(t))\overline{u}_2(t)} \\
+			\onslide<5->{\Rightarrow\quad\hat{u}_1|\sin(\omega t)|&\approx\hat{i}_1\omega L\cos(\omega t)\mathrm{sgn}(\sin(\omega t))+M\hat{u}_1(1-d(t)).}
 		\end{split}
 	\end{equation}
-	\onslide<6->{Rearranging towards the duty cycle $d(t)$ yields
+	\onslide<6->{Solving for the required duty cycle $d^*(t)$ yields
 			\begin{equation}
-				d(t) = 1 - \frac{1}{M}|\sin(\omega t)| + \frac{\hat{i}_1\omega L}{M\hat{u}_1} \cos(\omega t) \mathrm{sgn}(\sin(\omega t)).
+				d^*(t)\approx 1-\frac{1}{M}|\sin(\omega t)|+\frac{\hat{i}_1\omega L}{M\hat{u}_1}\cos(\omega t)\mathrm{sgn}(\sin(\omega t)).
 				\label{eq:PFC_duty_cycle_feed_forward_with_inductor}
 			\end{equation}}
 \end{frame}
@@ -2156,15 +2209,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{PFC rectifier with boost converter (cont.)}
-	Evaluating \eqref{eq:PFC_duty_cycle_feed_forward_with_inductor} for $\omega t = \varepsilon$ with $\varepsilon\in\mathbb{R}>0$ being an infinitesimally small value, one obtains
-	$$
-		d(\varepsilon/\omega) = 1 -\frac{1}{M}\sin(\varepsilon) + \frac{\hat{i}_1\omega L}{M\hat{u}_1} \cos(\varepsilon)\mathrm{sgn}(\sin(\varepsilon)) \approx 1 +  \frac{\hat{i}_1\omega L}{M\hat{u}_1} > 1.
-	$$\pause
-	Hence, the additional voltage demand of the boost converter inductor $L$ leads to a \hl{duty cycle exceeding unity}, that is, exceeding the feasible range and, therefore, the boost converter is not able to deliver the required voltage transfer ratio $m(t)$:
+	Evaluating \eqref{eq:PFC_duty_cycle_feed_forward_with_inductor} for $\omega t=\varepsilon$ with a small positive $\varepsilon$, one obtains
+	\begin{equation*}
+		\begin{aligned}
+			d^*(\varepsilon/\omega) & \approx 1-\frac{1}{M}\sin(\varepsilon)+\frac{\hat{i}_1\omega L}{M\hat{u}_1}\cos(\varepsilon) \\
+			                        & \xrightarrow{\varepsilon\to0}1+\frac{\hat{i}_1\omega L}{M\hat{u}_1}>1.
+		\end{aligned}
+	\end{equation*}\pause
+	Hence, the required duty cycle exceeds unity, i.e., the feasible range. The realized duty cycle is $d(t)=\min\{1,\max\{0,d^*(t)\}\}$.
 	\begin{itemize}
-		\item The boost converter is not able to exactly track the input current reference $i_1(t)=\hat{i}_1\sin(\omega t)$ (especially at the beginning and end of a half period).\pause
-		\item The lower $L$ the less the negative impact of the inductor voltage demand.\pause
-		\item Consequently, one wants to keep the inductance $L$ as low as possible which on the other hand requires a \hl{high switching frequency} $f_\mathrm{s}$ to keep the current ripple within acceptable bounds.
+		\item The boost converter cannot exactly track the average input current reference $\overline{i}_1^*(t)=\hat{i}_1\sin(\omega t)$ (especially close to the zero crossings).\pause
+		\item The lower $L$, the smaller the negative impact of the inductor voltage demand.\pause
+		\item Consequently, keeping $L$ small requires a \hl{high switching frequency} $f_\mathrm{s}$ to keep the current ripple within acceptable bounds.
 	\end{itemize}
 \end{frame}
 
@@ -2176,11 +2232,11 @@
 	As seen on the previous slides, the duty cycle $d(t)$ is a function of time. To generate a switching signal $s(t)$ for the boost converter, a \hl{pulse width modulation (PWM)} scheme is used:
 	\begin{equation}
 		s(t) = \begin{cases}
-			1 \quad (\mbox{transistor $T$ on}),  & \text{if } d(t) > c(t), \\
-			0 \quad (\mbox{transistor $T$ off}), & \text{otherwise}
+			1 \quad (\mbox{transistor $T$ on}),  & \text{if } d(t)>c(t), \\
+			0 \quad (\mbox{transistor $T$ off}), & \text{otherwise}.
 		\end{cases}
 	\end{equation}
-	with a (high frequency) \hl{carrier signal} $c(t)\in[0,1]$, e.g., a triangular or sawtooth signal.
+	With the high-frequency \hl{carrier signal} $c(t)\in[0,1]$ (triangular or sawtooth) and slowly varying $d(t)\in[0,1]$, the average switching signal is $\overline{s}(t)\approx d(t)$.
 	\begin{figure}
 		\begin{circuitikz}
 			\def\cwidth{1.5}
@@ -2188,35 +2244,23 @@
 			\draw[->] (0,0) to node[above]{$d(t)$} ++(2,0) node[adder, anchor = west, name=add1]{};
 			\draw node[ctrlblock, anchor = west, minimum width = \cwidth cm, minimum height = \cheight cm](carrier) at (0,-2) {};
 			\path (carrier.south west) coordinate (blockBottomLeft);
-
 			% Triangular signal pattern within block
 			\begin{scope}
-				% Define the number of signal steps
 				\def\signalsteps{6}
-
-				% Compute step width and height of the triangular pattern
 				\pgfmathsetmacro{\stepwidth}{\cwidth/\signalsteps}
 				\pgfmathsetmacro{\signalheight}{\cheight/(1.3)}
-
-				% Start drawing the triangular signal
 				\draw[signalalpha, thick]
-				($(blockBottomLeft) + (0.025, 0.1*\cheight)$) % Starting point with a margin
+				($(blockBottomLeft) + (0.025, 0.1*\cheight)$)
 				\foreach \x in {1,...,\signalsteps} {
-						-- ($
-							(blockBottomLeft) +
-							(\x*\stepwidth - 0*\stepwidth, {0.1*\cheight + mod(\x, 2)*\signalheight})
-						$)
+						-- ($(blockBottomLeft) + (\x*\stepwidth, {0.1*\cheight + mod(\x, 2)*\signalheight})$)
 					};
 			\end{scope}
 			\draw[->] (carrier.east) -- (carrier.east -| add1.south) -- node[left]{$c(t)$} (add1.south) node[anchor = north west] {$-$};
 			\draw[->] (add1.east) -- ++(1,0) node[ctrlblock, anchor = west, minimum width = \cwidth cm, minimum height = \cheight cm](comp){};
-
-			% Comperator block 
-			\begin{axis}[at={(comp)}, scale only axis, width = 0.8*\cwidth cm, height = 0.8*\cheight cm, anchor = center, xtick=\empty, ytick={0,1}, axis lines=middle,  enlargelimits=upper, ymax=1.25, font = \footnotesize]
+			% Comparator block
+			\begin{axis}[at={(comp)}, scale only axis, width = 0.8*\cwidth cm, height = 0.8*\cheight cm, anchor = center, xtick=\empty, ytick={0,1}, axis lines=middle, enlargelimits=upper, ymax=1.25, font = \footnotesize]
 				\addplot[thick, signalalpha] coordinates {(-1,0) (0,0) (0,1) (1,1)};
 			\end{axis}
-
-			% Transistor
 			\draw[->, dashed] (comp.east) -- node[above]{$s(t)$} ++(1.5,0)node[npn, anchor = B, solid](npn1) {};
 			\draw let \p1 = (npn1.B) in node[anchor=west] at (\x1,\y1) {\hspace{1cm}$T$};
 		\end{circuitikz}
@@ -2288,10 +2332,10 @@
 			\begin{groupplot}[group style={group size=1 by 3, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.375\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
 
 				% Top plot: duty cycle and carrier signal
-				\nextgroupplot[ylabel = {$d(t), c(t)$}, legend pos=south east, legend columns=2]
+				\nextgroupplot[ylabel = {$d^*(t), c(t)$}, legend pos=south east, legend columns=2]
 				\addplot[signaldelta, thick] table[x=wt, y=d, col sep=comma] {PWM_PFC_example.csv};
 				\addplot[signalalpha, thick] table[x=wt, y=c, col sep=comma] {PWM_PFC_example.csv};
-				\legend{$d(t)$, $c(t)$}
+				\legend{$d^*(t)$, $c(t)$}
 
 				% middle plot: switching signal
 				\nextgroupplot[ylabel = {$s(t)$}]
@@ -2301,7 +2345,7 @@
 				\nextgroupplot[ylabel = {$i_1(t)$}, xlabel={$\omega t$}, ytick = {-1, 0, 0.5, 1}, yticklabels = {}, legend columns=2]
 				\addplot[signaldelta, thick] table[x=wt, y=i1, col sep=comma] {PWM_PFC_example.csv};
 				\addplot[thick, dashed] table[x=wt, y=i1ref, col sep=comma] {PWM_PFC_example.csv};
-				\legend{$i_1(t)$, $i_1^{(1)}(t)$}
+				\legend{$i_1(t)$, $\overline{i}_1(t)$}
 			\end{groupplot}
 		\end{tikzpicture}
 	\end{figure}
@@ -2312,17 +2356,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{PWM-based PFC rectifier current ripple}
-	Due to the switching behavior of the boost converter, the input current $i_1(t)$ exhibits a current ripple. The boost inductor voltage during a switching period is:
+	Due to the switching behavior of the boost converter, the input current $i_1(t)$ exhibits a current ripple. In CCM, the boost inductor voltage is
 	\begin{equation}
-		u_\mathrm{L}(t) = \begin{cases} \hat{u}_1 |\sin(\omega t)|,       & 0 < t \leq d T_\mathrm{s}             \\
-		              \hat{u}_1 |\sin(\omega t)| - U_2, & d T_\mathrm{s} < t \leq T_\mathrm{s}.
+		u_\mathrm{L}(t)=\begin{cases}
+			u'(t),        & s(t)=1, \\
+			u'(t)-u_2(t), & s(t)=0.
 		\end{cases}
 	\end{equation}\pause
-	We assume that $$ T_\mathrm{s} << \nicefrac{2\pi}{\omega}$$ such that the input voltage and duty cycle are approximately constant within one switching period.\pause The \hl{ripple  current envelope} $\Delta i_1(t)$ is then defined as the moving difference between the actual input current $i_1(t)$ and its fundamental component $i^{(1)}_1(t)$:
+	We assume that $T_\mathrm{s}\ll 2\pi/\omega$ so that the voltages and duty cycle are approximately constant within one switching period. With the window $\mathcal{W}(t)=[t-T_\mathrm{s}/2,t+T_\mathrm{s}/2]$, the \hl{local peak-to-peak current ripple} is defined as
 	\begin{equation}
-		\Delta i_1(t) = \pm \max_{\tau\in[t \pm \frac{T_\mathrm{s}}{2}]}|i_1(\tau) - i^{(1)}_1(\tau)|.
+		\Delta i_1(t)= \max_{\tau\in\mathcal{W}(t)}\{i_1(\tau)-\overline{i}_1(\tau)\}
+		-\min_{\tau\in\mathcal{W}(t)}\{i_1(\tau)-\overline{i}_1(\tau)\}.
 	\end{equation}\pause
-	One should note that this ripple definition is different from the one used in the previous DC/DC converter section.
+	For a locally symmetric triangular ripple, the deviations from $\overline{i}_1(t)$ are approximately bounded by $\pm\Delta i_1(t)/2$.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2330,18 +2376,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{PWM-based PFC rectifier current ripple (cont.)}
-	\onslide<1->{Assuming CCM operation and a sufficiently small switching time interval $T_\mathrm{s}$, the ripple current can be approximated by the current rise during the on-time of the boost converter:}
+	\onslide<1->{Away from zero crossings, $\Delta i_1(t)\approx\Delta i'(t)$. In CCM, the local ripple is given by the current rise relative to its mean over the on-interval $\mathcal{I}_\mathrm{on}$ of duration $d(t)T_\mathrm{s}$:}
 	\begin{equation}
 		\begin{split}
-			\onslide<1->{\Delta i_1(t) & =  \pm\frac{1}{2L}\int_{0}^{d T_\mathrm{s}} u_\mathrm{L}(\tau) \mathrm{d}\tau}\onslide<2->{= \pm \frac{1}{2L}\int_{0}^{d T_\mathrm{s}} \hat{u}_1 \sin(\omega t) \mathrm{d}\tau} \\
-			\onslide<3->{              & \approx \pm \frac{\hat{u}_1 \sin(\omega t)}{2L}\int_{0}^{d T_\mathrm{s}} 1 \mathrm{d}\tau}\onslide<4->{ = \pm \frac{\hat{u}_1 \sin(\omega t)}{2L}d T_\mathrm{s}.}
+			\onslide<1->{\Delta i_1(t)&\approx\frac{1}{L}\int_{\mathcal{I}_\mathrm{on}}\left(u_\mathrm{L}(\tau)-\overline{u}_\mathrm{L}(\tau)\right)\,\mathrm{d}\tau} \\
+			\onslide<2->{&\approx\frac{d(t)T_\mathrm{s}}{L}\left(u'(t)-\overline{u}_\mathrm{L}(t)\right).}
 		\end{split}
 	\end{equation}
-	\onslide<5->{Inserting $d(t)$ from \eqref{eq:PFC_duty_cycle_feed_forward_with_inductor} in a quasi steady-state fashion yields
+	\onslide<3->{Using the averaged voltage balance and $\overline{u}_2(t)\approx U_2$ yields
 			\begin{equation}
-				\Delta i_1(t) = \pm \frac{\hat{u}_1 T_\mathrm{s} |\sin(\omega t)|}{2L}\left(1 - \frac{1}{M}|\sin(\omega t)| + \frac{\hat{i}_1\omega L}{M\hat{u}_1} \cos(\omega t) \mathrm{sgn}(\sin(\omega t))\right).
+				\Delta i_1(t)\approx\frac{U_2T_\mathrm{s}}{L}\,d(t)(1-d(t)).
 			\end{equation}}%
-	\onslide<6->{Due to the varying input voltage and duty cycle, the ripple current is not constant but also varies with time (cf. next slide).}
+	\onslide<4->{The ripple varies over the grid period. Insert $d(t)\approx d^*(t)$ from \eqref{eq:PFC_duty_cycle_feed_forward_with_inductor}, or use \eqref{eq:PFC_duty_cycle_feed_forward} if the low-frequency inductor voltage is negligible.}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2352,7 +2398,7 @@
 	\begin{figure}
 		\begin{tikzpicture}
 			\pgfplotsset{table/search path={fig/lec04}}
-			\begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, 0, 1}]
+			\begin{groupplot}[group style={group size=1 by 2, xticklabels at = edge bottom, vertical sep=0.75cm}, height=0.4\textheight, width=0.875\textwidth, xmin=0, xmax=pi, grid,clip = false, ymin = -0.1, ymax =1.1, xtick = {0, pi/4, pi/2, 3*pi/4,pi}, xticklabels = {0,$\frac{1}{4}\pi$, $\frac{1}{2}\pi$,$\frac{3}{4}\pi$, $\pi$}, ytick = {-1, 0, 1}, yticklabels = {, $0$, $1$}]
 
 				% top plot: input current
 				\nextgroupplot[ylabel = {$i_1(t)$}, ytick = {-1, 0, 0.5, 1}, yticklabels = {}, legend columns=2]
@@ -2360,7 +2406,7 @@
 				\addplot[thick, dashed] table[x=wt, y=i1ref, col sep=comma] {PWM_PFC_example.csv};
 				\addplot[domain=0:pi, samples=100, signaldelta, dashed, thick]{0.81*sin(deg(x))+0.9*sin(deg(x))*(1-sin(deg(x))/1.3)};
 				\addplot[domain=0:pi, samples=100, signaldelta, dashed, thick]{0.81*sin(deg(x))-0.9*sin(deg(x))*(1-sin(deg(x))/1.3)};
-				\legend{$i_1(t)$, $i_1^{(1)}(t)$}
+				\legend{$i_1(t)$, $\overline{i}_1(t)$}
 
 				% bottom plot: ripple current
 				\nextgroupplot[ylabel = {$\Delta i_1(t)$}, ytick = {-1, -0.5, 0, 0.5, 1}, yticklabels = {}, ymin = -0.6, ymax =0.6, xlabel={$\omega t$}]
@@ -2370,6 +2416,7 @@
 
 			\end{groupplot}
 		\end{tikzpicture}
+		\caption{Exemplary dynamic average and peak-to-peak current ripple for a PFC rectifier}
 	\end{figure}
 \end{frame}
 
@@ -2434,21 +2481,21 @@
 			\draw[->, dashed](add2.west) -- (vctrl1.east) node[midway, above]{$\Delta u_2$};
 			\draw[->, dashed] (vctrl1.west) -- node[midway, above] {$i_\mathrm{C}^*$}(add1.east);
 			\draw let \p1 = (DCDC.south) in node[ctrlblock, solid] (pwm) at (\x1,-3.6) {PWM};
-			\draw[<-, dashed] (pwm.south) -- node[ctrlblock, name=ictrl1, fill=white, solid, anchor=north]{$i'$ ctrl} ++(0,-1.2) node[midway, right, anchor = south west ]{$d(t)$};
+			\draw[<-, dashed] (pwm.south) -- node[ctrlblock, name=ictrl1, fill=white, solid, anchor=north]{$\overline{i}'$ ctrl} ++(0,-1.2) node[midway, right, anchor = south west ]{$d(t)$};
 			\draw[dashed, ->] (pwm.north) -- (DCDC.south) -- ++(0,0.5) node[midway, right] {$s(t)$} coordinate (ctrl3)
 				to [short] (ctrl3 -| npn.B) -- (npn.B);
 			\draw node[adder](add3) at (ictrl1.center -| ct1.tap){};
 			\draw node[lowpass2shape](lp) at ($(ct1.tap)!.5!(add3.center)$) {};
 			\draw[->, dashed] (ct1.tap) -- (lp.north) node[right, midway]{$i'$};
 			\draw[->, dashed](lp.south) -- (add3.north) node[left, above, anchor = south west]{$\overline{i}'$} node[left, above, anchor = south east] {$-$};
-			\draw[->, dashed](add3.east) -- (ictrl1.west) node[midway, above]{$\Delta i'$};
+			\draw[->, dashed](add3.east) -- (ictrl1.west) node[midway, above]{$\Delta \overline{i}'$};
 			\draw node[mixer, anchor = center](mult3) at (add1.center -| lp.center){};
 			\draw[->, dashed] (voltin) -- (mult3.center -| voltin) -- (mult3.w) node[right, above, anchor = south east]{$u'$};
-			\draw[->, dashed] (mult3.n) -- (add3.south) node[midway, right, anchor = south west]{$i'*$};
+			\draw[->, dashed] (mult3.n) -- (add3.south) node[midway, right, anchor = south west]{$\overline{i}'*$};
 			\draw node[mixer, anchor = center, solid](mult2) at ($(mult3.center)!.33!(add1.center)$) {};
 			\draw node[mixer, anchor = center, solid](mult1) at ($(mult3.center)!.66!(add1.center)$) {};
 			\draw[->, dashed] (add1.west) -- (mult1.east);
-			\draw[->, dashed] (mult1.west) -- (mult2.east) node[above, anchor = south west]{$p_2*$};
+			\draw[->, dashed] (mult1.west) -- (mult2.east) node[above, anchor = south west]{$\overline{p}_2*$};
 			\draw[->, dashed] (mult2.west) -- (mult3.east) node[above, anchor = south west]{$g^*$};
 			\draw[<-, dashed] (mult1.north) -- ++(0,0.75) node[left, midway]{$u_2*$};
 			\draw[<-, dashed] (mult2.north) -- ++(0,0.75) node[left, midway]{$\nicefrac{2}{\hat{u}_1^2}$};
@@ -2459,92 +2506,96 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% PFC rectifier with boost converter: control structure (cont.) %%
+%% PFC rectifier with boost converter: closed-loop control structure (cont.) %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{PFC rectifier with boost converter: closed-loop control structure (cont.)}
 	Reasons for closed-loop control:
 	\begin{itemize}
-		\item Mismatches between the actual system and the plant model behavior result in (steady-state) control errors.\pause
+		\item Mismatches between the actual system and the plant model result in (steady-state) control errors.\pause
 		\item Faster transient response to load changes.\pause
 		\item Robustness against further disturbances (e.g., input voltage variations).
 	\end{itemize}\pause
-	Central idea of the closed-loop control: given some required load power
+	Central idea: the load and the desired change of the capacitor energy determine the slowly varying requested mean power $\overline{p}_2^*(t)$:
 	$$
-		p_2(t) = u_2(t)i_2(t) = u_2(t)\left(I_0 + i_\mathrm{C}(t)\right)
+		\overline{p}_2^*(t)=U_2^*\left(I_0+i_\mathrm{C}^*(t)\right).
 	$$\pause
-	operate the boost converter such that the load power is represented by a \hl{(virtual) conductance} at the input of the boost converter:
+	Represent this power demand by a \hl{(virtual) input conductance}. With ideal current tracking and $g^*(t)$ nearly constant over a grid period,
 	$$
-		g(t) = \frac{p_1(t)}{\hat{u}_1^2} = \frac{p_2(t)}{\hat{u}_1^2} = \frac{U_2\left(I_0 + i_\mathrm{C}(t)\right)}{\hat{u}_1^2}.
+		\overline{p}_1\approx \frac{\hat{u}_1^2}{2}g^*
+		\quad\Rightarrow\quad
+		g^*(t)=\frac{2\overline{p}_2^*(t)}{\hat{u}_1^2}.
 	$$
+	Here, $\overline{p}_2^*(t)$ is a slow power reference, not the instantaneous power $p_2(t)$; the outer loop should not track the inherent power ripple.
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% PFC rectifier with boost converter: control structure (cont.) %%
+%% PFC rectifier with boost converter: closed-loop control structure (cont.) %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{PFC rectifier with boost converter: closed-loop control structure (cont.)}
-	The required conductance $g^*(t)$ is calculated by the outer voltage controller:
+	The required conductance $g^*(t)$ is calculated by the outer voltage controller (acting on the slow voltage error):
 	\begin{itemize}
-		\item If $u_2(t)< U_2^*$: increase $p_2(t)$ by increasing the conductance $g(t)$.\pause
-		\item If $u_2(t)> U_2^*$: decrease $p_2(t)$ by decreasing the conductance $g(t)$.
+		\item If the slow output voltage is below $U_2^*$: increase $\overline{p}_2^*(t)$ by increasing $g^*(t)$.\pause
+		\item If the slow output voltage is above $U_2^*$: decrease $\overline{p}_2^*(t)$ by decreasing $g^*(t)$.
 	\end{itemize}\pause
-	With
+	The required reference for the inner current controller is given by
 	$$
-		\hat{i}'(t) = \hat{u}_1 g(t)
-	$$
-	the required reference input current for the inner current controller can be calculated.\pause
+		\overline{i}'^{\,*}(t)=g^*(t)u'(t),\qquad e_i(t)=\overline{i}'^{\,*}(t)-\overline{i}'(t).
+	$$\pause
 	\begin{figure}
 		\begin{circuitikz}[]
-			\draw (-3,0) to [short, i=$i_1(t)$] ++(1.5,0)
+			\draw (-3,0) to [short, i=$\overline{i}_1(t)$] ++(1.5,0)
 			to [R, l=$g(t)$, name = g] ++(0,-2)
 			to [short] ++(-1.5,0);
 			\draw (-3,0) to [sinusoidal voltage source, v_= $u_1(t)$, voltage = straight] ++(0,-2);
-			\draw (3,0) to [short, i=$i_2(t)$] ++(1.5,0)
+			\draw (3,0) to [short, i=$\overline{i}_2(t)$] ++(1.5,0)
 			to [isource] ++(0,-2)
 			to [short] ++(-1.5,0);
 			\draw (3,0) to [vsource, v_= $U_2$, voltage = straight, name = u2] ++(0,-2);
-			\draw[-{Latex[length=4mm, width=8mm]}, line width=4mm] ($(g)!.33!(u2)$) -- node[above, midway, name = work, yshift=2.5mm] {$\overline{p}_1 = \overline{p}_2$} ($(g)!.66!(u2)$);
+			\draw[-{Latex[length=4mm, width=8mm]}, line width=4mm] ($(g)!.33!(u2)$) -- node[above, midway, name = work, yshift=2.5mm] {$\overline{p}_1=\overline{p}_2$} ($(g)!.66!(u2)$);
 		\end{circuitikz}
-		\caption{Interpretation of the closed-loop control of a PFC rectifier as a variable conductance tuning}
+		\caption{Interpretation of the closed-loop control as virtual conductance tuning}
 	\end{figure}%
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% PFC rectifier with boost converter: component sizing %%
+%% PFC rectifier with boost converter: capacitor sizing %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{PFC rectifier with boost converter: capacitor sizing}
-	Based on the previous assumption $u_2(t)\approx U_2$ the question is raised how the output capacitor $C$ of the boost converter must be sized to keep the output voltage ripple within acceptable bounds justifying the assumption. For a lossless converter, the instantaneous power is\footnote{Assuming a negligible change of the internally stored energy.}:
+	Based on the previous assumption $\overline{u}_2(t)\approx U_2$, the question is how the output capacitor $C$ must be sized to keep the low-frequency voltage ripple within acceptable bounds. For a lossless converter with negligible change of the inductor energy, the switching-period averaged output power is approximately:
 	\begin{equation*}
-		p_2(t) =p_1(t) = u_1(t)i_1(t).
+		\overline{p}_2(t)\approx\overline{p}_1(t)=\langle u_1(t)i_1(t)\rangle_{T_\mathrm{s}}\approx u_1(t)\overline{i}_1(t).
 	\end{equation*}\pause
-	Assuming that the input voltage and  current are both ideally sinusoidal and in phase (i.e., the PFC rectifier operates perfectly), the instantaneous power is:
+	Assuming sinusoidal and in-phase grid voltage and averaged input current (ideal PFC), we obtain
 	\begin{equation}
-		p_2(t) = \hat{u}_1\hat{i}_1\sin(\omega t)\sin(\omega t) = \frac{\hat{u}_1\hat{i}_1}{2}\left(1-\cos(2\omega t)\right).
+		\overline{p}_2(t)\approx\hat{u}_1\hat{i}_1\sin^2(\omega t)=\frac{\hat{u}_1\hat{i}_1}{2}\left(1-\cos(2\omega t)\right).
 	\end{equation}\pause
-	Hence, we can \hl{decompose the instantaneous power into a constant term and a harmonic term with twice the frequency} of the input voltage/current:
+	Hence, we can \hl{decompose the averaged power into a constant term and a harmonic term with twice the grid frequency}:
 	\begin{equation}
-		p_2(t) = \underbrace{\frac{\hat{u}_1\hat{i}_1}{2}}_{\overline{p}_2\vphantom{p_2^{(\mathrm{h})}}} \underbrace{- \frac{\hat{u}_1\hat{i}_1}{2}\cos(2\omega t)}_{p_2^{(\mathrm{h})}(t)}.
+		\overline{p}_2(t)\approx\underbrace{\frac{\hat{u}_1\hat{i}_1}{2}}_{\overline{p}_2\vphantom{p_2^{(2)}}}\underbrace{-\frac{\hat{u}_1\hat{i}_1}{2}\cos(2\omega t)}_{p_2^{(2)}(t)}.
 	\end{equation}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% PFC rectifier with boost converter: component sizing (cont. )%%
+%% PFC rectifier with boost converter: capacitor sizing (cont.) %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 	\frametitle{PFC rectifier with boost converter: capacitor sizing (cont.)}
-	\onslide<1->{The resulting harmonic output current component\footnote{Only considering the low-frequency harmonics originating from the fundamental rectification while neglecting the switching-induced harmonics.} is (approximately)}
+	\onslide<1->{Neglecting switching ripple and higher harmonics, the second-harmonic output current is}
 	\begin{equation}
-		\onslide<1->{i_2^{(\mathrm{h})}(t) \approx \frac{p_2^{(\mathrm{h})}(t)}{\overline{u}_2}}\onslide<2->{ = -\frac{\hat{u}_1\hat{i}_1}{2\overline{u}_2}\cos(2\omega t)}\onslide<3->{ = -\frac{\overline{p}_2}{\overline{u}_2}\cos(2\omega t).}
+		\onslide<1->{i_2^{(2)}(t)\approx\frac{p_2^{(2)}(t)}{U_2}}\onslide<2->{=-\frac{\hat{u}_1\hat{i}_1}{2U_2}\cos(2\omega t)}\onslide<3->{=-\frac{\overline{p}_2}{U_2}\cos(2\omega t).}
 	\end{equation}
-	\onslide<4->{If the load current $I_0$ is (approximately) constant, the \hl{harmonic current is flowing into the filter capacitor} $i_2^{(\mathrm{h})}(t)=i_\mathrm{C}(t)$}\onslide<5->{ leading to the (low-frequency) voltage ripple:
+	\onslide<4->{With constant $I_0$, $\overline{i}_\mathrm{C}(t)\approx i_2^{(2)}(t)$.}\onslide<5->{ In periodic steady state, the resulting voltage component is
 			\begin{equation}
-				\Delta u_2(t) = \frac{1}{C} \int  i_\mathrm{C}(t) \mathrm{d} t = -\underbrace{\frac{\overline{p}_2}{\overline{u}_2} \frac{1}{2\omega C}}_{\Delta \hat{u}_2} \sin(2\omega t).
-			\end{equation}}%
-	\onslide<6->{To limit the output voltage ripple to a certain amplitude value $\Delta \hat{u}_2$, the output capacitor $C$ must exhibit a minimal capacitance value:
+				u_2^{(2)}(t)\approx\frac{1}{C}\int \overline{i}_\mathrm{C}(t)\,\mathrm{d}t
+				=-\underbrace{\frac{\overline{p}_2}{2\omega CU_2}}_{\hat{u}_2^{(2)}}\sin(2\omega t),
+			\end{equation}
+			where $\overline{u}_2(t)\approx U_2+u_2^{(2)}(t)$.}
+	\onslide<6->{For the allowed \hl{peak-to-peak ripple} $\Delta u_2\approx2\hat{u}_2^{(2)}$, the sizing condition is
 			\begin{equation}
-				C > \frac{\overline{p}_2}{\overline{u}_2} \frac{1}{2\omega \Delta \hat{u}_2}.
+				C\geq C_\mathrm{min}=\frac{\overline{p}_2}{\omega U_2\Delta u_2}.
 			\end{equation}}
 \end{frame}
 
@@ -2572,7 +2623,7 @@
 
 			\end{groupplot}
 		\end{tikzpicture}
-		\caption{Power and voltage oscillations in the PFC rectifier in quasi steady-state operation}
+		\caption{Power and voltage oscillations in the PFC rectifier in quasi steady-state operation (switching ripple neglected)}
 		\label{fig:PFC_rectifier_power_voltage_oscillations}
 	\end{figure}
 \end{frame}
@@ -2859,7 +2910,7 @@
 	\end{equation}
 	\onslide<6->{One can also reinterpret this result for designing the filter inductor $L$ to ensure CCM operation:
 			\begin{equation}
-				L \geq \frac{\overline{u}_2}{\omega \overline{i}_2}\left[\cot(\omega t_1) + \omega t_1 - \frac{\pi}{2}\right].
+				L > \frac{\overline{u}_2}{\omega \overline{i}_2}\left[\cot(\omega t_1) + \omega t_1 - \frac{\pi}{2}\right].
 			\end{equation}}
 \end{frame}
 
@@ -3308,7 +3359,7 @@
 	\begin{itemize}
 		\item All considered rectifiers operate exclusively unidirectional.\pause
 		\item There is a complex interaction between semiconductor effort and filter effort to provide a DC voltage with a certain signal quality.\pause
-		\item Without active PFC, most diode-based rectifier will introduce significant distortions at the primary side due to harmonics and phase shifts between input voltage and current.\pause
+		\item Without active PFC, many diode-based rectifiers introduce significant distortions at the primary side due to harmonics and/or phase shifts between input voltage and current.\pause
 		\item Active PFC can be used to provide a near-unity power factor, which is required in many applications due to industrial / legal regulations.\pause
 	\end{itemize}
 	In addition, there are further topologies that are not covered in this course, such as
