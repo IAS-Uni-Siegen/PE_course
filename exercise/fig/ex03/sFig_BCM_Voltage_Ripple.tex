@@ -1,0 +1,174 @@
+\begin{solutionfigure}[htbp]
+	\centering
+	\begin{tikzpicture}[font=\small, color=black]
+		% Normalization: t/T_s and i/I_2.
+		% Voltage offset: u_{C,min}.
+		% Voltage scaling: I_2 T_s/C_2.
+		\pgfmathsetmacro{\plotD}{0.4}
+		\pgfmathsetmacro{\plotPeak}{2/(1-\plotD)}
+		\pgfmathsetmacro{\plotTmax}{1-(1-\plotD)^2/2}
+		\pgfmathsetmacro{\plotUmax}{(1+\plotD)^2/4}
+
+		\begin{groupplot}[
+				group style={
+						group size=1 by 3,
+						vertical sep=6mm,
+						xticklabels at=edge bottom
+					},
+				width=0.76\linewidth,
+				height=2.5cm,
+				scale only axis,
+				xmin=0, xmax=1.0,
+				xtick={0,\plotD,\plotTmax,1},
+				xticklabels={
+						$0$,$D$,$t_\mathrm{max}/T_\mathrm{s}$,$1$
+					},
+				grid=major,
+				xmajorgrids=false,
+				clip=false,
+				axis line style={black},
+				tick style={black},
+				tick label style={black},
+				label style={black}
+			]
+
+			% ---------------------------------------------
+			% Inductor current
+			% ---------------------------------------------
+			\nextgroupplot[
+				ylabel={$i_\mathrm{L}(t)$},
+				ymin=-0.1, ymax=5.0,
+				ytick={0,1,\plotPeak},
+				yticklabels={$0$,$I_2$,$\hat{i}_\mathrm{L}$}
+			]
+
+			\draw[thin,dashed,shadecolor]
+			(axis cs:\plotD,0) --
+			(axis cs:\plotD,5.0);
+			\draw[thin,dashed,shadecolor]
+			(axis cs:\plotTmax,0) --
+			(axis cs:\plotTmax,5.0);
+
+			\addplot[signaldelta,thick] coordinates {
+					(0,0)
+					(\plotD,\plotPeak)
+					(1,0)
+				};
+
+			% Switching intervals
+			\draw[thin,<->]
+			(axis cs:0,3.85) --
+			node[above] {$T_\mathrm{on}$}
+			(axis cs:\plotD,3.85);
+
+			\draw[thin,<->]
+			(axis cs:\plotD,3.85) --
+			node[above] {$T_\mathrm{off}$}
+			(axis cs:1,3.85);
+
+			% ---------------------------------------------
+			% Capacitor current and charge balance
+			% ---------------------------------------------
+			\nextgroupplot[
+				ylabel={$i_\mathrm{C}(t)$},
+				ymin=-1.8, ymax=2.65,
+				ytick={-1,0,\plotPeak-1},
+				yticklabels={
+						$-I_2$,$0$,$\hat{i}_\mathrm{L}-I_2$
+					}
+			]
+
+			\draw[thin,dashed,shadecolor]
+			(axis cs:\plotD,-1.8) --
+			(axis cs:\plotD,2.65);
+			\draw[thin,dashed,shadecolor]
+			(axis cs:\plotTmax,-1.8) --
+			(axis cs:\plotTmax,2.65);
+
+			% Discharging during switch-on
+			\path[fill=shadecolor,fill opacity=0.3]
+			(axis cs:0,0) --
+			(axis cs:0,-1) --
+			(axis cs:\plotD,-1) --
+			(axis cs:\plotD,0) -- cycle;
+
+			% Charging during switch-off
+			\path[fill=shadecolor,fill opacity=0.3]
+			(axis cs:\plotD,0) --
+			(axis cs:\plotD,{\plotPeak-1}) --
+			(axis cs:\plotTmax,0) -- cycle;
+
+			% Discharging at the end of switch-off
+			\path[fill=shadecolor,fill opacity=0.3]
+			(axis cs:\plotTmax,0) --
+			(axis cs:1,-1) --
+			(axis cs:1,0) -- cycle;
+
+			% Capacitor current trajectory
+			\addplot[signaldelta,thick] coordinates {
+					(0,-1)
+					(\plotD,-1)
+					(\plotD,{\plotPeak-1})
+					(1,-1)
+				};
+
+			% Charge and discharge labels
+			\node[font=\footnotesize]
+			at (axis cs:0.2,-1.4) {Discharging};
+			\node[font=\footnotesize]
+			at (axis cs:0.73,1.6) {Charging};
+			\node[font=\footnotesize]
+			at (axis cs:0.91,-1.4) {Discharging};
+
+			\node at (axis cs:0.52,0.6) {$\Delta Q$};
+
+			% ---------------------------------------------
+			% Capacitor voltage
+			% ---------------------------------------------
+			\nextgroupplot[
+				ylabel={$u_\mathrm{C}(t)$},
+				xlabel={$t/T_\mathrm{s}$},
+				ymin=-0.07, ymax=0.59,
+				ytick={0,\plotUmax},
+				yticklabels={
+						$u_\mathrm{C,min}$,
+						$u_\mathrm{C,max}$
+					}
+			]
+
+			\draw[thin,dashed,shadecolor]
+			(axis cs:\plotD,-0.07) --
+			(axis cs:\plotD,0.59);
+			\draw[thin,dashed,shadecolor]
+			(axis cs:\plotTmax,-0.07) --
+			(axis cs:\plotTmax,0.59);
+
+			% Linear voltage decrease during switch-on
+			\addplot[
+				signalalpha,thick,
+				domain=0:\plotD,samples=2
+			] {\plotD-x};
+
+			% Quadratic voltage trajectory during switch-off
+			\addplot[
+				signalalpha,thick,
+				domain=\plotD:1,samples=80
+			] {
+				(\plotPeak-1)*(x-\plotD)
+				-\plotPeak/(2*(1-\plotD))*(x-\plotD)^2
+			};
+
+			% Peak-to-peak voltage ripple
+			\draw[thin,<->]
+			(axis cs:0.82,0) --
+			node[left,fill=white,inner sep=1pt]
+			{$\Delta u_\mathrm{C}$}
+			(axis cs:0.82,\plotUmax);
+
+		\end{groupplot}
+	\end{tikzpicture}
+	\caption{Inductor current, capacitor current and capacitor
+		voltage in BCM for $D=0.4$. The shaded areas indicate
+		the charge transferred to and from the capacitor.}
+	\label{fig:ex03-bcm-capacitor-ripple}
+\end{solutionfigure}

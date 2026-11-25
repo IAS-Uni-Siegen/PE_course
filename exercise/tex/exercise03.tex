@@ -8,93 +8,86 @@
 %% Task 1: Inverting buck-boost converter %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \task {Inverting buck-boost converter}
-An inverting buck-boost converter (see \autoref{fig:Inverting buck-boost converter}) is used to generate the negative supply voltage of a control electronic unit. The input voltage is specified as $U_\mathrm{1}=\SI{18}{\volt}$, the output voltage is regulated to $U_\mathrm{2}=\SI{12}{\volt}$. The output power can vary in the range $P_\mathrm{2} = \SI{2}{\watt} \, \dots \, \SI{15}{\watt}$.
+An inverting buck-boost converter (see \autoref{fig:Inverting buck-boost converter}) is used to generate the negative supply voltage of an electronic control unit (ECU). The input voltage is specified as $U_\mathrm{1}=\SI{18}{\volt}$, the output voltage is regulated to $U_\mathrm{2}=\SI{12}{\volt}$. The input voltage is considered constant and the output voltage ripple is comparably small not affecting the inductor current ripple. The output power can vary in the range $P_\mathrm{2} = \SI{2}{\watt} \, \dots \, \SI{15}{\watt}$. Initially all components are considered ideal and lossless.
 
 \input{./fig/ex03/Fig_inverseConverter.tex}
 
-\subtask{The system should operate at boundary conduction mode (BCM)   throughout the entire output power range. How should the inductance be selected so that the switching frequency is always above the hearing threshold $f_\mathrm{s}=\SI{20}{\kilo\hertz}$?}
+\subtask{The system should operate at boundary conduction mode (BCM)   throughout the entire output power range.  Determine the maximum permissible inductance $L$ such that the switching frequency satisfies $f_\mathrm{s}\geq\SI{20}{\kilo\hertz}$.}
 
 \begin{solutionblock}
-	The $\Delta$ is an approximation of the total differential using a difference equation with the differences $\Delta$. This results in the component differential equations becoming average value equations.
-	During the transistor on time, the input voltage is equal to the inductor voltage and defined as:
-	\begin{equation}
-		U_{\mathrm{1}} = \overline u_{\mathrm{L}} = L \frac{\Delta i_{\mathrm{L}} }{\Delta t}.
-	\end{equation}
 	With voltages $U_1$ and $U_2$ given in the task, the duty cycle is calculated as:
 	\begin{equation}
 		D = \frac{U_\mathrm{2}}{U_\mathrm{1}+U_\mathrm{2}} = \frac{\SI{12}{\volt}}{\SI{18}{\volt}+\SI{12}{\volt}} = 0.4.
 	\end{equation}
-	During the on phase of the transistor, the total energy for one period (on and off phase) must be stored in the inductor. Therefore, the average power and the corresponding inductor current increases with the inverse value of the duty cycle. Hence, the average inductor current is given with:
+	The (highest) average output current is
 	\begin{equation}
-		\overline{i}_\mathrm{L} = \frac{P_\mathrm{2}}{U_\mathrm{2}} \frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.083}{\ampere}.
+		I_\mathrm{2} = \frac{P_\mathrm{2}}{U_\mathrm{2}} = \frac{\SI{15}{\watt}}{\SI{12}{\volt}} = \SI{1.25}{\ampere}
 	\end{equation}
-	With BCM the maximum inductor current, i.e., the peak-to-peak ripple, is defined as:
+	resulting in an average inductor current of
 	\begin{equation}
-		\Delta i_{\mathrm{L}} = 2 \overline{i}_\mathrm{L} = \SI{4.16}{\ampere}.
+		\overline{i}_\mathrm{L} = \frac{I_\mathrm{2}}{1-D} = \frac{\SI{1.25}{\ampere}}{0.6} = \SI{2.083}{\ampere}.
 	\end{equation}
-	Here, $\Delta t$ can also be expressed as:
+	Due to the triangular shape of the inductor current reaching zero at the beginning and end of each switching period in BCM, the peak-to-peak ripple current is twice the average inductor current:
 	\begin{equation}
-		\Delta t = \frac{D}{f_\mathrm{s}}.
+		\Delta i_{\mathrm{L}} = 2 \overline{i}_\mathrm{L} = \SI{4.17}{\ampere}.
 	\end{equation}
-	Therefore, the inductance can be determined using the following equation:
+	The inverting buck-boost converter's current ripple is defined as
 	\begin{equation}
-		L = \frac{\Delta t  \overline u_{\mathrm{L}}}{\Delta i_{\mathrm{L}}}= \frac{D \overline u_{\mathrm{L}}}{f_\mathrm{s}\Delta i_{\mathrm{L}}}= \frac{D U_{\mathrm{1}}}{f_\mathrm{s}\Delta i_{\mathrm{L}}} = \frac{0.4 \cdot \SI{18}{\volt}}{\SI{20}{\kilo\hertz}\cdot \SI{4.16}{\ampere }} = \SI{86.4}{\micro\henry}.
+		\Delta i_{\mathrm{L}} = D T_\mathrm{s} \frac{U_1}{L} = \frac{D U_1}{f_\mathrm{s} L},
+		\label{eq:sol_task_3_1_buck_boost_current_ripple}
 	\end{equation}
-
+	and therefore, the required inductance is calculated as:
+	\begin{equation}
+		L = \frac{D U_1}{f_\mathrm{s} \Delta i_{\mathrm{L}}} = \frac{0.4 \cdot \SI{18}{\volt}}{\SI{20}{\kilo\hertz} \cdot \SI{4.17}{\ampere}} = \SI{86.4}{\micro\henry}.
+	\end{equation}
+	It can be noted that the calculation is conducted for the maximum output power as smaller output powers lead to smaller inductor currents and therefore, smaller current ripples. Hence, the maximum power consideration is the worst case for the inductance selection in BCM.
 \end{solutionblock}
-\subtask{In what value range does the switching frequency $f_\mathrm{s}$ vary considering the inductance choice from the previous subtask and the given output power range?}
+\subtask{Considering the previous inductance value choice, what is the range of the switching frequency $f_\mathrm{s}$ for the specified output power range to ensure operation in BCM?}
 
 \begin{solutionblock}
-	The inductance equation is used again for this subtask:
+	From \eqref{eq:sol_task_3_1_buck_boost_current_ripple} the resulting switching frequency is calculated as:
 	\begin{equation}
-		L = \frac{\Delta t \overline u_{\mathrm{L}}}{\Delta i_{\mathrm{L}}}= \frac{D \overline u_{\mathrm{L}}}{f_\mathrm{s}\Delta i_{\mathrm{L}}}.
+		f_\mathrm{s} = \frac{D U_1}{L \Delta i_{\mathrm{L}}}.
+		\label{eq:sol_task_3_1_buck_boost_switching_frequency}
 	\end{equation}
-	This equation can be rewritten to determine the frequency as follows:
+	From the previous subtask we already know the maximum inductor current ripple $\Delta i_{\mathrm{L}}(P_2=\SI{15}{\watt}) = \SI{4.17}{\ampere}$. The minimum inductor current ripple is calculated analogously:
 	\begin{equation}
-		f_\mathrm{s} = \frac{DU_{\mathrm{1}}}{L\Delta i_{\mathrm{L}}}. \label{eq:equation switching frequencies ex03}
+		\Delta i_{\mathrm{L}}(P_2=\SI{2}{\watt}) = 2 \overline{i}_\mathrm{L}(P_2=\SI{2}{\watt}) = 2 \cdot \frac{I_\mathrm{2}(P_2=\SI{2}{\watt})}{1-D} = 2 \cdot \frac{\SI{0.167}{\ampere}}{0.6} = \SI{0.556}{\ampere}.
 	\end{equation}
-
-	As the output power is specified as a value range, the highest and lowest values can be used. The lowest and highest current should be determined from these two values, from which the value range of the frequency $f_\mathrm{s}$ can then be determined.
-	The average inductor current is calculated as:
+	With \eqref{eq:sol_task_3_1_buck_boost_switching_frequency} the resulting switching frequencies are:
 	\begin{equation}
-		\overline{i}_\mathrm{L}(P_\mathrm{2}=\SI{2}{\watt})= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{2}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{0.278}{\ampere},
-	\end{equation}
-	\begin{equation}
-		\overline{i}_\mathrm{L}(P_\mathrm{2}=\SI{15}{\watt})= \frac{P_\mathrm{2}}{U_\mathrm{2}}\frac{1}{D}=\frac{\SI{15}{\watt}}{\SI{12}{\volt}}\frac{5}{3}=\SI{2.0833}{\ampere}.
-	\end{equation}
-	With \eqref{eq:equation switching frequencies ex03} the resulting switching frequencies are:
-	\begin{equation}
-		f_\mathrm{s}(P_\mathrm{2}=\SI{2}{\watt})=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{0.278}{\ampere}}=\SI{150}{\kilo \hertz},
+		f_\mathrm{s}(P_\mathrm{2}=\SI{2}{\watt})=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot \SI{0.556}{\ampere}}=\SI{150}{\kilo \hertz},
 	\end{equation}
 	\begin{equation}
-		f_\mathrm{s}(P_\mathrm{2}=\SI{15}{\watt})=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot 2\cdot \SI{2.0833}{\ampere}}=\SI{20}{\kilo \hertz}.
+		f_\mathrm{s}(P_\mathrm{2}=\SI{15}{\watt})=\frac{0.4\cdot\SI{18}{\volt}}{\SI{86.4}{\micro\henry}\cdot \SI{4.17}{\ampere}}=\SI{20}{\kilo \hertz}.
 	\end{equation}
-	The switching frequency $f_\mathrm{s}$ varies in the range from $\SI{20}{\kilo \hertz} \, \dots \, \SI{150}{\kilo \hertz}$ for the specified output power range in the task.
 \end{solutionblock}
 
 \subtask{What is the peak value $\hat i_1=\max\{i_1(t)\}$ of the transistor current?}
 \begin{solutionblock}
-	As the current through the transistor is the current $i_1$, their maximum values are the same. Since the BCM is considered in this circuit, the maximum current is the peak ripple current, which corresponds to the value of $\SI{4.16}{\ampere}$.
+	During the switch-on period, the transistor current equals
+	the inductor current. In BCM, the peak inductor current
+	equals the peak-to-peak inductor current ripple. Hence,
+	\begin{equation}
+		\hat{i}_1
+		= \hat{i}_\mathrm{L}
+		= \Delta i_\mathrm{L}(P_2=\SI{15}{\watt})
+		= \SI{4.17}{\ampere}.
+	\end{equation}
+	The maximum output power is considered, since the inductor
+	current ripple increases linearly with the output power.
 \end{solutionblock}
 
-\subtask{How does the duty cycle $D$ change with the output power? Calculate the duty cycle values and the transistor switch-on times $T_\mathrm{on} = D T_\mathrm{s}$ for minimum and maximum output power.}
+\subtask{How does the duty cycle $D$ change with the output power? Determine the transistor switch-on time $T_\mathrm{on} = D T_\mathrm{s}$ range for minimum and maximum output power.}
 \begin{solutionblock}
-	The switching period is the inverse of the switching frequency:
-	\begin{equation}
-		T_\mathrm{s} = \frac{1}{f_\mathrm{s}}. \label{switching frequency}
-	\end{equation}
-	The previously obtained maximum and minimum switching frequencies lead to:
+	Since the average output voltage should remain constant, the duty cycle is independent of the output power and remains constant at $D = 0.4$. However, the switching frequency changes with the output power, which affects the switch-on time.	The previously obtained maximum and minimum switching frequencies lead to:
 	\begin{equation}
 		T_\mathrm{s}(P_\mathrm{2}=\SI{2}{\watt}) = \frac{1}{\SI{150}{\kilo \hertz}}= \SI{6.67}{\micro \s},
 	\end{equation}
 	\begin{equation}
 		T_\mathrm{s}(P_\mathrm{2}=\SI{15}{\watt}) = \frac{1}{\SI{20}{\kilo \hertz}}= \SI{50}{\micro \s}.
 	\end{equation}
-	The transistor switch-on times can be determined using
-	\begin{equation}
-		T_\mathrm{on} = D T_\mathrm{s} \label{absolut value switch-on-times}
-	\end{equation}
-	leading to:
+	The transistor switch-on times resul
 	\begin{equation}
 		T_\mathrm{on}(P_\mathrm{2}=\SI{2}{\watt}) = 0.4 \cdot \SI{6.67}{\micro \s} = \SI{2.67}{\micro \s},
 	\end{equation}
@@ -109,94 +102,229 @@ An inverting buck-boost converter (see \autoref{fig:Inverting buck-boost convert
 	\input{fig/ex03/Fig_courseILminmaxOutputPower.tex}
 \end{solutionblock}
 
-\subtask{At which operating point does the maximum output voltage ripple $\Delta u_\mathrm{2}$ occur (assumption: the load draws a constant current)?}
+\subtask{At which operating point does the maximum output voltage ripple $\Delta u_\mathrm{2}$ occur (assumption: the load draws a constant current $i_2(t) = I_2$)?}
 
 \begin{solutionblock}
-	The capacitor current is given by
+	Assuming a constant load current $I_2$ and that the output
+	voltage ripple does not affect the inductor current ripple,
+	the capacitor current is given by
 	\begin{equation}
-		i_{\mathrm{C}}(t) = i_{\mathrm{L}}(t)-I_{\mathrm{2}},
+		i_\mathrm{C}(t) = \begin{cases}
+			-I_2, & t\in [0,T_\mathrm{on}[,            \\
+			i_\mathrm{L}(t)-I_2,
+			      & t\in [T_\mathrm{on},T_\mathrm{s}].
+		\end{cases}
 	\end{equation}
-	with the assumption of a constant load current $I_2$.
-	The voltage equation of the capacitor is defined as
+	The corresponding signal trajectories in BCM are shown in
+	\autoref{fig:ex03-bcm-capacitor-ripple}.
+
+	\input{./fig/ex03/sFig_BCM_Voltage_Ripple.tex}
+
+	The capacitor voltage decreases linearly during the switch-on
+	period and follows a quadratic trajectory during the switch-off
+	period, since
 	\begin{equation}
-		i_{\mathrm{C}}(t) = C\frac{\mathrm{d}u_{\mathrm{C}}(t)}{\mathrm{d}t},
+		C_2\frac{\mathrm{d}u_\mathrm{C}(t)}{\mathrm{d}t}
+		=i_\mathrm{C}(t).
 	\end{equation}
-	which is rearranged into
+
+	The capacitor is charged from $t=T_\mathrm{on}$ until
+	$t=t_\mathrm{max}$, when $i_\mathrm{C}(t_\mathrm{max})=0$.
+	In BCM, the inductor current decreases linearly during the
+	switch-off period from $\hat{i}_\mathrm{L}$
+	to zero, hence
 	\begin{equation}
-		u_{\mathrm{C}}(t) = \frac{1}{C} \int i_{\mathrm{C}}(t),
+		i_\mathrm{L}(t)=
+		\hat{i}_\mathrm{L}\frac{T_\mathrm{s}-t}{T_\mathrm{off}},
+		\quad t\in [T_\mathrm{on},T_\mathrm{s}].
 	\end{equation}
-	showing that the voltage ripple depends on the capacitor current, which is larger a the second operating point ($P_2 = \SI{15}{\watt}$, \autoref{fig:InductorCurrentEx03}), leading to the highest voltage ripple.
+
+	As the average diode current equals the load current in
+	steady state,
+	\begin{equation}
+		I_2=\overline{i}_\mathrm{D}
+		=\frac{1-D}{2}\hat{i}_\mathrm{L}.
+	\end{equation}
+
+	Using $i_\mathrm{L}(t_\mathrm{max})=I_2$ yields
+	\begin{equation}
+		\begin{split}
+			t_\mathrm{max}
+			 & = T_\mathrm{s}
+			-\frac{I_2}{\hat{i}_\mathrm{L}}T_\mathrm{off} \\
+			 & = T_\mathrm{s}
+			\left(1-\frac{(1-D)^2}{2}\right),
+		\end{split}
+	\end{equation}
+	which corresponds to $t_\mathrm{max}=0.82T_\mathrm{s}$
+	for $D=0.4$. The peak-to-peak voltage ripple follows from the charge
+	transferred to the capacitor during the charging interval:
+	\begin{equation}
+		\begin{split}
+			\Delta u_\mathrm{C}
+			 & = u_\mathrm{C}(t_\mathrm{max})
+			-u_\mathrm{C}(T_\mathrm{on})              \\
+			 & = \frac{1}{C_2}
+			\int_{T_\mathrm{on}}^{t_\mathrm{max}}
+			i_\mathrm{C}(t)\,\mathrm{d}t              \\
+			 & = \frac{1}{2C_2}
+			\left(\hat{i}_\mathrm{L}-I_2\right)
+			\left(t_\mathrm{max}-T_\mathrm{on}\right) \\
+			 & = \frac{I_2T_\mathrm{s}}{4C_2}(1+D)^2.
+		\end{split}
+		\label{eq:ex03-bcm-capacitor-ripple}
+	\end{equation}
+
+	Since $D$ is constant, $I_2=P_2/U_2$ and
+	$f_\mathrm{s}\propto 1/\Delta i_\mathrm{L}\propto 1/P_2$,
+	we obtain
+	\begin{equation}
+		\Delta u_2=\Delta u_\mathrm{C}\propto P_2^2.
+	\end{equation}
+
+	Hence, the maximum output voltage ripple occurs at
+	$P_2=\SI{15}{\watt}$, corresponding to the minimum switching
+	frequency $f_\mathrm{s}=\SI{20}{\kilo\hertz}$.
 \end{solutionblock}
 
 \subtask{How high should the output capacitance be selected to ensure $\Delta u_\mathrm{2} < 0.02 \cdot U_\mathrm{2}?$}
 
 \begin{solutionblock}
-	The output capacitor $C_2$ is located parallel to the output voltage $U_2$, therefore, the maximum voltage ripple is calculated according to the task description with:
+	Since the output capacitor $C_2$ is connected in parallel
+	to the load, the maximum permissible output voltage ripple is
+	given by
 	\begin{equation}
-		\Delta u_2 = \Delta u_{\mathrm{C}} = 0.02 U_2 = 0.02 \cdot \SI{12}{\volt} = \SI{0.24}{\volt}.
+		\Delta u_{2,\mathrm{lim}}
+		= 0.02 U_2
+		= 0.02 \cdot \SI{12}{\volt}
+		= \SI{0.24}{\volt}.
 	\end{equation}
 
-	The relationship between the voltage ripple and the capacitance is identical to the step-up converter, which is defined as:
+	Using the voltage ripple expression derived in
+	\eqref{eq:ex03-bcm-capacitor-ripple} and considering the
+	operating point with maximum output power yields
 	\begin{equation}
-		\Delta u_{\mathrm{C}} = \frac{I_2}{C} D T_{\mathrm{s}}.
-	\end{equation}
-	Considering the maximum power ($P_2 = \SI{15}{\watt}$) results into:
-	\begin{equation}
-		C_2 = \frac{I_{\mathrm{2}}(P_\mathrm{2}=\SI{15}{\watt}) D T_{\mathrm{s}}(P_\mathrm{2}=\SI{15}{\watt})}{\Delta u_{\mathrm{C}}}
-		= \frac{\SI{1.25}{\ampere} \cdot 0.4 \cdot \SI{50}{\micro\second}}{\SI{0.24}{\volt}}
-		= \SI{104}{\micro\farad}.
+		\Delta u_{2,\mathrm{max}}
+		= \frac{\SI{30.625}{\micro\coulomb}}{C_2}
+		< \Delta u_{2,\mathrm{lim}}.
 	\end{equation}
 
+	Rearranging for the required output capacitance results in
+	\begin{equation}
+		C_2 >
+		\frac{\SI{30.625}{\micro\coulomb}}{\SI{0.24}{\volt}}
+		= \SI{127.6}{\micro\farad}.
+	\end{equation}
 \end{solutionblock}
 
 \subtask{What is the maximum effective value $i_\mathrm{C,RMS}$ of the output capacitor current?}
 
 \begin{solutionblock}
+	The RMS value of the capacitor current is defined as
+	\begin{equation}
+		I_\mathrm{C} =
+		\sqrt{\frac{1}{T_\mathrm{s}}
+			\int_0^{T_\mathrm{s}} i_\mathrm{C}^2(t)\,\mathrm{d}t}.
+	\end{equation}
 
-	The capacitor RMS current is defined as follows
+	Using the capacitor current waveform derived in Subtask~3.1.6
+	and the relation $\overline{i}_\mathrm{L}=I_2/(1-D)$ yields
 	\begin{equation}
-		i_{\mathrm{C,RMS}} = \sqrt{\frac{1}{T_{\mathrm{s}}} \int_{0}^{T_{\mathrm{s}}}i_{\mathrm{C}}^2(t)\mathrm{d}t},
+		i_\mathrm{C}(t) =
+		\begin{cases}
+			-I_2,
+			 & t\in[0,T_\mathrm{on}[,            \\[1ex]
+			\displaystyle
+			\frac{D}{1-D}I_2
+			+\Delta i_\mathrm{L}
+			\left(\frac{1}{2}
+			-\frac{t-T_\mathrm{on}}{T_\mathrm{off}}\right),
+			 & t\in[T_\mathrm{on},T_\mathrm{s}].
+		\end{cases}
 	\end{equation}
-	with the capacitor current for the inverting buck-boost converter being:
+
+	Splitting the integral into the switch-on and switch-off
+	intervals results in
 	\begin{equation}
-		{i_\mathrm{C}(t) = \begin{cases}
-				\frac{D}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2(t-kT_\mathrm{s})}{2T_\mathrm{off}}, & t\in [k T_\mathrm{s}, k T_\mathrm{s} + T_\mathrm{off}],    \\
-				-I_2,                                                                                             & t\in [k T_\mathrm{s}+ T_\mathrm{off}, (k+1) T_\mathrm{s}].
-			\end{cases}}
+		I_\mathrm{C} =
+		\sqrt{
+			\frac{1}{T_\mathrm{s}}
+			\int_0^{T_\mathrm{on}} I_2^2\,\mathrm{d}t
+			+
+			\frac{1}{T_\mathrm{s}}
+			\int_{T_\mathrm{on}}^{T_\mathrm{s}}
+			i_\mathrm{C}^2(t)\,\mathrm{d}t
+		}.
 	\end{equation}
-	For $k$ = 0 the equation results into
+
+	During the switch-on interval (transistor conducting),
+	the capacitor supplies the constant load current:
 	\begin{equation}
-		i_{\mathrm{C,RMS}} = \sqrt{\frac{1}{T_{\mathrm{s}}} \int_{0}^{T_{\mathrm{off}}} \underbrace{\left( \frac{D}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2t}{2T_\mathrm{off}}\right)^2}_{a} \mathrm{d}t+ \frac{1}{T_{\mathrm{s}}}\int_{T_{\mathrm{off}}}^{T_{\mathrm{s}}} \left(-I_2 \right)^2 \mathrm{d}t},
+		\frac{1}{T_\mathrm{s}}
+		\int_0^{T_\mathrm{on}} I_2^2\,\mathrm{d}t
+		= DI_2^2.
 	\end{equation}
-	where the variable $a$ is utilized for a shorter description in the following. This first part is solved as:
-	\begin{align}
+
+	During the switch-off interval, the capacitor current
+	decreases linearly. Evaluating the corresponding integral yields
+	\begin{equation}
 		\begin{split}
-			\int_{0}^{T_{\mathrm{off}}} a \mathrm{d}t & = \int_{0}^{T_{\mathrm{off}}} \left( \frac{D}{1-D}I_2 + \Delta i_\mathrm{L} \frac{T_\mathrm{off}-2t}{2T_\mathrm{off}}\right)^2 \mathrm{d}t                                                                                                                                                                                                                                                                                    \\
-			                                          & = \int_{0}^{T_{\mathrm{off}}} \frac{D^2}{\left(D-1\right)^2}I_2^2 + \frac{D}{(1-D)}I_2 \Delta i_{\mathrm{L}} - 2 \frac{D}{(1-D)} I_2 \Delta i_{\mathrm{L}} \frac{t}{T_{\mathrm{off}}}                                                                                                                                                                                                                                         \\ &\hspace{5mm} + \frac{1}{4} \Delta i_{\mathrm{L}}^2 - \Delta i_{\mathrm{L}}^2 \frac{t}{T_{\mathrm{off}}} + \Delta i_{\mathrm{L}}^2 \frac{t^2}{T_{\mathrm{off}}^2} \mathrm{d}t \\
-			                                          & = \left[\frac{D^2}{\left(1-D\right)^2} I_2^2 t + \frac{D}{(1-D)}I_2 \Delta i_{\mathrm{L}} t - \frac{D}{(1-D)} I_2 i_{\mathrm{L}} \frac{t^2}{T_{\mathrm{off}}} \right.                 \\ & \left. \hspace{5mm} + \frac{1}{4}\Delta i_{\mathrm{L}}^2 t - \frac{1}{2} \Delta i_{\mathrm{L}}^2 \frac{t^2}{T_{\mathrm{off}}} + \frac{1}{3 }\Delta i_{\mathrm{L}}^2 \frac{t^3}{T_{\mathrm{off}}^2} \right]_{0}^{T_{\mathrm{off}}}.
+			\frac{1}{T_\mathrm{s}}
+			\int_{T_\mathrm{on}}^{T_\mathrm{s}}
+			i_\mathrm{C}^2(t)\,\mathrm{d}t
+			 & =
+			\frac{1}{T_\mathrm{s}}
+			\int_0^{T_\mathrm{off}}
+			\left[
+				\frac{D}{1-D}I_2
+				+\Delta i_\mathrm{L}
+				\left(\frac{1}{2}
+				-\frac{t}{T_\mathrm{off}}\right)
+				\right]^2
+			\mathrm{d}t \\
+			 & =
+			(1-D)
+			\left[
+				\left(\frac{D}{1-D}I_2\right)^2
+				+\frac{(\Delta i_\mathrm{L})^2}{12}
+				\right].
 		\end{split}
-	\end{align}
-	Applying the limits of the integral and rearranging the expression results into:
-	\begin{align}
-		\begin{split}
-			\int_{0}^{T_{\mathrm{off}}} a \mathrm{d}t & = \left[\frac{D^2}{\left(1-D\right)^2}I_2^2 + \frac{1}{12} \Delta i_{\mathrm{L}}^2 \right] T_{\mathrm{off}} - 0                                                                                                    \\
-			                                          & = \left[\frac{0.4^2}{\left(1-0.4\right)^2} \cdot \left(\SI{1.25}{\ampere}\right)^2 + \frac{1}{12}\cdot \left(\SI{4.16}{\ampere}\right)^2 \right] \cdot \SI{30}{\micro\second} = \SI{64.1}{\ampere^2\micro\second}.
-		\end{split}
-	\end{align}
-	The calculation of the second part (transistor is open) is given by:
-	\begin{equation}
-		\int_{T_{\mathrm{off}}}^{T_{\mathrm{s}}} \left(-I_2 \right)^2 \mathrm{d}t = \left[I_2^2 t \right]_{T_{\mathrm{off}}}^{T_{\mathrm{s}}} = I_2^2 \left(T_{\mathrm{s}} - T_{\mathrm{off}}\right) = (\SI{1.25}{\ampere})^2 \cdot (\SI{50}{\micro\second} - \SI{30}{\micro\second}) = \SI{31.3}{\ampere^2\micro\second}.
 	\end{equation}
-	Hence, the capacitor RMS current is calculated with:
+
+	Combining both contributions, the RMS value of the capacitor
+	current is given by
 	\begin{equation}
-		i_{\mathrm{C,RMS}} = \sqrt{\frac{1}{\SI{50}{\micro\second}} \left(\SI{64.1}{\ampere^2\micro\second} + \SI{31.3}{\ampere^2\micro\second}\right)} = \SI{1.38}{\ampere}.
+		I_\mathrm{C}
+		=
+		\sqrt{
+			\frac{D}{1-D}I_2^2
+			+\frac{1-D}{12}(\Delta i_\mathrm{L})^2
+		}.
+	\end{equation}
+
+	In BCM, the inductor current ripple is
+	$\Delta i_\mathrm{L}=2I_2/(1-D)$, which leads to
+	\begin{equation}
+		I_\mathrm{C}
+		= I_2\sqrt{\frac{1+3D}{3(1-D)}}.
+	\end{equation}
+
+	Since the duty cycle $D$ is constant and
+	$I_2=P_2/U_2$, the RMS value of the capacitor current
+	increases linearly with the output power. Hence, the maximum
+	RMS current occurs at $P_2=\SI{15}{\watt}$:
+	\begin{equation}
+		I_\mathrm{C,max}
+		= \SI{1.25}{\ampere}
+		\sqrt{\frac{1+3\cdot 0.4}{3(1-0.4)}}
+		= \SI{1.38}{\ampere}.
 	\end{equation}
 \end{solutionblock}
 
-\subtask{Sketch the curves of the voltage $u_\mathrm{T}(t)$ at the power transistor and the current $i_\mathrm{D}(t)$ in the output diode for $P_\mathrm{2}=\SI{2}{\watt}$. What is the maximum blocking voltage of the transistor?}
+\subtask{Sketch the curves of the voltage $u_\mathrm{T}(t)$ at the power transistor and the current $i_\mathrm{D}(t)$ in the output diode for $P_\mathrm{2}=\SI{2}{\watt}$. Neglecting the voltage output ripple, what is the maximum blocking voltage of the transistor?}
 
 \begin{solutionblock}
-	The input voltage for an activated transistor is given with
+	The input voltage equals the sum of the transistor voltage and the inductor voltage:
 	\begin{equation}
 		U_1 = u_{\mathrm{T}} + u_{\mathrm{L}},
 	\end{equation}
@@ -206,7 +334,7 @@ An inverting buck-boost converter (see \autoref{fig:Inverting buck-boost convert
 		\label{eq:uT}
 	\end{equation}
 
-	During the off time of the transistor, the inductance voltage is defined as
+	During the off time of the transistor, the inductor voltage is defined as
 	\begin{equation}
 		u_{\mathrm{L}} = -U_2 - u_{\mathrm{D}},
 		\label{eq:U2}

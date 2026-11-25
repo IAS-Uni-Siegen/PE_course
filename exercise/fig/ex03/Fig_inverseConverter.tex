@@ -13,7 +13,7 @@
 				% Add T1 with Control
 				(jU1v) ++(2,0) node[nigfete,rotate=90](Trans1){} -- ++(2.5,0) coordinate(T1)
 				% At transistor label T1
-				(Trans1)  node[anchor=south,color=black]{$T_1$}
+				(Trans1)  node[anchor=south,color=black]{$T$}
 				% Short horizontal line
 				(jU1v) to [short,-] (Trans1.D)
 				% Add junction point for inductor
@@ -21,7 +21,7 @@
 			% Add junction point for P-buck diode
 			(jLv) ++(0,-3) coordinate (jLg)
 				% Add inductance
-				(jLv) to  [L=$L$] (jLg)
+				(jLv) to  [L=$L$, v_=$u_\mathrm{L}$, voltage=straight] (jLg)
 				% Add current IL symbol
 				(jLv)  to [short,i^>=$i_\mathrm{L}$(t)] (4.5,-0.7)
 				% Continue horizontal line
@@ -31,9 +31,9 @@
 			% Add positive Diode connection point
 			(jPtg)  ++ (3,0) coordinate  (jDP)
 				% Add Diode
-				(jDP) to  [D-,l^=$D$] (jPtg)
+				(jDP) to  [D-,l^=$D$, v_=$u_\mathrm{D}$, voltage=straight] (jPtg)
 				% Add current Diode
-				(jPtg)  to [short,i^<=$i_\mathrm{D}$(t)] (7,-6)
+				(jPtg)  to [short,i_<=$i_\mathrm{D}$(t)] (7,-6)
 				% Add junction point for P-buck diode
 				(jDP) to [short,-*] ++(0,-0)
 			% Add junction point for capacitor
@@ -49,7 +49,7 @@
 				% Add line to capacitor
 				(jU2v)  to [short,-*] (jCv)
 				% Add capacitor
-				(jCv)  to [C=$C_2$] (jDP)
+				(jCv)  to [C=$C_2$, v_=$u_\mathrm{C}$, voltage=straight] (jDP)
 				% Add current capacitor
 				(jCv)  to [short,i^>=$i_\mathrm{C}$(t)] (9,-4)
 				% Add horizontal from C to L
@@ -58,8 +58,9 @@
 				% Connect U1
 				(jLg) to [short,-] (jU1g)
 			;
+			\draw[->] ([shift={(0,-1.3)}]Trans1.D) -- node[below] {$u_\mathrm{T}$} ([shift={(0,-1.3)}]Trans1.S);
 		\end{circuitikz}
 	\end{center}
-	\caption{Inverting buck-boost converter.}
+	\caption{Inverting buck-boost converter (note that the output terminals are flipped to compensate for the inverting nature of the converter).}
 	\label{fig:Inverting buck-boost converter}
 \end{figure}
