@@ -356,8 +356,8 @@ An inverting buck-boost converter (see \autoref{fig:Inverting buck-boost convert
 
 \task {Boost-buck converter and SEPIC topology}
 
-The supply of a plasma coating system is realized by a boost converter followed by a buck converter according \autoref{fig:ex03_boost_buck_converter} (with common capacitance).
-The converter is connected to a voltage $U_\mathrm{1}$ and provides a variable output voltage $U_\mathrm{2}$. The parameters are displayed in \autoref{table:ParametersOfBoostBuckConverter}.
+The energy supply of a plasma coating system is realized by a boost converter followed by a buck converter according \autoref{fig:ex03_boost_buck_converter} (with common capacitance).
+The converter is connected to a constant voltage $U_\mathrm{1}$ and provides a variable output voltage $U_\mathrm{2}$. The parameters are displayed in \autoref{table:ParametersOfBoostBuckConverter}.
 \vspace{2em}\par
 
 \par
@@ -368,10 +368,10 @@ The converter is connected to a voltage $U_\mathrm{1}$ and provides a variable o
 \input{./fig/ex03/FigTab_BoostBuckConverter}
 
 The output voltage is set to the specified value by adjusting the duty cycles $D_\mathrm{1}$ (of transistor $T_\mathrm{1}$)
-and $D_\mathrm{2}$ (of transistor $T_\mathrm{2}$) using a control system. Both transistors operate at the same switching frequency.
-The switching frequency fluctuation of the intermediate circuit voltage and the currents in the inductors can be neglected unless otherwise stated.
-The currents in $L_\mathrm{1}$ and $L_\mathrm{2}$ show a continuous course. Both transistors are operated with the
+and $D_\mathrm{2}$ (of transistor $T_\mathrm{2}$) using a control system. Both transistors operate at the same switching frequency and with the
 same duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
+Switching-induced ripple of the intermediate voltage and inductor currents can be neglected unless otherwise stated
+The currents in $L_\mathrm{1}$ and $L_\mathrm{2}$ show a continuous course. All components are considered ideal and lossless. The converter operates in steady state.
 
 \subtask{Calculate the duty cycle $D$ range to achieve the stated output voltage $U_\mathrm{2}$ range.}
 
@@ -388,36 +388,30 @@ same duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
 	\begin{equation}
 		D=\frac{\frac{\SI{285}{\volt}}{\SI{380}{\volt}}} {1+{\frac{\SI{285}{\volt}}{\SI{380}{\volt}}}} = 0.429.
 	\end{equation}
+	For $U_\mathrm{2}$ = $\SI{450}{\volt}$, the duty cycle results in
+	\begin{equation}
+		D=\frac{\frac{\SI{450}{\volt}}{\SI{380}{\volt}}} {1+{\frac{\SI{450}{\volt}}{\SI{380}{\volt}}}} = 0.542.
+	\end{equation}
+	Hence, we have $D \in [0.429, 0.542]$ for the specified output voltage range.
 \end{solutionblock}
 
-\subtask{Which intermediate circuit voltage $U_\mathrm{0}$ results depending on $U_\mathrm{2}$?}
+\subtask{Which average intermediate circuit voltage $U_\mathrm{0}$ results depending on $U_\mathrm{2}$?}
 
 \begin{solutionblock}
 	% Solution
-	The first part is the boost converter part. For the output voltage
-	of $\SI{285}{\volt}$, the intermediate circuit voltage $U_\mathrm{0}$ is calculated as
+	The first part is the boost converter part. Hence, the intermediate circuit voltage $U_\mathrm{0}$ is calculated as
 	\begin{equation}
-		U_\mathrm{0}=U_\mathrm{1} \frac{1}{1-D}
-		=
-		\SI{380}{\volt} \frac{1}{1-0.429} = \SI{665}{\volt}.
+		U_\mathrm{0}=U_\mathrm{1} \frac{1}{1-D}.
 		\label{eq:DCLinkEx03}
 	\end{equation}
-\end{solutionblock}
-
-\subtask{Plot $D$ and $U_\mathrm{0}$ against $U_\mathrm{2}$ and calculate the numerical values for $U_\mathrm{2}=\SI{285}{\volt}$, $U_\mathrm{2}=\SI{380}{\volt}$ and $U_\mathrm{2}=\SI{450}{\volt}$.}
-
-\begin{solutionblock}
-	% Solution
-	Here, \eqref{eq:DutyCycleEx03} and \eqref{eq:DCLinkEx03} are used to calculate results summarized in \autoref{table:DutyCycleDCLinkVoltageAtOutputVoltage}
-	and displayed in \autoref{fig:DCLinkVoltageAtOutputVoltage} and \autoref{fig:DutyCycleAtOutputVoltage}.
-
-	%Result table
-	\input{./fig/ex03/sFigTab_DCLinkVoltageDutycycleE3T2}
-	%Plot of DCLinkVoltage
-	\input{./fig/ex03/sFigDia_DCLinkVSUoutE3T2}
-	%Plot of duty cycle
-	\input{./fig/ex03/sFigDia_DutyCycleVSUoutE3T2}
-
+	For the above calculated duty cycles, the intermediate circuit voltage results in:
+	\begin{equation}
+		U_\mathrm{0}(D=0.429)=\SI{380}{\volt} \frac{1}{1-0.429} = \SI{665}{\volt},
+	\end{equation}
+	\begin{equation}
+		U_\mathrm{0}(D=0.542)=\SI{380}{\volt} \frac{1}{1-0.542} = \SI{830}{\volt}.
+		\label{eq:sol_task_3_2_max_U0_voltage}
+	\end{equation}
 \end{solutionblock}
 
 \subtask{What blocking voltage ratings must the transistors $T_\mathrm{1}$ and $T_\mathrm{2}$ and the diodes $D_1$ and
@@ -427,20 +421,15 @@ same duty cycle $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$.
 	% Solution
 	Based on the schematic from \autoref{fig:ex03_boost_buck_converter}, following voltage ratings of the semiconductor components can be derived:
 	\begin{itemize}
-		\item Reverse voltage across $D_1$: In case of $T_1$ is active, the potential at the T$T_1$'s drain is pulled down.
-		      The diode $D_1$ hat to block $U_0$.
-		\item Block voltage across $T_1$: In case of $T_1$ is inactive, the current of $i_\mathrm{L1}$ load the capacitor $C$ via diode $D_1$.
-		      The voltage across the ideal diode in forward direction is \SI{0}{\volt}, so that the voltage $U_0$ is applied to transistor T1.
-		\item Reverse voltage across $D_2$: In case of $T_2$ is active, the voltage $U_0$ of capacitor $C$ is applied to $D_2$.
-		\item Block voltage across $T_2$: In case of $T_2$ is inactive, the current $i_\mathrm{L2}$ flows through $D_1$.
-		      The forward voltage of the ideal diode is \SI{0}{\volt}, so that $U_0$ is applied to $T_2$.
+		\item $D_1$: In case of $T_1$ is active, the potential at the $T_1$'s drain is pulled down. The diode $D_1$ has to block $U_0$.
+		\item $T_1$: In case $T_1$ is blocking, the inductor current
+		      $i_\mathrm{L1}(t)$ feeds the DC link via $D_1$. The voltage across the ideal diode in forward direction is \SI{0}{\volt}, so that the voltage $U_0$ must be blocked via $T_1$.
+		\item $D_2$: In case of $T_2$ is active, the voltage $U_0$ of capacitor $C$ must be blocked via $D_2$.
+		\item $T_2$: In case of $T_2$ is blocking, the current $i_\mathrm{L2}$ flows through $D_2$.
+		      The forward voltage of the ideal diode is \SI{0}{\volt}, so that $U_0$ is blocked by $T_2$.
 	\end{itemize}
-	The minimum blocking voltage of the component needs to be higher than $U_\mathrm{0}$.
+	The minimum blocking voltage of all semiconductor components aligns with $U_\mathrm{0}$, which maximally reaches \SI{830}{\volt} according to \eqref{eq:sol_task_3_2_max_U0_voltage}. In real-world applications, additional voltage reserves of the semiconductors must be considered (often 20-30\% of the maximum steady-state voltage) to cover transient overshoot / ringing effects due to parasitics.
 \end{solutionblock}
-
-\vspace{2em}\par
-The converter operation continues with $D_\mathrm{1}$ = $D_\mathrm{2}$ = $D$. The input and output inductances
-have the same value $L_\mathrm{1}$ = $L_\mathrm{2}$ = $L$ = $\SI{0.5}{m\henry}$.
 
 \subtask{Derive the input and output current ripple $\Delta i_\mathrm{L_1}$ and $\Delta i_\mathrm{L_2}$ depending on the duty cycle.}
 
@@ -449,14 +438,15 @@ have the same value $L_\mathrm{1}$ = $L_\mathrm{2}$ = $L$ = $\SI{0.5}{m\henry}$.
 	The current ripple depends on the duty cycle, switching period and inductor voltage.
 	For the boost converter stage:
 	\begin{equation}
-		\Delta i_\mathrm{L1}=\frac{U_\mathrm{1}D}{f_\mathrm{s}L}
+		\Delta i_\mathrm{L1}=\frac{U_\mathrm{1}D}{f_\mathrm{s}L_1}
 		\label{eq:Boostripple}
 	\end{equation}
 	results while the buck converter stage's current ripple is:
 	\begin{equation}
-		\Delta i_\mathrm{L2}=\frac{\left(U_\mathrm{0}-U_\mathrm{2}\right)D}{f_\mathrm{s}L}.
+		\Delta i_\mathrm{L2}=\frac{\left(U_\mathrm{0}-U_\mathrm{2}\right)D}{f_\mathrm{s}L_2} = \frac{U_\mathrm{1}D}{f_\mathrm{s}L_1} = \Delta i_\mathrm{L1}.
 		\label{eq:Buckripple}
 	\end{equation}
+	Due to the same duty cycle and the same inductor values, the current ripples of both stages are equal.
 \end{solutionblock}
 
 \subtask{To what minimum value can the output power be reduced while still ensuring
@@ -465,49 +455,40 @@ have the same value $L_\mathrm{1}$ = $L_\mathrm{2}$ = $L$ = $\SI{0.5}{m\henry}$.
 
 \begin{solutionblock}
 	% Solution
-	For the boost stage the power is the product of output voltage
-	$U_\mathrm{0}$ and average current calculated by using \eqref{eq:Boostripple}:
+	For the boost stage, the power is the product of the input voltage $U_1$ and the average current through $L_1$. Considering boundary conduction mode (BCM) and a triangular	current waveform yields:
 	\begin{equation}
-		P_\mathrm{lim,boost}=U_\mathrm{0}\frac{\Delta i_\mathrm{L1}}{2}D.
+		P_\mathrm{min,boost}=U_\mathrm{1}\overline{i}_\mathrm{L1}=U_\mathrm{1}\frac{\Delta i_\mathrm{L1}}{2}.
 		\label{eq:PowerBoostripple}
 	\end{equation}
 	For the buck stage the power is the product of output voltage
-	$U_\mathrm{2}$ and average current calculated by using \eqref{eq:Buckripple}:
+	$U_\mathrm{2}$ and average current through $L_2$ considering BCM and a triangular current shape:
 	\begin{equation}
-		P_\mathrm{lim,buck}=U_\mathrm{2}\frac{\Delta i_\mathrm{L2}}{2}.
+		P_\mathrm{min,buck}=U_\mathrm{2}\overline{i}_\mathrm{L2}=U_\mathrm{2}\frac{\Delta i_\mathrm{L2}}{2}.
 		\label{eq:PowerBuckripple}
 	\end{equation}
 	Entering the relevant values in \eqref{eq:PowerBoostripple} and \eqref{eq:PowerBuckripple} leads to \autoref{table:PowerminInputOutputStage}.
 	%Solution table Minimal Power 
 	\input{./fig/ex03/sFigTab_PowerminInputOutputStage}
 	The minimal power, which ensuring continuous operation across the entire output voltage range
-	yields  $\SI{1854}{\watt}$.
-\end{solutionblock}
-
-\subtask{At which value of the output voltage range is this limit reached first on the input side and at which value is it reached first on the output side?}
-\begin{solutionblock}
-	% Solution
-	As displayed in \autoref{table:PowerminInputOutputStage} the minimal power limit is caused by the
-	boost-stage (input side) for output voltage less than \SI{380}{\volt}. For output voltages greater than \SI{380}{\volt}
-	the buck-stage (output side) causes the minimal power limit for continuous conduction mode.
+	yields  $\SI{1854}{\watt}$. A lower power would violate the $P_{\mathrm{min,buck}}$ limit for $U_\mathrm{2}=\SI{450}{\volt}$, which represents the relevant worst-case condition.
 \end{solutionblock}
 
 \vspace{2em}\par
-For comparison reasons, the single ended primary inductance converter (SEPIC) in \autoref{fig:ex03_SEPIC} shall be considered under similar conditions as an alternative circuit.
+For comparison reasons, the single-ended primary inductance converter (SEPIC) in \autoref{fig:ex03_SEPIC} shall be considered under identical operation conditions (lossless, idealized steady state with same input/output voltage, inductance and switching frequency ratings) as an alternative circuit.
 
 % Schematic of Buck Boost Converter cascade
 \input{./fig/ex03/Fig_SepicConverter}
 
-\subtask{What blocking voltage ratings must the transistors $T_\mathrm{1}$ and the diode $D$ have?}
+\subtask{What blocking voltage ratings must the transistor $T$ and the diode $D$ have?}
 \begin{solutionblock}
 	% Solution
-	For the SEPIC topology the voltage at the transistor blocking voltage is calculated by the sum of
+	For the SEPIC topology the transistor blocking voltage is calculated by the sum of
 	$U_\mathrm{c}$ and $U_\mathrm{2}$.
 	\begin{equation}
 		U_\mathrm{T,block}=U_\mathrm{C}+U_\mathrm{2}.
+		\label{eq:task_3_2_sol_blocking_voltage_transistor}
 	\end{equation}
-	Using \eqref{eq:PowerL1ripplesepic}, which reflects the voltage balance during a switching period
-	of inductor $L_1$ as
+	Using the volt-second balance of the inductor $L_1$
 	\begin{equation}
 		DU_\mathrm{1}+\left(1-D\right)\left(U_\mathrm{1}-U_\mathrm{2}-U_\mathrm{C}\right)=0
 	\end{equation}
@@ -521,29 +502,23 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
 		=\left( \frac{1}{D}-1\right) U_\mathrm{2}.
 		\label{eq:ucapacitor}
 	\end{equation}
-	The substitution of $U_\mathrm{C}$ in \eqref{eq:ucapacitor} leads to
+	The substitution of $U_\mathrm{C}$ in \eqref{eq:task_3_2_sol_blocking_voltage_transistor} leads to
 	\begin{equation}
 		U_\mathrm{T,block}=\left( \frac{1}{D}-1\right) U_\mathrm{2}+U_\mathrm{2}=\frac{U_\mathrm{2}}{D}.
 	\end{equation}
-	The diode has to block the voltage, when the transistor is active. Applying Kirchhoff's loop rule yields:
+	The diode has to block the voltage, when the transistor is active, which is the sum of the capacitor and output volage:
 	\begin{equation}
-		U_\mathrm{C}+U_\mathrm{D,block}+U_\mathrm{2}=0.
+		U_\mathrm{D,block} = U_\mathrm{C}+U_\mathrm{2}.
 	\end{equation}
-	With the used loop direction (right turn) the diode blocks negative voltage, which leads to:
-	\begin{equation}
-		-U_\mathrm{D,block}=U_\mathrm{C}+U_\mathrm{2}.
-	\end{equation}
-	$U_\mathrm{C}$ corresponds to the input voltage $U_\mathrm{1}$, because the voltage transfer ratio of the SEPIC-topology
-	is calculated by:
+	$U_\mathrm{C}$ corresponds to the input voltage $U_\mathrm{1}$, because the voltage transfer ratio of the SEPIC-topology is calculated by:
 	\begin{equation}
 		\frac{U_\mathrm{2}}{U_\mathrm{1}}= \frac{D}{1-D} \quad \Leftrightarrow \quad
-		U_\mathrm{1}=\frac{1-D}{D}U_\mathrm{2}=\left( \frac{1}{D}-1\right)U_\mathrm{2}=U_\mathrm{C}
+		U_\mathrm{1}=\frac{1-D}{D}U_\mathrm{2}=\left( \frac{1}{D}-1\right)U_\mathrm{2}=U_\mathrm{C}.
 	\end{equation}
-	The result shows, that the transistor and the diode needs to block the sum of input and output voltage,
-	which is the same blocking voltage as for the transistors and diodes in a boost-buck converter.
+	The result shows, that the transistor and the diode needs to block the same voltage ($U_\mathrm{T,block}=U_\mathrm{D,block}=\SI{830}{\volt}$) as the sum of input and output voltage, which is the same (idealized) blocking voltage rating as for the transistors and diodes in a boost-buck converter.
 \end{solutionblock}
 
-\subtask{Derive the input and output current ripple $\Delta i_\mathrm{L_1}$ and $\Delta i_\mathrm{L_2}$ depending on the duty cycle.}
+\subtask{Derive the current ripples $\Delta i_\mathrm{L_1}$ and $\Delta i_\mathrm{L_2}$ depending on the duty cycle.}
 
 \begin{solutionblock}
 	% Solution
@@ -552,29 +527,72 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
 	\begin{equation}
 		\Delta i_\mathrm{L1}=\frac{U_\mathrm{1}D}{f_\mathrm{s}L_\mathrm{1}}.
 	\end{equation}
-	Also, for $L_2$ the current increases while $T$ is active. In this case the voltage of the capacitor $C$ is applied to $L_2$.
-	The ripple current of $L_2$ is obtained by
+	For $L_2$, the current also increases while $T$ is conducting.
+	In this case, the capacitor voltage $U_\mathrm{C}$ is applied
+	to $L_2$ in the direction of its current reference arrow.
+	The peak-to-peak current ripple is obtained as
 	\begin{equation}
-		\Delta i_\mathrm{L2}=\frac{U_\mathrm{C}D}{f_\mathrm{s}L_\mathrm{2}}=\frac{U_\mathrm{1}D}{f_\mathrm{s}L_\mathrm{2}}.
+		\Delta i_\mathrm{L2}
+		= \frac{U_\mathrm{C}D}{f_\mathrm{s}L_2}
+		= \frac{U_1D}{f_\mathrm{s}L_2}.
 	\end{equation}
 \end{solutionblock}
 
 \subtask{To what minimum value can the output power be reduced while still ensuring continuous operation across the entire output voltage range?
-	(i.e., continuous current flow in $L_\mathrm{1}$  and $L_\mathrm{2}$)?}
+	(i.e., continuous current flow through $D$ during the off-time)?}
 
 \begin{solutionblock}
-	% Solution
-	Both inductors have the same ripple current as long as they have the same inductance.
-	For the inductor $L_1$ the power is the product of output voltage
-	$U_\mathrm{2}$ and average current calculated by using \eqref{eq:Boostripple}:
+	During the switch-off interval, the diode current is given by the sum of both inductor currents:
 	\begin{equation}
-		P_\mathrm{min}=U_\mathrm{2}\frac{\Delta i_\mathrm{L1}}{2}.
-		\label{eq:PowerL1ripplesepic}
+		i_\mathrm{D}(t) = i_\mathrm{L1}(t) + i_\mathrm{L2}(t),
+		\quad t \in [T_\mathrm{on},T_\mathrm{s}].
 	\end{equation}
-	\input{./fig/ex03/sFigTab_PowerminSepic} %Solution table Minimal Power 
-	Entering the values in \eqref{eq:PowerL1ripplesepic} leads to \autoref{table:PowerminSepic}. Similar to the boost-buck converter the minimal power,
-	which ensures continuous operation across the entire output voltage range yields $\SI{1854}{\watt}$.
 
+	In BCM, the diode current reaches zero at the end of the switch-off interval. A corresponding current waveform plot at the BCM
+	is depicted in \autoref{fig:ex03-sepic-bcm}.
+
+	\input{./fig/ex03/sFig_SEPIC_BCM.tex}
+
+	Note that the individual inductor currents do not necessarily reach zero at the same time. Since the diode current equals the output current, its average value over one switching period results in
+	\begin{equation}
+		\overline{i}_2 = \overline{i}_\mathrm{D}
+		= \frac{1-D}{2}
+		\left(\Delta i_\mathrm{L1}+\Delta i_\mathrm{L2}\right).
+	\end{equation}
+
+	Using the current ripple expressions from the previous subtask and the voltage transfer ratio $U_2/U_1=D/(1-D)$, the output power at the BCM boundary is obtained as
+	\begin{equation}
+		\begin{split}
+			P_{2,\mathrm{BCM}}
+			 & = U_2 \overline{i}_2                                \\
+			 & = \frac{U_2(1-D)}{2}
+			\left(\Delta i_\mathrm{L1}+\Delta i_\mathrm{L2}\right) \\
+			 & = \frac{U_1^2D^2}{2f_\mathrm{s}}
+			\left(\frac{1}{L_1}+\frac{1}{L_2}\right).
+		\end{split}
+	\end{equation}
+
+	For identical inductances $L_1=L_2=L$, this simplifies to
+	\begin{equation}
+		P_{2,\mathrm{BCM}} = \frac{U_1^2D^2}{f_\mathrm{s}L}.
+	\end{equation}
+
+	Since the BCM boundary power increases monotonically with the duty cycle, the limiting operating point is reached	at the maximum output voltage $U_2=\SI{450}{\volt}$.
+	Consequently, the minimum output power ensuring continuous conduction across the entire output voltage range is
+	\begin{equation}
+		\begin{split}
+			P_{2,\mathrm{min}}
+			 & = \frac{U_1^2}{f_\mathrm{s}L}
+			\left(\frac{U_{2,\mathrm{max}}}
+			      {U_1+U_{2,\mathrm{max}}}\right)^2                \\
+			 & = \frac{(\SI{380}{\volt})^2}
+			     {\SI{50}{\kilo\hertz}\cdot\SI{0.5}{\milli\henry}}
+			\left(\frac{450}{380+450}\right)^2                     \\
+			 & = \SI{1697.84}{\watt}.
+		\end{split}
+	\end{equation}
+
+	Hence, the SEPIC allows continuous conduction down to a lower output power than the boost-buck converter.
 \end{solutionblock}
 
 \subtask{Describe the advantage and disadvantage of the SEPIC topology
@@ -585,11 +603,12 @@ For comparison reasons, the single ended primary inductance converter (SEPIC) in
 	% Solution
 	Advantage of SEPIC-topology compared to boost-buck converter:
 	\begin{itemize}
-		\item The amount of semiconductor components are reduced (only 1 transistor and 1 diode is needed).
+		\item The amount of semiconductor components are reduced (only one transistor and diode are needed).
 		\item Lower voltage rating requirement for the capacitor ($U_1$ compared to $U_0$).
 	\end{itemize}
 	Disadvantage of SEPIC-topology compared to boost-buck converter:
 	\begin{itemize}
 		\item The output current is pulsating (needs more filtering components).
+		\item The peak current flowing through the transistor and diode is higher than in the boost-buck converter (higher thermal stress).
 	\end{itemize}
 \end{solutionblock}

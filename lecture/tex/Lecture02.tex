@@ -3544,7 +3544,7 @@
 		\begin{circuitikz}[]
 			\draw (-1.5,2.5) coordinate (A) to [capacitor, *-*, l=$C$, v =$u_\mathrm{C}(t)$, voltage = straight] (1.5,2.5) coordinate (B)
 				(A) to [Tnpn, n=npn1, *-*, invert] ++(0,-2.5)
-				(B) to [inductor, *-*, l=$L_2$, i=$i_\mathrm{L_2}(t)$] ++(0,-2.5)
+				(B) to [inductor, *-*, l=$L_2$, i<=$i_\mathrm{L_2}(t)$] ++(0,-2.5)
 				(B) to [diode, l=$D$, -o, i=$i_2(t)$] ++(3,0) coordinate (C)
 				to [open, o-o, v^= $u_2(t)$, voltage = straight] ++(0,-2.5)
 				(A) to [inductor, -o, i_<=$i_1(t)$, l_=$L_1$, mirror] ++(-3,0) coordinate (D)

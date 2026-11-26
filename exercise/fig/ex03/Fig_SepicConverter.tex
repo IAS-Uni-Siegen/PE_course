@@ -18,7 +18,7 @@
 				(jL1v) to  [L, l=$L_1$] ++ (3,0) coordinate (jTv)
 				% Add arrow and Text
 				++(-0.5,0) node[currarrow](IL){}
-				(IL)  node[anchor=south,color=black]{$i_\mathrm{L}$}
+				(IL)  node[anchor=south,color=black]{$i_\mathrm{L_1}$}
 			% Add junction for Transistor
 			(jTv) ++(0,-3) coordinate (jTg)
 				% Add junction point for Transistor
@@ -32,13 +32,13 @@
 				(jTg) to [short,-] (Trans1.S)
 				(Trans1.G) to [sqV] ++(-1,0)
 				% Add capacitor C
-				(jTv) to  [C,l=$C$] ++ (2,0) coordinate (jL2v)
+				(jTv) to  [C,l=$C$, v=$u_\mathrm{C}$, voltage=straight] ++ (2,0) coordinate (jL2v)
 				% Add junction for L2
 				(jL2v) to [short,-*] ++(0,0)
 			% Add coordinate jL2v and jL2g
 			(jL2v)  ++(0,-3) coordinate (jL2g)
 				% Add  L2
-				(jL2v)  to [L, l=$L_2$] (jL2g)
+				(jL2v)  to [L, l=$L_2$, i<=$i_\mathrm{L_2}$] (jL2g)
 				% Add Diode
 				(jL2v) to  [D-,l^=$D$] ++ (2,0) coordinate (jU2v)
 				% Add coordinate jU2v and jU2g
@@ -54,6 +54,6 @@
 			;
 		\end{circuitikz}
 	\end{center}
-	\caption{Single ended  primary inductance converter circuit.}
+	\caption{Single-ended  primary inductance converter circuit.}
 	\label{fig:ex03_SEPIC}
 \end{figure}
