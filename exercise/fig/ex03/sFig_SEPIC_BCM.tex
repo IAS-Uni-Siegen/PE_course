@@ -1,145 +1,145 @@
-	\begin{solutionfigure}[htbp]
-		\centering
-		\begin{tikzpicture}[font=\small, color=black]
+\begin{solutionfigure}[htbp]
+	\centering
+	\begin{tikzpicture}[font=\small, color=black]
 
-			% Operating point: U_2 = 450 V, L_1 = L_2.
-			% Currents are normalized by the common
-			% peak-to-peak inductor current ripple.
-			\pgfmathsetmacro{\plotD}{450/(380+450)}
-			\pgfmathsetmacro{\plotLoneMin}{\plotD-0.5}
-			\pgfmathsetmacro{\plotLoneMax}{\plotD+0.5}
-			\pgfmathsetmacro{\plotLtwoMin}{0.5-\plotD}
-			\pgfmathsetmacro{\plotLtwoMax}{1.5-\plotD}
+		% Operating point: U_2 = 450 V, L_1 = L_2.
+		% Currents are normalized by the common
+		% peak-to-peak inductor current ripple.
+		\pgfmathsetmacro{\plotD}{450/(380+450)}
+		\pgfmathsetmacro{\plotLoneMin}{\plotD-0.5}
+		\pgfmathsetmacro{\plotLoneMax}{\plotD+0.5}
+		\pgfmathsetmacro{\plotLtwoMin}{0.5-\plotD}
+		\pgfmathsetmacro{\plotLtwoMax}{1.5-\plotD}
 
-			\begin{groupplot}[
-					group style={
-							group size=1 by 3,
-							vertical sep=6mm,
-							xticklabels at=edge bottom
-						},
-					width=0.76\linewidth,
-					height=2.8cm,
-					scale only axis,
-					xmin=0, xmax=1,
-					enlarge x limits=false,
-					xtick={0,\plotD,1},
-					xticklabels={$0$,$D$,$1$},
-					grid=major,
-					xmajorgrids=false,
-					axis line style={black},
-					tick style={black},
-					tick label style={black},
-					label style={black}
-				]
+		\begin{groupplot}[
+				group style={
+						group size=1 by 3,
+						vertical sep=6mm,
+						xticklabels at=edge bottom
+					},
+				width=0.76\linewidth,
+				height=2.8cm,
+				scale only axis,
+				xmin=0, xmax=1,
+				enlarge x limits=false,
+				xtick={0,\plotD,1},
+				xticklabels={$0$,$D$,$1$},
+				grid=major,
+				xmajorgrids=false,
+				axis line style={black},
+				tick style={black},
+				tick label style={black},
+				label style={black}
+			]
 
-				% -----------------------------------------
-				% Inductor current i_L1
-				% -----------------------------------------
-				\nextgroupplot[
-					ylabel={
-							$i_\mathrm{L1}(t)/\Delta i_\mathrm{L}$
-						},
-					ymin=-0.2, ymax=1.5,
-					ytick={0,0.5,1}
-				]
+			% -----------------------------------------
+			% Inductor current i_L1
+			% -----------------------------------------
+			\nextgroupplot[
+				ylabel={
+						$i_\mathrm{L1}(t)/\Delta i_\mathrm{L}$
+					},
+				ymin=-0.2, ymax=1.5,
+				ytick={0,0.5,1}
+			]
 
-				% Switching instant
-				\draw[thin,dashed,shadecolor]
-				(axis cs:\plotD,-0.2) --
-				(axis cs:\plotD,1.5);
+			% Switching instant
+			\draw[thin,dashed,shadecolor]
+			(axis cs:\plotD,-0.2) --
+			(axis cs:\plotD,1.5);
 
-				% Zero-current reference
-				\draw[thin,black!50]
-				(axis cs:0,0) -- (axis cs:1,0);
+			% Zero-current reference
+			\draw[thin,black!50]
+			(axis cs:0,0) -- (axis cs:1,0);
 
-				% Inductor current waveform
-				\addplot[signaldelta,thick] coordinates {
-						(0,\plotLoneMin)
-						(\plotD,\plotLoneMax)
-						(1,\plotLoneMin)
-					};
+			% Inductor current waveform
+			\addplot[signaldelta,thick] coordinates {
+					(0,\plotLoneMin)
+					(\plotD,\plotLoneMax)
+					(1,\plotLoneMin)
+				};
 
-				% Switching intervals
-				\draw[thin,<->]
-				(axis cs:0,1.22) --
-				node[below] {$T_\mathrm{on}$}
-				(axis cs:\plotD,1.22);
+			% Switching intervals
+			\draw[thin,<->]
+			(axis cs:0,1.22) --
+			node[below] {$T_\mathrm{on}$}
+			(axis cs:\plotD,1.22);
 
-				\draw[thin,<->]
-				(axis cs:\plotD,1.22) --
-				node[below] {$T_\mathrm{off}$}
-				(axis cs:1,1.22);
+			\draw[thin,<->]
+			(axis cs:\plotD,1.22) --
+			node[below] {$T_\mathrm{off}$}
+			(axis cs:1,1.22);
 
-				% -----------------------------------------
-				% Inductor current i_L2
-				% -----------------------------------------
-				\nextgroupplot[
-					ylabel={
-							$i_\mathrm{L2}(t)/\Delta i_\mathrm{L}$
-						},
-					ymin=-0.2, ymax=1.5,
-					ytick={0,0.5,1}
-				]
+			% -----------------------------------------
+			% Inductor current i_L2
+			% -----------------------------------------
+			\nextgroupplot[
+				ylabel={
+						$i_\mathrm{L2}(t)/\Delta i_\mathrm{L}$
+					},
+				ymin=-0.2, ymax=1.5,
+				ytick={0,0.5,1}
+			]
 
-				% Switching instant
-				\draw[thin,dashed,shadecolor]
-				(axis cs:\plotD,-0.2) --
-				(axis cs:\plotD,1.5);
+			% Switching instant
+			\draw[thin,dashed,shadecolor]
+			(axis cs:\plotD,-0.2) --
+			(axis cs:\plotD,1.5);
 
-				% Zero-current reference
-				\draw[thin,black!50]
-				(axis cs:0,0) -- (axis cs:1,0);
+			% Zero-current reference
+			\draw[thin,black!50]
+			(axis cs:0,0) -- (axis cs:1,0);
 
-				% Inductor current waveform
-				\addplot[signaldelta,thick] coordinates {
-						(0,\plotLtwoMin)
-						(\plotD,\plotLtwoMax)
-						(1,\plotLtwoMin)
-					};
+			% Inductor current waveform
+			\addplot[signaldelta,thick] coordinates {
+					(0,\plotLtwoMin)
+					(\plotD,\plotLtwoMax)
+					(1,\plotLtwoMin)
+				};
 
-				% -----------------------------------------
-				% Diode current i_D
-				% -----------------------------------------
-				\nextgroupplot[
-					ylabel={
-							$i_\mathrm{D}(t)/\Delta i_\mathrm{L}$
-						},
-					xlabel={$t/T_\mathrm{s}$},
-					ymin=-0.2, ymax=2.3,
-					ytick={0,1,2}
-				]
+			% -----------------------------------------
+			% Diode current i_D
+			% -----------------------------------------
+			\nextgroupplot[
+				ylabel={
+						$i_\mathrm{D}(t)/\Delta i_\mathrm{L}$
+					},
+				xlabel={$t/T_\mathrm{s}$},
+				ymin=-0.2, ymax=2.3,
+				ytick={0,1,2}
+			]
 
-				% Switching instant
-				\draw[thin,dashed,shadecolor]
-				(axis cs:\plotD,-0.2) --
-				(axis cs:\plotD,2.3);
+			% Switching instant
+			\draw[thin,dashed,shadecolor]
+			(axis cs:\plotD,-0.2) --
+			(axis cs:\plotD,2.3);
 
-				% Charge transferred to the output
-				\path[fill=shadecolor,fill opacity=0.3]
-				(axis cs:\plotD,0) --
-				(axis cs:\plotD,2) --
-				(axis cs:1,0) -- cycle;
+			% Charge transferred to the output
+			\path[fill=shadecolor,fill opacity=0.3]
+			(axis cs:\plotD,0) --
+			(axis cs:\plotD,2) --
+			(axis cs:1,0) -- cycle;
 
-				% Diode current waveform
-				\addplot[signaldelta,thick] coordinates {
-						(0,0)
-						(\plotD,0)
-						(\plotD,2)
-						(1,0)
-					};
+			% Diode current waveform
+			\addplot[signaldelta,thick] coordinates {
+					(0,0)
+					(\plotD,0)
+					(\plotD,2)
+					(1,0)
+				};
 
-				% Diode conduction states
-				\node[font=\footnotesize]
-				at (axis cs:{\plotD/2},0.9)
-				{Blocking};
+			% Diode conduction states
+			\node[font=\footnotesize]
+			at (axis cs:{\plotD/2},0.9)
+			{Blocking};
 
-				\node[font=\footnotesize]
-				at (axis cs:{(1+\plotD)/2},1.7)
-					{Conducting};
+			\node[font=\footnotesize]
+			at (axis cs:{(1+\plotD)/2},1.7)
+				{Conducting};
 
-			\end{groupplot}
-		\end{tikzpicture}
-		\caption{Exemplary inductor and diode current waveforms of the
-			SEPIC in BCM for $L_1=L_2$.}
-		\label{fig:ex03-sepic-bcm}
-	\end{solutionfigure}
+		\end{groupplot}
+	\end{tikzpicture}
+	\caption{Exemplary inductor and diode current waveforms of the
+		SEPIC in BCM for $L_1=L_2$.}
+	\label{fig:ex03-sepic-bcm}
+\end{solutionfigure}
